@@ -1,0 +1,6 @@
+.gradient {
+    margin-top: -20em;
+    width: 100%;
+    height: 20rem;
+    background-image: linear-gradient(to bottom, rgba(75, 67, 77, 0), rgb(41, 41, 41));
+}

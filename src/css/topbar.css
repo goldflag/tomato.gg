@@ -1,0 +1,22 @@
+
+  .topbar {
+    font-family: "Roboto";
+    font-size: 12;
+    color: white;
+    background-color: rgba(168, 137, 212, 0.692);
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    float: left;
+    width: 100%;
+    height: 4rem;
+    border-bottom: 1px solid rgb(100, 95, 129);
+    /* position: fixed; */
+    margin-left: 0em;
+  }
+
+  .field {
+    padding-top: 0.5em;
+    /* margin: 0 auto; */
+    right: 250px;
+    position: absolute;
+  }

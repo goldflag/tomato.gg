@@ -1,0 +1,88 @@
+
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(230,230,230);
+  color: #333;
+}
+
+.main {
+  margin-left: 160px; 
+} 
+
+.page {
+  /* padding-left: 800px;
+  padding-right: 800px; */
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 40px;
+  font-family: "Tahoma";
+}
+
+p {
+  font-size: 1.6rem;
+}
+
+small {
+  font-size: 1.2rem;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 40px;
+}
+
+
+
+table.mainStats {
+  border: 0px solid #1C6EA4;
+  background-color: #FFFFFF;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  margin: 100 auto;
+}
+table.mainStats td, table.mainStats th {
+  border: 0px solid #AAAAAA;
+  padding: 7px 7px;
+}
+table.mainStats tbody td {
+  font-size: 15px;
+}
+table.mainStats tr:nth-child(even) {
+  background: #F5F5F5;
+}
+table.mainStats thead {
+  background: #2d12c8;
+  border-bottom: 2px solid #444444;
+}
+table.mainStats thead th {
+  font-size: 17px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: left;
+  border-left: 1px solid #F5F5F5;
+}
+table.mainStats thead th:first-child {
+  border-left: none;
+}
+
+table.mainStats tfoot td {
+  font-size: 14px;
+}
+table.mainStats tfoot .links {
+  text-align: right;
+}
+table.mainStats tfoot .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}

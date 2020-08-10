@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+
+.footer {
+    font-family: 'Roboto';
+    font-size: 0.8em;
+    color: rgb(116, 123, 165);
+    background-color: rgb(35, 30, 77);
+    padding: 10px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    margin-left: -13rem;
+    overflow-x: hidden;
+    width: calc(100% + 13rem);
+    height: 4em;
+    border-top: 1px solid rgb(100, 95, 129);
+    z-index: 1;
+}
+
+/* a:link {
+    color: rgb(77, 91, 168);
+}
+
+a:link:hover { 
+    color: rgb(131, 143, 211);
+}  */
+
+
+/* .Link {
+    color: rgb(77, 91, 168);
+}
+
+.Link:hover { 
+    color: rgb(131, 143, 211);
+}  */
