@@ -66,8 +66,9 @@ export default function StatsPage(props) {
     const [tanksstats, setTanksstats] = useState('');
     const [MOEstats, setMOEstats] = useState('');
     const [statsJson, setStatsJson] = useState([]);
-
     const [WGRating, setWGRating] = useState('');
+
+    const [recentStats, setRecentStats] = useState('');
 
     let id = "";
     let server = ""
@@ -102,6 +103,7 @@ export default function StatsPage(props) {
         const url = `https://api.worldoftanks.${server}/wot/account/info/?application_id=${APIKey}&account_id=${id}`;
         const url2 = `https://api.worldoftanks.${server}/wot/tanks/stats/?application_id=${APIKey}&account_id=${id}&fields=mark_of_mastery%2C+tank_id%2C+all`;
         const url3 = `https://api.worldoftanks.${server}/wot/tanks/achievements/?application_id=${APIKey}&account_id=${id}&fields=achievements%2C+tank_id`;
+
         try {
             Promise.all([
                 fetch(url),
@@ -123,6 +125,41 @@ export default function StatsPage(props) {
             console.error(err);
         }
     }    
+
+  //   const searchStats = async () => {
+  //     // https://api.worldoftanks.com/wot/account/info/?application_id=bd589e105895f2f6b8af31f27da3e05e&account_id=1011694618
+  //     // https://api.worldoftanks.com/wot/tanks/stats/?application_id=bd589e105895f2f6b8af31f27da3e05e&account_id=1011694618&fields=mark_of_mastery%2C+tank_id%2C+all;
+      
+
+  //     const url = `https://api.worldoftanks.${server}/wot/account/info/?application_id=${APIKey}&account_id=${id}`;
+  //     const url2 = `https://api.worldoftanks.${server}/wot/tanks/stats/?application_id=${APIKey}&account_id=${id}&fields=mark_of_mastery%2C+tank_id%2C+all`;
+  //     const url3 = `https://api.worldoftanks.${server}/wot/tanks/achievements/?application_id=${APIKey}&account_id=${id}&fields=achievements%2C+tank_id`;
+  //     const url4 = `http://localhost:5000/api/v1/getRestaurants`;
+
+  //     try {
+  //         Promise.all([
+  //             fetch(url),
+  //             fetch(url2),
+  //             fetch(url3),
+  //             fetch(url4)
+  //         ])
+  //         .then(([res1, res2, res3, res4]) => Promise.all([res1.json(), res2.json(), res3.json(), res4.json()]))
+  //         .then(([data1, data2, data3, data4]) => 
+  //         {
+  //           console.log(data2.data[id]);
+  //           setStats(data1.data[id].statistics.all);
+  //           setTanksstats(data2.data[id]);
+  //           setMOEstats(data3.data[id]);
+  //           setUserName(data1.data[id].nickname);
+  //           setWGRating(data1.data[id].global_rating);
+  //           setRecentStats(data4);
+  //           console.log(data4);
+  //         });
+  //     }
+  //     catch(err){
+  //         console.error(err);
+  //     }
+  // }    
 
     if (validID === false) {
         StatTable = <>

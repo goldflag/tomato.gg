@@ -1,22 +1,28 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Switch, Route, useRouteMatch, withRouter } from "react-router-dom";
 import './css/search.css';
-import backgroundIMG from './assets/background.jpg';
+import backgroundIMG from './assets/bourrasque.jpg';
 import SearchBar from './material/searchBar';
 import FrontGrid from './material/frontGrid';
 import image1 from './assets/image1.png';
+import TomatoLogo from './assets/tomato.png'
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
-const background = {
-    backgroundImage: `url(${image1})`,
-    paddingTop: '200px',
-    paddingBottom: '200px',
-    width: '100%',
-    backgroundSize: '100% auto',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center top'
-}
+// const background = {
+//     backgroundImage: `url(${backgroundIMG}) no-repeat center center fixed`,
+//     paddingTop: '',
+//     paddingBottom: '200px',
+//     width: '100%',
+//     height: '100%',
+//     // backgroundSize: 'auto 100%',
+//     // backgroundRepeat: 'no-repeat',
+//     // backgroundPosition: 'center',
+//     -webkit-background-size: 'cover',
+//     -moz-background-size: 'cover',
+//     -o-background-size: 'cover',
+//     background-size: 'cover',
+// }
 
 const styles = {
     margin: '0 auto',
@@ -59,7 +65,6 @@ export default withRouter(function Search(props){
             fetch(url)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
                 if (data.status == "error" || data.meta.count == 0) { console.log('Invalid username'); }
                 else { testId = data.data[0].account_id; }
             })
@@ -75,21 +80,24 @@ export default withRouter(function Search(props){
 
     return (
         <Router>
-            <div style ={background}>
+            <div className='background'>
                 <div style={styles}>
+                    <div>
+                        <img src={TomatoLogo} alt='logo' style={{height: 'calc(120px)', margin: '0 auto', width: 'auto', display: 'flex', alignItems: 'center', padding: '0rem'}}/>
+                    </div>
                     <form onSubmit={searchId}>
                         <SearchBar setName = {setName} setServer = {setServer} server = {server} setMode = {setMode} mode = {mode}/>
                     </form>
                 </div >
                 <div style ={frontGrid}>
-                    <FrontGrid />
+                    {/* <FrontGrid /> */}
                 </div>
                 <Switch>
                     <Route exact path={path}>
                     </Route>
                 </Switch>
             </div>  
-            <div className="gradient"></div>
+            {/* <div className="gradient"></div> */}
         </Router>
     );
 })
