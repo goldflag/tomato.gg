@@ -32,6 +32,9 @@ export default function SmallSelectQuery(props) {
     <div>
       <FormControl className={classes.formControl}>
         <Select
+          MenuProps={{
+            disableScrollLock: true
+          }}
           value={props.server}
           onChange={e => props.setServer(e.target.value)}
           displayEmpty
@@ -41,10 +44,14 @@ export default function SmallSelectQuery(props) {
           <MenuItem value={'com'}>NA</MenuItem>
           <MenuItem value={'eu'}>EU</MenuItem>
           <MenuItem value={'asia'}>ASIA</MenuItem>
+          <MenuItem value={'ru'}>RU</MenuItem>
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
         <Select
+          MenuProps={{
+            disableScrollLock: true
+          }}
           value={props.mode}
           onChange={e => props.setMode(e.target.value)}
           displayEmpty

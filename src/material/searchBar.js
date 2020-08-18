@@ -17,19 +17,19 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     width: '600px',
     height: '50px',
-
+    borderRadius: 0
   },
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,
-    fontSize: '15',
+    fontSize: 16,
   },
   iconButton: {
     padding: 10,
   },
   divider: {
-    height: 28,
-    margin: 4,
+    height: 40,
+    margin: 10,
   },
 }));
 

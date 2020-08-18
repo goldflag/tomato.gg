@@ -8,7 +8,7 @@ export default function TierWN8Distribution(props) {
         <div style={{ height: 'calc(30vh + 100px)'}}>
             <ResponsiveBar
             data={data}
-            keys={[ 'HT', 'MT', 'TD', 'LT', 'SPG']}
+            keys={['HT', 'MT', 'TD', 'LT', 'SPG']}
             indexBy="Tier"
             margin={{ top: 30, right: 80, bottom: 50, left: 60 }}
             padding={0.3}

@@ -1,11 +1,6 @@
 import React, {useState} from 'react';
 import MUIDataTable from 'mui-datatables';
 import { createMuiTheme, MuiThemeProvider, withStyles, rgbToHex } from '@material-ui/core/styles';
-import Switch from '@material-ui/core/Switch';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import clsx from 'clsx';
-
 import WN8color from '../../functions/WN8color';
 import WRcolor from '../../functions/WRcolor';
 
@@ -23,16 +18,16 @@ const customStyles = theme => ({
 });
 
 export default function OverallTankStats(props) {
-
   const getMuiTheme = () =>
     createMuiTheme({
       overrides: {
         MUIDataTable: {
           root: {
-            backgroundColor: 'blue',
+            backgroundColor: '#AAF',
+            display: 'none'
           },
           paper: {
-            // boxShadow: 'none',
+            boxShadow: 'none',
           },
         },
         MuiToolbar: {
@@ -44,7 +39,6 @@ export default function OverallTankStats(props) {
           head: {
             backgroundColor: 'rgb(219, 213, 224)',
             // color: 'rgb(256, 256, 256)',
-
           },
         },
         MUIDataTableSelectCell: {
@@ -62,18 +56,6 @@ export default function OverallTankStats(props) {
         },
       },
     });
-
-//   toggleDenseTable = event => {
-//     this.setState({
-//       denseTable: event.target.checked,
-//     });
-//   };
-
-//   toggleResponsive = event => {
-//     this.setState({
-//       vertical: !!event.target.checked,
-//     });
-//   };
 
     const columns = [
       {
@@ -130,7 +112,7 @@ export default function OverallTankStats(props) {
       fixedHeader: false,
       fixedSelectColumn: false,
       rowHover: true,
-      selectableRows: false,
+      selectableRows: 'none',
       rowsPerPage: 15,
       rowsPerPageOptions: [10, 15, 25, 50, 100],
       sortOrder: {
@@ -155,26 +137,7 @@ export default function OverallTankStats(props) {
 
     return (
       <MuiThemeProvider theme={getMuiTheme()}>
-        {/* <FormGroup row>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={this.state.denseTable}
-                onChange={this.toggleDenseTable}
-                value="denseTable"
-                color="primary"
-              />
-            }
-            label="Dense Table"
-          />
-          <FormControlLabel
-            control={
-              <Switch checked={this.state.vertical} onChange={this.toggleResponsive} value="vertical" color="primary" />
-            }
-            label="Responsive Vertical Table"
-          />
-        </FormGroup> */}
-        <MUIDataTable title={'Tank Stats'} data={data} columns={columns} options={options}/>
+        <MUIDataTable title={''} data={data} columns={columns} options={options}/>
       </MuiThemeProvider>
     );
 }

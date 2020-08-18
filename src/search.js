@@ -1,28 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Switch, Route, useRouteMatch, withRouter } from "react-router-dom";
 import './css/search.css';
-import backgroundIMG from './assets/bourrasque.jpg';
 import SearchBar from './material/searchBar';
-import FrontGrid from './material/frontGrid';
-import image1 from './assets/image1.png';
 import TomatoLogo from './assets/tomato.png'
 
 const APIKey = process.env.REACT_APP_API_KEY;
-
-// const background = {
-//     backgroundImage: `url(${backgroundIMG}) no-repeat center center fixed`,
-//     paddingTop: '',
-//     paddingBottom: '200px',
-//     width: '100%',
-//     height: '100%',
-//     // backgroundSize: 'auto 100%',
-//     // backgroundRepeat: 'no-repeat',
-//     // backgroundPosition: 'center',
-//     -webkit-background-size: 'cover',
-//     -moz-background-size: 'cover',
-//     -o-background-size: 'cover',
-//     background-size: 'cover',
-// }
 
 const styles = {
     margin: '0 auto',
@@ -50,10 +32,7 @@ export default withRouter(function Search(props){
     const [server, setServer] = useState('com');
     const [mode, setMode] = useState('Player');
 
-    let tankStats = {};
     let testId = 'FAIL';
-
-    const [tankNames, setTankNames] = useState('');
 
     useEffect(() => {
     }, []);
@@ -97,7 +76,6 @@ export default withRouter(function Search(props){
                     </Route>
                 </Switch>
             </div>  
-            {/* <div className="gradient"></div> */}
         </Router>
     );
 })

@@ -1,21 +1,9 @@
-import React, {useState} from 'react';
-import MUIDataTable from 'mui-datatables';
-import { createMuiTheme, MuiThemeProvider, withStyles, rgbToHex } from '@material-ui/core/styles';
-import WN8color from '../../functions/WN8color';
-import WRcolor from '../../functions/WRcolor';
+import React from 'react';
+import Paper from '@material-ui/core/Paper';
 
-const customStyles = theme => ({
-  wn8row: {
-    '& td': { backgroundColor: 'blue' },
-  },
-  GreyLine: {
-    '& td': { backgroundColor: theme.palette.grey[100] },
-  },
-  NameCell: {
-    fontWeight: 900,
-    backgroundColor: theme.palette.grey[100],
-  },
-});
+import MUIDataTable from 'mui-datatables';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import WN8color from '../../functions/WN8color';
 
 export default function OverallStatsTable(props) {
 
@@ -27,8 +15,8 @@ export default function OverallStatsTable(props) {
             backgroundColor: 'blue',
           },
           paper: {
-            //boxShadow: 'none',
-            elevation: '5'
+            boxShadow: 'none',
+
           },
         },
         MuiToolbar: {
@@ -67,7 +55,7 @@ export default function OverallStatsTable(props) {
               filter: false,
                 setCellProps: (row, value) => {
                   return {
-                      style: { backgroundColor: 'rgb(241, 240, 242)'},
+                      style: { backgroundColor: 'rgb(246, 246, 252)'},
                   };
                 },
             },
@@ -78,7 +66,7 @@ export default function OverallStatsTable(props) {
                 filter: false,
                 setCellProps: (rowIndex, cellValue) => {
                     return {
-                        style: { color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+                        style: { padding: '2px 8px', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
                     };
                 },
             }
@@ -89,7 +77,7 @@ export default function OverallStatsTable(props) {
                 filter: true,
                 setCellProps: (rowIndex, cellValue) => {
                     return {
-                        style: { borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+                        style: { padding: '2px 8px', borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
                     };
                 },
             }
@@ -100,7 +88,7 @@ export default function OverallStatsTable(props) {
                 filter: true,
                 setCellProps: (rowIndex, cellValue) => {
                     return {
-                        style: { borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+                        style: { padding: '2px 8px', borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
                     };
                 },
             }
@@ -111,7 +99,7 @@ export default function OverallStatsTable(props) {
                 filter: false,
                 setCellProps: (rowIndex, cellValue) => {
                     return {
-                        style: { borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+                        style: { padding: '2px 8px', borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
                     };
                 },
             }
@@ -122,29 +110,29 @@ export default function OverallStatsTable(props) {
                 filter: false,
                 setCellProps: (rowIndex, cellValue) => {
                     return {
-                        style: { borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+                        style: { padding: '2px 8px', borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
                     };
                 },
             }
         },
-        {
-            name: '100 Games',
-            options: {
-                filter: false,
-                setCellProps: (rowIndex, cellValue) => {
-                    return {
-                        style: { borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
-                    };
-                },
-            }
-        },
+        // {
+        //     name: '100 Games',
+        //     options: {
+        //         filter: false,
+        //         setCellProps: (rowIndex, cellValue) => {
+        //             return {
+        //                 style: { borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+        //             };
+        //         },
+        //     }
+        // },
         {
             name: '500 Games',
             options: {
                 filter: false,
                 setCellProps: (rowIndex, cellValue) => {
                     return {
-                        style: { padding: '2px', borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+                        style: { padding: '2px 8px', borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
                     };
                 },
             }
@@ -155,33 +143,12 @@ export default function OverallStatsTable(props) {
                 filter: false,
                 setCellProps: (rowIndex, cellValue) => {
                     return {
-                        style: { borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+                        style: { padding: '2px 8px', borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
                     };
                 },
             }
         },
     ];
-
-
-    const data = props.data;
-    // const data = [
-    //     {'name': 'Battles', 'Overall': '', '24 Hours': '1', '7 Days': '', '30 Days': '', '60 Days': '', '100 Games': '', '500 Games': '', '1000 Games': ''},
-    //     {'name': 'Avg Tier', 'Overall': '', '24 Hours': '1', '7 Days': '', '30 Days': '', '60 Days': '', '100 Games': '', '500 Games': '', '1000 Games': ''},
-    //     {'name': 'WN8', 'Overall': '2401', '24 Hours': '2304', '7 Days': '3242', '30 Days': '1234', '60 Days': '3523', '100 Games': '4123', '500 Games': '3874', '1000 Games': '3454'},
-    //     {'name': 'Wins', 'Overall': '', '24 Hours': '1', '7 Days': '', '30 Days': '', '60 Days': '', '100 Games': '', '500 Games': '', '1000 Games': ''},
-    //     {'name': 'Losses', 'Overall': '', '24 Hours': '1', '7 Days': '', '30 Days': '', '60 Days': '', '100 Games': '', '500 Games': '', '1000 Games': ''},
-    //     {'name': 'Draws', 'Overall': '', '24 Hours': '1', '7 Days': '', '30 Days': '', '60 Days': '', '100 Games': '', '500 Games': '', '1000 Games': ''},
-    //     {'name': 'Damage', 'Overall': '', '24 Hours': '1', '7 Days': '', '30 Days': '', '60 Days': '', '100 Games': '', '500 Games': '', '1000 Games': ''},
-    //     {'name': 'Frags', 'Overall': '', '24 Hours': '1', '7 Days': '', '30 Days': '', '60 Days': '', '100 Games': '', '500 Games': '', '1000 Games': ''},
-    //     {'name': 'K/D Ratio', 'Overall': '', '24 Hours': '1', '7 Days': '', '30 Days': '', '60 Days': '', '100 Games': '', '500 Games': '', '1000 Games': ''},
-    //     {'name': 'Damage Ratio', 'Overall': '', '24 Hours': '1', '7 Days': '', '30 Days': '', '60 Days': '', '100 Games': '', '500 Games': '', '1000 Games': ''},
-    //     {'name': 'Survived', 'Overall': '', '24 Hours': '1', '7 Days': '', '30 Days': '', '60 Days': '', '100 Games': '', '500 Games': '', '1000 Games': ''},
-    //     {'name': 'Detected', 'Overall': '', '24 Hours': '1', '7 Days': '', '30 Days': '', '60 Days': '', '100 Games': '', '500 Games': '', '1000 Games': ''},
-    //     {'name': 'Cap Points', 'Overall': '', '24 Hours': '1', '7 Days': '', '30 Days': '', '60 Days': '', '100 Games': '', '500 Games': '', '1000 Games': ''},
-    //     {'name': 'Def Points', 'Overall': '', '24 Hours': '1', '7 Days': '', '30 Days': '', '60 Days': '', '100 Games': '', '500 Games': '', '1000 Games': ''},
-    //     {'name': 'Experience', 'Overall': '', '24 Hours': '1', '7 Days': '', '30 Days': '', '60 Days': '', '100 Games': '', '500 Games': '', '1000 Games': ''},
-    //     {'name': 'Trees Fallen', 'Overall': '', '24 Hours': '1', '7 Days': '', '30 Days': '', '60 Days': '', '100 Games': '', '500 Games': '', '1000 Games': ''},
-    // ];
 
     const options = {
       fixedHeader: false,
@@ -189,13 +156,12 @@ export default function OverallStatsTable(props) {
       fixedSelectColumn: false,
       pagination: false,
       rowHover: true,
-      selectableRows: false,
+      selectableRows: 'none',
       print: false,
       download: false,
       filter: false,
       search: false,
       sort: false,
-      print: false,
       viewColumns: false,
 
       setTableProps: () => {
@@ -209,7 +175,9 @@ export default function OverallStatsTable(props) {
 
     return (
       <MuiThemeProvider theme={getMuiTheme()}>
-        <MUIDataTable title={'Stats'} data={data} columns={columns} options={options}/>
+        <Paper elevation={2}>
+          <MUIDataTable boxShadow={'none'} title={''} data={props.data} columns={columns} options={options}/>
+        </Paper>
       </MuiThemeProvider>
     );
 }

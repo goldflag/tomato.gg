@@ -3,7 +3,7 @@
     font-family: "Roboto";
     font-size: 12;
     color: white;
-    background-color: rgba(168, 137, 212, 0.692);
+    background-color: rgba(112, 101, 173, 0.692);
     padding: 10px 10px 10px 10px;
     display: flex;
     float: left;
@@ -17,6 +17,19 @@
   .field {
     padding-top: 0.5em;
     /* margin: 0 auto; */
-    right: 250px;
+    right: 55px;
     position: absolute;
   }
+
+  .discord{
+    padding-top: 0.5em;
+    /* margin: 0 auto; */
+    right: 10px;
+    position: absolute;
+  }
+
+  .discord:hover {
+      opacity: 0.5;
+      
+  }
+    

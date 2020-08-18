@@ -5,10 +5,10 @@ export default function ClassDistribution(props) {
 
     const data = props.data;
     return(
-        <div style={{ height: 'calc(20vh + 100px)'}}>
+        <div style={{ height: 'calc(300px)'}}>
             <ResponsivePie
                 data={data}
-                margin={{ top: 50, right: 20, bottom: 20, left: 20 }}
+                margin={{ top: 30, right: 20, bottom: 30, left: 20 }}
                 innerRadius={0.5}
                 padAngle={0.7}
                 colors={[
@@ -24,8 +24,8 @@ export default function ClassDistribution(props) {
                 radialLabelsTextXOffset={6}
                 radialLabelsTextColor="#333333"
                 radialLabelsLinkOffset={0}
-                radialLabelsLinkDiagonalLength={16}
-                radialLabelsLinkHorizontalLength={24}
+                radialLabelsLinkDiagonalLength={5}
+                radialLabelsLinkHorizontalLength={5}
                 radialLabelsLinkStrokeWidth={1}
                 radialLabelsLinkColor={{ from: 'color' }}
                 slicesLabelsSkipAngle={10}

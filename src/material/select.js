@@ -39,6 +39,7 @@ export default function SelectQuery(props) {
           <MenuItem value={'com'}>NA</MenuItem>
           <MenuItem value={'eu'}>EU</MenuItem>
           <MenuItem value={'asia'}>ASIA</MenuItem>
+          <MenuItem value={'ru'}>RU</MenuItem>
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>

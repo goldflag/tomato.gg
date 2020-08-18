@@ -8,5 +8,6 @@ export default function WN8color(wn8) {
     else if (wn8 < 2000) { return '#4099BF'; }
     else if (wn8 < 2450) { return '#3972C6'; }
     else if (wn8 < 2900) { return '#793DB6'; }
+    else if (wn8 === '-') { return 'rgb(20,20,20)'; }
     else { return '#401070'; }
 }

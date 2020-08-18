@@ -5,7 +5,7 @@ export default function TierDistribution(props) {
 
     const data = props.data;
     return (
-        <div style={{ height: 'calc(30vh + 100px)'}}>
+        <div style={{ height: 'calc(310px)'}}>
             <ResponsiveBar
             data={data}
             keys={[ 'HT', 'MT', 'TD', 'LT', 'SPG']}

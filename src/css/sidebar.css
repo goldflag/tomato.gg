@@ -12,7 +12,11 @@
     left: 0;
     overflow-x: hidden;
     /* border-right: 1px solid rgb(100, 95, 129); */
-    background-image: url("../assets/background.jpg");
+    background: url(../assets/sidebar.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
 
   .layer {

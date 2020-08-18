@@ -7,11 +7,13 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@nivo/bar": "^0.62.0",
+    "@nivo/heatmap": "^0.62.0",
     "@nivo/pie": "^0.62.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "fontsource-roboto": "^2.2.6",
+    "lodash": "^4.17.20",
     "mui-datatables": "^3.3.1",
     "nivo": "^0.31.0",
     "react": "^16.13.1",
@@ -19,6 +21,7 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-vis": "^1.11.7",
     "redux": "^4.0.5"
   },
   "scripts": {

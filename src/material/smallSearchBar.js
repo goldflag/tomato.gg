@@ -14,26 +14,26 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     width: '400px',
     height: '30px',
-
+    borderRadius: 15
   },
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,
-    fontSize: '12',
+    fontSize: 12,
   },
   iconButton: {
     padding: 10,
   },
   divider: {
-    height: 28,
-    margin: 4,
+    height: 25,
+    margin: 8,
   },
 }));
 
 export default function SmallSearchBar(props) {
   const classes = useStyles();
   return (
-    <Paper component="form" className={classes.root}>
+    <Paper component="form" elevation={0} className={classes.root}>
       <InputBase
         className={classes.input}
         placeholder="Stats Lookup"

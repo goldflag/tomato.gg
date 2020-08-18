@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, BrowserRouter as Router} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './css/sidebar.css';
 import TomatoLogo from './assets/tomato.png'
 import AppsIcon from '@material-ui/icons/Apps';

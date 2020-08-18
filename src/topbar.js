@@ -45,6 +45,10 @@ export default withRouter(function Topbar(props) {
                         <SmallSearchBar setName = {setName} setServer = {setServer} server = {server} setMode = {setMode} mode = {mode}/>
                 </form>
             </div>
+            <div className="discord">
+            <a target="_blank" href="https://discordapp.com/invite/M"><img src="https://i.ibb.co/qMnF074/91-Discord-logo-logos-512.png" width="35" height="35" alt="discordicon"/></a>
+            </div>
         </div>
+        
     );
 });
