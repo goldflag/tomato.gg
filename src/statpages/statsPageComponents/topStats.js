@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import OverallStatsTable from './overallStatsTable.js';
-import RecentTankStats from './recentTankStats.js';
+import RecentTankStats from './allTankStats.js';
 import WN8color from '../../functions/WN8color';
 import WRcolor from '../../functions/WRcolor';
 import PRcolor from '../../functions/PRcolor';

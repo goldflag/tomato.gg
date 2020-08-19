@@ -10,8 +10,8 @@ function About() {
     }
 
     return(
-        <div style={styles}>
-            ABOUT OUR PAGE
+        <div>
+            About page
         </div>
     )
 }

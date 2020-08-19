@@ -4,6 +4,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import serverConv from '../../../data/serverConv.js';
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
@@ -65,7 +66,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const serverConv = { 'NA': 'com', 'EU': 'eu', 'ASIA': 'asia', 'RU': 'ru' }
+const roleConv = {
+  "intelligence_officer": "Intelligence Officer",
+  "personnel_officer": "Personnel Officer",
+  "quartermaster": "Quartermaster",
+  "executive_officer": "Executive Officer",
+  "recruit": "Recruit",
+  "private": "Private",
+  "commander": "Commander",
+  "reservist": "Reservist",
+  "combat_officer": "Combat Officer",
+  "junior_officer": "Junior Officer",
+  "recruitment_officer": "Recruitment Officer"
+};
 
 export default function ClanHistory(props) {
   const classes = useStyles();
@@ -97,7 +110,6 @@ export default function ClanHistory(props) {
     .then((data) => data.json())
     .then((clanData) => {
       let tempList = props.data;
-
       tempList.map((row) => {
         row["clan_name"] = clanData.data[row.clan_id].tag;
         row["color"] = clanData.data[row.clan_id].color;
@@ -111,7 +123,8 @@ export default function ClanHistory(props) {
           "color" : props.currentClan.clan.color,
           "joined_at" : props.currentClan.joined_at,
           "icon" : props.currentClan.clan.emblems.x64.wot,
-          "left_at" : props.currentClan.clan.color
+          "left_at" : props.currentClan.clan.color,
+          "role" : props.currentClan.role
         }
         tempList.unshift(currentClan);
       }
@@ -129,7 +142,7 @@ export default function ClanHistory(props) {
         let leftDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
         if (isNaN(date.getMonth())) leftDate = `Current`;
         return (
-            <Grid item xs={4}>
+            <Grid item xs={6}>
               <Grid container spacing={1}>
                 <Grid item xs={5}>
                   <div style={{ margin: 'auto', width: '80%', fontSize: '16px', color: row.color }}>
@@ -140,7 +153,7 @@ export default function ClanHistory(props) {
                   </div>
                 </Grid>
                 <Grid item xs={7}>
-                  <div style={{display: 'flex', justifyContent: 'center', paddingTop: '10px', fontWeight: '500'}}>
+                  <div style={{display: 'flex', justifyContent: 'left', fontWeight: '500'}}>
                       <span style={{textAlign: 'left', fontSize: '14px'}}>
                       <span style={{textAlign: 'left', fontSize: '13px', fontWeight: '400', color: 'rgb(100, 100, 100)'}}>Joined:</span>
                       <br/>
@@ -149,6 +162,10 @@ export default function ClanHistory(props) {
                       <span style={{textAlign: 'left', fontSize: '13px', fontWeight: '400', color: 'rgb(100, 100, 100)'}}>Left:</span>
                       <br/>
                       {leftDate}
+                      <br/>
+                      <span style={{textAlign: 'left', fontSize: '13px', fontWeight: '400', color: 'rgb(100, 100, 100)'}}>Position:</span>
+                      <br/>
+                      {roleConv[row.role]}
                       </span>
                     </div>
                 </Grid>
@@ -160,11 +177,10 @@ export default function ClanHistory(props) {
   }
 
   let clanInfo = <></>;
-
   if (clanList) {
     clanInfo = Unit();
   }
-  if (props.currentClan === 'NO CLAN') {
+  if (props.data === 'NO CLAN HISTORY') {
     clanInfo = <>
     This player has no clan data
     </>

@@ -1,3 +1,5 @@
+//this function is deprecated
+
 import React from 'react';
 import WN8 from '../data/wn8';
 
@@ -50,7 +52,7 @@ export default function OverallStats( tankNames, stats, MOEstats) {
             }
             
             let vehicleStats = {
-                'Icon' : <img src={require(`../assets/tankIcons/${row.tank_id}.png`)} />,
+                'Icon' : <img src={require(`../assets/tankIcons/${row.tank_id}.png`)} alt={row.tank_id}/>,
                 'Name': tankNames[row.tank_id]['short_name'],
                 'Tier' : tankNames[row.tank_id]['tier'],
                 'Class' : Conversion[tankNames[row.tank_id]['type']],

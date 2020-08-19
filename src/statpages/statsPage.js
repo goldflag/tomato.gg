@@ -2,8 +2,9 @@ import React, {useState, useEffect} from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import TopStats from './statsPageComponents/topStats';
 import "../css/style.css";
+import serverConv from '../data/serverConv';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import RecentTankStats from "./statsPageComponents/recentTankStats";
+import AllTankStats from "./statsPageComponents/allTankStats";
 import TankStatsCalculator from '../functions/TankStatsCalculator';
 import GraphCalculator from '../functions/GraphCalculator';
 import Charts from './statsPageComponents/charts';
@@ -38,8 +39,6 @@ function CircularIndeterminate() {
   );
 }
 
-const serverConv = { 'NA': 'com', 'EU': 'eu', 'ASIA': 'asia', 'RU': 'ru' }
-
 export default function StatsPage(props) {
     const [validID, setValidID] = useState(true);
     
@@ -58,7 +57,6 @@ export default function StatsPage(props) {
     const [clanHistory, setClanHistory] = useState('');
 
     const [recentStats, setRecentStats] = useState('');
-
 
     let id = "";
     let server = ""
@@ -113,7 +111,6 @@ export default function StatsPage(props) {
               setWGRating(data1.data[id].global_rating);
               setMOEstats(data3.data[id]);
               setAccountCreationDate(data1.data[id].created_at);
-              setClanHistory(data5.data[id]);
               if (data1.data[id].statistics.all.battles === 0) {
                 setValidID(false);
               }
@@ -123,6 +120,12 @@ export default function StatsPage(props) {
               else {
                 setClanStats('NO CLAN');
               }
+              if (data5.data[id].size === 0) {
+                setClanHistory('NO CLAN HISTORY');
+              }
+              else {
+                setClanHistory(data5.data[id]);
+              }
             });
         }
         catch(err){
@@ -130,8 +133,8 @@ export default function StatsPage(props) {
         }
     }    
 
-  //     // https://api.worldoftanks.com/wot/account/info/?application_id=bd589e105895f2f6b8af31f27da3e05e&account_id=1011694618
-  //     // https://api.worldoftanks.com/wot/tanks/stats/?application_id=bd589e105895f2f6b8af31f27da3e05e&account_id=1011694618&fields=mark_of_mastery%2C+tank_id%2C+all
+  // //  https://api.worldoftanks.com/wot/account/info/?application_id=bd589e105895f2f6b8af31f27da3e05e&account_id=1011694618
+  // //  https://api.worldoftanks.com/wot/tanks/stats/?application_id=bd589e105895f2f6b8af31f27da3e05e&account_id=1011694618&fields=mark_of_mastery%2C+tank_id%2C+all
   // //  https://api.worldoftanks.com/wot/tanks/achievements/?application_id=bd589e105895f2f6b8af31f27da3e05e&account_id=${id}&fields=achievements%2C+tank_id
   // //  https://api.worldoftanks.com/wot/clans/accountinfo/?application_id=bd589e105895f2f6b8af31f27da3e05e&account_id=${id}
   // //  https://api.worldoftanks.com/wot/clans/memberhistory/?application_id=bd589e105895f2f6b8af31f27da3e05e&account_id=${id}
@@ -148,7 +151,8 @@ export default function StatsPage(props) {
     if (WGRating && username && stats && tanksstats && MOEstats && clanStats && clanHistory && accountCreationDate && validID === true) {
 
         const overall = TankStatsCalculator(tanksstats, MOEstats, stats.battles);
-        const graphData = GraphCalculator(overall.tankWN8, stats, overall.overallWN8);
+        console.log(overall);
+        const graphData = GraphCalculator(overall.tankWN8, stats, overall.overallWN8, overall.avgTier);
         StatTable = <>
                         <div style = {{padding: '1em 0em'}}>
                           <TopStats username = {username} WGRating = {WGRating} data = {graphData} stats = {stats} clanStats = {clanStats} accountCreationDate = {accountCreationDate}/>
@@ -157,9 +161,7 @@ export default function StatsPage(props) {
                           <Charts data = {graphData} clanData = {clanHistory} currentClan = {clanStats} classWN8 = {overall.tankWN8byClassTier}/>
                         </div>
                         <div style = {{padding: '1em 0em'}}>
-                          <RecentTankStats overallStats = {overall.tankWN8} />
-
-                          {/* <TankStats tankStats.js = {overall.tankWN8} /> */}
+                          <AllTankStats overallStats = {overall.tankWN8} day1 = {graphData.day1} week1 = {graphData.week1}/>
                         </div>
                     </>
     } 

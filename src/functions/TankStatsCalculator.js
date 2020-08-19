@@ -1,28 +1,29 @@
 import React from 'react';
 import WN8 from '../data/wn8';
 import tankNames from '../data/tankNames';
+import nationConversion from '../data/nationConversion';
 import BattleTrackerTemplate from '../templates/BattleTrackerTemplate';
 import EXPTrackerTemplate from '../templates/EXPTrackerTemplate';
 import clonedeep from 'lodash.clonedeep';
 
-function calculateWN8(id, avgDamage, avgDef, avgFrag, avgSpots, winrate) {
-    const exp = WN8[id];
-    
-    const rDAMAGE = avgDamage / exp.expDamage;
-    const rSPOT   = avgSpots  / exp.expSpot;
-    const rFRAG   = avgFrag   / exp.expFrag;
-    const rDEF    = avgDef    / exp.expDef;
-    const rWIN    = winrate   / exp.expWinRate;
-
+function WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN) {
     const rWINc    = Math.max(0,                          (rWIN    - 0.71) / (1 - 0.71) );
     const rDAMAGEc = Math.max(0,                          (rDAMAGE - 0.22) / (1 - 0.22) );
     const rFRAGc   = Math.max(0, Math.min(rDAMAGEc + 0.2, (rFRAG   - 0.12) / (1 - 0.12)));
     const rSPOTc   = Math.max(0, Math.min(rDAMAGEc + 0.1, (rSPOT   - 0.38) / (1 - 0.38)));
     const rDEFc    = Math.max(0, Math.min(rDAMAGEc + 0.1, (rDEF    - 0.10) / (1 - 0.10)));
+    const WN8 = 980*rDAMAGEc + 210*rDAMAGEc*rFRAGc + 155*rFRAGc*rSPOTc + 75*rDEFc*rFRAGc + 145*Math.min(1.8,rWINc);
+    return WN8;
+}
 
-    const individualTankWN8 = 980*rDAMAGEc + 210*rDAMAGEc*rFRAGc + 155*rFRAGc*rSPOTc + 75*rDEFc*rFRAGc + 145*Math.min(1.8,rWINc);
-    
-    return individualTankWN8;
+function calculateWN8(id, avgDamage, avgDef, avgFrag, avgSpots, winrate) {
+    const exp = WN8[id];
+    const rDAMAGE = avgDamage / exp.expDamage;
+    const rSPOT   = avgSpots  / exp.expSpot;
+    const rFRAG   = avgFrag   / exp.expFrag;
+    const rDEF    = avgDef    / exp.expDef;
+    const rWIN    = winrate   / exp.expWinRate;
+    return WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN);
 }
 
 const Conversion = {
@@ -74,21 +75,7 @@ export default function TankStats(stats, MOEstats, totalBattles) {
         const rFRAG   = weighedFrag   / weighedExpFrag;
         const rDEF    = weighedDef    / weighedExpDef;
         const rWIN    = weighedWinrate   / weighedExpWinrate;
-        console.log('rDAMAGE :' + rDAMAGE);
-        console.log('rSPOT :' + rSPOT);
-        console.log('rFRAG :' + rFRAG);
-        console.log('rDEF :' + rDEF);
-        console.log('rWIN :' + rWIN);
-
-        const rWINc    = Math.max(0,                          (rWIN    - 0.71) / (1 - 0.71) );
-        const rDAMAGEc = Math.max(0,                          (rDAMAGE - 0.22) / (1 - 0.22) );
-        const rFRAGc   = Math.max(0, Math.min(rDAMAGEc + 0.2, (rFRAG   - 0.12) / (1 - 0.12)));
-        const rSPOTc   = Math.max(0, Math.min(rDAMAGEc + 0.1, (rSPOT   - 0.38) / (1 - 0.38)));
-        const rDEFc    = Math.max(0, Math.min(rDAMAGEc + 0.1, (rDEF    - 0.10) / (1 - 0.10)));
-    
-        const overallWN8 = 980*rDAMAGEc + 210*rDAMAGEc*rFRAGc + 155*rFRAGc*rSPOTc + 75*rDEFc*rFRAGc + 145*Math.min(1.8,rWINc);
-        
-        return parseInt(overallWN8);
+        return parseInt(WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN));
     }
 
     function simpleWN8(c, t) {
@@ -97,16 +84,7 @@ export default function TankStats(stats, MOEstats, totalBattles) {
         const rFRAG   = BattleTracker[c][tierToKey[t]].frag   / EXPTracker[c][tierToKey[t]].frag;
         const rDEF    = BattleTracker[c][tierToKey[t]].def    / EXPTracker[c][tierToKey[t]].def;
         const rWIN    = BattleTracker[c][tierToKey[t]].wr   / EXPTracker[c][tierToKey[t]].wr;
-    
-        const rWINc    = Math.max(0,                          (rWIN    - 0.71) / (1 - 0.71) );
-        const rDAMAGEc = Math.max(0,                          (rDAMAGE - 0.22) / (1 - 0.22) );
-        const rFRAGc   = Math.max(0, Math.min(rDAMAGEc + 0.2, (rFRAG   - 0.12) / (1 - 0.12)));
-        const rSPOTc   = Math.max(0, Math.min(rDAMAGEc + 0.1, (rSPOT   - 0.38) / (1 - 0.38)));
-        const rDEFc    = Math.max(0, Math.min(rDAMAGEc + 0.1, (rDEF    - 0.10) / (1 - 0.10)));
-    
-        const wn8 = 980*rDAMAGEc + 210*rDAMAGEc*rFRAGc + 155*rFRAGc*rSPOTc + 75*rDEFc*rFRAGc + 145*Math.min(1.8,rWINc);
-        
-        return wn8;
+        return WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN);
     }
     
     const BattleCount = [
@@ -120,7 +98,9 @@ export default function TankStats(stats, MOEstats, totalBattles) {
 
     let counter = 0;
     let jsonStats = {
+        battles: 0,
         overallWN8: 0,
+        avgTier: 0,
         tankWN8: [],
         tankWN8byClassTier: [
             { "Class": "HT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
@@ -193,17 +173,16 @@ export default function TankStats(stats, MOEstats, totalBattles) {
             if (MOEstats[counter].achievements.marksOnGun) {
                 MOE = MOEstats[counter].achievements.marksOnGun;
             }
-            
-            // BattleTracker[classToIndex[Conversion[tankNames[row.tank_id]['type']]]][tierToKey[tankNames[row.tank_id]['tier']]] += row.all.battles;
-            // data.WN8ClassDist[classToIndex[row[4]]][tierToKey[row[3]]] += (row[7]*row[5]);
-            // BattleTracker[5][tierToKey[tankNames[row.tank_id]['tier']]] += row.all.battles;
-            // data.WN8ClassDist[5][tierToKey[row[3]]] += (row[7]*row[5]);
+
+            jsonStats.avgTier += row.all.battles*tankNames[row.tank_id]['tier'];
+            jsonStats.battles += row.all.battles;
+
             calcTrackingVals(row);
 
             let vehicleStats = [
-                <img src={require(`../assets/tankIcons/${row.tank_id}.png`)} />,
+                <img src={require(`../assets/tankIcons/${row.tank_id}.png`)} alt={row.tank_id}/>,
                 tankNames[row.tank_id]['short_name'],
-                tankNames[row.tank_id]['nation'].charAt(0).toUpperCase() + tankNames[row.tank_id]['nation'].slice(1),
+                nationConversion[tankNames[row.tank_id]['nation']],
                 tankNames[row.tank_id]['tier'],
                 Conversion[tankNames[row.tank_id]['type']],
                 row.all.battles,
@@ -228,11 +207,7 @@ export default function TankStats(stats, MOEstats, totalBattles) {
         }
     );
     calculateWN8Distribution();
-    console.log(EXPTracker);
-    console.log(BattleTracker);
-
     jsonStats.overallWN8 = calculateOverallWN8();
-    
-    console.log(jsonStats);
+    jsonStats.avgTier /= jsonStats.battles;
     return jsonStats;
 }

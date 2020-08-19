@@ -1,93 +1,142 @@
-
 import React, {useState} from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
-import TankStats from './tankStats';
+import MUIDataTable from 'mui-datatables';
+import { createMuiTheme, MuiThemeProvider, withStyles, rgbToHex } from '@material-ui/core/styles';
+import WN8color from '../../functions/WN8color';
+import WRcolor from '../../functions/WRcolor';
 
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-  
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box padding={0}>
-            {children}
-          </Box>
-        )}
-      </div>
-    );
-  }
-
-const CustomTabs = withStyles({
-  root: {
-    elevation: 10,
-    backgroundColor: 'rgb(76, 90, 166)',
+const customStyles = theme => ({
+  wn8row: {
+    '& td': { backgroundColor: 'blue' },
   },
-  indicator: {
-    display: 'flex',
-    justifyContent: 'center',
-    '& > span': {
-      maxWidth: 40,
-      width: '100%',
-      backgroundColor: 'rgb(214, 43, 97)',
-    },
+  GreyLine: {
+    '& td': { backgroundColor: theme.palette.grey[100] },
   },
-})(Tabs);
+  NameCell: {
+    fontWeight: 900,
+    backgroundColor: theme.palette.grey[100],
+  },
+});
 
-const CustomTab = withStyles((theme) => ({
-  root: {
-    textTransform: 'none',
-    minWidth: 72,
-    fontWeight: 600,
-    marginRight: theme.spacing(4),
-    fontFamily: '"Segoe UI"',
-    color: 'rgb(250, 250, 250)',
-    '&:focus': {
-        opacity: 1,
+export default function RecentTankStats(props) {
+  const getMuiTheme = () =>
+    createMuiTheme({
+      overrides: {
+        MUIDataTable: {
+          root: {
+            backgroundColor: '#AAF',
+            display: 'none'
+          },
+          paper: {
+            boxShadow: 'none',
+          },
+        },
+        MuiToolbar: {
+          root: {
+            backgroundColor: 'white',
+          },
+        },
+        MuiTableCell: {
+          head: {
+            backgroundColor: 'rgb(219, 213, 224)',
+            // color: 'rgb(256, 256, 256)',
+          },
+        },
+        MUIDataTableSelectCell: {
+          headerCell: {
+            backgroundColor: 'white',
+
+          },
+        },
+        MuiTableFooter: {
+          root: {
+            '& .MuiToolbar-root': {
+              backgroundColor: 'white',
+            },
+          },
+        },
       },
-  },
-  selected: {},
-}))((props) => <Tab disableRipple {...props} />);
+    });
 
+    const columns = [
+      {
+        name: 'Icon',
+        label: ' ',
+        options: {
+            filter: false,
+        },
+      },
+      { name: 'Vehicle', options: { filter: false } },
+      { name: 'Nation', options: { filter: true } },
+      { name: 'Tier', options: { filter: true } },
+      { name: 'Class', options: { filter: true } },
+      { name: 'Battles', options: { filter: false } },
+      { 
+        name: 'Winrate', 
+        options: {  
+            filter: false,
+            setCellProps: (value) => {
+                return {
+                    style: { color: 'white', backgroundColor: WRcolor(value.slice(0, -1))},
+                };
+            },
+        } 
+      },
+      { 
+        name: 'WN8', 
+        options: { 
+            filter: false,
+            setCellProps: (value) => {
+                return {
+                    style: { color: 'white', backgroundColor: WN8color(value)},
+                };
+              },
+        } 
+      },
+      { name: 'DPG', options: { filter: false } },
+      { name: 'KPG', options: { filter: false } },
+      { name: 'DMG Ratio', options: { filter: false } },
+      { name: 'K/D', options: { filter: false } },
+      { name: 'XP', options: { filter: false } },
+      { name: 'Hit Ratio', options: { filter: false } },
+      { name: 'Spots', options: { filter: false } },
+    ];
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-}));
+    const data = props.overallStats;
 
-export default function NationDist(props) {
-  const classes = useStyles();
-  const [value, setValue] = useState(0);
+    const options = {
+      sortDescFirst: true,
+      filter: true,
+      filterType: 'dropdown',
+      fixedHeader: false,
+      fixedSelectColumn: false,
+      rowHover: true,
+      selectableRows: 'none',
+      rowsPerPage: 15,
+      rowsPerPageOptions: [10, 15, 25, 50, 100],
+      sortOrder: {
+        name: 'Battles',
+        direction: 'desc'
+      },
+      print: false,
+      viewColumns: false,
+      setRowProps: (row, dataIndex, rowIndex) => {
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+        return {
+            style: {backgroundColor: ((rowIndex % 2) === 0 ? 'rgb(242, 243, 247)' : 'white')}
+        };
+      },
 
-  return (
-    <div className={classes.root}>
-      <div>
-        <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
-          <CustomTab label="OVERALL" /> 
-          <CustomTab label="24 HOURS" /> 
-        </CustomTabs>
-        <TabPanel value={value} index={0}>
-          <TankStats overallStats = {props.overallStats}/>
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <TankStats overallStats = {props.overallStats}/>
-        </TabPanel>
-      </div>            
-    </div>
-  );
+      setTableProps: () => {
+        return {
+          size: 'small',
+        };
+      },
+    };
+
+    return (
+      <MuiThemeProvider theme={getMuiTheme()}>
+        <MUIDataTable title={''} data={data} columns={columns} options={options}/>
+      </MuiThemeProvider>
+    );
 }
-
 

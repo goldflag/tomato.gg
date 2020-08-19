@@ -6,6 +6,7 @@ import AppsIcon from '@material-ui/icons/Apps';
 import GroupIcon from '@material-ui/icons/Group';
 import PublicIcon from '@material-ui/icons/Public';
 import BarChartIcon from '@material-ui/icons/BarChart';
+import InfoIcon from '@material-ui/icons/Info';
 
 function Sidebar() {
     return (
@@ -36,6 +37,11 @@ function Sidebar() {
                     <Link to='/tanks' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
                     <BarChartIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
                         &nbsp;&nbsp;Tank Stats
+                    </Link>
+
+                    <Link to='/about' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
+                    <InfoIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
+                        &nbsp;&nbsp;About
                     </Link>
                 </div>
                 <div className="bottom">
