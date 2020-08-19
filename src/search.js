@@ -39,12 +39,14 @@ export default withRouter(function Search(props){
 
     const searchId = async (e) => {
         e.preventDefault();
+        // const url = `https://api.worldoftanks.${server}/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`
         const url = `https://api.worldoftanks.${server}/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`
+        console.log(APIKey);
         try {
             fetch(url)
             .then((res) => res.json())
             .then((data) => {
-                if (data.status == "error" || data.meta.count == 0) { console.log('Invalid username'); }
+                if (data.status === "error" || data.meta.count === 0) { console.log('Invalid username'); }
                 else { testId = data.data[0].account_id; }
             })
             .then(() => {

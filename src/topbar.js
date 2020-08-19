@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import './css/topbar.css'
 import SmallSearchBar from './material/smallSearchBar';
 import { Link, useRouteMatch, withRouter} from "react-router-dom";
+const APIKey = process.env.REACT_APP_API_KEY;
 
 const serverConv = {
     'com': 'NA',
@@ -18,7 +19,8 @@ export default withRouter(function Topbar(props) {
     const searchId = async (e) => {
         let testId = 'FAIL';
         e.preventDefault();
-        const url = `https://api.worldoftanks.${server}/wot/account/list/?language=en&application_id=bd589e105895f2f6b8af31f27da3e05e&search=${name}`
+        console.log(APIKey);
+        const url = `https://api.worldoftanks.${server}/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`
         try {
             fetch(url)
             .then((res) => res.json())
