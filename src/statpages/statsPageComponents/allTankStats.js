@@ -81,7 +81,7 @@ export default function NationDist(props) {
           <CustomTab label="24 HOURS" /> 
           <CustomTab label="7 DAYS" /> 
           <CustomTab label="30 DAYS" /> 
-          <CustomTab label="50 DAYS" /> 
+          <CustomTab label="60 DAYS" /> 
           <CustomTab label="500 BATTLES" /> 
           <CustomTab label="1000 BATTLES" /> 
         </CustomTabs>
@@ -95,16 +95,16 @@ export default function NationDist(props) {
           <RecentTankStats overallStats = {props.week1}/>
         </TabPanel>
         <TabPanel value={value} index={3}>
-          <TankStats overallStats = {props.overallStats}/>
+          <RecentTankStats overallStats = {props.days30}/>
         </TabPanel>
         <TabPanel value={value} index={4}>
-          <TankStats overallStats = {props.overallStats}/>
+          <RecentTankStats overallStats = {props.overallStats}/>
         </TabPanel>
         <TabPanel value={value} index={5}>
-          <TankStats overallStats = {props.overallStats}/>
+          <RecentTankStats overallStats = {props.overallStats}/>
         </TabPanel>
         <TabPanel value={value} index={6}>
-          <TankStats overallStats = {props.overallStats}/>
+          <RecentTankStats overallStats = {props.overallStats}/>
         </TabPanel>
       </div>            
     </div>

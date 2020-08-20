@@ -88,22 +88,29 @@ export default function StatsPage(props) {
     }
 
     const searchStats = async () => {
+        //Overall Summary Stats
         const url = `https://api.worldoftanks.${server}/wot/account/info/?application_id=${APIKey}&account_id=${id}`;
+        //Overall tank stats
         const url2 = `https://api.worldoftanks.${server}/wot/tanks/stats/?application_id=${APIKey}&account_id=${id}&fields=mark_of_mastery%2C+tank_id%2C+all`;
+        //MOE Data
         const url3 = `https://api.worldoftanks.${server}/wot/tanks/achievements/?application_id=${APIKey}&account_id=${id}&fields=achievements%2C+tank_id`;
+        //Current Clan Data
         const url4 = `https://api.worldoftanks.${server}/wot/clans/accountinfo/?application_id=${APIKey}&account_id=${id}`;
+        //Clan history
         const url5 = `https://api.worldoftanks.${server}/wot/clans/memberhistory/?application_id=${APIKey}&account_id=${id}`
-
+        //Recent stats from our own API
+        const url6 = `https://api.worldoftanks.${server}/wot/clans/memberhistory/?application_id=${APIKey}&account_id=${id}`
         try {
             Promise.all([
                 fetch(url),
                 fetch(url2),
                 fetch(url3),
                 fetch(url4),
-                fetch(url5)
+                fetch(url5),
+                fetch(url6),
             ])
-            .then(([res1, res2, res3, res4, res5]) => Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json()]))
-            .then(([data1, data2, data3, data4, data5]) => 
+            .then(([res1, res2, res3, res4, res5, res6]) => Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json(), res6.json()]))
+            .then(([data1, data2, data3, data4, data5, data6]) => 
             {
               setStats(data1.data[id].statistics.all);
               setTanksstats(data2.data[id]);
@@ -161,7 +168,7 @@ export default function StatsPage(props) {
                           <Charts data = {graphData} clanData = {clanHistory} currentClan = {clanStats} classWN8 = {overall.tankWN8byClassTier}/>
                         </div>
                         <div style = {{padding: '1em 0em'}}>
-                          <AllTankStats overallStats = {overall.tankWN8} day1 = {graphData.day1} week1 = {graphData.week1}/>
+                          <AllTankStats overallStats = {overall.tankWN8} day1 = {graphData.day1} week1 = {graphData.week1} days30 = {graphData.days30}/>
                         </div>
                     </>
     } 

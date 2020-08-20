@@ -96,8 +96,8 @@ export default function RecentTankStats(props) {
       { name: 'KPG', options: { filter: false } },
       { name: 'DMG Ratio', options: { filter: false } },
       { name: 'K/D', options: { filter: false } },
-      { name: 'XP', options: { filter: false } },
-      { name: 'Hit Ratio', options: { filter: false } },
+      // { name: 'XP', options: { filter: false } },
+      // { name: 'Hit Ratio', options: { filter: false } },
       { name: 'Spots', options: { filter: false } },
     ];
 

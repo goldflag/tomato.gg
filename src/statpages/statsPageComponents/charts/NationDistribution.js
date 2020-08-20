@@ -33,6 +33,9 @@ export default function NationDistribution(props) {
                     "rgb(181, 55, 240)",
                     "rgb(222, 55, 240)",
                     "rgb(240, 55, 225)",
+
+                    "rgb(222, 55, 240)",
+
                 ]}
                 borderWidth={2}
                 borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.2 ] ] }}

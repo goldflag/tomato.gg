@@ -3623,6 +3623,14 @@ const tankNames = {
         "tier": 7,
         "type": "heavyTank"
     },
+    "31745": {
+        "is_gift": false,
+        "short_name": "ISU-152K",
+        "nation": "ussr",
+        "is_premium": true,
+        "tier": 8,
+        "type": "AT-SPG"
+    },
     "32001": {
         "is_gift": false,
         "short_name": "Obj. 780",
