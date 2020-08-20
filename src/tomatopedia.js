@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Topbar from './topbar';
 import Sidebar from './sidebar';
 import Search from './search';
-import Footer from './footer'
 import About from './about';
 import StatsPage from './statpages/statsPage';
 import "./css/body.css";
@@ -30,9 +29,6 @@ export default function Tomatopedia() {
               </Route>
             </Switch>
           </main>
-          {/* <footer>
-            <Footer className='footer'/>
-          </footer> */}
         </div>
       </Router>
   );

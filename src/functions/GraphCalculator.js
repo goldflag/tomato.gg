@@ -1,8 +1,10 @@
 import React from 'react';
 import TankStats from './TankStatsCalculator';
+import zeroBattles from './GraphFunctions';
 import WN8 from '../data/wn8';
 import tankNames from '../data/tankNames';
 import nationConversion from '../data/nationConversion';
+import compressedRoot2 from '../data/compressedRoot2';
 
 import compressedRoot from '../data/compressedRoot';
 import compressed1month from '../data/compressed1month';
@@ -86,30 +88,31 @@ function calculatePeriodWN8(overall, historical) {
 
 function calculateRecents(statsSnapshot) {
     //the updated overall stats
-    let overall = compressedRoot;
+    let overall = compressedRoot2;
+    console.log(overall);
     //the historical snapshot
     let snapshotTanks = statsSnapshot.tankStats;
     let index = 0;
     let calculatedStats = {
         battles: 0,
-        tier: compressedRoot.tier - statsSnapshot.tier,
+        tier: overall.tier - statsSnapshot.tier,
         overallWN8: 0,
-        wins: compressedRoot.wins - statsSnapshot.wins,
-        losses: compressedRoot.losses - statsSnapshot.losses,
-        draws: compressedRoot.draws - statsSnapshot.draws,
-        damage: compressedRoot.damage - statsSnapshot.damage,
-        damage_received: compressedRoot.damageR - statsSnapshot.damageR,
-        frags: compressedRoot.frags - statsSnapshot.frags,
-        destroyed: compressedRoot.deaths - statsSnapshot.deaths,
-        survived: (compressedRoot.battles - compressedRoot.deaths) - (statsSnapshot.battles - statsSnapshot.deaths),
+        wins: overall.wins - statsSnapshot.wins,
+        losses: overall.losses - statsSnapshot.losses,
+        draws: overall.draws - statsSnapshot.draws,
+        damage: overall.damage - statsSnapshot.damage,
+        damage_received: overall.damageR - statsSnapshot.damageR,
+        frags: overall.frags - statsSnapshot.frags,
+        destroyed: overall.deaths - statsSnapshot.deaths,
+        survived: (overall.battles - overall.deaths) - (statsSnapshot.battles - statsSnapshot.deaths),
         spotted: 0,
-        cap: compressedRoot.cap - statsSnapshot.cap,
-        def: compressedRoot.def - statsSnapshot.def,
-        xp: compressedRoot.xp - statsSnapshot.xp,
+        cap: overall.cap - statsSnapshot.cap,
+        def: overall.def - statsSnapshot.def,
+        xp: overall.xp - statsSnapshot.xp,
         tankStats: []
     };
 
-    const overallWN8 =  calculatePeriodWN8(overall.tankStats, statsSnapshot.tankStats);
+    const overallWN8 = parseInt(calculatePeriodWN8(overall.tankStats, statsSnapshot.tankStats));
 
     calculatedStats.overallWN8 = overallWN8;
 
@@ -120,7 +123,7 @@ function calculateRecents(statsSnapshot) {
             const avgFrag = row[4] / row[1];
             const avgSpots = row[5] / row[1];
             const winrate = row[3] * 100 / row[1];
-            const WN8 = calculateWN8(row.tank_id, avgDamage, avgDef, avgFrag, avgSpots, winrate);
+            const WN8 = calculateWN8(row[0], avgDamage, avgDef, avgFrag, avgSpots, winrate);
             const destroyed = row[1] - row[7];
 
             let vehicleRecentStats = [
@@ -188,17 +191,20 @@ function calculateRecents(statsSnapshot) {
             ++index;
         }
     });
-    calculatedStats.tier = calculatedStats.tier / calculatedStats.battles;
+    // calculatedStats.tier = calculatedStats.tier / calculatedStats.battles;
+
+    calculatedStats = zeroBattles(calculatedStats);
+
     return calculatedStats;
 }
 
-function calculate1day() { return calculateRecents(compressed1day) }
+function calculate1day() { return calculateRecents(compressedRoot) }
 
-function calculate1week() { return calculateRecents(compressed1week) }
+function calculate1week() { return calculateRecents(compressed1day) }
 
-function calculate30days() { return calculateRecents(compressed1month) }
+function calculate30days() { return calculateRecents(compressed1week) }
 
-function calculate60days() { return calculateRecents() }
+function calculate60days() { return calculateRecents(compressed1month) }
 
 function calculate500battles() { return calculateRecents() }
 
@@ -250,11 +256,22 @@ function ClassDistCalculator(data) {
     data.ClassDist = NewClassDist;
 }
 
+function clr(recent, overall, flipped) {
+    if (recent === '-') return 'rgb(50,50,50)';
+    if (flipped) {
+        if (overall < recent) return 'red';
+        else return 'green';
+    }
+    if (overall > recent) return 'red';
+    else return 'green';
+}
+
 export default function GraphCalculator(stats, OS, overallWN8, avgTier) {
 
     const day1stats = calculate1day();
     const weekstats = calculate1week();
     const day30stats = calculate30days();
+    const day60stats = calculate60days();
 
     console.log(OS);
     const data = {
@@ -262,7 +279,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier) {
         'day1' : day1stats.tankStats,
         'week1' : weekstats.tankStats,
         'days30' : day30stats.tankStats,
-        'days60' : [],
+        'days60' : day60stats.tankStats,
         'battles500' : [],
         'battles1000' : [],
         'overallStats' : [
@@ -271,119 +288,119 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier) {
                 '24 Hours': day1stats.battles, 
                 '7 Days': weekstats.battles, 
                 '30 Days': day30stats.battles, 
-                '60 Days': 0,
+                '60 Days': day60stats.battles,
                 '500 Games': 0, 
                 '1000 Games': <span style={{ color: (190000 > OS.battles ? 'green' : 'red')}}> 190000 </span>},
             {'name': 'Avg Tier', 
                 'Overall': avgTier.toFixed(2), 
-                '24 Hours': day1stats.tier.toFixed(2), 
-                '7 Days': weekstats.tier.toFixed(2), 
-                '30 Days': day30stats.tier.toFixed(2),  
-                '60 Days': 0,
+                '24 Hours': day1stats.tier, 
+                '7 Days': weekstats.tier, 
+                '30 Days': day30stats.tier,  
+                '60 Days': day60stats.tier,  
                 '500 Games': 0, 
                 '1000 Games': <span style={{ color: (9.4 > 7.6 ? 'green' : 'red')}}> 9.6 </span>},
             {'name': 'WN8', 
                 'Overall': overallWN8, 
-                '24 Hours': parseInt(day1stats.overallWN8), 
-                '7 Days': parseInt(weekstats.overallWN8), 
-                '30 Days': parseInt(day30stats.overallWN8), 
-                '60 Days': parseInt(0),
+                '24 Hours': day1stats.overallWN8, 
+                '7 Days': weekstats.overallWN8, 
+                '30 Days': day30stats.overallWN8, 
+                '60 Days': day60stats.overallWN8, 
                 '500 Games': parseInt(0), 
                 '1000 Games': parseInt(0)},
             {'name': 'Wins', 
                 'Overall': <>{OS.wins}<span style={{float: 'right'}}> {(OS.wins*100/OS.battles).toFixed(2)}%</span></>, 
-                '24 Hours': <>{day1stats.wins}<span style={{ float: 'right', color: ((day1stats.wins/day1stats.battles) > (OS.wins/OS.battles) ? 'green' : 'red')}}>{(day1stats.wins*100/day1stats.battles).toFixed(2)}%</span></>, 
-                '7 Days': <>{weekstats.wins}<span style={{ float: 'right', color: ((weekstats.wins/weekstats.battles) > (OS.wins/OS.battles) ? 'green' : 'red')}}>{(weekstats.wins*100/weekstats.battles).toFixed(2)}%</span></>, 
-                '30 Days': <>{day30stats.wins}<span style={{ float: 'right', color: ((day30stats.wins/day30stats.battles) > (OS.wins/OS.battles) ? 'green' : 'red')}}>{(day30stats.wins*100/day30stats.battles).toFixed(2)}%</span></>, 
-                '60 Days': 0,
+                '24 Hours': <>{day1stats.wins}<span style={{ float: 'right', color: clr(day1stats.winrate, (OS.wins*100/OS.battles))}}>{day1stats.winrate}%</span></>, 
+                '7 Days': <>{weekstats.wins}<span style={{ float: 'right', color: clr(weekstats.winrate, (OS.wins*100/OS.battles))}}>{weekstats.winrate}%</span></>, 
+                '30 Days': <>{day30stats.wins}<span style={{ float: 'right', color: clr(day30stats.winrate, (OS.wins*100/OS.battles))}}>{day30stats.winrate}%</span></>, 
+                '60 Days': <>{day60stats.wins}<span style={{ float: 'right', color: clr(day60stats.winrate, (OS.wins*100/OS.battles))}}>{day60stats.winrate}%</span></>, 
                 '500 Games': 0, 
                 '1000 Games': <>641<span style={{ float: 'right', color: (0.641 > 0.54 ? 'green' : 'red')}}> 64% </span></>},
             {'name': 'Losses', 
                 'Overall': <>{OS.losses} <span style={{float: 'right'}}> {(OS.losses*100/OS.battles).toFixed(2)}%</span></>, 
-                '24 Hours': <>{day1stats.losses}<span style={{ float: 'right', color: ((day1stats.losses/day1stats.battles) > (OS.losses/OS.battles) ? 'red' : 'green')}}>{(day1stats.losses*100/day1stats.battles).toFixed(2)}%</span></>, 
-                '7 Days': <>{weekstats.losses}<span style={{ float: 'right', color: ((weekstats.losses/weekstats.battles) > (OS.losses/OS.battles) ? 'red' : 'green')}}>{(weekstats.losses*100/weekstats.battles).toFixed(2)}%</span></>, 
-                '30 Days': <>{day30stats.losses}<span style={{ float: 'right', color: ((day30stats.losses/day30stats.battles) > (OS.losses/OS.battles) ? 'red' : 'green')}}>{(day30stats.losses*100/day30stats.battles).toFixed(2)}%</span></>, 
-                '60 Days': 0,
+                '24 Hours': <>{day1stats.losses}<span style={{ float: 'right', color: clr(day1stats.lossrate, (OS.losses*100/OS.battles), true)}}>{day1stats.lossrate}%</span></>, 
+                '7 Days': <>{weekstats.losses}<span style={{ float: 'right', color: clr(weekstats.lossrate, (OS.losses*100/OS.battles), true)}}>{weekstats.lossrate}%</span></>, 
+                '30 Days': <>{day30stats.losses}<span style={{ float: 'right', color: clr(day30stats.lossrate, (OS.losses*100/OS.battles), true)}}>{day30stats.lossrate}%</span></>, 
+                '60 Days': <>{day60stats.losses}<span style={{ float: 'right', color: clr(day60stats.lossrate, (OS.losses*100/OS.battles), true)}}>{day60stats.lossrate}%</span></>, 
                 '500 Games': 0, 
                 '1000 Games': 0},
             {'name': 'Draws', 
                 'Overall': <>{OS.battles-OS.wins-OS.losses} <span style={{float: 'right'}}> {((OS.battles-OS.wins-OS.losses)*100/OS.losses).toFixed(2)}%</span></>, 
-                '24 Hours': <>{day1stats.draws}<span style={{ float: 'right', color: ((day1stats.draws/day1stats.battles) > (OS.draws/OS.battles) ? 'red' : 'green')}}>{(day1stats.draws*100/day1stats.battles).toFixed(2)}%</span></>, 
-                '7 Days': <>{weekstats.draws}<span style={{ float: 'right', color: ((weekstats.draws/weekstats.battles) > (OS.draws/OS.battles) ? 'red' : 'green')}}>{(weekstats.draws*100/weekstats.battles).toFixed(2)}%</span></>, 
-                '30 Days': <>{day30stats.draws}<span style={{ float: 'right', color: ((day30stats.draws/day30stats.battles) > (OS.draws/OS.battles) ? 'red' : 'green')}}>{(day30stats.draws*100/day30stats.battles).toFixed(2)}%</span></>,  
-                '60 Days': 0,
+                '24 Hours': <>{day1stats.draws}<span style={{ float: 'right', color: clr(day1stats.drawrate, (OS.draws*100/OS.battles), true)}}>{day1stats.drawrate}%</span></>, 
+                '7 Days': <>{weekstats.draws}<span style={{ float: 'right', color: clr(weekstats.drawrate, (OS.draws*100/OS.battles), true)}}>{weekstats.drawrate}%</span></>, 
+                '30 Days': <>{day30stats.draws}<span style={{ float: 'right', color: clr(day30stats.drawrate, (OS.draws*100/OS.battles), true)}}>{day30stats.drawrate}%</span></>,  
+                '60 Days': <>{day60stats.draws}<span style={{ float: 'right', color: clr(day60stats.drawrate, (OS.draws*100/OS.battles), true)}}>{day60stats.drawrate}%</span></>,  
                 '500 Games': 0, 
                 '1000 Games': 0},
             {'name': 'Damage', 
                 'Overall': <>{OS.damage_dealt} <span style={{float: 'right'}}>{parseInt(OS.damage_dealt/OS.battles)}</span></>, 
-                '24 Hours': <>{day1stats.damage}<span style={{ float: 'right', color: ((day1stats.damage/day1stats.battles) > (OS.damage_dealt/OS.battles) ? 'green' : 'red')}}>{(day1stats.damage/day1stats.battles).toFixed(0)}</span></>, 
-                '7 Days': <>{weekstats.damage}<span style={{ float: 'right', color: ((weekstats.damage/weekstats.battles) > (OS.damage_dealt/OS.battles) ? 'green' : 'red')}}>{(weekstats.damage/weekstats.battles).toFixed(0)}</span></>, 
-                '30 Days': <>{day30stats.damage}<span style={{ float: 'right', color: ((day30stats.damage/day30stats.battles) > (OS.damage_dealt/OS.battles) ? 'green' : 'red')}}>{(day30stats.damage/day30stats.battles).toFixed(0)}</span></>, 
-                '60 Days': 0,
+                '24 Hours': <>{day1stats.damage}<span style={{ float: 'right', color: clr(day1stats.damagerate, (OS.damage_dealt/OS.battles))}}>{day1stats.damagerate}</span></>, 
+                '7 Days': <>{weekstats.damage}<span style={{ float: 'right', color: clr(weekstats.damagerate, (OS.damage_dealt/OS.battles))}}>{weekstats.damagerate}</span></>, 
+                '30 Days': <>{day30stats.damage}<span style={{ float: 'right', color: clr(day30stats.damagerate, (OS.damage_dealt/OS.battles))}}>{day30stats.damagerate}</span></>, 
+                '60 Days': <>{day60stats.damage}<span style={{ float: 'right', color: clr(day60stats.damagerate, (OS.damage_dealt/OS.battles))}}>{day60stats.damagerate}</span></>, 
                 '500 Games': 0, 
                 '1000 Games': 0},
             {'name': 'Frags', 
                 'Overall': <>{OS.frags} <span style={{float: 'right'}}>{(OS.frags/OS.battles).toFixed(2)}</span></>, 
-                '24 Hours': <>{day1stats.frags}<span style={{ float: 'right', color: ((day1stats.frags/day1stats.battles) > (OS.frags/OS.battles) ? 'green' : 'red')}}>{(day1stats.frags/day1stats.battles).toFixed(2)}</span></>, 
-                '7 Days': <>{weekstats.frags}<span style={{ float: 'right', color: ((weekstats.frags/weekstats.battles) > (OS.frags/OS.battles) ? 'green' : 'red')}}>{(weekstats.frags/weekstats.battles).toFixed(2)}</span></>, 
-                '30 Days': <>{day30stats.frags}<span style={{ float: 'right', color: ((day30stats.frags/day30stats.battles) > (OS.frags/OS.battles) ? 'green' : 'red')}}>{(day30stats.frags/day30stats.battles).toFixed(2)}</span></>, 
-                '60 Days': 0,
+                '24 Hours': <>{day1stats.frags}<span style={{ float: 'right', color: clr(day1stats.fragsrate, (OS.frags/OS.battles))}}>{day1stats.fragsrate}</span></>, 
+                '7 Days': <>{weekstats.frags}<span style={{ float: 'right', color: clr(weekstats.fragsrate, (OS.frags/OS.battles))}}>{weekstats.fragsrate}</span></>, 
+                '30 Days': <>{day30stats.frags}<span style={{ float: 'right', color: clr(day30stats.fragsrate, (OS.frags/OS.battles))}}>{day30stats.fragsrate}</span></>, 
+                '60 Days': <>{day60stats.frags}<span style={{ float: 'right', color: clr(day60stats.fragsrate, (OS.frags/OS.battles))}}>{day60stats.fragsrate}</span></>, 
                 '500 Games': 0, 
                 '1000 Games': 0},
             {'name': 'K/D Ratio', 
                 'Overall': (OS.frags/(OS.battles - OS.survived_battles)).toFixed(2), 
-                '24 Hours': <><span style={{ color: ((day1stats.frags/day1stats.destroyed) > (OS.frags/(OS.battles - OS.survived_battles)) ? 'green' : 'red')}}>{(day1stats.frags/day1stats.destroyed).toFixed(2)}</span></>, 
-                '7 Days': <><span style={{ color: ((weekstats.frags/weekstats.destroyed) > (OS.frags/(OS.battles - OS.survived_battles)) ? 'green' : 'red')}}>{(weekstats.frags/weekstats.destroyed).toFixed(2)}</span></>, 
-                '30 Days': <><span style={{ color: ((day30stats.frags/day30stats.destroyed) > (OS.frags/(OS.battles - OS.survived_battles)) ? 'green' : 'red')}}>{(day30stats.frags/day30stats.destroyed).toFixed(2)}</span></>, 
-                '60 Days': 0, 
+                '24 Hours': <><span style={{ color: clr(day1stats.KD, (OS.frags/(OS.battles - OS.survived_battles)))}}>{day1stats.KD}</span></>, 
+                '7 Days': <><span style={{ color: clr(weekstats.KD, (OS.frags/(OS.battles - OS.survived_battles)))}}>{weekstats.KD}</span></>, 
+                '30 Days': <><span style={{ color: clr(day30stats.KD, (OS.frags/(OS.battles - OS.survived_battles)))}}>{day30stats.KD}</span></>, 
+                '60 Days': <><span style={{ color: clr(day60stats.KD, (OS.frags/(OS.battles - OS.survived_battles)))}}>{day60stats.KD}</span></>, 
                 '500 Games': 0, 
                 '1000 Games': 0},
             {'name': 'Damage Ratio', 
                 'Overall': (OS.damage_dealt/OS.damage_received).toFixed(2), 
-                '24 Hours': <><span style={{ color: ((day1stats.damage/day1stats.damage_received) > (OS.damage_dealt/(OS.damage_received)) ? 'green' : 'red')}}>{(day1stats.damage/day1stats.damage_received).toFixed(2)}</span></>, 
-                '7 Days': <><span style={{ color: ((weekstats.damage/weekstats.damage_received) > (OS.damage_dealt/(OS.damage_received)) ? 'green' : 'red')}}>{(weekstats.damage/weekstats.damage_received).toFixed(2)}</span></>, 
-                '30 Days': <><span style={{ color: ((day30stats.damage/day30stats.damage_received) > (OS.damage_dealt/(OS.damage_received)) ? 'green' : 'red')}}>{(day30stats.damage/day30stats.damage_received).toFixed(2)}</span></>, 
-                '60 Days': 0,
+                '24 Hours': <><span style={{ color: clr(day1stats.DMGratio, (OS.damage_dealt/(OS.damage_received)))}}>{day1stats.DMGratio}</span></>, 
+                '7 Days': <><span style={{ color: clr(weekstats.DMGratio, (OS.damage_dealt/(OS.damage_received)))}}>{weekstats.DMGratio}</span></>, 
+                '30 Days': <><span style={{ color: clr(day30stats.DMGratio, (OS.damage_dealt/(OS.damage_received)))}}>{day30stats.DMGratio}</span></>, 
+                '60 Days': <><span style={{ color: clr(day60stats.DMGratio, (OS.damage_dealt/(OS.damage_received)))}}>{day60stats.DMGratio}</span></>, 
                 '500 Games': 0, 
                 '1000 Games': 0},
             {'name': 'Survived', 
                 'Overall': <>{OS.survived_battles} <span style={{float: 'right'}}>{(OS.survived_battles*100/OS.battles).toFixed(2)}%</span></>, 
-                '24 Hours': <>{day1stats.survived}<span style={{ float: 'right', color: ((day1stats.survived/day1stats.battles) > (OS.survived_battles/(OS.battles)) ? 'green' : 'red')}}>{(day1stats.survived*100/day1stats.battles).toFixed(2)}%</span></>, 
-                '7 Days': <>{weekstats.survived}<span style={{ float: 'right', color: ((weekstats.survived/weekstats.battles) > (OS.survived_battles/(OS.battles)) ? 'green' : 'red')}}>{(weekstats.survived*100/weekstats.battles).toFixed(2)}%</span></>, 
-                '30 Days': <>{day30stats.survived}<span style={{ float: 'right', color: ((day30stats.survived/day30stats.battles) > (OS.survived_battles/(OS.battles)) ? 'green' : 'red')}}>{(day30stats.survived*100/day30stats.battles).toFixed(2)}%</span></>,
-                '60 Days': 0,
+                '24 Hours': <>{day1stats.survived}<span style={{ float: 'right', color: clr(day1stats.survivedrate, (OS.survived_battles/(OS.battles)))}}>{day1stats.survivedrate}%</span></>, 
+                '7 Days': <>{weekstats.survived}<span style={{ float: 'right', color: clr(weekstats.survivedrate, (OS.survived_battles/(OS.battles)))}}>{weekstats.survivedrate}%</span></>, 
+                '30 Days': <>{day30stats.survived}<span style={{ float: 'right', color: clr(day30stats.survivedrate, (OS.survived_battles/(OS.battles)))}}>{day30stats.survivedrate}%</span></>,
+                '60 Days': <>{day60stats.survived}<span style={{ float: 'right', color: clr(day60stats.survivedrate, (OS.survived_battles/(OS.battles)))}}>{day60stats.survivedrate}%</span></>,
                 '500 Games': 0, 
                 '1000 Games': 0},
             {'name': 'Detected', 
                 'Overall': <>{OS.spotted} <span style={{float: 'right'}}>{(OS.spotted/OS.battles).toFixed(2)}</span></>, 
-                '24 Hours': <>{day1stats.spotted}<span style={{ float: 'right', color: ((day1stats.spotted/day1stats.battles) > (OS.spotted/(OS.battles)) ? 'green' : 'red')}}>{(day1stats.spotted/day1stats.battles).toFixed(2)}</span></>, 
-                '7 Days': <>{weekstats.spotted}<span style={{ float: 'right', color: ((weekstats.spotted/weekstats.battles) > (OS.spotted/(OS.battles)) ? 'green' : 'red')}}>{(weekstats.spotted/weekstats.battles).toFixed(2)}</span></>, 
-                '30 Days': <>{day30stats.spotted}<span style={{ float: 'right', color: ((day30stats.spotted/day30stats.battles) > (OS.spotted/(OS.battles)) ? 'green' : 'red')}}>{(day30stats.spotted/day30stats.battles).toFixed(2)}</span></>,  
-                '60 Days': 0,
+                '24 Hours': <>{day1stats.spotted}<span style={{ float: 'right', color: clr(day1stats.spottedrate, (OS.spotted/(OS.battles)))}}>{day1stats.spottedrate}</span></>, 
+                '7 Days': <>{weekstats.spotted}<span style={{ float: 'right', color: clr(weekstats.spottedrate, (OS.spotted/(OS.battles)))}}>{weekstats.spottedrate}</span></>, 
+                '30 Days': <>{day30stats.spotted}<span style={{ float: 'right', color: clr(day30stats.spottedrate, (OS.spotted/(OS.battles)))}}>{day30stats.spottedrate}</span></>,  
+                '60 Days': <>{day60stats.spotted}<span style={{ float: 'right', color: clr(day60stats.spottedrate, (OS.spotted/(OS.battles)))}}>{day60stats.spottedrate}</span></>,
                 '500 Games': 0, 
                 '1000 Games': 0},
             {'name': 'Cap Points', 
                 'Overall': <>{OS.capture_points} <span style={{float: 'right'}}>{(OS.capture_points/OS.battles).toFixed(2)}</span></> , 
-                '24 Hours': <>{day1stats.cap}<span style={{ float: 'right', color: ((day1stats.cap/day1stats.battles) > (OS.capture_points/(OS.battles)) ? 'green' : 'red')}}>{(day1stats.cap/day1stats.battles).toFixed(2)}</span></>, 
-                '7 Days': <>{weekstats.cap}<span style={{ float: 'right', color: ((weekstats.cap/weekstats.battles) > (OS.capture_points/(OS.battles)) ? 'green' : 'red')}}>{(weekstats.cap/weekstats.battles).toFixed(2)}</span></>, 
-                '30 Days': <>{day30stats.cap}<span style={{ float: 'right', color: ((day30stats.cap/day30stats.battles) > (OS.capture_points/(OS.battles)) ? 'green' : 'red')}}>{(day30stats.cap/day30stats.battles).toFixed(2)}</span></>, 
-                '60 Days': 0,
+                '24 Hours': <>{day1stats.cap}<span style={{ float: 'right', color: clr(day1stats.caprate, (OS.capture_points/(OS.battles)))}}>{day1stats.caprate}</span></>, 
+                '7 Days': <>{weekstats.cap}<span style={{ float: 'right', color: clr(weekstats.caprate, (OS.capture_points/(OS.battles)))}}>{weekstats.caprate}</span></>, 
+                '30 Days': <>{day30stats.cap}<span style={{ float: 'right', color: clr(day30stats.caprate, (OS.capture_points/(OS.battles)) )}}>{day30stats.caprate}</span></>, 
+                '60 Days': <>{day60stats.cap}<span style={{ float: 'right', color: clr(day60stats.caprate, (OS.capture_points/(OS.battles)))}}>{day60stats.caprate}</span></>, 
                 '500 Games': 0, 
                 '1000 Games': 0},
             {'name': 'Def Points', 
                 'Overall': <>{OS.dropped_capture_points} <span style={{float: 'right'}}>{(OS.dropped_capture_points/OS.battles).toFixed(2)}</span></>, 
-                '24 Hours': <>{day1stats.def}<span style={{ float: 'right', color: ((day1stats.def/day1stats.battles) > (OS.dropped_capture_points/(OS.battles)) ? 'green' : 'red')}}>{(day1stats.def/day1stats.battles).toFixed(2)}</span></>, 
-                '7 Days': <>{weekstats.def}<span style={{ float: 'right', color: ((weekstats.def/weekstats.battles) > (OS.dropped_capture_points/(OS.battles)) ? 'green' : 'red')}}>{(weekstats.def/weekstats.battles).toFixed(2)}</span></>, 
-                '30 Days': <>{day30stats.def}<span style={{ float: 'right', color: ((day30stats.def/day30stats.battles) > (OS.dropped_capture_points/(OS.battles)) ? 'green' : 'red')}}>{(day30stats.def/day30stats.battles).toFixed(2)}</span></>, 
-                '60 Days': <>{OS.dropped_capture_points} <span style={{float: 'right'}}>{(OS.dropped_capture_points/OS.battles).toFixed(2)}</span></>,
+                '24 Hours': <>{day1stats.def}<span style={{ float: 'right', color: clr(day1stats.defrate, (OS.dropped_capture_points/(OS.battles)))}}>{day1stats.defrate}</span></>, 
+                '7 Days': <>{weekstats.def}<span style={{ float: 'right', color: clr(weekstats.defrate, (OS.dropped_capture_points/(OS.battles)))}}>{weekstats.defrate}</span></>, 
+                '30 Days': <>{day30stats.def}<span style={{ float: 'right', color: clr(day30stats.defrate, (OS.dropped_capture_points/(OS.battles)))}}>{day30stats.defrate}</span></>, 
+                '60 Days': <>{day60stats.def}<span style={{ float: 'right', color: clr(day60stats.defrate, (OS.dropped_capture_points/(OS.battles)))}}>{day60stats.defrate}</span></>,
                 '500 Games': <>{OS.dropped_capture_points} <span style={{float: 'right'}}>{(OS.dropped_capture_points/OS.battles).toFixed(2)}</span></>, 
                 '1000 Games': 1},
             {'name': 'Experience', 
                 'Overall': <>{OS.battle_avg_xp} <span style={{float: 'right'}}>{(OS.battle_avg_xp/OS.battles).toFixed(2)}</span></>, 
-                '24 Hours': <>{day1stats.xp}<span style={{ float: 'right', color: ((day1stats.xp/day1stats.battles) > (OS.battle_avg_xp) ? 'green' : 'red')}}>{(day1stats.xp/day1stats.battles).toFixed(0)}</span></>, 
-                '7 Days': <>{weekstats.xp}<span style={{ float: 'right', color: ((weekstats.xp/weekstats.battles) > (OS.battle_avg_xp) ? 'green' : 'red')}}>{(weekstats.xp/weekstats.battles).toFixed(0)}</span></>,
-                '30 Days': <>{day30stats.xp}<span style={{ float: 'right', color: ((day30stats.xp/day30stats.battles) > (OS.battle_avg_xp) ? 'green' : 'red')}}>{(day30stats.xp/day30stats.battles).toFixed(0)}</span></>, 
-                '60 Days': 0,
+                '24 Hours': <>{day1stats.xp}<span style={{ float: 'right', color: clr(day1stats.xprate, (OS.battle_avg_xp))}}>{day1stats.xprate}</span></>, 
+                '7 Days': <>{weekstats.xp}<span style={{ float: 'right', color: clr(weekstats.xprate, (OS.battle_avg_xp))}}>{weekstats.xprate}</span></>,
+                '30 Days': <>{day30stats.xp}<span style={{ float: 'right', color: clr(day30stats.xprate, (OS.battle_avg_xp))}}>{day30stats.xprate}</span></>, 
+                '60 Days': <>{day60stats.xp}<span style={{ float: 'right', color: clr(day60stats.xprate, (OS.battle_avg_xp))}}>{day60stats.xprate}</span></>, 
                 '500 Games': 0, 
                 '1000 Games': 0},
         ],
@@ -428,7 +445,6 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier) {
     };
 
     const numToMastery = { 0 : "None", 1 : "3rd", 2 : "2nd", 3 : "1st", 4 : "Ace" };
-    console.log(stats);
     stats.map((row) => {
         data.tierDist[row[3] - 1][row[4]] += row[5];
         if (row[3] > 4) {
