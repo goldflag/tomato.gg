@@ -8,5 +8,6 @@ export default function WRcolor(winrate) {
     else if (winrate < 56) { return '#4099BF'; }
     else if (winrate < 60) { return '#3972C6'; }
     else if (winrate < 65) { return '#793DB6'; }
+    else if (winrate === '-') { return 'rgb(200,200,200)'; }
     else { return '#401070'; }
 }

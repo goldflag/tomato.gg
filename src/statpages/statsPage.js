@@ -10,6 +10,7 @@ import GraphCalculator from '../functions/GraphCalculator';
 import Charts from './statsPageComponents/charts';
 
 const APIKey = process.env.REACT_APP_API_KEY;
+const backendKey = process.env.REACT_APP_BACKEND_API_KEY;
 
 const useStyles = makeStyles((theme) => ({
   loading: {
@@ -99,7 +100,8 @@ export default function StatsPage(props) {
         //Clan history
         const url5 = `https://api.worldoftanks.${server}/wot/clans/memberhistory/?application_id=${APIKey}&account_id=${id}`;
         //Recent stats from our own API
-        const url6 = `http://localhost:5000/api/${server}/${id}`;
+        const url6 = `https://tomatobackend.herokuapp.com/api/${backendKey}/${server}/${id}`;
+        console.log(backendKey);
         try {
             Promise.all([
                 fetch(url),
