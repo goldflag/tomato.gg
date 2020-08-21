@@ -100,7 +100,7 @@ export default function StatsPage(props) {
         //Clan history
         const url5 = `https://api.worldoftanks.${server}/wot/clans/memberhistory/?application_id=${APIKey}&account_id=${id}`;
         //Recent stats from our own API
-        const url6 = `https://tomatobackend.herokuapp.com/api/${backendKey}/${server}/${id}`;
+        const url6 = `https://tomatobackend.herokuapp.com/api/abcd/${server}/${id}`;
         console.log(backendKey);
         try {
             Promise.all([
