@@ -97,9 +97,9 @@ export default function StatsPage(props) {
         //Current Clan Data
         const url4 = `https://api.worldoftanks.${server}/wot/clans/accountinfo/?application_id=${APIKey}&account_id=${id}`;
         //Clan history
-        const url5 = `https://api.worldoftanks.${server}/wot/clans/memberhistory/?application_id=${APIKey}&account_id=${id}`
+        const url5 = `https://api.worldoftanks.${server}/wot/clans/memberhistory/?application_id=${APIKey}&account_id=${id}`;
         //Recent stats from our own API
-        const url6 = `https://api.worldoftanks.${server}/wot/clans/memberhistory/?application_id=${APIKey}&account_id=${id}`
+        const url6 = `http://localhost:5000/api/${server}/${id}`;
         try {
             Promise.all([
                 fetch(url),
@@ -118,6 +118,7 @@ export default function StatsPage(props) {
               setWGRating(data1.data[id].global_rating);
               setMOEstats(data3.data[id]);
               setAccountCreationDate(data1.data[id].created_at);
+              setRecentStats(data6);
               if (data1.data[id].statistics.all.battles === 0) {
                 setValidID(false);
               }
@@ -155,11 +156,11 @@ export default function StatsPage(props) {
                     </>
     }
 
-    if (WGRating && username && stats && tanksstats && MOEstats && clanStats && clanHistory && accountCreationDate && validID === true) {
+    if (WGRating && username && stats && tanksstats && MOEstats && clanStats && clanHistory && accountCreationDate && recentStats && validID === true) {
 
         const overall = TankStatsCalculator(tanksstats, MOEstats, stats.battles);
         console.log(overall);
-        const graphData = GraphCalculator(overall.tankWN8, stats, overall.overallWN8, overall.avgTier);
+        const graphData = GraphCalculator(overall.tankWN8, stats, overall.overallWN8, overall.avgTier, recentStats);
         StatTable = <>
                         <div style = {{padding: '1em 0em'}}>
                           <TopStats username = {username} WGRating = {WGRating} data = {graphData} stats = {stats} clanStats = {clanStats} accountCreationDate = {accountCreationDate}/>
