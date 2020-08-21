@@ -187,6 +187,7 @@ export default function TankStats(stats, MOEstats, totalBattles) {
                 Conversion[tankNames[row.tank_id]['type']],
                 row.all.battles,
                 winrate.toFixed(2) + '%',
+                // .toFixed(2) + '%'
                 parseInt(WN8),
                 parseInt(avgDamage),
                 avgFrag.toFixed(2),

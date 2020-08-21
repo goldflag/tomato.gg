@@ -79,6 +79,14 @@ export default function RecentTankStats(props) {
                     style: { color: 'white', backgroundColor: WRcolor(value.slice(0, -1))},
                 };
             },
+            sortCompare: (order) => {
+              return (obj1, obj2) => {
+                console.log(order);
+                let val1 = parseInt(obj1.data.slice(0, -1), 10);
+                let val2 = parseInt(obj2.data.slice(0, -1), 10);
+                return (val1 - val2) * (order === 'asc' ? 1 : -1);
+              };
+            }
         } 
       },
       { 
@@ -96,8 +104,6 @@ export default function RecentTankStats(props) {
       { name: 'KPG', options: { filter: false } },
       { name: 'DMG Ratio', options: { filter: false } },
       { name: 'K/D', options: { filter: false } },
-      // { name: 'XP', options: { filter: false } },
-      // { name: 'Hit Ratio', options: { filter: false } },
       { name: 'Spots', options: { filter: false } },
     ];
 

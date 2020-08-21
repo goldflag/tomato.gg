@@ -76,9 +76,18 @@ export default function OverallTankStats(props) {
             filter: false,
             setCellProps: (value) => {
                 return {
+                  //WRcolor(value.slice(0, -1))
                     style: { color: 'white', backgroundColor: WRcolor(value.slice(0, -1))},
                 };
             },
+            sortCompare: (order) => {
+              return (obj1, obj2) => {
+                console.log(order);
+                let val1 = parseInt(obj1.data.slice(0, -1), 10);
+                let val2 = parseInt(obj2.data.slice(0, -1), 10);
+                return (val1 - val2) * (order === 'asc' ? 1 : -1);
+              };
+            }
         } 
       },
       { 
@@ -97,13 +106,24 @@ export default function OverallTankStats(props) {
       { name: 'DMG Ratio', options: { filter: false } },
       { name: 'K/D', options: { filter: false } },
       { name: 'XP', options: { filter: false } },
-      { name: 'Hit Ratio', options: { filter: false } },
+      { 
+        name: 'Hit Ratio', 
+        options: { 
+          filter: false,
+          sortCompare: (order) => {
+            return (obj1, obj2) => {
+              console.log(order);
+              let val1 = parseInt(obj1.data.slice(0, -1), 10);
+              let val2 = parseInt(obj2.data.slice(0, -1), 10);
+              return (val1 - val2) * (order === 'asc' ? 1 : -1);
+            };
+          }
+        } 
+      },
       { name: 'Spots', options: { filter: false } },
       { name: 'Armor Eff', options: { filter: false } },
       { name: 'MoE', options: { filter: true } },
     ];
-
-    const data = props.overallStats;
 
     const options = {
       sortDescFirst: true,
@@ -137,7 +157,7 @@ export default function OverallTankStats(props) {
 
     return (
       <MuiThemeProvider theme={getMuiTheme()}>
-        <MUIDataTable title={''} data={data} columns={columns} options={options}/>
+        <MUIDataTable title={''} data={props.overallStats} columns={columns} options={options}/>
       </MuiThemeProvider>
     );
 }
