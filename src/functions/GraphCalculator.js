@@ -47,7 +47,8 @@ function calculatePeriodWN8(overall, historical) {
     let index = 0;
     overall.map((row) => {
         const exp = WN8[row[0]];
-        if (row[0] !== historical[index][0]) {
+
+        if (historical.length < index + 1 || row[0] !== historical[index][0]) {
             weighedExpDamage += row[1]*exp.expDamage;
             weighedExpSpots += row[1]*exp.expSpot;
             weighedExpFrag += row[1]*exp.expFrag;    
@@ -96,7 +97,6 @@ function calculateRecents(statsSnapshot, overall) {
     console.log(overall);
     //the historical snapshot
     let snapshotTanks = statsSnapshot.tankStats;
-    let index = 0;
     let calculatedStats = {
         battles: 0,
         tier: overall.tier - statsSnapshot.tier,
@@ -109,19 +109,21 @@ function calculateRecents(statsSnapshot, overall) {
         frags: overall.frags - statsSnapshot.frags,
         destroyed: overall.deaths - statsSnapshot.deaths,
         survived: (overall.battles - overall.deaths) - (statsSnapshot.battles - statsSnapshot.deaths),
-        spotted: 0,
+        spotted: overall.spotted - statsSnapshot.spotted,
         cap: overall.cap - statsSnapshot.cap,
         def: overall.def - statsSnapshot.def,
         xp: overall.xp - statsSnapshot.xp,
         tankStats: []
     };
 
+    console.log(overall.tankStats);
+    console.log(statsSnapshot.tankStats);
+
     const overallWN8 = parseInt(calculatePeriodWN8(overall.tankStats, statsSnapshot.tankStats));
-
     calculatedStats.overallWN8 = overallWN8;
-
+    let index = 0;
     overall.tankStats.map((row) => {
-        if (row[0] !== snapshotTanks[index][0]) {
+        if (snapshotTanks.length < index + 1 || row[0] !== snapshotTanks[index][0]) {
             const avgDamage = row[2] / row[1];
             const avgDef = row[6] / row[1];
             const avgFrag = row[4] / row[1];
@@ -279,6 +281,9 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
     console.log(OS);
     const data = {
         'overallWN8' : overallWN8,
+        'overallWinrate' : (OS.wins*100/OS.battles).toFixed(2),
+        'recentWN8' : recent1000.overallWN8,
+        'recentWinrate' : recent1000.winrate,
         'day1' : recent24hr.tankStats,
         'week1' : recent1week.tankStats,
         'days30' : recent30days.tankStats,

@@ -98,13 +98,13 @@ export default function NationDist(props) {
           <RecentTankStats overallStats = {props.days30}/>
         </TabPanel>
         <TabPanel value={value} index={4}>
-          <RecentTankStats overallStats = {props.overallStats}/>
+          <RecentTankStats overallStats = {props.days60}/>
         </TabPanel>
         <TabPanel value={value} index={5}>
-          <RecentTankStats overallStats = {props.overallStats}/>
+          <RecentTankStats overallStats = {props.battles500}/>
         </TabPanel>
         <TabPanel value={value} index={6}>
-          <RecentTankStats overallStats = {props.overallStats}/>
+          <RecentTankStats overallStats = {props.battles1000}/>
         </TabPanel>
       </div>            
     </div>

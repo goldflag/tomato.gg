@@ -54,10 +54,10 @@ export default function TopStats(props) {
   const classes = useStyles();
 
   const squareStats = {
-      'overallWR': (100*props.stats.wins/props.stats.battles).toFixed(2),
+      'overallWR': props.data.overallWinrate,
       'overallWN8': props.data.overallWN8, 
-      'recentWR': '61.42',
-      'recentWN8': '3542', 
+      'recentWR': props.data.recentWinrate,
+      'recentWN8': props.data.recentWN8,
       'PR' : props.WGRating
   }
   

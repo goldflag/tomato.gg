@@ -169,7 +169,8 @@ export default function StatsPage(props) {
                           <Charts data = {graphData} clanData = {clanHistory} currentClan = {clanStats} classWN8 = {overall.tankWN8byClassTier}/>
                         </div>
                         <div style = {{padding: '1em 0em'}}>
-                          <AllTankStats overallStats = {overall.tankWN8} day1 = {graphData.day1} week1 = {graphData.week1} days30 = {graphData.days30}/>
+                          <AllTankStats overallStats = {overall.tankWN8} day1 = {graphData.day1} week1 = {graphData.week1} 
+                          days30 = {graphData.days30} days60 = {graphData.days60} battles500 = {graphData.battles500} battles1000 = {graphData.battles1000}/>
                         </div>
                     </>
     } 

@@ -41,6 +41,7 @@ export default function zeroBattles(stats) {
         stats['fragsrate'] = (stats.frags/stats.battles).toFixed(2);
         stats['survivedrate'] = (stats.survived*100/stats.battles).toFixed(2);
         stats['spottedrate'] = (stats.spotted/stats.battles).toFixed(2);
+        console.log(stats.spotted);
         stats['caprate'] = (stats.cap/stats.battles).toFixed(2);
         stats['defrate'] = (stats.def/stats.battles).toFixed(2);
         stats['xprate'] = (stats.xp/stats.battles).toFixed(0);
