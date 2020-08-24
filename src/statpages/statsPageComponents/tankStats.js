@@ -76,7 +76,6 @@ export default function OverallTankStats(props) {
             filter: false,
             setCellProps: (value) => {
                 return {
-                  //WRcolor(value.slice(0, -1))
                     style: { color: 'white', backgroundColor: WRcolor(value.slice(0, -1))},
                 };
             },

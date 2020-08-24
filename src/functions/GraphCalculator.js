@@ -383,12 +383,12 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
             },
             {'name': 'Survived', 
                 'Overall': <>{OS.survived_battles} <span style={{float: 'right'}}>{(OS.survived_battles*100/OS.battles).toFixed(2)}%</span></>, 
-                '24 Hours': <>{recent24hr.survived}<span style={{ float: 'right', color: clr(recent24hr.survivedrate, (OS.survived_battles/(OS.battles)))}}>{recent24hr.survivedrate}%</span></>, 
-                '7 Days': <>{recent1week.survived}<span style={{ float: 'right', color: clr(recent1week.survivedrate, (OS.survived_battles/(OS.battles)))}}>{recent1week.survivedrate}%</span></>, 
-                '30 Days': <>{recent30days.survived}<span style={{ float: 'right', color: clr(recent30days.survivedrate, (OS.survived_battles/(OS.battles)))}}>{recent30days.survivedrate}%</span></>,
-                '60 Days': <>{recent60days.survived}<span style={{ float: 'right', color: clr(recent60days.survivedrate, (OS.survived_battles/(OS.battles)))}}>{recent60days.survivedrate}%</span></>,
-                '500 Games': <>{recent500.survived}<span style={{ float: 'right', color: clr(recent500.survivedrate, (OS.survived_battles/(OS.battles)))}}>{recent500.survivedrate}%</span></>, 
-                '1000 Games': <>{recent1000.survived}<span style={{ float: 'right', color: clr(recent1000.survivedrate, (OS.survived_battles/(OS.battles)))}}>{recent1000.survivedrate}%</span></>
+                '24 Hours': <>{recent24hr.survived}<span style={{ float: 'right', color: clr(recent24hr.survivedrate, (OS.survived_battles*100/(OS.battles)))}}>{recent24hr.survivedrate}%</span></>, 
+                '7 Days': <>{recent1week.survived}<span style={{ float: 'right', color: clr(recent1week.survivedrate, (OS.survived_battles*100/(OS.battles)))}}>{recent1week.survivedrate}%</span></>, 
+                '30 Days': <>{recent30days.survived}<span style={{ float: 'right', color: clr(recent30days.survivedrate, (OS.survived_battles*100/(OS.battles)))}}>{recent30days.survivedrate}%</span></>,
+                '60 Days': <>{recent60days.survived}<span style={{ float: 'right', color: clr(recent60days.survivedrate, (OS.survived_battles*100/(OS.battles)))}}>{recent60days.survivedrate}%</span></>,
+                '500 Games': <>{recent500.survived}<span style={{ float: 'right', color: clr(recent500.survivedrate, (OS.survived_battles*100/(OS.battles)))}}>{recent500.survivedrate}%</span></>, 
+                '1000 Games': <>{recent1000.survived}<span style={{ float: 'right', color: clr(recent1000.survivedrate, (OS.survived_battles*100/(OS.battles)))}}>{recent1000.survivedrate}%</span></>
             },
             {'name': 'Detected', 
                 'Overall': <>{OS.spotted} <span style={{float: 'right'}}>{(OS.spotted/OS.battles).toFixed(2)}</span></>, 

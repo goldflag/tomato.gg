@@ -13,6 +13,7 @@
     overflow-x: hidden;
     /* border-right: 1px solid rgb(100, 95, 129); */
     background: url(../assets/sidebar.jpg) no-repeat center center fixed; 
+    /* background-color: rgb(81, 89, 179); */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

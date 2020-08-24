@@ -76,7 +76,7 @@ return (
   <div className={classes.root}>
     <div>
       <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
-        <CustomTab label="TIER DISTRIUBTION" /> 
+        <CustomTab label="TIER DISTRIBUTION" /> 
       </CustomTabs>
       <TabPanel value={value} index={0}>
         <TierDistribution data={props.data}/>
