@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import clonedeep from 'lodash.clonedeep';
+
 import MUIDataTable, {ExpandButton} from "mui-datatables";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
@@ -11,9 +13,22 @@ import WN8Percentiles from '../../data/WN8Percentiles.json';
 import WN8color from '../../functions/WN8color';
 import WRcolor from '../../functions/WRcolor';
 
-export default function Table() {
+export default function Table(props) {
 
-    const   getMuiTheme = () =>
+  const [serverStats, setServerStats] = useState('');
+  useEffect(() => {
+    const data = clonedeep(NATankstats);
+    data.map((row) => {
+      // row[0] = <img src={`${process.env.PUBLIC_URL}/tankIcons/${row[0]}.png`} alt={row[0]}/>;
+      // row[0] = <img src={tankImports[IDtoIndex[row[0]]]} alt={row[0]}/>;
+      row[0] = <img src={require(`../../assets/tankIcons/${row[0]}.png`)} alt={row[0]}/>;
+
+    });
+    setServerStats(data);
+  }, []);
+
+
+    const getMuiTheme = () =>
     createMuiTheme({
       overrides: {
         MUIDataTable: {
@@ -89,12 +104,9 @@ export default function Table() {
     ];
 
 
-    const data = NATankstats;
-
-    NATankstats.map((row) => {
-      row[0] = <img src={require(`../../assets/tankIcons/${row[0]}.png`)} alt={row[0]}/>;
-    });
-
+    // data.map((row) => {
+    //   row[0] = <img src={tankImports[IDtoIndex[row[0]]]} alt={row[0]}/>;
+    // });
 
     const options = {
       filter: true,
@@ -170,9 +182,20 @@ export default function Table() {
       }
     };
 
-    return (
-    <MuiThemeProvider theme={getMuiTheme()}>
-        <MUIDataTable title={"NA Server Tank Stats"} data={data} columns={columns} options={options} components={components} />
+
+    let statTable = <></>
+    if (serverStats) {
+      statTable =       
+      <MuiThemeProvider theme={getMuiTheme()}>
+        <MUIDataTable title={"NA Server Tank Stats"} data={serverStats} columns={columns} options={options} components={components} />
       </MuiThemeProvider>
+    }
+    return (
+      // <MuiThemeProvider theme={getMuiTheme()}>
+      //   <MUIDataTable title={"NA Server Tank Stats"} data={serverStats} columns={columns} options={options} components={components} />
+      // </MuiThemeProvider>
+      <>
+      {statTable}
+      </>
     );
 }

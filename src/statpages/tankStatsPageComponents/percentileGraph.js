@@ -38,9 +38,7 @@ export default function PercentileGraph(props) {
                     props.color
                 ]}
                 pointSize={1}
-                pointColor={[                
-                    props.color
-                ]}
+                pointColor={props.color}
                 pointBorderWidth={2}
                 pointBorderColor={{ from: 'serieColor' }}
                 pointLabel="y"

@@ -23,7 +23,7 @@ function Sidebar() {
                     <AppsIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
                         &nbsp;&nbsp;Home
                     </Link>
-
+{/* 
                     <Link to='/clans' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
                     <GroupIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
                         &nbsp;&nbsp;Clan Stats
@@ -32,7 +32,7 @@ function Sidebar() {
                     <Link to='/servers' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
                     <PublicIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
                         &nbsp;&nbsp;Server Stats
-                    </Link>
+                    </Link> */}
 
                     <Link to='/tanks' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
                     <BarChartIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
