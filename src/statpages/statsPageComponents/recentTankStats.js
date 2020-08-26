@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import MUIDataTable from 'mui-datatables';
 import { createMuiTheme, MuiThemeProvider, withStyles, rgbToHex } from '@material-ui/core/styles';
 import WN8color from '../../functions/WN8color';
 import WRcolor from '../../functions/WRcolor';
+import nationVal from '../../data/nationVal';
+import classVal from '../../data/classVal';
 
 const customStyles = theme => ({
   wn8row: {
@@ -18,6 +20,19 @@ const customStyles = theme => ({
 });
 
 export default function RecentTankStats(props) {
+
+  const [finaldata, setFinaldata] = useState('');
+
+  // Runs once when component mounts
+  // useEffect(() => {
+  //   let data = props.overallStats;
+  //   data.map((row) => {
+  //     row[2] = <img src={require(`../../assets/flagIcons/${row[2]}.svg`)} style={{display: 'block', maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
+  //     row[4] = <img src={require(`../../assets/classIcons/${row[4]}.png`)} style={{display: 'block', maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[1]}/>;
+  //   });
+  //   setFinaldata(data);
+  // }, []);
+
   const getMuiTheme = () =>
     createMuiTheme({
       overrides: {
@@ -37,8 +52,11 @@ export default function RecentTankStats(props) {
         },
         MuiTableCell: {
           head: {
-            backgroundColor: 'rgb(219, 213, 224)',
-            // color: 'rgb(256, 256, 256)',
+            backgroundColor: 'rgb(220, 220, 230)',
+            padding: '5px 5px 5px 12px',
+          },
+          root: {
+            padding: '5px 5px 5px 12px',
           },
         },
         MUIDataTableSelectCell: {
@@ -66,9 +84,32 @@ export default function RecentTankStats(props) {
         },
       },
       { name: 'Vehicle', options: { filter: false } },
-      { name: 'Nation', options: { filter: true } },
-      { name: 'Tier', options: { filter: true } },
-      { name: 'Class', options: { filter: true } },
+      { name: 'Nation', options: { 
+        filter: true,
+        sortCompare: (order) => {
+          return (obj1, obj2) => {
+            let val1 = obj1.data.props.alt;
+            let val2 = obj2.data.props.alt;
+            return (nationVal[val1] - nationVal[val2]) * (order === 'asc' ? 1 : -1);          
+          };
+        }
+        } 
+      },
+      { name: 'Tier', options: { 
+        filter: true 
+        } 
+      },
+      { name: 'Class', options: { 
+        filter: true,
+        sortCompare: (order) => {
+          return (obj1, obj2) => {
+            let val1 = obj1.data.props.alt;
+            let val2 = obj2.data.props.alt;
+            return (classVal[val1] - classVal[val2]) * (order === 'asc' ? 1 : -1);          
+          };
+        }
+        } 
+      },
       { name: 'Battles', options: { filter: false } },
       { 
         name: 'Winrate', 
@@ -107,8 +148,6 @@ export default function RecentTankStats(props) {
       { name: 'Spots', options: { filter: false } },
     ];
 
-    const data = props.overallStats;
-
     const options = {
       sortDescFirst: true,
       filter: true,
@@ -134,15 +173,22 @@ export default function RecentTankStats(props) {
 
       setTableProps: () => {
         return {
-          size: 'small',
         };
       },
     };
 
+    let table = <></>;
+    if (true) {
+      table = <>
+        <MuiThemeProvider theme={getMuiTheme()}>
+          <MUIDataTable title={''} data={props.overallStats} columns={columns} options={options}/>
+        </MuiThemeProvider>
+      </>;
+    }
     return (
-      <MuiThemeProvider theme={getMuiTheme()}>
-        <MUIDataTable title={''} data={data} columns={columns} options={options}/>
-      </MuiThemeProvider>
+      <>
+      {table}
+      </>
     );
 }
 

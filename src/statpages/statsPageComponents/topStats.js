@@ -121,6 +121,12 @@ export default function TopStats(props) {
             </Grid>
         </Grid>
         <Grid item xs={9}>
+              <Paper square elevation={2} style={{marginBottom: '1rem', padding: '1rem 1rem 1rem 1rem', color: 'white'}}>
+                  <span style={{fontSize: '1.3em', color: 'rgb(100,100,100)', fontWeight: '500'}}>Where are my Recent Stats?</span><br/>
+                  <span style={{fontSize: '0.8em', color: 'rgb(100,100,100)'}}>Wargaming does not provide recent stats in their API, meaning that stats site
+                  must generate and store recent stats on their own servers. We can only collect data on players that have been queried on our sites. Check your stats often and your recent stats will appear very soon!</span><br/>
+
+                </Paper>
             <OverallStatsTable data = {props.data.overallStats}/> 
         </Grid>
 

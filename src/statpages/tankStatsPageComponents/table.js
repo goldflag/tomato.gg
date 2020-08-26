@@ -1,28 +1,48 @@
 import React, {useState, useEffect} from "react";
 import clonedeep from 'lodash.clonedeep';
-
 import MUIDataTable, {ExpandButton} from "mui-datatables";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import PercentileGraph from './percentileGraph';
+import CurveGraph from './curveGraph';
 import "../../css/tankstats.css";
 import NATankstats from '../../data/NATankstats.json';
 import DPGPercentiles from '../../data/DPGPercentiles.json';
 import WN8Percentiles from '../../data/WN8Percentiles.json';
+import nationVal from '../../data/nationVal';
+import classVal from '../../data/classVal';
+import WRCurves from '../../data/WRCurves.json';
+import WN8Curves from '../../data/WN8Curves.json';
 import WN8color from '../../functions/WN8color';
 import WRcolor from '../../functions/WRcolor';
 
-export default function Table(props) {
+function diffColor(diff) {
+  if (diff.charAt(0) === '+') {
+    diff = diff.substring(1);
+  }
+  if (diff > 4) return 'rgb(0, 184, 0)';
+  else if (diff > 3) return 'rgb(42, 199, 42)';
+  else if (diff > 2) return 'rgb(105, 224, 105)';
+  else if (diff > 1) return 'rgb(163, 240, 163)';
+  else if (diff > 0) return 'rgb(191, 255, 204)';
+  else if (diff > -1) return 'rgb(219, 184, 180)';
+  else if (diff > -2) return 'rgb(199, 127, 119)';
+  else if (diff > -3) return 'rgb(217, 80, 65)';
+  else if (diff > -4) return 'rgb(204, 55, 39)';
+  else return 'rgb(181, 21, 4)';
+}
 
+export default function Table(props) {
   const [serverStats, setServerStats] = useState('');
   useEffect(() => {
     const data = clonedeep(NATankstats);
     data.map((row) => {
       // row[0] = <img src={`${process.env.PUBLIC_URL}/tankIcons/${row[0]}.png`} alt={row[0]}/>;
       // row[0] = <img src={tankImports[IDtoIndex[row[0]]]} alt={row[0]}/>;
-      row[0] = <img src={require(`../../assets/tankIcons/${row[0]}.png`)} alt={row[0]}/>;
-
+      row[0] = <img src={require(`../../assets/flagIcons/${row[0]}.svg`)} style={{display: 'block', maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[0]}/>;
+      row[1] = <img src={require(`../../assets/classIcons/${row[1]}.png`)} style={{display: 'block', maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[1]}/>;
+      row[3] = <img src={require(`../../assets/tankIcons/${row[3]}.png`)} alt={row[0]}/>;
     });
     setServerStats(data);
   }, []);
@@ -47,6 +67,10 @@ export default function Table(props) {
         MuiTableCell: {
           head: {
             backgroundColor: 'rgb(220, 220, 230)',
+            padding: '8px 5px',
+          },
+          root: {
+            padding: '3px 5px',
           },
         },
         MUIDataTableSelectCell: {
@@ -64,14 +88,34 @@ export default function Table(props) {
       },
     });
     const columns = [
+      { name: "    ", options: { 
+        filter: true, 
+        sortCompare: (order) => {
+          return (obj1, obj2) => {
+            let val1 = obj1.data.props.alt;
+            let val2 = obj2.data.props.alt;
+            return (nationVal[val1] - nationVal[val2]) * (order === 'asc' ? 1 : -1);          
+          };
+          }  
+        } 
+      },
+      { name: "    ", options: { 
+        filter: true, 
+        sortCompare: (order) => {
+          return (obj1, obj2) => {
+            let val1 = obj1.data.props.alt;
+            let val2 = obj2.data.props.alt;
+            return (classVal[val1] - classVal[val2]) * (order === 'asc' ? 1 : -1);          
+          };
+          }
+        } 
+      },
+      { name: "", options: { filter: true, } },
       { name: "", options: { filter: true, } },
       { name: "Vehicle", options: { filter: true, } },
-      { name: "Nation", options: { filter: true, } },
-      { name: "Tier", options: { filter: true, } },
-      { name: "Class", options: { filter: true, } },
       { name: "Owned", options: { filter: true, } },
       { name: "Avg Battles", options: { filter: true, } },
-      { name: "Winrate", 
+      { name: "Tank WR", 
         options: { 
           filter: true, 
           setCellProps: (value) => {
@@ -81,7 +125,42 @@ export default function Table(props) {
           },
         } 
       },
-      { name: "WN8", options: { 
+      { name: "Player WR", 
+        options: { 
+          filter: true, 
+          setCellProps: (value) => {
+            return {
+              style: { color: 'white', backgroundColor: WRcolor(value.slice(0, -1))},
+            };
+          },
+        } 
+      },
+      { name: "WR Diff.", options: { 
+        filter: true, 
+        setCellProps: (value) => {
+          return {
+              style: { backgroundColor: diffColor(value.slice(0, -1)) },
+          };
+        },
+        sortCompare: (order) => {
+          return (obj1, obj2) => {
+            let val1 = obj1.data.slice(0, -1);
+            let val2 = obj2.data.slice(0, -1);
+            return (val1 - val2) * (order === 'asc' ? 1 : -1);
+          };
+        }
+        } 
+      },
+      { name: "Tank WN8", options: { 
+        filter: true, 
+        setCellProps: (value) => {
+          return {
+              style: { color: 'white', backgroundColor: WN8color(value)},
+            };
+          },
+        } 
+      },
+      { name: "Player WN8", options: { 
         filter: true, 
         setCellProps: (value) => {
           return {
@@ -98,15 +177,28 @@ export default function Table(props) {
       { name: "Hits", options: { filter: true, } },
       { name: "Spots", options: { filter: true, } },
       { name: "Armor \n Eff", options: { filter: true, } },
-      { name: "3MOE%", options: { filter: true, } },
-      { name: "ACE%", options: { filter: true, } },
+      { name: "3MOE%", options: { 
+        filter: true, 
+        sortCompare: (order) => {
+          return (obj1, obj2) => {
+            let val1 = obj1.data.slice(0, -1);
+            let val2 = obj2.data.slice(0, -1);
+            return (val1 - val2) * (order === 'asc' ? 1 : -1);
+          };
+        }
+      } },
+      { name: "ACE%", options: { 
+        filter: true, 
+        sortCompare: (order) => {
+          return (obj1, obj2) => {
+            let val1 = obj1.data.slice(0, -1);
+            let val2 = obj2.data.slice(0, -1);
+            return (val1 - val2) * (order === 'asc' ? 1 : -1);
+          };
+        }
+      } },
 
     ];
-
-
-    // data.map((row) => {
-    //   row[0] = <img src={tankImports[IDtoIndex[row[0]]]} alt={row[0]}/>;
-    // });
 
     const options = {
       filter: true,
@@ -120,28 +212,18 @@ export default function Table(props) {
       rowsPerPage: 50,
       rowsPerPageOptions: [15, 25, 50, 100, 200, 500],
       sortOrder: {
-        name: 'Tier',
+        name: 'Tank WN8',
         direction: 'desc'
       },
       print: false,
       viewColumns: false,
       setTableProps: () => {
         return {
-          size: 'small',
-          padding: '0'
         };
       },
-    //   isRowExpandable: (dataIndex, expandedRows) => {
-    //     if (dataIndex === 3 || dataIndex === 4) return false;
-
-    //     // Prevent expand/collapse of any row if there are 4 rows expanded already (but allow those already expanded to be collapsed)
-    //     if (expandedRows.data.length > 4 && expandedRows.data.filter(d => d.dataIndex === dataIndex).length === 0) return false;
-    //     return true;
-    //   },
-    //   rowsExpanded: [0, 1],
       renderExpandableRow: (rowData, rowMeta) => {
         const colSpan = rowData.length + 1;
-        console.log(rowData[1]);
+        console.log(rowData[3]);
         return (
           <TableRow>
             <TableCell colSpan={colSpan}>
@@ -149,11 +231,19 @@ export default function Table(props) {
                 <div className='grid'>
                   <div>
                     <div style={{fontSize: '1rem', padding: '20px 20px 0px 20px'}}>DPG Percentiles</div>
-                    <PercentileGraph data={DPGPercentiles[rowData[1]]} type='Average Damage' smallType='DPG' color="rgb(84, 140, 196)"/>
+                    <PercentileGraph data={DPGPercentiles[rowData[4]]} type='Average Damage' smallType='DPG' color="rgb(84, 140, 196)"/>
                   </div>
                   <div>
                     <div style={{fontSize: '1rem', padding: '20px 20px 0px 20px'}}>WN8 Percentiles</div>
-                    <PercentileGraph data={WN8Percentiles[rowData[1]]} type='WN8' smallType='WN8' color="rgb(212, 38, 186)"/>
+                    <PercentileGraph data={WN8Percentiles[rowData[4]]} type='WN8' smallType='WN8' color="rgb(212, 38, 186)"/>
+                  </div>
+                  <div>
+                    <div style={{fontSize: '1rem', padding: '20px 20px 0px 20px'}}>Winrate Curve</div>
+                    <CurveGraph data={WRCurves[rowData[4]]} type='Winrate' smallType='DPG' color="rgb(84, 140, 196)"/>
+                  </div>
+                  <div>
+                    <div style={{fontSize: '1rem', padding: '20px 20px 0px 20px'}}>WN8 Curve</div>
+                    <CurveGraph data={WN8Curves[rowData[4]]} type='WN8' smallType='WN8' color="rgb(212, 38, 186)"/>
                   </div>
                 </div>
               </div>
@@ -161,7 +251,6 @@ export default function Table(props) {
           </TableRow>
         );
       },
-    //   onRowExpansionChange: (curExpanded, allExpanded, rowsExpanded) => console.log(curExpanded, allExpanded, rowsExpanded)
     };
 
     const theme = createMuiTheme({
@@ -191,9 +280,6 @@ export default function Table(props) {
       </MuiThemeProvider>
     }
     return (
-      // <MuiThemeProvider theme={getMuiTheme()}>
-      //   <MUIDataTable title={"NA Server Tank Stats"} data={serverStats} columns={columns} options={options} components={components} />
-      // </MuiThemeProvider>
       <>
       {statTable}
       </>

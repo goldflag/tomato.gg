@@ -174,7 +174,11 @@ function calculateRecents(statsSnapshot, overall) {
                 let KDRatio;
                 if (destroyedDiff === 0) { KDRatio = 'No Deaths' }
                 else { KDRatio = (fragDiff/destroyedDiff).toFixed(2) }
-
+                    // <img src={require(`../assets/tankIcons/${row[0]}.png`)} alt={row[0]}/>,
+                    // tankNames[row[0]]['short_name'],
+                    // <img src={require(`../assets/flagIcons/${nationConversion[tankNames[row[0]]['nation']]}.svg`)} style={{display: 'block', maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[0]}/>,                    
+                    // tankNames[row[0]]['tier'],
+                    // <img src={require(`../assets/classIcons/${Conversion[tankNames[row[0]]['type']]}.png`)} style={{display: 'block', maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[1]}/>,
                 let vehicleRecentStats = [
                     <img src={require(`../assets/tankIcons/${row[0]}.png`)} alt={row[0]}/>,
                     tankNames[row[0]]['short_name'],

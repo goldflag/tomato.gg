@@ -161,10 +161,52 @@ export default function StatsPage(props) {
     }
 
     if (WGRating && username && stats && tanksstats && MOEstats && clanStats && clanHistory && accountCreationDate && recentStats && validID === true) {
-
+        const moeConv = {3: '⭐⭐⭐', 2: '⭐⭐', 1: '⭐', 0: ''};
         const overall = TankStatsCalculator(tanksstats, MOEstats, stats.battles);
         console.log(overall);
         const graphData = GraphCalculator(overall.tankWN8, stats, overall.overallWN8, overall.avgTier, recentStats);
+        overall.tankWN8.map((row) => {
+          row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
+          row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
+          row[17] = <img src={require(`../assets/masteryIcons/${row[17]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[17]}/>;
+          row[16] = moeConv[row[16]];
+        });
+        graphData.day1.map((row) => {
+          row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
+          row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
+          row[17] = <img src={require(`../assets/masteryIcons/${row[17]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[17]}/>;
+          row[16] = moeConv[row[16]];
+        });
+        graphData.week1.map((row) => {
+          row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
+          row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
+          row[17] = <img src={require(`../assets/masteryIcons/${row[17]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[17]}/>;
+          row[16] = moeConv[row[16]];
+        });
+        graphData.days30.map((row) => {
+          row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
+          row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>
+          row[17] = <img src={require(`../assets/masteryIcons/${row[17]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[17]}/>;
+          row[16] = moeConv[row[16]];
+        });
+        graphData.days60.map((row) => {
+          row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
+          row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
+          row[17] = <img src={require(`../assets/masteryIcons/${row[17]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[17]}/>;
+          row[16] = moeConv[row[16]];
+        });
+        graphData.battles500.map((row) => {
+          row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
+          row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
+          row[17] = <img src={require(`../assets/masteryIcons/${row[17]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[17]}/>;
+          row[16] = moeConv[row[16]];
+        });
+        graphData.battles1000.map((row) => {
+          row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
+          row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
+          row[17] = <img src={require(`../assets/masteryIcons/${row[17]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[17]}/>;
+          row[16] = moeConv[row[16]];
+        });
         StatTable = <>
                         <div style = {{padding: '1em 0em'}}>
                           <TopStats username = {username} WGRating = {WGRating} data = {graphData} stats = {stats} clanStats = {clanStats} accountCreationDate = {accountCreationDate}/>

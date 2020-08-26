@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import MUIDataTable from 'mui-datatables';
 import { createMuiTheme, MuiThemeProvider, withStyles, rgbToHex } from '@material-ui/core/styles';
 import WN8color from '../../functions/WN8color';
 import WRcolor from '../../functions/WRcolor';
+import nationVal from '../../data/nationVal';
+import classVal from '../../data/classVal';
 
 const customStyles = theme => ({
   wn8row: {
@@ -17,7 +19,21 @@ const customStyles = theme => ({
   },
 });
 
+const masteryConv = {4: 4, 3: 3, 2: 2, 1: 1, undefined: 0, 0: 0};
+
 export default function OverallTankStats(props) {
+
+  const [finaldata, setFinaldata] = useState('');
+
+  // useEffect(() => {
+  //   let data = props.overallStats;
+  //   data.map((row) => {
+  //     row[2] = <img src={require(`../../assets/flagIcons/${row[2]}.svg`)} style={{display: 'block', maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
+  //     row[4] = <img src={require(`../../assets/classIcons/${row[4]}.png`)} style={{display: 'block', maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[1]}/>;
+  //   });
+  //   setFinaldata(data);
+  // }, []);
+
   const getMuiTheme = () =>
     createMuiTheme({
       overrides: {
@@ -37,8 +53,11 @@ export default function OverallTankStats(props) {
         },
         MuiTableCell: {
           head: {
-            backgroundColor: 'rgb(219, 213, 224)',
-            // color: 'rgb(256, 256, 256)',
+            backgroundColor: 'rgb(220, 220, 230)',
+            padding: '5px 5px 5px 12px',
+          },
+          root: {
+            padding: '3px 5px 3px 12px',
           },
         },
         MUIDataTableSelectCell: {
@@ -66,27 +85,48 @@ export default function OverallTankStats(props) {
         },
       },
       { name: 'Vehicle', options: { filter: false } },
-      { name: 'Nation', options: { filter: true } },
+      { name: 'Nation', 
+        options: { 
+          filter: true,
+          sortCompare: (order) => {
+            return (obj1, obj2) => {
+              let val1 = obj1.data.props.alt;
+              let val2 = obj2.data.props.alt;
+              return (nationVal[val1] - nationVal[val2]) * (order === 'asc' ? 1 : -1);          
+            };
+          }
+        } 
+      },      
       { name: 'Tier', options: { filter: true } },
-      { name: 'Class', options: { filter: true } },
+      { name: 'Class', 
+        options: { 
+        filter: true,
+          sortCompare: (order) => {
+            return (obj1, obj2) => {
+              let val1 = obj1.data.props.alt;
+              let val2 = obj2.data.props.alt;
+              return (classVal[val1] - classVal[val2]) * (order === 'asc' ? 1 : -1);          
+            };
+          }
+        } 
+      },      
       { name: 'Battles', options: { filter: false } },
       { 
         name: 'Winrate', 
         options: {  
-            filter: false,
-            setCellProps: (value) => {
-                return {
-                    style: { color: 'white', backgroundColor: WRcolor(value.slice(0, -1))},
-                };
-            },
-            sortCompare: (order) => {
-              return (obj1, obj2) => {
-                console.log(order);
-                let val1 = parseInt(obj1.data.slice(0, -1), 10);
-                let val2 = parseInt(obj2.data.slice(0, -1), 10);
-                return (val1 - val2) * (order === 'asc' ? 1 : -1);
+          filter: false,
+          setCellProps: (value) => {
+              return {
+                  style: { color: 'white', backgroundColor: WRcolor(value.slice(0, -1))},
               };
-            }
+          },
+          sortCompare: (order) => {
+            return (obj1, obj2) => {
+              let val1 = parseInt(obj1.data.slice(0, -1), 10);
+              let val2 = parseInt(obj2.data.slice(0, -1), 10);
+              return (val1 - val2) * (order === 'asc' ? 1 : -1);
+            };
+          }
         } 
       },
       { 
@@ -111,7 +151,6 @@ export default function OverallTankStats(props) {
           filter: false,
           sortCompare: (order) => {
             return (obj1, obj2) => {
-              console.log(order);
               let val1 = parseInt(obj1.data.slice(0, -1), 10);
               let val2 = parseInt(obj2.data.slice(0, -1), 10);
               return (val1 - val2) * (order === 'asc' ? 1 : -1);
@@ -122,6 +161,21 @@ export default function OverallTankStats(props) {
       { name: 'Spots', options: { filter: false } },
       { name: 'Armor Eff', options: { filter: false } },
       { name: 'MoE', options: { filter: true } },
+      { name: 'Mastery', 
+        options: { 
+          filter: true,
+          sortCompare: (order) => {
+            return (obj1, obj2) => {
+              console.log(obj1);
+              let val1 = obj1.data.props.alt;
+              console.log(val1);
+
+              let val2 = obj1.data.props.alt;
+              return (masteryConv[val1] - masteryConv[val2]) * (order === 'asc' ? 1 : -1);
+            };
+          }
+        } 
+      },
     ];
 
     const options = {
@@ -141,7 +195,6 @@ export default function OverallTankStats(props) {
       print: false,
       viewColumns: false,
       setRowProps: (row, dataIndex, rowIndex) => {
-
         return {
             style: {backgroundColor: ((rowIndex % 2) === 0 ? 'rgb(242, 243, 247)' : 'white')}
         };
@@ -149,15 +202,22 @@ export default function OverallTankStats(props) {
 
       setTableProps: () => {
         return {
-          size: 'small',
         };
       },
     };
 
+    let table = <></>;
+    if (true) {
+      table = <>
+        <MuiThemeProvider theme={getMuiTheme()}>
+          <MUIDataTable title={''} data={props.overallStats} columns={columns} options={options}/>
+        </MuiThemeProvider>
+      </>;
+    }
     return (
-      <MuiThemeProvider theme={getMuiTheme()}>
-        <MUIDataTable title={''} data={props.overallStats} columns={columns} options={options}/>
-      </MuiThemeProvider>
+      <>
+      {table}
+      </>
     );
 }
 

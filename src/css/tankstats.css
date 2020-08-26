@@ -14,7 +14,7 @@
 .grid {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: min(350px);    /* This is better for small screens, once min() is better supported */
+    grid-template-rows: min(600px);    /* This is better for small screens, once min() is better supported */
     /* grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr)); */
     grid-gap: 0.0rem;
   }

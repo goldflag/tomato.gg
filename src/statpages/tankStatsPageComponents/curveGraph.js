@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsiveLine } from '@nivo/line'
-export default function PercentileGraph(props) {
+export default function CurveGraph(props) {
     
     const data = [
         {
@@ -19,14 +19,14 @@ export default function PercentileGraph(props) {
                 axisTop={null}
                 axisRight={null}
                 axisBottom={{
-                    tickValues: [
-                        0,
-                        20,
-                        40,
-                        60,
-                        80,
-                        100
-                    ],
+                    // tickValues: [
+                    //     0,
+                    //     20,
+                    //     40,
+                    //     60,
+                    //     80,
+                    //     100
+                    // ],
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
@@ -35,7 +35,7 @@ export default function PercentileGraph(props) {
                     legendOffset: 36,
                     legendPosition: 'middle'
                 }}
-                enableGridX={false}
+                // enableGridX={false}
                 axisLeft={{
                     orient: 'left',
                     tickSize: 5,
