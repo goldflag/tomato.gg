@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import './css/topbar.css'
 import SmallSearchBar from './material/smallSearchBar';
+import DiscordLogo from './assets/Discord.svg'
+
 import { Link, useRouteMatch, withRouter} from "react-router-dom";
 const APIKey = process.env.REACT_APP_API_KEY;
 
@@ -48,9 +50,8 @@ export default withRouter(function Topbar(props) {
                 </form>
             </div>
             <div className="discord">
-            <a target="_blank" href="https://discordapp.com/invite/M"><img src="https://i.ibb.co/qMnF074/91-Discord-logo-logos-512.png" width="35" height="35" alt="discordicon"/></a>
+            <a target="blank" href="https://discord.gg/qA2bV7K"><img src={DiscordLogo} width="33" height="33" alt="discordicon"/></a>
             </div>
         </div>
-        
     );
 });

@@ -6,14 +6,14 @@ export default function PercentileGraph(props) {
         {
             "id": props.smallType,
             "data": props.data
-          }
-        ];
+        }
+    ];
 
     return (
         <div style={{ height: 'calc(310px)'}}>
             <ResponsiveLine
                 data={data}
-                margin={{ top: 20, right: 110, bottom: 40, left: 60 }}
+                margin={{ top: 20, right: 110, bottom: 80, left: 120 }}
                 xScale={{ type: 'point' }}
                 yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
                 axisTop={null}
@@ -21,16 +21,21 @@ export default function PercentileGraph(props) {
                 axisBottom={{
                     tickValues: [
                         0,
+                        10,
                         20,
+                        30,
                         40,
+                        50,
                         60,
+                        70,
                         80,
+                        90,
                         100
                     ],
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    format: '.2f',
+                    format: '.0f',
                     legend: 'Percentile',
                     legendOffset: 36,
                     legendPosition: 'middle'
@@ -54,6 +59,7 @@ export default function PercentileGraph(props) {
                 pointBorderColor={{ from: 'serieColor' }}
                 pointLabel="y"
                 pointLabelYOffset={-12}
+                enableArea={false}
                 useMesh={true}
                 legends={[
                     {

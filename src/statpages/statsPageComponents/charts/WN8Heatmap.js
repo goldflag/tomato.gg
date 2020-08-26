@@ -47,7 +47,7 @@ export default function WN8Heatmap(props) {
                         <text
                             dominantBaseline="central"
                             textAnchor="middle"
-                            style={{ fill: 'white', fontSize: '0.8rem'}}
+                            style={{ fill: 'white', fontSize: '0.7rem'}}
                         >
                             {value}
                         </text>

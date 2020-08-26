@@ -88,7 +88,7 @@ export default function Table(props) {
       },
     });
     const columns = [
-      { name: "    ", options: { 
+      { name: "Nation", options: { 
         filter: true, 
         sortCompare: (order) => {
           return (obj1, obj2) => {
@@ -99,7 +99,7 @@ export default function Table(props) {
           }  
         } 
       },
-      { name: "    ", options: { 
+      { name: "Type", options: { 
         filter: true, 
         sortCompare: (order) => {
           return (obj1, obj2) => {
@@ -110,14 +110,14 @@ export default function Table(props) {
           }
         } 
       },
-      { name: "", options: { filter: true, } },
-      { name: "", options: { filter: true, } },
-      { name: "Vehicle", options: { filter: true, } },
-      { name: "Owned", options: { filter: true, } },
-      { name: "Avg Battles", options: { filter: true, } },
+      { name: "Tier", options: { filter: true, } },
+      { name: "", options: { filter: false, } },
+      { name: "Vehicle", options: { filter: false, } },
+      { name: "Owned", options: { filter: false, } },
+      { name: "Avg Battles", options: { filter: false, } },
       { name: "Tank WR", 
         options: { 
-          filter: true, 
+          filter: false, 
           setCellProps: (value) => {
             return {
               style: { color: 'white', backgroundColor: WRcolor(value.slice(0, -1))},
@@ -127,7 +127,7 @@ export default function Table(props) {
       },
       { name: "Player WR", 
         options: { 
-          filter: true, 
+          filter: false, 
           setCellProps: (value) => {
             return {
               style: { color: 'white', backgroundColor: WRcolor(value.slice(0, -1))},
@@ -136,7 +136,7 @@ export default function Table(props) {
         } 
       },
       { name: "WR Diff.", options: { 
-        filter: true, 
+        filter: false, 
         setCellProps: (value) => {
           return {
               style: { backgroundColor: diffColor(value.slice(0, -1)) },
@@ -152,7 +152,7 @@ export default function Table(props) {
         } 
       },
       { name: "Tank WN8", options: { 
-        filter: true, 
+        filter: false, 
         setCellProps: (value) => {
           return {
               style: { color: 'white', backgroundColor: WN8color(value)},
@@ -161,7 +161,7 @@ export default function Table(props) {
         } 
       },
       { name: "Player WN8", options: { 
-        filter: true, 
+        filter: false, 
         setCellProps: (value) => {
           return {
               style: { color: 'white', backgroundColor: WN8color(value)},
@@ -169,16 +169,16 @@ export default function Table(props) {
           },
         } 
       },
-      { name: "DPG", options: { filter: true, } },
-      { name: "KPG", options: { filter: true, } },
-      { name: "DMG Ratio", options: { filter: true, } },
-      { name: "K/D", options: { filter: true, } },
-      { name: "XP", options: { filter: true, } },
-      { name: "Hits", options: { filter: true, } },
-      { name: "Spots", options: { filter: true, } },
-      { name: "Armor \n Eff", options: { filter: true, } },
+      { name: "DPG", options: { filter: false, } },
+      { name: "KPG", options: { filter: false, } },
+      { name: "DMG Ratio", options: { filter: false, } },
+      { name: "K/D", options: { filter: false, } },
+      { name: "XP", options: { filter: false, } },
+      { name: "Hits", options: { filter: false, } },
+      { name: "Spots", options: { filter: false, } },
+      { name: "Armor \n Eff", options: { filter: false, } },
       { name: "3MOE%", options: { 
-        filter: true, 
+        filter: false, 
         sortCompare: (order) => {
           return (obj1, obj2) => {
             let val1 = obj1.data.slice(0, -1);
@@ -188,7 +188,7 @@ export default function Table(props) {
         }
       } },
       { name: "ACE%", options: { 
-        filter: true, 
+        filter: false, 
         sortCompare: (order) => {
           return (obj1, obj2) => {
             let val1 = obj1.data.slice(0, -1);
@@ -223,7 +223,19 @@ export default function Table(props) {
       },
       renderExpandableRow: (rowData, rowMeta) => {
         const colSpan = rowData.length + 1;
-        console.log(rowData[3]);
+        let curves = <></>;
+        if (rowData[2] > 4) {
+          curves = <>
+            <div>
+              <div style={{fontSize: '1rem', padding: '20px 20px 0px 20px'}}>Winrate Curve</div>
+              <CurveGraph data={WRCurves[rowData[4]]} type='Winrate' smallType='WR' color="rgb(84, 140, 196)"/>
+            </div>
+            <div>
+              <div style={{fontSize: '1rem', padding: '20px 20px 0px 20px'}}>WN8 Curve</div>
+              <CurveGraph data={WN8Curves[rowData[4]]} type='WN8' smallType='WN8' color="rgb(212, 38, 186)"/>
+            </div>
+          </>;
+        }
         return (
           <TableRow>
             <TableCell colSpan={colSpan}>
@@ -237,14 +249,7 @@ export default function Table(props) {
                     <div style={{fontSize: '1rem', padding: '20px 20px 0px 20px'}}>WN8 Percentiles</div>
                     <PercentileGraph data={WN8Percentiles[rowData[4]]} type='WN8' smallType='WN8' color="rgb(212, 38, 186)"/>
                   </div>
-                  <div>
-                    <div style={{fontSize: '1rem', padding: '20px 20px 0px 20px'}}>Winrate Curve</div>
-                    <CurveGraph data={WRCurves[rowData[4]]} type='Winrate' smallType='DPG' color="rgb(84, 140, 196)"/>
-                  </div>
-                  <div>
-                    <div style={{fontSize: '1rem', padding: '20px 20px 0px 20px'}}>WN8 Curve</div>
-                    <CurveGraph data={WN8Curves[rowData[4]]} type='WN8' smallType='WN8' color="rgb(212, 38, 186)"/>
-                  </div>
+                    {curves}
                 </div>
               </div>
             </TableCell>
