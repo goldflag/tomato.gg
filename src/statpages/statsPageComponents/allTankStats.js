@@ -79,10 +79,10 @@ export default function NationDist(props) {
         <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
           <CustomTab label="OVERALL" /> 
           <CustomTab label="24 HOURS" /> 
+          <CustomTab label="3 DAYS" /> 
           <CustomTab label="7 DAYS" /> 
           <CustomTab label="30 DAYS" /> 
-          <CustomTab label="60 DAYS" /> 
-          <CustomTab label="500 BATTLES" /> 
+          <CustomTab label="100 BATTLES" /> 
           <CustomTab label="1000 BATTLES" /> 
         </CustomTabs>
         <TabPanel value={value} index={0}>

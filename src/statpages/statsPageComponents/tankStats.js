@@ -57,7 +57,7 @@ export default function OverallTankStats(props) {
             padding: '5px 5px 5px 12px',
           },
           root: {
-            padding: '3px 5px 3px 12px',
+            padding: '3px 10px 3px 12px',
           },
         },
         MUIDataTableSelectCell: {

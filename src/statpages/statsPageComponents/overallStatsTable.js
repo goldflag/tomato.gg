@@ -83,7 +83,7 @@ export default function OverallStatsTable(props) {
             }
         },
         {
-            name: '7 Days',
+            name: '3 Days',
             options: {
                 filter: true,
                 setCellProps: (rowIndex, cellValue) => {
@@ -94,7 +94,7 @@ export default function OverallStatsTable(props) {
             }
         },
         {
-            name: '30 Days',
+            name: '7 Days',
             options: {
                 filter: false,
                 setCellProps: (rowIndex, cellValue) => {
@@ -105,7 +105,7 @@ export default function OverallStatsTable(props) {
             }
         },
         {
-            name: '60 Days',
+            name: '30 Days',
             options: {
                 filter: false,
                 setCellProps: (rowIndex, cellValue) => {
@@ -127,7 +127,7 @@ export default function OverallStatsTable(props) {
         //     }
         // },
         {
-            name: '500 Games',
+            name: '100 Games',
             options: {
                 filter: false,
                 setCellProps: (rowIndex, cellValue) => {
