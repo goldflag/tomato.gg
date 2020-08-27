@@ -50,7 +50,6 @@ export default function StatsPage(props) {
     const [username, setUserName] = useState('');
     const [stats, setStats] = useState([]);
     const [tanksstats, setTanksstats] = useState('');
-    const [statsJson, setStatsJson] = useState([]);
     const [WGRating, setWGRating] = useState('');
     const [MOEstats, setMOEstats] = useState('');
     const [clanStats, setClanStats] = useState('');

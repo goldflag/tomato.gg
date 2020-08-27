@@ -35,13 +35,22 @@ export default function CurveGraph(props) {
             "data": props.data
         },
     ];
+    let xformat = '% Overall'; 
+    let yformat = '% On Tank'; 
+
+    if (props.smallType === 'WN8') {
+        xformat = ' WN8 Overall'; 
+        yformat = ' WN8 On Tank'; 
+    }
     return (
         <div style={{ height: 'calc(310px)'}}>
             <ResponsiveLine
                 data={data}
                 margin={{ top: 20, right: 110, bottom: 80, left: 120 }}
                 xScale={{ type: 'point' }}
+                xFormat={function(e){return e+ xformat}}
                 yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: false, reverse: false }}
+                yFormat={function(e){return e+ yformat}}
                 curve="cardinal"
                 axisTop={null}
                 axisRight={null}

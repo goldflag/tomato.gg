@@ -4,6 +4,7 @@ import Sidebar from './sidebar';
 import Search from './search';
 import About from './about';
 import TankStatsPage from './statpages/tankStatsPage';
+import ServerStatsPage from './statpages/serverStatsPage';
 import StatsPage from './statpages/statsPage';
 import "./css/body.css";
 import { Link, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
@@ -24,6 +25,9 @@ export default function Tomatopedia() {
               </Route> 
               <Route path='/about'>
                 <About />
+              </Route> 
+              <Route path='/server-stats'>
+                <ServerStatsPage />
               </Route> 
               <Route path='/tanks'>
                 <TankStatsPage />

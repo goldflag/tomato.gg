@@ -39,6 +39,11 @@ function Sidebar() {
                         &nbsp;&nbsp;Tank Stats
                     </Link>
 
+                    <Link to='/server-stats' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
+                    <PublicIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
+                        &nbsp;&nbsp;Server Stats
+                    </Link>
+
                     <Link to='/about' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
                     <InfoIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
                         &nbsp;&nbsp;About

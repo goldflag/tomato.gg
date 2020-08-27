@@ -4,13 +4,6 @@ import zeroBattles from './GraphFunctions';
 import WN8 from '../data/wn8';
 import tankNames from '../data/tankNames';
 import nationConversion from '../data/nationConversion';
-import compressedRoot2 from '../data/compressedRoot2';
-
-import compressedRoot from '../data/compressedRoot';
-import compressed1month from '../data/compressed1month';
-import compressed1week from '../data/compressed1week';
-import compressed1day from '../data/compressed1day';
-
 
 function WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN) {
     const rWINc    = Math.max(0,                          (rWIN    - 0.71) / (1 - 0.71) );
@@ -207,13 +200,6 @@ function calculateRecents(statsSnapshot, overall) {
 
     return calculatedStats;
 }
-
-// function calculate1day() { return calculateRecents(compressedRoot) }
-// function calculate1week() { return calculateRecents(compressed1day) }
-// function calculate30days() { return calculateRecents(compressed1week) }
-// function calculate60days() { return calculateRecents(compressed1month) }
-// function calculate500battles() { return calculateRecents() }
-// function calculate1000battles() { return calculateRecents() }
 
 function NationDistCalculator(data) {
     const NewNationDist = [

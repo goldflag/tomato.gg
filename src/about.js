@@ -20,7 +20,7 @@ export default function TankStatsPage(props) {
 
   return (
       <div style = {{padding: '2em', paddingTop: '5em'}}>
-        <div style={{margin: '1rem 10rem 1rem 10rem'}}>
+        <div style={{margin: '1rem 10% 1rem 10%'}}>
         <Paper className={useStyles.paper}>
           <div style={{padding: '1rem', color: 'rgb(50,50,50)'}}>
             <span style={{fontSize: '1.5rem', fontWeight: '500', lineHeight: '3rem'}}>About Tomato.gg</span><br/>

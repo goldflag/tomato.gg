@@ -15,7 +15,9 @@ export default function PercentileGraph(props) {
                 data={data}
                 margin={{ top: 20, right: 110, bottom: 80, left: 120 }}
                 xScale={{ type: 'point' }}
+                xFormat={function(e){return e + " Percentile"}}
                 yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
+                yFormat={function(e){return e + ' ' + props.smallType}}
                 axisTop={null}
                 axisRight={null}
                 axisBottom={{
