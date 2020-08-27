@@ -36,7 +36,7 @@ export default function SmallSearchBar(props) {
     <Paper component="form" elevation={0} className={classes.root}>
       <InputBase
         className={classes.input}
-        placeholder="Stats Lookup"
+        placeholder="Enter a Username"
         inputProps={{ 'aria-label': 'search google maps' }}
         onChange={e => props.setName(e.target.value)}
       />

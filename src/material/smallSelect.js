@@ -47,7 +47,7 @@ export default function SmallSelectQuery(props) {
           <MenuItem value={'ru'}>RU</MenuItem>
         </Select>
       </FormControl>
-      <FormControl className={classes.formControl}>
+      {/* <FormControl className={classes.formControl}>
         <Select
           MenuProps={{
             disableScrollLock: true
@@ -61,7 +61,7 @@ export default function SmallSelectQuery(props) {
           <MenuItem value={'Player'}>Player</MenuItem>
           <MenuItem value={'Clan'}>Clan</MenuItem>
         </Select>
-      </FormControl>
+      </FormControl> */}
     </div>
   );
 }

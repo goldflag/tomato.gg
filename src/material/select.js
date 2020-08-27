@@ -42,7 +42,7 @@ export default function SelectQuery(props) {
           <MenuItem value={'ru'}>RU</MenuItem>
         </Select>
       </FormControl>
-      <FormControl className={classes.formControl}>
+      {/* <FormControl className={classes.formControl}>
         <Select
           value={props.mode}
           onChange={e => props.setMode(e.target.value)}
@@ -53,7 +53,7 @@ export default function SelectQuery(props) {
           <MenuItem value={'Player'}>Player</MenuItem>
           <MenuItem value={'Clan'}>Clan</MenuItem>
         </Select>
-      </FormControl>
+      </FormControl> */}
     </div>
   );
 }
