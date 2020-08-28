@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
-    width: '600px',
+    width: '100%',
     height: '50px',
     borderRadius: 0
   },

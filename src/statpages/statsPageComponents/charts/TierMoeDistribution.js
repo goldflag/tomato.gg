@@ -1,12 +1,12 @@
 import React from 'react';
-import { ResponsiveBar } from '@nivo/bar';
+import { ResponsiveBar  } from '@nivo/bar';
 
 export default function TierMoeDistribution(props) {
 
     const data = props.data;
     return (
         <div style={{ height: 'calc(292px)'}}>
-            <ResponsiveBar
+            <ResponsiveBar 
             data={data}
             keys={[ "0", "1", "2", "3"]}
             indexBy="Tier"

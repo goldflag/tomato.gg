@@ -190,7 +190,7 @@ export default function ClanHistory(props) {
     <div className={classes.root}>
       <div>
         <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
-          <CustomTab label="CLAN HISTORY" /> 
+          <CustomTab label="CLAN HISTORY (Scrollable)" /> 
         </CustomTabs>
         <TabPanel value={value} index={0} >
           <div style={{padding: '10px 0px 0px 10px' }}>

@@ -62,17 +62,15 @@ export default withRouter(function Search(props){
     return (
         <Router>
             <div className='background'>
-                <div style={styles}>
+                <div className='center'>
                     <div>
-                        <img src={TomatoLogo} alt='logo' style={{height: 'calc(120px)', margin: '0 auto', width: 'auto', display: 'flex', alignItems: 'center', padding: '0rem'}}/>
+                    <img src={TomatoLogo} alt='logo' style={{height: 'auto',  width: '80%', margin: '0 auto',display: 'flex', alignItems: 'center', padding: '0rem'}}/>
                     </div>
                     <form onSubmit={searchId}>
-                        <SearchBar setName = {setName} setServer = {setServer} server = {server} setMode = {setMode} mode = {mode}/>
+                        <SearchBar setName={setName} setServer={setServer} server={server} setMode={setMode} mode={mode} />
                     </form>
-                </div >
-                <div style ={frontGrid}>
-                    {/* <FrontGrid /> */}
                 </div>
+
                 <Switch>
                     <Route exact path={path}>
                     </Route>

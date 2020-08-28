@@ -1,12 +1,12 @@
 import React from 'react';
-import { ResponsivePie } from '@nivo/pie';
+import { ResponsivePie   } from '@nivo/pie';
 
 export default function ClassDistribution(props) {
 
     const data = props.data;
     return(
         <div style={{ height: 'calc(300px)'}}>
-            <ResponsivePie
+            <ResponsivePie  
                 data={data}
                 margin={{ top: 30, right: 20, bottom: 30, left: 20 }}
                 innerRadius={0.5}

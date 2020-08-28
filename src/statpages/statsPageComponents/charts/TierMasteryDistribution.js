@@ -1,12 +1,12 @@
 import React from 'react';
-import { ResponsiveBar } from '@nivo/bar';
+import { ResponsiveBar  } from '@nivo/bar';
 
 export default function TierMasteryDistribution(props) {
 
     const data = props.data;
     return (
         <div style={{ height: 'calc(292px)'}}>
-            <ResponsiveBar
+            <ResponsiveBar 
             data={data}
             keys={[ "None", "3rd", "2nd", "1st", "Ace"]}
             indexBy="Tier"

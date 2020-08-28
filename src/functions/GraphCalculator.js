@@ -87,7 +87,7 @@ function calculateRecents(statsSnapshot, overall) {
             winrate: '-', lossrate: '-', drawrate: '-', damagerate: '-', fragsrate: '-', survivedrate: '-', spottedrate: '-', caprate: '-', defrate: '-', xprate: '-', KD: '-', DMGratio: '-', tankStats: []
         };
     }
-    console.log(overall);
+    
     //the historical snapshot
     let snapshotTanks = statsSnapshot.tankStats;
     let calculatedStats = {
@@ -108,9 +108,6 @@ function calculateRecents(statsSnapshot, overall) {
         xp: overall.xp - statsSnapshot.xp,
         tankStats: []
     };
-
-    console.log(overall.tankStats);
-    console.log(statsSnapshot.tankStats);
 
     const overallWN8 = parseInt(calculatePeriodWN8(overall.tankStats, statsSnapshot.tankStats));
     calculatedStats.overallWN8 = overallWN8;
@@ -259,7 +256,6 @@ function clr(recent, overall, flipped) {
 
 export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentStats) {
 
-    console.log(recentStats);
 
     const recent24hr = calculateRecents(recentStats.recent24hr, recentStats.overall);
     const recent1week = calculateRecents(recentStats.recent1week, recentStats.overall);
@@ -268,7 +264,6 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
     const recent500 = calculateRecents(recentStats.recent500, recentStats.overall);
     const recent1000 = calculateRecents(recentStats.recent1000, recentStats.overall);
     
-    console.log(OS);
     const data = {
         'overallWN8' : overallWN8,
         'overallWinrate' : (OS.wins*100/OS.battles).toFixed(2),
@@ -471,6 +466,5 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
     NationDistCalculator(data);
     ClassDistCalculator(data);
 
-    console.log(data);
     return data;
 }

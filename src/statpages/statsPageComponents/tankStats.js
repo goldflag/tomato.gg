@@ -194,6 +194,7 @@ export default function OverallTankStats(props) {
       },
       print: false,
       viewColumns: false,
+      responsive: 'standard',
       setRowProps: (row, dataIndex, rowIndex) => {
         return {
             style: {backgroundColor: ((rowIndex % 2) === 0 ? 'rgb(242, 243, 247)' : 'white')}

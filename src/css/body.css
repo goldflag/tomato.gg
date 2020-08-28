@@ -2,7 +2,7 @@
 
 body {
     font-family: "Roboto";
-    margin-left: calc(7vw + 70px);
+    margin-left: 14rem;
     padding: 0;
     background-color: rgb(234, 238, 248);
     color: #333;
@@ -11,4 +11,8 @@ body {
 
 .wrapper {
     min-height: 100vh;  
+}
+
+@media screen and (max-Width: 1000px) {
+    body {margin-left: 0px;}
 }

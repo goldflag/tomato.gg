@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import './css/topbar.css'
 import SmallSearchBar from './material/smallSearchBar';
 import DiscordLogo from './assets/Discord.svg'
+import SmallMenu from './material/smallMenu';
 
 import { Link, useRouteMatch, withRouter} from "react-router-dom";
 const APIKey = process.env.REACT_APP_API_KEY;
@@ -44,6 +45,9 @@ export default withRouter(function Topbar(props) {
 
     return (
         <div className="topbar">
+            <div className="smallMenu">
+                <SmallMenu/>
+            </div>
             <div className="field">
                 <form onSubmit={searchId}>
                         <SmallSearchBar setName = {setName} setServer = {setServer} server = {server} setMode = {setMode} mode = {mode}/>

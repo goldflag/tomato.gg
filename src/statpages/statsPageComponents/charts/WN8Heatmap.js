@@ -1,11 +1,11 @@
 import React from 'react';
-import { ResponsiveHeatMap } from '@nivo/heatmap'
+import { ResponsiveHeatMap   } from '@nivo/heatmap'
 import WN8color from '../../../functions/WN8color';
 
 export default function WN8Heatmap(props) {
     return (
         <div style={{ height: 'calc(310px)'}}>
-        <ResponsiveHeatMap
+        <ResponsiveHeatMap  
             data={props.data}
             keys={[ 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']}
             indexBy="Class"

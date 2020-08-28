@@ -18,6 +18,10 @@ export default function OverallStatsTable(props) {
             boxShadow: 'none',
 
           },
+          responsiveStacked: {
+            maxHeight: 'none',
+            overflowX: 'auto'
+          },
         },
         MuiToolbar: {
           root: {
@@ -163,6 +167,7 @@ export default function OverallStatsTable(props) {
       search: false,
       sort: false,
       viewColumns: false,
+      responsive: 'standard',
 
       setTableProps: () => {
         return {

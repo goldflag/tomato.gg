@@ -1,12 +1,12 @@
 import React from 'react';
-import { ResponsiveBar } from '@nivo/bar'
+import { ResponsiveBar  } from '@nivo/bar'
 
 export default function TierWN8Distribution(props) {
 
     const data = props.data;
     return (
         <div style={{ height: 'calc(30vh + 100px)'}}>
-            <ResponsiveBar
+            <ResponsiveBar 
             data={data}
             keys={['HT', 'MT', 'TD', 'LT', 'SPG']}
             indexBy="Tier"

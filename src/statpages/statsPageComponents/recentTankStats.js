@@ -164,13 +164,12 @@ export default function RecentTankStats(props) {
       },
       print: false,
       viewColumns: false,
+      responsive: 'standard',
       setRowProps: (row, dataIndex, rowIndex) => {
-
         return {
             style: {backgroundColor: ((rowIndex % 2) === 0 ? 'rgb(242, 243, 247)' : 'white')}
         };
       },
-
       setTableProps: () => {
         return {
         };

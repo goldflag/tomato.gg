@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
-    width: '400px',
+    width: '250px',
     height: '30px',
     borderRadius: 15
   },

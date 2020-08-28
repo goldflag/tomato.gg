@@ -4,7 +4,7 @@
     font-size: 12;
     color: white;
     background-color: rgba(112, 101, 173, 0.692);
-    padding: 10px 10px 10px 10px;
+    padding: 0px 10px 10px 10px;
     display: flex;
     float: left;
     width: 100%;
@@ -14,15 +14,23 @@
     margin-left: 0em;
   }
 
+  .smallMenu {
+    display: none;
+  }
+
+  @media screen and (max-Width: 1000px) {
+    .smallMenu {display: block}
+  }
+
   .field {
-    padding-top: 0.5em;
+    padding-top: 1rem;
     /* margin: 0 auto; */
     right: 55px;
     position: absolute;
   }
 
   .discord{
-    padding-top: 0.5em;
+    padding-top: 1rem;
     /* margin: 0 auto; */
     right: 10px;
     position: absolute;
@@ -30,6 +38,5 @@
 
   .discord:hover {
       opacity: 0.5;
-      
   }
-    
+ 
