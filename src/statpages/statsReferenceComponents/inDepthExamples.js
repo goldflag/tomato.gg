@@ -79,17 +79,17 @@ export default function InDepthExamples() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={1} dir={theme.direction}>
-            <div className='grid'>
-                <CurveGraph data={WRCurves['Progetto 46']} type='Winrate' smallType='WR' color="rgb(230, 57, 103)"/>
-                <CurveGraph data={WN8Curves['Progetto 46']} type='WN8' smallType='WN8' color="rgb(212, 38, 186)"/>
-            </div>
+        <div className='grid'>
+            <CurveGraph data={WRCurves['Progetto 46']} type='Winrate' smallType='WR' color="rgb(230, 57, 103)"/>
+            <CurveGraph data={WN8Curves['Progetto 46']} type='WN8' smallType='WN8' color="rgb(212, 38, 186)"/>
+        </div>
 
-            As you can see, most of the tank curve is above the overall curve, which means Progetto 46 players have higher winrates and WN8s in the Progetto than their overall stats. 
-            This confirms the community consensus that the Progetto is overpowered. 
-            <br/><br/>
-            However, you have probably noticed that the portion of the tank curve for lower winrates and WN8s is not that different from the overall reference curve. 
-            This means the Progetto is not overpowered in the hands of a shitter.
-            This confirms the idea that autoreloaders like the Progetto 46 have a high skill ceiling. 
+        As you can see, most of the tank curve is above the overall curve, which means Progetto 46 players have higher winrates and WN8s in the Progetto than their overall stats. 
+        This confirms the community consensus that the Progetto is overpowered. 
+        <br/><br/>
+        However, you have probably noticed that the portion of the tank curve for lower winrates and WN8s is not that different from the overall reference curve. 
+        This means the Progetto is not overpowered in the hands of a shitter.
+        This confirms the idea that autoreloaders like the Progetto 46 have a high skill ceiling. 
       </TabPanel>
       <TabPanel value={value} index={0} dir={theme.direction}>
         <div className='grid'>
@@ -97,7 +97,7 @@ export default function InDepthExamples() {
             <CurveGraph data={WN8Curves['AT 8']} type='WN8' smallType='WN8' color="rgb(212, 38, 186)"/>
         </div>
 
-        The AT 8 is considered to be a noob tank. It's a casemate TD, has good armor, and the terrible mobility prevents the most important skill elite players have — relocation. 
+        The AT 8 is considered to be a noob tank. It's a casemate TD, has good armor, and the terrible mobility prevents the most important skill elite players have: relocation. 
         The winrate curve for the AT 8 appears to confirm this. The tank curve is higher at the lower overall winrates, but drops down to the reference curve at higher overall winrate.<br/><br/>
 
         The WN8 curve for the AT 8 is also quite interesting. It sits entirely below the reference curve, meaning the AT 8 is really bad for WN8 padding (especially if you are a good player).<br/>

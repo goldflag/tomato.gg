@@ -33,9 +33,12 @@ export default function StatsReference(props) {
             <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>UPDATED 8/27/2020</span> <br/>
             <span style={{fontSize: '0.9rem', lineHeight: '1.4rem'}}>
             <h2 style={{fontSize: '1.4rem', fontWeight: '500'}}>Understanding Tank Curves</h2> 
-            You can find accessible and easy to use tank curves in <Link to='/tanks'>Tank Stats</Link> and more detailed tank curves at <a target="blank" href="https://https://wot-news.com/stat/server/us/norm/en">Wot-news.com</a>.
+            You can find accessible and easy to use tank curves in <Link to='/tanks'>Tank Stats</Link> and more detailed tank curves at <a target="blank" href="https://https://wot-news.com/stat/server/us/norm/en">Wot-news.com</a>.<br/>
 
-            Tank curves compare an player's overall account performance to their performance on an individual tank and is probably the most accurate tool in determining how good a vehicle is.<br/><br/>
+            Tank curves compare an player's overall account performance to their performance on an individual tank and is probably <strong>the most accurate tool in determining the vehicle's position in the metagane</strong>.<br/><br/>
+
+            Tank curves are the most accurate in the range of the typical player's stats, generally from 45% to 55%. Less than 10% of the playerbase has a winrate of over 54% no matter how you measure it. <br/>
+            Curves above 60% or 2700 WN8 have very few datapoints and are should not be taken seriously as they are extremely volatile. <br/><br/>
             
             Here are some example tank curves that display various attributes:
             <div style={{margin: '1rem 0 1rem 0'}}>
