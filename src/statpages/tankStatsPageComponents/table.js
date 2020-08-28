@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import clonedeep from 'lodash.clonedeep';
+import { Link } from 'react-router-dom';
 import MUIDataTable, {ExpandButton} from "mui-datatables";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
@@ -228,7 +229,7 @@ export default function Table(props) {
           curves = <>
             <div>
               <div style={{fontSize: '1rem', padding: '20px 20px 0px 20px'}}>Winrate Curve</div>
-              <CurveGraph data={WRCurves[rowData[4]]} type='Winrate' smallType='WR' color="rgb(84, 140, 196)"/>
+              <CurveGraph data={WRCurves[rowData[4]]} type='Winrate' smallType='WR' color="rgb(230, 57, 103)"/>
             </div>
             <div>
               <div style={{fontSize: '1rem', padding: '20px 20px 0px 20px'}}>WN8 Curve</div>
@@ -240,6 +241,7 @@ export default function Table(props) {
           <TableRow>
             <TableCell colSpan={colSpan}>
               <div className='row'>  
+                <div style={{fontSize: '0.86rem', color: 'rgb(100,100,100)', padding: '10px 20px 0px 20px'}}>Don't get what these graphs mean? <Link to='/stats-reference'>Visit Stats Reference.</Link></div>
                 <div className='grid'>
                   <div>
                     <div style={{fontSize: '1rem', padding: '20px 20px 0px 20px'}}>DPG Percentiles</div>

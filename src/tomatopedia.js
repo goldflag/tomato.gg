@@ -6,6 +6,8 @@ import About from './about';
 import TankStatsPage from './statpages/tankStatsPage';
 import ServerStatsPage from './statpages/serverStatsPage';
 import StatsPage from './statpages/statsPage';
+import StatsReference from './statpages/statsReference';
+
 import "./css/body.css";
 import { Link, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
@@ -31,6 +33,9 @@ export default function Tomatopedia() {
               </Route> 
               <Route path='/tanks'>
                 <TankStatsPage />
+              </Route> 
+              <Route path='/stats-reference'>
+                <StatsReference />
               </Route> 
               <Route exact path='/'>
                 <Search />

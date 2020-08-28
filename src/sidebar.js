@@ -7,6 +7,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import PublicIcon from '@material-ui/icons/Public';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import InfoIcon from '@material-ui/icons/Info';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 
 function Sidebar() {
     return (
@@ -42,6 +43,11 @@ function Sidebar() {
                     <Link to='/server-stats' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
                     <PublicIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
                         &nbsp;&nbsp;Server Stats
+                    </Link>
+
+                    <Link to='/stats-reference' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
+                    <LibraryBooksIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
+                        &nbsp;&nbsp;Stats Reference
                     </Link>
 
                     <Link to='/about' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>

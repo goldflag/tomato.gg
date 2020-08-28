@@ -5,7 +5,7 @@ export default function CurveGraph(props) {
     let ticks = [ 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
                   54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, ];
     let referenceData = {
-        "id": 'Reference',
+        "id": 'Overall WR',
         "data": [
                 { "x": 42, "y": 42 }, { "x": 43, "y": 43 }, { "x": 44, "y": 44 }, { "x": 45, "y": 45 }, { "x": 46, "y": 46 }, { "x": 47, "y": 47 }, { "x": 48, "y": 48 }, { "x": 49, "y": 49 }, { "x": 50, "y": 50 }, { "x": 51, "y": 51 }, 
                 { "x": 52, "y": 52 }, { "x": 53, "y": 53 }, { "x": 54, "y": 54 }, { "x": 55, "y": 55 }, { "x": 56, "y": 56 }, { "x": 57, "y": 57 }, { "x": 58, "y": 58 }, { "x": 59, "y": 59 }, { "x": 60, "y": 60 }, { "x": 61, "y": 61 }, 
@@ -18,7 +18,7 @@ export default function CurveGraph(props) {
             2200, 2400, 2600, 2800, 3000,  
             3200, 3400, ];
         referenceData = {
-            "id": 'Reference',
+            "id": 'Overall WN8',
             "data": [
                     { "x": 200, "y": 200 }, { "x": 300, "y": 300 }, { "x": 400, "y": 400 }, { "x": 500, "y": 500 }, { "x": 600, "y": 600 }, { "x": 700, "y": 700 }, { "x": 800, "y": 800 }, { "x": 900, "y": 900 }, 
                     { "x": 1000, "y": 1000 }, { "x": 1100, "y": 1100 }, { "x": 1200, "y": 1200 }, { "x": 1300, "y": 1300 }, { "x": 1400, "y": 1400 }, { "x": 1500, "y": 1500 }, { "x": 1600, "y": 1600 }, { "x": 1700, "y": 1700 }, 
@@ -31,7 +31,7 @@ export default function CurveGraph(props) {
     const data = [
         referenceData,
         {
-            "id": props.smallType,
+            "id": 'Tank ' + props.smallType,
             "data": props.data
         },
     ];
@@ -77,7 +77,7 @@ export default function CurveGraph(props) {
                     legendPosition: 'middle'
                 }}
                 colors={[              
-                    'rgb(232, 37, 66)',
+                    'rgb(110, 100, 120)',
                     props.color,
                 ]}
                 pointSize={5}

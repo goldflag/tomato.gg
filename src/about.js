@@ -3,7 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import "./css/tankstats.css";
 
-export default function TankStatsPage(props) {
+export default function About(props) {
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,7 +23,7 @@ export default function TankStatsPage(props) {
         <div style={{margin: '1rem 10% 1rem 10%'}}>
         <Paper className={useStyles.paper}>
           <div style={{padding: '1rem', color: 'rgb(50,50,50)'}}>
-            <span style={{fontSize: '1.5rem', fontWeight: '500', lineHeight: '3rem'}}>About Tomato.gg</span><br/>
+            <h1 style={{fontSize: '1.5rem', fontWeight: '500'}}>About Tomato.gg</h1><br/>
             <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>UPDATED 8/26/2020</span> <br/>
             <span style={{fontSize: '0.9rem', lineHeight: '1.4rem'}}>I created this site to provide an accessible interface to view a huge variety of stats, many of which are only found here. Some stats have taken inspiration from the other sites.<br/>
             Some of the unique features offered on this site:
