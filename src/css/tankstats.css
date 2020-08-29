@@ -8,13 +8,35 @@
 }
 
 .row {
-    max-width: 80vw;
+    max-width: 100vw;
 }
 
 .grid {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: min(340px);    /* This is better for small screens, once min() is better supported */
-    /* grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr)); */
+    grid-template-rows: min(340px);
     grid-gap: 0.0rem;
-  }
+}
+
+.scattergrid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: min(340px);
+    grid-gap: 1rem;
+    margin: '1rem 2rem 1rem 0rem'
+}
+
+@media screen and (max-Width: 1000px) {
+    .grid {
+        display: grid;
+        grid-template-columns: 100vw;
+        grid-template-rows: min(340px);
+        grid-gap: 0.0rem;
+    }
+    .scattergrid {
+        display: grid;
+        grid-template-columns: 100vw;
+        grid-template-rows: min(580px);
+        grid-gap: 1rem;
+    }
+}

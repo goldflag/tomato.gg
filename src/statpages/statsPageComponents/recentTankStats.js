@@ -85,7 +85,7 @@ export default function RecentTankStats(props) {
       },
       { name: 'Vehicle', options: { filter: false } },
       { name: 'Nation', options: { 
-        filter: true,
+        filter: false,
         sortCompare: (order) => {
           return (obj1, obj2) => {
             let val1 = obj1.data.props.alt;
@@ -100,7 +100,7 @@ export default function RecentTankStats(props) {
         } 
       },
       { name: 'Class', options: { 
-        filter: true,
+        filter: false,
         sortCompare: (order) => {
           return (obj1, obj2) => {
             let val1 = obj1.data.props.alt;

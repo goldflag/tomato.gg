@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+
+.topstats { 
+    display: flex;
+    flex-direction: row;
+    /* grid-template-columns: auto  14% 14% 14% 14% 14% 14%;
+    grid-template-rows: 100%;
+    grid-gap: 1rem; */
+    justify-content:  space-between;
+    max-width: 100%;
+}
+.paper {
+    width: 12%;
+    padding: 1.5rem 0rem 0rem 0rem;
+    text-align: center;
+    font-family: roboto;
+    color: rgb(30, 30, 30);
+}
+
+.playerName {
+    text-align: left;
+    font-family: roboto;
+    color: rgb(30, 30, 30);
+    line-height: 1.2em;
+}
+
+.mobilePlayerName {
+    display: none;
+}
+.charts {
+    display: block;
+}
+.mobilecharts {
+    margin-bottom: 1rem;
+}
+
+/* .heatmap {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+.tier {
+    grid-column-start: 4;
+    grid-column-end: 7;
+}
+.clan {
+    grid-column-start: 7;
+    grid-column-end: 11;
+}
+.moe {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+.nation {
+    grid-column-start: 4;
+    grid-column-end: 7;
+}
+.class {
+    grid-column-start: 7;
+    grid-column-end: 11;
+} */
+
+
+@media screen and (max-Width: 1000px) {
+    .topstats {
+        /* display: none;*/
+    }    
+    .paper {
+        width: 15%;
+        padding: 1rem 0rem 1rem 0rem;
+        text-align: center;
+        font-family: roboto;
+        font-size: 0.6rem;
+        color: rgb(30, 30, 30);
+    }
+    .playerName {
+        display: none;
+    }
+    .mobilePlayerName {
+        display: block;
+        font-size: 0.7em;
+        margin: 0rem 0rem 1rem 0rem;
+    }
+    .charts {
+        display: none;
+    }
+    /* .heatmap {
+        grid-column-start: 1;
+        grid-column-end: 10;
+    }
+    .tier {
+        grid-column-start: 1;
+        grid-column-end: 10;
+    }
+    .clan {
+        grid-column-start: 1;
+        grid-column-end: 10;
+    }
+    .moe {
+        grid-column-start: 1;
+        grid-column-end: 10;
+    }
+    .nation {
+        grid-column-start: 1;
+        grid-column-end: 10;
+    }
+    .class {
+        grid-column-start: 1;
+        grid-column-end: 10;
+    } */
+}

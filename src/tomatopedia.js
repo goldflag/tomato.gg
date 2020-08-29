@@ -13,7 +13,7 @@ import { Link, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 export default function Tomatopedia() {
 
-  // const size = useWindowSize();
+  const size = useWindowSize();
 
   return (
       <Router>

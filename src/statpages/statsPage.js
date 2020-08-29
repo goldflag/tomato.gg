@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import TopStats from './statsPageComponents/topStats';
 import "../css/style.css";
+import "../css/innerpage.css";
 import serverConv from '../data/serverConv';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import AllTankStats from "./statsPageComponents/allTankStats";
@@ -221,7 +222,7 @@ export default function StatsPage(props) {
     } 
     
     return (
-        <div style = {{padding: '2em', paddingTop: '5em'}}>
+        <div className="smallpaper">
           {StatTable}
         </div>
     );

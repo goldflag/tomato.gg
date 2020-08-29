@@ -87,7 +87,7 @@ export default function OverallTankStats(props) {
       { name: 'Vehicle', options: { filter: false } },
       { name: 'Nation', 
         options: { 
-          filter: true,
+          filter: false,
           sortCompare: (order) => {
             return (obj1, obj2) => {
               let val1 = obj1.data.props.alt;
@@ -100,7 +100,7 @@ export default function OverallTankStats(props) {
       { name: 'Tier', options: { filter: true } },
       { name: 'Class', 
         options: { 
-        filter: true,
+        filter: false,
           sortCompare: (order) => {
             return (obj1, obj2) => {
               let val1 = obj1.data.props.alt;
@@ -163,7 +163,7 @@ export default function OverallTankStats(props) {
       { name: 'MoE', options: { filter: true } },
       { name: 'Mastery', 
         options: { 
-          filter: true,
+          filter: false,
           sortCompare: (order) => {
             return (obj1, obj2) => {
               console.log(obj1);

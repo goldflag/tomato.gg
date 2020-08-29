@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import "../css/tankstats.css";
+import "../css/innerpage.css";
 import WN8Waffle from './serverStatsPageComponents/WN8Waffle';
 import WRWaffle from './serverStatsPageComponents/WRWaffle';
 import Scatterplot from './serverStatsPageComponents/scatterplot';
@@ -24,7 +25,7 @@ export default function ServerStatsPage(props) {
   }
 
   return (
-      <div style = {{padding: '2em', paddingTop: '5em'}}>
+      <div className="smallpaper">
         <div style={{margin: '1rem 0 1rem 0'}}>
           <Paper className={useStyles.paper}>
             <div style={{padding: '1rem', color: 'rgb(50,50,50)'}}>
@@ -49,22 +50,24 @@ export default function ServerStatsPage(props) {
             <WRWaffle/>
           </Paper>
         </div>
-        <Grid container spacing={2}>
-            <Grid item xs={6}>
-                <Paper style={{ padding: '1rem 1rem 1rem 1rem'}}>
-                    <span style={{fontSize: '1.2rem', fontWeight: '500'}}>NA Winrate/WN8 Scatterplot | Min. 2500 Battles </span><br/>
-                    <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>1000 DATAPOINTS</span> <br/>
-                    <Scatterplot data={scatterdata} color={'rgb(167, 167, 232)'}/>
-                </Paper>
-            </Grid>
-            <Grid item xs={6}>
-                <Paper style={{ padding: '1rem 1rem 1rem 1rem'}}>
-                    <span style={{fontSize: '1.2rem', fontWeight: '500'}}>NA Winrate/WN8 Scatterplot | Min. 10000 Battles</span><br/>
-                    <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>1000 DATAPOINTS</span> <br/>
-                    <Scatterplot data={scatterdata10000} color={'rgb(217, 167, 232)'}/>
-                </Paper>
-            </Grid>
-        </Grid>
+        <div className="scattergrid">
+          <div>
+            <Paper style={{ padding: '1rem 1rem 1rem 1rem'}}>
+              <span style={{fontSize: '1.2rem', fontWeight: '500'}}>NA Winrate/WN8 Scatterplot | Min. 2500 Battles </span><br/>
+              <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>1000 DATAPOINTS</span> <br/>
+              <Scatterplot data={scatterdata} color={'rgb(167, 167, 232)'}/>
+          </Paper>
+          </div>
+          <div>
+
+            <Paper style={{ padding: '1rem 1rem 1rem 1rem'}}>
+              <span style={{fontSize: '1.2rem', fontWeight: '500'}}>NA Winrate/WN8 Scatterplot | Min. 10000 Battles</span><br/>
+              <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>1000 DATAPOINTS</span> <br/>
+              <Scatterplot data={scatterdata10000} color={'rgb(217, 167, 232)'}/>
+            </Paper>
+          </div>
+        </div>
+
       </div>
   );
 }

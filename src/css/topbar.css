@@ -4,7 +4,7 @@
     font-size: 12;
     color: white;
     background-color: rgba(112, 101, 173, 0.692);
-    padding: 0px 10px 10px 10px;
+    padding: 0px 10px 10px 0px;
     display: flex;
     float: left;
     width: 100%;
@@ -40,3 +40,27 @@
       opacity: 0.5;
   }
  
+
+  /* unvisited link */
+  a:link {
+    color: rgb(58, 89, 189);
+    text-decoration: none;
+  }
+
+  /* visited link */
+  a:visited {
+    color: rgb(58, 89, 189);
+    text-decoration: none;
+  }
+
+  /* mouse over link */
+  a:hover {
+    color: rgb(207, 12, 116);
+    text-decoration: none;
+  }
+
+  /* selected link */
+  a:active {
+    color: rgb(108, 37, 121);
+    text-decoration: none;
+  }

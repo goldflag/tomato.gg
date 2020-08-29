@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import "../css/tankstats.css";
 import Table from './tankStatsPageComponents/table';
+import "../css/innerpage.css";
 
 export default function TankStatsPage(props) {
 
@@ -20,7 +21,7 @@ export default function TankStatsPage(props) {
 
   return (
       <div style = {{padding: '2em', paddingTop: '5em'}}>
-        <div style={{margin: '1rem 0 1rem 0'}}>
+        <div className = 'narrowpage'>
           <Paper className={useStyles.paper}>
             <div style={{padding: '1rem', color: 'rgb(50,50,50)'}}>
               <span style={{fontSize: '1.5rem', fontWeight: '500'}}>Our Methodology</span><br/>
@@ -33,21 +34,18 @@ export default function TankStatsPage(props) {
               Join the Tomato.gg <a target="blank" href="https://discord.gg/qA2bV7K">Discord server</a> to be up-to-date on website development<br/>
               <span style={{fontSize: '1.2rem', fontWeight: '500', lineHeight: '3rem'}}>There's no way the stats for [insert tank here] are so low/high!!!</span><br/>
               Currently, these stats are <em>overall</em> stats — which means we don't discriminate between whether a player is active or not. <br/>
-              Therefore, newer tanks will have stats better reflect their state in the current meta compared to older tanks. The stats of recently nerfed or buffed tanks will also not perfectly reflect its current state <br/><br/>
+              Therefore, newer tanks will have stats better reflect their state in the current meta compared to older tanks. The stats of recently nerfed or buffed tanks will also not perfectly reflect its current state. <br/><br/>
 
-              Even though these stats aren't perfect, they don't lie either.<br/> 
-              The AT 7 is widely considered to be a miserable tank to play, and it is. So why does it have the same winrate differential as the Defender then? <br/><br/>
-
-              It turns out that slow vehicles heavy armor are really good for winrate because they can tank shots for their team (something that isn't reflected in DPG or WN8) and have relatively low skill floors — even if they are not fun to play.<br/><br/>
-
-              This is just one of the many examples in which server-wide tank stats can upend innaccurate paradigms the community has about the meta.<br/><br/>
+              Just because a tank isn't fum to play, it doesn't mean it's underpowered. Slow TDs with heavy armor like the british ATs are hated, but these vehicles are good for winrate because they have low skill floors and can tank shots for teammates. <br/><br/>
 
               Server stats for active accounts will come soon™.
               </span>
             </div>
           </Paper>
         </div>
-        <Table/>
+        <div className = 'tanktable'>
+          <Table/>
+        </div>
         {/* <Example/> */}
       </div>
   );

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import "../css/tankstats.css";
+import "../css/innerpage.css";
 import PercentileGraph from './tankStatsPageComponents/percentileGraph';
 import CurveExamples from './statsReferenceComponents/curveExamples';
 import InDepthExamples from './statsReferenceComponents/inDepthExamples';
@@ -26,7 +27,7 @@ export default function StatsReference(props) {
 
   return (
       <div style = {{padding: '2em', paddingTop: '5em'}}>
-        <div style={{margin: '1rem 10% 1rem 10%'}}>
+        <div className = 'narrowpage'>
         <Paper className={useStyles.paper}>
           <div style={{padding: '1rem', color: 'rgb(50,50,50)'}}>
             <h1 style={{fontWeight: '500', lineHeight: '1rem'}}>Stats Reference</h1>

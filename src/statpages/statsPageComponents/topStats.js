@@ -7,6 +7,7 @@ import RecentTankStats from './allTankStats.js';
 import WN8color from '../../functions/WN8color';
 import WRcolor from '../../functions/WRcolor';
 import PRcolor from '../../functions/PRcolor';
+import '../../css/statspage.css'
 
 function battlesColor(battles) {
   if (battles < 1500) { return '#930D0D'; }
@@ -74,62 +75,50 @@ export default function TopStats(props) {
   const creationDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
   return (
     <div className={classes.root}>
-      <Grid container spacing={2}>
-        <Grid item xs={3}>
-            <Paper className={classes.playerName} square elevation={2} style={{marginBottom: '1em', backgroundColor: WN8color(squareStats['overallWN8'])} }>
-              <div style={{fontSize: '1.5em', fontWeight: '500', color: 'white', paddingBottom: '5px'}}>{props.username}</div> 
-              {clanInfo}
-              <span style={{color: 'white', fontSize: '0.8rem'}}>Account created {creationDate}</span>
-            </Paper>
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <Paper className={classes.paper} square elevation={2} style={{padding: '2em 0.5em 2em 0.5em', color: 'white', backgroundColor: WRcolor(squareStats['overallWR'])}}>
-                  <span style={{fontSize: '0.8em'}}>Overall WR</span><br/>
-                  <span style={{fontSize: '1.3em', fontWeight: '500'}}>{squareStats['overallWR']}%</span>
-                </Paper>
-              </Grid>
-              <Grid item xs={6}>
-                <Paper className={classes.paper} square elevation={2} style={{padding: '2em 0.5em 2em 0.5em', color: 'white', backgroundColor: WN8color(squareStats['overallWN8'])}}>
-                  <span style={{fontSize: '0.8em'}}>Overall WN8</span><br/>
-                  <span style={{fontSize: '1.3em', fontWeight: '500'}}>{squareStats['overallWN8']}</span>
-                </Paper>
-              </Grid>
-              <Grid item xs={6}>
-                <Paper className={classes.paper} square elevation={2} style={{padding: '2em 0.5em 2em 0.5em', color: 'white', backgroundColor: WRcolor(squareStats['recentWR'])}}>
-                  <span style={{fontSize: '0.8em'}}>Recent WR</span><br/>
-                  <span style={{fontSize: '1.3em', fontWeight: '500'}}>{squareStats['recentWR']}%</span>
-                </Paper>
-              </Grid>
-              <Grid item xs={6}>
-                <Paper className={classes.paper} square elevation={2} style={{padding: '2em 0.5em 2em 0.5em', color: 'white', backgroundColor: WN8color(squareStats['recentWN8'])}}>
-                  <span style={{fontSize: '0.8em'}}>Recent WN8</span><br/>
-                  <span style={{fontSize: '1.3em', fontWeight: '500'}}>{squareStats['recentWN8']}</span>
-                </Paper>
-              </Grid>
-              <Grid item xs={6}>
-                <Paper className={classes.paper} square elevation={2} style={{padding: '2em 0.5em 2em 0.5em', color: 'white', backgroundColor: PRcolor(squareStats['PR'])}}>
-                  <span style={{fontSize: '0.8em'}}>WG Rating</span><br/>
-                  <span style={{fontSize: '1.3em', fontWeight: '500'}}>{squareStats['PR']}</span>
-                </Paper>
-              </Grid>
-              <Grid item xs={6}>
-                <Paper className={classes.paper} square elevation={2} style={{padding: '2em 0.5em 2em 0.5em', color: 'white', backgroundColor: battlesColor(props.stats.battles)}}>
-                  <span style={{fontSize: '0.8em'}}>Battles</span><br/>
-                  <span style={{fontSize: '1.3em', fontWeight: '500'}}>{props.stats.battles}</span>
-                </Paper>
-              </Grid>
-            </Grid>
-        </Grid>
-        <Grid item xs={9}>
-              <Paper square elevation={2} style={{marginBottom: '1rem', padding: '1rem 1rem 1rem 1rem', color: 'white'}}>
-                  <span style={{fontSize: '1.3em', color: 'rgb(100,100,100)', fontWeight: '500'}}>Where are my Recent Stats?</span><br/>
-                  <span style={{fontSize: '0.8em', color: 'rgb(100,100,100)'}}>Wargaming does not provide recent stats in their API, meaning that stats site
-                  must generate and store recent stats on their own servers. We can only collect data on players that have been queried on our sites. Check your stats often and your recent stats will appear very soon!</span><br/>
-                </Paper>
-            <OverallStatsTable data = {props.data.overallStats}/> 
-        </Grid>
-
-      </Grid>
+      <Paper className='mobilePlayerName' square elevation={2} style={{padding: '1rem', backgroundColor: WN8color(squareStats['overallWN8'])} }>
+        <div style={{fontSize: '1.5em', fontWeight: '500', color: 'white', paddingBottom: '5px'}}>{props.username}</div> 
+        {clanInfo}
+        <span style={{color: 'white', fontSize: '0.8rem'}}>Account created {creationDate}</span>
+      </Paper>
+      <div className='topstats'>
+        <div>
+          <Paper className='playerName' square elevation={2} style={{padding: '1rem', backgroundColor: WN8color(squareStats['overallWN8'])} }>
+            <div style={{fontSize: '1.5em', fontWeight: '500', color: 'white', paddingBottom: '5px'}}>{props.username}</div> 
+            {clanInfo}
+            <span style={{color: 'white', fontSize: '0.8rem'}}>Account created {creationDate}</span>
+          </Paper>
+          </div>
+          <Paper className='paper' square elevation={2} style={{ color: 'white', backgroundColor: WN8color(squareStats['overallWN8'])}}>
+            <span style={{fontSize: '0.8em'}}>Overall WN8</span><br/>
+            <span style={{fontSize: '1.3em', fontWeight: '500'}}>{squareStats['overallWN8']}</span>
+          </Paper>
+          <Paper className='paper' square elevation={2} style={{ color: 'white', backgroundColor: WRcolor(squareStats['overallWR'])}}>
+            <span style={{fontSize: '0.8em'}}>Overall WR</span><br/>
+            <span style={{fontSize: '1.3em', fontWeight: '500'}}>{squareStats['overallWR']}%</span>
+          </Paper>
+          <Paper className='paper' square elevation={2} style={{ color: 'white', backgroundColor: WN8color(squareStats['recentWN8'])}}>
+            <span style={{fontSize: '0.8em'}}>Recent WN8</span><br/>
+            <span style={{fontSize: '1.3em', fontWeight: '500'}}>{squareStats['recentWN8']}</span>
+          </Paper>
+          <Paper className='paper' square elevation={2} style={{ color: 'white', backgroundColor: WRcolor(squareStats['recentWR'])}}>
+            <span style={{fontSize: '0.8em'}}>Recent WR</span><br/>
+            <span style={{fontSize: '1.3em', fontWeight: '500'}}>{squareStats['recentWR']}%</span>
+          </Paper>
+          <Paper className='paper' square elevation={2} style={{ color: 'white', backgroundColor: PRcolor(squareStats['PR'])}}>
+            <span style={{fontSize: '0.8em'}}>WG Rating</span><br/>
+            <span style={{fontSize: '1.3em', fontWeight: '500'}}>{squareStats['PR']}</span>
+          </Paper>
+          <Paper className='paper' square elevation={2} style={{ color: 'white', backgroundColor: battlesColor(props.stats.battles)}}>
+            <span style={{fontSize: '0.8em'}}>Battles</span><br/>
+            <span style={{fontSize: '1.3em', fontWeight: '500'}}>{props.stats.battles}</span>
+          </Paper>
+        </div>
+          <Paper square elevation={2} style={{margin: '1rem 0 1rem 0', padding: '1rem 1rem 1rem 1rem', color: 'white'}}>
+            <span style={{fontSize: '1.3em', color: 'rgb(100,100,100)', fontWeight: '500'}}>Where are my Recent Stats?</span><br/>
+            <span style={{fontSize: '0.8em', color: 'rgb(100,100,100)'}}>Wargaming does not provide recent stats in their API, meaning that stats site
+            must generate and store recent stats on their own servers. We can only collect data on players that have been queried on our sites. Check your stats often and your recent stats will appear very soon!</span><br/>
+          </Paper>
+      <OverallStatsTable data = {props.data.overallStats}/> 
     </div>
   );
 }

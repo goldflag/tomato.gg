@@ -90,7 +90,7 @@ export default function Table(props) {
     });
     const columns = [
       { name: "Nation", options: { 
-        filter: true, 
+        filter: false, 
         sortCompare: (order) => {
           return (obj1, obj2) => {
             let val1 = obj1.data.props.alt;
@@ -101,7 +101,7 @@ export default function Table(props) {
         } 
       },
       { name: "Type", options: { 
-        filter: true, 
+        filter: false, 
         sortCompare: (order) => {
           return (obj1, obj2) => {
             let val1 = obj1.data.props.alt;

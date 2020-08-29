@@ -1,0 +1,24 @@
+.paper {
+    padding: 1rem;
+    padding-top: 5rem; 
+}
+
+.smallpaper {
+    padding: 2rem;
+    padding-top: 5rem; 
+}
+
+.narrowpage {
+    margin: 1rem 10% 1rem 10%;
+}
+
+.tanktable {
+    margin: 0;
+}
+
+@media screen and (max-Width: 1000px) {
+    .paper {padding: 0.5rem;}
+    .smallpaper {padding: 0.4rem; padding-top: 3.4rem; }
+    .narrowpage {margin: -0.8rem -1.8rem -0.8rem -1.8rem;}
+    .tanktable {margin: 1.5rem -1.8rem -0.8rem -1.8rem;}
+}

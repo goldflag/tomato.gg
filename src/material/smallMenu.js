@@ -14,6 +14,7 @@ import PublicIcon from '@material-ui/icons/Public';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import InfoIcon from '@material-ui/icons/Info';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import smallLogo from '../assets/smalllogo.png';
 
 const useStyles = makeStyles({
   list: {
@@ -50,31 +51,31 @@ export default function TemporaryDrawer() {
         <List>
             <Link to='/'>
                 <ListItem button key={'1'}>
-                    <ListItemIcon><AppsIcon /></ListItemIcon>
+                    <ListItemIcon><AppsIcon style={{color: 'rgb(31, 45, 90)'}}/></ListItemIcon>
                     <ListItemText primary={'Home'} />
                 </ListItem>
             </Link>
             <Link to='/tanks'>
                 <ListItem button key={'2'}>
-                    <ListItemIcon><BarChartIcon /></ListItemIcon>
+                    <ListItemIcon><BarChartIcon style={{color: 'rgb(31, 45, 90)'}}/></ListItemIcon>
                     <ListItemText primary={'Tank Stats'} />
                 </ListItem>
             </Link>
             <Link to='/server-stats'>
                 <ListItem button key={'3'}>
-                    <ListItemIcon><PublicIcon /></ListItemIcon>
+                    <ListItemIcon><PublicIcon style={{color: 'rgb(31, 45, 90)'}}/></ListItemIcon>
                     <ListItemText primary={'Server Stats'} />
                 </ListItem>
             </Link>
             <Link to='/stats-reference'>
                 <ListItem button key={'4'}>
-                    <ListItemIcon><LibraryBooksIcon /></ListItemIcon>
+                    <ListItemIcon><LibraryBooksIcon style={{color: 'rgb(31, 45, 90)'}}/></ListItemIcon>
                     <ListItemText primary={'Stats Reference'} />
                 </ListItem>
             </Link>
             <Link to='/about'>
                 <ListItem button key={'5'}>
-                    <ListItemIcon><InfoIcon /></ListItemIcon>
+                    <ListItemIcon><InfoIcon style={{color: 'rgb(31, 45, 90)'}}/></ListItemIcon>
                     <ListItemText primary={'About'} />
                 </ListItem>
             </Link>
@@ -86,12 +87,11 @@ export default function TemporaryDrawer() {
   return (
     <div>
         <React.Fragment key={'top'}>
-          <Button onClick={toggleDrawer('top', true)}><span style={{fontSize: '1.7rem'}}>🍅</span></Button>
+          <Button onClick={toggleDrawer('top', true)}><span style={{fontSize: '1.7rem'}}><img src={smallLogo} alt='smalllogo' style={{maxWidth: '70px', padding: '0 15px 0 0'}}/></span></Button>
           <Drawer anchor={'top'} open={state['top']} onClose={toggleDrawer('top', false)}>
             {list('🍅')}
           </Drawer>
         </React.Fragment>
-      
     </div>
   );
 }
