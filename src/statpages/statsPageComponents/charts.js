@@ -8,6 +8,10 @@ import ClanHistory from './appbars/ClanHistory';
 import MOEDist from './appbars/MOEDist';
 import NationDist from './appbars/NationDist';
 import ClassDist from './appbars/ClassDist';
+import ExpectedDist from './appbars/ExpectedDist';
+import RecordsBar from './appbars/RecordsBar';
+import LineGraphs from './appbars/LineGraphs';
+
 import '../../css/statspage.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -48,13 +52,13 @@ export default function Charts(props) {
     output =       <div /*className='charts'*/>
     <Grid container spacing={2}>
       <Grid item xs={4}>
-          <Paper className={classes.paper} square elevation={2}>
-              {/* <span style={{fontWeight: 500}}>WN8 Distribution</span>
-              <TierWN8Distribution data={props.data.WN8Dist}/> */}
-            {/* <WN8Map data={props.data.WN8ClassDist} />                 */}
-            
-            <WN8Map data={props.classWN8} />
-          </Paper>
+        <Paper className={classes.paper} square elevation={2}>
+            {/* <span style={{fontWeight: 500}}>WN8 Distribution</span>
+            <TierWN8Distribution data={props.data.WN8Dist}/> */}
+          {/* <WN8Map data={props.data.WN8ClassDist} />                 */}
+          
+          <WN8Map data={props.classWN8} />
+        </Paper>
       </Grid>
       <Grid item xs={4}>
         <Paper className={classes.paper} square elevation={2}>
@@ -75,15 +79,30 @@ export default function Charts(props) {
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Paper className={classes.paper} square elevation={2}>
-                <NationDist data={props.data.NationDist}/>
+              <NationDist data={props.data.NationDist}/>
             </Paper>
           </Grid>
           <Grid item xs={6}>
             <Paper className={classes.paper} square elevation={2}>
-                <ClassDist data={props.data.ClassDist}/>
+              <ClassDist data={props.data.ClassDist}/>
             </Paper>
           </Grid>
         </Grid>
+      </Grid>
+      <Grid item xs={3}>
+          <Paper className={classes.paper} square elevation={2}>
+            <ExpectedDist data={props.expectedRatios} />
+          </Paper>
+      </Grid>
+      <Grid item xs={3}>
+          <Paper className={classes.paper} square elevation={2} style={{ height: 348 }}>
+            <RecordsBar data={props.stats} />
+          </Paper>
+      </Grid>
+      <Grid item xs={6}>
+          <Paper className={classes.paper} square elevation={2} style={{ height: 348 }}>
+            <LineGraphs />
+          </Paper>
       </Grid>
     </Grid>
   
@@ -91,23 +110,32 @@ export default function Charts(props) {
   }
   else {
     output = <div className='mobilecharts' style={{marginBottom: '1rem'}}>
-    <Paper className='heatmap' square elevation={2} style={{marginBottom: '1rem'}}>              
+    <Paper square elevation={2} style={{marginBottom: '1rem'}}>              
       <WN8Map data={props.classWN8} />
     </Paper>
-    <Paper className='tier' square elevation={2} style={{marginBottom: '1rem'}}>
+    <Paper square elevation={2} style={{marginBottom: '1rem'}}>
       <TierDist data={props.data.tierDist} />
     </Paper>
-    <Paper className='clan' square elevation={2} style={{ marginBottom: '1rem', height: 358, overflowX: 'hidden', overflowY: 'auto'}}>
+    <Paper square elevation={2} style={{ marginBottom: '1rem', height: 358, overflowX: 'hidden', overflowY: 'auto'}}>
       {clanHistory}
     </Paper>
-    <Paper className='moe' square elevation={2} style={{marginBottom: '1rem'}}>
+    <Paper  square elevation={2} style={{marginBottom: '1rem'}}>
       <MOEDist MOEdata={props.data.tierMoeDist} MasteryData={props.data.tierMasteryDist}/> 
     </Paper>
-    <Paper className='nation' square elevation={2} style={{marginBottom: '1rem'}}>
+    <Paper square elevation={2} style={{marginBottom: '1rem'}}>
         <NationDist data={props.data.NationDist}/>
     </Paper>
-    <Paper className='class' square elevation={2} style={{marginBottom: '1rem'}}>
+    <Paper square elevation={2} style={{marginBottom: '1rem'}}>
         <ClassDist data={props.data.ClassDist}/>
+    </Paper>
+    <Paper square elevation={2} style={{marginBottom: '1rem'}}>
+      <ExpectedDist data={props.expectedRatios} />
+    </Paper>
+    <Paper square elevation={2} style={{marginBottom: '1rem', height: 348 }}>
+      <RecordsBar data={props.stats} />
+    </Paper>
+    <Paper square elevation={2} style={{marginBottom: '1rem', height: 348 }}>
+      <LineGraphs />
     </Paper>
   </div>;
   }

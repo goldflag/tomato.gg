@@ -40,7 +40,6 @@ function calculatePeriodWN8(overall, historical) {
     let index = 0;
     overall.map((row) => {
         const exp = WN8[row[0]];
-
         if (historical.length < index + 1 || row[0] !== historical[index][0]) {
             weighedExpDamage += row[1]*exp.expDamage;
             weighedExpSpots += row[1]*exp.expSpot;
@@ -255,7 +254,6 @@ function clr(recent, overall, flipped) {
 }
 
 export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentStats) {
-
 
     const recent24hr = calculateRecents(recentStats.recent24hr, recentStats.overall);
     const recent1week = calculateRecents(recentStats.recent1week, recentStats.overall);

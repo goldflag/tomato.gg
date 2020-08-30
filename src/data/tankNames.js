@@ -3959,6 +3959,14 @@ const tankNames = {
         "tier": 8,
         "type": "lightTank"
     },
+    "51089": {
+        "is_gift": false,
+        "short_name": "CS-52 LIS",
+        "nation": "poland",
+        "is_premium": true,
+        "tier": 8,
+        "type": "mediumTank"
+    },
     "51201": {
         "is_gift": false,
         "short_name": "KV-220-2 T",
@@ -4430,6 +4438,14 @@ const tankNames = {
         "is_premium": true,
         "tier": 8,
         "type": "AT-SPG"
+    },
+    "55377": {
+        "is_gift": false,
+        "short_name": "A46",
+        "nation": "uk",
+        "is_premium": true,
+        "tier": 6,
+        "type": "lightTank"
     },
     "55569": {
         "is_gift": false,
@@ -5134,6 +5150,14 @@ const tankNames = {
         "is_premium": true,
         "tier": 8,
         "type": "mediumTank"
+    },
+    "62753": {
+        "is_gift": false,
+        "short_name": "Concept 1B",
+        "nation": "usa",
+        "is_premium": true,
+        "tier": 9,
+        "type": "heavyTank"
     },
     "62785": {
         "is_gift": false,

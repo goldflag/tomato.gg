@@ -12,11 +12,11 @@ export default function ClassDistribution(props) {
                 innerRadius={0.5}
                 padAngle={0.7}
                 colors={[
-                    "rgb(84, 140, 196)",
-                    "rgb(68, 103, 219)",
-                    "rgb(93, 53, 212)",
-                    "rgb(138, 53, 212)",
-                    "rgb(212, 38, 186)",
+                    "rgb(100, 155, 209)",
+                    "rgb(104, 143, 227)",
+                    "rgb(137, 109, 222)",
+                    "rgb(162, 97, 199)",
+                    "rgb(217, 65, 166)"
                 ]}
                 borderWidth={2}
                 borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.2 ] ] }}

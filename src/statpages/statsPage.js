@@ -100,8 +100,8 @@ export default function StatsPage(props) {
         //Clan history
         const url5 = `https://api.worldoftanks.${server}/wot/clans/memberhistory/?application_id=${APIKey}&account_id=${id}`;
         //Recent stats from our own API
-        const url6 = `https://tomatobackend.herokuapp.com/api/abcd/${server}/${id}`;
-        //const url6 = `http://localhost:5000/api/abcd/${server}/${id}`;
+        //const url6 = `https://tomatobackend.herokuapp.com/api/abcd/${server}/${id}`;
+        const url6 = `http://localhost:5000/api/abcd/${server}/${id}`;
 
         console.log(backendKey);
         try {
@@ -212,7 +212,7 @@ export default function StatsPage(props) {
                           <TopStats username = {username} WGRating = {WGRating} data = {graphData} stats = {stats} clanStats = {clanStats} accountCreationDate = {accountCreationDate}/>
                         </div>
                         <div style = {{minHeight: '300px'}}>
-                          <Charts data = {graphData} clanData = {clanHistory} currentClan = {clanStats} classWN8 = {overall.tankWN8byClassTier}/>
+                          <Charts data = {graphData} clanData = {clanHistory} currentClan = {clanStats} classWN8 = {overall.tankWN8byClassTier} expectedRatios = {overall.expectedRatios} stats = {stats}/>
                         </div>
                         <div style = {{padding: '1em 0em'}}>
                           <AllTankStats overallStats = {overall.tankWN8} day1 = {graphData.day1} week1 = {graphData.week1} 

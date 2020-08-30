@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResponsiveBar  } from '@nivo/bar'
+import { ResponsiveBar } from '@nivo/bar'
 
 export default function TierWN8Distribution(props) {
 
@@ -14,11 +14,11 @@ export default function TierWN8Distribution(props) {
             padding={0.3}
             groupMode="grouped"
             colors={[
-                "rgb(84, 140, 196)",
-                "rgb(68, 103, 219)",
-                "rgb(93, 53, 212)",
-                "rgb(138, 53, 212)",
-                "rgb(212, 38, 186)"
+                "rgb(100, 155, 209)",
+                "rgb(104, 143, 227)",
+                "rgb(137, 109, 222)",
+                "rgb(162, 97, 199)",
+                "rgb(217, 65, 166)"
             ]}
 
             borderColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}

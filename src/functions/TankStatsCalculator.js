@@ -75,6 +75,11 @@ export default function TankStats(stats, MOEstats, totalBattles) {
         const rFRAG   = weighedFrag   / weighedExpFrag;
         const rDEF    = weighedDef    / weighedExpDef;
         const rWIN    = weighedWinrate   / weighedExpWinrate;
+        jsonStats.expectedRatios[0].player = (rDAMAGE).toFixed(2);
+        jsonStats.expectedRatios[1].player = (rSPOT).toFixed(2);
+        jsonStats.expectedRatios[2].player = (rFRAG).toFixed(2);
+        jsonStats.expectedRatios[3].player = (rDEF).toFixed(2);
+        jsonStats.expectedRatios[4].player = (rWIN).toFixed(2);
         return parseInt(WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN));
     }
 
@@ -101,6 +106,13 @@ export default function TankStats(stats, MOEstats, totalBattles) {
         battles: 0,
         overallWN8: 0,
         avgTier: 0,
+        expectedRatios : [
+            { 'stat': "rDAMAGE", 'player': 0 },
+            { 'stat': "rSPOT", 'player': 0 },
+            { 'stat': "rFRAG", 'player': 0 },
+            { 'stat': "rDEF", 'player': 0 },
+            { 'stat': "rWIN", 'player': 0 }
+        ],
         tankWN8: [],
         tankWN8byClassTier: [
             { "Class": "HT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},

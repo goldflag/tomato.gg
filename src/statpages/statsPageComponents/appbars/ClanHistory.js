@@ -5,6 +5,7 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import serverConv from '../../../data/serverConv.js';
+import clonedeep from 'lodash.clonedeep';
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
@@ -32,6 +33,7 @@ const CustomTabs = withStyles({
   root: {
     elevation: 10,
     backgroundColor: 'rgb(76, 90, 166)',
+
   },
   indicator: {
     display: 'flex',
@@ -50,7 +52,7 @@ const CustomTab = withStyles((theme) => ({
     minWidth: 72,
     fontWeight: 600,
     marginRight: theme.spacing(4),
-    fontFamily: '"Segoe UI"',
+    fontFamily: 'Segoe UI', 
     color: 'rgb(250, 250, 250)',
     '&:focus': {
         opacity: 1,
@@ -100,7 +102,8 @@ export default function ClanHistory(props) {
     server = serverConv[urlParams[0]];     
     let URL = `https://api.worldoftanks.${server}/wot/clans/info/?application_id=${APIKey}&clan_id=`;
 
-    props.data.map((row) => {
+    const clonedData = clonedeep(props.data);
+    clonedData.map((row) => {
       URL += `${row.clan_id}%2C+`;
     });
 
@@ -109,8 +112,8 @@ export default function ClanHistory(props) {
     fetch(URL)
     .then((data) => data.json())
     .then((clanData) => {
-      let tempList = props.data;
-      tempList.map((row) => {
+      // let tempList = props.data;
+      clonedData.map((row) => {
         row["clan_name"] = clanData.data[row.clan_id].tag;
         row["color"] = clanData.data[row.clan_id].color;
         if (clanData.data[row.clan_id].emblems != null) {
@@ -126,9 +129,9 @@ export default function ClanHistory(props) {
           "left_at" : props.currentClan.clan.color,
           "role" : props.currentClan.role
         }
-        tempList.unshift(currentClan);
+        clonedData.unshift(currentClan);
       }
-      setClanList(tempList);
+      setClanList(clonedData);
     })
 
   }

@@ -187,7 +187,7 @@ export default function OverallTankStats(props) {
       rowHover: true,
       selectableRows: 'none',
       rowsPerPage: 15,
-      rowsPerPageOptions: [10, 15, 25, 50, 100],
+      rowsPerPageOptions: [10, 15, 25, 50, 100, 250, 500],
       sortOrder: {
         name: 'Battles',
         direction: 'desc'

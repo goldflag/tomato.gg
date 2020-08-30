@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResponsivePie   } from '@nivo/pie';
+import { ResponsivePie } from '@nivo/pie';
 
 export default function NationDistribution(props) {
 
@@ -23,18 +23,17 @@ export default function NationDistribution(props) {
                     // "rgb(250, 242, 25)",
                     // "rgb(250, 90, 90)",
                     // "rgb(68, 189, 110)",
-                    "rgb(55, 197, 240)",
-                    "rgb(55, 157, 240)",
-                    "rgb(55, 110, 240)",
-                    "rgb(55, 73, 240)",
-                    "rgb(73, 55, 240)",
-                    "rgb(110, 55, 240)",
-                    "rgb(147, 55, 240)",
-                    "rgb(181, 55, 240)",
-                    "rgb(222, 55, 240)",
-                    "rgb(240, 55, 225)",
-
-                    "rgb(222, 55, 240)",
+                    "rgb(124, 209, 50)",
+                    "rgb(226, 232, 51)",
+                    "rgb(232, 154, 51)",
+                    "rgb(51, 160, 232)",
+                    "rgb(100, 132, 222)",
+                    "rgb(135, 123, 227)",
+                    "rgb(207, 145, 242)",
+                    "rgb(242, 145, 208)",
+                    "rgb(224, 123, 127)",
+                    "rgb(123, 224, 189)",
+                    "rgb(222, 113, 117)",
 
                 ]}
                 borderWidth={2}

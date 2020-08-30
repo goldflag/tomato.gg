@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResponsiveHeatMap   } from '@nivo/heatmap'
+import { ResponsiveHeatMap } from '@nivo/heatmap'
 import WN8color from '../../../functions/WN8color';
 
 export default function WN8Heatmap(props) {
