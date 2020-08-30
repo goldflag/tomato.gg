@@ -72,7 +72,7 @@ export default function StatsPage(props) {
       server = serverConv[urlParams[0]];        
       setUserName(nameIdSplit[0]);
       console.log(trackingId);
-      ReactGA.initialize(trackingId);
+      ReactGA.initialize('UA-176594708-1');
       ReactGA.pageview(`/stats/${server}`);
 
       id = nameIdSplit[1];
