@@ -8,7 +8,7 @@ export default function Records(props) {
         borderColor: 'rgb(220,220,220)',
 		borderCollapse: 'collapse',
         padding: 5,
-        fontSize: '0.8rem',
+        fontSize: '1rem',
         width: '100%',
         height: '300px'
     }
@@ -18,7 +18,7 @@ export default function Records(props) {
         borderStyle: 'solid',
         borderColor: 'rgb(220,220,220)',
         maxheight: '50px',
-        padding: '13.2px',
+        padding: '11.4px',
     }
 
     const tdc = {
@@ -26,7 +26,7 @@ export default function Records(props) {
         borderStyle: 'solid',
         borderColor: 'rgb(220,220,220)',
         maxheight: '50px',
-        padding: '13.2px',
+        padding: '11.4px',
         background: 'rgb(242, 243, 247)'
     }
 
