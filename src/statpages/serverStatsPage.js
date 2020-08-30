@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useEffect} from "react";
+import ReactGA from 'react-ga';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,8 +10,14 @@ import WRWaffle from './serverStatsPageComponents/WRWaffle';
 import Scatterplot from './serverStatsPageComponents/scatterplot';
 import scatterdata from '../data/scatterdata.json';
 import scatterdata10000 from '../data/scatterdata10000.json';
+const trackingId = process.env.REACT_APP_GA;
 
 export default function ServerStatsPage(props) {
+
+  useEffect(() => {
+    ReactGA.initialize(trackingId);
+    ReactGA.pageview('/server-stats');
+  }, []);
 
   const useStyles = makeStyles((theme) => ({
     root: {

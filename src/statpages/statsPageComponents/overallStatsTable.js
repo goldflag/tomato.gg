@@ -16,7 +16,6 @@ export default function OverallStatsTable(props) {
           },
           paper: {
             boxShadow: 'none',
-
           },
           responsiveStacked: {
             maxHeight: 'none',
@@ -180,8 +179,8 @@ export default function OverallStatsTable(props) {
 
     return (
       <MuiThemeProvider theme={getMuiTheme()}>
-        <Paper elevation={2}>
-          <MUIDataTable boxShadow={'none'} title={''} data={props.data} columns={columns} options={options}/>
+        <Paper>
+          <MUIDataTable title={''} data={props.data} columns={columns} options={options}/>
         </Paper>
       </MuiThemeProvider>
     );

@@ -62,7 +62,6 @@ export default function RecentTankStats(props) {
         MUIDataTableSelectCell: {
           headerCell: {
             backgroundColor: 'white',
-
           },
         },
         MuiTableFooter: {

@@ -81,13 +81,11 @@ export default function TopStats(props) {
         <span style={{color: 'white', fontSize: '0.8rem'}}>Account created {creationDate}</span>
       </Paper>
       <div className='topstats'>
-        <div>
-          <Paper className='playerName' square elevation={2} style={{padding: '1rem', backgroundColor: WN8color(squareStats['overallWN8'])} }>
+          <Paper className='playerName' square elevation={2} style={{ backgroundColor: WN8color(squareStats['overallWN8'])} }>
             <div style={{fontSize: '1.5em', fontWeight: '500', color: 'white', paddingBottom: '5px'}}>{props.username}</div> 
             {clanInfo}
             <span style={{color: 'white', fontSize: '0.8rem'}}>Account created {creationDate}</span>
           </Paper>
-          </div>
           <Paper className='paper' square elevation={2} style={{ color: 'white', backgroundColor: WN8color(squareStats['overallWN8'])}}>
             <span style={{fontSize: '0.8em'}}>Overall WN8</span><br/>
             <span style={{fontSize: '1.3em', fontWeight: '500'}}>{squareStats['overallWN8']}</span>

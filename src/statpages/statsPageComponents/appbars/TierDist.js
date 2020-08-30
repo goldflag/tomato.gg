@@ -47,7 +47,7 @@ root: {
   minWidth: 72,
   fontWeight: 600,
   marginRight: theme.spacing(4),
-  fontFamily: '"Segoe UI"',
+  fontFamily: 'Segoe UI, Futura',
   color: 'rgb(250, 250, 250)',
   '&:focus': {
       opacity: 1,

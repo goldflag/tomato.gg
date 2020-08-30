@@ -3,7 +3,6 @@ import './css/topbar.css'
 import SmallSearchBar from './material/smallSearchBar';
 import DiscordLogo from './assets/Discord.svg'
 import SmallMenu from './material/smallMenu';
-
 import { Link, useRouteMatch, withRouter} from "react-router-dom";
 const APIKey = process.env.REACT_APP_API_KEY;
 
@@ -22,14 +21,11 @@ export default withRouter(function Topbar(props) {
     const searchId = async (e) => {
         let testId = 'FAIL';
         e.preventDefault();
-        console.log(APIKey);
         const url = `https://api.worldoftanks.${server}/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`
         try {
             fetch(url)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
-
                 if (data.status == "error" || data.meta.count == 0) { console.log('Invalid username'); }
                 else { testId = data.data[0].account_id; }
             })

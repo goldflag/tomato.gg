@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import ReactGA from 'react-ga';
 import { makeStyles } from '@material-ui/core/styles';
 import TopStats from './statsPageComponents/topStats';
 import "../css/style.css";
@@ -12,6 +13,7 @@ import Charts from './statsPageComponents/charts';
 
 const APIKey = process.env.REACT_APP_API_KEY;
 const backendKey = process.env.REACT_APP_BACKEND_API_KEY;
+const trackingId = process.env.REACT_APP_GA;
 
 const useStyles = makeStyles((theme) => ({
   loading: {
@@ -64,20 +66,22 @@ export default function StatsPage(props) {
 
     // Runs once when component mounts
     useEffect(() => {
-        const windowUrl = window.location.pathname;
-        const urlParams = windowUrl.substring(7).split('/');
-        const nameIdSplit = urlParams[1].split('=')
-        server = serverConv[urlParams[0]];        
-        setUserName(nameIdSplit[0]);
+      const windowUrl = window.location.pathname;
+      const urlParams = windowUrl.substring(7).split('/');
+      const nameIdSplit = urlParams[1].split('=')
+      server = serverConv[urlParams[0]];        
+      setUserName(nameIdSplit[0]);
+      ReactGA.initialize(trackingId);
+      ReactGA.pageview(`/stats/${server}`);
 
-        id = nameIdSplit[1];
-        if (id === "FAIL") {
-            setValidID(false);
-        }
-        else {
-            setValidID(true);
-            searchStats();
-        }
+      id = nameIdSplit[1];
+      if (id === "FAIL") {
+          setValidID(false);
+      }
+      else {
+          setValidID(true);
+          searchStats();
+      }
     }, []);
 
     //Fetches object that points a tank's numerical ID to it's name, tier, premium status, and class

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import ReactGA from 'react-ga';
 import Topbar from './topbar';
 import Sidebar from './sidebar';
 import Search from './search';
@@ -7,11 +8,16 @@ import TankStatsPage from './statpages/tankStatsPage';
 import ServerStatsPage from './statpages/serverStatsPage';
 import StatsPage from './statpages/statsPage';
 import StatsReference from './statpages/statsReference';
-
 import "./css/body.css";
-import { Link, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+const trackingId = process.env.REACT_APP_GA;
 
 export default function Tomatopedia() {
+
+  useEffect(() => {
+    ReactGA.initialize(trackingId);
+    ReactGA.pageview('/');
+  }, []);
 
   const size = useWindowSize();
 
@@ -33,7 +39,7 @@ export default function Tomatopedia() {
               <Route path='/server-stats'>
                 <ServerStatsPage />
               </Route> 
-              <Route path='/tanks'>
+              <Route path='/tank-stats'>
                 <TankStatsPage />
               </Route> 
               <Route path='/stats-reference'>

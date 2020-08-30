@@ -1,10 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
+import ReactGA from 'react-ga';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import "./css/tankstats.css";
 import "./css/innerpage.css";
+const trackingId = process.env.REACT_APP_GA;
 
 export default function About(props) {
+
+  useEffect(() => {
+    ReactGA.initialize(trackingId);
+    ReactGA.pageview('/about');
+  }, []);
 
   const useStyles = makeStyles((theme) => ({
     root: {

@@ -8,47 +8,26 @@ export default function Records(props) {
         borderColor: 'rgb(220,220,220)',
 		borderCollapse: 'collapse',
         padding: 5,
-        fontSize: '1rem',
+        fontSize: '0.8rem',
         width: '100%',
-    }
-    const th = {
-        borderWidth: '(1px 0px 1px 0px)',
-        borderStyle: 'solid',
-        borderColor: 'rgb(220,220,220)',
-        padding: 5,
-		background: '#F0F0F0',
+        height: '300px'
     }
 
     const td = {
         borderWidth: '1px 0px 1px 0px',
         borderStyle: 'solid',
         borderColor: 'rgb(220,220,220)',
-        padding: 12,
+        maxheight: '50px',
+        padding: '13.2px',
     }
 
-    const td2 = {
-        borderWidth: '1px 0px 1px 0px',
-        borderStyle: 'solid',
-        borderColor: 'rgb(220,220,220)',
-        padding: 12,
-        textAlign: 'right'
-
-    }
     const tdc = {
         borderWidth: '1px 0px 1px 0px',
         borderStyle: 'solid',
         borderColor: 'rgb(220,220,220)',
-        padding: 12,
+        maxheight: '50px',
+        padding: '13.2px',
         background: 'rgb(242, 243, 247)'
-    }
-
-    const td2c = {
-        borderWidth: '1px 0px 1px 0px',
-        borderStyle: 'solid',
-        borderColor: 'rgb(220,220,220)',
-        padding: 12,
-        background: 'rgb(242, 243, 247)',
-        textAlign: 'right'
     }
 
     return (
@@ -56,31 +35,25 @@ export default function Records(props) {
             <table style={demo}>
                 <tbody>
                     <tr>
-                        <td style={tdc}>Maximum Damage</td>
-                        <td style={td2c}>{props.data.max_damage} <span style={{ color: 'rgb(120,120,120)' }}> in {tankNames[props.data.max_damage_tank_id].short_name}</span></td> </tr>
-                    <tr>
-                        <td style={td}>Maximum Kills</td>
-                        <td style={td2}>{props.data.max_frags} <span style={{ color: 'rgb(120,120,120)' }}> in {tankNames[props.data.max_frags_tank_id].short_name}</span></td>
+                        <td style={tdc}>Max Damage <span style={{ float: 'right'}}>{props.data.max_damage}<span style={{ color: 'rgb(120,120,120)' }}> in {tankNames[props.data.max_damage_tank_id].short_name}</span></span></td>
                     </tr>
                     <tr>
-                        <td style={tdc}>Maximum XP</td>
-                        <td style={td2c}>{props.data.max_xp} <span style={{ color: 'rgb(120,120,120)' }}> in {tankNames[props.data.max_xp_tank_id].short_name} </span></td>
+                        <td style={td}>Max Kills <span style={{ float: 'right'}}>{props.data.max_frags}<span style={{ color: 'rgb(120,120,120)' }}> in {tankNames[props.data.max_frags_tank_id].short_name}</span></span></td>
                     </tr>
                     <tr>
-                        <td style={td}>Average Assist</td>
-                        <td style={td2}>{props.data.avg_damage_assisted}</td>
+                        <td style={tdc}>Max XP <span style={{ float: 'right'}}>{props.data.max_xp}<span style={{ color: 'rgb(120,120,120)' }}> in {tankNames[props.data.max_xp_tank_id].short_name} </span></span></td>
                     </tr>
                     <tr>
-                        <td style={tdc}>Average Spot Assist </td>
-                        <td style={td2c}>{props.data.avg_damage_assisted_radio}</td>
+                        <td style={td}>Avg Assist <span style={{ float: 'right'}}>{props.data.avg_damage_assisted} </span></td>
                     </tr>
                     <tr>
-                        <td style={td}>Average Tracking Assist</td>
-                        <td style={td2}>{props.data.avg_damage_assisted_track}</td>
+                        <td style={tdc}>Avg Spot Assist <span style={{ float: 'right'}}>{props.data.avg_damage_assisted_radio} </span></td>
                     </tr>
                     <tr>
-                        <td style={tdc}>Armor-use Efficiency</td>
-                        <td style={td2c}>{props.data.tanking_factor}</td>
+                        <td style={td}>Avg Tracking Assist <span style={{ float: 'right'}}>{props.data.avg_damage_assisted_track}</span></td>
+                    </tr>
+                    <tr>
+                        <td style={tdc}>Armor-use Efficiency <span style={{ float: 'right'}}>{props.data.tanking_factor}</span></td>
                     </tr>
                 </tbody>
             </table>

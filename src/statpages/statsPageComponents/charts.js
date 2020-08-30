@@ -49,7 +49,8 @@ export default function Charts(props) {
   }, []);
 
   if (size.width > 1000) {
-    output =       <div /*className='charts'*/>
+    output = 
+    <div /*className='charts'*/>
     <Grid container spacing={2}>
       <Grid item xs={4}>
         <Paper className={classes.paper} square elevation={2}>
@@ -105,11 +106,10 @@ export default function Charts(props) {
           </Paper>
       </Grid>
     </Grid>
-  
     </div>
   }
   else {
-    output = <div className='mobilecharts' style={{marginBottom: '1rem'}}>
+    output = <div className='mobilecharts' >
     <Paper square elevation={2} style={{marginBottom: '1rem'}}>              
       <WN8Map data={props.classWN8} />
     </Paper>
@@ -119,7 +119,7 @@ export default function Charts(props) {
     <Paper square elevation={2} style={{ marginBottom: '1rem', height: 358, overflowX: 'hidden', overflowY: 'auto'}}>
       {clanHistory}
     </Paper>
-    <Paper  square elevation={2} style={{marginBottom: '1rem'}}>
+    <Paper  square elevation={2} style={{marginBottom: '1.5rem'}}>
       <MOEDist MOEdata={props.data.tierMoeDist} MasteryData={props.data.tierMasteryDist}/> 
     </Paper>
     <Paper square elevation={2} style={{marginBottom: '1rem'}}>
@@ -131,10 +131,10 @@ export default function Charts(props) {
     <Paper square elevation={2} style={{marginBottom: '1rem'}}>
       <ExpectedDist data={props.expectedRatios} />
     </Paper>
-    <Paper square elevation={2} style={{marginBottom: '1rem', height: 348 }}>
+    <Paper square elevation={2} style={{marginBottom: '1.5rem', height: 348 }}>
       <RecordsBar data={props.stats} />
     </Paper>
-    <Paper square elevation={2} style={{marginBottom: '1rem', height: 348 }}>
+    <Paper square elevation={2} style={{marginBottom: '-1rem', height: 348 }}>
       <LineGraphs />
     </Paper>
   </div>;
