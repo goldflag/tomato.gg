@@ -71,6 +71,7 @@ export default function StatsPage(props) {
       const nameIdSplit = urlParams[1].split('=')
       server = serverConv[urlParams[0]];        
       setUserName(nameIdSplit[0]);
+      console.log(trackingId);
       ReactGA.initialize(trackingId);
       ReactGA.pageview(`/stats/${server}`);
 
