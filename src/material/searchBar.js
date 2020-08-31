@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -35,14 +35,29 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchBar(props) {
   const classes = useStyles();
-  return (
-    <Paper component="form" className={classes.root}>
+  const [featuredPlayer, setFeaturedPlayer] = useState(      
+  <InputBase
+    className={classes.input}
+    placeholder="Enter Username (e.g. lordsheen)"
+    inputProps={{ 'aria-label': 'search google maps' }}
+    onChange={e => props.setName(e.target.value)}
+  />);
+  useEffect(() => {
+    if (Math.random() > 0.5) {
+      setFeaturedPlayer(      
       <InputBase
         className={classes.input}
-        placeholder="Enter a Username (e.g. lordsheen)"
+        placeholder="Enter Username (e.g. haglar)"
         inputProps={{ 'aria-label': 'search google maps' }}
         onChange={e => props.setName(e.target.value)}
-      />
+      />);
+    }
+  },[]);
+
+  
+  return (
+    <Paper component="form" className={classes.root}>
+      {featuredPlayer}
       <Divider className={classes.divider} orientation="vertical" />
       <SelectQuery setServer = {props.setServer} server = {props.server} setMode = {props.setMode} mode = {props.mode}/>
       <IconButton type="submit" className={classes.iconButton} aria-label="search">
