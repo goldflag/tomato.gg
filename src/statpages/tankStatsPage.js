@@ -43,7 +43,7 @@ export default function TankStatsPage(props) {
               Currently, these stats are <em>overall</em> stats — which means we don't discriminate between whether a player is active or not. <br/>
               Therefore, newer tanks will have stats better reflect their state in the current meta compared to older tanks. The stats of recently nerfed or buffed tanks will also not perfectly reflect its current state. <br/><br/>
 
-              Just because a tank isn't fum to play, it doesn't mean it's underpowered. Slow TDs with heavy armor like the british ATs are hated, but these vehicles are good for winrate because they have low skill floors and can tank shots for teammates. <br/><br/>
+              Just because a tank isn't fun to play, it doesn't mean it's underpowered. Slow TDs with heavy armor like the british ATs are hated, but these vehicles are good for winrate because they have low skill floors and can tank shots for teammates. <br/><br/>
 
               Server stats for active accounts will come soon™.
               </span>
