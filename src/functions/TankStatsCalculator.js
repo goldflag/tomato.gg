@@ -5,6 +5,9 @@ import nationConversion from '../data/nationConversion';
 import BattleTrackerTemplate from '../templates/BattleTrackerTemplate';
 import EXPTrackerTemplate from '../templates/EXPTrackerTemplate';
 import clonedeep from 'lodash.clonedeep';
+import CDF from '../data/CDF.json';
+import jStat from 'jstat';
+
 
 function WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN) {
     const rWINc    = Math.max(0,                          (rWIN    - 0.71) / (1 - 0.71) );
@@ -205,9 +208,10 @@ export default function TankStats(stats, MOEstats, totalBattles) {
                 Conversion[tankNames[row.tank_id]['type']],
                 row.all.battles,
                 winrate.toFixed(2) + '%',
-                // .toFixed(2) + '%'
-                parseInt(WN8),
-                parseInt(avgDamage),
+                WN8.toFixed(0),
+                avgDamage.toFixed(0),
+                (jStat.gamma.cdf( WN8, CDF[row.tank_id].wn8.a, CDF[row.tank_id].wn8.b)*100).toFixed(2),
+                (jStat.gamma.cdf( avgDamage, CDF[row.tank_id].dpg.a, CDF[row.tank_id].dpg.b)*100).toFixed(2),
                 avgFrag.toFixed(2),
                 (row.all.damage_dealt/row.all.damage_received).toFixed(2),
                 (row.all.frags/destroyed).toFixed(2),
@@ -216,7 +220,7 @@ export default function TankStats(stats, MOEstats, totalBattles) {
                 avgSpots.toFixed(2),
                 row.all.tanking_factor,
                 MOE,
-                row.mark_of_mastery
+                row.mark_of_mastery,
             ];
             if (row.all.battles !== 0) {
                 jsonStats.tankWN8.push(vehicleStats);

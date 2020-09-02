@@ -4,6 +4,8 @@ import zeroBattles from './GraphFunctions';
 import WN8 from '../data/wn8';
 import tankNames from '../data/tankNames';
 import nationConversion from '../data/nationConversion';
+import CDF from '../data/CDF.json';
+import jStat from 'jstat';
 
 function WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN) {
     const rWINc    = Math.max(0,                          (rWIN    - 0.71) / (1 - 0.71) );
@@ -131,6 +133,8 @@ function calculateRecents(statsSnapshot, overall) {
                 (winrate).toFixed(2) + '%',
                 parseInt(WN8),
                 parseInt(avgDamage),
+                (jStat.gamma.cdf( WN8, CDF[row[0]].wn8.a, CDF[row[0]].wn8.b)*100).toFixed(2),
+                (jStat.gamma.cdf( avgDamage, CDF[row[0]].dpg.a, CDF[row[0]].dpg.b)*100).toFixed(2),
                 (avgFrag).toFixed(2),
                 (row[2]/row[8]).toFixed(2),
                 (row[4]/destroyed).toFixed(2),
@@ -177,7 +181,9 @@ function calculateRecents(statsSnapshot, overall) {
                     battlesDiff,
                     (winrate).toFixed(2) + '%',
                     parseInt(WN8),
-                    parseInt(avgDamage),
+                    parseInt(avgDamage),     
+                    (jStat.gamma.cdf( WN8, CDF[row[0]].wn8.a, CDF[row[0]].wn8.b)*100).toFixed(2),
+                    (jStat.gamma.cdf( avgDamage, CDF[row[0]].dpg.a, CDF[row[0]].dpg.b)*100).toFixed(2),
                     (avgFrag).toFixed(2),
                     DMGRatio,
                     KDRatio,

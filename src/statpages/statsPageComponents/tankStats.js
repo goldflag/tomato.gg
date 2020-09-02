@@ -141,8 +141,11 @@ export default function OverallTankStats(props) {
         } 
       },
       { name: 'DPG', options: { filter: false } },
+      { name: 'WN8 %tile', options: { filter: false } },
+      { name: 'DPG %tile', options: { filter: false } },
       { name: 'KPG', options: { filter: false } },
       { name: 'DMG Ratio', options: { filter: false } },
+      
       { name: 'K/D', options: { filter: false } },
       { name: 'XP', options: { filter: false } },
       { 
@@ -176,6 +179,7 @@ export default function OverallTankStats(props) {
           }
         } 
       },
+
     ];
 
     const options = {
