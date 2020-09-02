@@ -460,9 +460,9 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
     stats.map((row) => {
         data.tierDist[row[3] - 1][row[4]] += row[5];
         if (row[3] > 4) {
-            data.tierMoeDist[row[3] - 5][row[16]] += 1;
+            data.tierMoeDist[row[3] - 5][row[18]] += 1;
         }
-        data.tierMasteryDist[row[3] - 1][numToMastery[row[17]]] += 1;
+        data.tierMasteryDist[row[3] - 1][numToMastery[row[19]]] += 1;
         data.NationDist[row[2]] += row[5];
         data.ClassDist[row[4]] += row[5];
     });
