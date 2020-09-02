@@ -48,10 +48,10 @@ function Sidebar() {
                         &nbsp;&nbsp;Tank Stats
                     </Link>
 
-                    <Link to='/server-stats' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
+                    {/* <Link to='/server-stats' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
                     <PublicIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
                         &nbsp;&nbsp;Server Stats
-                    </Link>
+                    </Link> */}
 
                     <Link to='/stats-reference' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
                     <LibraryBooksIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
