@@ -7,6 +7,7 @@
 
 .background { 
     background: url(../assets/bourrasque.jpg) no-repeat center center fixed; 
+    /* background: url(../assets/Kran.png) no-repeat center center fixed;  */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

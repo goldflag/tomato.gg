@@ -141,8 +141,32 @@ export default function RecentTankStats(props) {
         } 
       },
       { name: 'DPG', options: { filter: false } },
-      { name: 'WN8 %tile', options: { filter: false } },      
-      { name: 'DPG %tile', options: { filter: false } },
+      { 
+        name: 'WN8 %tile', 
+        options: { 
+          filter: false,
+          sortCompare: (order) => {
+            return (obj1, obj2) => {
+              let val1 = obj1.data;
+              let val2 = obj2.data;
+              return (val1 - val2) * (order === 'asc' ? 1 : -1);
+            };
+          }
+        } 
+      },      
+      { 
+        name: 'DPG %tile', 
+        options: { 
+          filter: false,
+          sortCompare: (order) => {
+            return (obj1, obj2) => {
+              let val1 = obj1.data;
+              let val2 = obj2.data;
+              return (val1 - val2) * (order === 'asc' ? 1 : -1);
+            };
+          }
+        } 
+      },
       { name: 'KPG', options: { filter: false } },
       { name: 'DMG Ratio', options: { filter: false } },
       { name: 'K/D', options: { filter: false } },

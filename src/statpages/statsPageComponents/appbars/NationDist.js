@@ -77,9 +77,13 @@ export default function NationDist(props) {
       <div>
         <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
           <CustomTab label="NATIONS" /> 
+          <CustomTab label="RECENT" /> 
         </CustomTabs>
         <TabPanel value={value} index={0}>
-            <NationDistribution data={props.data}/>
+          <NationDistribution data={props.data}/>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <NationDistribution data={props.recentData}/>
         </TabPanel>
       </div>            
     </div>

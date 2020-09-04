@@ -75,6 +75,17 @@ export default function OverallStatsTable(props) {
             }
         },
         {
+            name: 'Last Update',
+            options: {
+                filter: true,
+                setCellProps: (rowIndex, cellValue) => {
+                    return {
+                        style: { padding: '2px 8px', borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+                    };
+                },
+            }
+        },
+        {
             name: '24 Hours',
             options: {
                 filter: true,
