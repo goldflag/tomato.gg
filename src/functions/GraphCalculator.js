@@ -262,9 +262,13 @@ function clr(recent, overall, flipped) {
 }
 
 export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentStats) {
-    const recentsession = calculateRecents(recentStats.recentsession, recentStats.overall);
+    const recentsession = calculateRecents(recentStats.recent24hr, recentStats.overall);
+
+    // const recentsession = calculateRecents(recentStats.recentsession, recentStats.overall);
     const recent24hr = calculateRecents(recentStats.recent24hr, recentStats.overall);
-    const recent3days = calculateRecents(recentStats.recent3days, recentStats.overall);
+    const recent3days = calculateRecents(recentStats.recent1week, recentStats.overall);
+    // const recent3days = calculateRecents(recentStats.recent3days, recentStats.overall);
+
     const recent1week = calculateRecents(recentStats.recent1week, recentStats.overall);
     const recent30days = calculateRecents(recentStats.recent30days, recentStats.overall);
     const recent60days = calculateRecents(recentStats.recent60days, recentStats.overall);
