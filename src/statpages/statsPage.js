@@ -178,12 +178,6 @@ export default function StatsPage(props) {
         row[19] = <img src={require(`../assets/masteryIcons/${row[19]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[19]}/>;
         row[18] = moeConv[row[18]];
       });
-      graphData.recentsession.map((row) => {
-        row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
-        row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
-        row[19] = <img src={require(`../assets/masteryIcons/${row[19]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[19]}/>;
-        row[18] = moeConv[row[18]];
-      });
       graphData.day1.map((row) => {
         row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
         row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
@@ -234,7 +228,7 @@ export default function StatsPage(props) {
                         <Charts data = {graphData} clanData = {clanHistory} currentClan = {clanStats} classWN8 = {overall.tankWN8byClassTier} expectedRatios = {overall.expectedRatios} stats = {stats}/>
                       </div>
                       <div style = {{padding: '1em 0em'}}>
-                        <AllTankStats overallStats = {overall.tankWN8} recentsession = {graphData.recentsession} day1 = {graphData.day1} days3 = {graphData.days3} week1 = {graphData.week1} 
+                        <AllTankStats overallStats = {overall.tankWN8} day1 = {graphData.day1} days3 = {graphData.days3} week1 = {graphData.week1} 
                         days30 = {graphData.days30} days60 = {graphData.days60} battles500 = {graphData.battles500} battles1000 = {graphData.battles1000}/>
                       </div>
                   </>

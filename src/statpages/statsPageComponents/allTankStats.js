@@ -78,7 +78,6 @@ export default function NationDist(props) {
       <div>
         <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
           <CustomTab label="OVERALL" /> 
-          <CustomTab label="LAST SESS." /> 
           <CustomTab label="24 HOURS" /> 
           <CustomTab label="3 DAYS" /> 
           <CustomTab label="7 DAYS" /> 
@@ -90,24 +89,21 @@ export default function NationDist(props) {
           <TankStats overallStats = {props.overallStats}/>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <RecentTankStats overallStats = {props.recentsession}/>
-        </TabPanel>
-        <TabPanel value={value} index={2}>
           <RecentTankStats overallStats = {props.day1}/>
         </TabPanel>
-        <TabPanel value={value} index={3}>
+        <TabPanel value={value} index={2}>
           <RecentTankStats overallStats = {props.days3}/>
         </TabPanel>
-        <TabPanel value={value} index={4}>
+        <TabPanel value={value} index={3}>
           <RecentTankStats overallStats = {props.week1}/>
         </TabPanel>
-        <TabPanel value={value} index={5}>
+        <TabPanel value={value} index={4}>
           <RecentTankStats overallStats = {props.days30}/>
         </TabPanel>
-        <TabPanel value={value} index={6}>
+        <TabPanel value={value} index={5}>
           <RecentTankStats overallStats = {props.battles500}/>
         </TabPanel>
-        <TabPanel value={value} index={7}>
+        <TabPanel value={value} index={6}>
           <RecentTankStats overallStats = {props.battles1000}/>
         </TabPanel>
       </div>            
