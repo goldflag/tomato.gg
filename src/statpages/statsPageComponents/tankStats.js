@@ -5,6 +5,7 @@ import WN8color from '../../functions/WN8color';
 import WRcolor from '../../functions/WRcolor';
 import nationVal from '../../data/nationVal';
 import classVal from '../../data/classVal';
+import { ThemeContext } from '../../style/theme.js';
 
 const customStyles = theme => ({
   wn8row: {
@@ -22,17 +23,8 @@ const customStyles = theme => ({
 const masteryConv = {4: 4, 3: 3, 2: 2, 1: 1, undefined: 0, 0: 0};
 
 export default function OverallTankStats(props) {
-
   const [finaldata, setFinaldata] = useState('');
-
-  // useEffect(() => {
-  //   let data = props.overallStats;
-  //   data.map((row) => {
-  //     row[2] = <img src={require(`../../assets/flagIcons/${row[2]}.svg`)} style={{display: 'block', maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
-  //     row[4] = <img src={require(`../../assets/classIcons/${row[4]}.png`)} style={{display: 'block', maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[1]}/>;
-  //   });
-  //   setFinaldata(data);
-  // }, []);
+  const {theme} = React.useContext(ThemeContext);
 
   const getMuiTheme = () =>
     createMuiTheme({
@@ -48,13 +40,24 @@ export default function OverallTankStats(props) {
         },
         MuiToolbar: {
           root: {
-            backgroundColor: 'white',
+            backgroundColor: theme === 'dark' ? 'rgb(40, 40, 45)' : 'white',
+            color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(20, 20, 20)',
+          },
+        },
+        MUIDataTableToolbar: {
+          icon: {
+             color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(100, 100, 100)',
+             '&:hover': {
+                  color: 'dark' ? 'rgb(150, 150, 150)' : 'rgb(110, 110, 110)',
+              }
           },
         },
         MuiTableCell: {
           head: {
-            backgroundColor: 'rgb(220, 220, 230)',
+            backgroundColor: theme === 'dark' ? 'rgb(60, 60, 65)' : 'rgb(220, 220, 223)',
             padding: '5px 5px 5px 12px',
+            borderBottom: theme === 'dark' ? 'rgb(60, 60, 65)' : 'rgb(220, 220, 223)',
+            color: theme === 'dark' ? 'white' : 'black'
           },
           root: {
             padding: '3px 10px 3px 12px',
@@ -63,31 +66,44 @@ export default function OverallTankStats(props) {
         MUIDataTableSelectCell: {
           headerCell: {
             backgroundColor: 'white',
-
           },
         },
         MuiTableFooter: {
           root: {
             '& .MuiToolbar-root': {
-              backgroundColor: 'white',
+              backgroundColor: theme === 'dark' ? 'rgb(40, 40, 45)' : 'white',
+              color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(20, 20, 20)',
             },
           },
         },
       },
     });
 
+    const colStyle = {
+      borderBottom: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)', 
+      padding: '2px 8px', 
+      color: (theme === 'dark') ? 'white' : null, 
+    }
+
     const columns = [
       {
         name: 'Icon',
         label: ' ',
         options: {
-            filter: false,
+          setCellProps: (props) => { return { style: colStyle } },
+          filter: false,
         },
       },
-      { name: 'Vehicle', options: { filter: false } },
+      { name: 'Vehicle', 
+        options: { 
+          setCellProps: (props) => { return { style: colStyle } },
+          filter: false 
+        } 
+      },
       { name: 'Nation', 
         options: { 
           filter: false,
+          setCellProps: () => { return { style: colStyle } },
           sortCompare: (order) => {
             return (obj1, obj2) => {
               let val1 = obj1.data.props.alt;
@@ -97,10 +113,16 @@ export default function OverallTankStats(props) {
           }
         } 
       },      
-      { name: 'Tier', options: { filter: true } },
+      { name: 'Tier', 
+        options: { 
+          filter: true,
+          setCellProps: () => { return { style: colStyle } },
+        } 
+      },
       { name: 'Class', 
         options: { 
-        filter: false,
+          filter: false,
+          setCellProps: () => { return { style: colStyle } },
           sortCompare: (order) => {
             return (obj1, obj2) => {
               let val1 = obj1.data.props.alt;
@@ -110,14 +132,20 @@ export default function OverallTankStats(props) {
           }
         } 
       },      
-      { name: 'Battles', options: { filter: false } },
+      { name: 'Battles', 
+        options: { 
+          setCellProps: () => { return { style: colStyle } },
+          filter: false 
+        } 
+      },
       { 
         name: 'Winrate', 
         options: {  
           filter: false,
           setCellProps: (value) => {
               return {
-                  style: { color: 'white', backgroundColor: WRcolor(value.slice(0, -1))},
+                  style: { color: 'white', backgroundColor: WRcolor(value.slice(0, -1)), borderBottom: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)', 
+                },
               };
           },
           sortCompare: (order) => {
@@ -131,20 +159,27 @@ export default function OverallTankStats(props) {
       },
       { 
         name: 'WN8', 
-        options: { 
-            filter: false,
-            setCellProps: (value) => {
-                return {
-                    style: { color: 'white', backgroundColor: WN8color(value)},
-                };
+        options: {
+          filter: false,
+          setCellProps: (value) => {
+            return {
+                style: { color: 'white', backgroundColor: WN8color(value), borderBottom: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)', 
               },
+            };
+          },        
         } 
       },
-      { name: 'DPG', options: { filter: false } },
+      { name: 'DPG', 
+        options: { 
+          setCellProps: () => { return { style: colStyle } },
+          filter: false 
+        } 
+      },
       { 
         name: 'WN8 %tile', 
         options: { 
           filter: false,
+          setCellProps: () => { return { style: colStyle } },
           sortCompare: (order) => {
             return (obj1, obj2) => {
               let val1 = obj1.data;
@@ -158,6 +193,7 @@ export default function OverallTankStats(props) {
         name: 'DPG %tile', 
         options: { 
           filter: false,
+          setCellProps: () => { return { style: colStyle } },
           sortCompare: (order) => {
             return (obj1, obj2) => {
               let val1 = obj1.data;
@@ -167,15 +203,35 @@ export default function OverallTankStats(props) {
           }
         } 
       },
-      { name: 'KPG', options: { filter: false } },
-      { name: 'DMG Ratio', options: { filter: false } },
-      
-      { name: 'K/D', options: { filter: false } },
-      { name: 'XP', options: { filter: false } },
+      { name: 'KPG', 
+        options: { 
+          setCellProps: () => { return { style: colStyle } },
+          filter: false   
+        } 
+      },
+      { name: 'DMG Ratio',         
+        options: { 
+          setCellProps: () => { return { style: colStyle } },
+          filter: false   
+        }  
+      },
+      { name: 'K/D', 
+        options: {           
+          setCellProps: () => { return { style: colStyle } },
+          filter: false 
+        } 
+      },
+      { name: 'XP', 
+        options: { 
+          setCellProps: () => { return { style: colStyle } },
+          filter: false 
+        } 
+      },
       { 
         name: 'Hit Ratio', 
         options: { 
           filter: false,
+          setCellProps: () => { return { style: colStyle } },
           sortCompare: (order) => {
             return (obj1, obj2) => {
               let val1 = parseInt(obj1.data.slice(0, -1), 10);
@@ -185,12 +241,28 @@ export default function OverallTankStats(props) {
           }
         } 
       },
-      { name: 'Spots', options: { filter: false } },
-      { name: 'Armor Eff', options: { filter: false } },
-      { name: 'MoE', options: { filter: true } },
+      { name: 'Spots', 
+        options: { 
+          setCellProps: () => { return { style: colStyle } },
+          filter: false 
+        } 
+      },
+      { name: 'Armor Eff', 
+        options: { 
+          setCellProps: () => { return { style: colStyle } },
+          filter: false 
+        } 
+      },
+      { name: 'MoE', 
+        options: { 
+          setCellProps: () => { return { style: colStyle } },
+          filter: true 
+        } 
+      },
       { name: 'Mastery', 
         options: { 
           filter: false,
+          setCellProps: () => { return { style: colStyle } },
           sortCompare: (order) => {
             return (obj1, obj2) => {
               console.log(obj1);

@@ -11,6 +11,12 @@
     max-width: 100vw;
 }
 
+.rowdark {
+    max-width: 100vw;
+    background-color: rgb(40, 40, 40);
+    color: rgb(230, 230, 230);
+}
+
 .grid {
     display: grid;
     grid-template-columns: 50% 50%;

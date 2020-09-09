@@ -1,12 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { ThemeContext } from '../../../style/theme.js';
 
 const useStyles = makeStyles({
   table: {
@@ -17,10 +11,51 @@ const useStyles = makeStyles({
 });
 
 function createData(name, MOE) {
-    return { name, MOE };
-  }
+  return { name, MOE };
+}
 
 export default function MOETable(props) {
+  const {theme} = React.useContext(ThemeContext);
+
+  const demo = {
+    borderWidth: '1px 0px 1px 0px',
+    borderStyle: 'solid',
+    borderColor: 'rgb(220,220,220)',
+    borderCollapse: 'collapse',
+    padding: 5,
+    fontSize: '1rem',
+    width: '100%',
+    height: '200px',
+    color: theme === 'dark' ? 'rgb(240, 240, 240)' : 'rgb(40, 40, 40)',
+  }
+  
+  const tt = {
+    borderWidth: '1px 0px 1px 0px',
+    borderStyle: 'solid',
+    borderColor: theme === 'dark' ? 'rgb(100, 100, 100)' : 'rgb(220,220,220)',
+    maxheight: '20px',
+    padding: '9px',
+    background: theme === 'dark' ? 'rgb(70, 70, 70)' : 'rgb(220, 220, 225)'
+  }
+
+  const td = {
+    borderWidth: '1px 0px 1px 0px',
+    borderStyle: 'solid',
+    borderColor: theme === 'dark' ? 'rgb(100, 100, 100)' : 'rgb(220,220,220)',
+    maxheight: '20px',
+    padding: '9px',
+    background: theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(242, 243, 247)'
+  }
+  
+  const tdc = {
+    borderWidth: '1px 0px 1px 0px',
+    borderStyle: 'solid',
+    borderColor: theme === 'dark' ? 'rgb(100, 100, 100)' : 'rgb(220,220,220)',
+    maxheight: '20px',
+    padding: '9px',
+    background: theme === 'dark' ? 'rgb(40, 40, 40)' : 'rgb(252, 252, 254)'
+  }
+
   const rows = [
     { 'name': '3 Marks', 'MOE': 0},
     { 'name': '2 Marks', 'MOE': 0 },
@@ -39,25 +74,24 @@ export default function MOETable(props) {
   const classes = useStyles();
   
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} size="small" aria-label="a dense table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Vehicles</TableCell>
-            <TableCell align="right">{numTanks}</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.MOE}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <table style={demo}>
+        <tbody>
+            <tr>
+                <td style={tt}>Vehicles <span style={{ float: 'right'}}>{numTanks} </span></td>
+            </tr>
+            <tr>
+                <td style={tdc}>3 Marks <span style={{ float: 'right'}}>{rows[0].MOE} </span></td>
+            </tr>
+            <tr>
+                <td style={td}>2 Marks <span style={{ float: 'right'}}>{rows[1].MOE}</span></td>
+            </tr>
+            <tr>
+                <td style={tdc}>1 Mark <span style={{ float: 'right'}}>{rows[2].MOE}</span></td>
+            </tr>
+            <tr>
+                <td style={td}>None <span style={{ float: 'right'}}>{rows[3].MOE}</span></td>
+            </tr>
+        </tbody>
+    </table>
   );
 }

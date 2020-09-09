@@ -1,12 +1,12 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
-
 import MUIDataTable from 'mui-datatables';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import WN8color from '../../functions/WN8color';
+import { ThemeContext } from '../../style/theme.js';
 
 export default function OverallStatsTable(props) {
-
+  const {theme, toggle} = React.useContext(ThemeContext);
   const getMuiTheme = () =>
     createMuiTheme({
       overrides: {
@@ -24,31 +24,41 @@ export default function OverallStatsTable(props) {
         },
         MuiToolbar: {
           root: {
-            backgroundColor: 'white',
+            backgroundColor: theme === 'dark' ? 'rgb(40, 40, 45)' : 'rgb(220, 220, 223)',
+            color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(20, 20, 20)',
           },
         },
         MuiTableCell: {
-          head: {
-            backgroundColor: 'rgb(219, 213, 224)',
-            // color: 'rgb(256, 256, 256)',
-
-          },
+          root: {
+            backgroundColor: theme === 'dark' ? 'rgb(40, 40, 45)' : 'white',
+            borderColor: 'black'
+          }
         },
         MUIDataTableSelectCell: {
           headerCell: {
             backgroundColor: 'white',
-
           },
         },
         MuiTableFooter: {
           root: {
             '& .MuiToolbar-root': {
-              backgroundColor: 'white',
+              backgroundColor: theme === 'dark' ? 'rgb(40, 40, 45)' : 'rgb(220, 220, 223)',
+              color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(20, 20, 20)',
             },
           },
         },
       },
     });
+
+    function tableStyle(rowIndex, cellValue) {
+      return { 
+        borderBottom: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)', 
+        borderLeft: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)', 
+        padding: '2px 8px', 
+        color: (cellValue === 2 || theme === 'dark') ? 'white' : null, 
+        backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null 
+      };
+    } 
 
     const columns = [
         {
@@ -58,7 +68,11 @@ export default function OverallStatsTable(props) {
               filter: false,
                 setCellProps: (row, value) => {
                   return {
-                      style: { backgroundColor: 'rgb(246, 246, 252)'},
+                      style: { 
+                        backgroundColor: theme === 'dark' ? 'rgb(45, 45, 50)' : 'rgb(246, 246, 252)',
+                        color: theme === 'dark' ? 'white' : 'black',
+                        border: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)', 
+                      },
                   };
                 },
             },
@@ -69,7 +83,7 @@ export default function OverallStatsTable(props) {
                 filter: false,
                 setCellProps: (rowIndex, cellValue) => {
                     return {
-                        style: { padding: '2px 8px', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+                        style: tableStyle(rowIndex, cellValue),
                     };
                 },
             }
@@ -80,7 +94,7 @@ export default function OverallStatsTable(props) {
                 filter: true,
                 setCellProps: (rowIndex, cellValue) => {
                     return {
-                        style: { padding: '2px 8px', borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+                        style: tableStyle(rowIndex, cellValue),
                     };
                 },
             }
@@ -91,7 +105,7 @@ export default function OverallStatsTable(props) {
                 filter: true,
                 setCellProps: (rowIndex, cellValue) => {
                     return {
-                        style: { padding: '2px 8px', borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+                        style: tableStyle(rowIndex, cellValue),
                     };
                 },
             }
@@ -102,7 +116,7 @@ export default function OverallStatsTable(props) {
                 filter: false,
                 setCellProps: (rowIndex, cellValue) => {
                     return {
-                        style: { padding: '2px 8px', borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+                        style: tableStyle(rowIndex, cellValue),
                     };
                 },
             }
@@ -113,29 +127,18 @@ export default function OverallStatsTable(props) {
                 filter: false,
                 setCellProps: (rowIndex, cellValue) => {
                     return {
-                        style: { padding: '2px 8px', borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+                        style: tableStyle(rowIndex, cellValue),
                     };
                 },
             }
         },
-        // {
-        //     name: '100 Games',
-        //     options: {
-        //         filter: false,
-        //         setCellProps: (rowIndex, cellValue) => {
-        //             return {
-        //                 style: { borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
-        //             };
-        //         },
-        //     }
-        // },
         {
             name: '100 Games',
             options: {
                 filter: false,
                 setCellProps: (rowIndex, cellValue) => {
                     return {
-                        style: { padding: '2px 8px', borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+                        style: tableStyle(rowIndex, cellValue),
                     };
                 },
             }
@@ -146,7 +149,7 @@ export default function OverallStatsTable(props) {
                 filter: false,
                 setCellProps: (rowIndex, cellValue) => {
                     return {
-                        style: { padding: '2px 8px', borderLeft:'1px solid rgb(220,220,220)', color: cellValue === 2 ? 'white' : null, backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null },
+                        style: tableStyle(rowIndex, cellValue),
                     };
                 },
             }

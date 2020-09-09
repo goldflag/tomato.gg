@@ -10,35 +10,24 @@ import CurveExamples from './statsReferenceComponents/curveExamples';
 import InDepthExamples from './statsReferenceComponents/inDepthExamples';
 import DPGPercentiles from '../data/DPGPercentiles.json';
 import WN8Percentiles from '../data/WN8Percentiles.json';
+import { ThemeContext } from '../style/theme.js';
 const trackingId = process.env.REACT_APP_GA;
 
 export default function StatsReference(props) {
-
+  const {theme} = React.useContext(ThemeContext);
+  
   useEffect(() => {
     ReactGA.initialize(trackingId);
     ReactGA.pageview('/stats-reference');
   }, []);
 
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      margin: '1rem 0rem 2rem 0 rem',
-      textAlign: 'center',
-      fontFamily: 'roboto',
-      color: 'rgb(30, 30, 30)',
-    },
-  }));
-
   return (
       <div style = {{padding: '2em', paddingTop: '5em'}}>
         <div className = 'narrowpage'>
-        <Paper className={useStyles.paper}>
-          <div style={{padding: '1rem', color: 'rgb(50,50,50)'}}>
+        <Paper style={{backgroundColor: theme === 'dark' ? 'rgb(40, 40, 40)' : 'white',}}>
+          <div style={{padding: '1rem', color: theme === 'dark' ? 'rgb(220,220,220)' : 'rgb(50,50,50)'}}>
             <h1 style={{fontWeight: '500', lineHeight: '1rem'}}>Stats Reference</h1>
-            <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>UPDATED 8/27/2020</span> <br/>
+            <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: theme === 'dark' ? 'rgb(150,150,150)' : 'rgb(100, 100, 100)'}}>UPDATED 8/27/2020</span> <br/>
             <span style={{fontSize: '0.9rem', lineHeight: '1.4rem'}}>
             <h2 style={{fontSize: '1.4rem', fontWeight: '500'}}>Understanding Tank Curves</h2> 
             You can find accessible and easy to use tank curves in <Link to='/tanks'>Tank Stats</Link> and more detailed tank curves at <a target="blank" href="https://https://wot-news.com/stat/server/us/norm/en">Wot-news.com</a>.<br/>

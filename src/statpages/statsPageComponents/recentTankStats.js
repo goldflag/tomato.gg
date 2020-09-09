@@ -5,6 +5,7 @@ import WN8color from '../../functions/WN8color';
 import WRcolor from '../../functions/WRcolor';
 import nationVal from '../../data/nationVal';
 import classVal from '../../data/classVal';
+import { ThemeContext } from '../../style/theme.js';
 
 const customStyles = theme => ({
   wn8row: {
@@ -20,8 +21,8 @@ const customStyles = theme => ({
 });
 
 export default function RecentTankStats(props) {
-
   const [finaldata, setFinaldata] = useState('');
+  const {theme} = React.useContext(ThemeContext);
 
   // Runs once when component mounts
   // useEffect(() => {
@@ -47,16 +48,27 @@ export default function RecentTankStats(props) {
         },
         MuiToolbar: {
           root: {
-            backgroundColor: 'white',
+            backgroundColor: theme === 'dark' ? 'rgb(40, 40, 45)' : 'white',
+            color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(20, 20, 20)',
+          },
+        },
+        MUIDataTableToolbar: {
+          icon: {
+            color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(100, 100, 100)',
+            '&:hover': {
+              color: 'dark' ? 'rgb(150, 150, 150)' : 'rgb(110, 110, 110)',
+            }
           },
         },
         MuiTableCell: {
           head: {
-            backgroundColor: 'rgb(220, 220, 230)',
+            backgroundColor: theme === 'dark' ? 'rgb(60, 60, 65)' : 'rgb(220, 220, 223)',
             padding: '5px 5px 5px 12px',
+            borderBottom: theme === 'dark' ? 'rgb(60, 60, 65)' : 'rgb(220, 220, 223)',
+            color: theme === 'dark' ? 'white' : 'black'
           },
           root: {
-            padding: '5px 5px 5px 12px',
+            padding: '3px 10px 3px 12px',
           },
         },
         MUIDataTableSelectCell: {
@@ -67,23 +79,36 @@ export default function RecentTankStats(props) {
         MuiTableFooter: {
           root: {
             '& .MuiToolbar-root': {
-              backgroundColor: 'white',
+              backgroundColor: theme === 'dark' ? 'rgb(40, 40, 45)' : 'white',
+              color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(20, 20, 20)',
             },
           },
         },
       },
     });
 
+    const colStyle = {
+      borderBottom: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)', 
+      padding: '6px 8px', 
+      color: (theme === 'dark') ? 'white' : null, 
+    }
+
     const columns = [
       {
         name: 'Icon',
         label: ' ',
         options: {
-            filter: false,
+          setCellProps: (props) => { return { style: colStyle } },
+          filter: false,
         },
       },
-      { name: 'Vehicle', options: { filter: false } },
+      { name: 'Vehicle', options: { 
+          setCellProps: (props) => { return { style: colStyle } },
+          filter: false 
+        } 
+      },
       { name: 'Nation', options: { 
+        setCellProps: (props) => { return { style: colStyle } },
         filter: false,
         sortCompare: (order) => {
           return (obj1, obj2) => {
@@ -95,10 +120,12 @@ export default function RecentTankStats(props) {
         } 
       },
       { name: 'Tier', options: { 
+        setCellProps: (props) => { return { style: colStyle } },
         filter: true 
         } 
       },
       { name: 'Class', options: { 
+        setCellProps: (props) => { return { style: colStyle } },
         filter: false,
         sortCompare: (order) => {
           return (obj1, obj2) => {
@@ -109,14 +136,21 @@ export default function RecentTankStats(props) {
         }
         } 
       },
-      { name: 'Battles', options: { filter: false } },
+      { name: 'Battles', options: { 
+        setCellProps: (props) => { return { style: colStyle } },
+        filter: false 
+      } },
       { 
         name: 'Winrate', 
         options: {  
             filter: false,
             setCellProps: (value) => {
                 return {
-                    style: { color: 'white', backgroundColor: WRcolor(value.slice(0, -1))},
+                    style: { 
+                      color: 'white', 
+                      backgroundColor: WRcolor(value.slice(0, -1)),
+                      borderBottom: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)', 
+                    },
                 };
             },
             sortCompare: (order) => {
@@ -135,15 +169,23 @@ export default function RecentTankStats(props) {
             filter: false,
             setCellProps: (value) => {
                 return {
-                    style: { color: 'white', backgroundColor: WN8color(value)},
+                    style: { 
+                      color: 'white', 
+                      backgroundColor: WN8color(value),
+                      borderBottom: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)',
+                    },
                 };
               },
         } 
       },
-      { name: 'DPG', options: { filter: false } },
+      { name: 'DPG', options: { 
+        setCellProps: (props) => { return { style: colStyle } },
+        filter: false 
+      } },
       { 
         name: 'WN8 %tile', 
         options: { 
+          setCellProps: (props) => { return { style: colStyle } },
           filter: false,
           sortCompare: (order) => {
             return (obj1, obj2) => {
@@ -157,6 +199,7 @@ export default function RecentTankStats(props) {
       { 
         name: 'DPG %tile', 
         options: { 
+          setCellProps: (props) => { return { style: colStyle } },
           filter: false,
           sortCompare: (order) => {
             return (obj1, obj2) => {
@@ -167,10 +210,22 @@ export default function RecentTankStats(props) {
           }
         } 
       },
-      { name: 'KPG', options: { filter: false } },
-      { name: 'DMG Ratio', options: { filter: false } },
-      { name: 'K/D', options: { filter: false } },
-      { name: 'Spots', options: { filter: false } },
+      { name: 'KPG', 
+        options: { 
+          setCellProps: (props) => { return { style: colStyle } },
+          filter: false } },
+      { name: 'DMG Ratio', 
+        options: { 
+          setCellProps: (props) => { return { style: colStyle } },
+          filter: false } },
+      { name: 'K/D', 
+        options: { 
+          setCellProps: (props) => { return { style: colStyle } },
+          filter: false } },
+      { name: 'Spots', 
+        options: { 
+          setCellProps: (props) => { return { style: colStyle } },
+          filter: false } },
     ];
 
     const options = {

@@ -17,6 +17,7 @@ import WRCurves from '../../data/WRCurves.json';
 import WN8Curves from '../../data/WN8Curves.json';
 import WN8color from '../../functions/WN8color';
 import WRcolor from '../../functions/WRcolor';
+import { ThemeContext } from '../../style/theme.js';
 
 function diffColor(diff) {
   if (diff.charAt(0) === '+') {
@@ -35,6 +36,7 @@ function diffColor(diff) {
 }
 
 export default function Table(props) {
+  const {theme} = React.useContext(ThemeContext);
   const [serverStats, setServerStats] = useState('');
   useEffect(() => {
     const data = clonedeep(NATankstats);
@@ -240,8 +242,8 @@ export default function Table(props) {
         return (
           <TableRow>
             <TableCell colSpan={colSpan}>
-              <div className='row'>  
-                <div style={{fontSize: '0.86rem', color: 'rgb(100,100,100)', padding: '10px 20px 0px 20px'}}>Don't get what these graphs mean? <Link to='/stats-reference'>Visit Stats Reference.</Link></div>
+              <div className={theme === 'dark' ? 'rowdark' : 'row' }>  
+                <div style={{fontSize: '0.86rem', color: theme === 'dark' ? 'rgb(150, 150, 150)' : 'rgb(100,100,100)', padding: '10px 20px 0px 20px'}}>Don't get what these graphs mean? <Link to='/stats-reference'>Visit Stats Reference.</Link></div>
                 <div className='grid'>
                   <div>
                     <div style={{fontSize: '1rem', padding: '20px 20px 0px 20px'}}>DPG Percentiles</div>
@@ -260,16 +262,16 @@ export default function Table(props) {
       },
     };
 
-    const theme = createMuiTheme({
-      overrides: {
-        MUIDataTableSelectCell: {
-          expandDisabled: {
-            // Soft hide the button.
-            visibility: 'hidden',
-          },
-        },
-      },
-    });
+    // const theme = createMuiTheme({
+    //   overrides: {
+    //     MUIDataTableSelectCell: {
+    //       expandDisabled: {
+    //         // Soft hide the button.
+    //         visibility: 'hidden',
+    //       },
+    //     },
+    //   },
+    // });
 
     const components = {
       ExpandButton: function(props) {

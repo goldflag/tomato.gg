@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import serverConv from '../../../data/serverConv.js';
 import clonedeep from 'lodash.clonedeep';
+import { ThemeContext } from '../../../style/theme.js';
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
@@ -82,9 +83,10 @@ const roleConv = {
 
 export default function ClanHistory(props) {
   const classes = useStyles();
+  const {theme} = React.useContext(ThemeContext);
   const [value, setValue] = useState(0);
   let server = "";
-  const [clanList, setClanList] = useState('')
+  const [clanList, setClanList] = useState('');
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -155,16 +157,16 @@ export default function ClanHistory(props) {
                 </Grid>
                 <Grid item xs={7}>
                   <div style={{display: 'flex', justifyContent: 'left', fontWeight: '500'}}>
-                      <span style={{textAlign: 'left', fontSize: '14px'}}>
-                      <span style={{textAlign: 'left', fontSize: '13px', fontWeight: '400', color: 'rgb(100, 100, 100)'}}>Joined:</span>
+                      <span style={{textAlign: 'left', fontSize: '14px', color: theme === 'dark' ? 'rgb(220, 220, 220)' : 'black'}}>
+                      <span style={{textAlign: 'left', fontSize: '13px', fontWeight: '400', color: 'rgb(125, 125, 125)'}}>Joined:</span>
                       <br/>
                       {joinDate}
                       <br/>
-                      <span style={{textAlign: 'left', fontSize: '13px', fontWeight: '400', color: 'rgb(100, 100, 100)'}}>Left:</span>
+                      <span style={{textAlign: 'left', fontSize: '13px', fontWeight: '400', color: 'rgb(125, 125, 125)'}}>Left:</span>
                       <br/>
                       {leftDate}
                       <br/>
-                      <span style={{textAlign: 'left', fontSize: '13px', fontWeight: '400', color: 'rgb(100, 100, 100)'}}>Position:</span>
+                      <span style={{textAlign: 'left', fontSize: '13px', fontWeight: '400', color: 'rgb(125, 125, 125)'}}>Position:</span>
                       <br/>
                       {roleConv[row.role]}
                       </span>

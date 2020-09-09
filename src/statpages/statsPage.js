@@ -10,6 +10,7 @@ import AllTankStats from "./statsPageComponents/allTankStats";
 import TankStatsCalculator from '../functions/TankStatsCalculator';
 import GraphCalculator from '../functions/GraphCalculator';
 import Charts from './statsPageComponents/charts';
+import { ThemeContext } from '../style/theme.js';
 
 const APIKey = process.env.REACT_APP_API_KEY;
 const backendKey = process.env.REACT_APP_BACKEND_API_KEY;
@@ -34,16 +35,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CircularIndeterminate() {
-  const classes = useStyles();
-  return (
-    <div className={classes.loading}>
-      <CircularProgress color="secondary" />
-    </div>
-  );
-}
-
 export default function StatsPage(props) {
+    const {theme} = React.useContext(ThemeContext);
     const [validID, setValidID] = useState(true);
     // Combines StatsTable and TankTable into single component
     let StatTable = CircularIndeterminate();
@@ -57,7 +50,6 @@ export default function StatsPage(props) {
     const [clanStats, setClanStats] = useState('');
     const [accountCreationDate, setAccountCreationDate] = useState('');
     const [clanHistory, setClanHistory] = useState('');
-
     const [recentStats, setRecentStats] = useState('');
 
     let id = "";
@@ -84,6 +76,15 @@ export default function StatsPage(props) {
 
       }
     }, []);
+
+    function CircularIndeterminate() {
+      const classes = useStyles();
+      return (
+        <div className={classes.loading}>
+          <CircularProgress color={theme === 'dark' ? "primary" : "secondary"} />
+        </div>
+      );
+    }
 
     //Fetches object that points a tank's numerical ID to it's name, tier, premium status, and class
     async function FetchTankData() {

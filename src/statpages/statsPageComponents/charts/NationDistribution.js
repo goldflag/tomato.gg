@@ -1,28 +1,27 @@
 import React from 'react';
 import { ResponsivePie } from '@nivo/pie';
+import { ThemeContext } from '../../../style/theme.js';
 
 export default function NationDistribution(props) {
-
-    const data = props.data;
+    const {theme} = React.useContext(ThemeContext);
     return(
         <div style={{ height: 'calc(300px)'}}>
             <ResponsivePie  
-                data={data}
+                // theme={{ 
+                //     labels: {    
+                //         textColor: 'red',
+                //         text: {
+                //             // color: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',  
+                //             fontSize: 15
+                //         }
+                //     }
+                //     // itemTextColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',  
+                // }}
+                data={props.data}
                 margin={{ top: 30, right: 20, bottom: 30, left: 20 }}
                 innerRadius={0.5}
                 padAngle={0.7}
                 colors={[
-                    // "rgb(24, 95, 237)",
-                    // "rgb(199, 28, 28)",
-                    // "rgb(74, 109, 199)",
-                    // "rgb(158, 96, 81)",
-                    // "rgb(93, 106, 163)",
-
-                    // "rgb(242, 197, 15)",
-                    // "rgb(165, 117, 209)",
-                    // "rgb(250, 242, 25)",
-                    // "rgb(250, 90, 90)",
-                    // "rgb(68, 189, 110)",
                     "rgb(124, 209, 50)",
                     "rgb(226, 232, 51)",
                     "rgb(232, 154, 51)",
@@ -40,14 +39,14 @@ export default function NationDistribution(props) {
                 borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.2 ] ] }}
                 radialLabelsSkipAngle={10}
                 radialLabelsTextXOffset={6}
-                radialLabelsTextColor="#333333"
+                radialLabelsTextColor={theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)'} 
                 radialLabelsLinkOffset={0}
                 radialLabelsLinkDiagonalLength={5}
                 radialLabelsLinkHorizontalLength={5}
                 radialLabelsLinkStrokeWidth={1}
                 radialLabelsLinkColor={{ from: 'color' }}
                 slicesLabelsSkipAngle={10}
-                slicesLabelsTextColor="#333333"
+                slicesLabelsTextColor="rgb(230, 230, 230)"
                 animate={true}
                 motionStiffness={90}
                 motionDamping={15}

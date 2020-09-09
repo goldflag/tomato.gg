@@ -5,22 +5,27 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { ThemeContext } from '../style/theme.js';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    marginLeft: theme.spacing(0),
-    marginRight: theme.spacing(0),
-    width: 45,
-
-  },
-  selectEmpty: {
-    fontSize: '0.8em',
-    paddingTop: theme.spacing(0.1),
-    paddingBottom: theme.spacing(0.1),
-  },
-}));
 
 export default function SmallSelectQuery(props) {
+  const {theme} = React.useContext(ThemeContext);
+
+  const useStyles = makeStyles((t) => ({
+    formControl: {
+      marginLeft: t.spacing(0),
+      marginRight: t.spacing(0),
+      width: 45,
+      color: theme === 'dark' ? 'white' : 'rgb(40, 40, 40)',
+    },
+    selectEmpty: {
+      fontSize: '0.8em',
+      paddingTop: t.spacing(0.1),
+      paddingBottom: t.spacing(0.1),
+      color: theme === 'dark' ? 'white' : 'rgb(40, 40, 40)',
+    },
+  }));
+
   const classes = useStyles();
   const [age, setAge] = React.useState('');
 

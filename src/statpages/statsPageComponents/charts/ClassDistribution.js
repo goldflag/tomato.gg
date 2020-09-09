@@ -1,38 +1,41 @@
 import React from 'react';
-import { ResponsivePie   } from '@nivo/pie';
+import { ResponsivePie } from '@nivo/pie';
+import { ThemeContext } from '../../../style/theme.js';
 
 export default function ClassDistribution(props) {
-
-    const data = props.data;
+    const {theme} = React.useContext(ThemeContext);
     return(
         <div style={{ height: 'calc(300px)'}}>
             <ResponsivePie  
-                data={data}
+                theme={{ 
+                    textColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',  
+                }}
+                data={props.data}
                 margin={{ top: 30, right: 20, bottom: 30, left: 20 }}
                 innerRadius={0.5}
                 padAngle={0.7}
                 colors={[
-                    "rgb(100, 155, 209)",
-                    "rgb(104, 143, 227)",
-                    "rgb(137, 109, 222)",
-                    "rgb(162, 97, 199)",
-                    "rgb(217, 65, 166)"
+                    "rgb(84, 140, 196)",
+                    "rgb(68, 103, 219)",
+                    "rgb(93, 53, 212)",
+                    "rgb(138, 53, 212)",
+                    "rgb(212, 38, 186)"
                 ]}
                 borderWidth={2}
                 borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.2 ] ] }}
                 radialLabelsSkipAngle={10}
                 radialLabelsTextXOffset={6}
-                radialLabelsTextColor="#333333"
+                radialLabelsTextColor={theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)'} 
                 radialLabelsLinkOffset={0}
                 radialLabelsLinkDiagonalLength={5}
                 radialLabelsLinkHorizontalLength={5}
                 radialLabelsLinkStrokeWidth={1}
                 radialLabelsLinkColor={{ from: 'color' }}
                 slicesLabelsSkipAngle={10}
-                slicesLabelsTextColor="#333333"
+                slicesLabelsTextColor="rgb(230, 230, 230)"
                 animate={true}
                 motionStiffness={90}
-                motionDamping={15}
+                motionDamping={15}                        
                 />
             </div>
         );

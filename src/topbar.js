@@ -4,6 +4,9 @@ import SmallSearchBar from './material/smallSearchBar';
 import DiscordLogo from './assets/Discord.svg'
 import SmallMenu from './material/smallMenu';
 import { Link, useRouteMatch, withRouter} from "react-router-dom";
+import DarkModeToggle from "react-dark-mode-toggle";
+import { ThemeContext } from './style/theme.js';
+
 const APIKey = process.env.REACT_APP_API_KEY;
 
 const serverConv = {
@@ -14,6 +17,7 @@ const serverConv = {
 }
 
 export default withRouter(function Topbar(props) {
+    const { theme, toggle } = React.useContext(ThemeContext)
     const [name, setName] = useState('');
     const [server, setServer] = useState('com');
     const [mode, setMode] = useState('Player');
@@ -46,11 +50,18 @@ export default withRouter(function Topbar(props) {
             </div>
             <div className="field">
                 <form onSubmit={searchId}>
-                        <SmallSearchBar setName = {setName} setServer = {setServer} server = {server} setMode = {setMode} mode = {mode}/>
+                    <SmallSearchBar setName = {setName} setServer = {setServer} server = {server} setMode = {setMode} mode = {mode}/>
                 </form>
             </div>
+            <div className="light">
+                <DarkModeToggle
+                onChange={toggle}
+                checked={theme === 'light' ? false : true}
+                size={40}
+                />            
+            </div>
             <div className="discord">
-            <a target="blank" href="https://discord.gg/qA2bV7K"><img src={DiscordLogo} width="33" height="33" alt="discordicon"/></a>
+                <a target="blank" href="https://discord.gg/qA2bV7K"><img src={DiscordLogo} width="33" height="33" alt="discordicon"/></a>
             </div>
         </div>
     );

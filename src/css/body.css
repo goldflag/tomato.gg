@@ -4,9 +4,19 @@ body {
     font-family: "Roboto";
     margin-left: 14rem;
     padding: 0;
+    position: relative;
+    /* background-color: rgb(234, 238, 248);
+    color: #333; */
+}
+
+.dark-mode {
+    background-color:  rgb(50, 50, 54);
+    color: rgb(234, 238, 248);
+}
+
+.light-mode {
     background-color: rgb(234, 238, 248);
     color: #333;
-    position: relative;
 }
 
 .wrapper {

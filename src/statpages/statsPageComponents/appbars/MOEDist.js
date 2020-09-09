@@ -87,9 +87,9 @@ export default function NationDist(props) {
         <TabPanel value={value} index={0}>
             <Grid container spacing={2}>
               <Grid item xs={4}>
-                <Paper style={{padding: '1em 0em 1em 1em'}} elevation={0}>
-                    <MOETable data={props.MOEdata}/>
-                </Paper>
+                <div style={{padding: '1em 0em 1em 1em'}} elevation={0}>
+                  <MOETable data={props.MOEdata}/>
+                </div>
               </Grid>
               <Grid item xs={8}>
                 <TierMOEDistribution data={props.MOEdata}/>
@@ -99,9 +99,9 @@ export default function NationDist(props) {
         <TabPanel value={value} index={1}>
             <Grid container spacing={2}>
               <Grid item xs={4}>
-                <Paper style={{padding: '1em 0em 1em 1em'}} elevation={0}>
+                <div style={{padding: '1em 0em 1em 1em'}} elevation={0}>
                     <MasteryTable data={props.MasteryData}/>
-                </Paper>
+                </div>
               </Grid>
               <Grid item xs={8}>
                 <TierMasteryDistribution data={props.MasteryData}/>

@@ -1,7 +1,10 @@
 import React from "react";
 import { ResponsiveLine } from '@nivo/line'
+import { ThemeContext } from '../../style/theme.js';
+
 export default function PercentileGraph(props) {
-    
+    const {theme} = React.useContext(ThemeContext);
+
     const data = [
         {
             "id": props.smallType,
@@ -12,6 +15,15 @@ export default function PercentileGraph(props) {
     return (
         <div style={{ height: 'calc(310px)'}}>
             <ResponsiveLine
+                theme={{ 
+                    textColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100, 100, 100)',  
+                    grid: {
+                        line: {
+                            stroke: theme === 'dark' ? 'rgb(100, 100, 100)' : 'rgb(210, 210, 210)',
+                            strokeWidth: 1
+                        }
+                    },
+                }}
                 data={data}
                 margin={{ top: 20, right: 90, bottom: 80, left: 60 }}
                 xScale={{ type: 'point' }}
@@ -78,6 +90,7 @@ export default function PercentileGraph(props) {
                         symbolSize: 12,
                         symbolShape: 'circle',
                         symbolBorderColor: 'rgba(0, 0, 0, .5)',
+                        itemTextColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',  
                         effects: [
                             {
                                 on: 'hover',

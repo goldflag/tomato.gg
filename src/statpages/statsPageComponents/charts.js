@@ -11,39 +11,40 @@ import ClassDist from './appbars/ClassDist';
 import ExpectedDist from './appbars/ExpectedDist';
 import RecordsBar from './appbars/RecordsBar';
 import LineGraphs from './appbars/LineGraphs';
-
+import { ThemeContext } from '../../style/theme.js';
 import '../../css/statspage.css';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    //padding: theme.spacing(2),
-    textAlign: 'left',
-    fontFamily: 'roboto',
-    fontSize: '1.2em',
-    color: 'rgb(30, 30, 30)',
-  },
-  colorBox: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    fontFamily: 'roboto',
-  },
-  boxData: {
-      fontSize: '1.7em',
-      fontWeight: '500'
-  }
-}));
-
 export default function Charts(props) {
-  const classes = useStyles();
-  
   const size = useWindowSize();
+  const {theme} = React.useContext(ThemeContext);
+  const [clanHistory, setClanHistory] = useState('');
 
+  const useStyles = makeStyles((t) => ({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      //padding: theme.spacing(2),
+      textAlign: 'left',
+      fontFamily: 'roboto',
+      fontSize: '1.2em',
+      backgroundColor: theme === 'dark' ? 'rgb(40, 40, 40)' : 'white',
+      color: 'rgb(30, 30, 30)',
+    },
+    colorBox: {
+      padding: t.spacing(2),
+      textAlign: 'center',
+      fontFamily: 'roboto',
+    },
+    boxData: {
+        fontSize: '1.7em',
+        fontWeight: '500'
+    }
+  }));
+
+  const classes = useStyles();
   let output = <></>;   
 
-  const [clanHistory, setClanHistory] = useState('');
   useEffect(() => {
     setClanHistory(<ClanHistory data={props.clanData} currentClan={props.currentClan} />);
   }, []);
@@ -56,8 +57,7 @@ export default function Charts(props) {
         <Paper className={classes.paper} square elevation={2}>
             {/* <span style={{fontWeight: 500}}>WN8 Distribution</span>
             <TierWN8Distribution data={props.data.WN8Dist}/> */}
-          {/* <WN8Map data={props.data.WN8ClassDist} />                 */}
-          
+          {/* <WN8Map data={props.data.WN8ClassDist} />  */}
           <WN8Map data={props.classWN8} />
         </Paper>
       </Grid>

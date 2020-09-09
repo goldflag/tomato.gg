@@ -7,6 +7,7 @@ import RecentTankStats from './allTankStats.js';
 import WN8color from '../../functions/WN8color';
 import WRcolor from '../../functions/WRcolor';
 import PRcolor from '../../functions/PRcolor';
+import { ThemeContext } from '../../style/theme.js';
 import '../../css/statspage.css'
 
 function battlesColor(battles) {
@@ -53,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TopStats(props) {
   const classes = useStyles();
+  const {theme} = React.useContext(ThemeContext);
 
   const squareStats = {
       'overallWR': props.data.overallWinrate,
@@ -111,9 +113,9 @@ export default function TopStats(props) {
             <span style={{fontSize: '1.3em', fontWeight: '500'}}>{props.stats.battles}</span>
           </Paper>
         </div>
-          <Paper square elevation={2} style={{margin: '1rem 0 1rem 0', padding: '1rem 1rem 1rem 1rem', color: 'white'}}>
-            <span style={{fontSize: '1.3em', color: 'rgb(100,100,100)', fontWeight: '500'}}>Where are my Recent Stats?</span><br/>
-            <span style={{fontSize: '0.8em', color: 'rgb(100,100,100)'}}>Wargaming does not provide recent stats in their API, meaning that stats site
+          <Paper square elevation={2} style={{margin: '1rem 0 1rem 0', padding: '1rem 1rem 1rem 1rem', backgroundColor: theme === 'dark' ? 'rgb(60, 60, 65)' : 'white'}}>
+            <span style={{fontSize: '1.3em', color: theme === 'dark' ? 'rgb(200, 200, 200)' : 'rgb(100,100,100)', fontWeight: '500'}}>Where are my Recent Stats?</span><br/>
+            <span style={{fontSize: '0.8em', color: theme === 'dark' ? 'rgb(200, 200, 200)' : 'rgb(100,100,100)'}}>Wargaming does not provide recent stats in their API, meaning that stats site
             must generate and store recent stats on their own servers. We can only collect data on players that have been queried on our sites. Check your stats often and your recent stats will appear very soon!</span><br/>
           </Paper>
       <OverallStatsTable data = {props.data.overallStats}/> 

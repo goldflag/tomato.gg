@@ -25,14 +25,14 @@
   .field {
     padding-top: 1rem;
     /* margin: 0 auto; */
-    right: 55px;
+    right: 100px;
     position: absolute;
   }
 
   .discord{
     padding-top: 1rem;
     /* margin: 0 auto; */
-    right: 10px;
+    right: 58px;
     position: absolute;
   }
 
@@ -40,6 +40,12 @@
       opacity: 0.5;
   }
  
+  .light{
+    padding-top: 1rem;
+    padding: 22px 0 0 0;
+    right: 10px;
+    position: absolute;
+  }
 
   /* unvisited link */
   a:link {

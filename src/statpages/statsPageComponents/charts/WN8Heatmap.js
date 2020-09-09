@@ -1,8 +1,10 @@
 import React from 'react';
 import { ResponsiveHeatMap } from '@nivo/heatmap'
 import WN8color from '../../../functions/WN8color';
+import { ThemeContext } from '../../../style/theme.js';
 
 export default function WN8Heatmap(props) {
+    const {theme} = React.useContext(ThemeContext);
     return (
         <div style={{ height: 'calc(310px)'}}>
         <ResponsiveHeatMap  
@@ -11,7 +13,9 @@ export default function WN8Heatmap(props) {
             indexBy="Class"
             margin={{ top: 30, right: 30, bottom: 20, left: 60 }}
             forceSquare={true}
-
+            theme={{ 
+                textColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',  
+            }}
             cellShape={
                 ({
                     value,
@@ -65,7 +69,7 @@ export default function WN8Heatmap(props) {
                 tickRotation: 0,
                 legend: 'Class',
                 legendPosition: 'middle',
-                legendOffset: -40
+                legendOffset: -40,
             }}
             cellOpacity={1}
             cellBorderColor={{ from: 'color', modifiers: [ [ 'darker', 0.4 ] ] }}
@@ -78,7 +82,7 @@ export default function WN8Heatmap(props) {
                     color: 'rgba(0, 0, 0, 0.1)',
                     rotation: -45,
                     lineWidth: 4,
-                    spacing: 7
+                    spacing: 7, 
                 }
             ]}
             fill={[ { id: 'lines' } ]}

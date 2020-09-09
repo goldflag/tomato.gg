@@ -10,24 +10,26 @@ import StatsPage from './statpages/statsPage';
 import StatsReference from './statpages/statsReference';
 import "./css/body.css";
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { ThemeContext }  from './style/theme.js';
 const trackingId = process.env.REACT_APP_GA;
 
 export default function Tomatopedia() {
+
+  // const [theme, toggleTheme] = Theme();
+
 
   useEffect(() => {
     ReactGA.initialize(trackingId);
     ReactGA.pageview('/');
   }, []);
 
-  const size = useWindowSize();
+  const { theme, toggle, dark } = React.useContext(ThemeContext);
 
   return (
       <Router>
-        <div>
-        {/* {size.width}px / {size.height}px */}
- 
-            <Sidebar /> 
-            <Topbar />
+        <div className={theme === 'dark' ? "dark-mode" : "light-mode"}>
+          <Sidebar /> 
+          <Topbar />
           <main className='wrapper'>
             <Switch>
               <Route path='/stats'>
@@ -53,36 +55,4 @@ export default function Tomatopedia() {
         </div>
       </Router>
   );
-}
-
-// Hook
-function useWindowSize() {
-  // Initialize state with undefined width/height so server and client renders match
-  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
-  });
-
-  useEffect(() => {
-    // Handler to call on window resize
-    function handleResize() {
-      // Set window width/height to state
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
-    
-    // Add event listener
-    window.addEventListener("resize", handleResize);
-    
-    // Call handler right away so state gets updated with initial window size
-    handleResize();
-    
-    // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", handleResize);
-  }, []); // Empty array ensures that effect is only run on mount
-
-  return windowSize;
 }
