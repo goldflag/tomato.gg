@@ -18,10 +18,6 @@
     display: none;
   }
 
-  @media screen and (max-Width: 1000px) {
-    .smallMenu {display: block}
-  }
-
   .field {
     padding-top: 1rem;
     /* margin: 0 auto; */
@@ -69,4 +65,16 @@
   a:active {
     color: rgb(108, 37, 121);
     text-decoration: none;
+  }
+
+  @media screen and (max-Width: 1000px) {
+    .smallMenu {
+      display: block
+    }
+    .discord{
+      display: none
+    }
+    .field {
+      right: 59px;
+    }
   }

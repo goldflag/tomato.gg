@@ -109,32 +109,38 @@ export default function Charts(props) {
     </div>
   }
   else {
-    output = <div className='mobilecharts' >
-    <Paper square elevation={2} style={{marginBottom: '1rem'}}>              
+
+    const darkStyle = {
+      backgroundColor: theme === 'dark' ? 'rgb(40, 40, 40)' : 'white',
+      marginBottom: '1rem'
+    }
+
+    output = <div className={theme === 'dark' ? 'mobilechartsdark' : 'mobilecharts'}>
+    <Paper square elevation={2} style={darkStyle}>              
       <WN8Map data={props.classWN8} />
     </Paper>
-    <Paper square elevation={2} style={{marginBottom: '1rem'}}>
+    <Paper square elevation={2} style={darkStyle}>
       <TierDist data={props.data.tierDist} recentData={props.data.tierDistRecent}/>
     </Paper>
-    <Paper square elevation={2} style={{ marginBottom: '1rem', height: 358, overflowX: 'hidden', overflowY: 'auto'}}>
+    <Paper square elevation={2} style={{ marginBottom: '1rem', height: 358, overflowX: 'hidden', overflowY: 'auto', backgroundColor: theme === 'dark' ? 'rgb(40, 40, 40)' : 'white'}}>
       {clanHistory}
     </Paper>
-    <Paper  square elevation={2} style={{marginBottom: '1.5rem'}}>
+    <Paper square elevation={2} style={{marginBottom: '1.5rem', backgroundColor: theme === 'dark' ? 'rgb(40, 40, 40)' : 'white'}}>
       <MOEDist MOEdata={props.data.tierMoeDist} MasteryData={props.data.tierMasteryDist}/> 
     </Paper>
-    <Paper square elevation={2} style={{marginBottom: '1rem'}}>
+    <Paper square elevation={2} style={darkStyle}>
       <NationDist data={props.data.NationDist} recentData={props.data.NationDistRecent}/>
     </Paper>
-    <Paper square elevation={2} style={{marginBottom: '1rem'}}>
+    <Paper square elevation={2} style={darkStyle}>
       <ClassDist data={props.data.ClassDist} recentData={props.data.ClassDistRecent}/>
     </Paper>
-    <Paper square elevation={2} style={{marginBottom: '1rem'}}>
+    <Paper square elevation={2} style={darkStyle}>
       <ExpectedDist data={props.expectedRatios} />
     </Paper>
-    <Paper square elevation={2} style={{marginBottom: '1.5rem', height: 348 }}>
+    <Paper square elevation={2} style={{marginBottom: '1.5rem', height: 348, backgroundColor: theme === 'dark' ? 'rgb(40, 40, 40)' : 'white'}}>
       <RecordsBar data={props.stats} />
     </Paper>
-    <Paper square elevation={2} style={{marginBottom: '-1rem', height: 348 }}>
+    <Paper square elevation={2} style={{marginBottom: '-1rem', height: 348, backgroundColor: theme === 'dark' ? 'rgb(40, 40, 40)' : 'white'}}>
       <LineGraphs />
     </Paper>
   </div>;

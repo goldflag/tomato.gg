@@ -6,7 +6,7 @@
 }
 
 .background { 
-    background: url(../assets/Ocean8.svg) no-repeat center center fixed; 
+    background: url(../assets/Ocean.svg) no-repeat center center fixed; 
     /* background: url(../assets/Kran.png) no-repeat center center fixed;  */
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -17,7 +17,7 @@
 }
 
 .backgrounddark { 
-    background: url(../assets/Ocean8.svg) no-repeat center center fixed; 
+    background: url(../assets/Ocean.svg) no-repeat center center fixed; 
     /* background: url(../assets/Kran.png) no-repeat center center fixed;  */
     -webkit-background-size: cover;
     -moz-background-size: cover;

@@ -36,7 +36,10 @@
 .mobilecharts {
     margin-bottom: 1rem;
 }
-
+.mobilechartsdark {
+    margin-bottom: 1rem;
+    background-color: rgb(40, 40, 40);
+}
 
 
 @media screen and (max-Width: 1000px) {
