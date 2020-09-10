@@ -16,7 +16,12 @@ body {
 
 .light-mode {
     background-color: rgb(234, 238, 248);
-    color: #333;
+    /* background: url(../assets/ParticlesLight.svg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #333; */
 }
 
 .wrapper {

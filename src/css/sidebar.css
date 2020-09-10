@@ -12,6 +12,7 @@
     left: 0;
     overflow-x: hidden;
     background: url(../assets/sidebar.jpg) no-repeat center center fixed; 
+    /* background: url(../assets/Ocean8.svg) no-repeat center center fixed;  */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -19,7 +20,9 @@
   }
 
   .layer {
-    background-color: rgba(23, 20, 51, 0.7);
+    /* background-color: rgba(23, 20, 51, 0.7); */
+    background-color: rgba(24, 25, 92, 0.7);
+
     /* position: absolute; */
     top: 0;
     left: 0;

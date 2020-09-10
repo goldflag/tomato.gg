@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, useRouteMatch, withRouter } fro
 import './css/search.css';
 import SearchBar from './material/searchBar';
 import TomatoLogo from './assets/tomato.png'
+import { ThemeContext } from './style/theme.js';
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
@@ -26,6 +27,7 @@ const serverConv = {
 }
 
 export default withRouter(function Search(props){
+    const {theme} = React.useContext(ThemeContext);
 
     let { path, url } = useRouteMatch();
     const [name, setName] = useState('');
@@ -61,7 +63,7 @@ export default withRouter(function Search(props){
 
     return (
         <Router>
-            <div className='background'>
+            <div className={theme === 'dark' ? 'backgrounddark' : 'background'}>
                 <div className='center'>
                     <div>
                     <img src={TomatoLogo} alt='logo' style={{height: 'auto',  width: '80%', margin: '0 auto',display: 'flex', alignItems: 'center', padding: '0rem'}}/>
