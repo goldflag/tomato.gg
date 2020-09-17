@@ -3,13 +3,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import MOETable from '../charts/MOETable.js';
-import MasteryTable from '../charts/MasteryTable.js';
-
-import TierMOEDistribution from '../charts/TierMoeDistribution.js';
-import TierMasteryDistribution from '../charts/TierMasteryDistribution.js';
+import LineGraphWN8 from '../charts/LineGraphWN8.js';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -70,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LineGraphs(props) {
+  console.log(props.WN8);
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
@@ -86,13 +81,14 @@ export default function LineGraphs(props) {
           <CustomTab label="WR PROGRESS" /> 
         </CustomTabs>
         <TabPanel value={value} index={0}>
-            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><div>Module Coming Soon</div></div>
+          <LineGraphWN8 data={props.WN8} type='WN8'/>
+            {/* <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><LineGraphWN8 /></div> */}
         </TabPanel>
         <TabPanel value={value} index={1}>
-            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><div>Module Coming Soon</div></div>
+          <LineGraphWN8 data={props.DPG} type='DPG'/>
         </TabPanel>
         <TabPanel value={value} index={2}>
-            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><div>Module Coming Soon</div></div>
+          <LineGraphWN8 data={props.WR} type='WR'/>
         </TabPanel>
       </div>            
     </div>

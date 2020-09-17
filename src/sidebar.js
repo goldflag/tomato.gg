@@ -68,7 +68,9 @@ function Sidebar() {
                 <div style={{fontSize: '0.8rem',
                             fontWeight: '300',
                             color: '#96a7c7', padding: '15px', bottom: '0px', position: 'absolute'}}>
-                    Tomato.gg is a website created by <Link style={{color:'rgb(205, 205, 205)'}} to='stats/NA/goldflag=1011694618'>Goldflag</Link> and is not affiliated with Wargaming.net. World of Tanks is a trademark of Wargaming.net.
+                    Tomato.gg is a website created by <Link style={{color:'rgb(205, 205, 205)'}} to='stats/NA/goldflag=1011694618'>Goldflag</Link> and is not affiliated with Wargaming.net.
+                    <br/>
+                    Zeyu Yang © 2020
                 </div>
             </div>
         </div>

@@ -7,6 +7,10 @@ import nationConversion from '../data/nationConversion';
 import CDF from '../data/CDF.json';
 import jStat from 'jstat';
 
+function round(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
+
 function WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN) {
     const rWINc    = Math.max(0,                          (rWIN    - 0.71) / (1 - 0.71) );
     const rDAMAGEc = Math.max(0,                          (rDAMAGE - 0.22) / (1 - 0.22) );
@@ -477,6 +481,15 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
         },
         'ClassDistRecent' : {
             "HT": 0, "MT": 0, "TD": 0, "LT": 0, "SPG": 0,
+        },
+        'lineGraphWN8' : {
+            "data": []
+        },
+        'lineGraphWR' : {
+            "data": []
+        },
+        'lineGraphDPG' : {
+            "data": []
         }
     };
 
@@ -496,6 +509,14 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
         data.NationDistRecent[row[2]] += row[5];
         data.ClassDistRecent[row[4]] += row[5];
     });
+
+    for (let i = 0; i < recentStats.linegraph.length; ++i) {
+        if ( i < recentStats.linegraph.length - 1 && recentStats.linegraph[i][0] !== recentStats.linegraph[i + 1][0]) {
+            data.lineGraphWN8.data.push({ "x" : recentStats.linegraph[i][0], "y": round(recentStats.linegraph[i][1], 2)});
+            data.lineGraphWR.data.push({ "x" : recentStats.linegraph[i][0], "y": round(100*recentStats.linegraph[i][2], 2)});
+            data.lineGraphDPG.data.push({ "x" : recentStats.linegraph[i][0], "y": round(recentStats.linegraph[i][3], 1)});
+        }
+    }
 
     data.NationDist = NationDistCalculator(data.NationDist);
     data.NationDistRecent = NationDistCalculator(data.NationDistRecent);

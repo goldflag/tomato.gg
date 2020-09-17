@@ -102,7 +102,7 @@ export default function Charts(props) {
       </Grid>
       <Grid item xs={6}>
           <Paper className={classes.paper} square elevation={2} style={{ height: 348 }}>
-            <LineGraphs />
+            <LineGraphs WN8={props.data.lineGraphWN8} WR={props.data.lineGraphWR} DPG={props.data.lineGraphDPG} />
           </Paper>
       </Grid>
     </Grid>
@@ -141,7 +141,7 @@ export default function Charts(props) {
       <RecordsBar data={props.stats} />
     </Paper>
     <Paper square elevation={2} style={{marginBottom: '-1rem', height: 348, backgroundColor: theme === 'dark' ? 'rgb(40, 40, 40)' : 'white'}}>
-      <LineGraphs />
+      <LineGraphs WN8={props.data.lineGraphWN8} WR={props.data.lineGraphWR} DPG={props.data.lineGraphDPG} />
     </Paper>
   </div>;
   }
