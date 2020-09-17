@@ -22,9 +22,12 @@ export default function LineGraphWN8(props) {
             },
         }}
         data={[ props.data ]}
+        curve="catmullRom"
         margin={{ top: 23, right: 30, bottom: 73, left: 70 }}
         xScale={{ type: 'point' }}
+        xFormat={function(e){return e + " Battles"}}
         yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
+        yFormat={function(e){return e + ' ' + props.type}}
         axisTop={null}
         axisRight={null}
         axisBottom={{
@@ -47,7 +50,7 @@ export default function LineGraphWN8(props) {
             legendPosition: 'middle'
         }}
         colors={color[props.type]}
-        pointSize={10}
+        pointSize={5}
         pointColor={{ theme: 'background' }}
         pointBorderWidth={2}
         pointBorderColor={{ from: 'serieColor' }}
