@@ -1,6 +1,5 @@
 import React from 'react';
-import tankNames from '../../../data/tankNames';
-
+import tankNames from '../../../data/tankNames.json';
 export default function Records(props) {
     const demo = {
         borderWidth: '1px 0px 1px 0px',

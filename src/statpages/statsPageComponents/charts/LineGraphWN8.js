@@ -38,7 +38,6 @@ export default function LineGraphWN8(props) {
             legendOffset: 45,
             legendPosition: 'middle',
             tickRotation: -45,
-
         }}
         axisLeft={{
             orient: 'left',

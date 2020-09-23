@@ -1,6 +1,6 @@
 import React from 'react';
-import WN8 from '../data/wn8';
-import tankNames from '../data/tankNames';
+import WN8 from '../data/wn8.json';
+import tankNames from '../data/tankNames.json';
 import nationConversion from '../data/nationConversion';
 import BattleTrackerTemplate from '../templates/BattleTrackerTemplate';
 import EXPTrackerTemplate from '../templates/EXPTrackerTemplate';
@@ -199,7 +199,6 @@ export default function TankStats(stats, MOEstats, totalBattles) {
             // <img src={require(`../assets/flagIcons/${nationConversion[tankNames[row.tank_id]['nation']]}.svg`)} style={{display: 'block', maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[0]}/>,
             // tankNames[row.tank_id]['tier'],
             // <img src={require(`../assets/classIcons/${Conversion[tankNames[row.tank_id]['type']]}.png`)} style={{display: 'block', maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[1]}/>,
-
             let vehicleStats = [
                 <img src={require(`../assets/tankIcons/${row.tank_id}.png`)} alt={row.tank_id}/>,
                 tankNames[row.tank_id]['short_name'],

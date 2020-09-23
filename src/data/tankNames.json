@@ -1,4 +1,4 @@
-const tankNames = {
+{
     "1": {
         "is_gift": false,
         "short_name": "T-34",
@@ -3943,6 +3943,14 @@ const tankNames = {
         "tier": 8,
         "type": "AT-SPG"
     },
+    "50721": {
+        "is_gift": false,
+        "short_name": "T42",
+        "nation": "usa",
+        "is_premium": true,
+        "tier": 8,
+        "type": "mediumTank"
+    },
     "50945": {
         "is_gift": false,
         "short_name": "T-45",
@@ -5368,5 +5376,3 @@ const tankNames = {
         "type": "heavyTank"
     }
 }
-
-export default tankNames;

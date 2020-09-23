@@ -1,7 +1,7 @@
 //this function is deprecated
 
 import React from 'react';
-import WN8 from '../data/wn8';
+import WN8 from '../data/wn8.json';
 
 function calculateWN8(id, avgDamage, avgDef, avgFrag, avgSpots, winrate) {
     const exp = WN8[id];
