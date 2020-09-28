@@ -3983,6 +3983,14 @@
         "tier": 5,
         "type": "heavyTank"
     },
+    "51233": {
+        "is_gift": false,
+        "short_name": "T77",
+        "nation": "usa",
+        "is_premium": true,
+        "tier": 8,
+        "type": "heavyTank"
+    },
     "51345": {
         "is_gift": false,
         "short_name": "Rudy Pl",
