@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from "react";
 import ReactGA from 'react-ga';
-import Paper from '@material-ui/core/Paper';
 import styled from 'styled-components'
 import { ThemeContext } from '../style/theme.js';
 
-import { makeStyles } from '@material-ui/core/styles';
 import "../css/tankstats.css";
 import Leaderboard from './leaderboardComponents/leaderboard';
+import CustomLeaderboardParent from './leaderboardComponents/customLeaderboardParent';
 import "../css/innerpage.css";
 const trackingId = process.env.REACT_APP_GA;
 
@@ -15,10 +14,17 @@ const typeConv = {
   'winrate': 'Winrate',
   'battles': 'Battles',
   'moecount': '3 MoE',
-  'moe10': 'Tier X 3 MoE'
+  'moe10': 'Tier X 3 MoE',
+  'custom': 'Custom'
 }
 
 export default function Leaderboards(props) {
+
+  useEffect(() => {
+    ReactGA.initialize(trackingId);
+    ReactGA.pageview('/leaderboards');
+  }, []);
+
   const {theme} = React.useContext(ThemeContext);
   const [type, setType] = useState('wn8');
   const Styles = styled.div`
@@ -43,7 +49,7 @@ export default function Leaderboards(props) {
       color: rgb(240, 240, 240);
       background-color: rgb(71, 99, 214);
       padding: 1rem 0rem 0.8rem 0rem;
-      width: calc(100%/5);
+      width: calc(100%/6);
       border-width: 0px;
       border-bottom: 5px solid rgb(71, 99, 214);
     }
@@ -60,12 +66,6 @@ export default function Leaderboards(props) {
       .leaderboard {margin: 1rem;}
     }
     `
-
-  useEffect(() => {
-    ReactGA.initialize(trackingId);
-    ReactGA.pageview('/leaderboards');
-  }, []);
-
   function setWN8(e) {
     setType('wn8');
   }
@@ -89,6 +89,17 @@ export default function Leaderboards(props) {
     setType('moe10');
   }
 
+  function setCustom(e) {
+    e.preventDefault();
+    setType('custom');
+  }
+
+
+  let table = <CustomLeaderboardParent/>;
+  if (type !== 'custom') {
+    table = <Leaderboard type={type}/>; 
+  }
+
   return (
     <Styles>
       <div className='leaderboard'>
@@ -102,12 +113,13 @@ export default function Leaderboards(props) {
           <button className='selectButton' onClick={setBattles}>BATTLES</button>
           <button className='selectButton' onClick={setMOECOUNT}>3 MOE</button>
           <button className='selectButton' onClick={setMOE10}>TIER X 3 MOE</button>
+          <button className='selectButton' onClick={setCustom}>CUSTOM</button>
         </div>
         <div className='info'>
           <span style={{fontSize: '1.2rem', fontWeight: '500'}}>{typeConv[type]} Leaderboard</span><br/>
           <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>MINIMUM 5000 BATTLES</span> <br/>
         </div>
-        <Leaderboard type={type}/>
+        {table}
       </div>
     </Styles>
   );
