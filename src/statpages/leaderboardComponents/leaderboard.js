@@ -152,9 +152,9 @@ export default function Leaderboard(props) {
     winrate: [
         { Header: '', accessor: 'rank' },
         { Header: 'Username', accessor: 'username'},
-        { Cell: ({ value }) => { return (<div style={WRStyle(value)}>{value}</div>) },
+        { Cell: ({ value }) => { return (<div style={WRStyle(value)}>{value + '%'}</div>) },
             Header: setMid('Winrate'), accessor: 'winrate'},
-        { Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value + '%'}</div>) },
+        { Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value}</div>) },
             Header: setMid('WN8'), accessor: 'wn8' },
         { Cell: ({ value }) => { return setMid(value) },
             Header: setMid('Avg Tier'), accessor: 'avgtier'},
