@@ -1,0 +1,7 @@
+{
+    "lightTank" : "LT",
+    "mediumTank" : "MT",
+    "heavyTank" : "HT",
+    "AT-SPG" : "TD",
+    "SPG" : "SPG"
+}

@@ -43,30 +43,6 @@
     position: absolute;
   }
 
-  /* unvisited link */
-  a:link {
-    color: rgb(58, 89, 189);
-    text-decoration: none;
-  }
-
-  /* visited link */
-  a:visited {
-    color: rgb(58, 89, 189);
-    text-decoration: none;
-  }
-
-  /* mouse over link */
-  a:hover {
-    color: rgb(207, 12, 116);
-    text-decoration: none;
-  }
-
-  /* selected link */
-  a:active {
-    color: rgb(108, 37, 121);
-    text-decoration: none;
-  }
-
   @media screen and (max-Width: 1000px) {
     .smallMenu {
       display: block

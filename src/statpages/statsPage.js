@@ -167,8 +167,6 @@ export default function StatsPage(props) {
     }
 
     if (WGRating && username && stats && tanksstats && MOEstats && clanStats && clanHistory && accountCreationDate && recentStats && validID === true) {
-      console.timeEnd("Time this");
-
       const moeConv = {3: '⭐⭐⭐', 2: '⭐⭐', 1: '⭐', 0: ''};
       const overall = TankStatsCalculator(tanksstats, MOEstats, stats.battles);
       console.log(overall);

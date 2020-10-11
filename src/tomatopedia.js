@@ -5,9 +5,13 @@ import Sidebar from './sidebar';
 import Search from './search';
 import About from './about';
 import TankStatsPage from './statpages/tankStatsPage';
-import ServerStatsPage from './statpages/serverStatsPage';
+import TankList from './statpages/tankList';
 import StatsPage from './statpages/statsPage';
+import ServerStatsPage from './statpages/serverStatsPage';
+import TankPage from './statpages/tankPage';
 import StatsReference from './statpages/statsReference';
+import Leaderboards from './statpages/leaderboards';
+
 import "./css/body.css";
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { ThemeContext }  from './style/theme.js';
@@ -44,8 +48,17 @@ export default function Tomatopedia() {
               <Route path='/tank-stats'>
                 <TankStatsPage />
               </Route> 
+              <Route path='/tank-list'>
+                <TankList />
+              </Route> 
               <Route path='/stats-reference'>
                 <StatsReference />
+              </Route> 
+              <Route path='/leaderboards'>
+                <Leaderboards />
+              </Route> 
+              <Route path='/tank'>
+                <TankPage />
               </Route> 
               <Route exact path='/'>
                 <Search />

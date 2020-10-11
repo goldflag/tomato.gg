@@ -1,0 +1,5 @@
+.leaderboardgrid {
+    display: grid;
+    margin: 2rem 3rem 0rem 3rem;
+    grid-template-columns: 50% 50%;
+}

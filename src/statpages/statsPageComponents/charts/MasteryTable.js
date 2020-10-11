@@ -85,10 +85,13 @@ export default function MasteryTable(props) {
             <td style={td}>1st Class <span style={{ float: 'right'}}>{rows[1].Mastery}</span></td>
         </tr>
         <tr>
-            <td style={tdc}>3rd Class <span style={{ float: 'right'}}>{rows[2].Mastery}</span></td>
+            <td style={tdc}>2nd Class <span style={{ float: 'right'}}>{rows[2].Mastery}</span></td>
         </tr>
         <tr>
-            <td style={td}>None <span style={{ float: 'right'}}>{rows[3].Mastery}</span></td>
+            <td style={td}>3rd Class <span style={{ float: 'right'}}>{rows[3].Mastery}</span></td>
+        </tr>
+        <tr>
+            <td style={td}>None <span style={{ float: 'right'}}>{rows[4].Mastery}</span></td>
         </tr>
     </tbody>
 </table>

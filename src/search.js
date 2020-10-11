@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Switch, Route, useRouteMatch, withRouter } from "react-router-dom";
 import './css/search.css';
 import SearchBar from './material/searchBar';
 import TomatoLogo from './assets/tomato.png'
 import { ThemeContext } from './style/theme.js';
+import LeaderboardGrid from './statpages/searchComponents/leaderboardGrid';
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
@@ -62,7 +64,7 @@ export default withRouter(function Search(props){
     };
 
     return (
-        <Router>
+        <div className={'backbackground'}>
             <div className={theme === 'dark' ? 'backgrounddark' : 'background'}>
                 <div className='center'>
                     <div>
@@ -72,12 +74,8 @@ export default withRouter(function Search(props){
                         <SearchBar setName={setName} setServer={setServer} server={server} setMode={setMode} mode={mode} />
                     </form>
                 </div>
-
-                <Switch>
-                    <Route exact path={path}>
-                    </Route>
-                </Switch>
+                <LeaderboardGrid />
             </div>  
-        </Router>
+        </div>
     );
 })
