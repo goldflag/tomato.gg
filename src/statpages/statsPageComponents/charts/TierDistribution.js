@@ -108,7 +108,7 @@ export default function TierDistribution(props) {
 
     const data = props.data;
     return (
-        <div style={{ height: 'calc(310px)'}}>
+        <div style={{ height: 'calc(300px)'}}>
             <ResponsiveBar 
             theme={{ 
                 textColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100, 100, 100)',  
