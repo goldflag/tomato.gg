@@ -211,7 +211,7 @@ export default function StatsPage(props) {
                         <TopStats username = {username} WGRating = {WGRating} data = {graphData} stats = {stats} clanStats = {clanStats} accountCreationDate = {accountCreationDate}/>
                       </div>
                       <div style = {{minHeight: '300px'}}>
-                        <Charts data = {graphData} clanData = {clanHistory} currentClan = {clanStats} expectedRatios = {overall.expectedRatios} stats = {stats}/>
+                        <Charts data = {graphData} clanData = {clanHistory} currentClan = {clanStats} stats = {stats}/>
                       </div>
                       <div style = {{padding: '1em 0em'}}>
                         <AllTankStats overallStats = {overall.tankWN8} day1 = {graphData.day1} days3 = {graphData.days3} week1 = {graphData.week1} 

@@ -47,7 +47,7 @@ const Conversion = {
 
 const tierToKey = { 1 : "I", 2 : "II", 3 : "III", 4 : "IV", 5 : "V", 6 : "VI", 7 : "VII", 8 : "VIII", 9 : "IX", 10 : "X" };
 
-function calculatePeriodWN8(overall, historical) {
+function calculatePeriodWN8(overall, historical, radar=false) {
     let weighedExpDamage = 0, weighedExpSpots = 0, weighedExpFrag = 0, weighedExpDef = 0, weighedExpWinrate = 0;
     let weighedDamage = 0, weighedSpots = 0, weighedFrag = 0, weighedDef = 0, weighedWinrate = 0;
 
@@ -90,6 +90,15 @@ function calculatePeriodWN8(overall, historical) {
     const rFRAG   = weighedFrag   / weighedExpFrag;
     const rDEF    = weighedDef    / weighedExpDef;
     const rWIN    = weighedWinrate   / weighedExpWinrate;
+
+    if (radar) {
+        radar[0].player = (rDAMAGE).toFixed(2);
+        radar[1].player = (rSPOT).toFixed(2);
+        radar[2].player = (rFRAG).toFixed(2);
+        radar[3].player = (rDEF).toFixed(2);
+        radar[4].player = (rWIN).toFixed(2);
+    }
+
     return WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN);
 }
 
@@ -323,6 +332,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
     const recent60days = calculateRecents(recentStats.recent60days, recentStats.overall);
     const recent500 = calculateRecents(recentStats.recent500, recentStats.overall);
     const recent1000 = calculateRecents(recentStats.recent1000, recentStats.overall);
+
     const data = {
         overallWN8: overallWN8,
         overallWinrate: (OS.wins*100/OS.battles).toFixed(2),
@@ -544,6 +554,13 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
             { 'stat': "rDEF", 'player': 0 },
             { 'stat': "rWIN", 'player': 0 }
         ],
+        recentExpectedRatios : [
+            { 'stat': "rDAMAGE", 'player': 0 },
+            { 'stat': "rSPOT", 'player': 0 },
+            { 'stat': "rFRAG", 'player': 0 },
+            { 'stat': "rDEF", 'player': 0 },
+            { 'stat': "rWIN", 'player': 0 }
+        ],
         tankWN8byClassTier: [
             { "Class": "HT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
             { "Class": "MT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
@@ -551,13 +568,6 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
             { "Class": "LT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
             { "Class": "SPG", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
             { "Class": "Overall", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0}
-        ],
-        recentExpectedRatios : [
-            { 'stat': "rDAMAGE", 'player': 0 },
-            { 'stat': "rSPOT", 'player': 0 },
-            { 'stat': "rFRAG", 'player': 0 },
-            { 'stat': "rDEF", 'player': 0 },
-            { 'stat': "rWIN", 'player': 0 }
         ],
         recentTankWN8byClassTier: [
             { "Class": "HT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
@@ -584,6 +594,10 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
             { "Class": "Overall", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0}
         ],
     };
+
+    calculatePeriodWN8(recentStats.recent1000.tankStats, recentStats.overall.tankStats, data.recentExpectedRatios);
+    calculatePeriodWN8(recentStats.overall.tankStats, [], data.expectedRatios);
+
     const BattleCount = clonedeep(BattleCountTemplate);
     const BattleTracker = clonedeep(BattleTrackerTemplate);
     const EXPTracker = clonedeep(EXPTrackerTemplate);

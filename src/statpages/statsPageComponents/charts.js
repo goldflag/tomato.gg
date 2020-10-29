@@ -89,7 +89,7 @@ export default function Charts(props) {
       </Grid>
       <Grid item xs={3}>
           <Paper className={classes.paper} square elevation={2} style={{ height: 348 }}>
-            <ExpectedDist data={props.expectedRatios} />
+            <ExpectedDist data={props.data.expectedRatios} recentData={props.data.recentExpectedRatios}/>
           </Paper>
       </Grid>
       <Grid item xs={3}>
@@ -140,7 +140,7 @@ export default function Charts(props) {
       <ClassDist data={props.data.ClassDist} recentData={props.data.ClassDistRecent}/>
     </Paper>
     <Paper square elevation={2} style={darkStyle}>
-      <ExpectedDist data={props.expectedRatios} />
+      <ExpectedDist data={props.data.expectedRatios} recentData={props.data.recentExpectedRatios}/>
     </Paper>
     <Paper square elevation={2} style={{marginBottom: '1.5rem', height: 348, backgroundColor: theme === 'dark' ? 'rgb(40, 40, 40)' : 'white'}}>
       <RecordsBar data={props.stats} />
