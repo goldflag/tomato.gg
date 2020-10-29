@@ -5,6 +5,13 @@ import tankNames from '../data/tankNames.json';
 import nationConversion from '../data/nationConversion';
 import CDF from '../data/CDF.json';
 import jStat from 'jstat';
+import clonedeep from 'lodash.clonedeep';
+import BattleTrackerTemplate from '../templates/BattleTrackerTemplate';
+import EXPTrackerTemplate from '../templates/EXPTrackerTemplate';
+import BattleCountTemplate from '../templates/BattleCountTemplate';
+
+import simpleWN8 from './heatmapFunctions/simpleWN8';
+import calcTrackingVals from './heatmapFunctions/calcTrackingVals';
 
 function round(value, decimals) {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
@@ -37,6 +44,8 @@ const Conversion = {
     'AT-SPG' : 'TD',
     'SPG' : 'SPG',
 }
+
+const tierToKey = { 1 : "I", 2 : "II", 3 : "III", 4 : "IV", 5 : "V", 6 : "VI", 7 : "VII", 8 : "VIII", 9 : "IX", 10 : "X" };
 
 function calculatePeriodWN8(overall, historical) {
     let weighedExpDamage = 0, weighedExpSpots = 0, weighedExpFrag = 0, weighedExpDef = 0, weighedExpWinrate = 0;
@@ -84,6 +93,26 @@ function calculatePeriodWN8(overall, historical) {
     return WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN);
 }
 
+function calculateRawOverall(overall) {
+    let calculatedStats = {
+        raw: []
+    };
+    overall.tankStats.map((row) => {
+        const winrate = row[3];
+        let raw = {
+            id: row[0],
+            battles: row[1],
+            damage: row[2],
+            def: row[6],
+            frags: row[4],
+            spots: row[5],
+            winrate: winrate*100/row[1]
+        };
+        calculatedStats.raw.push(raw);        
+    });
+    return calculatedStats;
+}
+
 function calculateRecents(statsSnapshot, overall) {
     if (statsSnapshot === 'frog') {
         return {
@@ -110,7 +139,8 @@ function calculateRecents(statsSnapshot, overall) {
         cap: overall.cap - statsSnapshot.cap,
         def: overall.def - statsSnapshot.def,
         xp: overall.xp - statsSnapshot.xp,
-        tankStats: []
+        tankStats: [],
+        raw: []
     };
 
     const overallWN8 = parseInt(calculatePeriodWN8(overall.tankStats, statsSnapshot.tankStats));
@@ -143,7 +173,17 @@ function calculateRecents(statsSnapshot, overall) {
                 (row[4]/destroyed).toFixed(2),
                 avgSpots.toFixed(2),
             ];
+            let raw = {
+                id: row[0],
+                battles: row[1],
+                damage: row[2],
+                def: row[6],
+                frags: row[4],
+                spots: row[5],
+                winrate: winrate
+            };
             calculatedStats.tankStats.push(vehicleRecentStats);
+            calculatedStats.raw.push(raw);
             calculatedStats.battles += row[1];
         }
         else {
@@ -192,9 +232,18 @@ function calculateRecents(statsSnapshot, overall) {
                     KDRatio,
                     avgSpots.toFixed(2),
                 ];
+                let raw = {
+                    id: row[0],
+                    battles: battlesDiff,
+                    damage: dmgDiff,
+                    def: defDiff,
+                    frags: fragDiff,
+                    spots: spotsDiff,
+                    winrate: winrate
+                };
                 calculatedStats.tankStats.push(vehicleRecentStats);
+                calculatedStats.raw.push(raw);
                 calculatedStats.battles += battlesDiff;
-
             }
             ++index;
         }
@@ -208,7 +257,6 @@ function calculateRecents(statsSnapshot, overall) {
 }
 
 function NationDistCalculator(data) {
-
     const NewNationDist = [
         { "id": "USA", "value": 1 },
         { "id": "USSR", "value": 1 },
@@ -265,7 +313,9 @@ function clr(recent, overall, flipped) {
 }
 
 export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentStats) {
-    const recentsession = calculateRecents(recentStats.recent24hr, recentStats.overall);
+
+    const overallStats = calculateRawOverall(recentStats.overall);
+    console.log(overallStats);
     const recent24hr = calculateRecents(recentStats.recent24hr, recentStats.overall);
     const recent3days = calculateRecents(recentStats.recent1week, recentStats.overall);
     const recent1week = calculateRecents(recentStats.recent30days, recentStats.overall);
@@ -274,18 +324,18 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
     const recent500 = calculateRecents(recentStats.recent500, recentStats.overall);
     const recent1000 = calculateRecents(recentStats.recent1000, recentStats.overall);
     const data = {
-        'overallWN8' : overallWN8,
-        'overallWinrate' : (OS.wins*100/OS.battles).toFixed(2),
-        'recentWN8' : recent1000.overallWN8,
-        'recentWinrate' : recent1000.winrate,
-        'day1' : recent24hr.tankStats,
-        'days3' : recent3days.tankStats,
-        'week1' : recent1week.tankStats,
-        'days30' : recent30days.tankStats,
-        'days60' : recent60days.tankStats,
-        'battles500' : recent500.tankStats,
-        'battles1000' : recent1000.tankStats,
-        'overallStats' : [
+        overallWN8: overallWN8,
+        overallWinrate: (OS.wins*100/OS.battles).toFixed(2),
+        recentWN8: recent1000.overallWN8,
+        recentWinrate: recent1000.winrate,
+        day1: recent24hr.tankStats,
+        days3: recent3days.tankStats,
+        week1: recent1week.tankStats,
+        days30: recent30days.tankStats,
+        days60: recent60days.tankStats,
+        battles500: recent500.tankStats,
+        battles1000: recent1000.tankStats,
+        overallStats: [
             {'name': 'Battles', 
                 'Overall': OS.battles, 
                 '24 Hours': recent24hr.battles, 
@@ -396,7 +446,6 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
             },
             {'name': 'Cap Points', 
                 'Overall': <>{OS.capture_points} <span style={{float: 'right'}}>{(OS.capture_points/OS.battles).toFixed(2)}</span></> , 
-                'Last Update': <>{recentsession.cap}<span style={{ float: 'right', color: clr(recentsession.caprate, (OS.capture_points/(OS.battles)))}}>{recentsession.caprate}</span></>, 
                 '24 Hours': <>{recent24hr.cap}<span style={{ float: 'right', color: clr(recent24hr.caprate, (OS.capture_points/(OS.battles)))}}>{recent24hr.caprate}</span></>, 
                 '3 Days': <>{recent3days.cap}<span style={{ float: 'right', color: clr(recent3days.caprate, (OS.capture_points/(OS.battles)))}}>{recent3days.caprate}</span></>, 
                 '7 Days': <>{recent1week.cap}<span style={{ float: 'right', color: clr(recent1week.caprate, (OS.capture_points/(OS.battles)) )}}>{recent1week.caprate}</span></>, 
@@ -423,7 +472,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '1000 Games': <>{recent1000.xp}<span style={{ float: 'right', color: clr(recent1000.xprate, (OS.battle_avg_xp))}}>{recent1000.xprate}</span></>
             },
         ],
-        'tierDist' : [
+        tierDist: [
             { "Tier": "I", "HT": 0, "MT": 0, "TD": 0, "LT": 0, "SPG": 0 },
             { "Tier": "II", "HT": 0, "MT": 0, "TD": 0, "LT": 0, "SPG": 0 },
             { "Tier": "III", "HT": 0, "MT": 0, "TD": 0, "LT": 0, "SPG": 0 },
@@ -435,7 +484,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
             { "Tier": "IX", "HT": 0, "MT": 0, "TD": 0, "LT": 0, "SPG": 0 },
             { "Tier": "X", "HT": 0, "MT": 0, "TD": 0, "LT": 0, "SPG": 0 },
         ],
-        'tierDistRecent' : [
+        tierDistRecent: [
             { "Tier": "I", "HT": 0, "MT": 0, "TD": 0, "LT": 0, "SPG": 0 },
             { "Tier": "II", "HT": 0, "MT": 0, "TD": 0, "LT": 0, "SPG": 0 },
             { "Tier": "III", "HT": 0, "MT": 0, "TD": 0, "LT": 0, "SPG": 0 },
@@ -447,7 +496,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
             { "Tier": "IX", "HT": 0, "MT": 0, "TD": 0, "LT": 0, "SPG": 0 },
             { "Tier": "X", "HT": 0, "MT": 0, "TD": 0, "LT": 0, "SPG": 0 },
         ],
-        'tierMoeDist' : [
+        tierMoeDist: [
             { "Tier": "V", "0" : 0, "1" : 0, "2" : 0, "3" : 0},
             { "Tier": "VI", "0" : 0, "1" : 0, "2" : 0, "3" : 0},
             { "Tier": "VII", "0" : 0, "1" : 0, "2" : 0, "3" : 0},
@@ -455,7 +504,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
             { "Tier": "IX", "0" : 0, "1" : 0, "2" : 0, "3" : 0},
             { "Tier": "X", "0" : 0, "1" : 0, "2" : 0, "3" : 0},
         ],
-        'tierMasteryDist' : [
+        tierMasteryDist : [
             { "Tier": "I", "None": 0, "3rd": 0, "2nd": 0, "1st": 0, "Ace": 0 },
             { "Tier": "II", "None": 0, "3rd": 0, "2nd": 0, "1st": 0, "Ace": 0 },
             { "Tier": "III", "None": 0, "3rd": 0, "2nd": 0, "1st": 0, "Ace": 0 },
@@ -467,28 +516,82 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
             { "Tier": "IX", "None": 0, "3rd": 0, "2nd": 0, "1st": 0, "Ace": 0 },
             { "Tier": "X", "None": 0, "3rd": 0, "2nd": 0, "1st": 0, "Ace": 0 },
         ],
-        'NationDist' : {
+        NationDist : {
             "USA": 0, "USSR": 0, "France": 0, "Germany": 0, "UK": 0, "China": 0, "Japan": 0, "Czech": 0, "Sweden": 0, "Poland": 0, "Italy": 0
         },
-        'NationDistRecent' : {
+        NationDistRecent: {
             "USA": 0, "USSR": 0, "France": 0, "Germany": 0, "UK": 0, "China": 0, "Japan": 0, "Czech": 0, "Sweden": 0, "Poland": 0, "Italy": 0
         },
-        'ClassDist' : {
+        ClassDist: {
             "HT": 0, "MT": 0, "TD": 0, "LT": 0, "SPG": 0,
         },
-        'ClassDistRecent' : {
+        ClassDistRecent: {
             "HT": 0, "MT": 0, "TD": 0, "LT": 0, "SPG": 0,
         },
-        'lineGraphWN8' : {
+        lineGraphWN8: {
             "data": []
         },
-        'lineGraphWR' : {
+        lineGraphWR: {
             "data": []
         },
-        'lineGraphDPG' : {
+        lineGraphDPG: {
             "data": []
-        }
+        },
+        expectedRatios : [
+            { 'stat': "rDAMAGE", 'player': 0 },
+            { 'stat': "rSPOT", 'player': 0 },
+            { 'stat': "rFRAG", 'player': 0 },
+            { 'stat': "rDEF", 'player': 0 },
+            { 'stat': "rWIN", 'player': 0 }
+        ],
+        tankWN8byClassTier: [
+            { "Class": "HT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "MT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "TD", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "LT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "SPG", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "Overall", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0}
+        ],
+        recentExpectedRatios : [
+            { 'stat': "rDAMAGE", 'player': 0 },
+            { 'stat': "rSPOT", 'player': 0 },
+            { 'stat': "rFRAG", 'player': 0 },
+            { 'stat': "rDEF", 'player': 0 },
+            { 'stat': "rWIN", 'player': 0 }
+        ],
+        recentTankWN8byClassTier: [
+            { "Class": "HT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "MT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "TD", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "LT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "SPG", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "Overall", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0}
+        ],
+        tankWRbyClassTier: [
+            { "Class": "HT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "MT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "TD", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "LT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "SPG", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "Overall", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0}
+        ],
+        recentTankWRbyClassTier: [
+            { "Class": "HT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "MT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "TD", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "LT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "SPG", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
+            { "Class": "Overall", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0}
+        ],
     };
+    const BattleCount = clonedeep(BattleCountTemplate);
+    const BattleTracker = clonedeep(BattleTrackerTemplate);
+    const EXPTracker = clonedeep(EXPTrackerTemplate);
+    const RecentBattleCount = clonedeep(BattleCountTemplate);
+    const RecentBattleTracker = clonedeep(BattleTrackerTemplate);
+    const RecentEXPTracker = clonedeep(EXPTrackerTemplate);
+    const WinsCount = clonedeep(BattleCountTemplate);
+    const RecentWinsCount = clonedeep(BattleCountTemplate);
 
     const numToMastery = { 0 : "None", 1 : "3rd", 2 : "2nd", 3 : "1st", 4 : "Ace" };
     stats.map((row) => {
@@ -501,11 +604,39 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
         data.ClassDist[row[4]] += row[5];
     });
 
-    recent1000.tankStats.map((row) => {
-        data.tierDistRecent[row[3] - 1][row[4]] += row[5];
-        data.NationDistRecent[row[2]] += row[5];
-        data.ClassDistRecent[row[4]] += row[5];
+    recent1000.tankStats.map((tank) => {
+        data.tierDistRecent[tank[3] - 1][tank[4]] += tank[5];
+        data.NationDistRecent[tank[2]] += tank[5];
+        data.ClassDistRecent[tank[4]] += tank[5];
     });
+
+    overallStats.raw.map((stats) => {
+        calcTrackingVals(BattleCount, BattleTracker, EXPTracker, WinsCount, stats);
+    });
+
+    recent1000.raw.map((stats) => {
+        calcTrackingVals(RecentBattleCount, RecentBattleTracker, RecentEXPTracker, RecentWinsCount, stats);
+    });
+
+
+    console.log(WinsCount[3]["X"]);
+    console.log(BattleCount[3]["X"]);
+    console.log(WinsCount[3]["X"]*100/BattleCount[3]["X"]);
+
+    function calculateWN8Distribution() {
+        for (let i = 0; i < 6; ++i) {
+            for (let j = 1; j < 11; ++j) {
+                if (EXPTracker[i][tierToKey[j]].dmg > 0) data.tankWN8byClassTier[i][tierToKey[j]] = parseInt(simpleWN8(i, j, BattleTracker, EXPTracker));
+                else data.tankWN8byClassTier[i][tierToKey[j]] = '-';
+                if (RecentEXPTracker[i][tierToKey[j]].dmg > 0) data.recentTankWN8byClassTier[i][tierToKey[j]] = parseInt(simpleWN8(i, j, RecentBattleTracker, RecentEXPTracker));
+                else data.recentTankWN8byClassTier[i][tierToKey[j]] = '-';
+                if (BattleCount[i][tierToKey[j]] > 0) data.tankWRbyClassTier[i][tierToKey[j]] = round(WinsCount[i][tierToKey[j]]*100/BattleCount[i][tierToKey[j]], 2);
+                else data.tankWRbyClassTier[i][tierToKey[j]] = '-';
+                if (RecentBattleCount[i][tierToKey[j]] > 0) data.recentTankWRbyClassTier[i][tierToKey[j]] = round(RecentWinsCount[i][tierToKey[j]]*100/RecentBattleCount[i][tierToKey[j]], 2);
+                else data.recentTankWRbyClassTier[i][tierToKey[j]] = '-';
+            }
+        }
+    }
 
     for (let i = 0; i < recentStats.linegraph.length; ++i) {
         if ( i < recentStats.linegraph.length - 1 && recentStats.linegraph[i][0] !== recentStats.linegraph[i + 1][0]) {
@@ -521,6 +652,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
     data.ClassDist = ClassDistCalculator(data.ClassDist);
     data.ClassDistRecent = ClassDistCalculator(data.ClassDistRecent);
 
+    calculateWN8Distribution();
     console.log(data);
     return data;
 }

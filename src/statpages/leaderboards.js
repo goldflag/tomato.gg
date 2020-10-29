@@ -117,7 +117,7 @@ export default function Leaderboards(props) {
         </div>
         <div className='info'>
           <span style={{fontSize: '1.2rem', fontWeight: '500'}}>{typeConv[type]} Leaderboard</span><br/>
-          <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>MINIMUM 5000 BATTLES</span> <br/>
+          {/* <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>MINIMUM 5000 BATTLES</span> <br/> */}
         </div>
         {table}
       </div>

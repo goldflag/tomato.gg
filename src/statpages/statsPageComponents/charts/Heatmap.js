@@ -1,6 +1,7 @@
 import React from 'react';
 import { ResponsiveHeatMap } from '@nivo/heatmap'
 import WN8color from '../../../functions/WN8color';
+import WRcolor from '../../../functions/WRcolor';
 import { ThemeContext } from '../../../style/theme.js';
 
 export default function WN8Heatmap(props) {
@@ -31,7 +32,7 @@ export default function WN8Heatmap(props) {
                 }) => (
                     <g transform={`translate(${x}, ${y})`}>
                         <path
-                            fill={WN8color(value)}
+                            fill={props.type === 'wn8' ? WN8color(value) : WRcolor(value)}
                             fillOpacity={opacity}
                             strokeWidth={borderWidth}
                             stroke={borderColor}

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import WN8Map from './appbars/WN8Map';
+import Heatmap from './appbars/Heatmaps';
 import TierDist from './appbars/TierDist';
 import ClanHistory from './appbars/ClanHistory';
 import MOEDist from './appbars/MOEDist';
@@ -55,20 +55,17 @@ export default function Charts(props) {
     <Grid container spacing={2}>
       <Grid item xs={4}>
         <Paper className={classes.paper} square elevation={2}>
-            {/* <span style={{fontWeight: 500}}>WN8 Distribution</span>
-            <TierWN8Distribution data={props.data.WN8Dist}/> */}
-          {/* <WN8Map data={props.data.WN8ClassDist} />  */}
-          <WN8Map data={props.classWN8} />
+          <Heatmap data={props.data.tankWN8byClassTier} recentData={props.data.recentTankWN8byClassTier} type={'wn8'}/>
+        </Paper>
+      </Grid>
+      <Grid item xs={4}>
+        <Paper className={classes.paper} square elevation={2}>
+          <Heatmap data={props.data.tankWRbyClassTier} recentData={props.data.recentTankWRbyClassTier} type={'wr'}/>
         </Paper>
       </Grid>
       <Grid item xs={4}>
         <Paper className={classes.paper} square elevation={2}>
           <TierDist data={props.data.tierDist} recentData={props.data.tierDistRecent}/>
-        </Paper>
-      </Grid>
-      <Grid item xs={4}>
-        <Paper className={classes.paper} square elevation={2} style={{ height: 358, overflowX: 'hidden', overflowY: 'auto'}}>
-          {clanHistory}
         </Paper>
       </Grid>
       <Grid item xs={6}>
@@ -105,6 +102,11 @@ export default function Charts(props) {
             <LineGraphs WN8={props.data.lineGraphWN8} WR={props.data.lineGraphWR} DPG={props.data.lineGraphDPG} />
           </Paper>
       </Grid>
+      <Grid item xs={4}>
+        <Paper className={classes.paper} square elevation={2} style={{ height: 358, overflowX: 'hidden', overflowY: 'auto'}}>
+          {clanHistory}
+        </Paper>
+      </Grid>
     </Grid>
     </div>
   }
@@ -117,7 +119,10 @@ export default function Charts(props) {
 
     output = <div className={theme === 'dark' ? 'mobilechartsdark' : 'mobilecharts'}>
     <Paper square elevation={2} style={darkStyle}>              
-      <WN8Map data={props.classWN8} />
+      <Heatmap data={props.data.tankWN8byClassTier} recentData={props.data.recentTankWN8byClassTier} type={'wn8'}/>
+    </Paper>
+    <Paper className={classes.paper} square elevation={2}>
+      <Heatmap data={props.data.tankWRbyClassTier} recentData={props.data.recentTankWRbyClassTier} type={'wr'}/>
     </Paper>
     <Paper square elevation={2} style={darkStyle}>
       <TierDist data={props.data.tierDist} recentData={props.data.tierDistRecent}/>

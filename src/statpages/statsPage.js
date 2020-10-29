@@ -106,8 +106,8 @@ export default function StatsPage(props) {
       //Clan history
       const url5 = `https://api.worldoftanks.${server}/wot/clans/memberhistory/?application_id=${APIKey}&account_id=${id}`;
       //Recent stats from our own API
-      const url6 = `https://tomatobackend.herokuapp.com/api/abcd/${server}/${id}`;
-      //const url6 = `http://localhost:5000/api/abcd/${server}/${id}`;
+      //const url6 = `https://tomatobackend.herokuapp.com/api/abcd/${server}/${id}`;
+      const url6 = `http://localhost:5000/api/abcd/${server}/${id}`;
 
       console.log(backendKey);
       try {
@@ -177,54 +177,41 @@ export default function StatsPage(props) {
         row[19] = <img src={require(`../assets/masteryIcons/${row[19]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[19]}/>;
         row[18] = moeConv[row[18]];
       });
+      console.log( graphData.day1);
       graphData.day1.map((row) => {
-        row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
-        row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
-        row[19] = <img src={require(`../assets/masteryIcons/${row[19]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[19]}/>;
-        row[18] = moeConv[row[18]];
+        // row.stats[2] = <img src={require(`../assets/flagIcons/${row.stats[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row.stats[2]}/>;
+        // row.stats[4] = <img src={require(`../assets/classIcons/${row.stats[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row.stats[4]}/>;
       });
-      graphData.days3.map((row) => {
-        row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
-        row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>
-        row[19] = <img src={require(`../assets/masteryIcons/${row[19]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[19]}/>;
-        row[18] = moeConv[row[18]];
+      graphData.days3.map((row) => {        
+        // row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
+        // row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>
       });
       graphData.week1.map((row) => {
-        row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
-        row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
-        row[19] = <img src={require(`../assets/masteryIcons/${row[19]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[19]}/>;
-        row[18] = moeConv[row[18]];
+        // row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
+        // row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
       });
       graphData.days30.map((row) => {
-        row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
-        row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>
-        row[19] = <img src={require(`../assets/masteryIcons/${row[19]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[19]}/>;
-        row[18] = moeConv[row[18]];
+        // row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
+        // row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>
       });
       graphData.days60.map((row) => {
-        row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
-        row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
-        row[19] = <img src={require(`../assets/masteryIcons/${row[19]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[19]}/>;
-        row[18] = moeConv[row[18]];
+        // row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
+        // row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
       });
       graphData.battles500.map((row) => {
-        row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
-        row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
-        row[19] = <img src={require(`../assets/masteryIcons/${row[19]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[19]}/>;
-        row[18] = moeConv[row[18]];
+        // row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
+        // row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
       });
       graphData.battles1000.map((row) => {
-        row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
-        row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
-        row[19] = <img src={require(`../assets/masteryIcons/${row[19]}.png`)} style={{ maxheight: '24px', maxWidth: '30px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[19]}/>;
-        row[18] = moeConv[row[18]];
+        // row[2] = <img src={require(`../assets/flagIcons/${row[2]}.svg`)} style={{maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
+        // row[4] = <img src={require(`../assets/classIcons/${row[4]}.png`)} style={{ maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[4]}/>;
       });
       StatTable = <>
                       <div style = {{padding: '1em 0em'}}>
                         <TopStats username = {username} WGRating = {WGRating} data = {graphData} stats = {stats} clanStats = {clanStats} accountCreationDate = {accountCreationDate}/>
                       </div>
                       <div style = {{minHeight: '300px'}}>
-                        <Charts data = {graphData} clanData = {clanHistory} currentClan = {clanStats} classWN8 = {overall.tankWN8byClassTier} expectedRatios = {overall.expectedRatios} stats = {stats}/>
+                        <Charts data = {graphData} clanData = {clanHistory} currentClan = {clanStats} expectedRatios = {overall.expectedRatios} stats = {stats}/>
                       </div>
                       <div style = {{padding: '1em 0em'}}>
                         <AllTankStats overallStats = {overall.tankWN8} day1 = {graphData.day1} days3 = {graphData.days3} week1 = {graphData.week1} 

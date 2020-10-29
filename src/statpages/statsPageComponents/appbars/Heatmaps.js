@@ -3,8 +3,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-
-import WN8Heatmap from '../charts/WN8Heatmap.js';
+import Heatmap from '../charts/Heatmap.js';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -64,7 +63,7 @@ root: {
 },
 }));
 
-export default function WN8Dist(props) {
+export default function Heatmaps(props) {
 const classes = useStyles();
 const [value, setValue] = useState(0);
 
@@ -76,10 +75,14 @@ return (
   <div className={classes.root}>
     <div>
       <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
-        <CustomTab label="WN8 HEATMAP" /> 
+        <CustomTab label={props.type === "wn8" ? "WN8 HEATMAP" : "WR HEATMAP"} /> 
+        <CustomTab label="RECENT" /> 
       </CustomTabs>
       <TabPanel value={value} index={0}>
-        <WN8Heatmap data={props.data}/>
+        <Heatmap data={props.data} type={props.type}/>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <Heatmap data={props.recentData} type={props.type}/>
       </TabPanel>
     </div>            
   </div>

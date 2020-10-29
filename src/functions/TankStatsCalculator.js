@@ -2,12 +2,8 @@ import React from 'react';
 import WN8 from '../data/wn8.json';
 import tankNames from '../data/tankNames.json';
 import nationConversion from '../data/nationConversion';
-import BattleTrackerTemplate from '../templates/BattleTrackerTemplate';
-import EXPTrackerTemplate from '../templates/EXPTrackerTemplate';
-import clonedeep from 'lodash.clonedeep';
 import CDF from '../data/CDF.json';
 import jStat from 'jstat';
-
 
 function WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN) {
     const rWINc    = Math.max(0,                          (rWIN    - 0.71) / (1 - 0.71) );
@@ -36,8 +32,6 @@ const Conversion = {
     'AT-SPG' : 'TD',
     'SPG' : 'SPG',
 }
-const classToIndex = { "HT" : 0, "MT" : 1, "TD" : 2, "LT" : 3, "SPG" : 4};
-const tierToKey = { 1 : "I", 2 : "II", 3 : "III", 4 : "IV", 5 : "V", 6 : "VI", 7 : "VII", 8 : "VIII", 9 : "IX", 10 : "X" };
 
 export default function TankStats(stats, MOEstats, totalBattles) {
 
@@ -52,9 +46,6 @@ export default function TankStats(stats, MOEstats, totalBattles) {
     let weighedFrag = 0;
     let weighedDef = 0;
     let weighedWinrate = 0;
-
-    const BattleTracker = clonedeep(BattleTrackerTemplate);
-    const EXPTracker = clonedeep(EXPTrackerTemplate);
 
     function calculateWeighedOverall(id, damage, def, frag, spots, wins, battles) {
         const exp = WN8[id];
@@ -85,25 +76,7 @@ export default function TankStats(stats, MOEstats, totalBattles) {
         jsonStats.expectedRatios[4].player = (rWIN).toFixed(2);
         return parseInt(WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN));
     }
-
-    function simpleWN8(c, t) {
-        const rDAMAGE = BattleTracker[c][tierToKey[t]].dmg / EXPTracker[c][tierToKey[t]].dmg;
-        const rSPOT   = BattleTracker[c][tierToKey[t]].spot  / EXPTracker[c][tierToKey[t]].spot;
-        const rFRAG   = BattleTracker[c][tierToKey[t]].frag   / EXPTracker[c][tierToKey[t]].frag;
-        const rDEF    = BattleTracker[c][tierToKey[t]].def    / EXPTracker[c][tierToKey[t]].def;
-        const rWIN    = BattleTracker[c][tierToKey[t]].wr   / EXPTracker[c][tierToKey[t]].wr;
-        return WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN);
-    }
     
-    const BattleCount = [
-        { "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
-        { "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
-        { "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
-        { "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
-        { "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
-        { "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0}
-    ];
-
     let counter = 0;
     let jsonStats = {
         battles: 0,
@@ -117,59 +90,7 @@ export default function TankStats(stats, MOEstats, totalBattles) {
             { 'stat': "rWIN", 'player': 0 }
         ],
         tankWN8: [],
-        tankWN8byClassTier: [
-            { "Class": "HT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
-            { "Class": "MT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
-            { "Class": "TD", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
-            { "Class": "LT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
-            { "Class": "SPG", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
-            { "Class": "Overall", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0}
-        ],
     };
-
-    function calculateWN8Distribution() {
-        for (let i = 0; i < 6; ++i) {
-            for (let j = 1; j < 11; ++j) {
-                if (EXPTracker[i][tierToKey[j]].dmg > 0) {
-                    jsonStats.tankWN8byClassTier[i][tierToKey[j]] = parseInt(simpleWN8(i, j));
-                }
-                else {
-                    jsonStats.tankWN8byClassTier[i][tierToKey[j]] = '-';
-                }
-            }
-        }
-    }
-
-    function calcTrackingVals(row) {
-        const battles = row.all.battles;
-
-        const exp = WN8[row.tank_id];
-        BattleCount[classToIndex[Conversion[tankNames[row.tank_id]['type']]]][tierToKey[tankNames[row.tank_id]['tier']]] += battles;
-
-        BattleTracker[classToIndex[Conversion[tankNames[row.tank_id]['type']]]][tierToKey[tankNames[row.tank_id]['tier']]].dmg += row.all.damage_dealt;
-        BattleTracker[classToIndex[Conversion[tankNames[row.tank_id]['type']]]][tierToKey[tankNames[row.tank_id]['tier']]].spot += row.all.spotted;
-        BattleTracker[classToIndex[Conversion[tankNames[row.tank_id]['type']]]][tierToKey[tankNames[row.tank_id]['tier']]].frag += row.all.frags;
-        BattleTracker[classToIndex[Conversion[tankNames[row.tank_id]['type']]]][tierToKey[tankNames[row.tank_id]['tier']]].def += row.all.dropped_capture_points;
-        BattleTracker[classToIndex[Conversion[tankNames[row.tank_id]['type']]]][tierToKey[tankNames[row.tank_id]['tier']]].wr += (row.all.wins*100);
-
-        BattleTracker[5][tierToKey[tankNames[row.tank_id]['tier']]].dmg += row.all.damage_dealt;
-        BattleTracker[5][tierToKey[tankNames[row.tank_id]['tier']]].spot += row.all.spotted;
-        BattleTracker[5][tierToKey[tankNames[row.tank_id]['tier']]].frag += row.all.frags;
-        BattleTracker[5][tierToKey[tankNames[row.tank_id]['tier']]].def += row.all.dropped_capture_points;
-        BattleTracker[5][tierToKey[tankNames[row.tank_id]['tier']]].wr += (row.all.wins*100);
-
-        EXPTracker[classToIndex[Conversion[tankNames[row.tank_id]['type']]]][tierToKey[tankNames[row.tank_id]['tier']]].dmg += exp.expDamage*battles;
-        EXPTracker[classToIndex[Conversion[tankNames[row.tank_id]['type']]]][tierToKey[tankNames[row.tank_id]['tier']]].spot += exp.expSpot*battles;
-        EXPTracker[classToIndex[Conversion[tankNames[row.tank_id]['type']]]][tierToKey[tankNames[row.tank_id]['tier']]].frag += exp.expFrag*battles;
-        EXPTracker[classToIndex[Conversion[tankNames[row.tank_id]['type']]]][tierToKey[tankNames[row.tank_id]['tier']]].def += exp.expDef*battles;
-        EXPTracker[classToIndex[Conversion[tankNames[row.tank_id]['type']]]][tierToKey[tankNames[row.tank_id]['tier']]].wr += exp.expWinRate*battles;
-
-        EXPTracker[5][tierToKey[tankNames[row.tank_id]['tier']]].dmg += exp.expDamage*battles;
-        EXPTracker[5][tierToKey[tankNames[row.tank_id]['tier']]].spot += exp.expSpot*battles;
-        EXPTracker[5][tierToKey[tankNames[row.tank_id]['tier']]].frag += exp.expFrag*battles;
-        EXPTracker[5][tierToKey[tankNames[row.tank_id]['tier']]].def += exp.expDef*battles;
-        EXPTracker[5][tierToKey[tankNames[row.tank_id]['tier']]].wr += exp.expWinRate*battles;
-    }
 
     stats.map((row) => {
         if (tankNames[row.tank_id]) {
@@ -191,8 +112,6 @@ export default function TankStats(stats, MOEstats, totalBattles) {
 
             jsonStats.avgTier += row.all.battles*tankNames[row.tank_id]['tier'];
             jsonStats.battles += row.all.battles;
-
-            calcTrackingVals(row);
 
             // <img src={require(`../assets/tankIcons/${row.tank_id}.png`)} alt={row.tank_id}/>,
             // tankNames[row.tank_id]['short_name'],
@@ -228,7 +147,6 @@ export default function TankStats(stats, MOEstats, totalBattles) {
         ++counter;
         }
     );
-    calculateWN8Distribution();
     jsonStats.overallWN8 = calculateOverallWN8();
     jsonStats.avgTier /= jsonStats.battles;
     return jsonStats;
