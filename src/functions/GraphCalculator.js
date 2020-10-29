@@ -618,11 +618,6 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
         calcTrackingVals(RecentBattleCount, RecentBattleTracker, RecentEXPTracker, RecentWinsCount, stats);
     });
 
-
-    console.log(WinsCount[3]["X"]);
-    console.log(BattleCount[3]["X"]);
-    console.log(WinsCount[3]["X"]*100/BattleCount[3]["X"]);
-
     function calculateWN8Distribution() {
         for (let i = 0; i < 6; ++i) {
             for (let j = 1; j < 11; ++j) {
