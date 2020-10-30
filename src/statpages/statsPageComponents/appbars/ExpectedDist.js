@@ -76,13 +76,9 @@ export default function ExpectedDist(props) {
       <div>
         <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
           <CustomTab label="WN8 ACTUAL TO EXP. RATIO" /> 
-          <CustomTab label="RECENT" /> 
         </CustomTabs>
         <TabPanel value={value} index={0}>
             <WN8Radar data={props.data}/>
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-            <WN8Radar data={props.recentData}/>
         </TabPanel>
       </div>            
     </div>

@@ -1,21 +1,26 @@
 import React from 'react';
 import tankNames from '../../../data/tankNames.json';
+import { ThemeContext } from '../../../style/theme.js';
+
 export default function Records(props) {
+    const {theme} = React.useContext(ThemeContext);
+
     const demo = {
         borderWidth: '1px 0px 1px 0px',
         borderStyle: 'solid',
-        borderColor: 'rgb(220,220,220)',
+        borderColor: theme === 'dark' ? 'rgb(100, 100, 100)' : 'rgb(220,220,220)',
 		borderCollapse: 'collapse',
         padding: 5,
         fontSize: '1rem',
         width: '100%',
-        height: '300px'
+        height: '300px',
+        color: theme === 'dark'? 'rgb(240,240,240)' : 'rgb(40, 40, 40)',
     }
 
     const td = {
         borderWidth: '1px 0px 1px 0px',
         borderStyle: 'solid',
-        borderColor: 'rgb(220,220,220)',
+        borderColor: theme === 'dark' ? 'rgb(100, 100, 100)' : 'rgb(220,220,220)',
         maxheight: '50px',
         padding: '11.4px',
     }
@@ -23,10 +28,10 @@ export default function Records(props) {
     const tdc = {
         borderWidth: '1px 0px 1px 0px',
         borderStyle: 'solid',
-        borderColor: 'rgb(220,220,220)',
+        borderColor: theme === 'dark' ? 'rgb(100, 100, 100)' : 'rgb(220,220,220)',
         maxheight: '50px',
         padding: '11.4px',
-        background: 'rgb(242, 243, 247)'
+        background: theme === 'dark' ? 'rgb(50, 50, 50)' : 'rgb(242, 243, 247)'
     }
 
     let res = <></>;

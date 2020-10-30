@@ -47,7 +47,7 @@ const Conversion = {
 
 const tierToKey = { 1 : "I", 2 : "II", 3 : "III", 4 : "IV", 5 : "V", 6 : "VI", 7 : "VII", 8 : "VIII", 9 : "IX", 10 : "X" };
 
-function calculatePeriodWN8(overall, historical, radar=false) {
+function calculatePeriodWN8(overall, historical, radar=false, type) {
     let weighedExpDamage = 0, weighedExpSpots = 0, weighedExpFrag = 0, weighedExpDef = 0, weighedExpWinrate = 0;
     let weighedDamage = 0, weighedSpots = 0, weighedFrag = 0, weighedDef = 0, weighedWinrate = 0;
 
@@ -80,7 +80,8 @@ function calculatePeriodWN8(overall, historical, radar=false) {
                 weighedSpots += row[5] - historical[index][5];
                 weighedFrag += row[4] - historical[index][4];
                 weighedDef += row[6] - historical[index][6];
-                weighedWinrate += 100*row[3] - historical[index][3];
+                weighedWinrate += 100*row[3] - 100*historical[index][3];
+
             }
             ++index;
         }
@@ -92,11 +93,11 @@ function calculatePeriodWN8(overall, historical, radar=false) {
     const rWIN    = weighedWinrate   / weighedExpWinrate;
 
     if (radar) {
-        radar[0].player = (rDAMAGE).toFixed(2);
-        radar[1].player = (rSPOT).toFixed(2);
-        radar[2].player = (rFRAG).toFixed(2);
-        radar[3].player = (rDEF).toFixed(2);
-        radar[4].player = (rWIN).toFixed(2);
+        radar[0][type] = (rDAMAGE).toFixed(2);
+        radar[1][type] = (rSPOT).toFixed(2);
+        radar[2][type] = (rFRAG).toFixed(2);
+        radar[3][type] = (rDEF).toFixed(2);
+        radar[4][type] = (rWIN).toFixed(2);
     }
 
     return WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN);
@@ -324,7 +325,6 @@ function clr(recent, overall, flipped) {
 export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentStats) {
 
     const overallStats = calculateRawOverall(recentStats.overall);
-    console.log(overallStats);
     const recent24hr = calculateRecents(recentStats.recent24hr, recentStats.overall);
     const recent3days = calculateRecents(recentStats.recent1week, recentStats.overall);
     const recent1week = calculateRecents(recentStats.recent30days, recentStats.overall);
@@ -548,18 +548,11 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
             "data": []
         },
         expectedRatios : [
-            { 'stat': "rDAMAGE", 'player': 0 },
-            { 'stat': "rSPOT", 'player': 0 },
-            { 'stat': "rFRAG", 'player': 0 },
-            { 'stat': "rDEF", 'player': 0 },
-            { 'stat': "rWIN", 'player': 0 }
-        ],
-        recentExpectedRatios : [
-            { 'stat': "rDAMAGE", 'player': 0 },
-            { 'stat': "rSPOT", 'player': 0 },
-            { 'stat': "rFRAG", 'player': 0 },
-            { 'stat': "rDEF", 'player': 0 },
-            { 'stat': "rWIN", 'player': 0 }
+            { 'stat': "rDAMAGE", 'overall': 0, 'recent': 0 },
+            { 'stat': "rSPOT", 'overall': 0, 'recent': 0 },
+            { 'stat': "rFRAG", 'overall': 0, 'recent': 0 },
+            { 'stat': "rDEF", 'overall': 0, 'recent': 0 },
+            { 'stat': "rWIN", 'overall': 0, 'recent': 0 },
         ],
         tankWN8byClassTier: [
             { "Class": "HT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
@@ -595,8 +588,8 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
         ],
     };
 
-    calculatePeriodWN8(recentStats.recent1000.tankStats, recentStats.overall.tankStats, data.recentExpectedRatios);
-    calculatePeriodWN8(recentStats.overall.tankStats, [], data.expectedRatios);
+    calculatePeriodWN8(recentStats.overall.tankStats, recentStats.recent1000.tankStats, data.expectedRatios, "recent");
+    calculatePeriodWN8(recentStats.overall.tankStats, [], data.expectedRatios, "overall");
 
     const BattleCount = clonedeep(BattleCountTemplate);
     const BattleTracker = clonedeep(BattleTrackerTemplate);
@@ -628,9 +621,11 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
         calcTrackingVals(BattleCount, BattleTracker, EXPTracker, WinsCount, stats);
     });
 
-    recent1000.raw.map((stats) => {
-        calcTrackingVals(RecentBattleCount, RecentBattleTracker, RecentEXPTracker, RecentWinsCount, stats);
-    });
+    if (recent1000.raw) {
+        recent1000.raw.map((stats) => {
+            calcTrackingVals(RecentBattleCount, RecentBattleTracker, RecentEXPTracker, RecentWinsCount, stats);
+        });    
+    }
 
     function calculateWN8Distribution() {
         for (let i = 0; i < 6; ++i) {
