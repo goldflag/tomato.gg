@@ -92,7 +92,7 @@ function calculatePeriodWN8(overall, historical, radar=false, type) {
     const rDEF    = weighedDef    / weighedExpDef;
     const rWIN    = weighedWinrate   / weighedExpWinrate;
 
-    if (radar) {
+    if (radar && !isNaN(rWIN)) {
         radar[0][type] = (rDAMAGE).toFixed(2);
         radar[1][type] = (rSPOT).toFixed(2);
         radar[2][type] = (rFRAG).toFixed(2);
