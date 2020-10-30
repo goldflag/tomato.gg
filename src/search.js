@@ -74,7 +74,9 @@ export default withRouter(function Search(props){
                         <SearchBar setName={setName} setServer={setServer} server={server} setMode={setMode} mode={mode} />
                     </form>
                 </div>
-                <LeaderboardGrid />
+                <div className={'leaderboard'}>
+                    <LeaderboardGrid />
+                </div>
             </div>  
         </div>
     );

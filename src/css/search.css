@@ -29,6 +29,10 @@
     max-width: 800px;
 }
 
+.leaderboard {
+}
+
 @media screen and (max-Width: 1000px) {
-    .center {max-width: 100%;}
+    .center {max-width: 100%; }
+    .leaderboard {display: none; }
 }
