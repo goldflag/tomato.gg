@@ -3,7 +3,6 @@ import clonedeep from 'lodash.clonedeep';
 import BattleTrackerTemplate from '../templates/BattleTrackerTemplate';
 import EXPTrackerTemplate from '../templates/EXPTrackerTemplate';
 import BattleCountTemplate from '../templates/BattleCountTemplate';
-import WN8 from '../data/wn8.json';
 import simpleWN8 from './heatmapFunctions/simpleWN8';
 import calcTrackingVals from './heatmapFunctions/calcTrackingVals';
 
@@ -30,60 +29,6 @@ function calculateRawOverall(overall) {
         calculatedStats.raw.push(raw);        
     });
     return calculatedStats;
-}
-
-function calculatePeriodWN8(overall, historical, radar=false, type) {
-    let weighedExpDamage = 0, weighedExpSpots = 0, weighedExpFrag = 0, weighedExpDef = 0, weighedExpWinrate = 0;
-    let weighedDamage = 0, weighedSpots = 0, weighedFrag = 0, weighedDef = 0, weighedWinrate = 0;
-
-    let index = 0;
-    overall.map((row) => {
-        const exp = WN8[row[0]];
-        if (historical.length < index + 1 || row[0] !== historical[index][0]) {
-            weighedExpDamage += row[1]*exp.expDamage;
-            weighedExpSpots += row[1]*exp.expSpot;
-            weighedExpFrag += row[1]*exp.expFrag;    
-            weighedExpDef += row[1]*exp.expDef;    
-            weighedExpWinrate += row[1]*exp.expWinRate;
-        
-            weighedDamage += row[2];
-            weighedSpots += row[5];
-            weighedFrag += row[4];
-            weighedDef += row[6];
-            weighedWinrate += 100*row[3];
-        }
-        else {
-            if (row[1] !== historical[index][1]) {
-                const battlesDiff = row[1] - historical[index][1];
-                weighedExpDamage += battlesDiff*exp.expDamage;
-                weighedExpSpots += battlesDiff*exp.expSpot;
-                weighedExpFrag += battlesDiff*exp.expFrag;    
-                weighedExpDef += battlesDiff*exp.expDef;    
-                weighedExpWinrate += battlesDiff*exp.expWinRate;
-
-                weighedDamage += row[2] - historical[index][2];
-                weighedSpots += row[5] - historical[index][5];
-                weighedFrag += row[4] - historical[index][4];
-                weighedDef += row[6] - historical[index][6];
-                weighedWinrate += 100*row[3] - 100*historical[index][3];
-
-            }
-            ++index;
-        }
-    });
-    const rDAMAGE = weighedDamage / weighedExpDamage;
-    const rSPOT   = weighedSpots  / weighedExpSpots;
-    const rFRAG   = weighedFrag   / weighedExpFrag;
-    const rDEF    = weighedDef    / weighedExpDef;
-    const rWIN    = weighedWinrate   / weighedExpWinrate;
-
-    if (radar && !isNaN(rWIN)) {
-        radar[0][type] = (rDAMAGE).toFixed(2);
-        radar[1][type] = (rSPOT).toFixed(2);
-        radar[2][type] = (rFRAG).toFixed(2);
-        radar[3][type] = (rDEF).toFixed(2);
-        radar[4][type] = (rWIN).toFixed(2);
-    }
 }
 
 function NationDistCalculator(data) {
@@ -383,11 +328,11 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
             "data": []
         },
         expectedRatios : [
-            { 'stat': "rDAMAGE", 'overall': 0, 'recent': 0 },
-            { 'stat': "rSPOT", 'overall': 0, 'recent': 0 },
-            { 'stat': "rFRAG", 'overall': 0, 'recent': 0 },
-            { 'stat': "rDEF", 'overall': 0, 'recent': 0 },
-            { 'stat': "rWIN", 'overall': 0, 'recent': 0 },
+            { 'stat': "rDAMAGE", 'overall': recentStats.overallStats.radar.rDAMAGE, 'recent': recentStats.recents.recent1000.radar.rDAMAGE },
+            { 'stat': "rSPOT", 'overall': recentStats.overallStats.radar.rSPOT, 'recent': recentStats.recents.recent1000.radar.rSPOT },
+            { 'stat': "rFRAG", 'overall': recentStats.overallStats.radar.rFRAG, 'recent': recentStats.recents.recent1000.radar.rFRAG },
+            { 'stat': "rDEF", 'overall': recentStats.overallStats.radar.rDEF, 'recent': recentStats.recents.recent1000.radar.rDEF },
+            { 'stat': "rWIN", 'overall': recentStats.overallStats.radar.rWIN, 'recent': recentStats.recents.recent1000.radar.rWIN },
         ],
         tankWN8byClassTier: [
             { "Class": "HT", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0},
@@ -422,11 +367,6 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
             { "Class": "Overall", "I": 0, "II": 0, "III": 0, "IV": 0, "V": 0, "VI": 0, "VII": 0, "VIII": 0, "IX": 0, "X": 0}
         ],
     };
-
-
-    // if (recentStats.recent1000.tankStats.length > 0)
-    calculatePeriodWN8(recentStats.overall.tankStats, recent1000.tankStats, data.expectedRatios, "recent");
-    calculatePeriodWN8(recentStats.overall.tankStats, [], data.expectedRatios, "overall");
 
     const BattleCount = clonedeep(BattleCountTemplate);
     const BattleTracker = clonedeep(BattleTrackerTemplate);
