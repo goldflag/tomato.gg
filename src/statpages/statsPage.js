@@ -50,6 +50,7 @@ export default function StatsPage(props) {
     const [MOEstats, setMOEstats] = useState('');
     const [clanStats, setClanStats] = useState('');
     const [accountCreationDate, setAccountCreationDate] = useState('');
+    const [lastPlayedTime, setLastPlayedTime] = useState('');
     const [clanHistory, setClanHistory] = useState('');
     const [recentStats, setRecentStats] = useState('');
 
@@ -129,6 +130,7 @@ export default function StatsPage(props) {
             setWGRating(data1.data[id].global_rating);
             setMOEstats(data3.data[id]);
             setAccountCreationDate(data1.data[id].created_at);
+            setLastPlayedTime(data1.data[id].last_battle_time);
             setRecentStats(data6);
             console.log(data6);
             if (data1.data[id].statistics.all.battles === 0) {
@@ -168,12 +170,13 @@ export default function StatsPage(props) {
                   </>
     }
 
-    if (WGRating && username && stats && tanksstats && MOEstats && clanStats && clanHistory && accountCreationDate && recentStats && validID === true) {
+    if (WGRating && username && stats && tanksstats && MOEstats && clanStats && clanHistory && accountCreationDate && lastPlayedTime && recentStats && validID === true) {
       const graphData = GraphCalculator(recentStats.overallStats.tankWN8, stats, recentStats.overallStats.overallWN8, recentStats.overallStats.avgTier, recentStats);
       console.log(recentStats.recents);
       StatTable = <>
                       <div style = {{padding: '1em 0em'}}>
-                        <TopStats username = {username} WGRating = {WGRating} data = {graphData} stats = {stats} clanStats = {clanStats} accountCreationDate = {accountCreationDate}/>
+                        <TopStats username = {username} WGRating = {WGRating} data = {graphData} stats = {stats} 
+                          clanStats = {clanStats} accountCreationDate = {accountCreationDate} lastPlayedTime = {lastPlayedTime}/>
                       </div>
                       <div style = {{minHeight: '300px'}}>
                         <SessionsLogParent data = {recentStats.sessions}/>
