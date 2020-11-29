@@ -426,7 +426,6 @@ function PeriodBreakdown(props) {
     )
 }
 
-
 const [data, setData] = useState([]);
 
 // Runs once when component mounts
@@ -485,9 +484,9 @@ const columns = React.useMemo(
         },
         { Header: 'Games', accessor: 'battles' },
         { Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value}</div>) },
-            Header: setMid('WN8'), accessor: 'wn8' },
-            { Cell: ({ value }) => { return (<div style={WRStyle(value)}>{value + "%"}</div>) },
-            Header: setMid('Winrate'), accessor: 'winrate' },
+            Header: 'WN8', accessor: 'wn8' },
+        { Cell: ({ value }) => { return (<div style={WRStyle(value)}>{value + "%"}</div>) },
+        Header: 'Winrate', accessor: 'winrate' },
         { Header: 'DPG', accessor: 'dpg' },
         { Header: 'KPG', accessor: 'kpg' },
         { Header: 'DR', accessor: 'dmgRatio' },

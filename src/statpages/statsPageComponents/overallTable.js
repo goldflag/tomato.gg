@@ -279,39 +279,6 @@ function OverallTable(props) {
     )
   }
 
-  // This is a custom filter UI for selecting
-  // a unique option from a list
-  function SelectColumnFilter({
-    column: { filterValue, setFilter, preFilteredRows, id },
-  }) {
-    // Calculate the options for filtering
-    // using the preFilteredRows
-    const options = React.useMemo(() => {
-      const options = new Set()
-      preFilteredRows.forEach(row => {
-        options.add(row.values[id])
-      })
-      return [...options.values()]
-    }, [id, preFilteredRows])
-
-    // Render a multi-select box
-    return (
-      <select
-        value={filterValue}
-        onChange={e => {
-          setFilter(e.target.value || undefined)
-        }}
-      >
-        <option value="">All</option>
-        {options.map((option, i) => (
-          <option key={i} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-    )
-  }
-
   // This is a custom UI for our 'between' or number range
   // filter. It uses two number boxes and filters rows to
   // ones that have values between the two
@@ -679,9 +646,9 @@ filterGreaterThan.autoRemove = val => typeof val !== 'number'
             filter: 'between',            
           },
           { Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value}</div>) },
-              Header: setMid('WN8'), accessor: 'wn8', Filter: NumberRangeColumnFilter, filter: 'between', },
+              Header: 'WN8', accessor: 'wn8', Filter: NumberRangeColumnFilter, filter: 'between', },
           { Cell: ({ value }) => { return (<div style={WRStyle(value)}>{value + "%"}</div>) },
-              Header: setMid('Winrate'), accessor: 'winrate', Filter: NumberRangeColumnFilter, filter: 'between', },
+              Header: 'Winrate', accessor: 'winrate', Filter: NumberRangeColumnFilter, filter: 'between', },
           { Header: 'DPG', accessor: 'dpg', Filter: NumberRangeColumnFilter, filter: 'between', },
           { Header: 'KPG', accessor: 'kpg', disableFilters: true },
           { Header: 'WN8%tile', accessor: 'wn8percent', disableFilters: true },
