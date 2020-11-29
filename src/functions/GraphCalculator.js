@@ -423,7 +423,9 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
         ],
     };
 
-    calculatePeriodWN8(recentStats.overall.tankStats, recentStats.recent1000.tankStats, data.expectedRatios, "recent");
+
+    // if (recentStats.recent1000.tankStats.length > 0)
+    calculatePeriodWN8(recentStats.overall.tankStats, recent1000.tankStats, data.expectedRatios, "recent");
     calculatePeriodWN8(recentStats.overall.tankStats, [], data.expectedRatios, "overall");
 
     const BattleCount = clonedeep(BattleCountTemplate);
