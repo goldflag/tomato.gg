@@ -1,51 +1,36 @@
 import React from 'react';
-import zeroBattles from './GraphFunctions';
-import WN8 from '../data/wn8.json';
-import tankNames from '../data/tankNames.json';
-import nationConversion from '../data/nationConversion';
-import CDF from '../data/CDF.json';
-import jStat from 'jstat';
 import clonedeep from 'lodash.clonedeep';
 import BattleTrackerTemplate from '../templates/BattleTrackerTemplate';
 import EXPTrackerTemplate from '../templates/EXPTrackerTemplate';
 import BattleCountTemplate from '../templates/BattleCountTemplate';
-
+import WN8 from '../data/wn8.json';
 import simpleWN8 from './heatmapFunctions/simpleWN8';
 import calcTrackingVals from './heatmapFunctions/calcTrackingVals';
 
 function round(value, decimals) {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
-
-function WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN) {
-    const rWINc    = Math.max(0,                          (rWIN    - 0.71) / (1 - 0.71) );
-    const rDAMAGEc = Math.max(0,                          (rDAMAGE - 0.22) / (1 - 0.22) );
-    const rFRAGc   = Math.max(0, Math.min(rDAMAGEc + 0.2, (rFRAG   - 0.12) / (1 - 0.12)));
-    const rSPOTc   = Math.max(0, Math.min(rDAMAGEc + 0.1, (rSPOT   - 0.38) / (1 - 0.38)));
-    const rDEFc    = Math.max(0, Math.min(rDAMAGEc + 0.1, (rDEF    - 0.10) / (1 - 0.10)));
-    const WN8 = 980*rDAMAGEc + 210*rDAMAGEc*rFRAGc + 155*rFRAGc*rSPOTc + 75*rDEFc*rFRAGc + 145*Math.min(1.8,rWINc);
-    return WN8;
-}
-
-function calculateWN8(id, avgDamage, avgDef, avgFrag, avgSpots, winrate) {
-    const exp = WN8[id];
-    const rDAMAGE = avgDamage / exp.expDamage;
-    const rSPOT   = avgSpots  / exp.expSpot;
-    const rFRAG   = avgFrag   / exp.expFrag;
-    const rDEF    = avgDef    / exp.expDef;
-    const rWIN    = winrate   / exp.expWinRate;
-    return WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN);
-}
-
-const Conversion = {
-    'lightTank' : 'LT',
-    'mediumTank' : 'MT',
-    'heavyTank' : 'HT',
-    'AT-SPG' : 'TD',
-    'SPG' : 'SPG',
-}
-
 const tierToKey = { 1 : "I", 2 : "II", 3 : "III", 4 : "IV", 5 : "V", 6 : "VI", 7 : "VII", 8 : "VIII", 9 : "IX", 10 : "X" };
+
+function calculateRawOverall(overall) {
+    let calculatedStats = {
+        raw: []
+    };
+    overall.tankStats.map((row) => {
+        const winrate = row[3];
+        let raw = {
+            id: row[0],
+            battles: row[1],
+            damage: row[2],
+            def: row[6],
+            frags: row[4],
+            spots: row[5],
+            winrate: winrate*100/row[1]
+        };
+        calculatedStats.raw.push(raw);        
+    });
+    return calculatedStats;
+}
 
 function calculatePeriodWN8(overall, historical, radar=false, type) {
     let weighedExpDamage = 0, weighedExpSpots = 0, weighedExpFrag = 0, weighedExpDef = 0, weighedExpWinrate = 0;
@@ -99,171 +84,6 @@ function calculatePeriodWN8(overall, historical, radar=false, type) {
         radar[3][type] = (rDEF).toFixed(2);
         radar[4][type] = (rWIN).toFixed(2);
     }
-
-    return WN8Final(rDAMAGE, rSPOT, rFRAG, rDEF, rWIN);
-}
-
-function calculateRawOverall(overall) {
-    let calculatedStats = {
-        raw: []
-    };
-    overall.tankStats.map((row) => {
-        const winrate = row[3];
-        let raw = {
-            id: row[0],
-            battles: row[1],
-            damage: row[2],
-            def: row[6],
-            frags: row[4],
-            spots: row[5],
-            winrate: winrate*100/row[1]
-        };
-        calculatedStats.raw.push(raw);        
-    });
-    return calculatedStats;
-}
-
-function calculateRecents(statsSnapshot, overall) {
-    if (statsSnapshot === 'frog') {
-        return {
-            battles: 0, tier: '-', overallWN8: '-', wins: '-', losses: '-', draws: '-', damage: '-', damage_received: '-', frags: '-', destroyed: '-', survived: '-', spotted: '-', cap: '-', def: '-', xp: '-',
-            winrate: '-', lossrate: '-', drawrate: '-', damagerate: '-', fragsrate: '-', survivedrate: '-', spottedrate: '-', caprate: '-', defrate: '-', xprate: '-', KD: '-', DMGratio: '-', tankStats: []
-        };
-    }
-    
-    //the historical snapshot
-    let snapshotTanks = statsSnapshot.tankStats;
-    let calculatedStats = {
-        battles: 0,
-        tier: overall.tier - statsSnapshot.tier,
-        overallWN8: 0,
-        wins: overall.wins - statsSnapshot.wins,
-        losses: overall.losses - statsSnapshot.losses,
-        draws: overall.draws - statsSnapshot.draws,
-        damage: overall.damage - statsSnapshot.damage,
-        damage_received: overall.damageR - statsSnapshot.damageR,
-        frags: overall.frags - statsSnapshot.frags,
-        destroyed: overall.deaths - statsSnapshot.deaths,
-        survived: (overall.battles - overall.deaths) - (statsSnapshot.battles - statsSnapshot.deaths),
-        spotted: overall.spotted - statsSnapshot.spotted,
-        cap: overall.cap - statsSnapshot.cap,
-        def: overall.def - statsSnapshot.def,
-        xp: overall.xp - statsSnapshot.xp,
-        tankStats: [],
-        raw: []
-    };
-
-    const overallWN8 = parseInt(calculatePeriodWN8(overall.tankStats, statsSnapshot.tankStats));
-    calculatedStats.overallWN8 = overallWN8;
-    let index = 0;
-    overall.tankStats.map((row) => {
-        if (snapshotTanks.length < index + 1 || row[0] !== snapshotTanks[index][0]) {
-            const avgDamage = row[2] / row[1];
-            const avgDef = row[6] / row[1];
-            const avgFrag = row[4] / row[1];
-            const avgSpots = row[5] / row[1];
-            const winrate = row[3] * 100 / row[1];
-            const WN8 = calculateWN8(row[0], avgDamage, avgDef, avgFrag, avgSpots, winrate);
-            const destroyed = row[1] - row[7];
-
-            let vehicleRecentStats = [
-                <img src={require(`../assets/tankIcons/${row[0]}.png`)} alt={row[0]}/>,
-                tankNames[row[0]]['short_name'],
-                nationConversion[tankNames[row[0]]['nation']],
-                tankNames[row[0]]['tier'],
-                Conversion[tankNames[row[0]]['type']],
-                row[1],
-                (winrate).toFixed(2) + '%',
-                parseInt(WN8),
-                parseInt(avgDamage),
-                (jStat.gamma.cdf( WN8, CDF[row[0]].wn8.a, CDF[row[0]].wn8.b)*100).toFixed(2),
-                (jStat.gamma.cdf( avgDamage, CDF[row[0]].dpg.a, CDF[row[0]].dpg.b)*100).toFixed(2),
-                (avgFrag).toFixed(2),
-                (row[2]/row[8]).toFixed(2),
-                (row[4]/destroyed).toFixed(2),
-                avgSpots.toFixed(2),
-            ];
-            let raw = {
-                id: row[0],
-                battles: row[1],
-                damage: row[2],
-                def: row[6],
-                frags: row[4],
-                spots: row[5],
-                winrate: winrate
-            };
-            calculatedStats.tankStats.push(vehicleRecentStats);
-            calculatedStats.raw.push(raw);
-            calculatedStats.battles += row[1];
-        }
-        else {
-            if (row[1] !== snapshotTanks[index][1]) {
-                const battlesDiff = row[1] - snapshotTanks[index][1];
-                const dmgDiff = row[2] - snapshotTanks[index][2];
-                const defDiff = row[6] - snapshotTanks[index][6];
-                const fragDiff = row[4] - snapshotTanks[index][4];
-                const spotsDiff = row[5] - snapshotTanks[index][5];
-                const winsDiff = row[3] - snapshotTanks[index][3];
-
-                const avgDamage = dmgDiff / battlesDiff;
-                const avgDef = defDiff / battlesDiff;
-                const avgFrag = fragDiff / battlesDiff;
-                const avgSpots = spotsDiff / battlesDiff;
-                const winrate = winsDiff * 100 / battlesDiff;
-                const WN8 = calculateWN8(row[0], avgDamage, avgDef, avgFrag, avgSpots, winrate);
-
-                const destroyedDiff = (row[1] - row[7]) - (snapshotTanks[index][1] - snapshotTanks[index][7]);
-
-                let DMGRatio;
-                if (row[8] - snapshotTanks[index][8] === 0) { DMGRatio = 'No Damage Recieved' }
-                else { DMGRatio = ((row[2] - snapshotTanks[index][2])/(row[8] - snapshotTanks[index][8])).toFixed(2) }
-                let KDRatio;
-                if (destroyedDiff === 0) { KDRatio = 'No Deaths' }
-                else { KDRatio = (fragDiff/destroyedDiff).toFixed(2) }
-                    // <img src={require(`../assets/tankIcons/${row[0]}.png`)} alt={row[0]}/>,
-                    // tankNames[row[0]]['short_name'],
-                    // <img src={require(`../assets/flagIcons/${nationConversion[tankNames[row[0]]['nation']]}.svg`)} style={{display: 'block', maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[0]}/>,                    
-                    // tankNames[row[0]]['tier'],
-                    // <img src={require(`../assets/classIcons/${Conversion[tankNames[row[0]]['type']]}.png`)} style={{display: 'block', maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[1]}/>,
-                let vehicleRecentStats = [
-                    <img src={require(`../assets/tankIcons/${row[0]}.png`)} alt={row[0]}/>,
-                    tankNames[row[0]]['short_name'],
-                    nationConversion[tankNames[row[0]]['nation']],
-                    tankNames[row[0]]['tier'],
-                    Conversion[tankNames[row[0]]['type']],
-                    battlesDiff,
-                    (winrate).toFixed(2) + '%',
-                    parseInt(WN8),
-                    parseInt(avgDamage),     
-                    (jStat.gamma.cdf( WN8, CDF[row[0]].wn8.a, CDF[row[0]].wn8.b)*100).toFixed(2),
-                    (jStat.gamma.cdf( avgDamage, CDF[row[0]].dpg.a, CDF[row[0]].dpg.b)*100).toFixed(2),
-                    (avgFrag).toFixed(2),
-                    DMGRatio,
-                    KDRatio,
-                    avgSpots.toFixed(2),
-                ];
-                let raw = {
-                    id: row[0],
-                    battles: battlesDiff,
-                    damage: dmgDiff,
-                    def: defDiff,
-                    frags: fragDiff,
-                    spots: spotsDiff,
-                    winrate: winrate
-                };
-                calculatedStats.tankStats.push(vehicleRecentStats);
-                calculatedStats.raw.push(raw);
-                calculatedStats.battles += battlesDiff;
-            }
-            ++index;
-        }
-    });
-
-    // calculatedStats.tier = calculatedStats.tier / calculatedStats.battles;
-
-    calculatedStats = zeroBattles(calculatedStats);
-
-    return calculatedStats;
 }
 
 function NationDistCalculator(data) {
@@ -325,13 +145,13 @@ function clr(recent, overall, flipped) {
 export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentStats) {
 
     const overallStats = calculateRawOverall(recentStats.overall);
-    const recent24hr = calculateRecents(recentStats.recent24hr, recentStats.overall);
-    const recent3days = calculateRecents(recentStats.recent1week, recentStats.overall);
-    const recent1week = calculateRecents(recentStats.recent30days, recentStats.overall);
-    const recent30days = calculateRecents(recentStats.recent60days, recentStats.overall);
-    const recent60days = calculateRecents(recentStats.recent60days, recentStats.overall);
-    const recent500 = calculateRecents(recentStats.recent500, recentStats.overall);
-    const recent1000 = calculateRecents(recentStats.recent1000, recentStats.overall);
+    const recent24hr = recentStats.recents.recent24hr;
+    const recent3days = recentStats.recents.recent3days;
+    const recent1week = recentStats.recents.recent7days;
+    const recent30days = recentStats.recents.recent30days;
+    const recent60days = recentStats.recents.recent60days;
+    const recent500 = recentStats.recents.recent100;
+    const recent1000 = recentStats.recents.recent1000;
 
     const data = {
         overallWN8: overallWN8,
@@ -352,6 +172,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '3 Days': recent3days.battles, 
                 '7 Days': recent1week.battles, 
                 '30 Days': recent30days.battles,
+                '60 Days': recent60days.battles,
                 '100 Games': recent500.battles, 
                 '1000 Games': recent1000.battles
             },
@@ -361,6 +182,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '3 Days': recent3days.tier, 
                 '7 Days': recent1week.tier,  
                 '30 Days': recent30days.tier,  
+                '60 Days': recent60days.tier,  
                 '100 Games': recent500.tier, 
                 '1000 Games': recent1000.tier
             },
@@ -370,6 +192,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '3 Days': recent3days.overallWN8, 
                 '7 Days': recent1week.overallWN8, 
                 '30 Days': recent30days.overallWN8, 
+                '60 Days': recent60days.overallWN8, 
                 '100 Games': recent500.overallWN8, 
                 '1000 Games': recent1000.overallWN8
             },
@@ -379,6 +202,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '3 Days': <>{recent3days.wins}<span style={{ float: 'right', color: clr(recent3days.winrate, (OS.wins*100/OS.battles))}}>{recent3days.winrate}%</span></>, 
                 '7 Days': <>{recent1week.wins}<span style={{ float: 'right', color: clr(recent1week.winrate, (OS.wins*100/OS.battles))}}>{recent1week.winrate}%</span></>, 
                 '30 Days': <>{recent30days.wins}<span style={{ float: 'right', color: clr(recent30days.winrate, (OS.wins*100/OS.battles))}}>{recent30days.winrate}%</span></>, 
+                '60 Days': <>{recent60days.wins}<span style={{ float: 'right', color: clr(recent60days.winrate, (OS.wins*100/OS.battles))}}>{recent60days.winrate}%</span></>, 
                 '100 Games': <>{recent500.wins}<span style={{ float: 'right', color: clr(recent500.winrate, (OS.wins*100/OS.battles))}}>{recent500.winrate}%</span></>, 
                 '1000 Games': <>{recent1000.wins}<span style={{ float: 'right', color: clr(recent1000.winrate, (OS.wins*100/OS.battles))}}>{recent1000.winrate}%</span></>
             },
@@ -388,6 +212,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '3 Days': <>{recent3days.losses}<span style={{ float: 'right', color: clr(recent3days.lossrate, (OS.losses*100/OS.battles), true)}}>{recent3days.lossrate}%</span></>, 
                 '7 Days': <>{recent1week.losses}<span style={{ float: 'right', color: clr(recent1week.lossrate, (OS.losses*100/OS.battles), true)}}>{recent1week.lossrate}%</span></>, 
                 '30 Days': <>{recent30days.losses}<span style={{ float: 'right', color: clr(recent30days.lossrate, (OS.losses*100/OS.battles), true)}}>{recent30days.lossrate}%</span></>, 
+                '60 Days': <>{recent60days.losses}<span style={{ float: 'right', color: clr(recent60days.lossrate, (OS.losses*100/OS.battles), true)}}>{recent60days.lossrate}%</span></>, 
                 '100 Games': <>{recent500.losses}<span style={{ float: 'right', color: clr(recent500.lossrate, (OS.losses*100/OS.battles), true)}}>{recent500.lossrate}%</span></>, 
                 '1000 Games': <>{recent1000.losses}<span style={{ float: 'right', color: clr(recent1000.lossrate, (OS.losses*100/OS.battles), true)}}>{recent1000.lossrate}%</span></>
             },
@@ -397,6 +222,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '3 Days': <>{recent3days.draws}<span style={{ float: 'right', color: clr(recent3days.drawrate, (OS.draws*100/OS.battles), true)}}>{recent3days.drawrate}%</span></>, 
                 '7 Days': <>{recent1week.draws}<span style={{ float: 'right', color: clr(recent1week.drawrate, (OS.draws*100/OS.battles), true)}}>{recent1week.drawrate}%</span></>,  
                 '30 Days': <>{recent30days.draws}<span style={{ float: 'right', color: clr(recent30days.drawrate, (OS.draws*100/OS.battles), true)}}>{recent30days.drawrate}%</span></>,  
+                '60 Days': <>{recent60days.draws}<span style={{ float: 'right', color: clr(recent60days.drawrate, (OS.draws*100/OS.battles), true)}}>{recent60days.drawrate}%</span></>,  
                 '100 Games': <>{recent500.draws}<span style={{ float: 'right', color: clr(recent500.drawrate, (OS.draws*100/OS.battles), true)}}>{recent500.drawrate}%</span></>,  
                 '1000 Games': <>{recent1000.draws}<span style={{ float: 'right', color: clr(recent1000.drawrate, (OS.draws*100/OS.battles), true)}}>{recent1000.drawrate}%</span></>
             },
@@ -406,6 +232,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '3 Days': <>{recent3days.damage}<span style={{ float: 'right', color: clr(recent3days.damagerate, (OS.damage_dealt/OS.battles))}}>{recent3days.damagerate}</span></>, 
                 '7 Days': <>{recent1week.damage}<span style={{ float: 'right', color: clr(recent1week.damagerate, (OS.damage_dealt/OS.battles))}}>{recent1week.damagerate}</span></>, 
                 '30 Days': <>{recent30days.damage}<span style={{ float: 'right', color: clr(recent30days.damagerate, (OS.damage_dealt/OS.battles))}}>{recent30days.damagerate}</span></>, 
+                '60 Days': <>{recent60days.damage}<span style={{ float: 'right', color: clr(recent60days.damagerate, (OS.damage_dealt/OS.battles))}}>{recent60days.damagerate}</span></>, 
                 '100 Games': <>{recent500.damage}<span style={{ float: 'right', color: clr(recent500.damagerate, (OS.damage_dealt/OS.battles))}}>{recent500.damagerate}</span></>, 
                 '1000 Games': <>{recent1000.damage}<span style={{ float: 'right', color: clr(recent1000.damagerate, (OS.damage_dealt/OS.battles))}}>{recent1000.damagerate}</span></>
             },
@@ -415,6 +242,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '3 Days': <>{recent3days.frags}<span style={{ float: 'right', color: clr(recent3days.fragsrate, (OS.frags/OS.battles))}}>{recent3days.fragsrate}</span></>, 
                 '7 Days': <>{recent1week.frags}<span style={{ float: 'right', color: clr(recent1week.fragsrate, (OS.frags/OS.battles))}}>{recent1week.fragsrate}</span></>, 
                 '30 Days': <>{recent30days.frags}<span style={{ float: 'right', color: clr(recent30days.fragsrate, (OS.frags/OS.battles))}}>{recent30days.fragsrate}</span></>, 
+                '60 Days': <>{recent60days.frags}<span style={{ float: 'right', color: clr(recent60days.fragsrate, (OS.frags/OS.battles))}}>{recent60days.fragsrate}</span></>, 
                 '100 Games': <>{recent500.frags}<span style={{ float: 'right', color: clr(recent500.fragsrate, (OS.frags/OS.battles))}}>{recent500.fragsrate}</span></>,  
                 '1000 Games': <>{recent1000.frags}<span style={{ float: 'right', color: clr(recent1000.fragsrate, (OS.frags/OS.battles))}}>{recent1000.fragsrate}</span></>
             },
@@ -424,6 +252,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '3 Days': <><span style={{ color: clr(recent3days.KD, (OS.frags/(OS.battles - OS.survived_battles)))}}>{recent3days.KD}</span></>, 
                 '7 Days': <><span style={{ color: clr(recent1week.KD, (OS.frags/(OS.battles - OS.survived_battles)))}}>{recent1week.KD}</span></>, 
                 '30 Days': <><span style={{ color: clr(recent30days.KD, (OS.frags/(OS.battles - OS.survived_battles)))}}>{recent30days.KD}</span></>, 
+                '60 Days': <><span style={{ color: clr(recent60days.KD, (OS.frags/(OS.battles - OS.survived_battles)))}}>{recent60days.KD}</span></>, 
                 '100 Games': <><span style={{ color: clr(recent500.KD, (OS.frags/(OS.battles - OS.survived_battles)))}}>{recent500.KD}</span></>, 
                 '1000 Games': <><span style={{ color: clr(recent1000.KD, (OS.frags/(OS.battles - OS.survived_battles)))}}>{recent1000.KD}</span></>
             },
@@ -433,6 +262,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '3 Days': <><span style={{ color: clr(recent3days.DMGratio, (OS.damage_dealt/(OS.damage_received)))}}>{recent3days.DMGratio}</span></>, 
                 '7 Days': <><span style={{ color: clr(recent1week.DMGratio, (OS.damage_dealt/(OS.damage_received)))}}>{recent1week.DMGratio}</span></>, 
                 '30 Days': <><span style={{ color: clr(recent30days.DMGratio, (OS.damage_dealt/(OS.damage_received)))}}>{recent30days.DMGratio}</span></>, 
+                '60 Days': <><span style={{ color: clr(recent60days.DMGratio, (OS.damage_dealt/(OS.damage_received)))}}>{recent60days.DMGratio}</span></>, 
                 '100 Games': <><span style={{ color: clr(recent500.DMGratio, (OS.damage_dealt/(OS.damage_received)))}}>{recent500.DMGratio}</span></>, 
                 '1000 Games': <><span style={{ color: clr(recent1000.DMGratio, (OS.damage_dealt/(OS.damage_received)))}}>{recent1000.DMGratio}</span></>
             },
@@ -442,6 +272,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '3 Days': <>{recent3days.survived}<span style={{ float: 'right', color: clr(recent3days.survivedrate, (OS.survived_battles*100/(OS.battles)))}}>{recent3days.survivedrate}%</span></>, 
                 '7 Days': <>{recent1week.survived}<span style={{ float: 'right', color: clr(recent1week.survivedrate, (OS.survived_battles*100/(OS.battles)))}}>{recent1week.survivedrate}%</span></>,
                 '30 Days': <>{recent30days.survived}<span style={{ float: 'right', color: clr(recent30days.survivedrate, (OS.survived_battles*100/(OS.battles)))}}>{recent30days.survivedrate}%</span></>,
+                '60 Days': <>{recent60days.survived}<span style={{ float: 'right', color: clr(recent60days.survivedrate, (OS.survived_battles*100/(OS.battles)))}}>{recent60days.survivedrate}%</span></>,
                 '100 Games': <>{recent500.survived}<span style={{ float: 'right', color: clr(recent500.survivedrate, (OS.survived_battles*100/(OS.battles)))}}>{recent500.survivedrate}%</span></>, 
                 '1000 Games': <>{recent1000.survived}<span style={{ float: 'right', color: clr(recent1000.survivedrate, (OS.survived_battles*100/(OS.battles)))}}>{recent1000.survivedrate}%</span></>
             },
@@ -451,6 +282,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '3 Days': <>{recent3days.spotted}<span style={{ float: 'right', color: clr(recent3days.spottedrate, (OS.spotted/(OS.battles)))}}>{recent3days.spottedrate}</span></>, 
                 '7 Days': <>{recent1week.spotted}<span style={{ float: 'right', color: clr(recent1week.spottedrate, (OS.spotted/(OS.battles)))}}>{recent1week.spottedrate}</span></>,  
                 '30 Days': <>{recent30days.spotted}<span style={{ float: 'right', color: clr(recent30days.spottedrate, (OS.spotted/(OS.battles)))}}>{recent30days.spottedrate}</span></>,
+                '60 Days': <>{recent60days.spotted}<span style={{ float: 'right', color: clr(recent60days.spottedrate, (OS.spotted/(OS.battles)))}}>{recent60days.spottedrate}</span></>,
                 '100 Games': <>{recent500.spotted}<span style={{ float: 'right', color: clr(recent500.spottedrate, (OS.spotted/(OS.battles)))}}>{recent500.spottedrate}</span></>, 
                 '1000 Games': <>{recent1000.spotted}<span style={{ float: 'right', color: clr(recent1000.spottedrate, (OS.spotted/(OS.battles)))}}>{recent1000.spottedrate}</span></>
             },
@@ -460,6 +292,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '3 Days': <>{recent3days.cap}<span style={{ float: 'right', color: clr(recent3days.caprate, (OS.capture_points/(OS.battles)))}}>{recent3days.caprate}</span></>, 
                 '7 Days': <>{recent1week.cap}<span style={{ float: 'right', color: clr(recent1week.caprate, (OS.capture_points/(OS.battles)) )}}>{recent1week.caprate}</span></>, 
                 '30 Days': <>{recent30days.cap}<span style={{ float: 'right', color: clr(recent30days.caprate, (OS.capture_points/(OS.battles)))}}>{recent30days.caprate}</span></>, 
+                '60 Days': <>{recent60days.cap}<span style={{ float: 'right', color: clr(recent60days.caprate, (OS.capture_points/(OS.battles)))}}>{recent60days.caprate}</span></>, 
                 '100 Games': <>{recent500.cap}<span style={{ float: 'right', color: clr(recent500.caprate, (OS.capture_points/(OS.battles)))}}>{recent500.caprate}</span></>,
                 '1000 Games': <>{recent1000.cap}<span style={{ float: 'right', color: clr(recent1000.caprate, (OS.capture_points/(OS.battles)))}}>{recent1000.caprate}</span></>
             },
@@ -469,6 +302,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '3 Days': <>{recent3days.def}<span style={{ float: 'right', color: clr(recent3days.defrate, (OS.dropped_capture_points/(OS.battles)))}}>{recent3days.defrate}</span></>, 
                 '7 Days': <>{recent1week.def}<span style={{ float: 'right', color: clr(recent1week.defrate, (OS.dropped_capture_points/(OS.battles)))}}>{recent1week.defrate}</span></>, 
                 '30 Days': <>{recent30days.def}<span style={{ float: 'right', color: clr(recent30days.defrate, (OS.dropped_capture_points/(OS.battles)))}}>{recent30days.defrate}</span></>,
+                '60 Days': <>{recent60days.def}<span style={{ float: 'right', color: clr(recent60days.defrate, (OS.dropped_capture_points/(OS.battles)))}}>{recent60days.defrate}</span></>,
                 '100 Games': <>{recent500.def}<span style={{ float: 'right', color: clr(recent500.defrate, (OS.dropped_capture_points/(OS.battles)))}}>{recent500.defrate}</span></>,
                 '1000 Games': <>{recent1000.def}<span style={{ float: 'right', color: clr(recent1000.defrate, (OS.dropped_capture_points/(OS.battles)))}}>{recent1000.defrate}</span></>
             },
@@ -478,6 +312,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '3 Days': <>{recent3days.xp}<span style={{ float: 'right', color: clr(recent3days.xprate, (OS.battle_avg_xp))}}>{recent3days.xprate}</span></>,
                 '7 Days': <>{recent1week.xp}<span style={{ float: 'right', color: clr(recent1week.xprate, (OS.battle_avg_xp))}}>{recent1week.xprate}</span></>, 
                 '30 Days': <>{recent30days.xp}<span style={{ float: 'right', color: clr(recent30days.xprate, (OS.battle_avg_xp))}}>{recent30days.xprate}</span></>, 
+                '60 Days': <>{recent60days.xp}<span style={{ float: 'right', color: clr(recent60days.xprate, (OS.battle_avg_xp))}}>{recent60days.xprate}</span></>, 
                 '100 Games': <>{recent500.xp}<span style={{ float: 'right', color: clr(recent500.xprate, (OS.battle_avg_xp))}}>{recent500.xprate}</span></>,  
                 '1000 Games': <>{recent1000.xp}<span style={{ float: 'right', color: clr(recent1000.xprate, (OS.battle_avg_xp))}}>{recent1000.xprate}</span></>
             },
@@ -601,14 +436,15 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
     const RecentWinsCount = clonedeep(BattleCountTemplate);
 
     const numToMastery = { 0 : "None", 1 : "3rd", 2 : "2nd", 3 : "1st", 4 : "Ace" };
+
     stats.map((row) => {
-        data.tierDist[row[3] - 1][row[4]] += row[5];
-        if (row[3] > 4) {
-            data.tierMoeDist[row[3] - 5][row[18]] += 1;
+        data.tierDist[row.tier - 1][row.class] += row.battles;
+        if (row.tier > 4) {
+            data.tierMoeDist[row.tier - 5][row.moe] += 1;
         }
-        data.tierMasteryDist[row[3] - 1][numToMastery[row[19]]] += 1;
-        data.NationDist[row[2]] += row[5];
-        data.ClassDist[row[4]] += row[5];
+        data.tierMasteryDist[row.tier - 1][numToMastery[row.mastery]] += 1;
+        data.NationDist[row.nation] += row.battles;
+        data.ClassDist[row.class] += row.battles;
     });
 
     recent1000.tankStats.map((tank) => {

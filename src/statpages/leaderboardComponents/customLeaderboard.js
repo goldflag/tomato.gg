@@ -10,6 +10,8 @@ import { chevronRight } from 'react-icons-kit/feather/chevronRight'
 import { chevronLeft } from 'react-icons-kit/feather/chevronLeft'
 import { chevronsRight } from 'react-icons-kit/feather/chevronsRight'
 import { chevronsLeft } from 'react-icons-kit/feather/chevronsLeft'
+import {arrowDown} from 'react-icons-kit/feather/arrowDown';
+import {arrowUp} from 'react-icons-kit/feather/arrowUp';
 
 export default function CustomLeaderboard(props) {
     const {theme} = React.useContext(ThemeContext);
@@ -198,13 +200,13 @@ export default function CustomLeaderboard(props) {
                     {headerGroup.headers.map(column => (
                     <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                         {column.render('Header')}
-                        <div style={{textAlign: 'center'}}>
+                        <span style={{textAlign: 'center'}}>
                             {column.isSorted
                             ? column.isSortedDesc
-                                ? ' ▲'
-                                : ' ▼'
+                                ? <Icon size={16} icon={arrowUp} />
+                                : <Icon size={16} icon={arrowDown} />
                             : ''}
-                        </div>
+                        </span>
                     </th>
                     ))}
                 </tr>

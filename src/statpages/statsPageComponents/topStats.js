@@ -1,9 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import OverallStatsTable from './overallStatsTable.js';
-import RecentTankStats from './allTankStats.js';
 import WN8color from '../../functions/WN8color';
 import WRcolor from '../../functions/WRcolor';
 import PRcolor from '../../functions/PRcolor';
@@ -65,7 +63,7 @@ export default function TopStats(props) {
   }
   
   let clanInfo = <></>
-  if (props.clanStats != 'NO CLAN') {
+  if (props.clanStats !== 'NO CLAN') {
     clanInfo = <span style={{color: 'white'}}> 
         {props.clanStats.role_i18n} at 
         <span style={{color: props.clanStats.clan.color, fontWeight: '600'}}> [{props.clanStats.clan.tag}] </span>

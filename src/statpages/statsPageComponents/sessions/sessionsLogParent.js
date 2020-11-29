@@ -1,11 +1,10 @@
-
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import OverallTable from './overallTable';
-import PeriodBreakdown from './periodBreakdown';
+import SessionsLog from './sessionsLog';
+import Paper from '@material-ui/core/Paper';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -65,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NationDist(props) {
+export default function ExpectedDist(props) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
@@ -75,44 +74,14 @@ export default function NationDist(props) {
 
   return (
     <div className={classes.root}>
-      <div>
+      <Paper square elevation={2}>
         <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
-          <CustomTab label="OVERALL" /> 
-          <CustomTab label="24 HOURS" /> 
-          <CustomTab label="3 DAYS" /> 
-          <CustomTab label="7 DAYS" /> 
-          <CustomTab label="30 DAYS" /> 
-          <CustomTab label="60 DAYS" /> 
-          <CustomTab label="100 BATTLES" /> 
-          <CustomTab label="1000 BATTLES" /> 
+          <CustomTab label="DAILY SESSIONS LOG" /> 
         </CustomTabs>
         <TabPanel value={value} index={0}>
-          <OverallTable data = {props.overall}/>
+            <SessionsLog data={props.data}/>
         </TabPanel>
-        <TabPanel value={value} index={1}>
-          <PeriodBreakdown data = {props.recents.recent24hr.tankStats} />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <PeriodBreakdown data = {props.recents.recent3days.tankStats} />
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          <PeriodBreakdown data = {props.recents.recent7days.tankStats} />
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          <PeriodBreakdown data = {props.recents.recent30days.tankStats} />
-        </TabPanel>
-        <TabPanel value={value} index={5}>
-          <PeriodBreakdown data = {props.recents.recent30days.tankStats} />
-        </TabPanel>
-        <TabPanel value={value} index={6}>
-          <PeriodBreakdown data = {props.recents.recent100.tankStats} />
-        </TabPanel>
-        <TabPanel value={value} index={7}>
-          <PeriodBreakdown data = {props.recents.recent1000.tankStats} />
-        </TabPanel>
-      </div>            
+      </Paper>            
     </div>
   );
 }
-
-

@@ -3639,6 +3639,14 @@
         "tier": 10,
         "type": "heavyTank"
     },
+    "32257": {
+        "is_gift": false,
+        "short_name": "Obj. 274a",
+        "nation": "ussr",
+        "is_premium": true,
+        "tier": 8,
+        "type": "mediumTank"
+    },
     "43329": {
         "is_gift": false,
         "short_name": "AM Gendron",
@@ -3965,6 +3973,14 @@
         "nation": "germany",
         "is_premium": true,
         "tier": 8,
+        "type": "lightTank"
+    },
+    "50977": {
+        "is_gift": false,
+        "short_name": "Super Chaffee",
+        "nation": "usa",
+        "is_premium": true,
+        "tier": 6,
         "type": "lightTank"
     },
     "51089": {

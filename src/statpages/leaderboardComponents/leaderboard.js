@@ -10,6 +10,8 @@ import { chevronRight } from 'react-icons-kit/feather/chevronRight'
 import { chevronLeft } from 'react-icons-kit/feather/chevronLeft'
 import { chevronsRight } from 'react-icons-kit/feather/chevronsRight'
 import { chevronsLeft } from 'react-icons-kit/feather/chevronsLeft'
+import {arrowDown} from 'react-icons-kit/feather/arrowDown';
+import {arrowUp} from 'react-icons-kit/feather/arrowUp';
 
 export default function Leaderboard(props) {
     const {theme} = React.useContext(ThemeContext);
@@ -75,7 +77,6 @@ export default function Leaderboard(props) {
         color: white;
         border-radius: 50%;
     }
-
     `
 
     const [data, setData] = useState([]);
@@ -190,22 +191,17 @@ export default function Leaderboard(props) {
             Header: setMid('Battles'), accessor: 'battles'}
     ],
   }
-
-  function setMid(string) {
-      return <div style={{textAlign: 'center'}}>{string}</div>
-  }
-
-  function WN8Style(wn8) {
-    return {
-        background: WN8c(wn8), color: 'white', padding: '8px', margin: '-8px -8px', textAlign: 'center'
+    function setMid(string) {
+        return <div style={{textAlign: 'center'}}>{string}</div>
     }
-  }
 
-  function WRStyle(wr) {
-    return {
-        background: WRc(wr), color: 'white', padding: '8px', margin: '-8px -8px', textAlign: 'center'
+    function WN8Style(wn8) {
+        return { background: WN8c(wn8), color: 'white', padding: '8px', margin: '-8px -8px', textAlign: 'center' }
     }
-  }
+
+    function WRStyle(wr) {
+        return { background: WRc(wr), color: 'white', padding: '8px', margin: '-8px -8px', textAlign: 'center' }
+    }
 
   const columns = React.useMemo(
     () => colOptions[props.type],
@@ -238,10 +234,9 @@ export default function Leaderboard(props) {
             initialState: { pageIndex: 0, pageSize: 100 },
         },
         useSortBy, usePagination
-    )
+    );
 
     return (
-
         <Styles>
             <table {...getTableProps()}>
                 <thead>
@@ -250,13 +245,13 @@ export default function Leaderboard(props) {
                     {headerGroup.headers.map(column => (
                     <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                         {column.render('Header')}
-                        <div style={{textAlign: 'center'}}>
+                        <span style={{textAlign: 'center'}}>
                             {column.isSorted
                             ? column.isSortedDesc
-                                ? ' ▲'
-                                : ' ▼'
+                                ? <Icon size={16} icon={arrowUp} />
+                                : <Icon size={16} icon={arrowDown} />
                             : ''}
-                        </div>
+                        </span>
                     </th>
                     ))}
                 </tr>
@@ -318,7 +313,6 @@ export default function Leaderboard(props) {
                 ))}
                 </select>
             </div>
-
         </Styles>
     );
 }

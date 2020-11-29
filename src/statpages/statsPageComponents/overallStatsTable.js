@@ -133,6 +133,17 @@ export default function OverallStatsTable(props) {
             }
         },
         {
+            name: '60 Days',
+            options: {
+                filter: false,
+                setCellProps: (rowIndex, cellValue) => {
+                    return {
+                        style: tableStyle(rowIndex, cellValue),
+                    };
+                },
+            }
+        },
+        {
             name: '100 Games',
             options: {
                 filter: false,
