@@ -38,10 +38,10 @@ const themes = {
   }
 
 const initialState = {
-    dark: false,
-    theme: 'light',
+    dark: true,
+    theme: 'dark',
     toggle: () => {}
-  }
+}
 const ThemeContext = React.createContext(initialState)
 
 function ThemeProvider({ children }) {

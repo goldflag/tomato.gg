@@ -162,7 +162,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
                 '1000 Games': <>{recent1000.losses}<span style={{ float: 'right', color: clr(recent1000.lossrate, (OS.losses*100/OS.battles), true)}}>{recent1000.lossrate}%</span></>
             },
             {'name': 'Draws', 
-                'Overall': <>{OS.battles-OS.wins-OS.losses} <span style={{float: 'right'}}> {((OS.battles-OS.wins-OS.losses)*100/OS.losses).toFixed(2)}%</span></>, 
+                'Overall': <>{OS.draws} <span style={{float: 'right'}}> {((OS.draws)*100/OS.battles).toFixed(2)}%</span></>, 
                 '24 Hours': <>{recent24hr.draws}<span style={{ float: 'right', color: clr(recent24hr.drawrate, (OS.draws*100/OS.battles), true)}}>{recent24hr.drawrate}%</span></>, 
                 '3 Days': <>{recent3days.draws}<span style={{ float: 'right', color: clr(recent3days.drawrate, (OS.draws*100/OS.battles), true)}}>{recent3days.drawrate}%</span></>, 
                 '7 Days': <>{recent1week.draws}<span style={{ float: 'right', color: clr(recent1week.drawrate, (OS.draws*100/OS.battles), true)}}>{recent1week.drawrate}%</span></>,  

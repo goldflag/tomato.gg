@@ -24,7 +24,6 @@ import { matchSorter } from 'match-sorter';
 import { ThemeContext } from '../../style/theme.js';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Slider from '@material-ui/core/Slider';
 
 function setMid(string) {
     return <div style={{textAlign: 'center'}}>{string}</div>

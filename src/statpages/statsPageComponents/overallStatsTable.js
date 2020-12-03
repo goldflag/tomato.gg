@@ -23,10 +23,10 @@ export default function OverallStatsTable(props) {
           },
         },
         MuiToolbar: {
-          root: {
-            backgroundColor: theme === 'dark' ? 'rgb(40, 40, 45)' : 'rgb(220, 220, 223)',
-            color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(20, 20, 20)',
-          },
+          // root: {
+          //   backgroundColor: theme === 'dark' ? 'rgb(40, 40, 45)' : 'rgb(220, 220, 223)',
+          //   color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(20, 20, 20)',
+          // },
         },
         MuiTableCell: {
           root: {
