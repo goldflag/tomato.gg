@@ -34,7 +34,8 @@ function WN8Style(wn8) {
 }
 
 function WRStyle(wr) {
-    return { background: WRc(wr), color: 'white', padding: '9px', margin: '-0.3rem -0.5rem', textAlign: 'center' }
+  return { background: WRc(wr), color: 'white', padding: '9px', margin: '-0.3rem -0.5rem', textAlign: 'center' }
+  //return { background: WRc(wr), color: 'white', width: '100%', height: '100%' }
 }
 
 function OverallTable(props) {
@@ -450,7 +451,7 @@ function OverallTable(props) {
     // console.log(rowData);
     return (
         <div>
-            gfdgdfdgf
+            Under Construction
         </div>
     )
 }
@@ -644,9 +645,23 @@ filterGreaterThan.autoRemove = val => typeof val !== 'number'
             Filter: NumberRangeColumnFilter,
             filter: 'between',            
           },
-          { Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value}</div>) },
-              Header: 'WN8', accessor: 'wn8', Filter: NumberRangeColumnFilter, filter: 'between', },
-          { Cell: ({ value }) => { return (<div style={WRStyle(value)}>{value + "%"}</div>) },
+          { 
+            Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value + "%"}</div>)},
+            Header: 'WN8', 
+            accessor: 'wn8', 
+            Filter: NumberRangeColumnFilter, 
+            filter: 'between',
+            cellStyle: (state, rowInfo) => { 
+              return { 
+                style: { 
+                  backgroundColor: 'red'
+                }, 
+              }; 
+            }
+          },
+          { 
+            Cell: ({ value }) => { return (<div style={WRStyle(value)}>{value + "%"}</div>) 
+            },
               Header: 'Winrate', accessor: 'winrate', Filter: NumberRangeColumnFilter, filter: 'between', },
           { Header: 'DPG', accessor: 'dpg', Filter: NumberRangeColumnFilter, filter: 'between', },
           { Header: 'KPG', accessor: 'kpg', disableFilters: true },
