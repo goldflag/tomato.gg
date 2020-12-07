@@ -7,8 +7,8 @@ import Snowfall from 'react-snowfall';
 function Main() {
   return (
     <ThemeProvider>
-        <Snowfall/>
-        <Tomatopedia />
+      <Snowfall/>
+      <Tomatopedia />
     </ThemeProvider>
   );
 }

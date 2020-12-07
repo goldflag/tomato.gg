@@ -149,9 +149,11 @@ export default function ClanHistory(props) {
               <Grid container spacing={1}>
                 <Grid item xs={5}>
                   <div style={{ margin: 'auto', width: '80%', fontSize: '16px', color: row.color }}>
-                    <img src={row.icon} alt={row.clan_name}/>
+                    <span style={{display: 'flex', justifyContent: 'center'}}>
+                      <img src={row.icon} alt={row.clan_name}/>
+                    </span>
                     <span style={{display: 'flex', justifyContent: 'center', fontWeight: '500'}}>
-                    {`[${row.clan_name}]`}
+                      {`[${row.clan_name}]`}
                     </span>
                   </div>
                 </Grid>
@@ -193,7 +195,7 @@ export default function ClanHistory(props) {
     <div className={classes.root}>
       <div>
         <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
-          <CustomTab label="CLAN HISTORY (Scrollable)" /> 
+          <CustomTab label="CLAN HISTORY" /> 
         </CustomTabs>
         <TabPanel value={value} index={0} >
           <div style={{padding: '10px 0px 0px 10px' }}>
