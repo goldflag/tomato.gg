@@ -646,7 +646,7 @@ filterGreaterThan.autoRemove = val => typeof val !== 'number'
             filter: 'between',            
           },
           { 
-            Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value + "%"}</div>)},
+            Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value}</div>)},
             Header: 'WN8', 
             accessor: 'wn8', 
             Filter: NumberRangeColumnFilter, 
