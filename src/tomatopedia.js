@@ -11,7 +11,6 @@ import ServerStatsPage from './statpages/serverStatsPage';
 import TankPage from './statpages/tankPage';
 import StatsReference from './statpages/statsReference';
 import Leaderboards from './statpages/leaderboards';
-
 import "./css/body.css";
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { ThemeContext }  from './style/theme.js';
