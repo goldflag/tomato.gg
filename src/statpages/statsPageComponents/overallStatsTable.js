@@ -23,15 +23,19 @@ export default function OverallStatsTable(props) {
           },
         },
         MuiToolbar: {
-          // root: {
-          //   backgroundColor: theme === 'dark' ? 'rgb(40, 40, 45)' : 'rgb(220, 220, 223)',
-          //   color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(20, 20, 20)',
-          // },
+          root: {
+            backgroundColor: theme === 'dark' ? 'rgb(40, 40, 45)' : 'rgb(220, 220, 223)',
+            color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(20, 20, 20)',
+          },
         },
         MuiTableCell: {
+          head: {
+            backgroundColor: 'rgb(76, 90, 166)',
+            color: 'white',
+            borderBottom: 'none',
+          },
           root: {
             backgroundColor: theme === 'dark' ? 'rgb(40, 40, 45)' : 'white',
-            borderColor: 'black'
           }
         },
         MUIDataTableSelectCell: {
@@ -71,7 +75,9 @@ export default function OverallStatsTable(props) {
                       style: { 
                         backgroundColor: theme === 'dark' ? 'rgb(45, 45, 50)' : 'rgb(246, 246, 252)',
                         color: theme === 'dark' ? 'white' : 'black',
-                        border: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)', 
+                        borderRight: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)', 
+                        borderTop: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)', 
+                        borderBottom: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)', 
                       },
                   };
                 },

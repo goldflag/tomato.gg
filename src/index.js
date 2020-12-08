@@ -7,7 +7,7 @@ import Snowfall from 'react-snowfall';
 function Main() {
   return (
     <ThemeProvider>
-      <Snowfall/>
+      <Snowfall snowflakeCount={75}/>
       <Tomatopedia />
     </ThemeProvider>
   );
