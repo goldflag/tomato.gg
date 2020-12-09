@@ -4702,5 +4702,12 @@
         "expSpot": 1.367,
         "expDamage": 1245.798,
         "expWinRate": 52.259
+    },
+    "46097": {
+        "expDef": 0.498,
+        "expFrag": 0.863,
+        "expSpot": 1,
+        "expDamage": 360.798,
+        "expWinRate": 54.259
     }
 }
