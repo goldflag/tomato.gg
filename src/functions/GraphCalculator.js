@@ -5,6 +5,7 @@ import EXPTrackerTemplate from '../templates/EXPTrackerTemplate';
 import BattleCountTemplate from '../templates/BattleCountTemplate';
 import simpleWN8 from './heatmapFunctions/simpleWN8';
 import calcTrackingVals from './heatmapFunctions/calcTrackingVals';
+import { ThemeContext } from '../style/theme.js';
 
 function round(value, decimals) {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
@@ -77,17 +78,20 @@ function ClassDistCalculator(data) {
     return NewClassDist;    
 }
 
-function clr(recent, overall, flipped) {
-    if (recent === '-') return 'rgb(50,50,50)';
-    if (flipped) {
-        if (overall < recent) return 'red';
-        else return 'green';
-    }
-    if (overall > recent) return 'red';
-    else return 'green';
-}
-
 export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentStats) {
+
+    const {theme} = React.useContext(ThemeContext);
+
+    function clr(recent, overall, flipped) {
+        if (recent === '-') return 'rgb(50,50,50)';
+        if (flipped) {
+            if (overall < recent) return theme === 'dark' ? 'rgb(255, 41, 94)' : 'red';
+            else return theme === 'dark' ? 'rgb(52, 235, 89)' : 'green';
+        }
+        if (overall > recent) return theme === 'dark' ? 'rgb(255, 41, 94)' : 'red';
+        else return theme === 'dark' ? 'rgb(52, 235, 89)' : 'green';
+    }
+    
 
     const overallStats = calculateRawOverall(recentStats.overall);
     const recent24hr = recentStats.recents.recent24hr;
