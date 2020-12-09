@@ -2891,7 +2891,7 @@
         "is_gift": false,
         "short_name": "Aufkl.Panther",
         "nation": "germany",
-        "is_premium": false,
+        "is_premium": true,
         "tier": 7,
         "type": "lightTank"
     },
@@ -3751,6 +3751,14 @@
         "tier": 8,
         "type": "mediumTank"
     },
+    "46097": {
+        "is_gift": false,
+        "short_name": "Pz.Sfl. IC",
+        "nation": "germany",
+        "is_premium": true,
+        "tier": 4,
+        "type": "AT-SPG"
+    },
     "46337": {
         "is_gift": false,
         "short_name": "T-44-100 (U)",
@@ -3959,6 +3967,14 @@
         "tier": 8,
         "type": "mediumTank"
     },
+    "50849": {
+        "is_gift": false,
+        "short_name": "Carro 45 t",
+        "nation": "italy",
+        "is_premium": true,
+        "tier": 10,
+        "type": "mediumTank"
+    },
     "50945": {
         "is_gift": false,
         "short_name": "T-45",
@@ -3990,6 +4006,14 @@
         "is_premium": true,
         "tier": 8,
         "type": "mediumTank"
+    },
+    "51105": {
+        "is_gift": false,
+        "short_name": "Bisonte C45",
+        "nation": "italy",
+        "is_premium": true,
+        "tier": 8,
+        "type": "heavyTank"
     },
     "51201": {
         "is_gift": false,
@@ -4166,6 +4190,14 @@
         "is_premium": true,
         "tier": 5,
         "type": "mediumTank"
+    },
+    "52305": {
+        "is_gift": false,
+        "short_name": "GSOR 1008",
+        "nation": "uk",
+        "is_premium": true,
+        "tier": 8,
+        "type": "AT-SPG"
     },
     "52321": {
         "is_gift": true,
