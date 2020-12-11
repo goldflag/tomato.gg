@@ -7,6 +7,11 @@ import WRc from '../../../functions/WRcolor';
 import { Icon } from 'react-icons-kit'
 import { arrowDown } from 'react-icons-kit/feather/arrowDown';
 import { arrowUp } from 'react-icons-kit/feather/arrowUp';
+import { chevronRight } from 'react-icons-kit/feather/chevronRight'
+import { chevronLeft } from 'react-icons-kit/feather/chevronLeft'
+import { chevronsRight } from 'react-icons-kit/feather/chevronsRight'
+import { chevronsLeft } from 'react-icons-kit/feather/chevronsLeft'
+import { chevronDown } from 'react-icons-kit/feather/chevronDown'
 import { ThemeContext } from '../../../style/theme.js';
 
 function setMid(string) {
@@ -29,7 +34,6 @@ export default function SessionBreakdown(props) {
         border-spacing: 0;
         width: 100%;
         font-size: 0.8rem;
-        margin: -0.3rem;
         tr {
             :last-child {
                 td {
@@ -114,27 +118,39 @@ export default function SessionBreakdown(props) {
         getTableProps,
         getTableBodyProps,
         headerGroups,
+        rows,
         prepareRow,
-        page,
+        visibleColumns,
+        page, // Instead of using 'rows', we'll use page,
+        // which has only the rows for the active page
+        // The rest of these things are super handy, too ;)
+        canPreviousPage,
+        canNextPage,
+        pageOptions,
+        pageCount,
+        gotoPage,
+        nextPage,
+        previousPage,
+        setPageSize,
+        state: { pageIndex, pageSize },
     } = useTable(
         { 
             columns, 
             data,
-            hiddenColumns: ['prem'],
+            initialState: { pageIndex: 0, pageSize: 10 },
             sortBy: [
-              {
-                  id: 'tier',
-                  desc: true
-              },
-              {
-                  id: 'dpg',
-                  desc: true
-              }
-          ] 
+                {
+                    id: 'tier',
+                    desc: true
+                },
+                {
+                    id: 'dpg',
+                    desc: true
+                }
+            ] 
         },
         useSortBy, useExpanded, usePagination
     );
-
 
     return (
         <Styles>
@@ -170,6 +186,38 @@ export default function SessionBreakdown(props) {
                     })}
                 </tbody>
             </table>
+            <div className="pagination">
+                <button className={'paginationButton'} onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                <Icon size={24} icon={chevronsLeft} />
+                </button>{' '}
+                <button className={'paginationButton'} onClick={() => previousPage()} disabled={!canPreviousPage}>
+                <Icon size={24} icon={chevronLeft} />
+                </button>{' '}
+                <button className={'paginationButton'} onClick={() => nextPage()} disabled={!canNextPage}>
+                <Icon size={24} icon={chevronRight} />
+                </button>{' '}
+                <button className={'paginationButton'} onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+                <Icon size={24} icon={chevronsRight} />
+                </button>{' '}
+                {/* <span> */}
+                    Page{' '}
+                    {pageIndex + 1} of {pageOptions.length}
+                    {' '}
+                {/* </span> */}
+                {'  '}
+                <select
+                    value={pageSize}
+                    onChange={e => {
+                        setPageSize(Number(e.target.value))
+                    }}
+                    >
+                    {[10, 20, 30].map(pageSize => (
+                        <option key={pageSize} value={pageSize}>
+                        Show {pageSize}
+                        </option>
+                    ))}
+                </select>
+            </div>
         </Styles>
     );
 }

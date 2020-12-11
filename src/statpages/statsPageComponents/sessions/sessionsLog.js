@@ -52,11 +52,7 @@ export default function SessionsLog(props) {
             font-weight: 500;
         }
         td {
-            margin: 0;
-            padding: 0.3rem 0.5rem;
-            :last-child {
-                border-right: 0;
-            }
+            padding: 0.2rem 0.5rem;
         }
     }
 
