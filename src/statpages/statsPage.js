@@ -109,8 +109,8 @@ export default function StatsPage(props) {
       //Clan history
       const url5 = `https://api.worldoftanks.${server}/wot/clans/memberhistory/?application_id=${APIKey}&account_id=${id}`;
       //Recent stats from our own API
-      //const url6 = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/${server}/${id}`;
-      const url6 = `http://localhost:5000/api/abcd/${server}/${id}`;
+      const url6 = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/${server}/${id}`;
+      //const url6 = `http://localhost:5000/api/abcd/${server}/${id}`;
 
       console.log(backendKey);
       try {
