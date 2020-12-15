@@ -92,7 +92,7 @@ export default function Leaderboard(props) {
     }
 
     async function fetchData() {
-        const url = `https://tomatobackend-oswt3.ondigitalocean.app//api/abcd/leaderboards/${props.type}/1000`;
+        const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/leaderboards/${props.type}/1000`;
         // const url = `http://localhost:5000/api/abcd/leaderboards/${props.type}/1000`;
         const raw = await fetch(url);
         let res = await raw.json();
