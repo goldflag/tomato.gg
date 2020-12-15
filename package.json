@@ -27,6 +27,7 @@
     "primeicons": "^4.0.0",
     "primereact": "^5.0.0",
     "react": "^16.13.1",
+    "react-adsense": "^0.1.0",
     "react-dark-mode-toggle": "0.0.9",
     "react-dom": "^16.13.1",
     "react-ga": "^3.1.2",

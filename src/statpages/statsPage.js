@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import ReactGA from 'react-ga';
 import { makeStyles } from '@material-ui/core/styles';
 import TopStats from './statsPageComponents/topStats';
+import AdSense from 'react-adsense';
 import "../css/style.css";
 import "../css/innerpage.css";
 import serverConv from '../data/serverConv';
@@ -187,6 +188,10 @@ export default function StatsPage(props) {
                       <div style = {{padding: '1em 0em'}}>
                         <AllTankStats overall = {recentStats.overallStats.tankWN8} recents = {recentStats.recents} />
                       </div>
+                      <AdSense.Google
+                        client='pub-1358649580645755'
+                        slot='3903354081'
+                      />
                   </>
     } 
     
