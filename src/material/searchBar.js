@@ -40,25 +40,6 @@ export default function SearchBar(props) {
   }));
 
   const classes = useStyles();
-  const [featuredPlayer, setFeaturedPlayer] = useState(      
-  <InputBase
-    className={classes.input}
-    placeholder="Enter Username (e.g. lordsheen)"
-    inputProps={{ 'aria-label': 'search google maps' }}
-    onChange={e => props.setName(e.target.value)}
-  />);
-  useEffect(() => {
-    if (Math.random() > 0.5) {
-      setFeaturedPlayer(      
-      <InputBase
-        className={classes.input}
-        placeholder="Enter Username (e.g. haglar)"
-        inputProps={{ 'aria-label': 'search google maps' }}
-        onChange={e => props.setName(e.target.value)}
-      />);
-    }
-  },[]);
-
   
   return (
     <Paper component="form" className={classes.root}>

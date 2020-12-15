@@ -93,11 +93,7 @@ export default function CustomLeaderboard(props) {
     }
 
     async function fetchData() {
-        //const url = `https://tomatobackend.herokuapp.com/api/abcd/leaderboards/${props.type}/1000`;
-        ///api/abcd/leaderboards/custom/:type/:count/:mintier/:maxtier/:minbattles/:maxbattles/:minwn8/:maxwn8/:minwinrate/:maxwinrate
-        console.log(props);
-
-        const url = `https://tomatobackend.herokuapp.com/api/abcd/leaderboards/custom/
+        const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/leaderboards/custom/
             ${props.type}/${props.count}/${props.mintier}/${props.maxtier}/${props.minbattles}/${props.maxbattles}/${props.minWN8}/${props.maxWN8}/${props.minwinrate}/${props.maxwinrate}`;
             console.log(url);
         const raw = await fetch(url);
