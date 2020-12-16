@@ -1,42 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-// export default () => {
-//   const [theme, setTheme] = useState('light')
-
-//   const toggleTheme = () => {
-//     if (theme === 'light') {
-//       window.localStorage.setItem('theme', 'dark')
-//       setTheme('dark')
-//     } else {
-//       window.localStorage.setItem('theme', 'light')
-//       setTheme('light')
-//     }
-//   }
-
-//   useEffect(() => {
-//     const localTheme = window.localStorage.getItem('theme')
-//     if (localTheme) {
-//       setTheme(localTheme)
-//     }
-//   }, [])
-
-//   return [
-//     theme,
-//     toggleTheme,
-//   ]
-// }
-
-const themes = {
-    dark: {
-      backgroundColor: 'black',
-      color: 'white'
-    },
-    light: {
-      backgroundColor: 'white',
-      color: 'black'
-    }
-  }
-
 const initialState = {
     dark: true,
     theme: 'dark',
@@ -45,12 +8,13 @@ const initialState = {
 const ThemeContext = React.createContext(initialState)
 
 function ThemeProvider({ children }) {
-    const [dark, setDark] = React.useState(false) // Default theme is light
+    const [dark, setDark] = useState(true) // Default theme is dark
   
     // On mount, read the preferred theme from the persistence
-    React.useEffect(() => {
-      const isDark = localStorage.getItem('dark') === 'true'
-      setDark(isDark)
+    useEffect(() => {
+      if (localStorage.getItem("dark") === null) localStorage.setItem('dark', JSON.stringify(true));
+      const isDark = localStorage.getItem('dark') === 'true';
+      setDark(isDark);
     }, [dark])
   
     // To toggle between dark and light modes
