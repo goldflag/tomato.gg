@@ -35,7 +35,7 @@ export default function Records(props) {
     }
 
     let res = <></>;
-    if (props.data.max_damage_tank_id in tankNames && props.data.max_frags_tank_id in tankNames  && props.data.max_xp_tank_id in tankNames ) {
+    if (props.data.max_damage_tank_id in tankNames && props.data.max_frags_tank_id in tankNames && props.data.max_xp_tank_id in tankNames ) {
         res = <table style={demo}>
         <tbody>
             <tr>

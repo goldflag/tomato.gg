@@ -5,7 +5,8 @@ import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import SmallSelectQuery from './smallSelect'
+import SmallSelectQuery from './smallSelect';
+
 import { ThemeContext } from '../style/theme.js';
 
 export default function SmallSearchBar(props) {
@@ -16,7 +17,7 @@ export default function SmallSearchBar(props) {
       padding: '2px 4px',
       display: 'flex',
       alignItems: 'center',
-      width: '250px',
+      width: '300px',
       height: '30px',
       borderRadius: 15,
       backgroundColor: theme === 'dark' ? 'rgb(40, 40, 40)' : 'white'

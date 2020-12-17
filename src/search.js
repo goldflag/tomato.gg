@@ -29,11 +29,9 @@ const serverConv = {
 }
 
 export default withRouter(function Search(props){
-    const {theme} = React.useContext(ThemeContext);
-
-    let { path, url } = useRouteMatch();
+    const {theme, server, toggleServer } = React.useContext(ThemeContext);
     const [name, setName] = useState('');
-    const [server, setServer] = useState('com');
+    // const [server, setServer] = useState('com');
     const [mode, setMode] = useState('Player');
 
     let testId = 'FAIL';
@@ -43,7 +41,6 @@ export default withRouter(function Search(props){
 
     const searchId = async (e) => {
         e.preventDefault();
-        // const url = `https://api.worldoftanks.${server}/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`
         const url = `https://api.worldoftanks.${server}/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`
         console.log(APIKey);
         try {
@@ -71,7 +68,7 @@ export default withRouter(function Search(props){
                     <img src={TomatoLogo} alt='logo' style={{height: 'auto',  width: '80%', margin: '0 auto',display: 'flex', alignItems: 'center', padding: '0rem'}}/>
                     </div>
                     <form onSubmit={searchId}>
-                        <SearchBar setName={setName} setServer={setServer} server={server} setMode={setMode} mode={mode} />
+                        <SearchBar setName={setName} setServer={toggleServer} server={server} setMode={setMode} mode={mode} />
                     </form>
                 </div>
                 <div className={'leaderboard'}>

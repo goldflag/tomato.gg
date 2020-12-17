@@ -17,9 +17,9 @@ const serverConv = {
 }
 
 export default withRouter(function Topbar(props) {
-    const { theme, toggle } = React.useContext(ThemeContext)
+    const { theme, toggle, server, toggleServer } = React.useContext(ThemeContext)
     const [name, setName] = useState('');
-    const [server, setServer] = useState('com');
+    // const [server, setServer] = useState('com');
     const [mode, setMode] = useState('Player');
 
     const searchId = async (e) => {
@@ -50,7 +50,7 @@ export default withRouter(function Topbar(props) {
             </div>
             <div className="field">
                 <form onSubmit={searchId}>
-                    <SmallSearchBar setName = {setName} setServer = {setServer} server = {server} setMode = {setMode} mode = {mode}/>
+                    <SmallSearchBar setName = {setName} setServer = {toggleServer} server = {server} setMode = {setMode} mode = {mode}/>
                 </form>
             </div>
             <div className="light">
