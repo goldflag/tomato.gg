@@ -187,11 +187,11 @@ export default function StatsPage(props) {
                       </div>
                       <div style = {{padding: '1em 0em'}}>
                         <AllTankStats overall = {recentStats.overallStats.tankWN8} recents = {recentStats.recents} />
-                      </div>
-                      <AdSense.Google
+                        <AdSense.Google
                         client='pub-1358649580645755'
                         slot='3903354081'
                       />
+                      </div>
                   </>
     } 
     
