@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Icon } from 'react-icons-kit';
 import { chevronRight } from 'react-icons-kit/feather/chevronRight';
@@ -16,23 +16,13 @@ import {
   useGlobalFilter,
   useAsyncDebounce
 } from 'react-table';
-import WN8c from '../../functions/WN8color';
-import WRc from '../../functions/WRcolor';
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from 'match-sorter';
 import { ThemeContext } from '../../style/theme.js';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
-function WN8Style(wn8) {
-    return { background: WN8c(wn8), color: 'white', padding: '9px', margin: '-0.3rem -0.5rem', textAlign: 'center' }
-}
-
-function WRStyle(wr) {
-    return { background: WRc(wr), color: 'white', padding: '9px', margin: '-0.3rem -0.5rem', textAlign: 'center' }
-}
-
-function PeriodBreakdown(props) {
+function WN8Table(props) {
   const {theme} = React.useContext(ThemeContext);
 
   const Styles = styled.div`
@@ -42,6 +32,7 @@ function PeriodBreakdown(props) {
       width: 100%;
       font-size: 0.8rem;
       overflow-x: scroll;
+
       tr {
           overflow-x: scroll;
           :last-child {
@@ -118,7 +109,13 @@ function PeriodBreakdown(props) {
     background-color: ${theme === 'dark' ? 'rgb(40, 40, 40)' : 'rgb(250, 250, 250)'};
     padding: 10px 10px 0 10px;
   }
+
+  .subComponent {
+    background-color: ${theme === 'dark' ? 'rgb(40, 40, 40)' : 'rgb(250, 250, 250)'};
+    padding: 10px;
+  }
   `
+  let data = props.data;
 
   // Define a default UI for filtering
   function DefaultColumnFilter({
@@ -161,8 +158,8 @@ function PeriodBreakdown(props) {
             fontSize: '1rem',
             border: '0',
             padding: '6px',
-            border: '1px solid rgb(100, 100, 100)',
-            borderRadius: '3px'
+            borderRadius: '3px',
+            border: '1px solid rgb(100, 100, 100)'
           }}
         />
       </span>
@@ -190,16 +187,16 @@ function PeriodBreakdown(props) {
     return (
     <ButtonGroup variant="text" color="purple" aria-label="text primary button group">
       <Button onClick={() => setFilter(undefined)} className={'filterButton'}>All</Button> 
-      <Button onClick={() => {setFilter(10)}} className={'filterButton'}>X</Button>
-      <Button onClick={() => {setFilter(9)}} className={'filterButton'}>IX</Button>
-      <Button onClick={() => {setFilter(8)}} className={'filterButton'}>VIII</Button>
-      <Button onClick={() => {setFilter(7)}} className={'filterButton'}>VII</Button>
-      <Button onClick={() => {setFilter(6)}} className={'filterButton'}>VI</Button>
-      <Button onClick={() => {setFilter(5)}} className={'filterButton'}>V</Button>
-      <Button onClick={() => {setFilter(4)}} className={'filterButton'}>IV</Button>
-      <Button onClick={() => {setFilter(3)}} className={'filterButton'}>III</Button>
-      <Button onClick={() => {setFilter(2)}} className={'filterButton'}>II</Button>
-      <Button onClick={() => {setFilter(1)}} className={'filterButton'}>I</Button>
+      <Button onClick={() => {setFilter('X')}} className={'filterButton'}>X</Button>
+      <Button onClick={() => {setFilter('IX')}} className={'filterButton'}>IX</Button>
+      <Button onClick={() => {setFilter('VIII')}} className={'filterButton'}>VIII</Button>
+      <Button onClick={() => {setFilter('VII')}} className={'filterButton'}>VII</Button>
+      <Button onClick={() => {setFilter('VI')}} className={'filterButton'}>VI</Button>
+      <Button onClick={() => {setFilter('V')}} className={'filterButton'}>V</Button>
+      <Button onClick={() => {setFilter('IV')}} className={'filterButton'}>IV</Button>
+      <Button onClick={() => {setFilter('III')}} className={'filterButton'}>III</Button>
+      <Button onClick={() => {setFilter('II')}} className={'filterButton'}>II</Button>
+      <Button onClick={() => {setFilter('I')}} className={'filterButton'}>I</Button>
     </ButtonGroup>
     )
   }
@@ -234,6 +231,66 @@ function PeriodBreakdown(props) {
       <Button onClick={() => setFilter(true)} className={'filterButton'}>Prem</Button> 
       <Button onClick={() => setFilter(false)} className={'filterButton'}>Regular</Button> 
     </ButtonGroup>
+    )
+  }
+
+  // This is a custom UI for our 'between' or number range
+  // filter. It uses two number boxes and filters rows to
+  // ones that have values between the two
+  function NumberRangeColumnFilter({
+    column: { filterValue = [], preFilteredRows, setFilter, id },
+  }) {
+    const [min, max] = React.useMemo(() => {
+      let min = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
+      let max = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
+      preFilteredRows.forEach(row => {
+        min = Math.min(row.values[id], min)
+        max = Math.max(row.values[id], max)
+      })
+      return [min, max]
+    }, [id, preFilteredRows])
+
+    return (
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center', justifyContent: 'space-evenly'
+        }}
+      >
+        Battles
+        <input
+          value={filterValue[0] || ''}
+          type="number"
+          onChange={e => {
+            const val = e.target.value
+            setFilter((old = []) => [val ? parseInt(val, 10) : undefined, old[1]])
+          }}
+          placeholder={`Min (${min})`}
+          style={{
+            width: '90px',
+            height: '35px',
+            marginRight: '0.5rem',
+            marginLeft: '0.5rem',
+            borderRadius: '3px',
+          }}
+        />
+        to
+        <input
+          value={filterValue[1] || ''}
+          type="number"
+          onChange={e => {
+            const val = e.target.value
+            setFilter((old = []) => [old[0], val ? parseInt(val, 10) : undefined])
+          }}
+          placeholder={`Max (${max})`}
+          style={{
+            width: '90px',
+            height: '35px',
+            marginLeft: '0.5rem',
+            borderRadius: '3px',
+          }}
+        />
+      </div>
     )
   }
 
@@ -280,8 +337,10 @@ function PeriodBreakdown(props) {
     getTableProps,
     getTableBodyProps,
     headerGroups,
+    rows,
     prepareRow,
     state,
+    visibleColumns,
     page, // Instead of using 'rows', we'll use page,
     // which has only the rows for the active page
     // The rest of these things are super handy, too ;)
@@ -302,17 +361,13 @@ function PeriodBreakdown(props) {
       data,
       defaultColumn, // Be sure to pass the defaultColumn option
       filterTypes,
+      hiddenColumns: ['prem'],
       initialState: { 
         pageIndex: 0, 
-        pageSize: 25,
-        hiddenColumns: ['prem'],
+        pageSize: 100,
         sortBy: [
           {
-              id: 'tier',
-              desc: true
-          },
-          {
-              id: 'dpg',
+              id: 'expDamage',
               desc: true
           }
       ] 
@@ -343,7 +398,7 @@ function PeriodBreakdown(props) {
               {headerGroups[0].headers[4].render('Filter')}
             </span>
             <span style={{marginRight: '10px', marginBottom: '10px'}}>
-              {headerGroups[0].headers[14].render('Filter')}
+              {headerGroups[0].headers[10].render('Filter')}
             </span>
           </div>
         </div>
@@ -409,7 +464,7 @@ function PeriodBreakdown(props) {
               setPageSize(Number(e.target.value))
             }}
           >
-            {[15, 25, 100, 250, 500].map(pageSize => (
+            {[100, 250, 500].map(pageSize => (
               <option key={pageSize} value={pageSize}>
                 Show {pageSize}
               </option>
@@ -420,82 +475,86 @@ function PeriodBreakdown(props) {
     )
 }
 
-const [data, setData] = useState([]);
-
-// Runs once when component mounts
-useEffect(() => {
-    let tankStats = props.data;
-    let rowData = [];
-    for (let i = 0; i < tankStats.length; ++i) {
-        let entry = {
-            img: <img src={require(`../../assets/tankIcons/${tankStats[i][0]}.png`)} alt={tankStats[i][0]} />,
-            name: tankStats[i][1],
-            nation: tankStats[i][2],
-            tier: tankStats[i][3],
-            class: tankStats[i][4],
-            battles: tankStats[i][5],
-            winrate: tankStats[i][6],
-            wn8: tankStats[i][7],
-            dpg: tankStats[i][8],
-            kpg: tankStats[i][9],
-            dmgRatio: tankStats[i][10],
-            kd: tankStats[i][11],
-            spots: tankStats[i][12],
-            survived: tankStats[i][13],
-            isPrem: tankStats[i][14]
-        }
-        rowData.push(entry);
-    }
-    setData(rowData);
-}, []);
+// Define a custom filter filter function!
+function filterGreaterThan(rows, id, filterValue) {
+  return rows.filter(row => {
+    const rowValue = row.values[id]
+    return rowValue >= filterValue
+  })
+}
 
 const tierConv = { 1: 'I', 2: 'II', 3: 'III', 4: 'IV', 5: 'V', 6: 'VI', 7: 'VII', 8: 'VIII', 9: 'IX', 10: 'X' }
 
-const columns = React.useMemo(
-    () => [
-        { Header: '', accessor: 'img' },
-        { Header: 'Name', accessor: 'name' },
-        { 
-            Cell: ({ value }) => { return (<img src={require(`../../assets/flagIcons/${value}.svg`)} style={{ maxWidth: '40px' }} alt={value} />) },
-            Header: 'Nation',
-            accessor: 'nation',
-            Filter: NationFilter,
-            filter: 'equals',
-        },
-        {
-            Cell: ({ value }) => { return (<>{tierConv[value]}</>) },
-            Header: 'Tier',
-            accessor: 'tier',
+// This is an autoRemove method on the filter function that
+// when given the new filter value and returns true, the filter
+// will be automatically removed. Normally this is just an undefined
+// check, but here, we want to remove the filter if it's not a number
+filterGreaterThan.autoRemove = val => typeof val !== 'number'
+    const columns = React.useMemo(
+        () => [
+          { 
+            Cell: ({ value }) => { return (<img src={require(`../../assets/tankIcons/${value}.png`)} alt={value}/>) },
+            Header: '', 
+            accessor: 'id', 
+            disableFilters: true 
+          },
+          { 
+            Header: 'Name', 
+            accessor: 'name',       
+            disableFilters: true 
+          },
+          { 
+            Header: 'Nation', 
+            accessor: 'nation',   
+            Filter: NationFilter,              
+            filter: 'equals',    
+          },
+          { 
+            Header: 'Tier', 
+            accessor: 'tier',   
             Filter: TierFilter,
-            filter: 'equals',
-        },
-        {
-            Cell: ({ value }) => { return (<img src={require(`../../assets/classIcons/${value}.png`)} style={{ maxWidth: '20px' }} alt={value} />) },
-            Header: 'Class',
-            accessor: 'class',
+            filter: 'equals',    
+          },
+          { 
+            Header: 'Class', 
+            accessor: 'class',    
             Filter: ClassFilter,
-            filter: 'equals',
-        },
-        { Header: 'Games', accessor: 'battles' },
-        { Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value}</div>) },
-            Header: 'WN8', accessor: 'wn8' },
-        { Cell: ({ value }) => { return (<div style={WRStyle(value)}>{value + "%"}</div>) },
-        Header: 'Winrate', accessor: 'winrate' },
-        { Header: 'DPG', accessor: 'dpg' },
-        { Header: 'KPG', accessor: 'kpg' },
-        { Header: 'DR', accessor: 'dmgRatio' },
-        { Header: 'KDR', accessor: 'kd' },
-        { Header: 'Survival%', accessor: 'survived' },
-        { Header: 'Spots', accessor: 'spots' },
-        { 
+            filter: 'equals',      
+          },
+          { 
+            Header: 'expDef', 
+            accessor: 'expDef',       
+            disableFilters: true 
+          },          
+          { 
+            Header: 'expFrag', 
+            accessor: 'expFrag',       
+            disableFilters: true 
+          },
+          { 
+            Header: 'expSpot', 
+            accessor: 'expSpot',       
+            disableFilters: true 
+          },
+          { 
+            Header: 'expDamage', 
+            accessor: 'expDamage',       
+            disableFilters: true 
+          },
+          { 
+            Header: 'expWinRate', 
+            accessor: 'expWinRate',       
+            disableFilters: true 
+          },
+          { 
             Header: '', 
             accessor: 'isPrem', 
             Filter: PremFilter,              
             filter: 'equals',           
           },
         ],
-    []
-)
+        []
+    )
 
   // We need to keep the table from resetting the pageIndex when we
   // Update data. So we can keep track of that flag with a ref.
@@ -510,4 +569,4 @@ const columns = React.useMemo(
   )
 }
 
-export default PeriodBreakdown
+export default WN8Table

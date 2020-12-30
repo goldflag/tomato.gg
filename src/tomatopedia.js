@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect} from 'react';
 import ReactGA from 'react-ga';
 import Topbar from './topbar';
 import Sidebar from './sidebar';
@@ -11,22 +11,20 @@ import ServerStatsPage from './statpages/serverStatsPage';
 import TankPage from './statpages/tankPage';
 import StatsReference from './statpages/statsReference';
 import Leaderboards from './statpages/leaderboards';
+import WN8Expected from './statpages/wn8expected';
+
 import "./css/body.css";
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import { ThemeContext }  from './style/theme.js';
 const trackingId = process.env.REACT_APP_GA;
 
 export default function Tomatopedia() {
-
-  // const [theme, toggleTheme] = Theme();
-
-
   useEffect(() => {
     ReactGA.initialize(trackingId);
     ReactGA.pageview('/');
   }, []);
 
-  const { theme, toggle, dark } = React.useContext(ThemeContext);
+  const { theme } = React.useContext(ThemeContext);
 
   return (
       <Router>
@@ -58,6 +56,9 @@ export default function Tomatopedia() {
               </Route> 
               <Route path='/tank'>
                 <TankPage />
+              </Route> 
+              <Route path='/wn8'>
+                <WN8Expected />
               </Route> 
               <Route exact path='/'>
                 <Search />

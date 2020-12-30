@@ -17,7 +17,7 @@ export default function SmallSearchBar(props) {
       padding: '2px 4px',
       display: 'flex',
       alignItems: 'center',
-      width: '300px',
+      width: '250px',
       height: '30px',
       borderRadius: 15,
       backgroundColor: theme === 'dark' ? 'rgb(40, 40, 40)' : 'white'

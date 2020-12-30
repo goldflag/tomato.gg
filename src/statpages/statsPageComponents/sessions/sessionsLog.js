@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { useTable, useSortBy, usePagination, useExpanded } from 'react-table'
 import styled from 'styled-components'
 import WN8c from '../../../functions/WN8color';
@@ -14,10 +13,6 @@ import { arrowDown } from 'react-icons-kit/feather/arrowDown';
 import { arrowUp } from 'react-icons-kit/feather/arrowUp';
 import { ThemeContext } from '../../../style/theme.js';
 import SessionBreakdown from './sessionBreakdown';
-
-function setMid(string) {
-    return <div style={{textAlign: 'center'}}>{string}</div>
-}
 
 function WN8Style(wn8) {
     return { background: WN8c(wn8), color: 'white', padding: '9px', margin: '-8px -8px', textAlign: 'center' }
@@ -125,7 +120,6 @@ export default function SessionsLog(props) {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        rows,
         prepareRow,
         visibleColumns,
         page, // Instead of using 'rows', we'll use page,

@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
-import { BrowserRouter as Router, Switch, Route, useRouteMatch, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import './css/search.css';
 import SearchBar from './material/searchBar';
 import TomatoLogo from './assets/tomato.png'
@@ -8,18 +7,6 @@ import { ThemeContext } from './style/theme.js';
 import LeaderboardGrid from './statpages/searchComponents/leaderboardGrid';
 
 const APIKey = process.env.REACT_APP_API_KEY;
-
-const styles = {
-    margin: '0 auto',
-    display: 'table',
-    padding: '100px',
-    maxWidth: '1000px',
-}
-
-const frontGrid = {
-    margin: '0 auto',
-    maxWidth: '95%',
-}
 
 const serverConv = {
     'com': 'NA',
@@ -31,7 +18,6 @@ const serverConv = {
 export default withRouter(function Search(props){
     const {theme, server, toggleServer } = React.useContext(ThemeContext);
     const [name, setName] = useState('');
-    // const [server, setServer] = useState('com');
     const [mode, setMode] = useState('Player');
 
     let testId = 'FAIL';

@@ -1,15 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { ThemeContext } from '../../../style/theme.js';
-
-
-const useStyles = makeStyles({
-  table: {
-    // minWidth: 650,
-    elevation: 0,
-    boxShadow: 'none',
-  },
-});
 
 export default function MasteryTable(props) {
   const {theme} = React.useContext(ThemeContext);
@@ -70,7 +60,6 @@ export default function MasteryTable(props) {
   } 
 
   const numTanks = rows[0].Mastery + rows[1].Mastery + rows[2].Mastery + rows[3].Mastery + rows[4].Mastery;
-  const classes = useStyles();
   
   return (
     <table style={demo}>

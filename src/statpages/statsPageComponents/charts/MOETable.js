@@ -1,18 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { ThemeContext } from '../../../style/theme.js';
-
-const useStyles = makeStyles({
-  table: {
-    // minWidth: 650,
-    elevation: 0,
-    boxShadow: 'none',
-  },
-});
-
-function createData(name, MOE) {
-  return { name, MOE };
-}
 
 export default function MOETable(props) {
   const {theme} = React.useContext(ThemeContext);
@@ -71,8 +58,7 @@ export default function MOETable(props) {
   } 
 
   const numTanks = rows[0].MOE + rows[1].MOE + rows[2].MOE + rows[3].MOE;
-  const classes = useStyles();
-  
+
   return (
     <table style={demo}>
         <tbody>

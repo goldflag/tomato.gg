@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components'
-import { ThemeContext } from '../../style/theme.js';
+import React, { useState } from 'react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -13,7 +10,6 @@ import CustomLeaderboard from './customLeaderboard';
 import Button from '@material-ui/core/Button';
 
 export default function CustomLeaderboardParent(props) {
-    const {theme} = React.useContext(ThemeContext);
 
     const selectField = {
         display: 'grid',
@@ -144,7 +140,6 @@ export default function CustomLeaderboardParent(props) {
                         valueLabelDisplay="auto"
                         step={100} min={0} max={100000}/>
                 </div>
-
                 <Button variant="contained" color="primary" style={{margin: '2rem'}} onClick={GenerateLeaderboard}>
                 Generate Leaderboard
                 </Button>
@@ -152,5 +147,4 @@ export default function CustomLeaderboardParent(props) {
             {leaderboard}
             </>
     );
-
 }

@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import ReactGA from 'react-ga';
 import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
 import "./css/tankstats.css";
 import "./css/innerpage.css";
 import { ThemeContext } from './style/theme.js';
@@ -20,7 +19,6 @@ export default function About(props) {
       <div style = {{padding: '2em', paddingTop: '5em'}}>
         <div className = 'narrowpage'>
         <Paper style = {{
-          color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(20, 20, 20)',
           backgroundColor: theme === 'dark' ? 'rgb(40, 40, 40)' : 'white',
           padding: '1rem', 
           color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(50,50,50)'

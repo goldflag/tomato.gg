@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import ReactGA from 'react-ga';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import "../css/tankstats.css";
 import "../css/innerpage.css";
@@ -24,12 +23,6 @@ export default function ServerStatsPage(props) {
       flexGrow: 1,
     },
   }));
-
-  const grid = {
-    display: 'grid',
-    gridTemplateColumns: '50% 50%',
-    gridTemplateRows: '500px',
-  }
 
   return (
       <div className="smallpaper">
@@ -66,7 +59,6 @@ export default function ServerStatsPage(props) {
           </Paper>
           </div>
           <div>
-
             <Paper style={{ padding: '1rem 1rem 1rem 1rem'}}>
               <span style={{fontSize: '1.2rem', fontWeight: '500'}}>NA Winrate/WN8 Scatterplot | Min. 10000 Battles</span><br/>
               <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>1000 DATAPOINTS</span> <br/>
@@ -74,7 +66,6 @@ export default function ServerStatsPage(props) {
             </Paper>
           </div>
         </div>
-
       </div>
   );
 }

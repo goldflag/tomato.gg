@@ -62,10 +62,6 @@ export default function CurveExamples() {
     setValue(newValue);
   };
 
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
-
   return (
     <div className={classes.root}>
       <div style={{backgroundColor: theme === 'dark' ? 'rgb(45, 45, 45)' : 'white'}}>

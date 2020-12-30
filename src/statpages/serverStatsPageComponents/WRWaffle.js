@@ -2,28 +2,7 @@ import React from "react";
 import { ResponsiveWaffleCanvas  } from '@nivo/waffle'
 import WRdist from '../../data/WRdist';
 
-export default function WRWaffle(props) {
-    const data = [
-        {
-          "id": "men",
-          "label": "men",
-          "value": 31.465746642405556,
-          "color": "#468df3"
-        },
-        {
-          "id": "women",
-          "label": "women",
-          "value": 16.282301198220487,
-          "color": "#ba72ff"
-        },
-        {
-          "id": "children",
-          "label": "children",
-          "value": 15.780649539054712,
-          "color": "#a1cfff"
-        }
-      ]
-
+export default function WRWaffle() {
     return (
         <div style={{ height: 'calc(240px)'}}>
             <ResponsiveWaffleCanvas 

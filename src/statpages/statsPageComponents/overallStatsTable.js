@@ -6,7 +6,7 @@ import WN8color from '../../functions/WN8color';
 import { ThemeContext } from '../../style/theme.js';
 
 export default function OverallStatsTable(props) {
-  const {theme, toggle} = React.useContext(ThemeContext);
+  const { theme } = React.useContext(ThemeContext);
   const getMuiTheme = () =>
     createMuiTheme({
       overrides: {

@@ -51,7 +51,7 @@ export default function Charts(props) {
 
   if (size.width > 1000) {
     output = 
-    <div /*className='charts'*/>
+    <div>
     <Grid container spacing={2}>
       <Grid item xs={6}>
         <Paper className={classes.paper} square elevation={2}>

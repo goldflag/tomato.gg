@@ -3,32 +3,13 @@ import { Link } from 'react-router-dom';
 import './css/sidebar.css';
 import TomatoLogo from './assets/tomato.png'
 import AppsIcon from '@material-ui/icons/Apps';
-import GroupIcon from '@material-ui/icons/Group';
-import PublicIcon from '@material-ui/icons/Public';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import InfoIcon from '@material-ui/icons/Info';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
+import GamesIcon from '@material-ui/icons/Games';
 
 function Sidebar() {
-
-    const sidebar = {
-        fontFamily: "Roboto",
-        fontWeight: 500,
-        marginTop: '0rem',
-        marginBottom: '10rem',
-        zIndex: '0',
-        height: '100%',
-        width: '7vw',
-        position: 'fixed',
-        left: '0',
-        background: 'url(../assets/sidebar.jpg) no-repeat center center fixed',
-        webkitBackgroundSize: 'cover',
-        mozBackgroundSize: 'cover',
-        oBackgroundSize: 'cover',
-        backgroundSize: 'cover'
-      }
-
     return (
         <div className="sidebar">
             <div className="layer">
@@ -64,6 +45,11 @@ function Sidebar() {
                         &nbsp;&nbsp;Server Stats
                     </Link> */}
 
+                    <Link to='/wn8' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
+                    <GamesIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
+                        &nbsp;&nbsp;WN8 Exp. Values
+                    </Link>
+
                     <Link to='/stats-reference' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
                     <LibraryBooksIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
                         &nbsp;&nbsp;Stats Reference
@@ -74,8 +60,7 @@ function Sidebar() {
                         &nbsp;&nbsp;About
                     </Link>
                 </div>
-                
-                
+            
                 <div style={{fontSize: '0.8rem',
                             fontWeight: '300',
                             color: '#96a7c7', padding: '15px', bottom: '0px', position: 'absolute'}}>

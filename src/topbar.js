@@ -3,7 +3,7 @@ import './css/topbar.css'
 import SmallSearchBar from './material/smallSearchBar';
 import DiscordLogo from './assets/Discord.svg'
 import SmallMenu from './material/smallMenu';
-import { Link, useRouteMatch, withRouter} from "react-router-dom";
+import { withRouter} from "react-router-dom";
 import DarkModeToggle from "react-dark-mode-toggle";
 import { ThemeContext } from './style/theme.js';
 
@@ -19,7 +19,6 @@ const serverConv = {
 export default withRouter(function Topbar(props) {
     const { theme, toggle, server, toggleServer } = React.useContext(ThemeContext)
     const [name, setName] = useState('');
-    // const [server, setServer] = useState('com');
     const [mode, setMode] = useState('Player');
 
     const searchId = async (e) => {
@@ -30,7 +29,7 @@ export default withRouter(function Topbar(props) {
             fetch(url)
             .then((res) => res.json())
             .then((data) => {
-                if (data.status == "error" || data.meta.count == 0) { console.log('Invalid username'); }
+                if (data.status === "error" || data.meta.count === 0) { console.log('Invalid username'); }
                 else { testId = data.data[0].account_id; }
             })
             .then(() => {

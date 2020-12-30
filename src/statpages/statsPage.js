@@ -11,7 +11,6 @@ import AllTankStats from "./statsPageComponents/allTankStats";
 import GraphCalculator from '../functions/GraphCalculator';
 import Charts from './statsPageComponents/charts';
 import SessionsLogParent from './statsPageComponents/sessions/sessionsLogParent';
-
 import { ThemeContext } from '../style/theme.js';
 
 const APIKey = process.env.REACT_APP_API_KEY;
@@ -68,7 +67,6 @@ export default function StatsPage(props) {
       setUserName(nameIdSplit[0]);
       ReactGA.initialize(trackingId);
       ReactGA.pageview(`/stats/${server}`);
-
       id = nameIdSplit[1];
       if (id === "FAIL") {
           setValidID(false);
@@ -76,7 +74,6 @@ export default function StatsPage(props) {
       else {
           setValidID(true);
           searchStats();
-
       }
     }, []);
 
@@ -156,12 +153,6 @@ export default function StatsPage(props) {
       }
     }    
 
-  // //  https://api.worldoftanks.com/wot/account/info/?application_id=bd589e105895f2f6b8af31f27da3e05e&account_id=1011694618
-  // //  https://api.worldoftanks.com/wot/tanks/stats/?application_id=bd589e105895f2f6b8af31f27da3e05e&account_id=1011694618&fields=mark_of_mastery%2C+tank_id%2C+all
-  // //  https://api.worldoftanks.com/wot/tanks/achievements/?application_id=bd589e105895f2f6b8af31f27da3e05e&account_id=${id}&fields=achievements%2C+tank_id
-  // //  https://api.worldoftanks.com/wot/clans/accountinfo/?application_id=bd589e105895f2f6b8af31f27da3e05e&account_id=${id}
-  // //  https://api.worldoftanks.com/wot/clans/memberhistory/?application_id=bd589e105895f2f6b8af31f27da3e05e&account_id=${id}
-
     if (validID === false) {
       StatTable = <>
                     <span style={{fontSize:'2rem'}}>Player {username} not found</span>
@@ -187,10 +178,10 @@ export default function StatsPage(props) {
                       </div>
                       <div style = {{padding: '1em 0em'}}>
                         <AllTankStats overall = {recentStats.overallStats.tankWN8} recents = {recentStats.recents} />
-                        <AdSense.Google
-                        client='pub-1358649580645755'
-                        slot='3903354081'
-                      />
+                        {/* <AdSense.Google
+                          client='pub-1358649580645755'
+                          slot='3903354081'
+                        /> */}
                       </div>
                   </>
     } 

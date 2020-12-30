@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useTable, useSortBy, usePagination, useExpanded } from 'react-table'
 import styled from 'styled-components'
 import WN8c from '../../../functions/WN8color';
@@ -11,12 +10,7 @@ import { chevronRight } from 'react-icons-kit/feather/chevronRight'
 import { chevronLeft } from 'react-icons-kit/feather/chevronLeft'
 import { chevronsRight } from 'react-icons-kit/feather/chevronsRight'
 import { chevronsLeft } from 'react-icons-kit/feather/chevronsLeft'
-import { chevronDown } from 'react-icons-kit/feather/chevronDown'
 import { ThemeContext } from '../../../style/theme.js';
-
-function setMid(string) {
-    return <div style={{textAlign: 'center'}}>{string}</div>
-}
 
 function WN8Style(wn8) {
     return { background: WN8c(wn8), color: 'white', padding: '8px 4px', margin: '-8px -8px', textAlign: 'center' }
@@ -118,9 +112,7 @@ export default function SessionBreakdown(props) {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        rows,
         prepareRow,
-        visibleColumns,
         page, // Instead of using 'rows', we'll use page,
         // which has only the rows for the active page
         // The rest of these things are super handy, too ;)

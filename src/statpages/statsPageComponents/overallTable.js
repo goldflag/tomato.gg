@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Icon } from 'react-icons-kit';
 import { chevronRight } from 'react-icons-kit/feather/chevronRight';
@@ -262,7 +262,7 @@ function OverallTable(props) {
       <Button onClick={() => {setFilter(1)}} className={'filterButton'}><div style={{ display: 'flex', alignItems: 'center'}}><img src={require(`../../assets/masteryIcons/1.png`)} style={{maxHeight: '23px'}} alt={'1'}/></div></Button>
       <Button onClick={() => {setFilter(2)}} className={'filterButton'}><div style={{ display: 'flex', alignItems: 'center'}}><img src={require(`../../assets/masteryIcons/2.png`)} style={{maxHeight: '23px'}} alt={'2'}/></div></Button>
       <Button onClick={() => {setFilter(3)}} className={'filterButton'}><div style={{ display: 'flex', alignItems: 'center'}}><img src={require(`../../assets/masteryIcons/3.png`)} style={{maxHeight: '23px'}} alt={'3'}/></div></Button>
-      <Button onClick={() => {setFilter(3)}} className={'filterButton'}><div style={{ display: 'flex', alignItems: 'center'}}><img src={require(`../../assets/masteryIcons/4.png`)} style={{maxHeight: '23px'}} alt={'4'}/></div></Button>
+      <Button onClick={() => {setFilter(4)}} className={'filterButton'}><div style={{ display: 'flex', alignItems: 'center'}}><img src={require(`../../assets/masteryIcons/4.png`)} style={{maxHeight: '23px'}} alt={'4'}/></div></Button>
     </ButtonGroup>
     )
   }
@@ -697,9 +697,6 @@ filterGreaterThan.autoRemove = val => typeof val !== 'number'
         ],
         []
     )
-
-  // We need to keep the table from resetting the pageIndex when we
-  // Update data. So we can keep track of that flag with a ref.
 
   return (
     <Styles>

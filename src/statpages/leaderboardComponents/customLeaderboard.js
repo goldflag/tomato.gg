@@ -77,7 +77,6 @@ export default function CustomLeaderboard(props) {
         color: white;
         border-radius: 50%;
     }
-
     `
 
     const [data, setData] = useState([]);
@@ -162,7 +161,6 @@ export default function CustomLeaderboard(props) {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        rows,
         prepareRow,
         page, // Instead of using 'rows', we'll use page,
         // which has only the rows for the active page
@@ -187,7 +185,6 @@ export default function CustomLeaderboard(props) {
     )
 
     return (
-
         <Styles>
             <table {...getTableProps()}>
                 <thead>
@@ -264,7 +261,6 @@ export default function CustomLeaderboard(props) {
                 ))}
                 </select>
             </div>
-
         </Styles>
     );
 }

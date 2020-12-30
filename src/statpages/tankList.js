@@ -1,9 +1,7 @@
 import React, {useEffect} from "react";
 import ReactGA from 'react-ga';
 import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
 import "../css/tankstats.css";
-import Table from './tankStatsPageComponents/table';
 import TestTable from './tankListComponents/teststats';
 
 import "../css/innerpage.css";
@@ -16,11 +14,6 @@ export default function TankList(props) {
     ReactGA.pageview('/tank-list');
   }, []);
 
-  const grid = {
-    display: 'grid',
-    gridTemplateColumns: '50% 50%',
-    gridTemplateRows: '500px',
-  }
 
   return (
       <div style = {{padding: '2em', paddingTop: '5em'}}>

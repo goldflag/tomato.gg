@@ -399,14 +399,10 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
         data.ClassDistRecent[tank[4]] += tank[5];
     });
 
-    overallStats.raw.map((stats) => {
-        calcTrackingVals(BattleCount, BattleTracker, EXPTracker, WinsCount, stats);
-    });
+    overallStats.raw.map((stats) => calcTrackingVals(BattleCount, BattleTracker, EXPTracker, WinsCount, stats));
 
     if (recent1000.raw) {
-        recent1000.raw.map((stats) => {
-            calcTrackingVals(RecentBattleCount, RecentBattleTracker, RecentEXPTracker, RecentWinsCount, stats);
-        });    
+        recent1000.raw.map((stats) => calcTrackingVals(RecentBattleCount, RecentBattleTracker, RecentEXPTracker, RecentWinsCount, stats));    
     }
 
     function calculateWN8Distribution() {

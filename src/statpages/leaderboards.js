@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import ReactGA from 'react-ga';
 import styled from 'styled-components'
 import { ThemeContext } from '../style/theme.js';
-
 import "../css/tankstats.css";
 import Leaderboard from './leaderboardComponents/leaderboard';
 import CustomLeaderboardParent from './leaderboardComponents/customLeaderboardParent';
