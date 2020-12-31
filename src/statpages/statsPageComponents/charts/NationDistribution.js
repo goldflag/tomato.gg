@@ -3,10 +3,10 @@ import { ResponsivePie } from '@nivo/pie';
 import { ThemeContext } from '../../../style/theme.js';
 
 export default function NationDistribution(props) {
-    const {theme} = React.useContext(ThemeContext);
-    return(
-        <div style={{ height: 'calc(300px)'}}>
-            <ResponsivePie  
+    const { theme } = React.useContext(ThemeContext);
+    return (
+        <div style={{ height: 'calc(300px)' }}>
+            <ResponsivePie
                 // theme={{ 
                 //     labels: {    
                 //         textColor: 'red',
@@ -36,10 +36,10 @@ export default function NationDistribution(props) {
 
                 ]}
                 borderWidth={2}
-                borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.2 ] ] }}
+                borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
                 radialLabelsSkipAngle={10}
                 radialLabelsTextXOffset={6}
-                radialLabelsTextColor={theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)'} 
+                radialLabelsTextColor={theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)'}
                 radialLabelsLinkOffset={0}
                 radialLabelsLinkDiagonalLength={5}
                 radialLabelsLinkHorizontalLength={5}
@@ -50,7 +50,7 @@ export default function NationDistribution(props) {
                 animate={true}
                 motionStiffness={90}
                 motionDamping={15}
-                />
-            </div>
-        );
-    }
+            />
+        </div>
+    );
+}

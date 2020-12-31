@@ -3,12 +3,12 @@ import { ResponsiveBar } from '@nivo/bar';
 import { ThemeContext } from '../../../style/theme.js';
 
 export default function TierMasteryDistribution(props) {
-    const {theme} = React.useContext(ThemeContext);
+    const { theme } = React.useContext(ThemeContext);
     return (
-        <div style={{ height: 'calc(292px)'}}>
-            <ResponsiveBar 
-                theme={{ 
-                    textColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',  
+        <div style={{ height: 'calc(292px)' }}>
+            <ResponsiveBar
+                theme={{
+                    textColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',
                     grid: {
                         line: {
                             stroke: theme === 'dark' ? 'rgb(100, 100, 100)' : 'rgb(210, 210, 210)',
@@ -17,7 +17,7 @@ export default function TierMasteryDistribution(props) {
                     },
                 }}
                 data={props.data}
-                keys={[ "None", "3rd", "2nd", "1st", "Ace"]}
+                keys={["None", "3rd", "2nd", "1st", "Ace"]}
                 indexBy="Tier"
                 margin={{ top: 30, right: 100, bottom: 50, left: 50 }}
                 padding={0.3}
@@ -29,7 +29,7 @@ export default function TierMasteryDistribution(props) {
                     "rgb(235, 191, 47)",
                 ]}
 
-                borderColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
+                borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
                 axisTop={null}
                 axisRight={null}
                 axisBottom={{
@@ -51,35 +51,35 @@ export default function TierMasteryDistribution(props) {
                 enableLabel={false}
                 labelSkipWidth={12}
                 labelSkipHeight={12}
-                labelTextColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
+                labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
                 legends={[
-                {
-                    dataFrom: 'keys',
-                    anchor: 'bottom-right',
-                    direction: 'column',
-                    justify: false,
-                    translateX: 120,
-                    translateY: 0,
-                    itemsSpacing: 2,
-                    itemWidth: 100,
-                    itemHeight: 20,
-                    itemDirection: 'left-to-right',
-                    itemOpacity: 0.85,
-                    symbolSize: 20,
-                    itemTextColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',  
-                    effects: [
-                        {
-                            on: 'hover',
-                            style: {
-                                itemOpacity: 1
+                    {
+                        dataFrom: 'keys',
+                        anchor: 'bottom-right',
+                        direction: 'column',
+                        justify: false,
+                        translateX: 120,
+                        translateY: 0,
+                        itemsSpacing: 2,
+                        itemWidth: 100,
+                        itemHeight: 20,
+                        itemDirection: 'left-to-right',
+                        itemOpacity: 0.85,
+                        symbolSize: 20,
+                        itemTextColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',
+                        effects: [
+                            {
+                                on: 'hover',
+                                style: {
+                                    itemOpacity: 1
+                                }
                             }
-                        }
-                    ]
-                }
-            ]}
-            animate={true}
-            motionStiffness={90}
-            motionDamping={15}
+                        ]
+                    }
+                ]}
+                animate={true}
+                motionStiffness={90}
+                motionDamping={15}
             />
         </div>
     );

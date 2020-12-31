@@ -1,17 +1,17 @@
 import React from "react";
-import { ResponsiveRadar } from '@nivo/radar'
+import { ResponsiveRadar } from '@nivo/radar';
 import { ThemeContext } from '../../../style/theme.js';
 
 export default function WN8Radar(props) {
-    const {theme} = React.useContext(ThemeContext);
+    const { theme } = React.useContext(ThemeContext);
     return (
-        <div style={{ height: 'calc(300px)'}}>
+        <div style={{ height: 'calc(300px)' }}>
             <ResponsiveRadar
-                theme={{ 
-                    textColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',  
+                theme={{
+                    textColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',
                 }}
                 data={props.data}
-                keys={[ 'overall', 'recent' ]}
+                keys={['overall', 'recent']}
                 indexBy="stat"
                 maxValue="auto"
                 margin={{ top: 60, right: 70, bottom: 30, left: 70 }}
@@ -60,7 +60,7 @@ export default function WN8Radar(props) {
                         ]
                     }
                 ]}
-        />
-    </div>
-    )
+            />
+        </div>
+    );
 }

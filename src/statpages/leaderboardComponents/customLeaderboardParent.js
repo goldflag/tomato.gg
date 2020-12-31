@@ -16,17 +16,17 @@ export default function CustomLeaderboardParent(props) {
         gridTemplateColumns: '20% 40% 40%',
         background: 'white',
         padding: '1rem'
-    }
+    };
 
     const individualField = {
         padding: '1rem'
-    }
+    };
 
     const minMax = {
         display: 'grid',
-        gridTemplateColumns: '50% 50%',    
+        gridTemplateColumns: '50% 50%',
         padding: '0.5rem 0'
-    }
+    };
     const handleChangeEntries = (event, newValue) => {
         setNumEntries(newValue);
     };
@@ -58,13 +58,13 @@ export default function CustomLeaderboardParent(props) {
     }
 
 
-    
-// ${props.type}/${props.count}/${props.mintier}/${props.maxtier}/${props.minbattles}/${props.maxbattles}/${props.minwn8}/${props.maxwn8}/${props.minwinrate}/${props.maxwinrate}`;
+
+    // ${props.type}/${props.count}/${props.mintier}/${props.maxtier}/${props.minbattles}/${props.maxbattles}/${props.minwn8}/${props.maxwn8}/${props.minwinrate}/${props.maxwinrate}`;
 
     if (generated) {
         setLeaderboard(<>
-            <CustomLeaderboard type={customType} count={numEntries} mintier={tierRange[0]} maxtier={tierRange[1]} 
-            minbattles={minbattles} maxbattles={maxbattles} minWN8={minWN8} maxWN8={maxWN8} minwinrate={minWR} maxwinrate={maxWR}/>
+            <CustomLeaderboard type={customType} count={numEntries} mintier={tierRange[0]} maxtier={tierRange[1]}
+                minbattles={minbattles} maxbattles={maxbattles} minWN8={minWN8} maxWN8={maxWN8} minwinrate={minWR} maxwinrate={maxWR} />
         </>);
         setGenerated(false);
     }
@@ -90,7 +90,7 @@ export default function CustomLeaderboardParent(props) {
                         defaultValue={tierRange}
                         onChange={handleChangeTier}
                         valueLabelDisplay="auto"
-                        step={1} marks min={1} max={10}/>
+                        step={1} marks min={1} max={10} />
                     <div style={minMax}>
                         <div>
                             <TextField
@@ -102,7 +102,7 @@ export default function CustomLeaderboardParent(props) {
                             <TextField
                                 defaultValue={maxbattles} id="standard-number"
                                 onChange={e => setMaxbattles(e.target.value)}
-                                label="Max Battles" InputLabelProps={{ shrink: true }} />  
+                                label="Max Battles" InputLabelProps={{ shrink: true }} />
                         </div>
                     </div>
                     <div style={minMax}>
@@ -116,7 +116,7 @@ export default function CustomLeaderboardParent(props) {
                             <TextField
                                 defaultValue={maxWN8} id="standard-number"
                                 onChange={e => setMaxWN8(e.target.value)}
-                                label="Max WN8" InputLabelProps={{ shrink: true }} />  
+                                label="Max WN8" InputLabelProps={{ shrink: true }} />
                         </div>
                     </div>
                     <div style={minMax}>
@@ -130,7 +130,7 @@ export default function CustomLeaderboardParent(props) {
                             <TextField
                                 defaultValue={maxWR} id="standard-number"
                                 onChange={e => setMaxWR(e.target.value)}
-                                label="Max Winrate" InputLabelProps={{ shrink: true }} />  
+                                label="Max Winrate" InputLabelProps={{ shrink: true }} />
                         </div>
                     </div>
                     Number of Entries
@@ -138,13 +138,13 @@ export default function CustomLeaderboardParent(props) {
                         defaultValue={numEntries}
                         onChange={handleChangeEntries}
                         valueLabelDisplay="auto"
-                        step={100} min={0} max={100000}/>
+                        step={100} min={0} max={100000} />
                 </div>
-                <Button variant="contained" color="primary" style={{margin: '2rem'}} onClick={GenerateLeaderboard}>
-                Generate Leaderboard
+                <Button variant="contained" color="primary" style={{ margin: '2rem' }} onClick={GenerateLeaderboard}>
+                    Generate Leaderboard
                 </Button>
             </div>
             {leaderboard}
-            </>
+        </>
     );
 }

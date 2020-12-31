@@ -1,27 +1,27 @@
 import React from 'react';
-import { useTable, useSortBy, usePagination, useExpanded } from 'react-table'
-import styled from 'styled-components'
+import { useTable, useSortBy, usePagination, useExpanded } from 'react-table';
+import styled from 'styled-components';
 import WN8c from '../../../functions/WN8color';
 import WRc from '../../../functions/WRcolor';
-import { Icon } from 'react-icons-kit'
+import { Icon } from 'react-icons-kit';
 import { arrowDown } from 'react-icons-kit/feather/arrowDown';
 import { arrowUp } from 'react-icons-kit/feather/arrowUp';
-import { chevronRight } from 'react-icons-kit/feather/chevronRight'
-import { chevronLeft } from 'react-icons-kit/feather/chevronLeft'
-import { chevronsRight } from 'react-icons-kit/feather/chevronsRight'
-import { chevronsLeft } from 'react-icons-kit/feather/chevronsLeft'
+import { chevronRight } from 'react-icons-kit/feather/chevronRight';
+import { chevronLeft } from 'react-icons-kit/feather/chevronLeft';
+import { chevronsRight } from 'react-icons-kit/feather/chevronsRight';
+import { chevronsLeft } from 'react-icons-kit/feather/chevronsLeft';
 import { ThemeContext } from '../../../style/theme.js';
 
 function WN8Style(wn8) {
-    return { background: WN8c(wn8), color: 'white', padding: '8px 4px', margin: '-8px -8px', textAlign: 'center' }
+    return { background: WN8c(wn8), color: 'white', padding: '8px 4px', margin: '-8px -8px', textAlign: 'center' };
 }
 
 function WRStyle(wr) {
-    return { background: WRc(wr), color: 'white', padding: '8px 4px', margin: '-8px -8px', textAlign: 'center' }
+    return { background: WRc(wr), color: 'white', padding: '8px 4px', margin: '-8px -8px', textAlign: 'center' };
 }
 
 export default function SessionBreakdown(props) {
-    const {theme} = React.useContext(ThemeContext);
+    const { theme } = React.useContext(ThemeContext);
 
     const Styles = styled.div`
     table {
@@ -83,9 +83,9 @@ export default function SessionBreakdown(props) {
         color: white;
         border-radius: 50%;
     }
-    `
+    `;
     const data = props.data;
-    
+
     const columns = React.useMemo(
         () => [
             { Header: '', accessor: 'img' },
@@ -94,10 +94,14 @@ export default function SessionBreakdown(props) {
             { Header: 'Tier', accessor: 'tier' },
             { Header: 'Class', accessor: 'class' },
             { Header: 'Games', accessor: 'battles' },
-            { Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value}</div>) },
-                Header: 'WN8', accessor: 'wn8' },
-            { Cell: ({ value }) => { return (<div style={WRStyle(value)}>{value + "%"}</div>) },
-                Header: 'Winrate', accessor: 'winrate' },
+            {
+                Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value}</div>); },
+                Header: 'WN8', accessor: 'wn8'
+            },
+            {
+                Cell: ({ value }) => { return (<div style={WRStyle(value)}>{value + "%"}</div>); },
+                Header: 'Winrate', accessor: 'winrate'
+            },
             { Header: 'DPG', accessor: 'dpg' },
             { Header: 'KPG', accessor: 'kpg' },
             { Header: 'DR', accessor: 'dmgRatio' },
@@ -106,7 +110,7 @@ export default function SessionBreakdown(props) {
             { Header: 'Spots', accessor: 'spots' },
         ],
         []
-    )
+    );
 
     const {
         getTableProps,
@@ -126,8 +130,8 @@ export default function SessionBreakdown(props) {
         setPageSize,
         state: { pageIndex, pageSize },
     } = useTable(
-        { 
-            columns, 
+        {
+            columns,
             data,
             initialState: { pageIndex: 0, pageSize: 10 },
             sortBy: [
@@ -139,7 +143,7 @@ export default function SessionBreakdown(props) {
                     id: 'dpg',
                     desc: true
                 }
-            ] 
+            ]
         },
         useSortBy, useExpanded, usePagination
     );
@@ -148,64 +152,64 @@ export default function SessionBreakdown(props) {
         <Styles>
             <table {...getTableProps()}>
                 <thead>
-                {headerGroups.map(headerGroup => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map(column => (
-                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                        {column.render('Header')}
-                        <span style={{textAlign: 'center'}}>
-                            {column.isSorted
-                            ? column.isSortedDesc
-                                ? <Icon size={16} icon={arrowUp} />
-                                : <Icon size={16} icon={arrowDown} />
-                            : ''}
-                        </span>
-                    </th>
+                    {headerGroups.map(headerGroup => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map(column => (
+                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                    {column.render('Header')}
+                                    <span style={{ textAlign: 'center' }}>
+                                        {column.isSorted
+                                            ? column.isSortedDesc
+                                                ? <Icon size={16} icon={arrowUp} />
+                                                : <Icon size={16} icon={arrowDown} />
+                                            : ''}
+                                    </span>
+                                </th>
+                            ))}
+                        </tr>
                     ))}
-                </tr>
-                ))}
                 </thead>
                 <tbody {...getTableBodyProps()}>
                     {page.map((row, i) => {
-                        prepareRow(row)
+                        prepareRow(row);
                         return (
                             <tr {...row.getRowProps()}>
                                 {row.cells.map(cell => {
-                                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
                                 })}
                             </tr>
-                        )
+                        );
                     })}
                 </tbody>
             </table>
             <div className="pagination">
                 <button className={'paginationButton'} onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-                <Icon size={24} icon={chevronsLeft} />
+                    <Icon size={24} icon={chevronsLeft} />
                 </button>{' '}
                 <button className={'paginationButton'} onClick={() => previousPage()} disabled={!canPreviousPage}>
-                <Icon size={24} icon={chevronLeft} />
+                    <Icon size={24} icon={chevronLeft} />
                 </button>{' '}
                 <button className={'paginationButton'} onClick={() => nextPage()} disabled={!canNextPage}>
-                <Icon size={24} icon={chevronRight} />
+                    <Icon size={24} icon={chevronRight} />
                 </button>{' '}
                 <button className={'paginationButton'} onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-                <Icon size={24} icon={chevronsRight} />
+                    <Icon size={24} icon={chevronsRight} />
                 </button>{' '}
                 {/* <span> */}
                     Page{' '}
-                    {pageIndex + 1} of {pageOptions.length}
-                    {' '}
+                {pageIndex + 1} of {pageOptions.length}
+                {' '}
                 {/* </span> */}
                 {'  '}
                 <select
                     value={pageSize}
                     onChange={e => {
-                        setPageSize(Number(e.target.value))
+                        setPageSize(Number(e.target.value));
                     }}
-                    >
+                >
                     {[10, 20, 30].map(pageSize => (
                         <option key={pageSize} value={pageSize}>
-                        Show {pageSize}
+                            Show {pageSize}
                         </option>
                     ))}
                 </select>

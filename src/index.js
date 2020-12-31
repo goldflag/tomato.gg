@@ -5,12 +5,12 @@ import { ThemeProvider } from './style/theme';
 import Snowfall from 'react-snowfall';
 
 function Main() {
-  return (
-    <ThemeProvider>
-      <Snowfall snowflakeCount={75}/>
-      <Tomatopedia />
-    </ThemeProvider>
-  );
+    return (
+        <ThemeProvider>
+            <Snowfall snowflakeCount={75} />
+            <Tomatopedia />
+        </ThemeProvider>
+    );
 }
 
 ReactDOM.render(<Main />, document.getElementById('root'));

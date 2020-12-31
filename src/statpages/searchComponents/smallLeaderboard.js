@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useTable } from 'react-table'
-import styled from 'styled-components'
+import { useTable } from 'react-table';
+import styled from 'styled-components';
 import WN8c from '../../functions/WN8color';
 import WRc from '../../functions/WRcolor';
 import { ThemeContext } from '../../style/theme.js';
 
 export default function SmallLeaderboard(props) {
-    const {theme} = React.useContext(ThemeContext);
+    const { theme } = React.useContext(ThemeContext);
 
     const Styles = styled.div`
     table {
@@ -45,19 +45,19 @@ export default function SmallLeaderboard(props) {
             }
         }
     }
-    `
+    `;
 
     const [data, setData] = useState([
-            { "rank": "1", "username": "loading...", "battles": "", "avgtier": "", "": "" },
-            { "rank": "2", "username": "loading...", "battles": "", "avgtier": "", "": "" },
-            { "rank": "3", "username": "loading...", "battles": "", "avgtier": "", "": "" },
-            { "rank": "4", "username": "loading...", "battles": "", "avgtier": "", "": "" },
-            { "rank": "5", "username": "loading...", "battles": "", "avgtier": "", "": "" },
-            { "rank": "6", "username": "loading...", "battles": "", "avgtier": "", "": "" },
-            { "rank": "7", "username": "loading...", "battles": "", "avgtier": "", "": "" },
-            { "rank": "8", "username": "loading...", "battles": "", "avgtier": "", "": "" },
-            { "rank": "9", "username": "loading...", "battles": "", "avgtier": "", "": "" },
-            { "rank": "10", "username": "loading...", "battles": "", "avgtier": "", "": "" },
+        { "rank": "1", "username": "loading...", "battles": "", "avgtier": "", "": "" },
+        { "rank": "2", "username": "loading...", "battles": "", "avgtier": "", "": "" },
+        { "rank": "3", "username": "loading...", "battles": "", "avgtier": "", "": "" },
+        { "rank": "4", "username": "loading...", "battles": "", "avgtier": "", "": "" },
+        { "rank": "5", "username": "loading...", "battles": "", "avgtier": "", "": "" },
+        { "rank": "6", "username": "loading...", "battles": "", "avgtier": "", "": "" },
+        { "rank": "7", "username": "loading...", "battles": "", "avgtier": "", "": "" },
+        { "rank": "8", "username": "loading...", "battles": "", "avgtier": "", "": "" },
+        { "rank": "9", "username": "loading...", "battles": "", "avgtier": "", "": "" },
+        { "rank": "10", "username": "loading...", "battles": "", "avgtier": "", "": "" },
     ]);
 
     useEffect(() => {
@@ -65,10 +65,10 @@ export default function SmallLeaderboard(props) {
     }, []);
 
     const rankColors = {
-        1: <span style={{color: 'gold', fontWeight: 600}}>1</span>,
-        2: <span style={{color: 'silver', fontWeight: 600}}>2</span>,
-        3: <span style={{color: 'orange', fontWeight: 600}}>3</span>
-    }
+        1: <span style={{ color: 'gold', fontWeight: 600 }}>1</span>,
+        2: <span style={{ color: 'silver', fontWeight: 600 }}>2</span>,
+        3: <span style={{ color: 'orange', fontWeight: 600 }}>3</span>
+    };
 
     async function fetchData() {
         const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/leaderboards/${props.type}/10`;
@@ -86,69 +86,69 @@ export default function SmallLeaderboard(props) {
                 'username': <Link to={link}>{res[i].username}</Link>,
                 'avgtier': res[i].avgtier,
                 'battles': res[i].battles,
-            }
+            };
             if (res[i].rank <= 3) {
                 entry.rank = rankColors[res[i].rank];
             }
             entry[props.type] = res[i][props.type];
-            if (props.type === 'wn8') entry[props.type] = <div style={{padding: '8px', margin: '-8px -8px', color: 'white', backgroundColor: WN8c(res[i][props.type])}}>{res[i][props.type]}</div>;
-            if (props.type === 'winrate') entry[props.type] = <div style={{padding: '8px', margin: '-8px -8px', color: 'white', backgroundColor: WRc(res[i][props.type])}}>{res[i][props.type]}</div>;
+            if (props.type === 'wn8') entry[props.type] = <div style={{ padding: '8px', margin: '-8px -8px', color: 'white', backgroundColor: WN8c(res[i][props.type]) }}>{res[i][props.type]}</div>;
+            if (props.type === 'winrate') entry[props.type] = <div style={{ padding: '8px', margin: '-8px -8px', color: 'white', backgroundColor: WRc(res[i][props.type]) }}>{res[i][props.type]}</div>;
 
             newData.push(entry);
         }
         setData(newData);
     }
 
-  const colOptions = {
-    battles: [
-        { Header: '', accessor: 'rank' },
-        { Header: 'Username', accessor: 'username', Footer: <span style={{fontSize: '0.8rem', fontWeight: '500'}}> <Link to='/Leaderboards'>FULL LEADERBOARDS</Link></span> },
-        { Header: 'Battles', accessor: 'battles'},
-        { Header: 'Avg Tier', accessor: 'avgtier'}
-    ],
-    wn8: [
-        { Header: '', accessor: 'rank' },
-        { Header: 'Username', accessor: 'username', Footer: <span style={{fontSize: '0.8rem', fontWeight: '500'}}> <Link to='/Leaderboards'>FULL LEADERBOARDS</Link></span> },
-        { Header: 'WN8', accessor: 'wn8'},
-        { Header: 'Avg Tier', accessor: 'avgtier'},
-        { Header: 'Battles', accessor: 'battles'}
-    ],
-    winrate: [
-        { Header: '', accessor: 'rank' },
-        { Header: 'Username', accessor: 'username', Footer: <span style={{fontSize: '0.8rem', fontWeight: '500'}}> <Link to='/Leaderboards'>FULL LEADERBOARDS</Link></span> },
-        { Header: 'Winrate', accessor: 'winrate'},
-        { Header: 'Avg Tier', accessor: 'avgtier'},
-        { Header: 'Battles', accessor: 'battles'}
-    ],
-    moecount: [
-        { Header: '', accessor: 'rank' },
-        { Header: 'Username', accessor: 'username', Footer: <span style={{fontSize: '0.8rem', fontWeight: '500'}}> <Link to='/Leaderboards'>FULL LEADERBOARDS</Link></span> },
-        { Header: '3 MoE', accessor: 'moecount'},
-        { Header: 'Avg Tier', accessor: 'avgtier'},
-        { Header: 'Battles', accessor: 'battles'}
-    ],
-    moe10: [
-        { Header: '', accessor: 'rank' },
-        { Header: 'Username', accessor: 'username', Footer: <span style={{fontSize: '0.8rem', fontWeight: '500'}}> <Link to='/Leaderboards'>FULL LEADERBOARDS</Link></span> },
-        { Header: 'T10 3 MoE', accessor: 'moe10'},
-        { Header: 'Avg Tier', accessor: 'avgtier'},
-        { Header: 'Battles', accessor: 'battles'}
-    ],
-  }
+    const colOptions = {
+        battles: [
+            { Header: '', accessor: 'rank' },
+            { Header: 'Username', accessor: 'username', Footer: <span style={{ fontSize: '0.8rem', fontWeight: '500' }}> <Link to='/Leaderboards'>FULL LEADERBOARDS</Link></span> },
+            { Header: 'Battles', accessor: 'battles' },
+            { Header: 'Avg Tier', accessor: 'avgtier' }
+        ],
+        wn8: [
+            { Header: '', accessor: 'rank' },
+            { Header: 'Username', accessor: 'username', Footer: <span style={{ fontSize: '0.8rem', fontWeight: '500' }}> <Link to='/Leaderboards'>FULL LEADERBOARDS</Link></span> },
+            { Header: 'WN8', accessor: 'wn8' },
+            { Header: 'Avg Tier', accessor: 'avgtier' },
+            { Header: 'Battles', accessor: 'battles' }
+        ],
+        winrate: [
+            { Header: '', accessor: 'rank' },
+            { Header: 'Username', accessor: 'username', Footer: <span style={{ fontSize: '0.8rem', fontWeight: '500' }}> <Link to='/Leaderboards'>FULL LEADERBOARDS</Link></span> },
+            { Header: 'Winrate', accessor: 'winrate' },
+            { Header: 'Avg Tier', accessor: 'avgtier' },
+            { Header: 'Battles', accessor: 'battles' }
+        ],
+        moecount: [
+            { Header: '', accessor: 'rank' },
+            { Header: 'Username', accessor: 'username', Footer: <span style={{ fontSize: '0.8rem', fontWeight: '500' }}> <Link to='/Leaderboards'>FULL LEADERBOARDS</Link></span> },
+            { Header: '3 MoE', accessor: 'moecount' },
+            { Header: 'Avg Tier', accessor: 'avgtier' },
+            { Header: 'Battles', accessor: 'battles' }
+        ],
+        moe10: [
+            { Header: '', accessor: 'rank' },
+            { Header: 'Username', accessor: 'username', Footer: <span style={{ fontSize: '0.8rem', fontWeight: '500' }}> <Link to='/Leaderboards'>FULL LEADERBOARDS</Link></span> },
+            { Header: 'T10 3 MoE', accessor: 'moe10' },
+            { Header: 'Avg Tier', accessor: 'avgtier' },
+            { Header: 'Battles', accessor: 'battles' }
+        ],
+    };
 
-  const columns = React.useMemo(
-    () => colOptions[props.type],
-    []
-  )
+    const columns = React.useMemo(
+        () => colOptions[props.type],
+        []
+    );
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    footerGroups,
-    rows,
-    prepareRow,
-  } = useTable({ columns, data })
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        footerGroups,
+        rows,
+        prepareRow,
+    } = useTable({ columns, data });
 
 
     return (
@@ -156,39 +156,39 @@ export default function SmallLeaderboard(props) {
         <Styles>
             <table {...getTableProps()}>
                 <thead>
-                {headerGroups.map(headerGroup => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map(column => (
-                    <th {...column.getHeaderProps()}>
-                        {column.render('Header')}
-                    </th>
+                    {headerGroups.map(headerGroup => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map(column => (
+                                <th {...column.getHeaderProps()}>
+                                    {column.render('Header')}
+                                </th>
+                            ))}
+                        </tr>
                     ))}
-                </tr>
-                ))}
                 </thead>
                 <tbody>
-                {rows.map(row => {
-                prepareRow(row)
-                return (
-                    <tr {...row.getRowProps()}>
-                    {row.cells.map(cell => {
+                    {rows.map(row => {
+                        prepareRow(row);
                         return (
-                        <td {...cell.getCellProps()} >
-                            {cell.render('Cell')}
-                        </td>
-                        )
+                            <tr {...row.getRowProps()}>
+                                {row.cells.map(cell => {
+                                    return (
+                                        <td {...cell.getCellProps()} >
+                                            {cell.render('Cell')}
+                                        </td>
+                                    );
+                                })}
+                            </tr>
+                        );
                     })}
-                    </tr>
-                    )
-                })}            
                 </tbody>
                 <tfoot>
                     {footerGroups.map(group => (
-                    <tr {...group.getFooterGroupProps()}>
-                        {group.headers.map(column => (
-                        <td {...column.getFooterProps()}>{column.render('Footer')}</td>
-                        ))}
-                    </tr>
+                        <tr {...group.getFooterGroupProps()}>
+                            {group.headers.map(column => (
+                                <td {...column.getFooterProps()}>{column.render('Footer')}</td>
+                            ))}
+                        </tr>
                     ))}
                 </tfoot>
             </table>

@@ -3,12 +3,12 @@ import { ResponsivePie } from '@nivo/pie';
 import { ThemeContext } from '../../../style/theme.js';
 
 export default function ClassDistribution(props) {
-    const {theme} = React.useContext(ThemeContext);
-    return(
-        <div style={{ height: 'calc(300px)'}}>
-            <ResponsivePie  
-                theme={{ 
-                    textColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',  
+    const { theme } = React.useContext(ThemeContext);
+    return (
+        <div style={{ height: 'calc(300px)' }}>
+            <ResponsivePie
+                theme={{
+                    textColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',
                 }}
                 data={props.data}
                 margin={{ top: 30, right: 20, bottom: 30, left: 20 }}
@@ -22,10 +22,10 @@ export default function ClassDistribution(props) {
                     "rgb(212, 38, 186)"
                 ]}
                 borderWidth={2}
-                borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.2 ] ] }}
+                borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
                 radialLabelsSkipAngle={10}
                 radialLabelsTextXOffset={6}
-                radialLabelsTextColor={theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)'} 
+                radialLabelsTextColor={theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)'}
                 radialLabelsLinkOffset={0}
                 radialLabelsLinkDiagonalLength={5}
                 radialLabelsLinkHorizontalLength={5}
@@ -35,8 +35,8 @@ export default function ClassDistribution(props) {
                 slicesLabelsTextColor="rgb(230, 230, 230)"
                 animate={true}
                 motionStiffness={90}
-                motionDamping={15}                        
-                />
-            </div>
-        );
-    }
+                motionDamping={15}
+            />
+        </div>
+    );
+}

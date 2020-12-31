@@ -1,17 +1,17 @@
 import React from "react";
-import { ResponsiveScatterPlot  } from '@nivo/scatterplot'
+import { ResponsiveScatterPlot } from '@nivo/scatterplot';
 
 export default function Scatterplot(props) {
 
     return (
-        <div style={{ height: 'calc(500px)'}}>
-            <ResponsiveScatterPlot 
+        <div style={{ height: 'calc(500px)' }}>
+            <ResponsiveScatterPlot
                 data={props.data}
                 margin={{ top: 40, right: 120, bottom: 70, left: 70 }}
                 xScale={{ type: 'linear', min: 40, max: 'auto' }}
-                xFormat={function(e){return e.toFixed(2)+"%"}}
+                xFormat={function (e) { return e.toFixed(2) + "%"; }}
                 yScale={{ type: 'linear', min: 0, max: 'auto' }}
-                yFormat={function(e){return e+" WN8"}}
+                yFormat={function (e) { return e + " WN8"; }}
                 blendMode="multiply"
                 axisTop={null}
                 axisRight={null}

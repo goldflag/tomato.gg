@@ -20,14 +20,14 @@ import { camelCase } from 'lodash';
 
 
 const tiers = [
-    {"tier": 1}, {"tier": 2}, {"tier": 3}, {"tier": 4}, {"tier": 5}, {"tier": 6}, {"tier": 7}, {"tier": 8}, {"tier": 9}, {"tier": 10}
+    { "tier": 1 }, { "tier": 2 }, { "tier": 3 }, { "tier": 4 }, { "tier": 5 }, { "tier": 6 }, { "tier": 7 }, { "tier": 8 }, { "tier": 9 }, { "tier": 10 }
 ];
 const classes = [
-    {"class": "HT"}, {"class": "MT"}, {"class": "LT"}, {"class": "TD"}, {"class": "SPG"}
+    { "class": "HT" }, { "class": "MT" }, { "class": "LT" }, { "class": "TD" }, { "class": "SPG" }
 ];
 const nations = [
-    {"nation": "USA"}, {"nation": "China"}, {"nation": "Czech"}, {"nation": "France"}, {"nation": "Germany"}, 
-    {"nation": "Italy"}, {"nation": "Japan"}, {"nation": "Poland"}, {"nation": "Sweden"}, {"nation": "UK"}, {"nation": "USSR"}
+    { "nation": "USA" }, { "nation": "China" }, { "nation": "Czech" }, { "nation": "France" }, { "nation": "Germany" },
+    { "nation": "Italy" }, { "nation": "Japan" }, { "nation": "Poland" }, { "nation": "Sweden" }, { "nation": "UK" }, { "nation": "USSR" }
 ];
 
 export default function Table() {
@@ -51,11 +51,11 @@ export default function Table() {
         data = data.overall;
         for (let i = 0; i < data.length; ++i) {
             const link = `/tank/${data[i].id}/${data[i].name.replace(/\s/g, '-')}`;
-            data[i].id = <Link to={link}><img src={require(`../../assets/tankIcons/${data[i].id}.png`)} style={{maxHeight: '24px', margin: '-0.3rem', paddingLeft: '0.7rem' }} alt={data[i].id}/></Link>
-            data[i].name = <Link to={link}>{data[i].name}</Link>
+            data[i].id = <Link to={link}><img src={require(`../../assets/tankIcons/${data[i].id}.png`)} style={{ maxHeight: '24px', margin: '-0.3rem', paddingLeft: '0.7rem' }} alt={data[i].id} /></Link>;
+            data[i].name = <Link to={link}>{data[i].name}</Link>;
             data[i].nation = nationConversion[data[i].nation];
             data[i].class = classConversion[data[i].class];
-            data[i].winrate =  data[i].winrate + "%";
+            data[i].winrate = data[i].winrate + "%";
         }
         setProducts(data);
     }
@@ -100,7 +100,7 @@ export default function Table() {
 
     function WRcolor(rowData) {
         return (
-            <div style={{color: 'white', backgroundColor: WRc(rowData.winrate.substring(0, rowData.winrate.length - 1)), padding: '0.5rem 1rem', margin: '-1rem -1rem -1rem -1rem'}}>
+            <div style={{ color: 'white', backgroundColor: WRc(rowData.winrate.substring(0, rowData.winrate.length - 1)), padding: '0.5rem 1rem', margin: '-1rem -1rem -1rem -1rem' }}>
                 {rowData.winrate}
             </div>
         );
@@ -108,7 +108,7 @@ export default function Table() {
 
     function WN8color(rowData) {
         return (
-            <div style={{color: 'white', backgroundColor: WN8c(rowData.wn8), padding: '0.5rem 1rem', margin: '-1rem -1rem -1rem -1rem'}}>
+            <div style={{ color: 'white', backgroundColor: WN8c(rowData.wn8), padding: '0.5rem 1rem', margin: '-1rem -1rem -1rem -1rem' }}>
                 {rowData.wn8}
             </div>
         );
@@ -117,30 +117,30 @@ export default function Table() {
     let table = <></>;
     if (products) {
         table = <>
-        <div className="datatable">
-            <div className="card">
-                <DataTable value={products} 
-                        ref={(el) => setDt(el)} 
+            <div className="datatable">
+                <div className="card">
+                    <DataTable value={products}
+                        ref={(el) => setDt(el)}
                         paginator
                         paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={100} rowsPerPageOptions={[50, 100, 250, 1000]}
                         sortField="wn8" sortOrder={-1}
                         header={header} globalFilter={globalFilter} className="p"
                         rowHover={true}
-                        >
-                    <Column field="id" header="" style={{width:'8%'}}></Column>
-                    <Column field="name" header="Name" style={{width:'13%'}}></Column>
-                    <Column field="tier" header="Tier" sortable filter filterElement={tierFilter} style={{width:'8%'}}></Column>
-                    <Column field="class" header="Class" sortable filter filterElement={classFilter} style={{width:'8%'}}></Column>
-                    <Column field="nation" header="Nation" sortable filter filterElement={nationFilter} style={{width:'10%'}}></Column>
-                    <Column field="battles" header="Battles" sortable></Column>
-                    <Column field="wn8" header="WN8"  body={WN8color} sortable style={{width:'8%'}}></Column>
-                    <Column field="winrate" header="WR" body={WRcolor} sortable style={{width:'10%'}}></Column>
-                    <Column field="dpg" header="DPG" sortable style={{width:'8%'}}></Column>
-                </DataTable>
+                    >
+                        <Column field="id" header="" style={{ width: '8%' }}></Column>
+                        <Column field="name" header="Name" style={{ width: '13%' }}></Column>
+                        <Column field="tier" header="Tier" sortable filter filterElement={tierFilter} style={{ width: '8%' }}></Column>
+                        <Column field="class" header="Class" sortable filter filterElement={classFilter} style={{ width: '8%' }}></Column>
+                        <Column field="nation" header="Nation" sortable filter filterElement={nationFilter} style={{ width: '10%' }}></Column>
+                        <Column field="battles" header="Battles" sortable></Column>
+                        <Column field="wn8" header="WN8" body={WN8color} sortable style={{ width: '8%' }}></Column>
+                        <Column field="winrate" header="WR" body={WRcolor} sortable style={{ width: '10%' }}></Column>
+                        <Column field="dpg" header="DPG" sortable style={{ width: '8%' }}></Column>
+                    </DataTable>
+                </div>
             </div>
-        </div>
-    </>
+        </>;
     }
     return table;
 }

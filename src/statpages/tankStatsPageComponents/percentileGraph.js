@@ -1,9 +1,9 @@
 import React from "react";
-import { ResponsiveLine } from '@nivo/line'
+import { ResponsiveLine } from '@nivo/line';
 import { ThemeContext } from '../../style/theme.js';
 
 export default function PercentileGraph(props) {
-    const {theme} = React.useContext(ThemeContext);
+    const { theme } = React.useContext(ThemeContext);
 
     const data = [
         {
@@ -13,10 +13,10 @@ export default function PercentileGraph(props) {
     ];
 
     return (
-        <div style={{ height: 'calc(310px)'}}>
+        <div style={{ height: 'calc(310px)' }}>
             <ResponsiveLine
-                theme={{ 
-                    textColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100, 100, 100)',  
+                theme={{
+                    textColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100, 100, 100)',
                     grid: {
                         line: {
                             stroke: theme === 'dark' ? 'rgb(100, 100, 100)' : 'rgb(210, 210, 210)',
@@ -27,9 +27,9 @@ export default function PercentileGraph(props) {
                 data={data}
                 margin={{ top: 20, right: 90, bottom: 80, left: 60 }}
                 xScale={{ type: 'point' }}
-                xFormat={function(e){return e + " Percentile"}}
+                xFormat={function (e) { return e + " Percentile"; }}
                 yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
-                yFormat={function(e){return e + ' ' + props.smallType}}
+                yFormat={function (e) { return e + ' ' + props.smallType; }}
                 axisTop={null}
                 axisRight={null}
                 axisBottom={{
@@ -64,7 +64,7 @@ export default function PercentileGraph(props) {
                     legendOffset: -50,
                     legendPosition: 'middle'
                 }}
-                colors={[                
+                colors={[
                     props.color
                 ]}
                 pointSize={1}
@@ -90,7 +90,7 @@ export default function PercentileGraph(props) {
                         symbolSize: 12,
                         symbolShape: 'circle',
                         symbolBorderColor: 'rgba(0, 0, 0, .5)',
-                        itemTextColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',  
+                        itemTextColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',
                         effects: [
                             {
                                 on: 'hover',
@@ -104,5 +104,5 @@ export default function PercentileGraph(props) {
                 ]}
             />
         </div>
-    )
+    );
 }

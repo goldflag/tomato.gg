@@ -1,29 +1,29 @@
 import React from 'react';
-import { useTable, useSortBy, usePagination, useExpanded } from 'react-table'
-import styled from 'styled-components'
+import { useTable, useSortBy, usePagination, useExpanded } from 'react-table';
+import styled from 'styled-components';
 import WN8c from '../../../functions/WN8color';
 import WRc from '../../../functions/WRcolor';
-import { Icon } from 'react-icons-kit'
-import { chevronRight } from 'react-icons-kit/feather/chevronRight'
-import { chevronLeft } from 'react-icons-kit/feather/chevronLeft'
-import { chevronsRight } from 'react-icons-kit/feather/chevronsRight'
-import { chevronsLeft } from 'react-icons-kit/feather/chevronsLeft'
-import { chevronDown } from 'react-icons-kit/feather/chevronDown'
+import { Icon } from 'react-icons-kit';
+import { chevronRight } from 'react-icons-kit/feather/chevronRight';
+import { chevronLeft } from 'react-icons-kit/feather/chevronLeft';
+import { chevronsRight } from 'react-icons-kit/feather/chevronsRight';
+import { chevronsLeft } from 'react-icons-kit/feather/chevronsLeft';
+import { chevronDown } from 'react-icons-kit/feather/chevronDown';
 import { arrowDown } from 'react-icons-kit/feather/arrowDown';
 import { arrowUp } from 'react-icons-kit/feather/arrowUp';
 import { ThemeContext } from '../../../style/theme.js';
 import SessionBreakdown from './sessionBreakdown';
 
 function WN8Style(wn8) {
-    return { background: WN8c(wn8), color: 'white', padding: '9px', margin: '-8px -8px', textAlign: 'center' }
+    return { background: WN8c(wn8), color: 'white', padding: '9px', margin: '-8px -8px', textAlign: 'center' };
 }
 
 function WRStyle(wr) {
-    return { background: WRc(wr), color: 'white', padding: '9px', margin: '-8px -8px', textAlign: 'center' }
+    return { background: WRc(wr), color: 'white', padding: '9px', margin: '-8px -8px', textAlign: 'center' };
 }
 
 export default function SessionsLog(props) {
-    const {theme} = React.useContext(ThemeContext);
+    const { theme } = React.useContext(ThemeContext);
 
     const Styles = styled.div`
     table {
@@ -75,7 +75,7 @@ export default function SessionsLog(props) {
         color: white;
         border-radius: 50%;
     }
-    `
+    `;
 
     const data = props.data;
 
@@ -85,23 +85,27 @@ export default function SessionsLog(props) {
             Header: () => null, // No header
             id: 'expander', // It needs an ID
             Cell: ({ row }) => (
-              // Use Cell to render an expander for each row.
-              // We can use the getToggleRowExpandedProps prop-getter
-              // to build the expander.
-              <span {...row.getToggleRowExpandedProps()}>
-                {row.isExpanded ? <Icon size={24} icon={chevronDown} /> : <Icon size={24} icon={chevronRight} />}
-              </span>
+                // Use Cell to render an expander for each row.
+                // We can use the getToggleRowExpandedProps prop-getter
+                // to build the expander.
+                <span {...row.getToggleRowExpandedProps()}>
+                    {row.isExpanded ? <Icon size={24} icon={chevronDown} /> : <Icon size={24} icon={chevronRight} />}
+                </span>
             ),
-          },
+        },
         { Header: '', accessor: 'rank' },
         { Header: 'Date', accessor: 'date' },
         { Header: 'Battles', accessor: 'battles' },
         { Header: 'Avg Tier', accessor: 'tier' },
         { Header: 'Tanks', accessor: 'tankcount' },
-        { Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value}</div>) },
-            Header: 'WN8', accessor: 'overallWN8' },
-        { Cell: ({ value }) => { return (<div style={WRStyle(value)}>{value + "%"}</div>) },
-            Header: 'Winrate', accessor: 'winrate' },
+        {
+            Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value}</div>); },
+            Header: 'WN8', accessor: 'overallWN8'
+        },
+        {
+            Cell: ({ value }) => { return (<div style={WRStyle(value)}>{value + "%"}</div>); },
+            Header: 'Winrate', accessor: 'winrate'
+        },
         { Header: 'DPG', accessor: 'damagerate' },
         { Header: 'KPG', accessor: 'fragsrate' },
         { Header: 'DMG Ratio', accessor: 'DMGratio' },
@@ -109,12 +113,12 @@ export default function SessionsLog(props) {
         { Header: 'XP', accessor: 'xprate' },
         { Header: 'Spots', accessor: 'spottedrate' }
     ];
-    
+
 
     const columns = React.useMemo(
         () => colOptions,
         []
-    )
+    );
 
     const {
         getTableProps,
@@ -135,8 +139,8 @@ export default function SessionsLog(props) {
         setPageSize,
         state: { pageIndex, pageSize },
     } = useTable(
-        { 
-            columns, 
+        {
+            columns,
             data,
             initialState: { pageIndex: 0, pageSize: 7 },
         },
@@ -163,99 +167,99 @@ export default function SessionsLog(props) {
                 spots: tankStats[i][12],
                 survived: tankStats[i][13],
                 isPrem: tankStats[i][14]
-            }
+            };
             rowData.push(entry);
         }
         console.log(rowData);
         return (
             <div>
-                <SessionBreakdown data={rowData}/>
+                <SessionBreakdown data={rowData} />
             </div>
-        )
+        );
     }
 
     return (
         <Styles>
             <table {...getTableProps()}>
                 <thead>
-                {headerGroups.map(headerGroup => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map(column => (
-                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                        {column.render('Header')}
-                        <span style={{textAlign: 'center'}}>
-                            {column.isSorted
-                            ? column.isSortedDesc
-                                ? <Icon size={16} icon={arrowUp} />
-                                : <Icon size={16} icon={arrowDown} />
-                            : ''}
-                        </span>
-                    </th>
+                    {headerGroups.map(headerGroup => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map(column => (
+                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                    {column.render('Header')}
+                                    <span style={{ textAlign: 'center' }}>
+                                        {column.isSorted
+                                            ? column.isSortedDesc
+                                                ? <Icon size={16} icon={arrowUp} />
+                                                : <Icon size={16} icon={arrowDown} />
+                                            : ''}
+                                    </span>
+                                </th>
+                            ))}
+                        </tr>
                     ))}
-                </tr>
-                ))}
                 </thead>
                 <tbody {...getTableBodyProps()}>
                     {page.map((row, i) => {
-                        prepareRow(row)
+                        prepareRow(row);
                         return (
-                        <React.Fragment {...row.getRowProps()}>
-                            <tr>
-                                {row.cells.map(cell => {
-                                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                })}
-                            </tr>
-                            {/*
+                            <React.Fragment {...row.getRowProps()}>
+                                <tr>
+                                    {row.cells.map(cell => {
+                                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+                                    })}
+                                </tr>
+                                {/*
                                 If the row is in an expanded state, render a row with a
                                 column that fills the entire length of the table.
                             */}
-                            {row.isExpanded ? (
-                            <tr>
-                                <td colSpan={visibleColumns.length}>
-                                {/*
+                                {row.isExpanded ? (
+                                    <tr>
+                                        <td colSpan={visibleColumns.length}>
+                                            {/*
                                     Inside it, call our renderRowSubComponent function. In reality,
                                     you could pass whatever you want as props to
                                     a component like this, including the entire
                                     table instance. But for this example, we'll just
                                     pass the row
                                     */}
-                                {renderRowSubComponent({ row })}
-                                </td>
-                            </tr>
-                            ) : null}
-                        </React.Fragment>
-                        )
+                                            {renderRowSubComponent({ row })}
+                                        </td>
+                                    </tr>
+                                ) : null}
+                            </React.Fragment>
+                        );
                     })}
-                    </tbody>
+                </tbody>
             </table>
             <div className="pagination">
                 <button className={'paginationButton'} onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-                <Icon size={24} icon={chevronsLeft} />
+                    <Icon size={24} icon={chevronsLeft} />
                 </button>{' '}
                 <button className={'paginationButton'} onClick={() => previousPage()} disabled={!canPreviousPage}>
-                <Icon size={24} icon={chevronLeft} />
+                    <Icon size={24} icon={chevronLeft} />
                 </button>{' '}
                 <button className={'paginationButton'} onClick={() => nextPage()} disabled={!canNextPage}>
-                <Icon size={24} icon={chevronRight} />
+                    <Icon size={24} icon={chevronRight} />
                 </button>{' '}
                 <button className={'paginationButton'} onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-                <Icon size={24} icon={chevronsRight} />
+                    <Icon size={24} icon={chevronsRight} />
                 </button>{' '}
                 {/* <span> */}
                     Page{' '}
-                    {pageIndex + 1} of {pageOptions.length}
-                    {' '}
+                {pageIndex + 1} of {pageOptions.length}
+                {' '}
                 {/* </span> */}
                 {'  '}
                 <select
                     value={pageSize}
                     onChange={e => {
-                        setPageSize(Number(e.target.value))
+                        setPageSize(Number(e.target.value));
                     }}
-                    >
+                >
                     {[7, 14, 30, 90, 180].map(pageSize => (
                         <option key={pageSize} value={pageSize}>
-                        Show {pageSize}
+                            Show {pageSize}
                         </option>
                     ))}
                 </select>
