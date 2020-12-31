@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap");
 
-.topstats { 
+.topstats {
     display: flex;
     flex-direction: row;
     /* grid-template-columns: auto  14% 14% 14% 14% 14% 14%;
     grid-template-rows: 100%;
     grid-gap: 1rem; */
-    justify-content:  space-between;
+    justify-content: space-between;
     max-width: 100%;
 }
 .paper {
@@ -41,11 +41,10 @@
     background-color: rgb(40, 40, 40);
 }
 
-
-@media screen and (max-Width: 1000px) {
+@media screen and (max-width: 1000px) {
     .topstats {
         /* display: none;*/
-    }    
+    }
     .paper {
         width: 15%;
         padding: 1rem 0rem 1rem 0rem;
@@ -65,5 +64,4 @@
     .charts {
         display: none;
     }
-
 }

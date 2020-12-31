@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import MUIDataTable from 'mui-datatables';
-import { createMuiTheme, MuiThemeProvider, withStyles, rgbToHex } from '@material-ui/core/styles';
-import WN8color from '../../functions/WN8color';
-import WRcolor from '../../functions/WRcolor';
-import nationVal from '../../data/nationVal';
-import classVal from '../../data/classVal';
-import { ThemeContext } from '../../style/theme.js';
+import React, { useState, useEffect } from "react";
+import MUIDataTable from "mui-datatables";
+import {
+    createMuiTheme,
+    MuiThemeProvider,
+    withStyles,
+    rgbToHex,
+} from "@material-ui/core/styles";
+import WN8color from "../../functions/WN8color";
+import WRcolor from "../../functions/WRcolor";
+import nationVal from "../../data/nationVal";
+import classVal from "../../data/classVal";
+import { ThemeContext } from "../../style/theme.js";
 
-const customStyles = theme => ({
+const customStyles = (theme) => ({
     wn8row: {
-        '& td': { backgroundColor: 'blue' },
+        "& td": { backgroundColor: "blue" },
     },
     GreyLine: {
-        '& td': { backgroundColor: theme.palette.grey[100] },
+        "& td": { backgroundColor: theme.palette.grey[100] },
     },
     NameCell: {
         fontWeight: 900,
@@ -23,7 +28,7 @@ const customStyles = theme => ({
 const masteryConv = { 4: 4, 3: 3, 2: 2, 1: 1, undefined: 0, 0: 0 };
 
 export default function OverallTankStats(props) {
-    const [finaldata, setFinaldata] = useState('');
+    const [finaldata, setFinaldata] = useState("");
     const { theme } = React.useContext(ThemeContext);
 
     const getMuiTheme = () =>
@@ -31,48 +36,67 @@ export default function OverallTankStats(props) {
             overrides: {
                 MUIDataTable: {
                     root: {
-                        backgroundColor: '#AAF',
-                        display: 'none'
+                        backgroundColor: "#AAF",
+                        display: "none",
                     },
                     paper: {
-                        boxShadow: 'none',
+                        boxShadow: "none",
                     },
                 },
                 MuiToolbar: {
                     root: {
-                        backgroundColor: theme === 'dark' ? 'rgb(40, 40, 45)' : 'white',
-                        color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(20, 20, 20)',
+                        backgroundColor:
+                            theme === "dark" ? "rgb(40, 40, 45)" : "white",
+                        color:
+                            theme === "dark"
+                                ? "rgb(230, 230, 230)"
+                                : "rgb(20, 20, 20)",
                     },
                 },
                 MUIDataTableToolbar: {
                     icon: {
-                        color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(100, 100, 100)',
-                        '&:hover': {
-                            color: 'dark' ? 'rgb(150, 150, 150)' : 'rgb(110, 110, 110)',
-                        }
+                        color:
+                            theme === "dark"
+                                ? "rgb(230, 230, 230)"
+                                : "rgb(100, 100, 100)",
+                        "&:hover": {
+                            color: "dark"
+                                ? "rgb(150, 150, 150)"
+                                : "rgb(110, 110, 110)",
+                        },
                     },
                 },
                 MuiTableCell: {
                     head: {
-                        backgroundColor: theme === 'dark' ? 'rgb(60, 60, 65)' : 'rgb(220, 220, 223)',
-                        padding: '5px 5px 5px 12px',
-                        borderBottom: theme === 'dark' ? 'rgb(60, 60, 65)' : 'rgb(220, 220, 223)',
-                        color: theme === 'dark' ? 'white' : 'black'
+                        backgroundColor:
+                            theme === "dark"
+                                ? "rgb(60, 60, 65)"
+                                : "rgb(220, 220, 223)",
+                        padding: "5px 5px 5px 12px",
+                        borderBottom:
+                            theme === "dark"
+                                ? "rgb(60, 60, 65)"
+                                : "rgb(220, 220, 223)",
+                        color: theme === "dark" ? "white" : "black",
                     },
                     root: {
-                        padding: '3px 10px 3px 12px',
+                        padding: "3px 10px 3px 12px",
                     },
                 },
                 MUIDataTableSelectCell: {
                     headerCell: {
-                        backgroundColor: 'white',
+                        backgroundColor: "white",
                     },
                 },
                 MuiTableFooter: {
                     root: {
-                        '& .MuiToolbar-root': {
-                            backgroundColor: theme === 'dark' ? 'rgb(40, 40, 45)' : 'white',
-                            color: theme === 'dark' ? 'rgb(230, 230, 230)' : 'rgb(20, 20, 20)',
+                        "& .MuiToolbar-root": {
+                            backgroundColor:
+                                theme === "dark" ? "rgb(40, 40, 45)" : "white",
+                            color:
+                                theme === "dark"
+                                    ? "rgb(230, 230, 230)"
+                                    : "rgb(20, 20, 20)",
                         },
                     },
                 },
@@ -80,77 +104,103 @@ export default function OverallTankStats(props) {
         });
 
     const colStyle = {
-        borderBottom: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)',
-        padding: '2px 8px',
-        color: (theme === 'dark') ? 'white' : null,
+        borderBottom:
+            theme === "dark"
+                ? "1px solid rgb(80, 80, 85)"
+                : "1px solid rgb(220, 220, 220)",
+        padding: "2px 8px",
+        color: theme === "dark" ? "white" : null,
     };
 
     const columns = [
         {
-            name: 'Icon',
-            label: ' ',
+            name: "Icon",
+            label: " ",
             options: {
-                setCellProps: (props) => { return { style: colStyle }; },
+                setCellProps: (props) => {
+                    return { style: colStyle };
+                },
                 filter: false,
             },
         },
         {
-            name: 'Vehicle',
+            name: "Vehicle",
             options: {
-                setCellProps: (props) => { return { style: colStyle }; },
-                filter: false
-            }
+                setCellProps: (props) => {
+                    return { style: colStyle };
+                },
+                filter: false,
+            },
         },
         {
-            name: 'Nation',
+            name: "Nation",
             options: {
                 filter: false,
-                setCellProps: () => { return { style: colStyle }; },
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
                 sortCompare: (order) => {
                     return (obj1, obj2) => {
                         let val1 = obj1.data.props.alt;
                         let val2 = obj2.data.props.alt;
-                        return (nationVal[val1] - nationVal[val2]) * (order === 'asc' ? 1 : -1);
+                        return (
+                            (nationVal[val1] - nationVal[val2]) *
+                            (order === "asc" ? 1 : -1)
+                        );
                     };
-                }
-            }
+                },
+            },
         },
         {
-            name: 'Tier',
+            name: "Tier",
             options: {
                 filter: true,
-                setCellProps: () => { return { style: colStyle }; },
-            }
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
+            },
         },
         {
-            name: 'Class',
+            name: "Class",
             options: {
                 filter: false,
-                setCellProps: () => { return { style: colStyle }; },
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
                 sortCompare: (order) => {
                     return (obj1, obj2) => {
                         let val1 = obj1.data.props.alt;
                         let val2 = obj2.data.props.alt;
-                        return (classVal[val1] - classVal[val2]) * (order === 'asc' ? 1 : -1);
+                        return (
+                            (classVal[val1] - classVal[val2]) *
+                            (order === "asc" ? 1 : -1)
+                        );
                     };
-                }
-            }
+                },
+            },
         },
         {
-            name: 'Battles',
+            name: "Battles",
             options: {
-                setCellProps: () => { return { style: colStyle }; },
-                filter: false
-            }
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
+                filter: false,
+            },
         },
         {
-            name: 'Winrate',
+            name: "Winrate",
             options: {
                 filter: false,
                 setCellProps: (value) => {
                     return {
                         style: {
-                            color: 'white', backgroundColor: WRcolor(value.slice(0, -1)), borderBottom: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)',
+                            color: "white",
+                            backgroundColor: WRcolor(value.slice(0, -1)),
+                            borderBottom:
+                                theme === "dark"
+                                    ? "1px solid rgb(80, 80, 85)"
+                                    : "1px solid rgb(220, 220, 220)",
                         },
                     };
                 },
@@ -158,127 +208,156 @@ export default function OverallTankStats(props) {
                     return (obj1, obj2) => {
                         let val1 = parseInt(obj1.data.slice(0, -1), 10);
                         let val2 = parseInt(obj2.data.slice(0, -1), 10);
-                        return (val1 - val2) * (order === 'asc' ? 1 : -1);
+                        return (val1 - val2) * (order === "asc" ? 1 : -1);
                     };
-                }
-            }
+                },
+            },
         },
         {
-            name: 'WN8',
+            name: "WN8",
             options: {
                 filter: false,
                 setCellProps: (value) => {
                     return {
                         style: {
-                            color: 'white', backgroundColor: WN8color(value), borderBottom: theme === 'dark' ? '1px solid rgb(80, 80, 85)' : '1px solid rgb(220, 220, 220)',
+                            color: "white",
+                            backgroundColor: WN8color(value),
+                            borderBottom:
+                                theme === "dark"
+                                    ? "1px solid rgb(80, 80, 85)"
+                                    : "1px solid rgb(220, 220, 220)",
                         },
                     };
                 },
-            }
+            },
         },
         {
-            name: 'DPG',
+            name: "DPG",
             options: {
-                setCellProps: () => { return { style: colStyle }; },
-                filter: false
-            }
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
+                filter: false,
+            },
         },
         {
-            name: 'WN8 %tile',
+            name: "WN8 %tile",
             options: {
                 filter: false,
-                setCellProps: () => { return { style: colStyle }; },
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
                 sortCompare: (order) => {
                     return (obj1, obj2) => {
                         let val1 = obj1.data;
                         let val2 = obj2.data;
-                        return (val1 - val2) * (order === 'asc' ? 1 : -1);
+                        return (val1 - val2) * (order === "asc" ? 1 : -1);
                     };
-                }
-            }
+                },
+            },
         },
         {
-            name: 'DPG %tile',
+            name: "DPG %tile",
             options: {
                 filter: false,
-                setCellProps: () => { return { style: colStyle }; },
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
                 sortCompare: (order) => {
                     return (obj1, obj2) => {
                         let val1 = obj1.data;
                         let val2 = obj2.data;
-                        return (val1 - val2) * (order === 'asc' ? 1 : -1);
+                        return (val1 - val2) * (order === "asc" ? 1 : -1);
                     };
-                }
-            }
+                },
+            },
         },
         {
-            name: 'KPG',
+            name: "KPG",
             options: {
-                setCellProps: () => { return { style: colStyle }; },
-                filter: false
-            }
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
+                filter: false,
+            },
         },
         {
-            name: 'DMG Ratio',
+            name: "DMG Ratio",
             options: {
-                setCellProps: () => { return { style: colStyle }; },
-                filter: false
-            }
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
+                filter: false,
+            },
         },
         {
-            name: 'K/D',
+            name: "K/D",
             options: {
-                setCellProps: () => { return { style: colStyle }; },
-                filter: false
-            }
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
+                filter: false,
+            },
         },
         {
-            name: 'XP',
+            name: "XP",
             options: {
-                setCellProps: () => { return { style: colStyle }; },
-                filter: false
-            }
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
+                filter: false,
+            },
         },
         {
-            name: 'Hit Ratio',
+            name: "Hit Ratio",
             options: {
                 filter: false,
-                setCellProps: () => { return { style: colStyle }; },
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
                 sortCompare: (order) => {
                     return (obj1, obj2) => {
                         let val1 = parseInt(obj1.data.slice(0, -1), 10);
                         let val2 = parseInt(obj2.data.slice(0, -1), 10);
-                        return (val1 - val2) * (order === 'asc' ? 1 : -1);
+                        return (val1 - val2) * (order === "asc" ? 1 : -1);
                     };
-                }
-            }
+                },
+            },
         },
         {
-            name: 'Spots',
+            name: "Spots",
             options: {
-                setCellProps: () => { return { style: colStyle }; },
-                filter: false
-            }
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
+                filter: false,
+            },
         },
         {
-            name: 'Armor Eff',
+            name: "Armor Eff",
             options: {
-                setCellProps: () => { return { style: colStyle }; },
-                filter: false
-            }
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
+                filter: false,
+            },
         },
         {
-            name: 'MoE',
+            name: "MoE",
             options: {
-                setCellProps: () => { return { style: colStyle }; },
-                filter: true
-            }
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
+                filter: true,
+            },
         },
         {
-            name: 'Mastery',
+            name: "Mastery",
             options: {
                 filter: false,
-                setCellProps: () => { return { style: colStyle }; },
+                setCellProps: () => {
+                    return { style: colStyle };
+                },
                 sortCompare: (order) => {
                     return (obj1, obj2) => {
                         console.log(obj1);
@@ -286,55 +365,61 @@ export default function OverallTankStats(props) {
                         console.log(val1);
 
                         let val2 = obj1.data.props.alt;
-                        return (masteryConv[val1] - masteryConv[val2]) * (order === 'asc' ? 1 : -1);
+                        return (
+                            (masteryConv[val1] - masteryConv[val2]) *
+                            (order === "asc" ? 1 : -1)
+                        );
                     };
-                }
-            }
+                },
+            },
         },
-
     ];
 
     const options = {
         sortDescFirst: true,
         filter: true,
-        filterType: 'dropdown',
+        filterType: "dropdown",
         fixedHeader: false,
         fixedSelectColumn: false,
         rowHover: true,
-        selectableRows: 'none',
+        selectableRows: "none",
         rowsPerPage: 15,
         rowsPerPageOptions: [10, 15, 25, 50, 100, 250, 500],
         sortOrder: {
-            name: 'Battles',
-            direction: 'desc'
+            name: "Battles",
+            direction: "desc",
         },
         print: false,
         viewColumns: false,
-        responsive: 'standard',
+        responsive: "standard",
         setRowProps: (row, dataIndex, rowIndex) => {
             return {
-                style: { backgroundColor: ((rowIndex % 2) === 0 ? 'rgb(242, 243, 247)' : 'white') }
+                style: {
+                    backgroundColor:
+                        rowIndex % 2 === 0 ? "rgb(242, 243, 247)" : "white",
+                },
             };
         },
 
         setTableProps: () => {
-            return {
-            };
+            return {};
         },
     };
 
     let table = <></>;
     if (true) {
-        table = <>
-            <MuiThemeProvider theme={getMuiTheme()}>
-                <MUIDataTable title={''} data={props.overallStats} columns={columns} options={options} />
-            </MuiThemeProvider>
-        </>;
+        table = (
+            <>
+                <MuiThemeProvider theme={getMuiTheme()}>
+                    <MUIDataTable
+                        title={""}
+                        data={props.overallStats}
+                        columns={columns}
+                        options={options}
+                    />
+                </MuiThemeProvider>
+            </>
+        );
     }
-    return (
-        <>
-            {table}
-        </>
-    );
+    return <>{table}</>;
 }
-

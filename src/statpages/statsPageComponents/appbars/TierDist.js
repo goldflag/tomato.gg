@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import CustomTab from './tabs/customTab';
-import CustomTabs from './tabs/customTabs';
-import TabPanel from './tabs/tabPanel';
-import TierDistribution from '../charts/TierDistribution.js';
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import CustomTab from "./tabs/customTab";
+import CustomTabs from "./tabs/customTabs";
+import TabPanel from "./tabs/tabPanel";
+import TierDistribution from "../charts/TierDistribution.js";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,7 +22,11 @@ export default function TierDist(props) {
     return (
         <div className={classes.root}>
             <div>
-                <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
+                <CustomTabs
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="ant example"
+                >
                     <CustomTab label="TIER DISTRIBUTION" />
                     <CustomTab label="RECENT" />
                 </CustomTabs>

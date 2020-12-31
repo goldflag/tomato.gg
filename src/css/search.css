@@ -1,9 +1,9 @@
-.backbackground { 
-    background-color:  rgb(50, 50, 54);
+.backbackground {
+    background-color: rgb(50, 50, 54);
 }
 
-.background { 
-    background: url(../assets/Ocean.svg) no-repeat center center fixed; 
+.background {
+    background: url(../assets/Ocean.svg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -12,8 +12,8 @@
     padding-top: 20vh;
 }
 
-.backgrounddark { 
-    background: url(../assets/Ocean.svg) no-repeat center center fixed; 
+.backgrounddark {
+    background: url(../assets/Ocean.svg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -32,7 +32,11 @@
 .leaderboard {
 }
 
-@media screen and (max-Width: 1000px) {
-    .center {max-width: 100%; }
-    .leaderboard {display: none; }
+@media screen and (max-width: 1000px) {
+    .center {
+        max-width: 100%;
+    }
+    .leaderboard {
+        display: none;
+    }
 }

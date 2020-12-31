@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Tomatopedia from './tomatopedia.js';
-import { ThemeProvider } from './style/theme';
-import Snowfall from 'react-snowfall';
+import React from "react";
+import ReactDOM from "react-dom";
+import Tomatopedia from "./tomatopedia.js";
+import { ThemeProvider } from "./style/theme";
+import Snowfall from "react-snowfall";
 
 function Main() {
     return (
@@ -13,4 +13,4 @@ function Main() {
     );
 }
 
-ReactDOM.render(<Main />, document.getElementById('root'));
+ReactDOM.render(<Main />, document.getElementById("root"));

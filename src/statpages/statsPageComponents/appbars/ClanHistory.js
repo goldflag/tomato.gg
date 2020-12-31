@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import CustomTab from './tabs/customTab';
-import CustomTabs from './tabs/customTabs';
-import TabPanel from './tabs/tabPanel';
-import Grid from '@material-ui/core/Grid';
-import serverConv from '../../../data/serverConv.js';
-import clonedeep from 'lodash.clonedeep';
-import { ThemeContext } from '../../../style/theme.js';
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import CustomTab from "./tabs/customTab";
+import CustomTabs from "./tabs/customTabs";
+import TabPanel from "./tabs/tabPanel";
+import Grid from "@material-ui/core/Grid";
+import serverConv from "../../../data/serverConv.js";
+import clonedeep from "lodash.clonedeep";
+import { ThemeContext } from "../../../style/theme.js";
 
 const APIKey = process.env.REACT_APP_API_KEY;
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,17 +17,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const roleConv = {
-    "intelligence_officer": "Intelligence Officer",
-    "personnel_officer": "Personnel Officer",
-    "quartermaster": "Quartermaster",
-    "executive_officer": "Executive Officer",
-    "recruit": "Recruit",
-    "private": "Private",
-    "commander": "Commander",
-    "reservist": "Reservist",
-    "combat_officer": "Combat Officer",
-    "junior_officer": "Junior Officer",
-    "recruitment_officer": "Recruitment Officer"
+    intelligence_officer: "Intelligence Officer",
+    personnel_officer: "Personnel Officer",
+    quartermaster: "Quartermaster",
+    executive_officer: "Executive Officer",
+    recruit: "Recruit",
+    private: "Private",
+    commander: "Commander",
+    reservist: "Reservist",
+    combat_officer: "Combat Officer",
+    junior_officer: "Junior Officer",
+    recruitment_officer: "Recruitment Officer",
 };
 
 export default function ClanHistory(props) {
@@ -36,7 +35,7 @@ export default function ClanHistory(props) {
     const { theme } = React.useContext(ThemeContext);
     const [value, setValue] = useState(0);
     let server = "";
-    const [clanList, setClanList] = useState('');
+    const [clanList, setClanList] = useState("");
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -48,7 +47,7 @@ export default function ClanHistory(props) {
 
     function getClanData() {
         const windowUrl = window.location.pathname;
-        const urlParams = windowUrl.substring(7).split('/');
+        const urlParams = windowUrl.substring(7).split("/");
         server = serverConv[urlParams[0]];
         let URL = `https://api.worldoftanks.${server}/wot/clans/info/?application_id=${APIKey}&clan_id=`;
 
@@ -67,58 +66,125 @@ export default function ClanHistory(props) {
                     row["clan_name"] = clanData.data[row.clan_id].tag;
                     row["color"] = clanData.data[row.clan_id].color;
                     if (clanData.data[row.clan_id].emblems != null) {
-                        row["icon"] = clanData.data[row.clan_id].emblems.x64.wot;
+                        row["icon"] =
+                            clanData.data[row.clan_id].emblems.x64.wot;
                     }
                 });
-                if (props.currentClan !== 'NO CLAN') {
+                if (props.currentClan !== "NO CLAN") {
                     let currentClan = {
-                        "clan_name": props.currentClan.clan.tag,
-                        "color": props.currentClan.clan.color,
-                        "joined_at": props.currentClan.joined_at,
-                        "icon": props.currentClan.clan.emblems.x64.wot,
-                        "left_at": props.currentClan.clan.color,
-                        "role": props.currentClan.role
+                        clan_name: props.currentClan.clan.tag,
+                        color: props.currentClan.clan.color,
+                        joined_at: props.currentClan.joined_at,
+                        icon: props.currentClan.clan.emblems.x64.wot,
+                        left_at: props.currentClan.clan.color,
+                        role: props.currentClan.role,
                     };
                     clonedData.unshift(currentClan);
                 }
                 setClanList(clonedData);
             });
-
     }
 
     function Unit() {
         return clanList.map((row) => {
             if (row.clan_name) {
                 let date = new Date(row.joined_at * 1000);
-                const joinDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+                const joinDate = `${
+                    date.getMonth() + 1
+                }/${date.getDate()}/${date.getFullYear()}`;
                 date = new Date(row.left_at * 1000);
-                let leftDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+                let leftDate = `${
+                    date.getMonth() + 1
+                }/${date.getDate()}/${date.getFullYear()}`;
                 if (isNaN(date.getMonth())) leftDate = `Current`;
                 return (
                     <Grid item xs={6}>
                         <Grid container spacing={1}>
                             <Grid item xs={5}>
-                                <div style={{ margin: 'auto', width: '80%', fontSize: '16px', color: row.color }}>
-                                    <span style={{ display: 'flex', justifyContent: 'center' }}>
-                                        <img src={row.icon} alt={row.clan_name} />
+                                <div
+                                    style={{
+                                        margin: "auto",
+                                        width: "80%",
+                                        fontSize: "16px",
+                                        color: row.color,
+                                    }}
+                                >
+                                    <span
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "center",
+                                        }}
+                                    >
+                                        <img
+                                            src={row.icon}
+                                            alt={row.clan_name}
+                                        />
                                     </span>
-                                    <span style={{ display: 'flex', justifyContent: 'center', fontWeight: '500' }}>
+                                    <span
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            fontWeight: "500",
+                                        }}
+                                    >
                                         {`[${row.clan_name}]`}
                                     </span>
                                 </div>
                             </Grid>
                             <Grid item xs={7}>
-                                <div style={{ display: 'flex', justifyContent: 'left', fontWeight: '500' }}>
-                                    <span style={{ textAlign: 'left', fontSize: '14px', color: theme === 'dark' ? 'rgb(220, 220, 220)' : 'black' }}>
-                                        <span style={{ textAlign: 'left', fontSize: '13px', fontWeight: '400', color: 'rgb(125, 125, 125)' }}>Joined:</span>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        justifyContent: "left",
+                                        fontWeight: "500",
+                                    }}
+                                >
+                                    <span
+                                        style={{
+                                            textAlign: "left",
+                                            fontSize: "14px",
+                                            color:
+                                                theme === "dark"
+                                                    ? "rgb(220, 220, 220)"
+                                                    : "black",
+                                        }}
+                                    >
+                                        <span
+                                            style={{
+                                                textAlign: "left",
+                                                fontSize: "13px",
+                                                fontWeight: "400",
+                                                color: "rgb(125, 125, 125)",
+                                            }}
+                                        >
+                                            Joined:
+                                        </span>
                                         <br />
                                         {joinDate}
                                         <br />
-                                        <span style={{ textAlign: 'left', fontSize: '13px', fontWeight: '400', color: 'rgb(125, 125, 125)' }}>Left:</span>
+                                        <span
+                                            style={{
+                                                textAlign: "left",
+                                                fontSize: "13px",
+                                                fontWeight: "400",
+                                                color: "rgb(125, 125, 125)",
+                                            }}
+                                        >
+                                            Left:
+                                        </span>
                                         <br />
                                         {leftDate}
                                         <br />
-                                        <span style={{ textAlign: 'left', fontSize: '13px', fontWeight: '400', color: 'rgb(125, 125, 125)' }}>Position:</span>
+                                        <span
+                                            style={{
+                                                textAlign: "left",
+                                                fontSize: "13px",
+                                                fontWeight: "400",
+                                                color: "rgb(125, 125, 125)",
+                                            }}
+                                        >
+                                            Position:
+                                        </span>
                                         <br />
                                         {roleConv[row.role]}
                                     </span>
@@ -135,20 +201,22 @@ export default function ClanHistory(props) {
     if (clanList) {
         clanInfo = Unit();
     }
-    if (props.data === 'NO CLAN HISTORY') {
-        clanInfo = <>
-            This player has no clan data
-        </>;
+    if (props.data === "NO CLAN HISTORY") {
+        clanInfo = <>This player has no clan data</>;
     }
 
     return (
         <div className={classes.root}>
             <div>
-                <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
+                <CustomTabs
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="ant example"
+                >
                     <CustomTab label="CLAN HISTORY" />
                 </CustomTabs>
-                <TabPanel value={value} index={0} >
-                    <div style={{ padding: '10px 0px 0px 10px' }}>
+                <TabPanel value={value} index={0}>
+                    <div style={{ padding: "10px 0px 0px 10px" }}>
                         <Grid container spacing={1}>
                             {clanInfo}
                         </Grid>

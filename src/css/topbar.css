@@ -1,5 +1,4 @@
-
-  .topbar {
+.topbar {
     font-family: "Roboto";
     font-size: 12;
     color: white;
@@ -12,45 +11,45 @@
     border-bottom: 1px solid rgb(100, 95, 129);
     /* position: fixed; */
     margin-left: 0em;
-  }
+}
 
-  .smallMenu {
+.smallMenu {
     display: none;
-  }
+}
 
-  .field {
+.field {
     padding-top: 1rem;
     /* margin: 0 auto; */
     right: 100px;
     position: absolute;
-  }
+}
 
-  .discord{
+.discord {
     padding-top: 1rem;
     /* margin: 0 auto; */
     right: 58px;
     position: absolute;
-  }
+}
 
-  .discord:hover {
-      opacity: 0.5;
-  }
- 
-  .light{
+.discord:hover {
+    opacity: 0.5;
+}
+
+.light {
     padding-top: 1rem;
     padding: 22px 0 0 0;
     right: 10px;
     position: absolute;
-  }
+}
 
-  @media screen and (max-Width: 1000px) {
+@media screen and (max-width: 1000px) {
     .smallMenu {
-      display: block
+        display: block;
     }
-    .discord{
-      display: none
+    .discord {
+        display: none;
     }
     .field {
-      right: 59px;
+        right: 59px;
     }
-  }
+}

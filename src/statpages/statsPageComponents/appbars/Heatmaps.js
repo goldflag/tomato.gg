@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import CustomTab from './tabs/customTab';
-import CustomTabs from './tabs/customTabs';
-import TabPanel from './tabs/tabPanel';
-import Heatmap from '../charts/Heatmap.js';
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import CustomTab from "./tabs/customTab";
+import CustomTabs from "./tabs/customTabs";
+import TabPanel from "./tabs/tabPanel";
+import Heatmap from "../charts/Heatmap.js";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,8 +22,16 @@ export default function Heatmaps(props) {
     return (
         <div className={classes.root}>
             <div>
-                <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
-                    <CustomTab label={props.type === "wn8" ? "WN8 HEATMAP" : "WR HEATMAP"} />
+                <CustomTabs
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="ant example"
+                >
+                    <CustomTab
+                        label={
+                            props.type === "wn8" ? "WN8 HEATMAP" : "WR HEATMAP"
+                        }
+                    />
                     <CustomTab label="RECENT" />
                 </CustomTabs>
                 <TabPanel value={value} index={0}>
