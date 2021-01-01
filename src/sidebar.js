@@ -8,6 +8,7 @@ import InfoIcon from "@material-ui/icons/Info";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import GamesIcon from "@material-ui/icons/Games";
+import StarIcon from "@material-ui/icons/Star";
 
 function Sidebar() {
     return (
@@ -87,6 +88,22 @@ function Sidebar() {
                     <PublicIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
                         &nbsp;&nbsp;Server Stats
                     </Link> */}
+
+                    <Link
+                        to="/moe"
+                        style={{
+                            padding: "10px 20px 10px 20px",
+                            fontSize: "16px",
+                        }}
+                    >
+                        <StarIcon
+                            style={{
+                                verticalAlign: "middle",
+                                padding: "0px 1px 2px 1px",
+                            }}
+                        />
+                        &nbsp;&nbsp;MoE Reqs
+                    </Link>
 
                     <Link
                         to="/wn8"

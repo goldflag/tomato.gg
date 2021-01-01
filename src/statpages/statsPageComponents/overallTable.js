@@ -107,10 +107,7 @@ function MOEFilter({
     column: { filterValue, setFilter, preFilteredRows, id },
 }) {
     return (
-        <ButtonGroup
-            variant="text"
-            aria-label="text primary button group"
-        >
+        <ButtonGroup variant="text" aria-label="text primary button group">
             <Button
                 onClick={() => setFilter(undefined)}
                 className={"filterButton"}
@@ -179,10 +176,7 @@ function MasteryFilter({
     column: { filterValue, setFilter, preFilteredRows, id },
 }) {
     return (
-        <ButtonGroup
-            variant="text"
-            aria-label="text primary button group"
-        >
+        <ButtonGroup variant="text" aria-label="text primary button group">
             <Button
                 onClick={() => setFilter(undefined)}
                 className={"filterButton"}
@@ -267,10 +261,7 @@ function PremFilter({
     column: { filterValue, setFilter, preFilteredRows, id },
 }) {
     return (
-        <ButtonGroup
-            variant="text"
-            aria-label="text primary button group"
-        >
+        <ButtonGroup variant="text" aria-label="text primary button group">
             <Button
                 onClick={() => setFilter(undefined)}
                 className={"filterButton"}
@@ -458,10 +449,7 @@ function OverallTable(props) {
         column: { filterValue, setFilter, preFilteredRows, id },
     }) {
         return (
-            <ButtonGroup
-                variant="text"
-                aria-label="text primary button group"
-            >
+            <ButtonGroup variant="text" aria-label="text primary button group">
                 <Button
                     onClick={() => {
                         setFilter(undefined);
@@ -524,10 +512,7 @@ function OverallTable(props) {
         column: { filterValue, setFilter, preFilteredRows, id },
     }) {
         return (
-            <ButtonGroup
-                variant="text"
-                aria-label="text primary button group"
-            >
+            <ButtonGroup variant="text" aria-label="text primary button group">
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
@@ -622,10 +607,7 @@ function OverallTable(props) {
         column: { filterValue, setFilter, preFilteredRows, id },
     }) {
         return (
-            <ButtonGroup
-                variant="text"
-                aria-label="text primary button group"
-            >
+            <ButtonGroup variant="text" aria-label="text primary button group">
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
@@ -1002,12 +984,12 @@ function OverallTable(props) {
                                                 column.isSortedDesc ? (
                                                     <Icon
                                                         size={16}
-                                                        icon={arrowUp}
+                                                        icon={arrowDown}
                                                     />
                                                 ) : (
                                                     <Icon
                                                         size={16}
-                                                        icon={arrowDown}
+                                                        icon={arrowUp}
                                                     />
                                                 )
                                             ) : (

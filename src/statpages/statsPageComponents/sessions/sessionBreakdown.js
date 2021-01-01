@@ -206,12 +206,12 @@ export default function SessionBreakdown(props) {
                                             column.isSortedDesc ? (
                                                 <Icon
                                                     size={16}
-                                                    icon={arrowUp}
+                                                    icon={arrowDown}
                                                 />
                                             ) : (
                                                 <Icon
                                                     size={16}
-                                                    icon={arrowDown}
+                                                    icon={arrowUp}
                                                 />
                                             )
                                         ) : (

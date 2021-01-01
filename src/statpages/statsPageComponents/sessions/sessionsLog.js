@@ -236,12 +236,12 @@ export default function SessionsLog(props) {
                                             column.isSortedDesc ? (
                                                 <Icon
                                                     size={16}
-                                                    icon={arrowUp}
+                                                    icon={arrowDown}
                                                 />
                                             ) : (
                                                 <Icon
                                                     size={16}
-                                                    icon={arrowDown}
+                                                    icon={arrowUp}
                                                 />
                                             )
                                         ) : (

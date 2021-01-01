@@ -206,10 +206,7 @@ function PeriodBreakdown(props) {
         column: { filterValue, setFilter, preFilteredRows, id },
     }) {
         return (
-            <ButtonGroup
-                variant="text"
-                aria-label="text primary button group"
-            >
+            <ButtonGroup variant="text" aria-label="text primary button group">
                 <Button
                     onClick={() => {
                         setFilter(undefined);
@@ -272,10 +269,7 @@ function PeriodBreakdown(props) {
         column: { filterValue, setFilter, preFilteredRows, id },
     }) {
         return (
-            <ButtonGroup
-                variant="text"
-                aria-label="text primary button group"
-            >
+            <ButtonGroup variant="text" aria-label="text primary button group">
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
@@ -370,10 +364,7 @@ function PeriodBreakdown(props) {
         column: { filterValue, setFilter, preFilteredRows, id },
     }) {
         return (
-            <ButtonGroup
-                variant="text"
-                aria-label="text primary button group"
-            >
+            <ButtonGroup variant="text" aria-label="text primary button group">
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
@@ -476,10 +467,7 @@ function PeriodBreakdown(props) {
         column: { filterValue, setFilter, preFilteredRows, id },
     }) {
         return (
-            <ButtonGroup
-                variant="text"
-                aria-label="text primary button group"
-            >
+            <ButtonGroup variant="text" aria-label="text primary button group">
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
@@ -661,12 +649,12 @@ function PeriodBreakdown(props) {
                                                     column.isSortedDesc ? (
                                                         <Icon
                                                             size={16}
-                                                            icon={arrowUp}
+                                                            icon={arrowDown}
                                                         />
                                                     ) : (
                                                         <Icon
                                                             size={16}
-                                                            icon={arrowDown}
+                                                            icon={arrowUp}
                                                         />
                                                     )
                                                 ) : (

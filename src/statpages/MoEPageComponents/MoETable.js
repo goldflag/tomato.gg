@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import styled from "styled-components";
 import { Icon } from "react-icons-kit";
 import { chevronRight } from "react-icons-kit/feather/chevronRight";
 import { chevronLeft } from "react-icons-kit/feather/chevronLeft";
 import { chevronsRight } from "react-icons-kit/feather/chevronsRight";
 import { chevronsLeft } from "react-icons-kit/feather/chevronsLeft";
+import { chevronDown } from "react-icons-kit/feather/chevronDown";
 import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import {
@@ -21,9 +22,10 @@ import { matchSorter } from "match-sorter";
 import { ThemeContext } from "../../style/theme.js";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
+import MoEGraph from "./MoEGraph";
 
-function WN8Table(props) {
-    const { theme } = React.useContext(ThemeContext);
+function MoETable(props) {
+    const { theme, server } = useContext(ThemeContext);
 
     const Styles = styled.div`
         table {
@@ -66,7 +68,6 @@ function WN8Table(props) {
                 background-color: ${theme === "dark"
                     ? "rgb(50, 50, 50)"
                     : "rgb(255, 255, 255)"};
-                // color: black;
                 border-bottom: solid 1px
                     ${theme === "dark"
                         ? "rgb(100, 100, 100)"
@@ -75,7 +76,7 @@ function WN8Table(props) {
             }
             td {
                 margin: 0;
-                padding: 0.2rem 0.5rem;
+                padding: 0rem 0rem 0rem 0.5rem;
                 :last-child {
                     border-right: 0;
                 }
@@ -164,7 +165,7 @@ function WN8Table(props) {
         setGlobalFilter,
     }) {
         const count = preGlobalFilteredRows.length;
-        const [value, setValue] = React.useState(globalFilter);
+        const [value, setValue] = useState(globalFilter);
         const onChange = useAsyncDebounce((value) => {
             setGlobalFilter(value || undefined);
         }, 200);
@@ -486,8 +487,7 @@ function WN8Table(props) {
     // Let the table remove the filter if the string is empty
     fuzzyTextFilterFn.autoRemove = (val) => !val;
 
-    // Be sure to pass our updateMyData and the skipReset option
-    function Table({ columns, data, updateMyData, skipReset }) {
+    function Table({ columns, data }) {
         const filterTypes = React.useMemo(
             () => ({
                 // Add a new fuzzyTextFilterFn filter type.
@@ -524,6 +524,7 @@ function WN8Table(props) {
             headerGroups,
             prepareRow,
             state,
+            visibleColumns,
             page, // Instead of using 'rows', we'll use page,
             // which has only the rows for the active page
             // The rest of these things are super handy, too ;)
@@ -550,7 +551,7 @@ function WN8Table(props) {
                     pageSize: 100,
                     sortBy: [
                         {
-                            id: "expDamage",
+                            id: "95",
                             desc: true,
                         },
                     ],
@@ -561,6 +562,58 @@ function WN8Table(props) {
             useSortBy,
             useExpanded,
             usePagination
+        );
+
+        // console.log(row.row.original.id);
+
+        function SubRows({ data }) {
+            if (data) {
+                console.log(data);
+                return (
+                    <div
+                        style={{
+                            backgroundColor:
+                                theme === "dark"
+                                    ? "rgb(40, 40, 40)"
+                                    : "rgb(255, 255, 255)",
+                            marginLeft: "-0.5rem",
+                        }}
+                    >
+                        <MoEGraph data={data} />
+                    </div>
+                );
+            } else {
+                return <div style={{ padding: "0.3rem" }}>Loading...</div>;
+            }
+        }
+
+        function SubRowAsync({ row, rowProps, visibleColumns }) {
+            const [data, setData] = useState();
+            useEffect(() => {
+                async function get() {
+                    // fetch(`http://localhost:5000/api/abcd/moetank/${row.original.id}/${server}`)
+                    fetch(
+                        `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/moetank/${row.original.id}/${server}`
+                    )
+                        .then((res) => res.json())
+                        .then((res) => setData(res));
+                }
+
+                get();
+            }, [row.original.id]);
+
+            return <SubRows data={data} />;
+        }
+
+        const renderRowSubComponent = useCallback(
+            ({ row, rowProps, visibleColumns }) => (
+                <SubRowAsync
+                    row={row}
+                    rowProps={rowProps}
+                    visibleColumns={visibleColumns}
+                />
+            ),
+            []
         );
 
         // Render the UI for your table
@@ -587,6 +640,14 @@ function WN8Table(props) {
                                 marginBottom: "10px",
                             }}
                         >
+                            {headerGroups[0].headers[1].render("Filter")}
+                        </span>
+                        <span
+                            style={{
+                                marginRight: "10px",
+                                marginBottom: "10px",
+                            }}
+                        >
                             {headerGroups[0].headers[2].render("Filter")}
                         </span>
                         <span
@@ -603,67 +664,62 @@ function WN8Table(props) {
                                 marginBottom: "10px",
                             }}
                         >
-                            {headerGroups[0].headers[4].render("Filter")}
-                        </span>
-                        <span
-                            style={{
-                                marginRight: "10px",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            {headerGroups[0].headers[10].render("Filter")}
+                            {headerGroups[0].headers[11].render("Filter")}
                         </span>
                     </div>
                 </div>
                 <table {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
-                            <>
-                                <tr {...headerGroup.getHeaderGroupProps()}>
-                                    {headerGroup.headers.map((column) => (
-                                        <th
-                                            {...column.getHeaderProps(
-                                                column.getSortByToggleProps()
-                                            )}
-                                        >
-                                            {column.render("Header")}
-                                            <span>
-                                                {column.isSorted ? (
-                                                    column.isSortedDesc ? (
-                                                        <Icon
-                                                            size={16}
-                                                            icon={arrowDown}
-                                                        />
-                                                    ) : (
-                                                        <Icon
-                                                            size={16}
-                                                            icon={arrowUp}
-                                                        />
-                                                    )
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) => (
+                                    <th
+                                        {...column.getHeaderProps(
+                                            column.getSortByToggleProps()
+                                        )}
+                                    >
+                                        {column.render("Header")}
+                                        <span>
+                                            {column.isSorted ? (
+                                                column.isSortedDesc ? (
+                                                    <Icon
+                                                        size={16}
+                                                        icon={arrowDown}
+                                                    />
                                                 ) : (
-                                                    ""
-                                                )}
-                                            </span>
-                                        </th>
-                                    ))}
-                                </tr>
-                            </>
+                                                    <Icon
+                                                        size={16}
+                                                        icon={arrowUp}
+                                                    />
+                                                )
+                                            ) : (
+                                                ""
+                                            )}
+                                        </span>
+                                    </th>
+                                ))}
+                            </tr>
                         ))}
                     </thead>
                     <tbody {...getTableBodyProps()}>
                         {page.map((row, i) => {
                             prepareRow(row);
                             return (
-                                <React.Fragment {...row.getRowProps()}>
-                                    <tr>
-                                        {row.cells.map((cell) => {
-                                            return (
-                                                <td {...cell.getCellProps()}>
-                                                    {cell.render("Cell")}
-                                                </td>
-                                            );
-                                        })}
+                                <React.Fragment key={i}>
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map((cell) => (
+                                            <td {...cell.getCellProps()}>
+                                                {cell.render("Cell")}
+                                            </td>
+                                        ))}
                                     </tr>
+                                    {row.isExpanded ? (
+                                        <tr className="subComponent">
+                                            <td colSpan={visibleColumns.length}>
+                                                {renderRowSubComponent({ row })}
+                                            </td>
+                                        </tr>
+                                    ) : null}
                                 </React.Fragment>
                             );
                         })}
@@ -737,6 +793,59 @@ function WN8Table(props) {
     const columns = React.useMemo(
         () => [
             {
+                // Make an expander cell
+                Header: () => null, // No header
+                id: "expander", // It needs an ID
+                Cell: ({ row }) => (
+                    // Use Cell to render an expander for each row.
+                    // We can use the getToggleRowExpandedProps prop-getter
+                    // to build the expander.
+                    <span {...row.getToggleRowExpandedProps()}>
+                        {row.isExpanded ? (
+                            <Icon size={24} icon={chevronDown} />
+                        ) : (
+                            <Icon size={24} icon={chevronRight} />
+                        )}
+                    </span>
+                ),
+            },
+            {
+                Cell: ({ value }) => {
+                    return (
+                        <img
+                            src={require(`../../assets/flagIcons/${value}.svg`)}
+                            style={{ maxWidth: "40px" }}
+                            alt={value}
+                        />
+                    );
+                },
+                Header: "Nation",
+                accessor: "nation",
+                Filter: NationFilter,
+                filter: "equals",
+            },
+            {
+                Header: "Tier",
+                accessor: "tier",
+                Filter: TierFilter,
+                filter: "equals",
+            },
+            {
+                Cell: ({ value }) => {
+                    return (
+                        <img
+                            src={require(`../../assets/classIcons/${value}.png`)}
+                            style={{ maxWidth: "20px", margin: "3px" }}
+                            alt={value}
+                        />
+                    );
+                },
+                Header: "Class",
+                accessor: "class",
+                Filter: ClassFilter,
+                filter: "equals",
+            },
+            {
                 Cell: ({ value }) => {
                     return (
                         <img
@@ -755,46 +864,28 @@ function WN8Table(props) {
                 disableFilters: true,
             },
             {
-                Header: "Nation",
-                accessor: "nation",
-                Filter: NationFilter,
-                filter: "equals",
-            },
-            {
-                Header: "Tier",
-                accessor: "tier",
-                Filter: TierFilter,
-                filter: "equals",
-            },
-            {
-                Header: "Class",
-                accessor: "class",
-                Filter: ClassFilter,
-                filter: "equals",
-            },
-            {
-                Header: "expDef",
-                accessor: "expDef",
+                Header: "50%",
+                accessor: "50",
                 disableFilters: true,
             },
             {
-                Header: "expFrag",
-                accessor: "expFrag",
+                Header: "65%",
+                accessor: "65",
                 disableFilters: true,
             },
             {
-                Header: "expSpot",
-                accessor: "expSpot",
+                Header: "85%",
+                accessor: "85",
                 disableFilters: true,
             },
             {
-                Header: "expDamage",
-                accessor: "expDamage",
+                Header: "95%",
+                accessor: "95",
                 disableFilters: true,
             },
             {
-                Header: "expWinRate",
-                accessor: "expWinRate",
+                Header: "100%",
+                accessor: "100",
                 disableFilters: true,
             },
             {
@@ -817,4 +908,4 @@ function WN8Table(props) {
     );
 }
 
-export default WN8Table;
+export default MoETable;
