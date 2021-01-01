@@ -156,7 +156,6 @@ function WN8Table(props) {
           placeholder={`Search ${count} records...`}
           style={{
             fontSize: '1rem',
-            border: '0',
             padding: '6px',
             borderRadius: '3px',
             border: '1px solid rgb(100, 100, 100)'
@@ -234,66 +233,6 @@ function WN8Table(props) {
     )
   }
 
-  // This is a custom UI for our 'between' or number range
-  // filter. It uses two number boxes and filters rows to
-  // ones that have values between the two
-  function NumberRangeColumnFilter({
-    column: { filterValue = [], preFilteredRows, setFilter, id },
-  }) {
-    const [min, max] = React.useMemo(() => {
-      let min = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
-      let max = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
-      preFilteredRows.forEach(row => {
-        min = Math.min(row.values[id], min)
-        max = Math.max(row.values[id], max)
-      })
-      return [min, max]
-    }, [id, preFilteredRows])
-
-    return (
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center', justifyContent: 'space-evenly'
-        }}
-      >
-        Battles
-        <input
-          value={filterValue[0] || ''}
-          type="number"
-          onChange={e => {
-            const val = e.target.value
-            setFilter((old = []) => [val ? parseInt(val, 10) : undefined, old[1]])
-          }}
-          placeholder={`Min (${min})`}
-          style={{
-            width: '90px',
-            height: '35px',
-            marginRight: '0.5rem',
-            marginLeft: '0.5rem',
-            borderRadius: '3px',
-          }}
-        />
-        to
-        <input
-          value={filterValue[1] || ''}
-          type="number"
-          onChange={e => {
-            const val = e.target.value
-            setFilter((old = []) => [old[0], val ? parseInt(val, 10) : undefined])
-          }}
-          placeholder={`Max (${max})`}
-          style={{
-            width: '90px',
-            height: '35px',
-            marginLeft: '0.5rem',
-            borderRadius: '3px',
-          }}
-        />
-      </div>
-    )
-  }
-
   function fuzzyTextFilterFn(rows, id, filterValue) {
     return matchSorter(rows, filterValue, { keys: [row => row.values[id]] })
   }
@@ -337,10 +276,8 @@ function WN8Table(props) {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
     prepareRow,
     state,
-    visibleColumns,
     page, // Instead of using 'rows', we'll use page,
     // which has only the rows for the active page
     // The rest of these things are super handy, too ;)
@@ -413,8 +350,8 @@ function WN8Table(props) {
                       <span>
                         {column.isSorted
                           ? column.isSortedDesc
-                            ? <Icon size={16} icon={arrowUp} />
-                            : <Icon size={16} icon={arrowDown} />
+                            ? <Icon size={16} icon={arrowDown} />
+                            : <Icon size={16} icon={arrowUp} />
                           : ''}
                       </span>
                     </th>

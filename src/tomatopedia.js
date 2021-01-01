@@ -12,6 +12,7 @@ import TankPage from './statpages/tankPage';
 import StatsReference from './statpages/statsReference';
 import Leaderboards from './statpages/leaderboards';
 import WN8Expected from './statpages/wn8expected';
+import MoEExpected from './statpages/MoEPage';
 
 import "./css/body.css";
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
@@ -59,6 +60,9 @@ export default function Tomatopedia() {
               </Route> 
               <Route path='/wn8'>
                 <WN8Expected />
+              </Route> 
+              <Route path='/moe'>
+                <MoEExpected />
               </Route> 
               <Route exact path='/'>
                 <Search />

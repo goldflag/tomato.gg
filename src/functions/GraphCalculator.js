@@ -16,6 +16,7 @@ function calculateRawOverall(overall) {
     let calculatedStats = {
         raw: []
     };
+    // eslint-disable-next-line 
     overall.tankStats.map((row) => {
         const winrate = row[3];
         let raw = {
@@ -382,7 +383,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
     const RecentWinsCount = clonedeep(BattleCountTemplate);
 
     const numToMastery = { 0 : "None", 1 : "3rd", 2 : "2nd", 3 : "1st", 4 : "Ace" };
-
+    // eslint-disable-next-line 
     stats.map((row) => {
         data.tierDist[row.tier - 1][row.class] += row.battles;
         if (row.tier > 4) {
@@ -392,7 +393,7 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
         data.NationDist[row.nation] += row.battles;
         data.ClassDist[row.class] += row.battles;
     });
-
+    // eslint-disable-next-line 
     recent1000.tankStats.map((tank) => {
         data.tierDistRecent[tank[3] - 1][tank[4]] += tank[5];
         data.NationDistRecent[tank[2]] += tank[5];

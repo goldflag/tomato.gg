@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import ReactGA from 'react-ga';
 import styled from 'styled-components'
 import { ThemeContext } from '../style/theme.js';
-import WN8Table from './wn8Components/wn8Table';
+import MoETable from './MoEPageComponents/MoETable';
 import tankNames from '../data/tankNames.json';
 import nationConversion from '../data/nationConversion';
 import classConversion from '../data/classConversion.json';
@@ -10,24 +10,25 @@ import classConversion from '../data/classConversion.json';
 const tierConv = { 1: 'I', 2: 'II', 3: 'III', 4: 'IV', 5: 'V', 6: 'VI', 7: 'VII', 8: 'VIII', 9: 'IX', 10: 'X' }
 const trackingId = process.env.REACT_APP_GA;
 
-export default function WN8expected(props) {
+export default function MoEPage(props) {
+    const {theme, server} = React.useContext(ThemeContext);
+
   const [data, setData] = useState();
 
   useEffect(() => {
     ReactGA.initialize(trackingId);
     ReactGA.pageview('/wn8');
     getData();
-  }, []);
+  }, [server]);
 
   async function getData() {
-    const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/wn8`;
-    //const url = `http://localhost:5000/api/abcd/leaderboards/${props.type}/10`;
+    const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/moe/${server}`;
+    //const url = `http://localhost:5000/api/abcd/moe/${server}`;
     const raw = await fetch(url);
     let res = await raw.json();
     setData(res);
   }
 
-  const {theme} = React.useContext(ThemeContext);
   const Styles = styled.div`
     *:focus {
       outline: none;
@@ -35,7 +36,7 @@ export default function WN8expected(props) {
 
     .leaderboard {
       padding: 6rem 0rem 5rem 0rem;
-      margin: 0rem 10% 0rem 10%;
+      margin: 0rem 15% 0rem 15%;
     }
 
     .info {
@@ -71,37 +72,37 @@ export default function WN8expected(props) {
   let table = <></>;
 
   if (data) {
-    const ids = Object.keys(data);
     let rowData = [];
-
-    for (let i = 0; i < ids.length; ++i) {
-      if (ids[i] in tankNames) {
+    for (let i = 0; i < data.length; ++i) {
+      if (data[i].id in tankNames) {
+        const id = data[i].id;
         let entry = {
-          id: ids[i],
-          name: tankNames[ids[i]].short_name + (tankNames[ids[i]]['is_premium'] ? " 🟊" : ""),
-          nation: nationConversion[tankNames[ids[i]].nation],
-          tier: tierConv[tankNames[ids[i]].tier],
-          class: classConversion[tankNames[ids[i]].type],
-          expDef: data[ids[i]].expDef,
-          expFrag: data[ids[i]].expFrag,
-          expSpot: data[ids[i]].expSpot,
-          expDamage: data[ids[i]].expDamage,
-          expWinRate: data[ids[i]].expWinRate,
-          isPrem: tankNames[ids[i]].is_premium
+          id: id,
+          name: tankNames[id].short_name + (tankNames[id]['is_premium'] ? " 🟊" : ""),
+          nation: nationConversion[tankNames[id].nation],
+          tier: tierConv[tankNames[id].tier],
+          class: classConversion[tankNames[id].type],
+          '50': data[i]['50'] || '-',
+          '65': data[i]['65'] || '-',
+          '85': data[i]['85'] || '-',
+          '95': data[i]['95'] || '-',
+          '100': data[i]['100'] || '-',
+          isPrem: tankNames[id].is_premium
         }
         rowData.push(entry);
       }
     }
-
-    table = <WN8Table data = {rowData}/>;
+    table = <MoETable data = {rowData}/>;
   }
+
+  const serverConv = { 'com' : 'NA', 'eu' : 'EU', 'asia': 'ASIA', 'ru': 'RU' };
 
   return (
     <Styles>
       <div className='leaderboard'>
         <div className='info'>
-          <span style={{fontSize: '1.5rem', fontWeight: '500'}}>WN8 Expected Values</span><br/>
-          <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>Maintained by the <a target="blank" href="https://modxvm.com/en/wn8-expected-values/">XVM team</a></span> <br/>
+          <span style={{fontSize: '1.5rem', fontWeight: '500'}}>{serverConv[server]} MoE Requirements</span><br/>
+          <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>Maintained by the creators of the <a target="blank" href="https://gunmarks.poliroid.ru/">MoE mod</a></span> <br/>
         </div>
         {table}
       </div>

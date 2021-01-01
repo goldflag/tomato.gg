@@ -156,8 +156,8 @@ export default function SessionBreakdown(props) {
                         <span style={{textAlign: 'center'}}>
                             {column.isSorted
                             ? column.isSortedDesc
-                                ? <Icon size={16} icon={arrowUp} />
-                                : <Icon size={16} icon={arrowDown} />
+                                ? <Icon size={16} icon={arrowDown} />
+                                : <Icon size={16} icon={arrowUp} />
                             : ''}
                         </span>
                     </th>
