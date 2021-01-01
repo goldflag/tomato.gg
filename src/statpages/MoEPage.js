@@ -17,7 +17,7 @@ export default function MoEPage(props) {
 
   useEffect(() => {
     ReactGA.initialize(trackingId);
-    ReactGA.pageview('/wn8');
+    ReactGA.pageview('/moe');
     getData();
   }, [server]);
 
