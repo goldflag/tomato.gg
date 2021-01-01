@@ -17,7 +17,6 @@ import "../../css/statspage.css";
 export default function Charts(props) {
     const size = useWindowSize();
     const { theme } = React.useContext(ThemeContext);
-    const [clanHistory, setClanHistory] = useState("");
 
     const useStyles = makeStyles((t) => ({
         root: {
@@ -44,15 +43,6 @@ export default function Charts(props) {
 
     const classes = useStyles();
     let output = <></>;
-
-    useEffect(() => {
-        setClanHistory(
-            <ClanHistory
-                data={props.clanData}
-                currentClan={props.currentClan}
-            />
-        );
-    }, []);
 
     if (size.width > 1000) {
         output = (
@@ -151,7 +141,10 @@ export default function Charts(props) {
                                 overflowY: "auto",
                             }}
                         >
-                            {clanHistory}
+                            <ClanHistory
+                                data={props.clanData}
+                                currentClan={props.currentClan}
+                            />
                         </Paper>
                     </Grid>
                     <Grid item xs={8}>
@@ -215,7 +208,10 @@ export default function Charts(props) {
                             theme === "dark" ? "rgb(40, 40, 40)" : "white",
                     }}
                 >
-                    {clanHistory}
+                    <ClanHistory
+                        data={props.clanData}
+                        currentClan={props.currentClan}
+                    />
                 </Paper>
                 <Paper
                     square

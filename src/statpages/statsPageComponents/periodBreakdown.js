@@ -193,7 +193,6 @@ function PeriodBreakdown(props) {
                     placeholder={`Search ${count} records...`}
                     style={{
                         fontSize: "1rem",
-                        border: "0",
                         padding: "6px",
                         border: "1px solid rgb(100, 100, 100)",
                         borderRadius: "3px",
@@ -787,23 +786,22 @@ function PeriodBreakdown(props) {
             rowData.push(entry);
         }
         setData(rowData);
-    }, []);
+    }, [props.data]);
 
-    const tierConv = {
-        1: "I",
-        2: "II",
-        3: "III",
-        4: "IV",
-        5: "V",
-        6: "VI",
-        7: "VII",
-        8: "VIII",
-        9: "IX",
-        10: "X",
-    };
-
-    const columns = React.useMemo(
-        () => [
+    const columns = React.useMemo(() => {
+        const tierConv = {
+            1: "I",
+            2: "II",
+            3: "III",
+            4: "IV",
+            5: "V",
+            6: "VI",
+            7: "VII",
+            8: "VIII",
+            9: "IX",
+            10: "X",
+        };
+        return [
             { Header: "", accessor: "img" },
             { Header: "Name", accessor: "name" },
             {
@@ -823,7 +821,7 @@ function PeriodBreakdown(props) {
             },
             {
                 Cell: ({ value }) => {
-                    return <>{tierConv[value]}</>;
+                    return tierConv[value];
                 },
                 Header: "Tier",
                 accessor: "tier",
@@ -872,9 +870,8 @@ function PeriodBreakdown(props) {
                 Filter: PremFilter,
                 filter: "equals",
             },
-        ],
-        []
-    );
+        ];
+    }, []);
 
     // We need to keep the table from resetting the pageIndex when we
     // Update data. So we can keep track of that flag with a ref.

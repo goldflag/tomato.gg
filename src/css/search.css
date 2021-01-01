@@ -29,9 +29,6 @@
     max-width: 800px;
 }
 
-.leaderboard {
-}
-
 @media screen and (max-width: 1000px) {
     .center {
         max-width: 100%;

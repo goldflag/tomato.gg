@@ -24,23 +24,19 @@ const tierToKey = {
 };
 
 function calculateRawOverall(overall) {
-    let calculatedStats = {
-        raw: [],
+    return {
+        raw: overall.tankStats.map(
+            ([id, battles, damage, wins, frags, spots, def]) => ({
+                id,
+                battles,
+                damage,
+                def,
+                frags,
+                spots,
+                winrate: (wins / battles) * 100,
+            })
+        ),
     };
-    overall.tankStats.map((row) => {
-        const winrate = row[3];
-        let raw = {
-            id: row[0],
-            battles: row[1],
-            damage: row[2],
-            def: row[6],
-            frags: row[4],
-            spots: row[5],
-            winrate: (winrate * 100) / row[1],
-        };
-        calculatedStats.raw.push(raw);
-    });
-    return calculatedStats;
 }
 
 function NationDistCalculator(data) {
@@ -58,17 +54,9 @@ function NationDistCalculator(data) {
         { id: "Japan", value: 1 },
     ];
 
-    NewNationDist[0].value = data.USA;
-    NewNationDist[1].value = data.USSR;
-    NewNationDist[2].value = data.France;
-    NewNationDist[3].value = data.Germany;
-    NewNationDist[4].value = data.UK;
-    NewNationDist[5].value = data.China;
-    NewNationDist[6].value = data.Czech;
-    NewNationDist[7].value = data.Sweden;
-    NewNationDist[8].value = data.Poland;
-    NewNationDist[9].value = data.Italy;
-    NewNationDist[10].value = data.Japan;
+    NewNationDist.forEach((nation) => {
+        nation.value = data[nation.id];
+    });
     return NewNationDist;
 }
 
@@ -81,11 +69,9 @@ function ClassDistCalculator(data) {
         { id: "SPG", value: 1 },
     ];
 
-    NewClassDist[0].value = data.HT;
-    NewClassDist[1].value = data.MT;
-    NewClassDist[2].value = data.TD;
-    NewClassDist[3].value = data.LT;
-    NewClassDist[4].value = data.SPG;
+    NewClassDist.forEach((tankClass) => {
+        tankClass.value = data[tankClass.id];
+    });
     return NewClassDist;
 }
 
@@ -2076,7 +2062,7 @@ export default function GraphCalculator(
 
     const numToMastery = { 0: "None", 1: "3rd", 2: "2nd", 3: "1st", 4: "Ace" };
 
-    stats.map((row) => {
+    stats.forEach((row) => {
         data.tierDist[row.tier - 1][row.class] += row.battles;
         if (row.tier > 4) {
             data.tierMoeDist[row.tier - 5][row.moe] += 1;
@@ -2086,13 +2072,13 @@ export default function GraphCalculator(
         data.ClassDist[row.class] += row.battles;
     });
 
-    recent1000.tankStats.map((tank) => {
+    recent1000.tankStats.forEach((tank) => {
         data.tierDistRecent[tank[3] - 1][tank[4]] += tank[5];
         data.NationDistRecent[tank[2]] += tank[5];
         data.ClassDistRecent[tank[4]] += tank[5];
     });
 
-    overallStats.raw.map((stats) =>
+    overallStats.raw.forEach((stats) =>
         calcTrackingVals(
             BattleCount,
             BattleTracker,
@@ -2103,7 +2089,7 @@ export default function GraphCalculator(
     );
 
     if (recent1000.raw) {
-        recent1000.raw.map((stats) =>
+        recent1000.raw.forEach((stats) =>
             calcTrackingVals(
                 RecentBattleCount,
                 RecentBattleTracker,

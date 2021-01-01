@@ -40,7 +40,7 @@ export default function Table(props) {
     const [serverStats, setServerStats] = useState("");
     useEffect(() => {
         const data = clonedeep(NATankstats);
-        data.map((row) => {
+        data.forEach((row) => {
             // row[0] = <img src={`${process.env.PUBLIC_URL}/tankIcons/${row[0]}.png`} alt={row[0]}/>;
             // row[0] = <img src={tankImports[IDtoIndex[row[0]]]} alt={row[0]}/>;
             row[0] = (

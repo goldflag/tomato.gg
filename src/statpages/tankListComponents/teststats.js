@@ -16,7 +16,6 @@ import nationConversion from "../../data/nationConversion";
 import classConversion from "../../data/classConversion.json";
 import WRc from "../../functions/WRcolor";
 import WN8c from "../../functions/WN8color";
-import { camelCase } from "lodash";
 
 const tiers = [
     { tier: 1 },
@@ -109,15 +108,6 @@ export default function Table() {
             </span>
         </div>
     );
-
-    function nameBodyTemplate(rowData) {
-        return (
-            <>
-                <span className="p-column-title">Name</span>
-                {rowData.name}
-            </>
-        );
-    }
 
     function onTierChange(e) {
         dt.filter(e.value, "tier", "in");

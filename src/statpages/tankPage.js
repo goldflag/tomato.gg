@@ -20,12 +20,6 @@ export default function TankPage(props) {
         },
     }));
 
-    const grid = {
-        display: "grid",
-        gridTemplateColumns: "50% 50%",
-        gridTemplateRows: "500px",
-    };
-
     return (
         <div style={{ padding: "2em", paddingTop: "5em" }}>
             <div className="narrowpage">

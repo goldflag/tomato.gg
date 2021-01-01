@@ -101,225 +101,51 @@ export default function Leaderboard(props) {
 
     const [data, setData] = useState([]);
 
+    const { type } = props;
+
     useEffect(() => {
-        fetchData();
-    }, []);
+        const rankColors = {
+            1: <span style={{ color: "gold", fontWeight: 600 }}>1</span>,
+            2: <span style={{ color: "silver", fontWeight: 600 }}>2</span>,
+            3: <span style={{ color: "orange", fontWeight: 600 }}>3</span>,
+        };
 
-    const rankColors = {
-        1: <span style={{ color: "gold", fontWeight: 600 }}>1</span>,
-        2: <span style={{ color: "silver", fontWeight: 600 }}>2</span>,
-        3: <span style={{ color: "orange", fontWeight: 600 }}>3</span>,
-    };
+        async function fetchData() {
+            const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/leaderboards/${type}/1000`;
+            // const url = `http://localhost:5000/api/abcd/leaderboards/${type}/1000`;
+            const raw = await fetch(url);
+            let res = await raw.json();
 
-    async function fetchData() {
-        const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/leaderboards/${props.type}/1000`;
-        // const url = `http://localhost:5000/api/abcd/leaderboards/${props.type}/1000`;
-        const raw = await fetch(url);
-        let res = await raw.json();
+            const newData = [];
+            for (let i = 0; i < res.length; ++i) {
+                const link = `/stats/NA/${res[i].username}=${res[i].player_id}`;
+                res[i].winrate = res[i].winrate.toFixed(2);
+                res[i].avgtier = res[i].avgtier.toFixed(2);
+                let entry = {
+                    rank: res[i].rank,
+                    username: <Link to={link}>{res[i].username}</Link>,
+                    winrate: res[i].winrate,
+                    wn8: res[i].wn8,
+                    avgtier: res[i].avgtier,
+                    battles: res[i].battles,
+                    moecount: res[i].moecount,
+                    moe10: res[i].moe10,
+                };
+                if (res[i].rank <= 3) {
+                    entry.rank = rankColors[res[i].rank];
+                }
+                // entry[type] = res[i][type];
+                // if (type === 'wn8') entry[type] = <div style={{padding: '8px', margin: '-8px -8px', color: 'white', backgroundColor: WN8c(res[i][type])}}>{res[i][type]}</div>;
+                // if (type === 'winrate') entry[type] = <div style={{padding: '8px', margin: '-8px -8px', color: 'white', backgroundColor: WRc(res[i][type])}}>{res[i][type]}</div>;
 
-        const newData = [];
-        for (let i = 0; i < res.length; ++i) {
-            const link = `/stats/NA/${res[i].username}=${res[i].player_id}`;
-            res[i].winrate = res[i].winrate.toFixed(2);
-            res[i].avgtier = res[i].avgtier.toFixed(2);
-            let entry = {
-                rank: res[i].rank,
-                username: <Link to={link}>{res[i].username}</Link>,
-                winrate: res[i].winrate,
-                wn8: res[i].wn8,
-                avgtier: res[i].avgtier,
-                battles: res[i].battles,
-                moecount: res[i].moecount,
-                moe10: res[i].moe10,
-            };
-            if (res[i].rank <= 3) {
-                entry.rank = rankColors[res[i].rank];
+                newData.push(entry);
             }
-            // entry[props.type] = res[i][props.type];
-            // if (props.type === 'wn8') entry[props.type] = <div style={{padding: '8px', margin: '-8px -8px', color: 'white', backgroundColor: WN8c(res[i][props.type])}}>{res[i][props.type]}</div>;
-            // if (props.type === 'winrate') entry[props.type] = <div style={{padding: '8px', margin: '-8px -8px', color: 'white', backgroundColor: WRc(res[i][props.type])}}>{res[i][props.type]}</div>;
-
-            newData.push(entry);
+            setData(newData);
         }
-        setData(newData);
-    }
 
-    const colOptions = {
-        battles: [
-            { Header: "", accessor: "rank" },
-            { Header: "Username", accessor: "username" },
-            {
-                Cell: ({ value }) => {
-                    return setMid(value);
-                },
-                Header: setMid("Battles"),
-                accessor: "battles",
-            },
-            {
-                Cell: ({ value }) => {
-                    return <div style={WN8Style(value)}>{value}</div>;
-                },
-                Header: setMid("WN8"),
-                accessor: "wn8",
-            },
-            {
-                Cell: ({ value }) => {
-                    return <div style={WRStyle(value)}>{value + "%"}</div>;
-                },
-                Header: setMid("Winrate"),
-                accessor: "winrate",
-            },
-            {
-                Cell: ({ value }) => {
-                    return setMid(value);
-                },
-                Header: setMid("Avg Tier"),
-                accessor: "avgtier",
-            },
-        ],
-        wn8: [
-            { Header: "", accessor: "rank" },
-            { Header: "Username", accessor: "username" },
-            {
-                Cell: ({ value }) => {
-                    return <div style={WN8Style(value)}>{value}</div>;
-                },
-                Header: setMid("WN8"),
-                accessor: "wn8",
-            },
-            {
-                Cell: ({ value }) => {
-                    return <div style={WRStyle(value)}>{value + "%"}</div>;
-                },
-                Header: setMid("Winrate"),
-                accessor: "winrate",
-            },
-            {
-                Cell: ({ value }) => {
-                    return setMid(value);
-                },
-                Header: setMid("Avg Tier"),
-                accessor: "avgtier",
-            },
-            {
-                Cell: ({ value }) => {
-                    return setMid(value);
-                },
-                Header: setMid("Battles"),
-                accessor: "battles",
-            },
-        ],
-        winrate: [
-            { Header: "", accessor: "rank" },
-            { Header: "Username", accessor: "username" },
-            {
-                Cell: ({ value }) => {
-                    return <div style={WRStyle(value)}>{value + "%"}</div>;
-                },
-                Header: setMid("Winrate"),
-                accessor: "winrate",
-            },
-            {
-                Cell: ({ value }) => {
-                    return <div style={WN8Style(value)}>{value}</div>;
-                },
-                Header: setMid("WN8"),
-                accessor: "wn8",
-            },
-            {
-                Cell: ({ value }) => {
-                    return setMid(value);
-                },
-                Header: setMid("Avg Tier"),
-                accessor: "avgtier",
-            },
-            {
-                Cell: ({ value }) => {
-                    return setMid(value);
-                },
-                Header: setMid("Battles"),
-                accessor: "battles",
-            },
-        ],
-        moecount: [
-            { Header: "", accessor: "rank" },
-            { Header: "Username", accessor: "username" },
-            {
-                Cell: ({ value }) => {
-                    return setMid(value);
-                },
-                Header: setMid("3 MoE"),
-                accessor: "moecount",
-            },
-            {
-                Cell: ({ value }) => {
-                    return <div style={WN8Style(value)}>{value}</div>;
-                },
-                Header: setMid("WN8"),
-                accessor: "wn8",
-            },
-            {
-                Cell: ({ value }) => {
-                    return <div style={WRStyle(value)}>{value + "%"}</div>;
-                },
-                Header: setMid("Winrate"),
-                accessor: "winrate",
-            },
-            {
-                Cell: ({ value }) => {
-                    return setMid(value);
-                },
-                Header: setMid("Avg Tier"),
-                accessor: "avgtier",
-            },
-            {
-                Cell: ({ value }) => {
-                    return setMid(value);
-                },
-                Header: setMid("Battles"),
-                accessor: "battles",
-            },
-        ],
-        moe10: [
-            { Header: "", accessor: "rank" },
-            { Header: "Username", accessor: "username" },
-            {
-                Cell: ({ value }) => {
-                    return setMid(value);
-                },
-                Header: setMid("T10 3 MoE"),
-                accessor: "moe10",
-            },
-            {
-                Cell: ({ value }) => {
-                    return <div style={WN8Style(value)}>{value}</div>;
-                },
-                Header: setMid("WN8"),
-                accessor: "wn8",
-            },
-            {
-                Cell: ({ value }) => {
-                    return <div style={WRStyle(value)}>{value + "%"}</div>;
-                },
-                Header: setMid("Winrate"),
-                accessor: "winrate",
-            },
-            {
-                Cell: ({ value }) => {
-                    return setMid(value);
-                },
-                Header: setMid("Avg Tier"),
-                accessor: "avgtier",
-            },
-            {
-                Cell: ({ value }) => {
-                    return setMid(value);
-                },
-                Header: setMid("Battles"),
-                accessor: "battles",
-            },
-        ],
-    };
+        fetchData();
+    }, [type]);
+
     function setMid(string) {
         return <div style={{ textAlign: "center" }}>{string}</div>;
     }
@@ -344,13 +170,190 @@ export default function Leaderboard(props) {
         };
     }
 
-    const columns = React.useMemo(() => colOptions[props.type], []);
+    const columns = React.useMemo(
+        () => ({
+            battles: [
+                { Header: "", accessor: "rank" },
+                { Header: "Username", accessor: "username" },
+                {
+                    Cell: ({ value }) => {
+                        return setMid(value);
+                    },
+                    Header: setMid("Battles"),
+                    accessor: "battles",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return <div style={WN8Style(value)}>{value}</div>;
+                    },
+                    Header: setMid("WN8"),
+                    accessor: "wn8",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return <div style={WRStyle(value)}>{value + "%"}</div>;
+                    },
+                    Header: setMid("Winrate"),
+                    accessor: "winrate",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return setMid(value);
+                    },
+                    Header: setMid("Avg Tier"),
+                    accessor: "avgtier",
+                },
+            ],
+            wn8: [
+                { Header: "", accessor: "rank" },
+                { Header: "Username", accessor: "username" },
+                {
+                    Cell: ({ value }) => {
+                        return <div style={WN8Style(value)}>{value}</div>;
+                    },
+                    Header: setMid("WN8"),
+                    accessor: "wn8",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return <div style={WRStyle(value)}>{value + "%"}</div>;
+                    },
+                    Header: setMid("Winrate"),
+                    accessor: "winrate",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return setMid(value);
+                    },
+                    Header: setMid("Avg Tier"),
+                    accessor: "avgtier",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return setMid(value);
+                    },
+                    Header: setMid("Battles"),
+                    accessor: "battles",
+                },
+            ],
+            winrate: [
+                { Header: "", accessor: "rank" },
+                { Header: "Username", accessor: "username" },
+                {
+                    Cell: ({ value }) => {
+                        return <div style={WRStyle(value)}>{value + "%"}</div>;
+                    },
+                    Header: setMid("Winrate"),
+                    accessor: "winrate",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return <div style={WN8Style(value)}>{value}</div>;
+                    },
+                    Header: setMid("WN8"),
+                    accessor: "wn8",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return setMid(value);
+                    },
+                    Header: setMid("Avg Tier"),
+                    accessor: "avgtier",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return setMid(value);
+                    },
+                    Header: setMid("Battles"),
+                    accessor: "battles",
+                },
+            ],
+            moecount: [
+                { Header: "", accessor: "rank" },
+                { Header: "Username", accessor: "username" },
+                {
+                    Cell: ({ value }) => {
+                        return setMid(value);
+                    },
+                    Header: setMid("3 MoE"),
+                    accessor: "moecount",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return <div style={WN8Style(value)}>{value}</div>;
+                    },
+                    Header: setMid("WN8"),
+                    accessor: "wn8",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return <div style={WRStyle(value)}>{value + "%"}</div>;
+                    },
+                    Header: setMid("Winrate"),
+                    accessor: "winrate",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return setMid(value);
+                    },
+                    Header: setMid("Avg Tier"),
+                    accessor: "avgtier",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return setMid(value);
+                    },
+                    Header: setMid("Battles"),
+                    accessor: "battles",
+                },
+            ],
+            moe10: [
+                { Header: "", accessor: "rank" },
+                { Header: "Username", accessor: "username" },
+                {
+                    Cell: ({ value }) => {
+                        return setMid(value);
+                    },
+                    Header: setMid("T10 3 MoE"),
+                    accessor: "moe10",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return <div style={WN8Style(value)}>{value}</div>;
+                    },
+                    Header: setMid("WN8"),
+                    accessor: "wn8",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return <div style={WRStyle(value)}>{value + "%"}</div>;
+                    },
+                    Header: setMid("Winrate"),
+                    accessor: "winrate",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return setMid(value);
+                    },
+                    Header: setMid("Avg Tier"),
+                    accessor: "avgtier",
+                },
+                {
+                    Cell: ({ value }) => {
+                        return setMid(value);
+                    },
+                    Header: setMid("Battles"),
+                    accessor: "battles",
+                },
+            ],
+        }),
+        []
+    )[type];
 
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        rows,
         prepareRow,
         page, // Instead of using 'rows', we'll use page,
         // which has only the rows for the active page
@@ -411,7 +414,7 @@ export default function Leaderboard(props) {
                     ))}
                 </thead>
                 <tbody {...getTableBodyProps()}>
-                    {page.map((row, i) => {
+                    {page.map((row) => {
                         prepareRow(row);
                         return (
                             <tr {...row.getRowProps()}>

@@ -34,7 +34,6 @@ export default function ClanHistory(props) {
     const classes = useStyles();
     const { theme } = React.useContext(ThemeContext);
     const [value, setValue] = useState(0);
-    let server = "";
     const [clanList, setClanList] = useState("");
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -42,48 +41,48 @@ export default function ClanHistory(props) {
 
     // Runs once when component mounts
     useEffect(() => {
-        getClanData();
-    }, []);
+        function getClanData() {
+            const windowUrl = window.location.pathname;
+            const urlParams = windowUrl.substring(7).split("/");
+            const server = serverConv[urlParams[0]];
+            let URL = `https://api.worldoftanks.${server}/wot/clans/info/?application_id=${APIKey}&clan_id=`;
 
-    function getClanData() {
-        const windowUrl = window.location.pathname;
-        const urlParams = windowUrl.substring(7).split("/");
-        server = serverConv[urlParams[0]];
-        let URL = `https://api.worldoftanks.${server}/wot/clans/info/?application_id=${APIKey}&clan_id=`;
-
-        const clonedData = clonedeep(props.data);
-        clonedData.map((row) => {
-            URL += `${row.clan_id}%2C+`;
-        });
-
-        URL = URL.slice(0, -4);
-
-        fetch(URL)
-            .then((data) => data.json())
-            .then((clanData) => {
-                // let tempList = props.data;
-                clonedData.map((row) => {
-                    row["clan_name"] = clanData.data[row.clan_id].tag;
-                    row["color"] = clanData.data[row.clan_id].color;
-                    if (clanData.data[row.clan_id].emblems != null) {
-                        row["icon"] =
-                            clanData.data[row.clan_id].emblems.x64.wot;
-                    }
-                });
-                if (props.currentClan !== "NO CLAN") {
-                    let currentClan = {
-                        clan_name: props.currentClan.clan.tag,
-                        color: props.currentClan.clan.color,
-                        joined_at: props.currentClan.joined_at,
-                        icon: props.currentClan.clan.emblems.x64.wot,
-                        left_at: props.currentClan.clan.color,
-                        role: props.currentClan.role,
-                    };
-                    clonedData.unshift(currentClan);
-                }
-                setClanList(clonedData);
+            const clonedData = clonedeep(props.data);
+            clonedData.forEach((row) => {
+                URL += `${row.clan_id}%2C+`;
             });
-    }
+
+            URL = URL.slice(0, -4);
+
+            fetch(URL)
+                .then((data) => data.json())
+                .then((clanData) => {
+                    // let tempList = props.data;
+                    clonedData.forEach((row) => {
+                        row["clan_name"] = clanData.data[row.clan_id].tag;
+                        row["color"] = clanData.data[row.clan_id].color;
+                        if (clanData.data[row.clan_id].emblems != null) {
+                            row["icon"] =
+                                clanData.data[row.clan_id].emblems.x64.wot;
+                        }
+                    });
+                    if (props.currentClan !== "NO CLAN") {
+                        let currentClan = {
+                            clan_name: props.currentClan.clan.tag,
+                            color: props.currentClan.clan.color,
+                            joined_at: props.currentClan.joined_at,
+                            icon: props.currentClan.clan.emblems.x64.wot,
+                            left_at: props.currentClan.clan.color,
+                            role: props.currentClan.role,
+                        };
+                        clonedData.unshift(currentClan);
+                    }
+                    setClanList(clonedData);
+                });
+        }
+
+        getClanData();
+    }, [props.currentClan, props.data]);
 
     function Unit() {
         return clanList.map((row) => {
@@ -194,6 +193,7 @@ export default function ClanHistory(props) {
                     </Grid>
                 );
             }
+            return undefined;
         });
     }
 

@@ -6,6 +6,11 @@ import WN8c from "../../functions/WN8color";
 import WRc from "../../functions/WRcolor";
 import { ThemeContext } from "../../style/theme.js";
 
+const rankColors = {
+    1: <span style={{ color: "gold", fontWeight: 600 }}>1</span>,
+    2: <span style={{ color: "silver", fontWeight: 600 }}>2</span>,
+    3: <span style={{ color: "orange", fontWeight: 600 }}>3</span>,
+};
 export default function SmallLeaderboard(props) {
     const { theme } = React.useContext(ThemeContext);
 
@@ -81,155 +86,149 @@ export default function SmallLeaderboard(props) {
     ]);
 
     useEffect(() => {
-        fetchData();
-    }, []);
+        async function fetchData() {
+            const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/leaderboards/${props.type}/10`;
+            //const url = `http://localhost:5000/api/abcd/leaderboards/${props.type}/10`;
+            const raw = await fetch(url);
+            let res = await raw.json();
 
-    const rankColors = {
-        1: <span style={{ color: "gold", fontWeight: 600 }}>1</span>,
-        2: <span style={{ color: "silver", fontWeight: 600 }}>2</span>,
-        3: <span style={{ color: "orange", fontWeight: 600 }}>3</span>,
-    };
+            const newData = [];
+            for (let i = 0; i < res.length; ++i) {
+                const link = `/stats/NA/${res[i].username}=${res[i].player_id}`;
+                res[i].winrate = res[i].winrate.toFixed(2) + "%";
+                res[i].avgtier = res[i].avgtier.toFixed(2);
+                let entry = {
+                    rank: res[i].rank,
+                    username: <Link to={link}>{res[i].username}</Link>,
+                    avgtier: res[i].avgtier,
+                    battles: res[i].battles,
+                };
+                if (res[i].rank <= 3) {
+                    entry.rank = rankColors[res[i].rank];
+                }
+                entry[props.type] = res[i][props.type];
+                if (props.type === "wn8")
+                    entry[props.type] = (
+                        <div
+                            style={{
+                                padding: "8px",
+                                margin: "-8px -8px",
+                                color: "white",
+                                backgroundColor: WN8c(res[i][props.type]),
+                            }}
+                        >
+                            {res[i][props.type]}
+                        </div>
+                    );
+                if (props.type === "winrate")
+                    entry[props.type] = (
+                        <div
+                            style={{
+                                padding: "8px",
+                                margin: "-8px -8px",
+                                color: "white",
+                                backgroundColor: WRc(res[i][props.type]),
+                            }}
+                        >
+                            {res[i][props.type]}
+                        </div>
+                    );
 
-    async function fetchData() {
-        const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/leaderboards/${props.type}/10`;
-        //const url = `http://localhost:5000/api/abcd/leaderboards/${props.type}/10`;
-        const raw = await fetch(url);
-        let res = await raw.json();
-
-        const newData = [];
-        for (let i = 0; i < res.length; ++i) {
-            const link = `/stats/NA/${res[i].username}=${res[i].player_id}`;
-            res[i].winrate = res[i].winrate.toFixed(2) + "%";
-            res[i].avgtier = res[i].avgtier.toFixed(2);
-            let entry = {
-                rank: res[i].rank,
-                username: <Link to={link}>{res[i].username}</Link>,
-                avgtier: res[i].avgtier,
-                battles: res[i].battles,
-            };
-            if (res[i].rank <= 3) {
-                entry.rank = rankColors[res[i].rank];
+                newData.push(entry);
             }
-            entry[props.type] = res[i][props.type];
-            if (props.type === "wn8")
-                entry[props.type] = (
-                    <div
-                        style={{
-                            padding: "8px",
-                            margin: "-8px -8px",
-                            color: "white",
-                            backgroundColor: WN8c(res[i][props.type]),
-                        }}
-                    >
-                        {res[i][props.type]}
-                    </div>
-                );
-            if (props.type === "winrate")
-                entry[props.type] = (
-                    <div
-                        style={{
-                            padding: "8px",
-                            margin: "-8px -8px",
-                            color: "white",
-                            backgroundColor: WRc(res[i][props.type]),
-                        }}
-                    >
-                        {res[i][props.type]}
-                    </div>
-                );
-
-            newData.push(entry);
+            setData(newData);
         }
-        setData(newData);
-    }
 
-    const colOptions = {
-        battles: [
-            { Header: "", accessor: "rank" },
-            {
-                Header: "Username",
-                accessor: "username",
-                Footer: (
-                    <span style={{ fontSize: "0.8rem", fontWeight: "500" }}>
-                        {" "}
-                        <Link to="/Leaderboards">FULL LEADERBOARDS</Link>
-                    </span>
-                ),
-            },
-            { Header: "Battles", accessor: "battles" },
-            { Header: "Avg Tier", accessor: "avgtier" },
-        ],
-        wn8: [
-            { Header: "", accessor: "rank" },
-            {
-                Header: "Username",
-                accessor: "username",
-                Footer: (
-                    <span style={{ fontSize: "0.8rem", fontWeight: "500" }}>
-                        {" "}
-                        <Link to="/Leaderboards">FULL LEADERBOARDS</Link>
-                    </span>
-                ),
-            },
-            { Header: "WN8", accessor: "wn8" },
-            { Header: "Avg Tier", accessor: "avgtier" },
-            { Header: "Battles", accessor: "battles" },
-        ],
-        winrate: [
-            { Header: "", accessor: "rank" },
-            {
-                Header: "Username",
-                accessor: "username",
-                Footer: (
-                    <span style={{ fontSize: "0.8rem", fontWeight: "500" }}>
-                        {" "}
-                        <Link to="/Leaderboards">FULL LEADERBOARDS</Link>
-                    </span>
-                ),
-            },
-            { Header: "Winrate", accessor: "winrate" },
-            { Header: "Avg Tier", accessor: "avgtier" },
-            { Header: "Battles", accessor: "battles" },
-        ],
-        moecount: [
-            { Header: "", accessor: "rank" },
-            {
-                Header: "Username",
-                accessor: "username",
-                Footer: (
-                    <span style={{ fontSize: "0.8rem", fontWeight: "500" }}>
-                        {" "}
-                        <Link to="/Leaderboards">FULL LEADERBOARDS</Link>
-                    </span>
-                ),
-            },
-            { Header: "3 MoE", accessor: "moecount" },
-            { Header: "Avg Tier", accessor: "avgtier" },
-            { Header: "Battles", accessor: "battles" },
-        ],
-        moe10: [
-            { Header: "", accessor: "rank" },
-            {
-                Header: "Username",
-                accessor: "username",
-                Footer: (
-                    <span style={{ fontSize: "0.8rem", fontWeight: "500" }}>
-                        {" "}
-                        <Link to="/Leaderboards">FULL LEADERBOARDS</Link>
-                    </span>
-                ),
-            },
-            { Header: "T10 3 MoE", accessor: "moe10" },
-            { Header: "Avg Tier", accessor: "avgtier" },
-            { Header: "Battles", accessor: "battles" },
-        ],
-    };
+        fetchData();
+    }, [props.type]);
 
-    const columns = React.useMemo(() => colOptions[props.type], []);
+    const columns = React.useMemo(
+        () => ({
+            battles: [
+                { Header: "", accessor: "rank" },
+                {
+                    Header: "Username",
+                    accessor: "username",
+                    Footer: (
+                        <span style={{ fontSize: "0.8rem", fontWeight: "500" }}>
+                            {" "}
+                            <Link to="/Leaderboards">FULL LEADERBOARDS</Link>
+                        </span>
+                    ),
+                },
+                { Header: "Battles", accessor: "battles" },
+                { Header: "Avg Tier", accessor: "avgtier" },
+            ],
+            wn8: [
+                { Header: "", accessor: "rank" },
+                {
+                    Header: "Username",
+                    accessor: "username",
+                    Footer: (
+                        <span style={{ fontSize: "0.8rem", fontWeight: "500" }}>
+                            {" "}
+                            <Link to="/Leaderboards">FULL LEADERBOARDS</Link>
+                        </span>
+                    ),
+                },
+                { Header: "WN8", accessor: "wn8" },
+                { Header: "Avg Tier", accessor: "avgtier" },
+                { Header: "Battles", accessor: "battles" },
+            ],
+            winrate: [
+                { Header: "", accessor: "rank" },
+                {
+                    Header: "Username",
+                    accessor: "username",
+                    Footer: (
+                        <span style={{ fontSize: "0.8rem", fontWeight: "500" }}>
+                            {" "}
+                            <Link to="/Leaderboards">FULL LEADERBOARDS</Link>
+                        </span>
+                    ),
+                },
+                { Header: "Winrate", accessor: "winrate" },
+                { Header: "Avg Tier", accessor: "avgtier" },
+                { Header: "Battles", accessor: "battles" },
+            ],
+            moecount: [
+                { Header: "", accessor: "rank" },
+                {
+                    Header: "Username",
+                    accessor: "username",
+                    Footer: (
+                        <span style={{ fontSize: "0.8rem", fontWeight: "500" }}>
+                            {" "}
+                            <Link to="/Leaderboards">FULL LEADERBOARDS</Link>
+                        </span>
+                    ),
+                },
+                { Header: "3 MoE", accessor: "moecount" },
+                { Header: "Avg Tier", accessor: "avgtier" },
+                { Header: "Battles", accessor: "battles" },
+            ],
+            moe10: [
+                { Header: "", accessor: "rank" },
+                {
+                    Header: "Username",
+                    accessor: "username",
+                    Footer: (
+                        <span style={{ fontSize: "0.8rem", fontWeight: "500" }}>
+                            {" "}
+                            <Link to="/Leaderboards">FULL LEADERBOARDS</Link>
+                        </span>
+                    ),
+                },
+                { Header: "T10 3 MoE", accessor: "moe10" },
+                { Header: "Avg Tier", accessor: "avgtier" },
+                { Header: "Battles", accessor: "battles" },
+            ],
+        }),
+        []
+    )[props.type];
 
     const {
         getTableProps,
-        getTableBodyProps,
         headerGroups,
         footerGroups,
         rows,

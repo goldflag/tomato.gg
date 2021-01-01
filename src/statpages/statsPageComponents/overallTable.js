@@ -25,10 +25,6 @@ import { ThemeContext } from "../../style/theme.js";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 
-function setMid(string) {
-    return <div style={{ textAlign: "center" }}>{string}</div>;
-}
-
 function WN8Style(wn8) {
     return {
         background: WN8c(wn8),
@@ -48,6 +44,250 @@ function WRStyle(wr) {
         textAlign: "center",
     };
     //return { background: WRc(wr), color: 'white', width: '100%', height: '100%' }
+}
+
+const tierConv = {
+    1: "I",
+    2: "II",
+    3: "III",
+    4: "IV",
+    5: "V",
+    6: "VI",
+    7: "VII",
+    8: "VIII",
+    9: "IX",
+    10: "X",
+};
+
+const moeConv = {
+    0: "",
+    1: (
+        <img
+            src={require(`../../assets/star.png`)}
+            style={{ maxHeight: "16px" }}
+            alt={"moe"}
+        />
+    ),
+    2: (
+        <>
+            <img
+                src={require(`../../assets/star.png`)}
+                style={{ maxHeight: "16px" }}
+                alt={"moe"}
+            />{" "}
+            <img
+                src={require(`../../assets/star.png`)}
+                style={{ maxHeight: "16px" }}
+                alt={"moe"}
+            />
+        </>
+    ),
+    3: (
+        <>
+            <img
+                src={require(`../../assets/star.png`)}
+                style={{ maxHeight: "16px" }}
+                alt={"moe"}
+            />{" "}
+            <img
+                src={require(`../../assets/star.png`)}
+                style={{ maxHeight: "16px" }}
+                alt={"moe"}
+            />{" "}
+            <img
+                src={require(`../../assets/star.png`)}
+                style={{ maxHeight: "16px" }}
+                alt={"moe"}
+            />
+        </>
+    ),
+};
+
+function MOEFilter({
+    column: { filterValue, setFilter, preFilteredRows, id },
+}) {
+    return (
+        <ButtonGroup
+            variant="text"
+            color="purple"
+            aria-label="text primary button group"
+        >
+            <Button
+                onClick={() => setFilter(undefined)}
+                className={"filterButton"}
+            >
+                ALL
+            </Button>
+            <Button
+                onClick={() => {
+                    setFilter(0);
+                }}
+                className={"filterButton"}
+            ></Button>
+            <Button
+                onClick={() => {
+                    setFilter(1);
+                }}
+                className={"filterButton"}
+            >
+                <div
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-evenly",
+                    }}
+                >
+                    {moeConv[1]}
+                </div>
+            </Button>
+            <Button
+                onClick={() => {
+                    setFilter(2);
+                }}
+                className={"filterButton"}
+            >
+                <div
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-evenly",
+                    }}
+                >
+                    {moeConv[2]}
+                </div>
+            </Button>
+            <Button
+                onClick={() => {
+                    setFilter(3);
+                }}
+                className={"filterButton"}
+            >
+                <div
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-evenly",
+                    }}
+                >
+                    {moeConv[3]}
+                </div>
+            </Button>
+        </ButtonGroup>
+    );
+}
+
+function MasteryFilter({
+    column: { filterValue, setFilter, preFilteredRows, id },
+}) {
+    return (
+        <ButtonGroup
+            variant="text"
+            color="purple"
+            aria-label="text primary button group"
+        >
+            <Button
+                onClick={() => setFilter(undefined)}
+                className={"filterButton"}
+            >
+                ALL
+            </Button>
+            <Button
+                onClick={() => {
+                    setFilter(0);
+                }}
+                className={"filterButton"}
+            >
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                        src={require(`../../assets/masteryIcons/0.png`)}
+                        style={{ maxHeight: "23px" }}
+                        alt={"0"}
+                    />
+                </div>
+            </Button>
+            <Button
+                onClick={() => {
+                    setFilter(1);
+                }}
+                className={"filterButton"}
+            >
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                        src={require(`../../assets/masteryIcons/1.png`)}
+                        style={{ maxHeight: "23px" }}
+                        alt={"1"}
+                    />
+                </div>
+            </Button>
+            <Button
+                onClick={() => {
+                    setFilter(2);
+                }}
+                className={"filterButton"}
+            >
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                        src={require(`../../assets/masteryIcons/2.png`)}
+                        style={{ maxHeight: "23px" }}
+                        alt={"2"}
+                    />
+                </div>
+            </Button>
+            <Button
+                onClick={() => {
+                    setFilter(3);
+                }}
+                className={"filterButton"}
+            >
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                        src={require(`../../assets/masteryIcons/3.png`)}
+                        style={{ maxHeight: "23px" }}
+                        alt={"3"}
+                    />
+                </div>
+            </Button>
+            <Button
+                onClick={() => {
+                    setFilter(4);
+                }}
+                className={"filterButton"}
+            >
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                        src={require(`../../assets/masteryIcons/4.png`)}
+                        style={{ maxHeight: "23px" }}
+                        alt={"4"}
+                    />
+                </div>
+            </Button>
+        </ButtonGroup>
+    );
+}
+
+function PremFilter({
+    column: { filterValue, setFilter, preFilteredRows, id },
+}) {
+    return (
+        <ButtonGroup
+            variant="text"
+            color="purple"
+            aria-label="text primary button group"
+        >
+            <Button
+                onClick={() => setFilter(undefined)}
+                className={"filterButton"}
+            >
+                ALL
+            </Button>
+            <Button onClick={() => setFilter(true)} className={"filterButton"}>
+                Prem
+            </Button>
+            <Button onClick={() => setFilter(false)} className={"filterButton"}>
+                Regular
+            </Button>
+        </ButtonGroup>
+    );
 }
 
 function OverallTable(props) {
@@ -208,7 +448,6 @@ function OverallTable(props) {
                     placeholder={`Search ${count} records...`}
                     style={{
                         fontSize: "1rem",
-                        border: "0",
                         padding: "6px",
                         borderRadius: "3px",
                         border: "1px solid rgb(100, 100, 100)",
@@ -491,199 +730,6 @@ function OverallTable(props) {
         );
     }
 
-    function MOEFilter({
-        column: { filterValue, setFilter, preFilteredRows, id },
-    }) {
-        return (
-            <ButtonGroup
-                variant="text"
-                color="purple"
-                aria-label="text primary button group"
-            >
-                <Button
-                    onClick={() => setFilter(undefined)}
-                    className={"filterButton"}
-                >
-                    ALL
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter(0);
-                    }}
-                    className={"filterButton"}
-                ></Button>
-                <Button
-                    onClick={() => {
-                        setFilter(1);
-                    }}
-                    className={"filterButton"}
-                >
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-evenly",
-                        }}
-                    >
-                        {moeConv[1]}
-                    </div>
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter(2);
-                    }}
-                    className={"filterButton"}
-                >
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-evenly",
-                        }}
-                    >
-                        {moeConv[2]}
-                    </div>
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter(3);
-                    }}
-                    className={"filterButton"}
-                >
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-evenly",
-                        }}
-                    >
-                        {moeConv[3]}
-                    </div>
-                </Button>
-            </ButtonGroup>
-        );
-    }
-
-    function MasteryFilter({
-        column: { filterValue, setFilter, preFilteredRows, id },
-    }) {
-        return (
-            <ButtonGroup
-                variant="text"
-                color="purple"
-                aria-label="text primary button group"
-            >
-                <Button
-                    onClick={() => setFilter(undefined)}
-                    className={"filterButton"}
-                >
-                    ALL
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter(0);
-                    }}
-                    className={"filterButton"}
-                >
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                        <img
-                            src={require(`../../assets/masteryIcons/0.png`)}
-                            style={{ maxHeight: "23px" }}
-                            alt={"0"}
-                        />
-                    </div>
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter(1);
-                    }}
-                    className={"filterButton"}
-                >
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                        <img
-                            src={require(`../../assets/masteryIcons/1.png`)}
-                            style={{ maxHeight: "23px" }}
-                            alt={"1"}
-                        />
-                    </div>
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter(2);
-                    }}
-                    className={"filterButton"}
-                >
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                        <img
-                            src={require(`../../assets/masteryIcons/2.png`)}
-                            style={{ maxHeight: "23px" }}
-                            alt={"2"}
-                        />
-                    </div>
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter(3);
-                    }}
-                    className={"filterButton"}
-                >
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                        <img
-                            src={require(`../../assets/masteryIcons/3.png`)}
-                            style={{ maxHeight: "23px" }}
-                            alt={"3"}
-                        />
-                    </div>
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter(4);
-                    }}
-                    className={"filterButton"}
-                >
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                        <img
-                            src={require(`../../assets/masteryIcons/4.png`)}
-                            style={{ maxHeight: "23px" }}
-                            alt={"4"}
-                        />
-                    </div>
-                </Button>
-            </ButtonGroup>
-        );
-    }
-
-    function PremFilter({
-        column: { filterValue, setFilter, preFilteredRows, id },
-    }) {
-        return (
-            <ButtonGroup
-                variant="text"
-                color="purple"
-                aria-label="text primary button group"
-            >
-                <Button
-                    onClick={() => setFilter(undefined)}
-                    className={"filterButton"}
-                >
-                    ALL
-                </Button>
-                <Button
-                    onClick={() => setFilter(true)}
-                    className={"filterButton"}
-                >
-                    Prem
-                </Button>
-                <Button
-                    onClick={() => setFilter(false)}
-                    className={"filterButton"}
-                >
-                    Regular
-                </Button>
-            </ButtonGroup>
-        );
-    }
-
     // This is a custom UI for our 'between' or number range
     // filter. It uses two number boxes and filters rows to
     // ones that have values between the two
@@ -764,8 +810,7 @@ function OverallTable(props) {
     // Let the table remove the filter if the string is empty
     fuzzyTextFilterFn.autoRemove = (val) => !val;
 
-    // Be sure to pass our updateMyData and the skipReset option
-    function Table({ columns, data, updateMyData, skipReset }) {
+    function Table({ columns, data }) {
         const filterTypes = React.useMemo(
             () => ({
                 // Add a new fuzzyTextFilterFn filter type.
@@ -800,7 +845,6 @@ function OverallTable(props) {
             getTableProps,
             getTableBodyProps,
             headerGroups,
-            rows,
             prepareRow,
             state,
             visibleColumns,
@@ -1069,61 +1113,6 @@ function OverallTable(props) {
         });
     }
 
-    const tierConv = {
-        1: "I",
-        2: "II",
-        3: "III",
-        4: "IV",
-        5: "V",
-        6: "VI",
-        7: "VII",
-        8: "VIII",
-        9: "IX",
-        10: "X",
-    };
-    const moeConv = {
-        0: "",
-        1: (
-            <img
-                src={require(`../../assets/star.png`)}
-                style={{ maxHeight: "16px" }}
-                alt={"moe"}
-            />
-        ),
-        2: (
-            <>
-                <img
-                    src={require(`../../assets/star.png`)}
-                    style={{ maxHeight: "16px" }}
-                    alt={"moe"}
-                />{" "}
-                <img
-                    src={require(`../../assets/star.png`)}
-                    style={{ maxHeight: "16px" }}
-                    alt={"moe"}
-                />
-            </>
-        ),
-        3: (
-            <>
-                <img
-                    src={require(`../../assets/star.png`)}
-                    style={{ maxHeight: "16px" }}
-                    alt={"moe"}
-                />{" "}
-                <img
-                    src={require(`../../assets/star.png`)}
-                    style={{ maxHeight: "16px" }}
-                    alt={"moe"}
-                />{" "}
-                <img
-                    src={require(`../../assets/star.png`)}
-                    style={{ maxHeight: "16px" }}
-                    alt={"moe"}
-                />
-            </>
-        ),
-    };
     // This is an autoRemove method on the filter function that
     // when given the new filter value and returns true, the filter
     // will be automatically removed. Normally this is just an undefined

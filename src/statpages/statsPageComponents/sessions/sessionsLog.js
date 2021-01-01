@@ -105,52 +105,53 @@ export default function SessionsLog(props) {
 
     const data = props.data;
 
-    const colOptions = [
-        {
-            // Make an expander cell
-            Header: () => null, // No header
-            id: "expander", // It needs an ID
-            Cell: ({ row }) => (
-                // Use Cell to render an expander for each row.
-                // We can use the getToggleRowExpandedProps prop-getter
-                // to build the expander.
-                <span {...row.getToggleRowExpandedProps()}>
-                    {row.isExpanded ? (
-                        <Icon size={24} icon={chevronDown} />
-                    ) : (
-                        <Icon size={24} icon={chevronRight} />
-                    )}
-                </span>
-            ),
-        },
-        { Header: "", accessor: "rank" },
-        { Header: "Date", accessor: "date" },
-        { Header: "Battles", accessor: "battles" },
-        { Header: "Avg Tier", accessor: "tier" },
-        { Header: "Tanks", accessor: "tankcount" },
-        {
-            Cell: ({ value }) => {
-                return <div style={WN8Style(value)}>{value}</div>;
+    const columns = React.useMemo(
+        () => [
+            {
+                // Make an expander cell
+                Header: () => null, // No header
+                id: "expander", // It needs an ID
+                Cell: ({ row }) => (
+                    // Use Cell to render an expander for each row.
+                    // We can use the getToggleRowExpandedProps prop-getter
+                    // to build the expander.
+                    <span {...row.getToggleRowExpandedProps()}>
+                        {row.isExpanded ? (
+                            <Icon size={24} icon={chevronDown} />
+                        ) : (
+                            <Icon size={24} icon={chevronRight} />
+                        )}
+                    </span>
+                ),
             },
-            Header: "WN8",
-            accessor: "overallWN8",
-        },
-        {
-            Cell: ({ value }) => {
-                return <div style={WRStyle(value)}>{value + "%"}</div>;
+            { Header: "", accessor: "rank" },
+            { Header: "Date", accessor: "date" },
+            { Header: "Battles", accessor: "battles" },
+            { Header: "Avg Tier", accessor: "tier" },
+            { Header: "Tanks", accessor: "tankcount" },
+            {
+                Cell: ({ value }) => {
+                    return <div style={WN8Style(value)}>{value}</div>;
+                },
+                Header: "WN8",
+                accessor: "overallWN8",
             },
-            Header: "Winrate",
-            accessor: "winrate",
-        },
-        { Header: "DPG", accessor: "damagerate" },
-        { Header: "KPG", accessor: "fragsrate" },
-        { Header: "DMG Ratio", accessor: "DMGratio" },
-        { Header: "KD", accessor: "KD" },
-        { Header: "XP", accessor: "xprate" },
-        { Header: "Spots", accessor: "spottedrate" },
-    ];
-
-    const columns = React.useMemo(() => colOptions, []);
+            {
+                Cell: ({ value }) => {
+                    return <div style={WRStyle(value)}>{value + "%"}</div>;
+                },
+                Header: "Winrate",
+                accessor: "winrate",
+            },
+            { Header: "DPG", accessor: "damagerate" },
+            { Header: "KPG", accessor: "fragsrate" },
+            { Header: "DMG Ratio", accessor: "DMGratio" },
+            { Header: "KD", accessor: "KD" },
+            { Header: "XP", accessor: "xprate" },
+            { Header: "Spots", accessor: "spottedrate" },
+        ],
+        []
+    );
 
     const {
         getTableProps,
