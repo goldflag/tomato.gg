@@ -41,11 +41,11 @@ export default function SmallSearchBar(props) {
 
     const classes = useStyles();
     return (
-        <Paper component="form" elevation={0} className={classes.root}>
+        <Paper elevation={0} className={classes.root}>
             <InputBase
                 className={classes.input}
                 placeholder="Enter a Username"
-                inputProps={{ "aria-label": "search google maps" }}
+                inputProps={{ "aria-label": "enter a username" }}
                 onChange={(e) => props.setName(e.target.value)}
             />
             <Divider className={classes.divider} orientation="vertical" />

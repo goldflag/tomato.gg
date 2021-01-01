@@ -85,7 +85,7 @@ export default function ClanHistory(props) {
     }, [props.currentClan, props.data]);
 
     function Unit() {
-        return clanList.map((row) => {
+        return clanList.map((row, i) => {
             if (row.clan_name) {
                 let date = new Date(row.joined_at * 1000);
                 const joinDate = `${
@@ -97,7 +97,7 @@ export default function ClanHistory(props) {
                 }/${date.getDate()}/${date.getFullYear()}`;
                 if (isNaN(date.getMonth())) leftDate = `Current`;
                 return (
-                    <Grid item xs={6}>
+                    <Grid item xs={6} key={i}>
                         <Grid container spacing={1}>
                             <Grid item xs={5}>
                                 <div

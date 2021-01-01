@@ -5,7 +5,6 @@ import EXPTrackerTemplate from "../templates/EXPTrackerTemplate";
 import BattleCountTemplate from "../templates/BattleCountTemplate";
 import simpleWN8 from "./heatmapFunctions/simpleWN8";
 import calcTrackingVals from "./heatmapFunctions/calcTrackingVals";
-import { ThemeContext } from "../style/theme.js";
 
 function round(value, decimals) {
     return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
@@ -80,10 +79,9 @@ export default function GraphCalculator(
     OS,
     overallWN8,
     avgTier,
-    recentStats
+    recentStats,
+    theme
 ) {
-    const { theme } = React.useContext(ThemeContext);
-
     function clr(recent, overall, flipped) {
         if (recent === "-") return "rgb(50,50,50)";
         if (flipped) {

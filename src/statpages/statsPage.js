@@ -178,7 +178,8 @@ export default function StatsPage(props) {
             stats,
             recentStats.overallStats.overallWN8,
             recentStats.overallStats.avgTier,
-            recentStats
+            recentStats,
+            theme
         );
         console.log(recentStats.recents);
         StatTable = (

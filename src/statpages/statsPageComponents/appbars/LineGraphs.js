@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LineGraphs(props) {
-    console.log(props.WN8);
     const classes = useStyles();
     const [value, setValue] = useState(0);
 

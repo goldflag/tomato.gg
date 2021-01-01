@@ -44,6 +44,10 @@ export default function Charts(props) {
     const classes = useStyles();
     let output = <></>;
 
+    const clanHistory = (
+        <ClanHistory data={props.clanData} currentClan={props.currentClan} />
+    );
+
     if (size.width > 1000) {
         output = (
             <div>
@@ -141,10 +145,7 @@ export default function Charts(props) {
                                 overflowY: "auto",
                             }}
                         >
-                            <ClanHistory
-                                data={props.clanData}
-                                currentClan={props.currentClan}
-                            />
+                            {clanHistory}
                         </Paper>
                     </Grid>
                     <Grid item xs={8}>
@@ -208,10 +209,7 @@ export default function Charts(props) {
                             theme === "dark" ? "rgb(40, 40, 40)" : "white",
                     }}
                 >
-                    <ClanHistory
-                        data={props.clanData}
-                        currentClan={props.currentClan}
-                    />
+                    {clanHistory}
                 </Paper>
                 <Paper
                     square

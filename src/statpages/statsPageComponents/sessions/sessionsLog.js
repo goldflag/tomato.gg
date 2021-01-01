@@ -257,15 +257,13 @@ export default function SessionsLog(props) {
                     {page.map((row, i) => {
                         prepareRow(row);
                         return (
-                            <React.Fragment {...row.getRowProps()}>
-                                <tr>
-                                    {row.cells.map((cell) => {
-                                        return (
-                                            <td {...cell.getCellProps()}>
-                                                {cell.render("Cell")}
-                                            </td>
-                                        );
-                                    })}
+                            <React.Fragment key={i}>
+                                <tr {...row.getRowProps()}>
+                                    {row.cells.map((cell) => (
+                                        <td {...cell.getCellProps()}>
+                                            {cell.render("Cell")}
+                                        </td>
+                                    ))}
                                 </tr>
                                 {/*
                                 If the row is in an expanded state, render a row with a
@@ -275,12 +273,12 @@ export default function SessionsLog(props) {
                                     <tr>
                                         <td colSpan={visibleColumns.length}>
                                             {/*
-                                    Inside it, call our renderRowSubComponent function. In reality,
-                                    you could pass whatever you want as props to
-                                    a component like this, including the entire
-                                    table instance. But for this example, we'll just
-                                    pass the row
-                                    */}
+                                                Inside it, call our renderRowSubComponent function. In reality,
+                                                you could pass whatever you want as props to
+                                                a component like this, including the entire
+                                                table instance. But for this example, we'll just
+                                                pass the row
+                                            */}
                                             {renderRowSubComponent({ row })}
                                         </td>
                                     </tr>

@@ -109,7 +109,6 @@ function MOEFilter({
     return (
         <ButtonGroup
             variant="text"
-            color="purple"
             aria-label="text primary button group"
         >
             <Button
@@ -182,7 +181,6 @@ function MasteryFilter({
     return (
         <ButtonGroup
             variant="text"
-            color="purple"
             aria-label="text primary button group"
         >
             <Button
@@ -271,7 +269,6 @@ function PremFilter({
     return (
         <ButtonGroup
             variant="text"
-            color="purple"
             aria-label="text primary button group"
         >
             <Button
@@ -463,7 +460,6 @@ function OverallTable(props) {
         return (
             <ButtonGroup
                 variant="text"
-                color="green"
                 aria-label="text primary button group"
             >
                 <Button
@@ -530,7 +526,6 @@ function OverallTable(props) {
         return (
             <ButtonGroup
                 variant="text"
-                color="purple"
                 aria-label="text primary button group"
             >
                 <Button
@@ -629,7 +624,6 @@ function OverallTable(props) {
         return (
             <ButtonGroup
                 variant="text"
-                color="purple"
                 aria-label="text primary button group"
             >
                 <Button
@@ -995,51 +989,47 @@ function OverallTable(props) {
                 <table {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
-                            <>
-                                <tr {...headerGroup.getHeaderGroupProps()}>
-                                    {headerGroup.headers.map((column) => (
-                                        <th
-                                            {...column.getHeaderProps(
-                                                column.getSortByToggleProps()
-                                            )}
-                                        >
-                                            {column.render("Header")}
-                                            <span>
-                                                {column.isSorted ? (
-                                                    column.isSortedDesc ? (
-                                                        <Icon
-                                                            size={16}
-                                                            icon={arrowUp}
-                                                        />
-                                                    ) : (
-                                                        <Icon
-                                                            size={16}
-                                                            icon={arrowDown}
-                                                        />
-                                                    )
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) => (
+                                    <th
+                                        {...column.getHeaderProps(
+                                            column.getSortByToggleProps()
+                                        )}
+                                    >
+                                        {column.render("Header")}
+                                        <span>
+                                            {column.isSorted ? (
+                                                column.isSortedDesc ? (
+                                                    <Icon
+                                                        size={16}
+                                                        icon={arrowUp}
+                                                    />
                                                 ) : (
-                                                    ""
-                                                )}
-                                            </span>
-                                        </th>
-                                    ))}
-                                </tr>
-                            </>
+                                                    <Icon
+                                                        size={16}
+                                                        icon={arrowDown}
+                                                    />
+                                                )
+                                            ) : (
+                                                ""
+                                            )}
+                                        </span>
+                                    </th>
+                                ))}
+                            </tr>
                         ))}
                     </thead>
                     <tbody {...getTableBodyProps()}>
                         {page.map((row, i) => {
                             prepareRow(row);
                             return (
-                                <React.Fragment {...row.getRowProps()}>
-                                    <tr>
-                                        {row.cells.map((cell) => {
-                                            return (
-                                                <td {...cell.getCellProps()}>
-                                                    {cell.render("Cell")}
-                                                </td>
-                                            );
-                                        })}
+                                <React.Fragment key={i}>
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map((cell) => (
+                                            <td {...cell.getCellProps()}>
+                                                {cell.render("Cell")}
+                                            </td>
+                                        ))}
                                     </tr>
                                     {row.isExpanded ? (
                                         <tr className="subComponent">

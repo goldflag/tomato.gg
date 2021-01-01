@@ -195,7 +195,6 @@ function WN8Table(props) {
         return (
             <ButtonGroup
                 variant="text"
-                color="green"
                 aria-label="text primary button group"
             >
                 <Button
@@ -262,7 +261,6 @@ function WN8Table(props) {
         return (
             <ButtonGroup
                 variant="text"
-                color="purple"
                 aria-label="text primary button group"
             >
                 <Button
@@ -361,7 +359,6 @@ function WN8Table(props) {
         return (
             <ButtonGroup
                 variant="text"
-                color="purple"
                 aria-label="text primary button group"
             >
                 <Button
@@ -468,7 +465,6 @@ function WN8Table(props) {
         return (
             <ButtonGroup
                 variant="text"
-                color="purple"
                 aria-label="text primary button group"
             >
                 <Button

@@ -41,7 +41,7 @@ export default function SearchBar(props) {
     const classes = useStyles();
 
     return (
-        <Paper component="form" className={classes.root}>
+        <Paper className={classes.root}>
             <InputBase
                 className={classes.input}
                 placeholder="Enter Username (e.g. Goldflag)"
