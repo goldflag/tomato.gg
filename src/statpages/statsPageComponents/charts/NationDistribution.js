@@ -7,16 +7,18 @@ export default function NationDistribution(props) {
     return (
         <div style={{ height: "calc(300px)" }}>
             <ResponsivePie
-                // theme={{
-                //     labels: {
-                //         textColor: 'red',
-                //         text: {
-                //             // color: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',
-                //             fontSize: 15
-                //         }
-                //     }
-                //     // itemTextColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100,100,100)',
-                // }}
+                theme={{
+                    textColor:
+                        theme === "dark"
+                            ? "rgb(255, 255, 255)"
+                            : "rgb(100,100,100)",
+                    tooltip: {
+                        container: {
+                            background: theme === 'dark' ? 'rgb(40, 40, 40)' : 'rgb(255, 255, 255)',
+                            color: theme === 'dark' ?  'rgb(255, 255, 255)' : 'rgb(40, 40, 40)',
+                        },
+                    },
+                }}
                 data={props.data}
                 margin={{ top: 30, right: 20, bottom: 30, left: 20 }}
                 innerRadius={0.5}

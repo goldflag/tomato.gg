@@ -7,12 +7,20 @@ export default function WN8Radar(props) {
     return (
         <div style={{ height: "calc(300px)" }}>
             <ResponsiveRadar
-                theme={{
+                theme={
+                    {
                     textColor:
                         theme === "dark"
                             ? "rgb(210, 210, 210)"
                             : "rgb(100,100,100)",
-                }}
+                    tooltip: {
+                        container: {
+                            background: theme === 'dark' ? 'rgb(40, 40, 40)' : 'rgb(255, 255, 255)',
+                            color: theme === 'dark' ?  'rgb(255, 255, 255)' : 'rgb(40, 40, 40)',
+                        },
+                    },
+                    }
+                }
                 data={props.data}
                 keys={["overall", "recent"]}
                 indexBy="stat"

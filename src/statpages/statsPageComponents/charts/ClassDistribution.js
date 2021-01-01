@@ -10,8 +10,14 @@ export default function ClassDistribution(props) {
                 theme={{
                     textColor:
                         theme === "dark"
-                            ? "rgb(210, 210, 210)"
+                            ? "rgb(255, 255, 255)"
                             : "rgb(100,100,100)",
+                    tooltip: {
+                        container: {
+                            background: theme === 'dark' ? 'rgb(40, 40, 40)' : 'rgb(255, 255, 255)',
+                            color: theme === 'dark' ?  'rgb(255, 255, 255)' : 'rgb(40, 40, 40)',
+                        },
+                    },
                 }}
                 data={props.data}
                 margin={{ top: 30, right: 20, bottom: 30, left: 20 }}
@@ -37,7 +43,6 @@ export default function ClassDistribution(props) {
                 radialLabelsLinkStrokeWidth={1}
                 radialLabelsLinkColor={{ from: "color" }}
                 slicesLabelsSkipAngle={10}
-                slicesLabelsTextColor="rgb(230, 230, 230)"
                 animate={true}
                 motionStiffness={90}
                 motionDamping={15}

@@ -21,6 +21,7 @@ const LINKS = [
     // {url: "/tank-list", title: "Tank List", Icon: BarChartIcon},
     // { url: "/server-stats", title: "Server Stats", Icon: PublicIcon },
     { url: "/moe", title: "MoE Reqs", Icon: StarIcon },
+    { url: "/mastery", title: "Mastery Reqs", Icon: StarIcon },
     { url: "/wn8", title: "WN8 Exp. Values", Icon: GamesIcon },
     {
         url: "/stats-reference",

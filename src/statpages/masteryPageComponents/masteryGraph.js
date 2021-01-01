@@ -2,7 +2,7 @@ import React from 'react';
 import { ResponsiveLine } from '@nivo/line'
 import { ThemeContext } from '../../style/theme.js';
 
-export default function MoEGraph(props) {
+export default function MasteryGraph(props) {
     const {theme} = React.useContext(ThemeContext);
     return( <div style={{ height: 'calc(310px)'}}>
         <ResponsiveLine
@@ -40,7 +40,7 @@ export default function MoEGraph(props) {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'Combined Damage',
+                legend: 'Base Experience',
                 legendOffset: -50,
                 legendPosition: 'middle',
                 tickValues: 6

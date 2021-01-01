@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
 import styled from "styled-components";
 import { ThemeContext } from "../style/theme.js";
-import MoETable from "./MoEPageComponents/MoETable";
+import MasteryTable from "./masteryPageComponents/masteryTable";
 import tankNames from "../data/tankNames.json";
 import nationConversion from "../data/nationConversion";
 import classConversion from "../data/classConversion.json";
@@ -21,25 +21,24 @@ const tierConv = {
 };
 const trackingId = process.env.REACT_APP_GA;
 
-export default function MoEPage(props) {
+export default function MasteryPage(props) {
     const { theme, server } = React.useContext(ThemeContext);
 
     const [data, setData] = useState();
 
     useEffect(() => {
         ReactGA.initialize(trackingId);
-        ReactGA.pageview("/moe");
+        ReactGA.pageview("/mastery");
     }, []);
 
     useEffect(() => {
         async function getData() {
-            const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/moe/${server}`;
-            //const url = `http://localhost:5000/api/abcd/moe/${server}`;
+            const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/mastery/${server}`;
+            //const url = `http://localhost:5000/api/abcd/mastery/${server}`;
             const raw = await fetch(url);
             let res = await raw.json();
             setData(res);
         }
-
         getData();
     }, [server]);
 
@@ -104,17 +103,16 @@ export default function MoEPage(props) {
                     nation: nationConversion[tankNames[id].nation],
                     tier: tierConv[tankNames[id].tier],
                     class: classConversion[tankNames[id].type],
-                    50: data[i]["50"] || "-",
-                    65: data[i]["65"] || "-",
-                    85: data[i]["85"] || "-",
-                    95: data[i]["95"] || "-",
-                    100: data[i]["100"] || "-",
+                    "3rd": data[i]["3rd"] || "-",
+                    "2nd": data[i]["2nd"] || "-",
+                    "1st": data[i]["1st"] || "-",
+                    "ace": data[i]["ace"] || "-",
                     isPrem: tankNames[id].is_premium,
                 };
                 rowData.push(entry);
             }
         }
-        table = <MoETable data={rowData} />;
+        table = <MasteryTable data={rowData} />;
     }
 
     const serverConv = { com: "NA", eu: "EU", asia: "ASIA", ru: "RU" };
@@ -124,7 +122,7 @@ export default function MoEPage(props) {
             <div className="leaderboard">
                 <div className="info">
                     <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                        {serverConv[server]} Marks of Excellence Requirements
+                        {serverConv[server]} Mastery Badge Requirements
                     </span>
                     <br />
                     <span
@@ -135,10 +133,10 @@ export default function MoEPage(props) {
                         }}
                     >
                         Data from the creators of the{" "}
-                        <a target="blank" href="https://gunmarks.poliroid.ru/">
+                        <a target="blank" href="https://mastery.poliroid.ru/">
                             Marks of Excellence mod
                         </a>{" "}
-                        &#47;&#47;&#47; Expand rows to see 30 days of MoE
+                        &#47;&#47;&#47; Expand rows to see 30 days of mastery
                         history
                     </span>{" "}
                     <br />

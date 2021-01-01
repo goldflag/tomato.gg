@@ -21,6 +21,12 @@ export default function TierMoeDistribution(props) {
                             strokeWidth: 1,
                         },
                     },
+                    tooltip: {
+                        container: {
+                            background: theme === 'dark' ? 'rgb(40, 40, 40)' : 'rgb(255, 255, 255)',
+                            color: theme === 'dark' ?  'rgb(255, 255, 255)' : 'rgb(40, 40, 40)',
+                        },
+                    },
                 }}
                 data={props.data}
                 keys={["0", "1", "2", "3"]}

@@ -23,11 +23,17 @@ export default function TierDistribution(props) {
                             strokeWidth: 1,
                         },
                     },
+                    tooltip: {
+                        container: {
+                            background: theme === 'dark' ? 'rgb(40, 40, 40)' : 'rgb(255, 255, 255)',
+                            color: theme === 'dark' ?  'rgb(255, 255, 255)' : 'rgb(40, 40, 40)',
+                        },
+                    },
                 }}
                 data={data}
                 keys={["HT", "MT", "TD", "LT", "SPG"]}
                 indexBy="Tier"
-                margin={{ top: 30, right: 80, bottom: 50, left: 60 }}
+                margin={{ top: 30, right: 80, bottom: 50, left: 70 }}
                 padding={0.3}
                 colors={[
                     "rgb(84, 140, 196)",
@@ -53,7 +59,8 @@ export default function TierDistribution(props) {
                     tickRotation: 0,
                     legend: "Battles",
                     legendPosition: "middle",
-                    legendOffset: -40,
+                    legendOffset: -50,
+                    tickValues: 6
                 }}
                 enableLabel={false}
                 labelSkipWidth={12}

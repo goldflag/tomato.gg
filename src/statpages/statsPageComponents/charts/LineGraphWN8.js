@@ -27,6 +27,12 @@ export default function LineGraphWN8(props) {
                             strokeWidth: 1,
                         },
                     },
+                    tooltip: {
+                        container: {
+                            background: theme === 'dark' ? 'rgb(40, 40, 40)' : 'rgb(255, 255, 255)',
+                            color: theme === 'dark' ?  'rgb(255, 255, 255)' : 'rgb(40, 40, 40)',
+                        },
+                    },
                 }}
                 data={[props.data]}
                 curve="catmullRom"
@@ -55,6 +61,7 @@ export default function LineGraphWN8(props) {
                     legendOffset: 45,
                     legendPosition: "middle",
                     tickRotation: -45,
+
                 }}
                 axisLeft={{
                     orient: "left",
@@ -64,6 +71,7 @@ export default function LineGraphWN8(props) {
                     legend: props.type,
                     legendOffset: -55,
                     legendPosition: "middle",
+                    tickValues: 5
                 }}
                 colors={color[props.type]}
                 pointSize={5}
