@@ -420,8 +420,6 @@ function filterGreaterThan(rows, id, filterValue) {
   })
 }
 
-const tierConv = { 1: 'I', 2: 'II', 3: 'III', 4: 'IV', 5: 'V', 6: 'VI', 7: 'VII', 8: 'VIII', 9: 'IX', 10: 'X' }
-
 // This is an autoRemove method on the filter function that
 // when given the new filter value and returns true, the filter
 // will be automatically removed. Normally this is just an undefined

@@ -112,8 +112,7 @@ export default function SessionsLog(props) {
     
 
     const columns = React.useMemo(
-        () => colOptions,
-        []
+        () => colOptions, []
     )
 
     const {
