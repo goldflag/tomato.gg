@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap");
 
 .sidebar {
     font-family: "Roboto";
@@ -11,15 +11,15 @@
     position: fixed;
     left: 0;
     overflow-x: hidden;
-    background: url(../assets/sidebar.jpg) no-repeat center center fixed; 
+    background: url(../assets/sidebar.jpg) no-repeat center center fixed;
     /* background: url(../assets/Ocean8.svg) no-repeat center center fixed;  */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-  }
+}
 
-  .layer {
+.layer {
     /* background-color: rgba(23, 20, 51, 0.7); */
     background-color: rgba(24, 25, 92, 0.7);
 
@@ -28,38 +28,38 @@
     left: 0;
     width: 100%;
     height: 100%;
-  }
+}
 
-  .line {
+.line {
     width: 100%;
     height: 0%;
     border-bottom: 1px solid rgb(100, 95, 129);
     position: absolute;
-  }
+}
 
-  .logo {
+.logo {
     padding: 10px 10px 10px 10px;
     width: auto;
     height: 4em;
-  }
+}
 
-  .menu {
+.menu {
     font-size: 14px;
-  }
+}
 
-  .menu a {
+.menu a {
     padding: 12px 16px 12px 32px;
     text-decoration: none;
     font-size: 12px;
     color: #dddddd !important;
     display: block;
-  }
-  
-  .menu a:hover {
+}
+
+.menu a:hover {
     color: rgb(207, 12, 116) !important;
-  }
-  
-  .bottom {
+}
+
+.bottom {
     padding: 10px 10px 10px 10px;
     margin: 10px;
     font-size: 0.8rem;
@@ -69,14 +69,21 @@
     border-top: 1px solid rgb(100, 95, 129);
     bottom: 0;
     /* max-width: calc(10vw + 50px); */
-  }
-  /* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
+}
+/* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
 
-
-@media screen and (max-Width: 1000px) {
-  .sidebar {width: 0px;}
-  .sidebar {padding-top: 15px;}
-  /* .sidebar a {font-size: 18px;} */
-  .bottom {max-width: 0;}
-  .line {width: 0px;}
+@media screen and (max-width: 1000px) {
+    .sidebar {
+        width: 0px;
+    }
+    .sidebar {
+        padding-top: 15px;
+    }
+    /* .sidebar a {font-size: 18px;} */
+    .bottom {
+        max-width: 0;
+    }
+    .line {
+        width: 0px;
+    }
 }
