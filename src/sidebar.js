@@ -10,6 +10,26 @@ import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import GamesIcon from "@material-ui/icons/Games";
 import StarIcon from "@material-ui/icons/Star";
 
+const LINKS = [
+    { url: "/", title: "Home", Icon: AppsIcon },
+    { url: "/tank-stats", title: "Tank Stats", Icon: BarChartIcon },
+    {
+        url: "/leaderboards",
+        title: "Leaderboards",
+        Icon: FormatListNumberedIcon,
+    },
+    // {url: "/tank-list", title: "Tank List", Icon: BarChartIcon},
+    // { url: "/server-stats", title: "Server Stats", Icon: PublicIcon },
+    { url: "/moe", title: "MoE Reqs", Icon: StarIcon },
+    { url: "/wn8", title: "WN8 Exp. Values", Icon: GamesIcon },
+    {
+        url: "/stats-reference",
+        title: "Stats Reference",
+        Icon: LibraryBooksIcon,
+    },
+    { url: "/about", title: "About", Icon: InfoIcon },
+];
+
 function Sidebar() {
     return (
         <div className="sidebar">
@@ -31,129 +51,13 @@ function Sidebar() {
                 </Link>
                 <div className="line" />
                 <div className="menu">
-                    <Link
-                        to="/"
-                        style={{
-                            padding: "20px 20px 10px 20px",
-                            fontSize: "16px",
-                        }}
-                    >
-                        <AppsIcon
-                            style={{
-                                verticalAlign: "middle",
-                                padding: "0px 1px 2px 1px",
-                            }}
-                        />
-                        &nbsp;&nbsp;Home
-                    </Link>
-
-                    <Link
-                        to="/tank-stats"
-                        style={{
-                            padding: "10px 20px 10px 20px",
-                            fontSize: "16px",
-                        }}
-                    >
-                        <BarChartIcon
-                            style={{
-                                verticalAlign: "middle",
-                                padding: "0px 1px 2px 1px",
-                            }}
-                        />
-                        &nbsp;&nbsp;Tank Stats
-                    </Link>
-
-                    <Link
-                        to="/Leaderboards"
-                        style={{
-                            padding: "10px 20px 10px 20px",
-                            fontSize: "16px",
-                        }}
-                    >
-                        <FormatListNumberedIcon
-                            style={{
-                                verticalAlign: "middle",
-                                padding: "0px 1px 2px 1px",
-                            }}
-                        />
-                        &nbsp;&nbsp;Leaderboards
-                    </Link>
-
-                    {/* <Link to='/tank-list' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
-                    <BarChartIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
-                        &nbsp;&nbsp;Tank List
-                    </Link> */}
-
-                    {/* <Link to='/server-stats' style={{padding: '10px 20px 10px 20px', fontSize: '16px'}}>
-                    <PublicIcon  style={{ verticalAlign: 'middle', padding: '0px 1px 2px 1px'}}/>
-                        &nbsp;&nbsp;Server Stats
-                    </Link> */}
-
-                    <Link
-                        to="/moe"
-                        style={{
-                            padding: "10px 20px 10px 20px",
-                            fontSize: "16px",
-                        }}
-                    >
-                        <StarIcon
-                            style={{
-                                verticalAlign: "middle",
-                                padding: "0px 1px 2px 1px",
-                            }}
-                        />
-                        &nbsp;&nbsp;MoE Reqs
-                    </Link>
-
-                    <Link
-                        to="/wn8"
-                        style={{
-                            padding: "10px 20px 10px 20px",
-                            fontSize: "16px",
-                        }}
-                    >
-                        <GamesIcon
-                            style={{
-                                verticalAlign: "middle",
-                                padding: "0px 1px 2px 1px",
-                            }}
-                        />
-                        &nbsp;&nbsp;WN8 Exp. Values
-                    </Link>
-
-                    <Link
-                        to="/stats-reference"
-                        style={{
-                            padding: "10px 20px 10px 20px",
-                            fontSize: "16px",
-                        }}
-                    >
-                        <LibraryBooksIcon
-                            style={{
-                                verticalAlign: "middle",
-                                padding: "0px 1px 2px 1px",
-                            }}
-                        />
-                        &nbsp;&nbsp;Stats Reference
-                    </Link>
-
-                    <Link
-                        to="/about"
-                        style={{
-                            padding: "10px 20px 10px 20px",
-                            fontSize: "16px",
-                        }}
-                    >
-                        <InfoIcon
-                            style={{
-                                verticalAlign: "middle",
-                                padding: "0px 1px 2px 1px",
-                            }}
-                        />
-                        &nbsp;&nbsp;About
-                    </Link>
+                    {LINKS.map(({ url, title, Icon }) => (
+                        <Link to={url} className="menu-link" key={url}>
+                            <Icon className="menu-link-icon" />
+                            &nbsp;&nbsp;{title}
+                        </Link>
+                    ))}
                 </div>
-
                 <div
                     style={{
                         fontSize: "0.8rem",
