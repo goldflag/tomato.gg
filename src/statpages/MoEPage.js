@@ -101,8 +101,8 @@ export default function MoEPage(props) {
     <Styles>
       <div className='leaderboard'>
         <div className='info'>
-          <span style={{fontSize: '1.5rem', fontWeight: '500'}}>{serverConv[server]} MoE Requirements</span><br/>
-          <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>Maintained by the creators of the <a target="blank" href="https://gunmarks.poliroid.ru/">MoE mod</a></span> <br/>
+          <span style={{fontSize: '2rem', fontWeight: '500'}}>{serverConv[server]} Marks of Excellence Requirements</span><br/>
+          <span style={{fontSize: '0.9rem', lineHeight: '1rem', color: 'rgb(130,130,130)'}}>Data from the creators of the <a target="blank" href="https://gunmarks.poliroid.ru/">Marks of Excellence mod</a> /// Expand rows to see 30 days of MoE history</span> <br/>
         </div>
         {table}
       </div>

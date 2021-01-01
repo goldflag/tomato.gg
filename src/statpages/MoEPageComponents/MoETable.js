@@ -330,7 +330,7 @@ function MoETable(props) {
             }
             else {
                 return (
-                    <div>
+                    <div style={{padding: '0.3rem'}}>
                         Loading...
                     </div>
                 );
@@ -339,14 +339,12 @@ function MoETable(props) {
 
         function SubRowAsync({ row, rowProps, visibleColumns }) {
             const [data, setData] = useState();
-
             async function get() {
                 // fetch(`http://localhost:5000/api/abcd/moetank/${row.original.id}/${server}`)
                 fetch(`https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/moetank/${row.original.id}/${server}`)
                     .then(res => res.json())
                     .then(res => setData(res))
             }
-
             useEffect(() => {
                 get();
             }, []);

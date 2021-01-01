@@ -100,8 +100,8 @@ export default function WN8expected(props) {
     <Styles>
       <div className='leaderboard'>
         <div className='info'>
-          <span style={{fontSize: '1.5rem', fontWeight: '500'}}>WN8 Expected Values</span><br/>
-          <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>Maintained by the <a target="blank" href="https://modxvm.com/en/wn8-expected-values/">XVM team</a></span> <br/>
+          <span style={{fontSize: '2rem', fontWeight: '500'}}>WN8 Expected Values</span><br/>
+          <span style={{fontSize: '0.9rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>Maintained by the <a target="blank" href="https://modxvm.com/en/wn8-expected-values/">XVM team</a></span> <br/>
         </div>
         {table}
       </div>
