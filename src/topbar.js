@@ -10,13 +10,13 @@ import serverConv from "./data/serverConv";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
-const addToSearchHistory = (name, id) => {
+const addToSearchHistory = (name, id, server) => {
     const searchHistory =
         JSON.parse(localStorage.getItem("searchHistory")) || [];
     localStorage.setItem(
         "searchHistory",
         JSON.stringify([
-            { name, id },
+            { name, id, server },
             ...searchHistory.filter((value) => value.id !== id),
         ])
     );
@@ -43,7 +43,7 @@ export default withRouter(function Topbar(props) {
             )
             .then((playerID) => {
                 if (playerID !== "FAIL") {
-                    addToSearchHistory(name, playerID);
+                    addToSearchHistory(name, playerID, server);
                 }
                 props.history.push("/");
                 props.history.push(

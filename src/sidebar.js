@@ -10,7 +10,6 @@ import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import GamesIcon from "@material-ui/icons/Games";
 import StarIcon from "@material-ui/icons/Star";
 import PersonIcon from "@material-ui/icons/Person";
-
 import {
     List,
     ListItem,
@@ -42,6 +41,18 @@ const LINKS = [
     { url: "/about", title: "About", Icon: InfoIcon },
 ];
 
+const styles = theme => ({
+    root: {
+      width: "100%",
+      maxWidth: 360,
+      backgroundColor: theme.palette.background.paper
+    },
+  
+    item: {
+      padding: 0
+    }
+  });
+
 const Sidebar = withRouter((props) => {
     const searchHistory =
         JSON.parse(localStorage.getItem("searchHistory")) || [];
@@ -49,11 +60,13 @@ const Sidebar = withRouter((props) => {
     const { server } = React.useContext(ThemeContext);
     console.log(server);
 
-    const redirectToPlayerStatsPage = (playerName, playerID) => {
+    const redirectToPlayerStatsPage = (playerName, playerID, playerServer) => {
         props.history.push("/");
         props.history.push(
-            `/stats/${serverConv[server]}/${playerName}=${playerID}`
+            `/stats/${serverConv[playerServer]}/${playerName}=${playerID}`
         );
+        window.location.reload();
+
     };
 
     return (
@@ -85,24 +98,30 @@ const Sidebar = withRouter((props) => {
                 </div>
                 <div className="line" />
                 <div className="menu">
-                    <Typography variant="h6" className="menu-link">
+                    <Typography variant="h6" className="menu-link" style={{marginTop: '-5px'}}>
                         Recent searches
                     </Typography>
-                    <List aria-label="recent searches">
+                    <List aria-label="recent searches" style={{marginTop: '-10px'}} >
                         {searchHistory
                             .slice(0, Math.min(searchHistory.length, 5)) // No more than 5 recent searches
-                            .map(({ name, id }) => (
+                            .map(({ name, id, server }) => (
                                 <ListItem
                                     key={id}
                                     button
                                     onClick={() =>
-                                        redirectToPlayerStatsPage(name, id)
+                                        redirectToPlayerStatsPage(name, id, server)
                                     }
+                                    style={{padding: '0px 20px 10px 22px'}} 
                                 >
-                                    <ListItemIcon>
+                                    {/* <ListItemIcon>
                                         <PersonIcon color="secondary" />
-                                    </ListItemIcon>
-                                    <ListItemText primary={name} />
+                                    </ListItemIcon> */}
+                                    <img
+                                        src={require(`./assets/flagIcons/${server}mini.png`)}
+                                        style={{ maxHeight: "21px" }}
+                                        alt={"4"}
+                                    />
+                                    <ListItemText style={{marginLeft: '10px'}} primary={name} />
                                 </ListItem>
                             ))}
                     </List>
@@ -126,7 +145,7 @@ const Sidebar = withRouter((props) => {
                     </Link>{" "}
                     and is not affiliated with Wargaming.net.
                     <br />
-                    Zeyu Yang © 2020
+                    Zeyu Yang © 2021
                 </div>
             </div>
         </div>
