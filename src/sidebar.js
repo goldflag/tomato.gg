@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./css/sidebar.css";
 import TomatoLogo from "./assets/tomato.png";
 import AppsIcon from "@material-ui/icons/Apps";
@@ -9,6 +9,17 @@ import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import GamesIcon from "@material-ui/icons/Games";
 import StarIcon from "@material-ui/icons/Star";
+import PersonIcon from "@material-ui/icons/Person";
+
+import {
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Typography,
+} from "@material-ui/core";
+import serverConv from "./data/serverConv";
+import { ThemeContext } from "./style/theme";
 
 const LINKS = [
     { url: "/", title: "Home", Icon: AppsIcon },
@@ -31,7 +42,20 @@ const LINKS = [
     { url: "/about", title: "About", Icon: InfoIcon },
 ];
 
-function Sidebar() {
+const Sidebar = withRouter((props) => {
+    const searchHistory =
+        JSON.parse(localStorage.getItem("searchHistory")) || [];
+
+    const { server } = React.useContext(ThemeContext);
+    console.log(server);
+
+    const redirectToPlayerStatsPage = (playerName, playerID) => {
+        props.history.push("/");
+        props.history.push(
+            `/stats/${serverConv[server]}/${playerName}=${playerID}`
+        );
+    };
+
     return (
         <div className="sidebar">
             <div className="layer">
@@ -59,6 +83,30 @@ function Sidebar() {
                         </Link>
                     ))}
                 </div>
+                <div className="line" />
+                <div className="menu">
+                    <Typography variant="h6" className="menu-link">
+                        Recent searches
+                    </Typography>
+                    <List aria-label="recent searches">
+                        {searchHistory
+                            .slice(0, Math.min(searchHistory.length, 5)) // No more than 5 recent searches
+                            .map(({ name, id }) => (
+                                <ListItem
+                                    key={id}
+                                    button
+                                    onClick={() =>
+                                        redirectToPlayerStatsPage(name, id)
+                                    }
+                                >
+                                    <ListItemIcon>
+                                        <PersonIcon color="secondary" />
+                                    </ListItemIcon>
+                                    <ListItemText primary={name} />
+                                </ListItem>
+                            ))}
+                    </List>
+                </div>
                 <div
                     style={{
                         fontSize: "0.8rem",
@@ -83,6 +131,6 @@ function Sidebar() {
             </div>
         </div>
     );
-}
+});
 
 export default Sidebar;

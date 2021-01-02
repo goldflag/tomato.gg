@@ -5,15 +5,9 @@ import SearchBar from "./material/searchBar";
 import TomatoLogo from "./assets/tomato.png";
 import { ThemeContext } from "./style/theme.js";
 import LeaderboardGrid from "./statpages/searchComponents/leaderboardGrid";
+import serverConv from "./data/serverConv";
 
 const APIKey = process.env.REACT_APP_API_KEY;
-
-const serverConv = {
-    com: "NA",
-    eu: "EU",
-    asia: "ASIA",
-    ru: "RU",
-};
 
 export default withRouter(function Search(props) {
     const { theme, server, toggleServer } = React.useContext(ThemeContext);

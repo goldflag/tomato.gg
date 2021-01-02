@@ -6,14 +6,20 @@ import SmallMenu from "./material/smallMenu";
 import { withRouter } from "react-router-dom";
 import DarkModeToggle from "react-dark-mode-toggle";
 import { ThemeContext } from "./style/theme.js";
+import serverConv from "./data/serverConv";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
-const serverConv = {
-    com: "NA",
-    eu: "EU",
-    asia: "ASIA",
-    ru: "RU",
+const addToSearchHistory = (name, id) => {
+    const searchHistory =
+        JSON.parse(localStorage.getItem("searchHistory")) || [];
+    localStorage.setItem(
+        "searchHistory",
+        JSON.stringify([
+            { name, id },
+            ...searchHistory.filter((value) => value.id !== id),
+        ])
+    );
 };
 
 export default withRouter(function Topbar(props) {
@@ -24,28 +30,27 @@ export default withRouter(function Topbar(props) {
     const [mode, setMode] = useState("Player");
 
     const searchId = async (e) => {
-        let testId = "FAIL";
         e.preventDefault();
+        if (!name) return;
         const url = `https://api.worldoftanks.${server}/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`;
-        try {
-            fetch(url)
-                .then((res) => res.json())
-                .then((data) => {
-                    if (data.status === "error" || data.meta.count === 0) {
-                        console.log("Invalid username");
-                    } else {
-                        testId = data.data[0].account_id;
-                    }
-                })
-                .then(() => {
-                    props.history.push(`/`);
-                    props.history.push(
-                        `/stats/${serverConv[server]}/${name}=${testId}`
-                    );
-                });
-        } catch (err) {
-            console.error(err);
-        }
+
+        fetch(url)
+            .then((res) => res.json())
+            .then((data) =>
+                data.status === "error" || data.meta.count === 0
+                    ? "FAIL"
+                    : data.data[0].account_id
+            )
+            .then((playerID) => {
+                if (playerID !== "FAIL") {
+                    addToSearchHistory(name, playerID);
+                }
+                props.history.push("/");
+                props.history.push(
+                    `/stats/${serverConv[server]}/${name}=${playerID}`
+                );
+            })
+            .catch(console.error);
     };
 
     return (

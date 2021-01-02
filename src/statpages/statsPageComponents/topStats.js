@@ -273,7 +273,7 @@ export default function TopStats(props) {
                     }}
                 >
                     Wargaming does not provide recent stats in their API,
-                    meaning that stats site must generate and store recent stats
+                    meaning that stats sites must generate and store recent stats
                     on their own servers. This website is new so we do not have
                     deep records yet. In the future, every active account will
                     have complete recent stats.

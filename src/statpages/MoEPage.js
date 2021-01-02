@@ -6,6 +6,7 @@ import MoETable from "./MoEPageComponents/MoETable";
 import tankNames from "../data/tankNames.json";
 import nationConversion from "../data/nationConversion";
 import classConversion from "../data/classConversion.json";
+import serverConv from "../data/serverConv";
 
 const tierConv = {
     1: "I",
@@ -116,8 +117,6 @@ export default function MoEPage(props) {
         }
         table = <MoETable data={rowData} />;
     }
-
-    const serverConv = { com: "NA", eu: "EU", asia: "ASIA", ru: "RU" };
 
     return (
         <Styles>
