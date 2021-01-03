@@ -28,8 +28,8 @@ function WN8Style(wn8) {
     return {
         background: WN8c(wn8),
         color: "white",
-        padding: "9px",
-        margin: "-0.3rem -0.5rem",
+        padding: "11px",
+        margin: "-0.3rem -0.5rem -0.3rem -0.5rem",
         textAlign: "center",
     };
 }
@@ -38,8 +38,8 @@ function WRStyle(wr) {
     return {
         background: WRc(wr),
         color: "white",
-        padding: "9px",
-        margin: "-0.3rem -0.5rem",
+        padding: "11px",
+        margin: "-0.3rem -0.5rem -0.3rem -0.5rem",
         textAlign: "center",
     };
 }
@@ -805,7 +805,9 @@ function PeriodBreakdown(props) {
             },
             {
                 Cell: ({ value }) => {
-                    return tierConv[value];
+                    return <div style={{ margin: "8px" }}>
+                        {tierConv[value]}
+                    </div>
                 },
                 Header: "Tier",
                 accessor: "tier",

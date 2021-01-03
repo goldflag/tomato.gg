@@ -29,8 +29,9 @@ function WN8Style(wn8) {
     return {
         background: WN8c(wn8),
         color: "white",
-        padding: "9px",
-        margin: "-0.3rem -0.5rem",
+        padding: "11px",
+        margin: "-0.3rem -0.5rem -0.3rem -0.5rem",
+        //margin: "-9px -9px",
         textAlign: "center",
     };
 }
@@ -39,8 +40,9 @@ function WRStyle(wr) {
     return {
         background: WRc(wr),
         color: "white",
-        padding: "9px",
-        margin: "-0.3rem -0.5rem",
+        padding: "11px",
+        margin: "-0.3rem -0.5rem -0.3rem -0.5rem",
+        //margin: "-9px -9px",
         textAlign: "center",
     };
     //return { background: WRc(wr), color: 'white', width: '100%', height: '100%' }
@@ -1144,7 +1146,11 @@ function OverallTable(props) {
             },
             {
                 Cell: ({ value }) => {
-                    return <>{tierConv[value]}</>;
+                    return (
+                        <div style={{ margin: "8px" }}>
+                            {tierConv[value]}
+                        </div>                  
+                    );
                 },
                 Header: "Tier",
                 accessor: "tier",

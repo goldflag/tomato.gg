@@ -16,8 +16,8 @@ function WN8Style(wn8) {
     return {
         background: WN8c(wn8),
         color: "white",
-        padding: "8px 4px",
-        margin: "-8px -8px",
+        padding: "10.5px",
+        margin: "-0.3rem -0.5rem -0.3rem -0.5rem",
         textAlign: "center",
     };
 }
@@ -26,11 +26,24 @@ function WRStyle(wr) {
     return {
         background: WRc(wr),
         color: "white",
-        padding: "8px 4px",
-        margin: "-8px -8px",
+        padding: "10.5px",
+        margin: "-0.3rem -0.5rem -0.3rem -0.5rem",
         textAlign: "center",
     };
 }
+
+const tierConv = {
+    1: "I",
+    2: "II",
+    3: "III",
+    4: "IV",
+    5: "V",
+    6: "VI",
+    7: "VII",
+    8: "VIII",
+    9: "IX",
+    10: "X",
+};
 
 export default function SessionBreakdown(props) {
     const { theme } = React.useContext(ThemeContext);
@@ -96,7 +109,6 @@ export default function SessionBreakdown(props) {
             color: ${theme === "dark"
                 ? "rgb(220, 220, 220)"
                 : "rgb(80, 80, 80)"};
-            margin-bottom: 1rem;
         }
 
         .paginationButton {
@@ -122,9 +134,43 @@ export default function SessionBreakdown(props) {
         () => [
             { Header: "", accessor: "img" },
             { Header: "Name", accessor: "name" },
-            { Header: "Nation", accessor: "nation" },
-            { Header: "Tier", accessor: "tier" },
-            { Header: "Class", accessor: "class" },
+            { 
+                Cell: ({ value }) => {
+                    return (
+                        <img
+                            src={require(`../../../assets/flagIcons/${value}.svg`)}
+                            style={{ maxWidth: "40px" }}
+                            alt={value}
+                        />
+                    );
+                },
+                Header: "Nation", 
+                accessor: "nation" 
+            },
+            { 
+                Cell: ({ value }) => {
+                    return (
+                        <div style={{ margin: "10px" }}>
+                            {tierConv[value]}
+                        </div>                  
+                    );
+                },
+                Header: "Tier", 
+                accessor: "tier" 
+            },
+            { 
+                Cell: ({ value }) => {
+                    return (
+                        <img
+                            src={require(`../../../assets/classIcons/${value}.png`)}
+                            style={{ maxWidth: "20px" }}
+                            alt={value}
+                        />
+                    );
+                },
+                Header: "Class", 
+                accessor: "class"
+            },
             { Header: "Games", accessor: "battles" },
             {
                 Cell: ({ value }) => {

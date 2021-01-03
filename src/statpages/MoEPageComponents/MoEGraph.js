@@ -4,7 +4,7 @@ import { ThemeContext } from '../../style/theme.js';
 
 export default function MoEGraph(props) {
     const {theme} = React.useContext(ThemeContext);
-    return( <div style={{ height: 'calc(310px)'}}>
+    return( <div style={{ height: 'calc(450px)'}}>
         <ResponsiveLine
             theme={{ 
                 textColor: theme === 'dark' ? 'rgb(210, 210, 210)' : 'rgb(100, 100, 100)',  

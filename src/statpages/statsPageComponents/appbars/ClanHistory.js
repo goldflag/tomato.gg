@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import CustomTab from "./tabs/customTab";
-import CustomTabs from "./tabs/customTabs";
-import TabPanel from "./tabs/tabPanel";
+import CustomTab from "../../tabs/customTab";
+import CustomTabs from "../../tabs/customTabs";
+import TabPanel from "../../tabs/tabPanel";
 import Grid from "@material-ui/core/Grid";
 import serverConv from "../../../data/serverConv.js";
 import clonedeep from "lodash.clonedeep";

@@ -22,9 +22,22 @@ import { matchSorter } from "match-sorter";
 import { ThemeContext } from "../../style/theme.js";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
-import MasteryGraph from "./masteryGraph";
+import MoEGraph from "./MoEGraph";
 
-function MasteryTable(props) {
+const tierConv = {
+    1: "I",
+    2: "II",
+    3: "III",
+    4: "IV",
+    5: "V",
+    6: "VI",
+    7: "VII",
+    8: "VIII",
+    9: "IX",
+    10: "X",
+};
+
+function MoETracker(props) {
     const { theme, server } = useContext(ThemeContext);
 
     const Styles = styled.div`
@@ -266,7 +279,7 @@ function MasteryTable(props) {
                 </Button>
                 <Button
                     onClick={() => {
-                        setFilter("X");
+                        setFilter(10);
                     }}
                     className={"filterButton"}
                 >
@@ -274,7 +287,7 @@ function MasteryTable(props) {
                 </Button>
                 <Button
                     onClick={() => {
-                        setFilter("IX");
+                        setFilter(9);
                     }}
                     className={"filterButton"}
                 >
@@ -282,7 +295,7 @@ function MasteryTable(props) {
                 </Button>
                 <Button
                     onClick={() => {
-                        setFilter("VIII");
+                        setFilter(8);
                     }}
                     className={"filterButton"}
                 >
@@ -290,7 +303,7 @@ function MasteryTable(props) {
                 </Button>
                 <Button
                     onClick={() => {
-                        setFilter("VII");
+                        setFilter(7);
                     }}
                     className={"filterButton"}
                 >
@@ -298,7 +311,7 @@ function MasteryTable(props) {
                 </Button>
                 <Button
                     onClick={() => {
-                        setFilter("VI");
+                        setFilter(6);
                     }}
                     className={"filterButton"}
                 >
@@ -306,43 +319,11 @@ function MasteryTable(props) {
                 </Button>
                 <Button
                     onClick={() => {
-                        setFilter("V");
+                        setFilter(5);
                     }}
                     className={"filterButton"}
                 >
                     V
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("IV");
-                    }}
-                    className={"filterButton"}
-                >
-                    IV
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("III");
-                    }}
-                    className={"filterButton"}
-                >
-                    III
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("II");
-                    }}
-                    className={"filterButton"}
-                >
-                    II
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("I");
-                    }}
-                    className={"filterButton"}
-                >
-                    I
                 </Button>
             </ButtonGroup>
         );
@@ -551,8 +532,8 @@ function MasteryTable(props) {
                     pageSize: 100,
                     sortBy: [
                         {
-                            id: "ace",
-                            desc: true,
+                            id: `7percent${props.moe}`,
+                            desc: false,
                         },
                     ],
                 },
@@ -579,7 +560,7 @@ function MasteryTable(props) {
                             marginLeft: "-0.5rem",
                         }}
                     >
-                        <MasteryGraph data={data} />
+                        <MoEGraph data={data} />
                     </div>
                 );
             } else {
@@ -591,9 +572,9 @@ function MasteryTable(props) {
             const [data, setData] = useState();
             useEffect(() => {
                 async function get() {
-                    //fetch(`http://localhost:5000/api/abcd/masterytank/${row.original.id}/${server}`)
+                    // fetch(`http://localhost:5000/api/abcd/moetank/${row.original.id}/${server}`)
                     fetch(
-                        `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/masterytank/${row.original.id}/${server}`
+                        `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/moetank/${row.original.id}/${server}`
                     )
                         .then((res) => res.json())
                         .then((res) => setData(res));
@@ -664,7 +645,7 @@ function MasteryTable(props) {
                                 marginBottom: "10px",
                             }}
                         >
-                            {headerGroups[0].headers[10].render("Filter")}
+                            {headerGroups[0].headers[13].render("Filter")}
                         </span>
                     </div>
                 </div>
@@ -785,6 +766,30 @@ function MasteryTable(props) {
         });
     }
 
+
+    function percentStyle(val, multiplier) {
+
+        function green(val) {
+            val *= -1;
+            return `rgb(${255 - val*multiplier}, 255, ${255 - val*multiplier})`
+        }
+
+        function red(val) {
+            return `rgb(255,${255 - val*multiplier}, ${255 - val*multiplier})`
+        }
+
+        return (
+            <div style={{
+                color: "black", 
+                backgroundColor: val > 0 ? red(val) : green(val),
+                padding: "9.5px",
+                margin: "-0.3rem 1rem -0.3rem -0.5rem",
+                }}>
+                {val > 0 ? "+" : "" }{val}%
+            </div>
+        )
+    }
+
     // This is an autoRemove method on the filter function that
     // when given the new filter value and returns true, the filter
     // will be automatically removed. Normally this is just an undefined
@@ -828,7 +833,7 @@ function MasteryTable(props) {
                 Cell: ({ value }) => {
                     return (
                         <div style={{ margin: "10px" }}>
-                            {value}
+                            {tierConv[value]}
                         </div>                  
                     );
                 },
@@ -871,23 +876,52 @@ function MasteryTable(props) {
                 disableFilters: true,
             },
             {
-                Header: "3rd Class",
-                accessor: "3rd",
+                Header: "7 Day Δ",
+                accessor: `7diff${props.moe}`,
                 disableFilters: true,
+                sortType: 'basic',
+
             },
             {
-                Header: "2nd Class",
-                accessor: "2nd",
+                Cell: ({ value }) => percentStyle(value, 50),
+                Header: "7 Day %Δ",
+                accessor: `7percent${props.moe}`,
                 disableFilters: true,
+                sortType: 'basic',
+
             },
             {
-                Header: "1st Class",
-                accessor: "1st",
+                Header: "14 Day Δ",
+                accessor: `14diff${props.moe}`,
                 disableFilters: true,
+                sortType: 'basic',
+
             },
             {
-                Header: "Ace Wanker",
-                accessor: "ace",
+                Cell: ({ value }) => percentStyle(value, 30),
+                Header: "14 Day %Δ",
+                accessor: `14percent${props.moe}`,
+                disableFilters: true,
+                sortType: 'basic',
+
+            },
+            {
+                Header: "30 Day Δ",
+                accessor: `30diff${props.moe}`,
+                disableFilters: true,
+                sortType: 'basic',
+            },
+            {
+                Cell: ({ value }) => percentStyle(value, 20),
+                Header: "30 Day %Δ",
+                accessor: `30percent${props.moe}`,
+                disableFilters: true,
+                sortType: 'basic',
+
+            },
+            {
+                Header: `${props.moe}%`,
+                accessor: `${props.moe}`,
                 disableFilters: true,
             },
             {
@@ -900,9 +934,6 @@ function MasteryTable(props) {
         []
     );
 
-    // We need to keep the table from resetting the pageIndex when we
-    // Update data. So we can keep track of that flag with a ref.
-
     return (
         <Styles>
             <Table columns={columns} data={data} />
@@ -910,4 +941,4 @@ function MasteryTable(props) {
     );
 }
 
-export default MasteryTable;
+export default MoETracker;

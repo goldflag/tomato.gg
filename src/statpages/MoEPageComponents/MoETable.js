@@ -312,38 +312,6 @@ function MoETable(props) {
                 >
                     V
                 </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("IV");
-                    }}
-                    className={"filterButton"}
-                >
-                    IV
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("III");
-                    }}
-                    className={"filterButton"}
-                >
-                    III
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("II");
-                    }}
-                    className={"filterButton"}
-                >
-                    II
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("I");
-                    }}
-                    className={"filterButton"}
-                >
-                    I
-                </Button>
             </ButtonGroup>
         );
     }
@@ -825,6 +793,13 @@ function MoETable(props) {
                 filter: "equals",
             },
             {
+                Cell: ({ value }) => {
+                    return (
+                        <div style={{ margin: "10px" }}>
+                            {value}
+                        </div>                  
+                    );
+                },
                 Header: "Tier",
                 accessor: "tier",
                 Filter: TierFilter,
@@ -835,7 +810,7 @@ function MoETable(props) {
                     return (
                         <img
                             src={require(`../../assets/classIcons/${value}.png`)}
-                            style={{ maxWidth: "20px", margin: "3px" }}
+                            style={{ maxWidth: "20px" }}
                             alt={value}
                         />
                     );

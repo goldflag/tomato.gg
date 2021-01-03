@@ -113,15 +113,12 @@ const Sidebar = withRouter((props) => {
                                     }
                                     style={{padding: '0px 20px 10px 22px'}} 
                                 >
-                                    {/* <ListItemIcon>
-                                        <PersonIcon color="secondary" />
-                                    </ListItemIcon> */}
                                     <img
                                         src={require(`./assets/flagIcons/${server}mini.png`)}
                                         style={{ maxHeight: "21px" }}
                                         alt={"4"}
                                     />
-                                    <ListItemText style={{marginLeft: '10px'}} primary={name} />
+                                    <ListItemText style={{marginLeft: '10px', color: 'white'}} primary={name} />
                                 </ListItem>
                             ))}
                     </List>

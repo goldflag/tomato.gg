@@ -3,6 +3,12 @@ import ReactGA from "react-ga";
 import styled from "styled-components";
 import { ThemeContext } from "../style/theme.js";
 import MoETable from "./MoEPageComponents/MoETable";
+import MoETracker from "./MoEPageComponents/MoETracker";
+
+import CustomTab from "./tabs/customTab";
+import CustomTabs from "./tabs/customTabs";
+import TabPanel from "./tabs/tabPanel";
+
 import tankNames from "../data/tankNames.json";
 import nationConversion from "../data/nationConversion";
 import classConversion from "../data/classConversion.json";
@@ -26,6 +32,12 @@ export default function MoEPage(props) {
     const { theme, server } = React.useContext(ThemeContext);
 
     const [data, setData] = useState();
+    const [changeData, setChangeData] = useState();
+    const [value, setValue] = useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     useEffect(() => {
         ReactGA.initialize(trackingId);
@@ -36,11 +48,28 @@ export default function MoEPage(props) {
         async function getData() {
             const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/moe/${server}`;
             //const url = `http://localhost:5000/api/abcd/moe/${server}`;
-            const raw = await fetch(url);
-            let res = await raw.json();
-            setData(res);
-        }
+            const url2 = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/moetracker/get/${server}`;
+            //const url2 = `http://localhost:5000/api/abcd/moetracker/get/${server}`;
 
+            try {
+                Promise.all([
+                    fetch(url),
+                    fetch(url2),
+                ])
+                .then(([res1, res2]) =>
+                    Promise.all([
+                        res1.json(),
+                        res2.json(),
+                    ])
+                )
+                .then(([data1, data2]) => {
+                    setData(data1);
+                    setChangeData(data2);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
         getData();
     }, [server]);
 
@@ -118,6 +147,17 @@ export default function MoEPage(props) {
         table = <MoETable data={rowData} />;
     }
 
+    let changeTable95 = <></>;
+    let changeTable85 = <></>;
+    let changeTable65 = <></>;
+
+
+    if (changeData) {
+        changeTable95 = <MoETracker data={changeData} moe={'95'}/>;
+        changeTable85 = <MoETracker data={changeData} moe={'85'}/>;
+        changeTable65 = <MoETracker data={changeData} moe={'65'}/>;
+    }
+
     return (
         <Styles>
             <div className="leaderboard">
@@ -139,10 +179,31 @@ export default function MoEPage(props) {
                         </a>{" "}
                         &#47;&#47;&#47; Expand rows to see 30 days of MoE
                         history
-                    </span>{" "}
+                    </span>
                     <br />
                 </div>
-                {table}
+                <CustomTabs
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="ant example"
+                >
+                    <CustomTab label="EXPECTED VALUES" />
+                    <CustomTab label="95% EXP. VAL CHANGE" />
+                    <CustomTab label="85% EXP. VAL CHANGE" />
+                    <CustomTab label="65% EXP. VAL CHANGE" />
+                </CustomTabs>
+                <TabPanel value={value} index={0}>
+                    {table}
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    {changeTable95}
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                    {changeTable85}
+                </TabPanel>
+                <TabPanel value={value} index={3}>
+                    {changeTable65}
+                </TabPanel>
             </div>
         </Styles>
     );

@@ -18,8 +18,8 @@ function WN8Style(wn8) {
     return {
         background: WN8c(wn8),
         color: "white",
-        padding: "9px",
-        margin: "-8px -8px",
+        padding: "8px",
+        margin: "-0.3rem 0rem -0.3rem -0.5rem",
         textAlign: "center",
     };
 }
@@ -28,8 +28,8 @@ function WRStyle(wr) {
     return {
         background: WRc(wr),
         color: "white",
-        padding: "9px",
-        margin: "-8px -8px",
+        padding: "8px",
+        margin: "-0.3rem 0rem -0.3rem -0.5rem",
         textAlign: "center",
     };
 }
@@ -69,7 +69,7 @@ export default function SessionsLog(props) {
                 font-weight: 500;
             }
             td {
-                padding: 0.2rem 0.5rem;
+                // padding: 0.2rem 0.5rem;
             }
         }
 
@@ -105,6 +105,10 @@ export default function SessionsLog(props) {
 
     const data = props.data;
 
+    const cellstyle = {
+        padding: '0.2rem 0.5rem',
+    }
+
     const columns = React.useMemo(
         () => [
             {
@@ -115,20 +119,53 @@ export default function SessionsLog(props) {
                     // Use Cell to render an expander for each row.
                     // We can use the getToggleRowExpandedProps prop-getter
                     // to build the expander.
-                    <span {...row.getToggleRowExpandedProps()}>
-                        {row.isExpanded ? (
-                            <Icon size={24} icon={chevronDown} />
-                        ) : (
-                            <Icon size={24} icon={chevronRight} />
-                        )}
-                    </span>
+                    <div style={cellstyle}>
+                        <span {...row.getToggleRowExpandedProps()}>
+                            {row.isExpanded ? (
+                                <Icon size={24} icon={chevronDown} />
+                            ) : (
+                                <Icon size={24} icon={chevronRight} />
+                            )}
+                        </span>
+                    </div>
+
                 ),
             },
-            { Header: "", accessor: "rank" },
-            { Header: "Date", accessor: "date" },
-            { Header: "Battles", accessor: "battles" },
-            { Header: "Avg Tier", accessor: "tier" },
-            { Header: "Tanks", accessor: "tankcount" },
+            { 
+                Cell: ({ value }) => {
+                    return <div style={cellstyle}>{value}</div>;
+                }, 
+                Header: "", 
+                accessor: "rank" 
+            },
+            { 
+                Cell: ({ value }) => {
+                    return <div style={cellstyle}>{value}</div>;
+                }, 
+                Header: "Date", 
+                accessor: "date" 
+            },
+            { 
+                Cell: ({ value }) => {
+                    return <div style={cellstyle}>{value}</div>;
+                }, 
+                Header: "Battles", 
+                accessor: "battles" 
+            },
+            {
+                Cell: ({ value }) => {
+                    return <div style={cellstyle}>{value}</div>;
+                }, 
+                Header: "Avg Tier", 
+                accessor: "tier" 
+            },
+            {
+                Cell: ({ value }) => {
+                    return <div style={cellstyle}>{value}</div>;
+                },  
+                Header: "Tanks", 
+                accessor: "tankcount" 
+            },
             {
                 Cell: ({ value }) => {
                     return <div style={WN8Style(value)}>{value}</div>;
@@ -143,12 +180,48 @@ export default function SessionsLog(props) {
                 Header: "Winrate",
                 accessor: "winrate",
             },
-            { Header: "DPG", accessor: "damagerate" },
-            { Header: "KPG", accessor: "fragsrate" },
-            { Header: "DMG Ratio", accessor: "DMGratio" },
-            { Header: "KD", accessor: "KD" },
-            { Header: "XP", accessor: "xprate" },
-            { Header: "Spots", accessor: "spottedrate" },
+            { 
+                Cell: ({ value }) => {
+                    return <div style={cellstyle}>{value}</div>;
+                }, 
+                Header: "DPG", 
+                accessor: "damagerate" 
+            },
+            { 
+                Cell: ({ value }) => {
+                    return <div style={cellstyle}>{value}</div>;
+                }, 
+                Header: "KPG", 
+                accessor: "fragsrate" 
+            },
+            { 
+                Cell: ({ value }) => {
+                    return <div style={cellstyle}>{value}</div>;
+                }, 
+                Header: "DMG Ratio", 
+                accessor: "DMGratio" 
+            },
+            { 
+                Cell: ({ value }) => {
+                    return <div style={cellstyle}>{value}</div>;
+                }, 
+                Header: "KD", 
+                accessor: "KD" 
+            },
+            { 
+                Cell: ({ value }) => {
+                    return <div style={cellstyle}>{value}</div>;
+                }, 
+                Header: "XP", 
+                accessor: "xprate" 
+            },
+            { 
+                Cell: ({ value }) => {
+                    return <div style={cellstyle}>{value}</div>;
+                }, 
+                Header: "Spots", 
+                accessor: "spottedrate" 
+            },
         ],
         []
     );

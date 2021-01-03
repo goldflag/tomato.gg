@@ -761,6 +761,11 @@ function WN8Table(props) {
                 filter: "equals",
             },
             {
+                Cell: ({ value }) => {
+                    return <div style={{ margin: "10px" }}>
+                        {value}
+                    </div>
+                },
                 Header: "Tier",
                 accessor: "tier",
                 Filter: TierFilter,
