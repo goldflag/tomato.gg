@@ -5,14 +5,12 @@ import styled from "styled-components";
 // import WRc from "../../../functions/WRcolor";
 import { Icon } from "react-icons-kit";
 import { chevronRight } from "react-icons-kit/feather/chevronRight";
-import { chevronLeft } from "react-icons-kit/feather/chevronLeft";
-import { chevronsRight } from "react-icons-kit/feather/chevronsRight";
-import { chevronsLeft } from "react-icons-kit/feather/chevronsLeft";
 import { chevronDown } from "react-icons-kit/feather/chevronDown";
 import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import { ThemeContext } from "../../../context";
 import SessionBreakdown from "./sessionBreakdown";
+import { Pagination } from "../../../components";
 
 // function WN8Style(wn8) {
 //     return {
@@ -71,35 +69,6 @@ export default function SessionsLog(props) {
             td {
                 // padding: 0.2rem 0.5rem;
             }
-        }
-
-        .pagination {
-            padding: 0.7rem;
-            font-size: 0.8rem;
-            background-color: ${theme === "dark"
-                ? "rgb(40, 40, 40)"
-                : "rgb(250, 250, 250)"};
-            color: ${theme === "dark"
-                ? "rgb(220, 220, 220)"
-                : "rgb(80, 80, 80)"};
-            margin-bottom: 1rem;
-        }
-
-        .paginationButton {
-            font-family: "Segoe UI";
-            font-weight: 500;
-            height: 2rem;
-            width: 2rem;
-            color: rgb(71, 99, 214);
-            background: none;
-            padding: 0rem;
-            border-width: 0px;
-        }
-
-        .paginationButton:hover {
-            background-color: rgb(100, 129, 234);
-            color: white;
-            border-radius: 50%;
         }
 
         .cell {
@@ -333,51 +302,21 @@ export default function SessionsLog(props) {
                     })}
                 </tbody>
             </table>
-            <div className="pagination">
-                <button
-                    className={"paginationButton"}
-                    onClick={() => gotoPage(0)}
-                    disabled={!canPreviousPage}
-                >
-                    <Icon size={24} icon={chevronsLeft} />
-                </button>{" "}
-                <button
-                    className={"paginationButton"}
-                    onClick={() => previousPage()}
-                    disabled={!canPreviousPage}
-                >
-                    <Icon size={24} icon={chevronLeft} />
-                </button>{" "}
-                <button
-                    className={"paginationButton"}
-                    onClick={() => nextPage()}
-                    disabled={!canNextPage}
-                >
-                    <Icon size={24} icon={chevronRight} />
-                </button>{" "}
-                <button
-                    className={"paginationButton"}
-                    onClick={() => gotoPage(pageCount - 1)}
-                    disabled={!canNextPage}
-                >
-                    <Icon size={24} icon={chevronsRight} />
-                </button>{" "}
-                {/* <span> */}
-                Page {pageIndex + 1} of {pageOptions.length} {/* </span> */}
-                {"  "}
-                <select
-                    value={pageSize}
-                    onChange={(e) => {
-                        setPageSize(Number(e.target.value));
-                    }}
-                >
-                    {[7, 14, 30, 90, 180].map((pageSize) => (
-                        <option key={pageSize} value={pageSize}>
-                            Show {pageSize}
-                        </option>
-                    ))}
-                </select>
-            </div>
+            <Pagination
+                pageSizes={[7, 14, 30, 90, 180]}
+                {...{
+                    canPreviousPage,
+                    canNextPage,
+                    pageOptions,
+                    pageCount,
+                    gotoPage,
+                    nextPage,
+                    previousPage,
+                    setPageSize,
+                    pageIndex,
+                    pageSize,
+                }}
+            />
         </Styles>
     );
 }

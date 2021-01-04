@@ -1,10 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Icon } from "react-icons-kit";
-import { chevronRight } from "react-icons-kit/feather/chevronRight";
-import { chevronLeft } from "react-icons-kit/feather/chevronLeft";
-import { chevronsRight } from "react-icons-kit/feather/chevronsRight";
-import { chevronsLeft } from "react-icons-kit/feather/chevronsLeft";
 import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import {
@@ -21,6 +17,7 @@ import { matchSorter } from "match-sorter";
 import { ThemeContext } from "../../context";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
+import { Pagination } from "../../components";
 
 function WN8Table(props) {
     const { theme } = React.useContext(ThemeContext);
@@ -80,35 +77,6 @@ function WN8Table(props) {
                     border-right: 0;
                 }
             }
-        }
-
-        .pagination {
-            padding: 0.7rem;
-            font-size: 0.8rem;
-            background-color: ${theme === "dark"
-                ? "rgb(40, 40, 40)"
-                : "rgb(250, 250, 250)"};
-            color: ${theme === "dark"
-                ? "rgb(220, 220, 220)"
-                : "rgb(80, 80, 80)"};
-            margin-bottom: 1rem;
-        }
-
-        .paginationButton {
-            font-family: "Segoe UI";
-            font-weight: 500;
-            height: 2rem;
-            width: 2rem;
-            color: rgb(71, 99, 214);
-            background: none;
-            padding: 0rem;
-            border-width: 0px;
-        }
-
-        .paginationButton:hover {
-            background-color: rgb(100, 129, 234);
-            color: white;
-            border-radius: 50%;
         }
 
         .filterButton {
@@ -669,54 +637,21 @@ function WN8Table(props) {
                         })}
                     </tbody>
                 </table>
-                {/*
-      Pagination can be built however you'd like.
-      This is just a very basic UI implementation:
-    */}
-                <div className="pagination">
-                    <button
-                        className={"paginationButton"}
-                        onClick={() => gotoPage(0)}
-                        disabled={!canPreviousPage}
-                    >
-                        <Icon size={24} icon={chevronsLeft} />
-                    </button>{" "}
-                    <button
-                        className={"paginationButton"}
-                        onClick={() => previousPage()}
-                        disabled={!canPreviousPage}
-                    >
-                        <Icon size={24} icon={chevronLeft} />
-                    </button>{" "}
-                    <button
-                        className={"paginationButton"}
-                        onClick={() => nextPage()}
-                        disabled={!canNextPage}
-                    >
-                        <Icon size={24} icon={chevronRight} />
-                    </button>{" "}
-                    <button
-                        className={"paginationButton"}
-                        onClick={() => gotoPage(pageCount - 1)}
-                        disabled={!canNextPage}
-                    >
-                        <Icon size={24} icon={chevronsRight} />
-                    </button>{" "}
-                    Page {pageIndex + 1} of {pageOptions.length}
-                    {"  "}
-                    <select
-                        value={pageSize}
-                        onChange={(e) => {
-                            setPageSize(Number(e.target.value));
-                        }}
-                    >
-                        {[100, 250, 500].map((pageSize) => (
-                            <option key={pageSize} value={pageSize}>
-                                Show {pageSize}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                <Pagination
+                    pageSizes={[100, 250, 500]}
+                    {...{
+                        canPreviousPage,
+                        canNextPage,
+                        pageOptions,
+                        pageCount,
+                        gotoPage,
+                        nextPage,
+                        previousPage,
+                        setPageSize,
+                        pageIndex,
+                        pageSize,
+                    }}
+                />
             </>
         );
     }

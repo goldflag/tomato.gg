@@ -20,7 +20,7 @@ import {
     Typography,
 } from "@material-ui/core";
 import serverConv from "./data/serverConv";
-import { ServerContext, SearchHistoryContext } from "./context";
+import { SearchHistoryContext } from "./context";
 
 const LINKS = [
     { url: "/", title: "Home", Icon: Apps },

@@ -6,12 +6,9 @@ import WN8c from "../../functions/WN8color";
 import WRc from "../../functions/WRcolor";
 import { ThemeContext } from "../../context";
 import { Icon } from "react-icons-kit";
-import { chevronRight } from "react-icons-kit/feather/chevronRight";
-import { chevronLeft } from "react-icons-kit/feather/chevronLeft";
-import { chevronsRight } from "react-icons-kit/feather/chevronsRight";
-import { chevronsLeft } from "react-icons-kit/feather/chevronsLeft";
 import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
+import { Pagination } from "../../components";
 
 export default function Leaderboard(props) {
     const { theme } = React.useContext(ThemeContext);
@@ -68,34 +65,6 @@ export default function Leaderboard(props) {
                     border-right: 0;
                 }
             }
-        }
-
-        .pagination {
-            padding: 1rem;
-            font-size: 0.8rem;
-            background-color: ${theme === "dark"
-                ? "rgb(40, 40, 40)"
-                : "rgb(250, 250, 250)"};
-            color: ${theme === "dark"
-                ? "rgb(220, 220, 220)"
-                : "rgb(80, 80, 80)"};
-        }
-
-        .paginationButton {
-            font-family: "Segoe UI";
-            font-weight: 500;
-            height: 2rem;
-            width: 2rem;
-            color: rgb(71, 99, 214);
-            background: none;
-            padding: 0rem;
-            border-width: 0px;
-        }
-
-        .paginationButton:hover {
-            background-color: rgb(100, 129, 234);
-            color: white;
-            border-radius: 50%;
         }
     `;
 
@@ -430,64 +399,22 @@ export default function Leaderboard(props) {
                     })}
                 </tbody>
             </table>
-            <div className="pagination">
-                <button
-                    className={"paginationButton"}
-                    onClick={() => gotoPage(0)}
-                    disabled={!canPreviousPage}
-                >
-                    <Icon size={24} icon={chevronsLeft} />
-                </button>{" "}
-                <button
-                    className={"paginationButton"}
-                    onClick={() => previousPage()}
-                    disabled={!canPreviousPage}
-                >
-                    <Icon size={24} icon={chevronLeft} />
-                </button>{" "}
-                <button
-                    className={"paginationButton"}
-                    onClick={() => nextPage()}
-                    disabled={!canNextPage}
-                >
-                    <Icon size={24} icon={chevronRight} />
-                </button>{" "}
-                <button
-                    className={"paginationButton"}
-                    onClick={() => gotoPage(pageCount - 1)}
-                    disabled={!canNextPage}
-                >
-                    <Icon size={24} icon={chevronsRight} />
-                </button>{" "}
-                {/* <span> */}
-                Page {pageIndex + 1} of {pageOptions.length} {/* </span> */}
-                <span>
-                    | Go to page:{" "}
-                    <input
-                        type="number"
-                        defaultValue={pageIndex + 1}
-                        onChange={(e) => {
-                            const page = e.target.value
-                                ? Number(e.target.value) - 1
-                                : 0;
-                            gotoPage(page);
-                        }}
-                        style={{ width: "100px" }}
-                    />
-                </span>{" "}
-                <select
-                    value={pageSize}
-                    onChange={(e) => {
-                        setPageSize(Number(e.target.value));
-                    }}
-                >
-                    {[50, 100, 250, 1000].map((pageSize) => (
-                        <option key={pageSize} value={pageSize}>
-                            Show {pageSize}
-                        </option>
-                    ))}
-                </select>
-            </div>
+            <Pagination
+                showGoTo
+                pageSizes={[50, 100, 250, 1000]}
+                {...{
+                    canPreviousPage,
+                    canNextPage,
+                    pageOptions,
+                    pageCount,
+                    gotoPage,
+                    nextPage,
+                    previousPage,
+                    setPageSize,
+                    pageIndex,
+                    pageSize,
+                }}
+            />
         </Styles>
     );
 }
