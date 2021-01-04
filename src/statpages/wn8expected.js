@@ -8,6 +8,7 @@ import "../css/innerpage.css";
 import tankNames from "../data/tankNames.json";
 import nationConversion from "../data/nationConversion";
 import classConversion from "../data/classConversion.json";
+import { FullPageTableWrapper } from "../components";
 
 const tierConv = {
     1: "I",
@@ -47,11 +48,6 @@ export default function Leaderboards(props) {
             outline: none;
         }
 
-        .leaderboard {
-            padding: 6rem 0rem 5rem 0rem;
-            margin: 0rem 10% 0rem 10%;
-        }
-
         .info {
             background-color: ${theme === "dark"
                 ? "rgb(40, 40, 40)"
@@ -79,12 +75,6 @@ export default function Leaderboards(props) {
 
         .selectButton:focus {
             border-bottom: 5px solid red;
-        }
-
-        @media screen and (max-width: 1000px) {
-            .leaderboard {
-                margin: 1rem;
-            }
         }
     `;
 
@@ -120,7 +110,7 @@ export default function Leaderboards(props) {
 
     return (
         <Styles>
-            <div className="leaderboard">
+            <FullPageTableWrapper>
                 <div className="info">
                     <span style={{ fontSize: "2rem", fontWeight: "500" }}>
                         WN8 Expected Values
@@ -144,7 +134,7 @@ export default function Leaderboards(props) {
                     <br />
                 </div>
                 {table}
-            </div>
+            </FullPageTableWrapper>
         </Styles>
     );
 }

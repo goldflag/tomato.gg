@@ -6,6 +6,7 @@ import MasteryTable from "./masteryPageComponents/masteryTable";
 import tankNames from "../data/tankNames.json";
 import nationConversion from "../data/nationConversion";
 import classConversion from "../data/classConversion.json";
+import { FullPageTableWrapper } from "../components";
 
 const tierConv = {
     1: "I",
@@ -48,11 +49,6 @@ export default function MasteryPage(props) {
             outline: none;
         }
 
-        .leaderboard {
-            padding: 6rem 0rem 5rem 0rem;
-            margin: 0rem 15% 0rem 15%;
-        }
-
         .info {
             background-color: ${theme === "dark"
                 ? "rgb(40, 40, 40)"
@@ -80,12 +76,6 @@ export default function MasteryPage(props) {
 
         .selectButton:focus {
             border-bottom: 5px solid red;
-        }
-
-        @media screen and (max-width: 1000px) {
-            .leaderboard {
-                margin: 1rem;
-            }
         }
     `;
 
@@ -120,7 +110,7 @@ export default function MasteryPage(props) {
 
     return (
         <Styles>
-            <div className="leaderboard">
+            <FullPageTableWrapper>
                 <div className="info">
                     <span style={{ fontSize: "2rem", fontWeight: "500" }}>
                         {serverConv[server]} Mastery Badge Requirements
@@ -143,7 +133,7 @@ export default function MasteryPage(props) {
                     <br />
                 </div>
                 {table}
-            </div>
+            </FullPageTableWrapper>
         </Styles>
     );
 }

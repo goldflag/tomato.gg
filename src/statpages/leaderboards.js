@@ -6,6 +6,7 @@ import "../css/tankstats.css";
 import Leaderboard from "./leaderboardComponents/leaderboard";
 import CustomLeaderboardParent from "./leaderboardComponents/customLeaderboardParent";
 import "../css/innerpage.css";
+import { FullPageTableWrapper } from "../components";
 const trackingId = process.env.REACT_APP_GA;
 
 const typeConv = {
@@ -20,11 +21,6 @@ const typeConv = {
 const Styles = styled.div`
     *:focus {
         outline: none;
-    }
-
-    .leaderboard {
-        padding: 6rem 0rem 5rem 0rem;
-        margin: 0rem 20% 0rem 20%;
     }
 
     .info {
@@ -52,12 +48,6 @@ const Styles = styled.div`
 
     .selectButton:focus {
         border-bottom: 5px solid red;
-    }
-
-    @media screen and (max-width: 1000px) {
-        .leaderboard {
-            margin: 1rem;
-        }
     }
 `;
 
@@ -104,7 +94,7 @@ export default function Leaderboards(props) {
 
     return (
         <Styles theme={theme}>
-            <div className="leaderboard">
+            <FullPageTableWrapper>
                 <div className="info">
                     <span style={{ fontSize: "1.5rem", fontWeight: "500" }}>
                         NA Leaderboards
@@ -149,7 +139,7 @@ export default function Leaderboards(props) {
                     {/* <span style={{fontSize: '0.8rem', lineHeight: '1.3rem', color: 'rgb(100,100,100)'}}>MINIMUM 5000 BATTLES</span> <br/> */}
                 </div>
                 {table}
-            </div>
+            </FullPageTableWrapper>
         </Styles>
     );
 }

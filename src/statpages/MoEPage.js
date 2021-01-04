@@ -13,6 +13,7 @@ import tankNames from "../data/tankNames.json";
 import nationConversion from "../data/nationConversion";
 import classConversion from "../data/classConversion.json";
 import serverConv from "../data/serverConv";
+import { FullPageTableWrapper } from "../components";
 
 const tierConv = {
     1: "I",
@@ -73,10 +74,6 @@ export default function MoEPage(props) {
             outline: none;
         }
 
-        .leaderboard {
-            padding: 6rem 0rem 5rem 0rem;
-            margin: 0rem 15% 0rem 15%;
-        }
 
         .info {
             background-color: ${theme === "dark"
@@ -105,12 +102,6 @@ export default function MoEPage(props) {
 
         .selectButton:focus {
             border-bottom: 5px solid red;
-        }
-
-        @media screen and (max-width: 1000px) {
-            .leaderboard {
-                margin: 1rem;
-            }
         }
     `;
 
@@ -154,7 +145,7 @@ export default function MoEPage(props) {
 
     return (
         <Styles>
-            <div className="leaderboard">
+            <FullPageTableWrapper>
                 <div className="info">
                     <span style={{ fontSize: "2rem", fontWeight: "500" }}>
                         {serverConv[server]} Marks of Excellence Requirements
@@ -198,7 +189,7 @@ export default function MoEPage(props) {
                 <TabPanel value={value} index={3}>
                     {changeTable65}
                 </TabPanel>
-            </div>
+            </FullPageTableWrapper>
         </Styles>
     );
 }
