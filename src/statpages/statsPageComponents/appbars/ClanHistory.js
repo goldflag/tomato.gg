@@ -6,7 +6,7 @@ import TabPanel from "../../tabs/tabPanel";
 import Grid from "@material-ui/core/Grid";
 import serverConv from "../../../data/serverConv.js";
 import clonedeep from "lodash.clonedeep";
-import { ThemeContext } from "../../../style/theme.js";
+import { ThemeContext } from "../../../context";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 

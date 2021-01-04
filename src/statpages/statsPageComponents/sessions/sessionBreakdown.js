@@ -10,7 +10,7 @@ import { chevronRight } from "react-icons-kit/feather/chevronRight";
 import { chevronLeft } from "react-icons-kit/feather/chevronLeft";
 import { chevronsRight } from "react-icons-kit/feather/chevronsRight";
 import { chevronsLeft } from "react-icons-kit/feather/chevronsLeft";
-import { ThemeContext } from "../../../style/theme.js";
+import { ThemeContext } from "../../../context";
 
 function WN8Style(wn8) {
     return {
@@ -134,7 +134,7 @@ export default function SessionBreakdown(props) {
         () => [
             { Header: "", accessor: "img" },
             { Header: "Name", accessor: "name" },
-            { 
+            {
                 Cell: ({ value }) => {
                     return (
                         <img
@@ -144,21 +144,19 @@ export default function SessionBreakdown(props) {
                         />
                     );
                 },
-                Header: "Nation", 
-                accessor: "nation" 
+                Header: "Nation",
+                accessor: "nation",
             },
-            { 
+            {
                 Cell: ({ value }) => {
                     return (
-                        <div style={{ margin: "10px" }}>
-                            {tierConv[value]}
-                        </div>                  
+                        <div style={{ margin: "10px" }}>{tierConv[value]}</div>
                     );
                 },
-                Header: "Tier", 
-                accessor: "tier" 
+                Header: "Tier",
+                accessor: "tier",
             },
-            { 
+            {
                 Cell: ({ value }) => {
                     return (
                         <img
@@ -168,8 +166,8 @@ export default function SessionBreakdown(props) {
                         />
                     );
                 },
-                Header: "Class", 
-                accessor: "class"
+                Header: "Class",
+                accessor: "class",
             },
             { Header: "Games", accessor: "battles" },
             {

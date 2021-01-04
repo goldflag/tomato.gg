@@ -11,7 +11,7 @@ import ClassDist from "./appbars/ClassDist";
 import ExpectedDist from "./appbars/ExpectedDist";
 import RecordsBar from "./appbars/RecordsBar";
 import LineGraphs from "./appbars/LineGraphs";
-import { ThemeContext } from "../../style/theme.js";
+import { ThemeContext } from "../../context";
 import "../../css/statspage.css";
 
 export default function Charts(props) {

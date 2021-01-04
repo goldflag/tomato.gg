@@ -11,7 +11,7 @@ import AllTankStats from "./statsPageComponents/allTankStats";
 import GraphCalculator from "../functions/GraphCalculator";
 import Charts from "./statsPageComponents/charts";
 import SessionsLogParent from "./statsPageComponents/sessions/sessionsLogParent";
-import { ThemeContext } from "../style/theme.js";
+import { ThemeContext } from "../context";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 const backendKey = process.env.REACT_APP_BACKEND_API_KEY;
@@ -124,7 +124,6 @@ export default function StatsPage(props) {
             }
         };
 
-        console.time("Time this");
         // setUserName(username);
         ReactGA.initialize(trackingId);
         ReactGA.pageview(`/stats/${server}`);

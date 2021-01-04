@@ -3,7 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import MUIDataTable from "mui-datatables";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import WN8color from "../../functions/WN8color";
-import { ThemeContext } from "../../style/theme.js";
+import { ThemeContext } from "../../context";
 
 export default function OverallStatsTable(props) {
     const { theme } = React.useContext(ThemeContext);

@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
-import { ThemeContext } from "../../../style/theme.js";
+import { ThemeContext } from "../../../context";
 
 export default function ClassDistribution(props) {
     const { theme } = React.useContext(ThemeContext);
@@ -14,8 +14,14 @@ export default function ClassDistribution(props) {
                             : "rgb(100,100,100)",
                     tooltip: {
                         container: {
-                            background: theme === 'dark' ? 'rgb(40, 40, 40)' : 'rgb(255, 255, 255)',
-                            color: theme === 'dark' ?  'rgb(255, 255, 255)' : 'rgb(40, 40, 40)',
+                            background:
+                                theme === "dark"
+                                    ? "rgb(40, 40, 40)"
+                                    : "rgb(255, 255, 255)",
+                            color:
+                                theme === "dark"
+                                    ? "rgb(255, 255, 255)"
+                                    : "rgb(40, 40, 40)",
                         },
                     },
                 }}

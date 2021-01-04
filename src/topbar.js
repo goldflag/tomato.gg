@@ -1,31 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./css/topbar.css";
 import SmallSearchBar from "./material/smallSearchBar";
 import DiscordLogo from "./assets/Discord.svg";
 import SmallMenu from "./material/smallMenu";
 import { withRouter } from "react-router-dom";
 import DarkModeToggle from "react-dark-mode-toggle";
-import { ThemeContext } from "./style/theme.js";
+import { ThemeContext, ServerContext, SearchHistoryContext } from "./context";
 import serverConv from "./data/serverConv";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
-const addToSearchHistory = (name, id, server) => {
-    const searchHistory =
-        JSON.parse(localStorage.getItem("searchHistory")) || [];
-    localStorage.setItem(
-        "searchHistory",
-        JSON.stringify([
-            { name, id, server },
-            ...searchHistory.filter((value) => value.id !== id),
-        ])
-    );
-};
-
 export default withRouter(function Topbar(props) {
-    const { theme, toggle, server, toggleServer } = React.useContext(
-        ThemeContext
-    );
+    const { theme, toggleTheme } = useContext(ThemeContext);
+    const { server, toggleServer } = useContext(ServerContext);
+    const { addToHistory } = useContext(SearchHistoryContext);
     const [name, setName] = useState("");
     const [mode, setMode] = useState("Player");
 
@@ -43,7 +31,7 @@ export default withRouter(function Topbar(props) {
             )
             .then((playerID) => {
                 if (playerID !== "FAIL") {
-                    addToSearchHistory(name, playerID, server);
+                    addToHistory(name, playerID, server);
                 }
                 props.history.push("/");
                 props.history.push(
@@ -71,7 +59,7 @@ export default withRouter(function Topbar(props) {
             </div>
             <div className="light">
                 <DarkModeToggle
-                    onChange={toggle}
+                    onChange={toggleTheme}
                     checked={theme === "light" ? false : true}
                     size={40}
                 />

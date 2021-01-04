@@ -4,7 +4,7 @@ import { useTable, useSortBy, usePagination } from "react-table";
 import styled from "styled-components";
 import WN8c from "../../functions/WN8color";
 import WRc from "../../functions/WRcolor";
-import { ThemeContext } from "../../style/theme.js";
+import { ThemeContext } from "../../context";
 import { Icon } from "react-icons-kit";
 import { chevronRight } from "react-icons-kit/feather/chevronRight";
 import { chevronLeft } from "react-icons-kit/feather/chevronLeft";

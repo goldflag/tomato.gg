@@ -20,7 +20,7 @@ import WN8c from "../../functions/WN8color";
 import WRc from "../../functions/WRcolor";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
-import { ThemeContext } from "../../style/theme.js";
+import { ThemeContext } from "../../context";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 
@@ -805,9 +805,9 @@ function PeriodBreakdown(props) {
             },
             {
                 Cell: ({ value }) => {
-                    return <div style={{ margin: "8px" }}>
-                        {tierConv[value]}
-                    </div>
+                    return (
+                        <div style={{ margin: "8px" }}>{tierConv[value]}</div>
+                    );
                 },
                 Header: "Tier",
                 accessor: "tier",

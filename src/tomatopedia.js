@@ -17,7 +17,7 @@ import MasteryExpected from "./statpages/masteryPage";
 
 import "./css/body.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { ThemeContext } from "./style/theme.js";
+import { ThemeContext } from "./context";
 const trackingId = process.env.REACT_APP_GA;
 
 export default function Tomatopedia() {

@@ -1,8 +1,8 @@
 import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
 import styled from "styled-components";
-import WN8c from "../../../functions/WN8color";
-import WRc from "../../../functions/WRcolor";
+// import WN8c from "../../../functions/WN8color";
+// import WRc from "../../../functions/WRcolor";
 import { Icon } from "react-icons-kit";
 import { chevronRight } from "react-icons-kit/feather/chevronRight";
 import { chevronLeft } from "react-icons-kit/feather/chevronLeft";
@@ -11,28 +11,28 @@ import { chevronsLeft } from "react-icons-kit/feather/chevronsLeft";
 import { chevronDown } from "react-icons-kit/feather/chevronDown";
 import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
-import { ThemeContext } from "../../../style/theme.js";
+import { ThemeContext } from "../../../context";
 import SessionBreakdown from "./sessionBreakdown";
 
-function WN8Style(wn8) {
-    return {
-        background: WN8c(wn8),
-        color: "white",
-        padding: "8px",
-        margin: "-0.3rem 0rem -0.3rem -0.5rem",
-        textAlign: "center",
-    };
-}
+// function WN8Style(wn8) {
+//     return {
+//         background: WN8c(wn8),
+//         color: "white",
+//         padding: "8px",
+//         margin: "-0.3rem 0rem -0.3rem -0.5rem",
+//         textAlign: "center",
+//     };
+// }
 
-function WRStyle(wr) {
-    return {
-        background: WRc(wr),
-        color: "white",
-        padding: "8px",
-        margin: "-0.3rem 0rem -0.3rem -0.5rem",
-        textAlign: "center",
-    };
-}
+// function WRStyle(wr) {
+//     return {
+//         background: WRc(wr),
+//         color: "white",
+//         padding: "8px",
+//         margin: "-0.3rem 0rem -0.3rem -0.5rem",
+//         textAlign: "center",
+//     };
+// }
 
 export default function SessionsLog(props) {
     const { theme } = React.useContext(ThemeContext);
@@ -101,13 +101,13 @@ export default function SessionsLog(props) {
             color: white;
             border-radius: 50%;
         }
+
+        .cell {
+            padding: 0.2rem 0.5rem;
+        }
     `;
 
     const data = props.data;
-
-    const cellstyle = {
-        padding: '0.2rem 0.5rem',
-    }
 
     const columns = React.useMemo(
         () => [
@@ -119,7 +119,7 @@ export default function SessionsLog(props) {
                     // Use Cell to render an expander for each row.
                     // We can use the getToggleRowExpandedProps prop-getter
                     // to build the expander.
-                    <div style={cellstyle}>
+                    <div className=".cell">
                         <span {...row.getToggleRowExpandedProps()}>
                             {row.isExpanded ? (
                                 <Icon size={24} icon={chevronDown} />
@@ -128,99 +128,72 @@ export default function SessionsLog(props) {
                             )}
                         </span>
                     </div>
-
                 ),
             },
-            { 
-                Cell: ({ value }) => {
-                    return <div style={cellstyle}>{value}</div>;
-                }, 
-                Header: "", 
-                accessor: "rank" 
-            },
-            { 
-                Cell: ({ value }) => {
-                    return <div style={cellstyle}>{value}</div>;
-                }, 
-                Header: "Date", 
-                accessor: "date" 
-            },
-            { 
-                Cell: ({ value }) => {
-                    return <div style={cellstyle}>{value}</div>;
-                }, 
-                Header: "Battles", 
-                accessor: "battles" 
+            {
+                Cell: ({ value }) => <div className=".cell">{value}</div>,
+                Header: "",
+                accessor: "rank",
             },
             {
-                Cell: ({ value }) => {
-                    return <div style={cellstyle}>{value}</div>;
-                }, 
-                Header: "Avg Tier", 
-                accessor: "tier" 
+                Cell: ({ value }) => <div className=".cell">{value}</div>,
+                Header: "Date",
+                accessor: "date",
             },
             {
-                Cell: ({ value }) => {
-                    return <div style={cellstyle}>{value}</div>;
-                },  
-                Header: "Tanks", 
-                accessor: "tankcount" 
+                Cell: ({ value }) => <div className=".cell">{value}</div>,
+                Header: "Battles",
+                accessor: "battles",
             },
             {
-                Cell: ({ value }) => {
-                    return <div style={WN8Style(value)}>{value}</div>;
-                },
+                Cell: ({ value }) => <div className=".cell">{value}</div>,
+                Header: "Avg Tier",
+                accessor: "tier",
+            },
+            {
+                Cell: ({ value }) => <div className=".cell">{value}</div>,
+                Header: "Tanks",
+                accessor: "tankcount",
+            },
+            {
+                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "WN8",
                 accessor: "overallWN8",
             },
             {
-                Cell: ({ value }) => {
-                    return <div style={WRStyle(value)}>{value + "%"}</div>;
-                },
+                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "Winrate",
                 accessor: "winrate",
             },
-            { 
-                Cell: ({ value }) => {
-                    return <div style={cellstyle}>{value}</div>;
-                }, 
-                Header: "DPG", 
-                accessor: "damagerate" 
+            {
+                Cell: ({ value }) => <div className=".cell">{value}</div>,
+                Header: "DPG",
+                accessor: "damagerate",
             },
-            { 
-                Cell: ({ value }) => {
-                    return <div style={cellstyle}>{value}</div>;
-                }, 
-                Header: "KPG", 
-                accessor: "fragsrate" 
+            {
+                Cell: ({ value }) => <div className=".cell">{value}</div>,
+                Header: "KPG",
+                accessor: "fragsrate",
             },
-            { 
-                Cell: ({ value }) => {
-                    return <div style={cellstyle}>{value}</div>;
-                }, 
-                Header: "DMG Ratio", 
-                accessor: "DMGratio" 
+            {
+                Cell: ({ value }) => <div className=".cell">{value}</div>,
+                Header: "DMG Ratio",
+                accessor: "DMGratio",
             },
-            { 
-                Cell: ({ value }) => {
-                    return <div style={cellstyle}>{value}</div>;
-                }, 
-                Header: "KD", 
-                accessor: "KD" 
+            {
+                Cell: ({ value }) => <div className=".cell">{value}</div>,
+                Header: "KD",
+                accessor: "KD",
             },
-            { 
-                Cell: ({ value }) => {
-                    return <div style={cellstyle}>{value}</div>;
-                }, 
-                Header: "XP", 
-                accessor: "xprate" 
+            {
+                Cell: ({ value }) => <div className=".cell">{value}</div>,
+                Header: "XP",
+                accessor: "xprate",
             },
-            { 
-                Cell: ({ value }) => {
-                    return <div style={cellstyle}>{value}</div>;
-                }, 
-                Header: "Spots", 
-                accessor: "spottedrate" 
+            {
+                Cell: ({ value }) => <div className=".cell">{value}</div>,
+                Header: "Spots",
+                accessor: "spottedrate",
             },
         ],
         []

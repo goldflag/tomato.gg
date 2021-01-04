@@ -3,10 +3,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { ThemeContext } from "../style/theme.js";
+import { ThemeContext, ServerContext } from "../context";
 
 export default function SmallSelectQuery(props) {
-    const { theme, server } = React.useContext(ThemeContext);
+    const { theme } = React.useContext(ThemeContext);
+    const { server } = React.useContext(ServerContext);
 
     const useStyles = makeStyles((t) => ({
         formControl: {

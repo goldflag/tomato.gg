@@ -6,7 +6,7 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import SelectQuery from "./select";
-import { ThemeContext } from "../style/theme.js";
+import { ThemeContext } from "../context";
 
 export default function SearchBar(props) {
     const { theme } = React.useContext(ThemeContext);

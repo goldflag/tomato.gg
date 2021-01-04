@@ -9,7 +9,7 @@ import CurveExamples from "./statsReferenceComponents/curveExamples";
 import InDepthExamples from "./statsReferenceComponents/inDepthExamples";
 import DPGPercentiles from "../data/DPGPercentiles.json";
 import WN8Percentiles from "../data/WN8Percentiles.json";
-import { ThemeContext } from "../style/theme.js";
+import { ThemeContext } from "../context";
 const trackingId = process.env.REACT_APP_GA;
 
 export default function StatsReference(props) {

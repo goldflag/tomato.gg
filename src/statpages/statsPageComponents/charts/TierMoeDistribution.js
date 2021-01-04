@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
-import { ThemeContext } from "../../../style/theme.js";
+import { ThemeContext } from "../../../context";
 
 export default function TierMoeDistribution(props) {
     const { theme } = React.useContext(ThemeContext);
@@ -23,8 +23,14 @@ export default function TierMoeDistribution(props) {
                     },
                     tooltip: {
                         container: {
-                            background: theme === 'dark' ? 'rgb(40, 40, 40)' : 'rgb(255, 255, 255)',
-                            color: theme === 'dark' ?  'rgb(255, 255, 255)' : 'rgb(40, 40, 40)',
+                            background:
+                                theme === "dark"
+                                    ? "rgb(40, 40, 40)"
+                                    : "rgb(255, 255, 255)",
+                            color:
+                                theme === "dark"
+                                    ? "rgb(255, 255, 255)"
+                                    : "rgb(40, 40, 40)",
                         },
                     },
                 }}

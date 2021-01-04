@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
-import { ThemeContext } from "../../style/theme.js";
+import { ThemeContext } from "../../context";
 
 export default function CurveGraph(props) {
     const { theme } = React.useContext(ThemeContext);

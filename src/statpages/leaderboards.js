@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
-import styled from "styled-components";
-import { ThemeContext } from "../style/theme.js";
+import styled, { css } from "styled-components";
+import { ThemeContext } from "../context";
 import "../css/tankstats.css";
 import Leaderboard from "./leaderboardComponents/leaderboard";
 import CustomLeaderboardParent from "./leaderboardComponents/customLeaderboardParent";
@@ -17,6 +17,50 @@ const typeConv = {
     custom: "Custom",
 };
 
+const Styles = styled.div`
+    *:focus {
+        outline: none;
+    }
+
+    .leaderboard {
+        padding: 6rem 0rem 5rem 0rem;
+        margin: 0rem 20% 0rem 20%;
+    }
+
+    .info {
+        background-color: ${({ theme }) =>
+            theme === "dark" ? css`rgb(40, 40, 40)` : css`rgb(250, 250, 250)`};
+        color: ${({ theme }) =>
+            theme === "dark" ? css`rgb(255, 255, 255)` : css`rgb(60, 60, 60)`};
+        padding: 1rem;
+    }
+
+    .selectButton {
+        font-family: "Segoe UI";
+        font-weight: 600;
+        color: rgb(240, 240, 240);
+        background-color: rgb(71, 99, 214);
+        padding: 1rem 0rem 0.8rem 0rem;
+        width: calc(100% / 6);
+        border-width: 0px;
+        border-bottom: 5px solid rgb(71, 99, 214);
+    }
+
+    .selectButton:hover {
+        border-bottom: 5px solid red;
+    }
+
+    .selectButton:focus {
+        border-bottom: 5px solid red;
+    }
+
+    @media screen and (max-width: 1000px) {
+        .leaderboard {
+            margin: 1rem;
+        }
+    }
+`;
+
 export default function Leaderboards(props) {
     useEffect(() => {
         ReactGA.initialize(trackingId);
@@ -25,51 +69,6 @@ export default function Leaderboards(props) {
 
     const { theme } = React.useContext(ThemeContext);
     const [type, setType] = useState("wn8");
-    const Styles = styled.div`
-        *:focus {
-            outline: none;
-        }
-
-        .leaderboard {
-            padding: 6rem 0rem 5rem 0rem;
-            margin: 0rem 20% 0rem 20%;
-        }
-
-        .info {
-            background-color: ${theme === "dark"
-                ? "rgb(40, 40, 40)"
-                : "rgb(250, 250, 250)"};
-            color: ${theme === "dark"
-                ? "rgb(255, 255, 255)"
-                : "rgb(60, 60, 60)"};
-            padding: 1rem;
-        }
-
-        .selectButton {
-            font-family: "Segoe UI";
-            font-weight: 600;
-            color: rgb(240, 240, 240);
-            background-color: rgb(71, 99, 214);
-            padding: 1rem 0rem 0.8rem 0rem;
-            width: calc(100% / 6);
-            border-width: 0px;
-            border-bottom: 5px solid rgb(71, 99, 214);
-        }
-
-        .selectButton:hover {
-            border-bottom: 5px solid red;
-        }
-
-        .selectButton:focus {
-            border-bottom: 5px solid red;
-        }
-
-        @media screen and (max-width: 1000px) {
-            .leaderboard {
-                margin: 1rem;
-            }
-        }
-    `;
     function setWN8(e) {
         setType("wn8");
     }
@@ -104,7 +103,7 @@ export default function Leaderboards(props) {
     }
 
     return (
-        <Styles>
+        <Styles theme={theme}>
             <div className="leaderboard">
                 <div className="info">
                     <span style={{ fontSize: "1.5rem", fontWeight: "500" }}>

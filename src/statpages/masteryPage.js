@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
 import styled from "styled-components";
-import { ThemeContext } from "../style/theme.js";
+import { ThemeContext, ServerContext } from "../context";
 import MasteryTable from "./masteryPageComponents/masteryTable";
 import tankNames from "../data/tankNames.json";
 import nationConversion from "../data/nationConversion";
@@ -22,7 +22,8 @@ const tierConv = {
 const trackingId = process.env.REACT_APP_GA;
 
 export default function MasteryPage(props) {
-    const { theme, server } = React.useContext(ThemeContext);
+    const { theme } = React.useContext(ThemeContext);
+    const { server } = React.useContext(ServerContext);
 
     const [data, setData] = useState();
 
@@ -106,7 +107,7 @@ export default function MasteryPage(props) {
                     "3rd": data[i]["3rd"] || "-",
                     "2nd": data[i]["2nd"] || "-",
                     "1st": data[i]["1st"] || "-",
-                    "ace": data[i]["ace"] || "-",
+                    ace: data[i]["ace"] || "-",
                     isPrem: tankNames[id].is_premium,
                 };
                 rowData.push(entry);

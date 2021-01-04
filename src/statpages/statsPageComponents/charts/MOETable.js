@@ -1,8 +1,8 @@
-import React from "react";
-import { ThemeContext } from "../../../style/theme.js";
+import React, { useContext } from "react";
+import { ThemeContext } from "../../../context";
 
 export default function MOETable(props) {
-    const { theme } = React.useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
 
     const demo = {
         borderWidth: "1px 0px 1px 0px",

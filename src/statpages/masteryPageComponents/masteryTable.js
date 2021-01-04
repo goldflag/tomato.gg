@@ -19,13 +19,14 @@ import {
 } from "react-table";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
-import { ThemeContext } from "../../style/theme.js";
+import { ThemeContext, ServerContext } from "../../context";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import MasteryGraph from "./masteryGraph";
 
 function MasteryTable(props) {
-    const { theme, server } = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
+    const { server } = useContext(ServerContext);
 
     const Styles = styled.div`
         table {
@@ -826,11 +827,7 @@ function MasteryTable(props) {
             },
             {
                 Cell: ({ value }) => {
-                    return (
-                        <div style={{ margin: "10px" }}>
-                            {value}
-                        </div>                  
-                    );
+                    return <div style={{ margin: "10px" }}>{value}</div>;
                 },
                 Header: "Tier",
                 accessor: "tier",

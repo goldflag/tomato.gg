@@ -5,7 +5,7 @@ import OverallStatsTable from "./overallStatsTable.js";
 import WN8color from "../../functions/WN8color";
 import WRcolor from "../../functions/WRcolor";
 import PRcolor from "../../functions/PRcolor";
-import { ThemeContext } from "../../style/theme.js";
+import { ThemeContext } from "../../context";
 import "../../css/statspage.css";
 
 function battlesColor(battles) {
@@ -273,10 +273,10 @@ export default function TopStats(props) {
                     }}
                 >
                     Wargaming does not provide recent stats in their API,
-                    meaning that stats sites must generate and store recent stats
-                    on their own servers. This website is new so we do not have
-                    deep records yet. In the future, every active account will
-                    have complete recent stats.
+                    meaning that stats sites must generate and store recent
+                    stats on their own servers. This website is new so we do not
+                    have deep records yet. In the future, every active account
+                    will have complete recent stats.
                 </span>
                 <br />
             </Paper>

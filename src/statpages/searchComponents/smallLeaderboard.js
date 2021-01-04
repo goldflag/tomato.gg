@@ -4,7 +4,7 @@ import { useTable } from "react-table";
 import styled from "styled-components";
 import WN8c from "../../functions/WN8color";
 import WRc from "../../functions/WRcolor";
-import { ThemeContext } from "../../style/theme.js";
+import { ThemeContext } from "../../context";
 
 const rankColors = {
     1: <span style={{ color: "gold", fontWeight: 600 }}>1</span>,

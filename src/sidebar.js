@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./css/sidebar.css";
 import TomatoLogo from "./assets/tomato.png";
@@ -9,16 +9,9 @@ import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import GamesIcon from "@material-ui/icons/Games";
 import StarIcon from "@material-ui/icons/Star";
-import PersonIcon from "@material-ui/icons/Person";
-import {
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
-    Typography,
-} from "@material-ui/core";
+import { List, ListItem, ListItemText, Typography } from "@material-ui/core";
 import serverConv from "./data/serverConv";
-import { ThemeContext } from "./style/theme";
+import { ServerContext, SearchHistoryContext } from "./context";
 
 const LINKS = [
     { url: "/", title: "Home", Icon: AppsIcon },
@@ -41,23 +34,9 @@ const LINKS = [
     { url: "/about", title: "About", Icon: InfoIcon },
 ];
 
-const styles = theme => ({
-    root: {
-      width: "100%",
-      maxWidth: 360,
-      backgroundColor: theme.palette.background.paper
-    },
-  
-    item: {
-      padding: 0
-    }
-  });
-
 const Sidebar = withRouter((props) => {
-    const searchHistory =
-        JSON.parse(localStorage.getItem("searchHistory")) || [];
-
-    const { server } = React.useContext(ThemeContext);
+    const { server } = useContext(ServerContext);
+    const { history } = useContext(SearchHistoryContext);
     console.log(server);
 
     const redirectToPlayerStatsPage = (playerName, playerID, playerServer) => {
@@ -66,7 +45,6 @@ const Sidebar = withRouter((props) => {
             `/stats/${serverConv[playerServer]}/${playerName}=${playerID}`
         );
         window.location.reload();
-
     };
 
     return (
@@ -98,27 +76,44 @@ const Sidebar = withRouter((props) => {
                 </div>
                 <div className="line" />
                 <div className="menu">
-                    <Typography variant="h6" className="menu-link" style={{marginTop: '-5px'}}>
+                    <Typography
+                        variant="h6"
+                        className="menu-link"
+                        style={{ marginTop: "-5px" }}
+                    >
                         Recent searches
                     </Typography>
-                    <List aria-label="recent searches" style={{marginTop: '-10px'}} >
-                        {searchHistory
-                            .slice(0, Math.min(searchHistory.length, 5)) // No more than 5 recent searches
+                    <List
+                        aria-label="recent searches"
+                        style={{ marginTop: "-10px" }}
+                    >
+                        {history
+                            .slice(0, Math.min(history.length, 5)) // No more than 5 recent searches
                             .map(({ name, id, server }) => (
                                 <ListItem
                                     key={id}
                                     button
                                     onClick={() =>
-                                        redirectToPlayerStatsPage(name, id, server)
+                                        redirectToPlayerStatsPage(
+                                            name,
+                                            id,
+                                            server
+                                        )
                                     }
-                                    style={{padding: '0px 20px 10px 22px'}} 
+                                    style={{ padding: "0px 20px 10px 22px" }}
                                 >
                                     <img
                                         src={require(`./assets/flagIcons/${server}mini.png`)}
                                         style={{ maxHeight: "21px" }}
                                         alt={"4"}
                                     />
-                                    <ListItemText style={{marginLeft: '10px', color: 'white'}} primary={name} />
+                                    <ListItemText
+                                        style={{
+                                            marginLeft: "10px",
+                                            color: "white",
+                                        }}
+                                        primary={name}
+                                    />
                                 </ListItem>
                             ))}
                     </List>

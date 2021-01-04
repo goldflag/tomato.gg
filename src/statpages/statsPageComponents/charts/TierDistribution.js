@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
-import { ThemeContext } from "../../../style/theme.js";
+import { ThemeContext } from "../../../context";
 
 export default function TierDistribution(props) {
     const { theme } = React.useContext(ThemeContext);
@@ -25,8 +25,14 @@ export default function TierDistribution(props) {
                     },
                     tooltip: {
                         container: {
-                            background: theme === 'dark' ? 'rgb(40, 40, 40)' : 'rgb(255, 255, 255)',
-                            color: theme === 'dark' ?  'rgb(255, 255, 255)' : 'rgb(40, 40, 40)',
+                            background:
+                                theme === "dark"
+                                    ? "rgb(40, 40, 40)"
+                                    : "rgb(255, 255, 255)",
+                            color:
+                                theme === "dark"
+                                    ? "rgb(255, 255, 255)"
+                                    : "rgb(40, 40, 40)",
                         },
                     },
                 }}
@@ -60,7 +66,7 @@ export default function TierDistribution(props) {
                     legend: "Battles",
                     legendPosition: "middle",
                     legendOffset: -50,
-                    tickValues: 6
+                    tickValues: 6,
                 }}
                 enableLabel={false}
                 labelSkipWidth={12}

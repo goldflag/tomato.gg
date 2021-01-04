@@ -7,7 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import SmallSelectQuery from "./smallSelect";
 
-import { ThemeContext } from "../style/theme.js";
+import { ThemeContext } from "../context";
 
 export default function SmallSearchBar(props) {
     const { theme } = React.useContext(ThemeContext);

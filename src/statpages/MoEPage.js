@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ReactGA from "react-ga";
 import styled from "styled-components";
-import { ThemeContext } from "../style/theme.js";
+import { ThemeContext, ServerContext } from "../context";
 import MoETable from "./MoEPageComponents/MoETable";
 import MoETracker from "./MoEPageComponents/MoETracker";
 
@@ -29,7 +29,8 @@ const tierConv = {
 const trackingId = process.env.REACT_APP_GA;
 
 export default function MoEPage(props) {
-    const { theme, server } = React.useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
+    const { server } = useContext(ServerContext);
 
     const [data, setData] = useState();
     const [changeData, setChangeData] = useState();
@@ -52,20 +53,14 @@ export default function MoEPage(props) {
             //const url2 = `http://localhost:5000/api/abcd/moetracker/get/${server}`;
 
             try {
-                Promise.all([
-                    fetch(url),
-                    fetch(url2),
-                ])
-                .then(([res1, res2]) =>
-                    Promise.all([
-                        res1.json(),
-                        res2.json(),
-                    ])
-                )
-                .then(([data1, data2]) => {
-                    setData(data1);
-                    setChangeData(data2);
-                });
+                Promise.all([fetch(url), fetch(url2)])
+                    .then(([res1, res2]) =>
+                        Promise.all([res1.json(), res2.json()])
+                    )
+                    .then(([data1, data2]) => {
+                        setData(data1);
+                        setChangeData(data2);
+                    });
             } catch (err) {
                 console.error(err);
             }
@@ -151,11 +146,10 @@ export default function MoEPage(props) {
     let changeTable85 = <></>;
     let changeTable65 = <></>;
 
-
     if (changeData) {
-        changeTable95 = <MoETracker data={changeData} moe={'95'}/>;
-        changeTable85 = <MoETracker data={changeData} moe={'85'}/>;
-        changeTable65 = <MoETracker data={changeData} moe={'65'}/>;
+        changeTable95 = <MoETracker data={changeData} moe={"95"} />;
+        changeTable85 = <MoETracker data={changeData} moe={"85"} />;
+        changeTable65 = <MoETracker data={changeData} moe={"65"} />;
     }
 
     return (

@@ -17,7 +17,7 @@ import WRCurves from "../../data/WRCurves.json";
 import WN8Curves from "../../data/WN8Curves.json";
 import WN8color from "../../functions/WN8color";
 import WRcolor from "../../functions/WRcolor";
-import { ThemeContext } from "../../style/theme.js";
+import { ThemeContext } from "../../context";
 
 function diffColor(diff) {
     if (diff.charAt(0) === "+") {

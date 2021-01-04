@@ -3,7 +3,7 @@ import ReactGA from "react-ga";
 import Paper from "@material-ui/core/Paper";
 import "./css/tankstats.css";
 import "./css/innerpage.css";
-import { ThemeContext } from "./style/theme.js";
+import { ThemeContext } from "./context";
 const trackingId = process.env.REACT_APP_GA;
 
 export default function About() {

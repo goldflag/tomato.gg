@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
-import { ThemeContext } from "../../../style/theme.js";
+import { ThemeContext } from "../../../context";
 
 const color = {
     WR: "rgb(58, 124, 199)",
@@ -29,8 +29,14 @@ export default function LineGraphWN8(props) {
                     },
                     tooltip: {
                         container: {
-                            background: theme === 'dark' ? 'rgb(40, 40, 40)' : 'rgb(255, 255, 255)',
-                            color: theme === 'dark' ?  'rgb(255, 255, 255)' : 'rgb(40, 40, 40)',
+                            background:
+                                theme === "dark"
+                                    ? "rgb(40, 40, 40)"
+                                    : "rgb(255, 255, 255)",
+                            color:
+                                theme === "dark"
+                                    ? "rgb(255, 255, 255)"
+                                    : "rgb(40, 40, 40)",
                         },
                     },
                 }}
@@ -61,7 +67,6 @@ export default function LineGraphWN8(props) {
                     legendOffset: 45,
                     legendPosition: "middle",
                     tickRotation: -45,
-
                 }}
                 axisLeft={{
                     orient: "left",
@@ -71,7 +76,7 @@ export default function LineGraphWN8(props) {
                     legend: props.type,
                     legendOffset: -55,
                     legendPosition: "middle",
-                    tickValues: 5
+                    tickValues: 5,
                 }}
                 colors={color[props.type]}
                 pointSize={5}

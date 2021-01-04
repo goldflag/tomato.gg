@@ -18,7 +18,7 @@ import {
 } from "react-table";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
-import { ThemeContext } from "../../style/theme.js";
+import { ThemeContext } from "../../context";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 
@@ -762,9 +762,7 @@ function WN8Table(props) {
             },
             {
                 Cell: ({ value }) => {
-                    return <div style={{ margin: "10px" }}>
-                        {value}
-                    </div>
+                    return <div style={{ margin: "10px" }}>{value}</div>;
                 },
                 Header: "Tier",
                 accessor: "tier",

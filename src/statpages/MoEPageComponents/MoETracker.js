@@ -19,7 +19,7 @@ import {
 } from "react-table";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
-import { ThemeContext } from "../../style/theme.js";
+import { ThemeContext, ServerContext } from "../../context";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import MoEGraph from "./MoEGraph";
@@ -38,7 +38,8 @@ const tierConv = {
 };
 
 function MoETracker(props) {
-    const { theme, server } = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
+    const { server } = useContext(ServerContext);
 
     const Styles = styled.div`
         table {
@@ -707,9 +708,9 @@ function MoETracker(props) {
                     </tbody>
                 </table>
                 {/*
-      Pagination can be built however you'd like.
-      This is just a very basic UI implementation:
-    */}
+                Pagination can be built however you'd like.
+                This is just a very basic UI implementation:
+                */}
                 <div className="pagination">
                     <button
                         className={"paginationButton"}
@@ -766,28 +767,33 @@ function MoETracker(props) {
         });
     }
 
-
     function percentStyle(val, multiplier) {
-
         function green(val) {
             val *= -1;
-            return `rgb(${255 - val*multiplier}, 255, ${255 - val*multiplier})`
+            return `rgb(${255 - val * multiplier}, 255, ${
+                255 - val * multiplier
+            })`;
         }
 
         function red(val) {
-            return `rgb(255,${255 - val*multiplier}, ${255 - val*multiplier})`
+            return `rgb(255,${255 - val * multiplier}, ${
+                255 - val * multiplier
+            })`;
         }
 
         return (
-            <div style={{
-                color: "black", 
-                backgroundColor: val > 0 ? red(val) : green(val),
-                padding: "9.5px",
-                margin: "-0.3rem 1rem -0.3rem -0.5rem",
-                }}>
-                {val > 0 ? "+" : "" }{val}%
+            <div
+                style={{
+                    color: "black",
+                    backgroundColor: val > 0 ? red(val) : green(val),
+                    padding: "9.5px",
+                    margin: "-0.3rem 1rem -0.3rem -0.5rem",
+                }}
+            >
+                {val > 0 ? "+" : ""}
+                {val}%
             </div>
-        )
+        );
     }
 
     // This is an autoRemove method on the filter function that
@@ -832,9 +838,7 @@ function MoETracker(props) {
             {
                 Cell: ({ value }) => {
                     return (
-                        <div style={{ margin: "10px" }}>
-                            {tierConv[value]}
-                        </div>                  
+                        <div style={{ margin: "10px" }}>{tierConv[value]}</div>
                     );
                 },
                 Header: "Tier",
@@ -879,45 +883,40 @@ function MoETracker(props) {
                 Header: "7 Day Δ",
                 accessor: `7diff${props.moe}`,
                 disableFilters: true,
-                sortType: 'basic',
-
+                sortType: "basic",
             },
             {
                 Cell: ({ value }) => percentStyle(value, 50),
                 Header: "7 Day %Δ",
                 accessor: `7percent${props.moe}`,
                 disableFilters: true,
-                sortType: 'basic',
-
+                sortType: "basic",
             },
             {
                 Header: "14 Day Δ",
                 accessor: `14diff${props.moe}`,
                 disableFilters: true,
-                sortType: 'basic',
-
+                sortType: "basic",
             },
             {
                 Cell: ({ value }) => percentStyle(value, 30),
                 Header: "14 Day %Δ",
                 accessor: `14percent${props.moe}`,
                 disableFilters: true,
-                sortType: 'basic',
-
+                sortType: "basic",
             },
             {
                 Header: "30 Day Δ",
                 accessor: `30diff${props.moe}`,
                 disableFilters: true,
-                sortType: 'basic',
+                sortType: "basic",
             },
             {
                 Cell: ({ value }) => percentStyle(value, 20),
                 Header: "30 Day %Δ",
                 accessor: `30percent${props.moe}`,
                 disableFilters: true,
-                sortType: 'basic',
-
+                sortType: "basic",
             },
             {
                 Header: `${props.moe}%`,
@@ -931,7 +930,7 @@ function MoETracker(props) {
                 filter: "equals",
             },
         ],
-        []
+        [props.moe]
     );
 
     return (

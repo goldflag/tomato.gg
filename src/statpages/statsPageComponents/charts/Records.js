@@ -1,6 +1,6 @@
 import React from "react";
 import tankNames from "../../../data/tankNames.json";
-import { ThemeContext } from "../../../style/theme.js";
+import { ThemeContext } from "../../../context";
 
 export default function Records(props) {
     const { theme } = React.useContext(ThemeContext);

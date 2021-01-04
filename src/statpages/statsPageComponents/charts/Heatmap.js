@@ -2,7 +2,7 @@ import React from "react";
 import { ResponsiveHeatMap } from "@nivo/heatmap";
 import WN8color from "../../../functions/WN8color";
 import WRcolor from "../../../functions/WRcolor";
-import { ThemeContext } from "../../../style/theme.js";
+import { ThemeContext } from "../../../context";
 
 export default function WN8Heatmap(props) {
     const { theme } = React.useContext(ThemeContext);

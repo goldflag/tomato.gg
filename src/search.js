@@ -1,28 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import "./css/search.css";
 import SearchBar from "./material/searchBar";
 import TomatoLogo from "./assets/tomato.png";
-import { ThemeContext } from "./style/theme.js";
+import { ThemeContext, ServerContext, SearchHistoryContext } from "./context";
 import LeaderboardGrid from "./statpages/searchComponents/leaderboardGrid";
 import serverConv from "./data/serverConv";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
-const addToSearchHistory = (name, id, server) => {
-    const searchHistory =
-        JSON.parse(localStorage.getItem("searchHistory")) || [];
-    localStorage.setItem(
-        "searchHistory",
-        JSON.stringify([
-            { name, id, server },
-            ...searchHistory.filter((value) => value.id !== id),
-        ])
-    );
-};
-
 export default withRouter(function Search(props) {
-    const { theme, server, toggleServer } = React.useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
+    const { server, toggleServer } = useContext(ServerContext);
+    const { addToHistory } = useContext(SearchHistoryContext);
     const [name, setName] = useState("");
     const [mode, setMode] = useState("Player");
 
@@ -41,7 +31,7 @@ export default withRouter(function Search(props) {
             )
             .then((playerID) => {
                 if (playerID !== "FAIL") {
-                    addToSearchHistory(name, playerID, server);
+                    addToHistory(name, playerID, server);
                 }
                 props.history.push("/");
                 props.history.push(

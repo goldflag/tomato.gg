@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
 import styled from "styled-components";
-import { ThemeContext } from "../style/theme.js";
+import { ThemeContext } from "../context";
 import "../css/tankstats.css";
 import WN8Table from "./wn8Components/wn8Table";
 import "../css/innerpage.css";

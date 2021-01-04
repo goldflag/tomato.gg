@@ -8,7 +8,7 @@ import Box from "@material-ui/core/Box";
 import WRCurves from "../../data/WRCurves.json";
 import WN8Curves from "../../data/WN8Curves.json";
 import CurveGraph from "../tankStatsPageComponents/curveGraph";
-import { ThemeContext } from "../../style/theme.js";
+import { ThemeContext } from "../../context";
 import "../../css/tankstats.css";
 
 function TabPanel(props) {
