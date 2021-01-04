@@ -33,7 +33,6 @@ export default withRouter(function Search(props) {
                 if (playerID !== "FAIL") {
                     addToHistory(name, playerID, server);
                 }
-                props.history.push("/");
                 props.history.push(
                     `/stats/${serverConv[server]}/${name}=${playerID}`
                 );

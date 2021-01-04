@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { Component } from "react";
 import ReactGA from "react-ga";
-import { makeStyles } from "@material-ui/core/styles";
 import TopStats from "./statsPageComponents/topStats";
 // import AdSense from "react-adsense";
 import "../css/style.css";
@@ -12,212 +11,215 @@ import GraphCalculator from "../functions/GraphCalculator";
 import Charts from "./statsPageComponents/charts";
 import SessionsLogParent from "./statsPageComponents/sessions/sessionsLogParent";
 import { ThemeContext } from "../context";
+import { withRouter } from "react-router-dom";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 const backendKey = process.env.REACT_APP_BACKEND_API_KEY;
 const trackingId = process.env.REACT_APP_GA;
 
-const useStyles = makeStyles((theme) => ({
+const styles = () => ({
     loading: {
         display: "flex",
         justifyContent: "center",
         paddingTop: "40vh",
-        "& > * + *": {
-            marginLeft: theme.spacing(2),
-        },
     },
     root: {
         flexGrow: 1,
     },
     paper: {
-        padding: theme.spacing(2),
         textAlign: "center",
-        color: theme.palette.text.secondary,
     },
-}));
+});
 
-export default function StatsPage(props) {
-    const windowUrl = window.location.pathname;
-    const urlParams = windowUrl.substring(7).split("/");
-    const server = serverConv[urlParams[0]];
-    const [urlUsername, id] = urlParams[1].split("=");
-
-    const { theme } = React.useContext(ThemeContext);
-    const [validID, setValidID] = useState(true);
-    // Combines StatsTable and TankTable into single component
-    let StatTable = CircularIndeterminate();
-    // Maps tank ID to basic information about a vehicle
-    const [username, setUserName] = useState(urlUsername);
-    const [stats, setStats] = useState([]);
-    const [tanksstats, setTanksstats] = useState("");
-    const [WGRating, setWGRating] = useState("");
-    const [MOEstats, setMOEstats] = useState("");
-    const [clanStats, setClanStats] = useState("");
-    const [accountCreationDate, setAccountCreationDate] = useState("");
-    const [lastPlayedTime, setLastPlayedTime] = useState("");
-    const [clanHistory, setClanHistory] = useState("");
-    const [recentStats, setRecentStats] = useState("");
-
-    // Runs once when component mounts
-    useEffect(() => {
-        const searchStats = async () => {
-            //Overall Summary Stats
-            const url = `https://api.worldoftanks.${server}/wot/account/info/?application_id=${APIKey}&account_id=${id}`;
-            //Overall tank stats
-            const url2 = `https://api.worldoftanks.${server}/wot/tanks/stats/?application_id=${APIKey}&account_id=${id}&fields=mark_of_mastery%2C+tank_id%2C+all`;
-            //MOE Data
-            const url3 = `https://api.worldoftanks.${server}/wot/tanks/achievements/?application_id=${APIKey}&account_id=${id}&fields=achievements%2C+tank_id`;
-            //Current Clan Data
-            const url4 = `https://api.worldoftanks.${server}/wot/clans/accountinfo/?application_id=${APIKey}&account_id=${id}`;
-            //Clan history
-            const url5 = `https://api.worldoftanks.${server}/wot/clans/memberhistory/?application_id=${APIKey}&account_id=${id}`;
-            //Recent stats from our own API
-            const url6 = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/${server}/${id}`;
-            //const url6 = `http://localhost:5000/api/abcd/${server}/${id}`;
-
-            console.log(backendKey);
-            try {
-                Promise.all([
-                    fetch(url),
-                    fetch(url2),
-                    fetch(url3),
-                    fetch(url4),
-                    fetch(url5),
-                    fetch(url6),
-                ])
-                    .then(([res1, res2, res3, res4, res5, res6]) =>
-                        Promise.all([
-                            res1.json(),
-                            res2.json(),
-                            res3.json(),
-                            res4.json(),
-                            res5.json(),
-                            res6.json(),
-                        ])
-                    )
-                    .then(([data1, data2, data3, data4, data5, data6]) => {
-                        setStats(data1.data[id].statistics.all);
-                        setTanksstats(data2.data[id]);
-                        setUserName(data1.data[id].nickname);
-                        setWGRating(data1.data[id].global_rating);
-                        setMOEstats(data3.data[id]);
-                        setAccountCreationDate(data1.data[id].created_at);
-                        setLastPlayedTime(data1.data[id].last_battle_time);
-                        setRecentStats(data6);
-                        console.log(data6);
-                        if (data1.data[id].statistics.all.battles === 0) {
-                            setValidID(false);
-                        }
-                        if (data4.data[id] != null) {
-                            setClanStats(data4.data[id]);
-                        } else {
-                            setClanStats("NO CLAN");
-                        }
-                        if (data5.data[id].size === 0) {
-                            setClanHistory("NO CLAN HISTORY");
-                        } else {
-                            setClanHistory(data5.data[id]);
-                        }
-                    });
-            } catch (err) {
-                console.error(err);
-            }
+class StatsPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: false,
+            validID: false,
+            stats: [],
+            username: "",
+            WGRating: "",
+            clanStats: "",
+            graphData: {},
+            MOERating: "",
+            tankstats: "",
+            clanHistory: "",
+            recentStats: "",
+            lastPlayedTime: "",
+            accountCreationDate: "",
         };
+    }
 
-        // setUserName(username);
+    componentDidMount() {
+        const { match } = this.props;
+        const { server, user } = match.params;
+        const [username, id] = user.split("=");
+        if (id !== "FAIL") {
+            this.searchStats(server, id).then(() =>
+                this.setState({ loading: false })
+            );
+        } else {
+            this.setState({ username });
+        }
+
         ReactGA.initialize(trackingId);
         ReactGA.pageview(`/stats/${server}`);
-        if (id === "FAIL") {
-            setValidID(false);
-        } else {
-            setValidID(true);
-            searchStats();
+    }
+
+    componentDidUpdate({ match: prevMatch }) {
+        const { match } = this.props;
+        const { server, user } = match.params;
+        if (
+            server !== prevMatch.params.server ||
+            user !== prevMatch.params.user
+        ) {
+            console.log(server, user, prevMatch);
+            const [username, id] = user.split("=");
+            const validID = id !== "FAIL";
+            this.setState({ loading: validID, validID, username });
+            if (validID) {
+                this.searchStats(server, id).then(() =>
+                    this.setState({ loading: false })
+                );
+            }
         }
-    }, [id, server]);
-
-    function CircularIndeterminate() {
-        const classes = useStyles();
-        return (
-            <div className={classes.loading}>
-                <CircularProgress
-                    color={theme === "dark" ? "primary" : "secondary"}
-                />
-            </div>
-        );
     }
 
-    if (validID === false) {
-        StatTable = (
-            <>
-                <span style={{ fontSize: "2rem" }}>
-                    Player {username} not found
-                </span>
-                <br />
-                <br />
-                Make sure the username and region are correct.
-            </>
-        );
-    }
+    searchStats = async (server, id) => {
+        this.setState({ loading: true });
+        server = serverConv[server];
+        const domain = `https://api.worldoftanks.${server}`;
+        const commonArgs = `application_id=${APIKey}&account_id=${id}`;
+        const urls = [
+            `${domain}/wot/account/info/?${commonArgs}`, //Overall Summary Stats
+            `${domain}/wot/tanks/stats/?${commonArgs}&fields=mark_of_mastery%2C+tank_id%2C+all`, //Overall tank stats TODO: not used?
+            `${domain}/wot/tanks/achievements/?${commonArgs}&fields=achievements%2C+tank_id`, //MOE Data TODO: not used?
+            `${domain}/wot/clans/accountinfo/?${commonArgs}`, //Current Clan Data
+            `${domain}/wot/clans/memberhistory/?${commonArgs}`, //Clan history
+            `https://tomatobackend-oswt3.ondigitalocean.app/api/${backendKey}/${server}/${id}`, //Recent stats from our own API
+            //`http://localhost:5000/api/abcd/${server}/${id}`
+        ];
 
-    if (
-        WGRating &&
-        username &&
-        stats &&
-        tanksstats &&
-        MOEstats &&
-        clanStats &&
-        clanHistory &&
-        accountCreationDate &&
-        lastPlayedTime &&
-        recentStats &&
-        validID === true
-    ) {
-        const graphData = GraphCalculator(
-            recentStats.overallStats.tankWN8,
+        return Promise.all(urls.map((url) => fetch(url)))
+            .then((resps) => Promise.all(resps.map((r) => r.json())))
+            .then(([overall, tank, MOE, clanStats, clanHistory, recent]) => {
+                const stats = overall.data[id].statistics.all;
+                const graphData = GraphCalculator(
+                    recent.overallStats.tankWN8,
+                    stats,
+                    recent.overallStats.overallWN8,
+                    recent.overallStats.avgTier,
+                    recent,
+                    this.context.theme
+                );
+                const newState = {
+                    stats,
+                    tanksstats: tank.data[id],
+                    username: overall.data[id].nickname,
+                    WGRating: overall.data[id].global_rating,
+                    MOEstats: MOE.data[id],
+                    accountCreationDate: overall.data[id].created_at,
+                    lastPlayedTime: overall.data[id].last_battle_time,
+                    recentStats: recent,
+                    validID: stats.battles !== 0,
+                    clanStats: clanStats.data[id] || "NO CLAN",
+                    clanHistory: clanHistory.data[id].length
+                        ? clanHistory.data[id]
+                        : "NO CLAN HISTORY",
+                    graphData,
+                };
+                console.log(newState);
+                this.setState(newState);
+            })
+            .catch(console.error);
+    };
+
+    render() {
+        const {
             stats,
-            recentStats.overallStats.overallWN8,
-            recentStats.overallStats.avgTier,
+            loading,
+            validID,
+            // MOEstats,
+            username,
+            WGRating,
+            clanStats,
+            graphData,
+            // tanksstats,
+            clanHistory,
             recentStats,
-            theme
-        );
-        console.log(recentStats.recents);
-        StatTable = (
-            <>
-                <div style={{ padding: "1em 0em" }}>
-                    <TopStats
-                        username={username}
-                        WGRating={WGRating}
-                        data={graphData}
-                        stats={stats}
-                        clanStats={clanStats}
-                        accountCreationDate={accountCreationDate}
-                        lastPlayedTime={lastPlayedTime}
-                    />
-                </div>
-                <div style={{ minHeight: "300px" }}>
-                    <SessionsLogParent data={recentStats.sessions} />
-                </div>
-                <div style={{ minHeight: "300px" }}>
-                    <Charts
-                        data={graphData}
-                        clanData={clanHistory}
-                        currentClan={clanStats}
-                        stats={stats}
-                    />
-                </div>
-                <div style={{ padding: "1em 0em" }}>
-                    <AllTankStats
-                        overall={recentStats.overallStats.tankWN8}
-                        recents={recentStats.recents}
-                    />
-                    {/* <AdSense.Google
-                          client='pub-1358649580645755'
-                          slot='3903354081'
-                        /> */}
-                </div>
-            </>
-        );
-    }
+            lastPlayedTime,
+            accountCreationDate,
+        } = this.state;
 
-    return <div className="smallpaper">{StatTable}</div>;
+        let statTable;
+
+        if (loading) {
+            statTable = (
+                <div style={styles().loading}>
+                    <CircularProgress
+                        color={
+                            this.context.theme === "dark"
+                                ? "primary"
+                                : "secondary"
+                        }
+                    />
+                </div>
+            );
+        } else if (validID) {
+            statTable = (
+                <>
+                    <div style={{ padding: "1em 0em" }}>
+                        <TopStats
+                            username={username}
+                            WGRating={WGRating}
+                            data={graphData}
+                            stats={stats}
+                            clanStats={clanStats}
+                            accountCreationDate={accountCreationDate}
+                            lastPlayedTime={lastPlayedTime}
+                        />
+                    </div>
+                    <div style={{ minHeight: "300px" }}>
+                        <SessionsLogParent data={recentStats.sessions} />
+                    </div>
+                    <div style={{ minHeight: "300px" }}>
+                        <Charts
+                            data={graphData}
+                            clanData={clanHistory}
+                            currentClan={clanStats}
+                            stats={stats}
+                        />
+                    </div>
+                    <div style={{ padding: "1em 0em" }}>
+                        <AllTankStats
+                            overall={recentStats.overallStats.tankWN8}
+                            recents={recentStats.recents}
+                        />
+                        {/* <AdSense.Google
+                        client='pub-1358649580645755'
+                        slot='3903354081'
+                        /> */}
+                    </div>
+                </>
+            );
+        } else {
+            statTable = (
+                <>
+                    <span style={{ fontSize: "2rem" }}>
+                        Player {username} not found
+                    </span>
+                    <br />
+                    <br />
+                    Make sure the username and region are correct.
+                </>
+            );
+        }
+
+        return <div className="smallpaper">{statTable}</div>;
+    }
 }
+
+StatsPage.contextType = ThemeContext;
+StatsPage = withRouter(StatsPage);
+export default StatsPage;

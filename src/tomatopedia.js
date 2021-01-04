@@ -35,7 +35,7 @@ export default function Tomatopedia() {
                 <Topbar />
                 <main className="wrapper">
                     <Switch>
-                        <Route path="/stats">
+                        <Route path="/stats/:server/:user">
                             <StatsPage />
                         </Route>
                         <Route path="/about">

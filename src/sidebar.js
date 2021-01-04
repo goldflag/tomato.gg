@@ -2,49 +2,53 @@ import React, { useContext } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./css/sidebar.css";
 import TomatoLogo from "./assets/tomato.png";
-import AppsIcon from "@material-ui/icons/Apps";
-import BarChartIcon from "@material-ui/icons/BarChart";
-import InfoIcon from "@material-ui/icons/Info";
-import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
-import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
-import GamesIcon from "@material-ui/icons/Games";
-import StarIcon from "@material-ui/icons/Star";
-import { List, ListItem, ListItemText, Typography } from "@material-ui/core";
+import {
+    Apps,
+    Info,
+    Star,
+    Games,
+    DeleteOutline,
+    BarChart,
+    LibraryBooks,
+    FormatListNumbered,
+} from "@material-ui/icons";
+import {
+    IconButton,
+    List,
+    ListItem,
+    ListItemText,
+    Typography,
+} from "@material-ui/core";
 import serverConv from "./data/serverConv";
 import { ServerContext, SearchHistoryContext } from "./context";
 
 const LINKS = [
-    { url: "/", title: "Home", Icon: AppsIcon },
-    { url: "/tank-stats", title: "Tank Stats", Icon: BarChartIcon },
+    { url: "/", title: "Home", Icon: Apps },
+    { url: "/tank-stats", title: "Tank Stats", Icon: BarChart },
     {
         url: "/leaderboards",
         title: "Leaderboards",
-        Icon: FormatListNumberedIcon,
+        Icon: FormatListNumbered,
     },
-    // {url: "/tank-list", title: "Tank List", Icon: BarChartIcon},
-    // { url: "/server-stats", title: "Server Stats", Icon: PublicIcon },
-    { url: "/moe", title: "MoE Reqs", Icon: StarIcon },
-    { url: "/mastery", title: "Mastery Reqs", Icon: StarIcon },
-    { url: "/wn8", title: "WN8 Exp. Values", Icon: GamesIcon },
+    // {url: "/tank-list", title: "Tank List", Icon: BarChart},
+    // { url: "/server-stats", title: "Server Stats", Icon: Public },
+    { url: "/moe", title: "MoE Reqs", Icon: Star },
+    { url: "/mastery", title: "Mastery Reqs", Icon: Star },
+    { url: "/wn8", title: "WN8 Exp. Values", Icon: Games },
     {
         url: "/stats-reference",
         title: "Stats Reference",
-        Icon: LibraryBooksIcon,
+        Icon: LibraryBooks,
     },
-    { url: "/about", title: "About", Icon: InfoIcon },
+    { url: "/about", title: "About", Icon: Info },
 ];
 
 const Sidebar = withRouter((props) => {
-    const { server } = useContext(ServerContext);
-    const { history } = useContext(SearchHistoryContext);
-    console.log(server);
-
+    const { history, clearHistory } = useContext(SearchHistoryContext);
     const redirectToPlayerStatsPage = (playerName, playerID, playerServer) => {
-        props.history.push("/");
         props.history.push(
             `/stats/${serverConv[playerServer]}/${playerName}=${playerID}`
         );
-        window.location.reload();
     };
 
     return (
@@ -79,9 +83,21 @@ const Sidebar = withRouter((props) => {
                     <Typography
                         variant="h6"
                         className="menu-link"
-                        style={{ marginTop: "-5px" }}
+                        style={{ marginTop: "-5px", paddingRight: "unset" }}
                     >
                         Recent searches
+                        <IconButton
+                            aria-label="clear history"
+                            size="small"
+                            onClick={clearHistory}
+                            style={{
+                                color: "inherit",
+                                marginLeft: ".6rem",
+                                marginBottom: ".1rem",
+                            }}
+                        >
+                            <DeleteOutline />
+                        </IconButton>
                     </Typography>
                     <List
                         aria-label="recent searches"
