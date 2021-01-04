@@ -74,7 +74,6 @@ class StatsPage extends Component {
             server !== prevMatch.params.server ||
             user !== prevMatch.params.user
         ) {
-            console.log(server, user, prevMatch);
             const [username, id] = user.split("=");
             const validID = id !== "FAIL";
             this.setState({ loading: validID, validID, username });
@@ -129,7 +128,6 @@ class StatsPage extends Component {
                         : "NO CLAN HISTORY",
                     graphData,
                 };
-                console.log(newState);
                 this.setState(newState);
             })
             .catch(console.error);

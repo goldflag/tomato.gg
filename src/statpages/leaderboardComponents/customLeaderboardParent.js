@@ -47,7 +47,6 @@ export default function CustomLeaderboardParent(props) {
 
     function GenerateLeaderboard() {
         setGenerated(true);
-        // console.log('fic');
         // setLeaderboard(<></>);
         // setLeaderboard(<>
         //     <CustomLeaderboard type={customType} count={numEntries} mintier={tierRange[0]} maxtier={tierRange[1]}

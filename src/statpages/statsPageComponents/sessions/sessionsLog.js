@@ -256,7 +256,6 @@ export default function SessionsLog(props) {
             };
             rowData.push(entry);
         }
-        console.log(rowData);
         return (
             <div>
                 <SessionBreakdown data={rowData} />

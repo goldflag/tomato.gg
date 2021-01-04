@@ -21,7 +21,6 @@ export default withRouter(function Search(props) {
     const searchId = async (e) => {
         e.preventDefault();
         const url = `https://api.worldoftanks.${server}/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`;
-        console.log(APIKey);
         fetch(url)
             .then((res) => res.json())
             .then((data) =>

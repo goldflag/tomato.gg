@@ -546,11 +546,8 @@ function MoETracker(props) {
             usePagination
         );
 
-        // console.log(row.row.original.id);
-
         function SubRows({ data }) {
             if (data) {
-                console.log(data);
                 return (
                     <div
                         style={{

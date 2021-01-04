@@ -360,11 +360,8 @@ export default function OverallTankStats(props) {
                 },
                 sortCompare: (order) => {
                     return (obj1, obj2) => {
-                        console.log(obj1);
                         let val1 = obj1.data.props.alt;
-                        console.log(val1);
-
-                        let val2 = obj1.data.props.alt;
+                        let val2 = obj2.data.props.alt;
                         return (
                             (masteryConv[val1] - masteryConv[val2]) *
                             (order === "asc" ? 1 : -1)

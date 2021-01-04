@@ -890,7 +890,6 @@ function OverallTable(props) {
             //     }
             //     rowData.push(entry);
             // }
-            // console.log(rowData);
             return <div>Under Construction</div>;
         }
 

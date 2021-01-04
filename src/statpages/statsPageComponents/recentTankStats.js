@@ -214,7 +214,6 @@ export default function RecentTankStats(props) {
                 },
                 sortCompare: (order) => {
                     return (obj1, obj2) => {
-                        console.log(order);
                         let val1 = parseInt(obj1.data.slice(0, -1), 10);
                         let val2 = parseInt(obj2.data.slice(0, -1), 10);
                         return (val1 - val2) * (order === "asc" ? 1 : -1);

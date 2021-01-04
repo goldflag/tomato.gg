@@ -2156,6 +2156,5 @@ export default function GraphCalculator(
     data.ClassDistRecent = ClassDistCalculator(data.ClassDistRecent);
 
     calculateWN8Distribution();
-    console.log(data);
     return data;
 }
