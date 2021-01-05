@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactGA from "react-ga";
 import TopStats from "./statsPageComponents/topStats";
-// import AdSense from "react-adsense";
+import AdSense from "react-adsense";
 import "../css/style.css";
 import "../css/innerpage.css";
 import serverConv from "../data/serverConv";
@@ -194,10 +194,10 @@ class StatsPage extends Component {
                             overall={recentStats.overallStats.tankWN8}
                             recents={recentStats.recents}
                         />
-                        {/* <AdSense.Google
-                        client='pub-1358649580645755'
-                        slot='3903354081'
-                        /> */}
+                        <AdSense.Google
+                            client='ca-pub-1358649580645755'
+                            slot='3903354081'
+                        />
                     </div>
                 </>
             );
