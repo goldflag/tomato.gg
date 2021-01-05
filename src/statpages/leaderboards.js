@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { ThemeContext } from "../context";
 import "../css/tankstats.css";
 import Leaderboard from "./leaderboardComponents/leaderboard";
 import CustomLeaderboardParent from "./leaderboardComponents/customLeaderboardParent";
 import "../css/innerpage.css";
-import { FullPageTableWrapper } from "../components";
+import { FullPageTableWrapper, Info } from "../components";
 const trackingId = process.env.REACT_APP_GA;
 
 const typeConv = {
@@ -21,14 +21,6 @@ const typeConv = {
 const Styles = styled.div`
     *:focus {
         outline: none;
-    }
-
-    .info {
-        background-color: ${({ theme }) =>
-            theme === "dark" ? css`rgb(40, 40, 40)` : css`rgb(250, 250, 250)`};
-        color: ${({ theme }) =>
-            theme === "dark" ? css`rgb(255, 255, 255)` : css`rgb(60, 60, 60)`};
-        padding: 1rem;
     }
 
     .selectButton {
@@ -95,7 +87,7 @@ export default function Leaderboards(props) {
     return (
         <Styles theme={theme}>
             <FullPageTableWrapper>
-                <div className="info">
+                <Info theme={theme}>
                     <span style={{ fontSize: "1.5rem", fontWeight: "500" }}>
                         NA Leaderboards
                     </span>
@@ -110,7 +102,7 @@ export default function Leaderboards(props) {
                         1181038 PLAYERS ANALYZED
                     </span>{" "}
                     <br />
-                </div>
+                </Info>
                 <div>
                     <button className="selectButton" onClick={setWN8}>
                         WN8

@@ -8,7 +8,7 @@ import "../css/innerpage.css";
 import tankNames from "../data/tankNames.json";
 import nationConversion from "../data/nationConversion";
 import classConversion from "../data/classConversion.json";
-import { FullPageTableWrapper } from "../components";
+import { FullPageTableWrapper, Info } from "../components";
 
 const tierConv = {
     1: "I",
@@ -46,16 +46,6 @@ export default function Leaderboards(props) {
     const Styles = styled.div`
         *:focus {
             outline: none;
-        }
-
-        .info {
-            background-color: ${theme === "dark"
-                ? "rgb(40, 40, 40)"
-                : "rgb(250, 250, 250)"};
-            color: ${theme === "dark"
-                ? "rgb(255, 255, 255)"
-                : "rgb(60, 60, 60)"};
-            padding: 1rem;
         }
 
         .selectButton {
@@ -111,7 +101,7 @@ export default function Leaderboards(props) {
     return (
         <Styles>
             <FullPageTableWrapper>
-                <div className="info">
+                <Info theme={theme}>
                     <span style={{ fontSize: "2rem", fontWeight: "500" }}>
                         WN8 Expected Values
                     </span>
@@ -132,7 +122,7 @@ export default function Leaderboards(props) {
                         </a>
                     </span>{" "}
                     <br />
-                </div>
+                </Info>
                 {table}
             </FullPageTableWrapper>
         </Styles>
