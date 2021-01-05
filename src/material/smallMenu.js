@@ -18,7 +18,58 @@ import {
     LibraryBooks,
 } from "@material-ui/icons";
 import smallLogo from "../assets/smalllogo.png";
-import  "../css/body.css";
+import styled from "styled-components";
+
+const Styles = styled.div`
+    .dark-mode {
+        background-color: rgb(50, 50, 54);
+        color: rgb(234, 238, 248);
+    }
+
+    /* unvisited link */
+    .dark-mode a {
+        color: rgb(161, 177, 230);
+        text-decoration: none;
+    }
+
+    /* mouse over link */
+    .dark-mode a:hover {
+        color: rgb(180, 70, 129);
+        text-decoration: none;
+    }
+
+    /* selected link */
+    .dark-mode a:active {
+        color: rgb(120, 60, 131);
+        text-decoration: none;
+    }
+
+    .light-mode {
+        background-color: rgb(234, 238, 248);
+    }
+
+    /* unvisited link */
+    .light-mode a {
+        color: rgb(58, 89, 189);
+        text-decoration: none;
+    }
+
+    /* mouse over link */
+    .light-mode a:hover {
+        color: rgb(207, 12, 116);
+        text-decoration: none;
+    }
+
+    /* selected link */
+    .light-mode a:active {
+        color: rgb(108, 37, 121);
+        text-decoration: none;
+    }
+
+    .wrapper {
+        min-height: 100vh;
+    }
+    `;
 
 const useStyles = makeStyles({
     list: {
@@ -53,6 +104,7 @@ export default function TemporaryDrawer() {
     }
 
     const list = (anchor) => (
+        <Styles>
         <div
             className= {theme === "dark" ? "dark-mode" : "light-mode"}
             role="presentation"
@@ -127,6 +179,7 @@ export default function TemporaryDrawer() {
                 </List>
             <Divider />
         </div>
+        </Styles>
     );
 
     return (

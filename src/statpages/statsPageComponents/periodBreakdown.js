@@ -55,6 +55,7 @@ function PeriodBreakdown(props) {
         table {
             border-spacing: 0;
             font-size: 0.8rem;
+            width: 100%;
             tr {
                 overflow-x: scroll;
                 :last-child {

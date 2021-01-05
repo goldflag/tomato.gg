@@ -44,7 +44,6 @@ const tierConv = {
 
 export default function SessionBreakdown(props) {
     const { theme } = React.useContext(ThemeContext);
-
     const Styles = styled.div`
         table {
             border-spacing: 0;

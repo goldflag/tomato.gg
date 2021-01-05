@@ -8,14 +8,15 @@
     z-index: 0;
     height: 100%;
     width: 14rem;
+    margin-right: 14rem;
     position: fixed;
     left: 0;
-    overflow-x: hidden;
     background: url(../assets/sidebar.jpg) no-repeat fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    overflow-x: hidden;
 }
 
 .layer {

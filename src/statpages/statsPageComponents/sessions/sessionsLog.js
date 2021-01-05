@@ -1,8 +1,8 @@
 import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
 import styled from "styled-components";
-// import WN8c from "../../../functions/WN8color";
-// import WRc from "../../../functions/WRcolor";
+import WN8c from "../../../functions/WN8color";
+import WRc from "../../../functions/WRcolor";
 import { Icon } from "react-icons-kit";
 import { chevronRight } from "react-icons-kit/feather/chevronRight";
 import { chevronDown } from "react-icons-kit/feather/chevronDown";
@@ -12,28 +12,29 @@ import { ThemeContext } from "../../../context";
 import SessionBreakdown from "./sessionBreakdown";
 import { Pagination } from "../../../components";
 
-// function WN8Style(wn8) {
-//     return {
-//         background: WN8c(wn8),
-//         color: "white",
-//         padding: "8px",
-//         margin: "-0.3rem 0rem -0.3rem -0.5rem",
-//         textAlign: "center",
-//     };
-// }
+function WN8Style(wn8) {
+    return {
+        background: WN8c(wn8),
+        color: "white",
+        padding: "10.5px",
+        margin: "-0.3rem 0rem -0.3rem -0.5rem",
+        textAlign: "center",
+    };
+}
 
-// function WRStyle(wr) {
-//     return {
-//         background: WRc(wr),
-//         color: "white",
-//         padding: "8px",
-//         margin: "-0.3rem 0rem -0.3rem -0.5rem",
-//         textAlign: "center",
-//     };
-// }
+function WRStyle(wr) {
+    return {
+        background: WRc(wr),
+        color: "white",
+        padding: "10.5px",
+        margin: "-0.3rem 0rem -0.3rem -0.5rem",
+        textAlign: "center",
+    };
+}
 
 export default function SessionsLog(props) {
     const { theme } = React.useContext(ThemeContext);
+    console.log(props.data);
 
     const Styles = styled.div`
         .tableContainer {
@@ -74,14 +75,10 @@ export default function SessionsLog(props) {
                 font-weight: 500;
             }
             td {
-                // padding: 0.2rem 0.5rem;
             }
         }
-
-        .cell {
-            padding: 0.2rem 0.5rem;
-        }
     `;
+
 
     const data = props.data;
 
@@ -95,7 +92,7 @@ export default function SessionsLog(props) {
                     // Use Cell to render an expander for each row.
                     // We can use the getToggleRowExpandedProps prop-getter
                     // to build the expander.
-                    <div className=".cell">
+                    <div style={{ margin: "6px" }}>
                         <span {...row.getToggleRowExpandedProps()}>
                             {row.isExpanded ? (
                                 <Icon size={24} icon={chevronDown} />
@@ -107,67 +104,54 @@ export default function SessionsLog(props) {
                 ),
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "",
                 accessor: "rank",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "Date",
                 accessor: "date",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "Battles",
                 accessor: "battles",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "Avg Tier",
                 accessor: "tier",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "Tanks",
                 accessor: "tankcount",
             },
+            { 
+                Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value}</div>) },
+                Header: 'WN8', 
+                accessor: 'overallWN8' },
+            { 
+                Cell: ({ value }) => { return (<div style={WRStyle(value)}>{value + "%"}</div>) },
+                Header: 'Winrate', 
+                accessor: 'winrate' },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
-                Header: "WN8",
-                accessor: "overallWN8",
-            },
-            {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
-                Header: "Winrate",
-                accessor: "winrate",
-            },
-            {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "DPG",
                 accessor: "damagerate",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "KPG",
                 accessor: "fragsrate",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "DMG Ratio",
                 accessor: "DMGratio",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "KD",
                 accessor: "KD",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "XP",
                 accessor: "xprate",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "Spots",
                 accessor: "spottedrate",
             },
