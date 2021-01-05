@@ -22,6 +22,8 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import MasteryGraph from "./masteryGraph";
 import { Pagination } from "../../components";
 
+const backend = process.env.REACT_APP_BACKEND;
+
 function MasteryTable(props) {
     const { theme } = useContext(ThemeContext);
     const { server } = useContext(ServerContext);
@@ -559,7 +561,7 @@ function MasteryTable(props) {
             useEffect(() => {
                 async function get() {
                     fetch(
-                        `https://tomatobackend.herokuapp.com/api/abcd/masterytank/${row.original.id}/${server}`
+                        `${backend}/api/abcd/masterytank/${row.original.id}/${server}`
                     )
                         .then((res) => res.json())
                         .then((res) => setData(res));
