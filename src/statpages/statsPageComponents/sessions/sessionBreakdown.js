@@ -106,7 +106,7 @@ export default function SessionBreakdown(props) {
                 Cell: ({ value }) => {
                     return (
                         <img
-                            src={require(`../../../assets/flagIcons/${value}.svg`)}
+                            src={require(`../../../assets/flagIcons/${value}.png`)}
                             style={{ maxWidth: "40px" }}
                             alt={value}
                         />

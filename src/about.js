@@ -42,7 +42,7 @@ export default function About() {
                                         : "rgb(100,100,100)",
                             }}
                         >
-                            UPDATED 8/26/2020
+                            UPDATED 5/1/2021
                         </span>{" "}
                         <br />
                         <br />
@@ -54,54 +54,34 @@ export default function About() {
                             which are only found here. Some stats have taken
                             inspiration from the other sites.
                             <br />
-                            Some of the unique features offered on this site:
-                            <ul>
-                                <li>
-                                    Period breakdown for recent stats - inspired
-                                    by Wotlabs.net
-                                </li>
-                                <li>
-                                    Player MoE data - inspired by the Mastery
-                                    Badge breakdown on Wotstats.org
-                                </li>
-                                <li>
-                                    Player WN8 heatmap - inspired by WN8lab.com
-                                    and Noobmeter.net
-                                </li>
-                                <li>
-                                    Ultra detailed server stats - inspired by
-                                    vbaddict.net (RIP)
-                                </li>
-                                <li>
-                                    Tank WR and WN8 curves - inspired by WR
-                                    curves on wot-news.com
-                                </li>
-                                <li>Per-tank DPG and WN8 percentiles</li>
-                            </ul>
+
                             Tomato.gg doesn't aim to do everything. It will
                             never have server stats as detailed as those on
                             wot-news.com, nor will it have the percise
                             individual battle accessible on WN8lab.com.
-                            Tomato.gg is still in the early stages of
-                            development and is nowhere near feature complete. In
-                            the near future, I plan to expand the player stats
+                            Tomato.gg is being actively developed
+                             and is nowhere near feature complete. In
+                            the future, I plan to expand the player stats
                             page, expand the tank stats page, implement clan
-                            stats, and add tank stats for the EU, ASIA, and RU
-                            servers.
+                            stats, and finish the leaderboards.
                             <br />
                             <br />
-                            You can Tomato.gg on your phone, but this is mainly
-                            a desktop app. I will not leave out statistics on
-                            the mobile version even if it makes the site looks
-                            worse on mobile. <br />
+                            Tomato.gg fully supports EU and NA player stats. You can still view stats for RU and ASIA gamers, but there are no automatic daily stat updates. 
                             <br />
-                            As of now, I am the sole developer of Tomato.gg. For
-                            those of you wondering about the technical details
-                            of this site, I am using React, Node (may switch in
-                            the future), PostgreSQL. It currently, costs me
-                            around $50-$100 a month to host, but these costs are
-                            certain to rise when Tomato.gg increases in
-                            popularity. Join my{" "}
+                            <br />
+                            Check out Tomato.gg on mobile as well. I have optimzied the 
+                            mobile site for the best user experience while still 
+                            being nearly 100% feature complete.<br />
+                            <br />
+                            <a
+                                target="blank"
+                                href="http://localhost:3000/stats/NA/Superdude3800=1007264827"
+                            >
+                                Superdude3800
+                            </a> has helped extensively with the development of Tomato.gg. Thanks so much!
+                            <br />
+                            <br />
+                            Join my{" "}
                             <a target="blank" href="https://discord.gg/qA2bV7K">
                                 Discord server
                             </a>{" "}

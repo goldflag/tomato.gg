@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
 import styled from "styled-components";
 import { ThemeContext } from "../context";
-import "../css/tankstats.css";
 import WN8Table from "./wn8Components/wn8Table";
-import "../css/innerpage.css";
 import tankNames from "../data/tankNames.json";
 import nationConversion from "../data/nationConversion";
 import classConversion from "../data/classConversion.json";
@@ -49,7 +47,7 @@ export default function Leaderboards(props) {
         }
 
         .info {
-            margin: -1.8rem -0.8rem 0 -0.8rem;
+            margin: 0rem -0.8rem 0 -0.8rem;
             background-color: ${theme === "dark"
                 ? "rgb(40, 40, 40)"
                 : "rgb(250, 250, 250)"};

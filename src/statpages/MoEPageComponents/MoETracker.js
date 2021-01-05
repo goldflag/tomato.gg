@@ -109,7 +109,7 @@ function MoETracker(props) {
             padding: 5px 10px;
             text-align: center;
             text-decoration: none;
-            display: inline-block;
+            display: flex;
             font-size: 14px;
         }
 
@@ -321,7 +321,11 @@ function MoETracker(props) {
                     }}
                     className={"filterButton"}
                 >
-                    CN
+                    <img
+                        src={require(`../../assets/flagIcons/China.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"China"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
@@ -329,7 +333,11 @@ function MoETracker(props) {
                     }}
                     className={"filterButton"}
                 >
-                    FR
+                    <img
+                        src={require(`../../assets/flagIcons/France.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"France"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
@@ -337,7 +345,11 @@ function MoETracker(props) {
                     }}
                     className={"filterButton"}
                 >
-                    DE
+                    <img
+                        src={require(`../../assets/flagIcons/Germany.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"Germany"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
@@ -345,7 +357,11 @@ function MoETracker(props) {
                     }}
                     className={"filterButton"}
                 >
-                    JP
+                    <img
+                        src={require(`../../assets/flagIcons/Japan.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"Japan"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
@@ -353,7 +369,11 @@ function MoETracker(props) {
                     }}
                     className={"filterButton"}
                 >
-                    SE
+                    <img
+                        src={require(`../../assets/flagIcons/Sweden.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"Sweden"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
@@ -361,7 +381,11 @@ function MoETracker(props) {
                     }}
                     className={"filterButton"}
                 >
-                    UK
+                    <img
+                        src={require(`../../assets/flagIcons/UK.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"UK"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
@@ -369,7 +393,11 @@ function MoETracker(props) {
                     }}
                     className={"filterButton"}
                 >
-                    USA
+                    <img
+                        src={require(`../../assets/flagIcons/USA.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"USA"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
@@ -377,7 +405,11 @@ function MoETracker(props) {
                     }}
                     className={"filterButton"}
                 >
-                    USSR
+                    <img
+                        src={require(`../../assets/flagIcons/USSR.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"USSR"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
@@ -385,7 +417,11 @@ function MoETracker(props) {
                     }}
                     className={"filterButton"}
                 >
-                    CZ
+                    <img
+                        src={require(`../../assets/flagIcons/Czech.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"Czech"}
+                    />                  
                 </Button>
                 <Button
                     onClick={() => {
@@ -393,15 +429,29 @@ function MoETracker(props) {
                     }}
                     className={"filterButton"}
                 >
-                    IT
+                    <img
+                        src={require(`../../assets/flagIcons/Italy.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"Italy"}
+                    />                  
                 </Button>
                 <Button
+                        styles={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        paddingTop: '10px',
+                    }}
                     onClick={() => {
                         setFilter("Poland");
                     }}
                     className={"filterButton"}
                 >
-                    PL
+                    <img
+                        src={require(`../../assets/flagIcons/Poland.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"Poland"}
+                    />
                 </Button>
             </ButtonGroup>
         );
@@ -761,7 +811,7 @@ function MoETracker(props) {
                 Cell: ({ value }) => {
                     return (
                         <img
-                            src={require(`../../assets/flagIcons/${value}.svg`)}
+                            src={require(`../../assets/flagIcons/${value}.png`)}
                             style={{ maxWidth: "40px" }}
                             alt={value}
                         />

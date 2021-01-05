@@ -42,6 +42,7 @@ export default function SessionsLog(props) {
             background-color: ${theme === "dark"
             ? "rgb(40, 40, 40)"
             : "rgb(250, 250, 250)"};
+            margin-bottom: 1rem;
         }
         
         table {

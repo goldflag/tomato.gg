@@ -29,15 +29,6 @@ export default function RecentTankStats(props) {
     const [finaldata, setFinaldata] = useState("");
     const { theme } = React.useContext(ThemeContext);
 
-    // Runs once when component mounts
-    // useEffect(() => {
-    //   let data = props.overallStats;
-    //   data.map((row) => {
-    //     row[2] = <img src={require(`../../assets/flagIcons/${row[2]}.svg`)} style={{display: 'block', maxheight: '20px', maxWidth: '40px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[2]}/>;
-    //     row[4] = <img src={require(`../../assets/classIcons/${row[4]}.png`)} style={{display: 'block', maxheight: '20px', maxWidth: '20px', marginLeft: 'auto', marginRight: 'auto'}} alt={row[1]}/>;
-    //   });
-    //   setFinaldata(data);
-    // }, []);
 
     const getMuiTheme = () =>
         createMuiTheme({
