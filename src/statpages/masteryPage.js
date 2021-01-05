@@ -35,8 +35,7 @@ export default function MasteryPage(props) {
 
     useEffect(() => {
         async function getData() {
-            const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/mastery/${server}`;
-            //const url = `http://localhost:5000/api/abcd/mastery/${server}`;
+            const url = `https://tomatobackend.herokuapp.com/api/abcd/mastery/${server}`;
             const raw = await fetch(url);
             let res = await raw.json();
             setData(res);

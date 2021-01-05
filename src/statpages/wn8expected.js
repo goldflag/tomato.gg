@@ -35,8 +35,7 @@ export default function Leaderboards(props) {
     }, []);
 
     async function getData() {
-        const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/wn8`;
-        //const url = `http://localhost:5000/api/abcd/leaderboards/${props.type}/10`;
+        const url = `https://tomatobackend.herokuapp.com/api/abcd/wn8`;
         const raw = await fetch(url);
         let res = await raw.json();
         setData(res);

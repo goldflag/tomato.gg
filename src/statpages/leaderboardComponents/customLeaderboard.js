@@ -90,7 +90,7 @@ export default function CustomLeaderboard(props) {
         };
 
         async function fetchData() {
-            const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/leaderboards/custom/
+            const url = `https://tomatobackend.herokuapp.com/api/abcd/leaderboards/custom/
             ${type}/${count}/${mintier}/${maxtier}/${minbattles}/${maxbattles}/${minWN8}/${maxWN8}/${minwinrate}/${maxwinrate}`;
             const raw = await fetch(url);
             let res = await raw.json();

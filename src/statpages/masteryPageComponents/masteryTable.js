@@ -558,9 +558,8 @@ function MasteryTable(props) {
             const [data, setData] = useState();
             useEffect(() => {
                 async function get() {
-                    //fetch(`http://localhost:5000/api/abcd/masterytank/${row.original.id}/${server}`)
                     fetch(
-                        `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/masterytank/${row.original.id}/${server}`
+                        `https://tomatobackend.herokuapp.com/api/abcd/masterytank/${row.original.id}/${server}`
                     )
                         .then((res) => res.json())
                         .then((res) => setData(res));

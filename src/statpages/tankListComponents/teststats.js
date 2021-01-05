@@ -64,7 +64,6 @@ export default function Table() {
     }, []);
 
     async function fetchData() {
-        //const url = `https://tomatobackend.herokuapp.com/api/tankstats`;
         const url = `http://localhost:5000/api/abcd/stats/tankstats`;
         const res = await fetch(url);
         let data = await res.json();

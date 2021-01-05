@@ -48,10 +48,8 @@ export default function MoEPage(props) {
 
     useEffect(() => {
         async function getData() {
-            const url = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/moe/${server}`;
-            //const url = `http://localhost:5000/api/abcd/moe/${server}`;
-            const url2 = `https://tomatobackend-oswt3.ondigitalocean.app/api/abcd/moetracker/get/${server}`;
-            //const url2 = `http://localhost:5000/api/abcd/moetracker/get/${server}`;
+            const url = `https://tomatobackend.herokuapp.com/api/abcd/moe/${server}`;
+            const url2 = `https://tomatobackend.herokuapp.com/api/abcd/moetracker/get/${server}`;
 
             try {
                 Promise.all([fetch(url), fetch(url2)])

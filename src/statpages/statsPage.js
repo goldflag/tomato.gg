@@ -96,8 +96,7 @@ class StatsPage extends Component {
             `${domain}/wot/tanks/achievements/?${commonArgs}&fields=achievements%2C+tank_id`, //MOE Data TODO: not used?
             `${domain}/wot/clans/accountinfo/?${commonArgs}`, //Current Clan Data
             `${domain}/wot/clans/memberhistory/?${commonArgs}`, //Clan history
-            `https://tomatobackend-oswt3.ondigitalocean.app/api/${backendKey}/${server}/${id}`, //Recent stats from our own API
-            //`http://localhost:5000/api/abcd/${server}/${id}`
+            `https://tomatobackend.herokuapp.com/api/${backendKey}/${server}/${id}`, //Recent stats from our own API
         ];
 
         return Promise.all(urls.map((url) => fetch(url)))
