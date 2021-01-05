@@ -69,10 +69,10 @@ export default function MoEPage(props) {
     }, [server]);
 
     const Styles = styled.div`
+
         *:focus {
             outline: none;
         }
-
 
         .info {
             background-color: ${theme === "dark"

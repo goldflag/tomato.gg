@@ -282,13 +282,16 @@ function OverallTable(props) {
     const { theme } = React.useContext(ThemeContext);
 
     const Styles = styled.div`
-        table {
-            position: sticky;
-            border-spacing: 0;
-            width: 100%;
-            font-size: 0.8rem;
-            overflow-x: scroll;
+        .tableContainer {
+            overflow-x: auto;
+            background-color: ${theme === "dark"
+            ? "rgb(40, 40, 40)"
+            : "rgb(250, 250, 250)"};
+        }
 
+        table {
+            border-spacing: 0;
+            font-size: 0.8rem;
             tr {
                 overflow-x: scroll;
                 :last-child {
@@ -1196,7 +1199,9 @@ function OverallTable(props) {
 
     return (
         <Styles>
-            <Table columns={columns} data={data} />
+            <div className="tableContainer">
+                <Table columns={columns} data={data} />
+            </div>
         </Styles>
     );
 }

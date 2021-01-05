@@ -1,5 +1,5 @@
-import React from "react";
-import clsx from "clsx";
+import React, {useState, useContext} from "react";
+import { ThemeContext } from "../context";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -9,12 +9,16 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import AppsIcon from "@material-ui/icons/Apps";
-import PublicIcon from "@material-ui/icons/Public";
-import BarChartIcon from "@material-ui/icons/BarChart";
-import InfoIcon from "@material-ui/icons/Info";
-import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import {
+    Apps,
+    Info,
+    Star,
+    Games,
+    BarChart,
+    LibraryBooks,
+} from "@material-ui/icons";
 import smallLogo from "../assets/smalllogo.png";
+import  "../css/body.css";
 
 const useStyles = makeStyles({
     list: {
@@ -27,9 +31,11 @@ const useStyles = makeStyles({
 
 export default function TemporaryDrawer() {
     const classes = useStyles();
-    const [state, setState] = React.useState({
+    const [state, setState] = useState({
         top: false,
     });
+
+    const { theme } = React.useContext(ThemeContext);
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (
@@ -42,61 +48,83 @@ export default function TemporaryDrawer() {
         setState({ ...state, [anchor]: open });
     };
 
+    const textStyle = {
+        color: theme === "dark" ? "rgb(255, 255, 255)" : "rgb(31, 45, 90)"
+    }
+
     const list = (anchor) => (
         <div
-            className={clsx(classes.list, {
-                [classes.fullList]: anchor === "top" || anchor === "bottom",
-            })}
+            className= {theme === "dark" ? "dark-mode" : "light-mode"}
             role="presentation"
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
-            <List>
-                <Link to="/">
-                    <ListItem button key={"1"}>
-                        <ListItemIcon>
-                            <AppsIcon style={{ color: "rgb(31, 45, 90)" }} />
-                        </ListItemIcon>
-                        <ListItemText primary={"Home"} />
-                    </ListItem>
-                </Link>
-                <Link to="/tanks">
-                    <ListItem button key={"2"}>
-                        <ListItemIcon>
-                            <BarChartIcon
-                                style={{ color: "rgb(31, 45, 90)" }}
-                            />
-                        </ListItemIcon>
-                        <ListItemText primary={"Tank Stats"} />
-                    </ListItem>
-                </Link>
-                <Link to="/server-stats">
-                    <ListItem button key={"3"}>
-                        <ListItemIcon>
-                            <PublicIcon style={{ color: "rgb(31, 45, 90)" }} />
-                        </ListItemIcon>
-                        <ListItemText primary={"Server Stats"} />
-                    </ListItem>
-                </Link>
-                <Link to="/stats-reference">
-                    <ListItem button key={"4"}>
-                        <ListItemIcon>
-                            <LibraryBooksIcon
-                                style={{ color: "rgb(31, 45, 90)" }}
-                            />
-                        </ListItemIcon>
-                        <ListItemText primary={"Stats Reference"} />
-                    </ListItem>
-                </Link>
-                <Link to="/about">
-                    <ListItem button key={"5"}>
-                        <ListItemIcon>
-                            <InfoIcon style={{ color: "rgb(31, 45, 90)" }} />
-                        </ListItemIcon>
-                        <ListItemText primary={"About"} />
-                    </ListItem>
-                </Link>
-            </List>
+                <List>
+                    <Link to="/">
+                        <ListItem button key={"1"}>
+                            <ListItemIcon>
+                                <Apps style={textStyle} />
+                            </ListItemIcon>
+                            <ListItemText primary={"Home"} style={textStyle}/>
+                        </ListItem>
+                    </Link>
+                    <Link to="/tanks">
+                        <ListItem button key={"2"}>
+                            <ListItemIcon>
+                                <BarChart style={textStyle} />
+                            </ListItemIcon>
+                            <ListItemText primary={"Tank Stats"} style={textStyle}/>
+                        </ListItem>
+                    </Link>
+                    <Link to="/moe">
+                        <ListItem button key={"3"}>
+                            <ListItemIcon>
+                                <Star style={textStyle} />
+                            </ListItemIcon>
+                            <ListItemText primary={"MoE Reqs"} style={textStyle}/>
+                        </ListItem>
+                    </Link>
+                    <Link to="/mastery">
+                        <ListItem button key={"3"}>
+                            <ListItemIcon>
+                                <Star style={textStyle} />
+                            </ListItemIcon>
+                            <ListItemText primary={"Mastery Reqs"} style={textStyle}/>
+                        </ListItem>
+                    </Link>
+                    <Link to="/wn8">
+                        <ListItem button key={"3"}>
+                            <ListItemIcon>
+                                <Games style={textStyle} />
+                            </ListItemIcon>
+                            <ListItemText primary={"WN8 Exp. Values"} style={textStyle}/>
+                        </ListItem>
+                    </Link>
+                    {/* <Link to="/server-stats">
+                        <ListItem button key={"3"}>
+                            <ListItemIcon>
+                                <Star style={iconStyle} />
+                            </ListItemIcon>
+                            <ListItemText primary={"Server Stats"} style={textStyle}/>
+                        </ListItem>
+                    </Link> */}
+                    <Link to="/stats-reference">
+                        <ListItem button key={"4"}>
+                            <ListItemIcon>
+                                <LibraryBooks style={textStyle} />
+                            </ListItemIcon>
+                            <ListItemText primary={"Stats Reference"} style={textStyle}/>
+                        </ListItem>
+                    </Link>
+                    <Link to="/about">
+                        <ListItem button key={"5"}>
+                            <ListItemIcon>
+                                <Info style={textStyle} />
+                            </ListItemIcon>
+                            <ListItemText primary={"About"} style={textStyle}/>
+                        </ListItem>
+                    </Link>
+                </List>
             <Divider />
         </div>
     );

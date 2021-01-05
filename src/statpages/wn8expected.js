@@ -49,6 +49,7 @@ export default function Leaderboards(props) {
         }
 
         .info {
+            margin: -1.8rem -0.8rem 0 -0.8rem;
             background-color: ${theme === "dark"
                 ? "rgb(40, 40, 40)"
                 : "rgb(250, 250, 250)"};

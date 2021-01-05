@@ -39,6 +39,14 @@ export default function ClanHistory(props) {
         setValue(newValue);
     };
 
+    let clanInfo = <></>;
+    if (clanList) {
+        clanInfo = Unit();
+    }
+    if (props.data === "NO CLAN HISTORY") {
+        clanInfo = <>This player has no clan data</>;
+    }
+
     // Runs once when component mounts
     useEffect(() => {
         function getClanData() {
@@ -48,9 +56,12 @@ export default function ClanHistory(props) {
             let URL = `https://api.worldoftanks.${server}/wot/clans/info/?application_id=${APIKey}&clan_id=`;
 
             const clonedData = clonedeep(props.data);
-            clonedData.forEach((row) => {
-                URL += `${row.clan_id}%2C+`;
-            });
+            console.log(clonedData);
+            if (clonedData !== "NO CLAN HISTORY") {
+                clonedData.forEach((row) => {
+                    URL += `${row.clan_id}%2C+`;
+                });
+            }
 
             URL = URL.slice(0, -4);
 
@@ -80,8 +91,9 @@ export default function ClanHistory(props) {
                     setClanList(clonedData);
                 });
         }
-
-        getClanData();
+        if (props.data !== "NO CLAN HISTORY") {
+            getClanData();
+        }
     }, [props.currentClan, props.data]);
 
     function Unit() {
@@ -195,14 +207,6 @@ export default function ClanHistory(props) {
             }
             return undefined;
         });
-    }
-
-    let clanInfo = <></>;
-    if (clanList) {
-        clanInfo = Unit();
-    }
-    if (props.data === "NO CLAN HISTORY") {
-        clanInfo = <>This player has no clan data</>;
     }
 
     return (

@@ -36,6 +36,13 @@ export default function SessionsLog(props) {
     const { theme } = React.useContext(ThemeContext);
 
     const Styles = styled.div`
+        .tableContainer {
+            overflow-x: auto;
+            background-color: ${theme === "dark"
+            ? "rgb(40, 40, 40)"
+            : "rgb(250, 250, 250)"};
+        }
+        
         table {
             border-spacing: 0;
             width: 100%;
@@ -234,89 +241,91 @@ export default function SessionsLog(props) {
 
     return (
         <Styles>
-            <table {...getTableProps()}>
-                <thead>
-                    {headerGroups.map((headerGroup) => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) => (
-                                <th
-                                    {...column.getHeaderProps(
-                                        column.getSortByToggleProps()
-                                    )}
-                                >
-                                    {column.render("Header")}
-                                    <span style={{ textAlign: "center" }}>
-                                        {column.isSorted ? (
-                                            column.isSortedDesc ? (
-                                                <Icon
-                                                    size={16}
-                                                    icon={arrowDown}
-                                                />
-                                            ) : (
-                                                <Icon
-                                                    size={16}
-                                                    icon={arrowUp}
-                                                />
-                                            )
-                                        ) : (
-                                            ""
+            <div className="tableContainer">
+                <table {...getTableProps()}>
+                    <thead>
+                        {headerGroups.map((headerGroup) => (
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) => (
+                                    <th
+                                        {...column.getHeaderProps(
+                                            column.getSortByToggleProps()
                                         )}
-                                    </span>
-                                </th>
-                            ))}
-                        </tr>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {page.map((row, i) => {
-                        prepareRow(row);
-                        return (
-                            <React.Fragment key={i}>
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map((cell) => (
-                                        <td {...cell.getCellProps()}>
-                                            {cell.render("Cell")}
-                                        </td>
-                                    ))}
-                                </tr>
-                                {/*
-                                If the row is in an expanded state, render a row with a
-                                column that fills the entire length of the table.
-                            */}
-                                {row.isExpanded ? (
-                                    <tr>
-                                        <td colSpan={visibleColumns.length}>
-                                            {/*
-                                                Inside it, call our renderRowSubComponent function. In reality,
-                                                you could pass whatever you want as props to
-                                                a component like this, including the entire
-                                                table instance. But for this example, we'll just
-                                                pass the row
-                                            */}
-                                            {renderRowSubComponent({ row })}
-                                        </td>
+                                    >
+                                        {column.render("Header")}
+                                        <span style={{ textAlign: "center" }}>
+                                            {column.isSorted ? (
+                                                column.isSortedDesc ? (
+                                                    <Icon
+                                                        size={16}
+                                                        icon={arrowDown}
+                                                    />
+                                                ) : (
+                                                    <Icon
+                                                        size={16}
+                                                        icon={arrowUp}
+                                                    />
+                                                )
+                                            ) : (
+                                                ""
+                                            )}
+                                        </span>
+                                    </th>
+                                ))}
+                            </tr>
+                        ))}
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {page.map((row, i) => {
+                            prepareRow(row);
+                            return (
+                                <React.Fragment key={i}>
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map((cell) => (
+                                            <td {...cell.getCellProps()}>
+                                                {cell.render("Cell")}
+                                            </td>
+                                        ))}
                                     </tr>
-                                ) : null}
-                            </React.Fragment>
-                        );
-                    })}
-                </tbody>
-            </table>
-            <Pagination
-                pageSizes={[7, 14, 30, 90, 180]}
-                {...{
-                    canPreviousPage,
-                    canNextPage,
-                    pageOptions,
-                    pageCount,
-                    gotoPage,
-                    nextPage,
-                    previousPage,
-                    setPageSize,
-                    pageIndex,
-                    pageSize,
-                }}
-            />
+                                    {/*
+                                    If the row is in an expanded state, render a row with a
+                                    column that fills the entire length of the table.
+                                */}
+                                    {row.isExpanded ? (
+                                        <tr>
+                                            <td colSpan={visibleColumns.length}>
+                                                {/*
+                                                    Inside it, call our renderRowSubComponent function. In reality,
+                                                    you could pass whatever you want as props to
+                                                    a component like this, including the entire
+                                                    table instance. But for this example, we'll just
+                                                    pass the row
+                                                */}
+                                                {renderRowSubComponent({ row })}
+                                            </td>
+                                        </tr>
+                                    ) : null}
+                                </React.Fragment>
+                            );
+                        })}
+                    </tbody>
+                </table>
+                <Pagination
+                    pageSizes={[7, 14, 30, 90, 180]}
+                    {...{
+                        canPreviousPage,
+                        canNextPage,
+                        pageOptions,
+                        pageCount,
+                        gotoPage,
+                        nextPage,
+                        previousPage,
+                        setPageSize,
+                        pageIndex,
+                        pageSize,
+                    }}
+                />
+            </div>
         </Styles>
     );
 }

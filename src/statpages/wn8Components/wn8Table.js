@@ -23,12 +23,21 @@ function WN8Table(props) {
     const { theme } = React.useContext(ThemeContext);
 
     const Styles = styled.div`
+
+        margin: 0rem -0.8rem;
+
+        .tableContainer {
+            overflow-x: auto;
+            background-color: ${theme === "dark"
+            ? "rgb(40, 40, 40)"
+            : "rgb(250, 250, 250)"};
+        }
+
         table {
             position: sticky;
             border-spacing: 0;
             width: 100%;
             font-size: 0.8rem;
-            overflow-x: scroll;
 
             tr {
                 overflow-x: scroll;
@@ -63,7 +72,6 @@ function WN8Table(props) {
                 background-color: ${theme === "dark"
                     ? "rgb(50, 50, 50)"
                     : "rgb(255, 255, 255)"};
-                // color: black;
                 border-bottom: solid 1px
                     ${theme === "dark"
                         ? "rgb(100, 100, 100)"
@@ -72,7 +80,7 @@ function WN8Table(props) {
             }
             td {
                 margin: 0;
-                padding: 0.2rem 0.5rem;
+                padding: 0rem 0rem 0rem 0.5rem;
                 :last-child {
                     border-right: 0;
                 }
@@ -94,9 +102,6 @@ function WN8Table(props) {
         }
 
         .filters {
-            background-color: ${theme === "dark"
-                ? "rgb(40, 40, 40)"
-                : "rgb(250, 250, 250)"};
             padding: 10px 10px 0 10px;
         }
 
@@ -750,7 +755,9 @@ function WN8Table(props) {
 
     return (
         <Styles>
-            <Table columns={columns} data={data} />
+            <div className="tableContainer">
+                <Table columns={columns} data={data} />
+            </div>
         </Styles>
     );
 }

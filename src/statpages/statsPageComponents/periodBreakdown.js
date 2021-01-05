@@ -45,12 +45,16 @@ function PeriodBreakdown(props) {
     const { theme } = React.useContext(ThemeContext);
 
     const Styles = styled.div`
+        .tableContainer {
+            overflow-x: auto;
+            background-color: ${theme === "dark"
+            ? "rgb(40, 40, 40)"
+            : "rgb(250, 250, 250)"};
+        }
+
         table {
-            position: sticky;
             border-spacing: 0;
-            width: 100%;
             font-size: 0.8rem;
-            overflow-x: scroll;
             tr {
                 overflow-x: scroll;
                 :last-child {
@@ -119,6 +123,13 @@ function PeriodBreakdown(props) {
                 ? "rgb(40, 40, 40)"
                 : "rgb(250, 250, 250)"};
             padding: 10px 10px 0 10px;
+        }
+
+        .subComponent {
+            background-color: ${theme === "dark"
+                ? "rgb(40, 40, 40)"
+                : "rgb(250, 250, 250)"};
+            padding: 10px;
         }
     `;
 
@@ -799,7 +810,9 @@ function PeriodBreakdown(props) {
 
     return (
         <Styles>
-            <Table columns={columns} data={data} />
+            <div className="tableContainer">
+                <Table columns={columns} data={data} />
+            </div>
         </Styles>
     );
 }
