@@ -21,6 +21,7 @@ const tierConv = {
     10: "X",
 };
 const trackingId = process.env.REACT_APP_GA;
+const backend = process.env.REACT_APP_BACKEND;
 
 export default function MasteryPage(props) {
     const { theme } = React.useContext(ThemeContext);
@@ -35,7 +36,7 @@ export default function MasteryPage(props) {
 
     useEffect(() => {
         async function getData() {
-            const url = `https://tomatobackend.herokuapp.com/api/abcd/mastery/${server}`;
+            const url = `${backend}/api/abcd/mastery/${server}`;
             const raw = await fetch(url);
             let res = await raw.json();
             setData(res);

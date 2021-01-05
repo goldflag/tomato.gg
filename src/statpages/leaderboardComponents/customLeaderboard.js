@@ -10,6 +10,8 @@ import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import { Pagination } from "../../components";
 
+const backend = process.env.REACT_APP_BACKEND;
+
 export default function CustomLeaderboard(props) {
     const { theme } = React.useContext(ThemeContext);
 
@@ -90,7 +92,7 @@ export default function CustomLeaderboard(props) {
         };
 
         async function fetchData() {
-            const url = `https://tomatobackend.herokuapp.com/api/abcd/leaderboards/custom/
+            const url = `${backend}/api/abcd/leaderboards/custom/
             ${type}/${count}/${mintier}/${maxtier}/${minbattles}/${maxbattles}/${minWN8}/${maxWN8}/${minwinrate}/${maxwinrate}`;
             const raw = await fetch(url);
             let res = await raw.json();

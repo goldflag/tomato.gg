@@ -6,6 +6,8 @@ import WN8c from "../../functions/WN8color";
 import WRc from "../../functions/WRcolor";
 import { ThemeContext } from "../../context";
 
+const backend = process.env.REACT_APP_BACKEND;
+
 const rankColors = {
     1: <span style={{ color: "gold", fontWeight: 600 }}>1</span>,
     2: <span style={{ color: "silver", fontWeight: 600 }}>2</span>,
@@ -87,7 +89,7 @@ export default function SmallLeaderboard(props) {
 
     useEffect(() => {
         async function fetchData() {
-            const url = `https://tomatobackend.herokuapp.com/api/abcd/leaderboards/${props.type}/10`;
+            const url = `${backend}/api/abcd/leaderboards/${props.type}/10`;
             const raw = await fetch(url);
             let res = await raw.json();
 

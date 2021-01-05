@@ -22,6 +22,8 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import MoEGraph from "./MoEGraph";
 import { Pagination } from "../../components";
 
+const backend = process.env.REACT_APP_BACKEND;
+
 const tierConv = {
     1: "I",
     2: "II",
@@ -540,7 +542,7 @@ function MoETracker(props) {
             useEffect(() => {
                 async function get() {
                     fetch(
-                        `https://tomatobackend.herokuapp.com/api/abcd/moetank/${row.original.id}/${server}`
+                        `${backend}/api/abcd/moetank/${row.original.id}/${server}`
                     )
                         .then((res) => res.json())
                         .then((res) => setData(res));

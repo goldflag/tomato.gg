@@ -28,6 +28,7 @@ const tierConv = {
     10: "X",
 };
 const trackingId = process.env.REACT_APP_GA;
+const backend = process.env.REACT_APP_BACKEND;
 
 export default function MoEPage(props) {
     const { theme } = useContext(ThemeContext);
@@ -48,8 +49,8 @@ export default function MoEPage(props) {
 
     useEffect(() => {
         async function getData() {
-            const url = `https://tomatobackend.herokuapp.com/api/abcd/moe/${server}`;
-            const url2 = `https://tomatobackend.herokuapp.com/api/abcd/moetracker/get/${server}`;
+            const url = `${backend}/api/abcd/moe/${server}`;
+            const url2 = `${backend}/api/abcd/moetracker/get/${server}`;
 
             try {
                 Promise.all([fetch(url), fetch(url2)])

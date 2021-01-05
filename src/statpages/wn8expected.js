@@ -24,6 +24,7 @@ const tierConv = {
 };
 
 const trackingId = process.env.REACT_APP_GA;
+const backend = process.env.REACT_APP_BACKEND;
 
 export default function Leaderboards(props) {
     const [data, setData] = useState();
@@ -35,7 +36,7 @@ export default function Leaderboards(props) {
     }, []);
 
     async function getData() {
-        const url = `https://tomatobackend.herokuapp.com/api/abcd/wn8`;
+        const url = `${backend}/api/abcd/wn8`;
         const raw = await fetch(url);
         let res = await raw.json();
         setData(res);

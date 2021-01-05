@@ -16,6 +16,7 @@ import { withRouter } from "react-router-dom";
 const APIKey = process.env.REACT_APP_API_KEY;
 const backendKey = process.env.REACT_APP_BACKEND_API_KEY;
 const trackingId = process.env.REACT_APP_GA;
+const backend = process.env.REACT_APP_BACKEND;
 
 const styles = () => ({
     loading: {
@@ -96,7 +97,7 @@ class StatsPage extends Component {
             `${domain}/wot/tanks/achievements/?${commonArgs}&fields=achievements%2C+tank_id`, //MOE Data TODO: not used?
             `${domain}/wot/clans/accountinfo/?${commonArgs}`, //Current Clan Data
             `${domain}/wot/clans/memberhistory/?${commonArgs}`, //Clan history
-            `https://tomatobackend.herokuapp.com/api/${backendKey}/${server}/${id}`, //Recent stats from our own API
+            `${backend}/api/${backendKey}/${server}/${id}`, //Recent stats from our own API
         ];
 
         return Promise.all(urls.map((url) => fetch(url)))
