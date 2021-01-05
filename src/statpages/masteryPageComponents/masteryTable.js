@@ -29,12 +29,18 @@ function MasteryTable(props) {
     const { server } = useContext(ServerContext);
 
     const Styles = styled.div`
+        .tableContainer {
+            overflow-x: auto;
+            background-color: ${theme === "dark"
+            ? "rgb(40, 40, 40)"
+            : "rgb(250, 250, 250)"};
+        }
+
         table {
             position: sticky;
             border-spacing: 0;
             width: 100%;
             font-size: 0.8rem;
-            overflow-x: scroll;
 
             tr {
                 overflow-x: scroll;
@@ -99,9 +105,6 @@ function MasteryTable(props) {
         }
 
         .filters {
-            background-color: ${theme === "dark"
-                ? "rgb(40, 40, 40)"
-                : "rgb(250, 250, 250)"};
             padding: 10px 10px 0 10px;
         }
 
@@ -836,7 +839,9 @@ function MasteryTable(props) {
 
     return (
         <Styles>
-            <Table columns={columns} data={data} />
+            <div className="tableContainer">
+                <Table columns={columns} data={data} />
+            </div>
         </Styles>
     );
 }

@@ -69,6 +69,7 @@ export default function MoEPage(props) {
     }, [server]);
 
     const Styles = styled.div`
+
         *:focus {
             outline: none;
         }

@@ -1,8 +1,8 @@
 import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
 import styled from "styled-components";
-// import WN8c from "../../../functions/WN8color";
-// import WRc from "../../../functions/WRcolor";
+import WN8c from "../../../functions/WN8color";
+import WRc from "../../../functions/WRcolor";
 import { Icon } from "react-icons-kit";
 import { chevronRight } from "react-icons-kit/feather/chevronRight";
 import { chevronDown } from "react-icons-kit/feather/chevronDown";
@@ -12,30 +12,38 @@ import { ThemeContext } from "../../../context";
 import SessionBreakdown from "./sessionBreakdown";
 import { Pagination } from "../../../components";
 
-// function WN8Style(wn8) {
-//     return {
-//         background: WN8c(wn8),
-//         color: "white",
-//         padding: "8px",
-//         margin: "-0.3rem 0rem -0.3rem -0.5rem",
-//         textAlign: "center",
-//     };
-// }
+function WN8Style(wn8) {
+    return {
+        background: WN8c(wn8),
+        color: "white",
+        padding: "10.5px",
+        margin: "-0.3rem 0rem -0.3rem -0.5rem",
+        textAlign: "center",
+    };
+}
 
-// function WRStyle(wr) {
-//     return {
-//         background: WRc(wr),
-//         color: "white",
-//         padding: "8px",
-//         margin: "-0.3rem 0rem -0.3rem -0.5rem",
-//         textAlign: "center",
-//     };
-// }
+function WRStyle(wr) {
+    return {
+        background: WRc(wr),
+        color: "white",
+        padding: "10.5px",
+        margin: "-0.3rem 0rem -0.3rem -0.5rem",
+        textAlign: "center",
+    };
+}
 
 export default function SessionsLog(props) {
     const { theme } = React.useContext(ThemeContext);
+    console.log(props.data);
 
     const Styles = styled.div`
+        .tableContainer {
+            overflow-x: auto;
+            background-color: ${theme === "dark"
+            ? "rgb(40, 40, 40)"
+            : "rgb(250, 250, 250)"};
+        }
+        
         table {
             border-spacing: 0;
             width: 100%;
@@ -67,14 +75,10 @@ export default function SessionsLog(props) {
                 font-weight: 500;
             }
             td {
-                // padding: 0.2rem 0.5rem;
             }
         }
-
-        .cell {
-            padding: 0.2rem 0.5rem;
-        }
     `;
+
 
     const data = props.data;
 
@@ -88,7 +92,7 @@ export default function SessionsLog(props) {
                     // Use Cell to render an expander for each row.
                     // We can use the getToggleRowExpandedProps prop-getter
                     // to build the expander.
-                    <div className=".cell">
+                    <div style={{ margin: "6px" }}>
                         <span {...row.getToggleRowExpandedProps()}>
                             {row.isExpanded ? (
                                 <Icon size={24} icon={chevronDown} />
@@ -100,67 +104,54 @@ export default function SessionsLog(props) {
                 ),
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "",
                 accessor: "rank",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "Date",
                 accessor: "date",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "Battles",
                 accessor: "battles",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "Avg Tier",
                 accessor: "tier",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "Tanks",
                 accessor: "tankcount",
             },
+            { 
+                Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value}</div>) },
+                Header: 'WN8', 
+                accessor: 'overallWN8' },
+            { 
+                Cell: ({ value }) => { return (<div style={WRStyle(value)}>{value + "%"}</div>) },
+                Header: 'Winrate', 
+                accessor: 'winrate' },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
-                Header: "WN8",
-                accessor: "overallWN8",
-            },
-            {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
-                Header: "Winrate",
-                accessor: "winrate",
-            },
-            {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "DPG",
                 accessor: "damagerate",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "KPG",
                 accessor: "fragsrate",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "DMG Ratio",
                 accessor: "DMGratio",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "KD",
                 accessor: "KD",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "XP",
                 accessor: "xprate",
             },
             {
-                Cell: ({ value }) => <div className=".cell">{value}</div>,
                 Header: "Spots",
                 accessor: "spottedrate",
             },
@@ -234,89 +225,91 @@ export default function SessionsLog(props) {
 
     return (
         <Styles>
-            <table {...getTableProps()}>
-                <thead>
-                    {headerGroups.map((headerGroup) => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) => (
-                                <th
-                                    {...column.getHeaderProps(
-                                        column.getSortByToggleProps()
-                                    )}
-                                >
-                                    {column.render("Header")}
-                                    <span style={{ textAlign: "center" }}>
-                                        {column.isSorted ? (
-                                            column.isSortedDesc ? (
-                                                <Icon
-                                                    size={16}
-                                                    icon={arrowDown}
-                                                />
-                                            ) : (
-                                                <Icon
-                                                    size={16}
-                                                    icon={arrowUp}
-                                                />
-                                            )
-                                        ) : (
-                                            ""
+            <div className="tableContainer">
+                <table {...getTableProps()}>
+                    <thead>
+                        {headerGroups.map((headerGroup) => (
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) => (
+                                    <th
+                                        {...column.getHeaderProps(
+                                            column.getSortByToggleProps()
                                         )}
-                                    </span>
-                                </th>
-                            ))}
-                        </tr>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {page.map((row, i) => {
-                        prepareRow(row);
-                        return (
-                            <React.Fragment key={i}>
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map((cell) => (
-                                        <td {...cell.getCellProps()}>
-                                            {cell.render("Cell")}
-                                        </td>
-                                    ))}
-                                </tr>
-                                {/*
-                                If the row is in an expanded state, render a row with a
-                                column that fills the entire length of the table.
-                            */}
-                                {row.isExpanded ? (
-                                    <tr>
-                                        <td colSpan={visibleColumns.length}>
-                                            {/*
-                                                Inside it, call our renderRowSubComponent function. In reality,
-                                                you could pass whatever you want as props to
-                                                a component like this, including the entire
-                                                table instance. But for this example, we'll just
-                                                pass the row
-                                            */}
-                                            {renderRowSubComponent({ row })}
-                                        </td>
+                                    >
+                                        {column.render("Header")}
+                                        <span style={{ textAlign: "center" }}>
+                                            {column.isSorted ? (
+                                                column.isSortedDesc ? (
+                                                    <Icon
+                                                        size={16}
+                                                        icon={arrowDown}
+                                                    />
+                                                ) : (
+                                                    <Icon
+                                                        size={16}
+                                                        icon={arrowUp}
+                                                    />
+                                                )
+                                            ) : (
+                                                ""
+                                            )}
+                                        </span>
+                                    </th>
+                                ))}
+                            </tr>
+                        ))}
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {page.map((row, i) => {
+                            prepareRow(row);
+                            return (
+                                <React.Fragment key={i}>
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map((cell) => (
+                                            <td {...cell.getCellProps()}>
+                                                {cell.render("Cell")}
+                                            </td>
+                                        ))}
                                     </tr>
-                                ) : null}
-                            </React.Fragment>
-                        );
-                    })}
-                </tbody>
-            </table>
-            <Pagination
-                pageSizes={[7, 14, 30, 90, 180]}
-                {...{
-                    canPreviousPage,
-                    canNextPage,
-                    pageOptions,
-                    pageCount,
-                    gotoPage,
-                    nextPage,
-                    previousPage,
-                    setPageSize,
-                    pageIndex,
-                    pageSize,
-                }}
-            />
+                                    {/*
+                                    If the row is in an expanded state, render a row with a
+                                    column that fills the entire length of the table.
+                                */}
+                                    {row.isExpanded ? (
+                                        <tr>
+                                            <td colSpan={visibleColumns.length}>
+                                                {/*
+                                                    Inside it, call our renderRowSubComponent function. In reality,
+                                                    you could pass whatever you want as props to
+                                                    a component like this, including the entire
+                                                    table instance. But for this example, we'll just
+                                                    pass the row
+                                                */}
+                                                {renderRowSubComponent({ row })}
+                                            </td>
+                                        </tr>
+                                    ) : null}
+                                </React.Fragment>
+                            );
+                        })}
+                    </tbody>
+                </table>
+                <Pagination
+                    pageSizes={[7, 14, 30, 90, 180]}
+                    {...{
+                        canPreviousPage,
+                        canNextPage,
+                        pageOptions,
+                        pageCount,
+                        gotoPage,
+                        nextPage,
+                        previousPage,
+                        setPageSize,
+                        pageIndex,
+                        pageSize,
+                    }}
+                />
+            </div>
         </Styles>
     );
 }
