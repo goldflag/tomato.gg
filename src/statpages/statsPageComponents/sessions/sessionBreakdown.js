@@ -1,6 +1,5 @@
 import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
-import styled from "styled-components";
 import WN8c from "../../../functions/WN8color";
 import WRc from "../../../functions/WRcolor";
 import { Icon } from "react-icons-kit";
@@ -8,6 +7,7 @@ import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import { ThemeContext } from "../../../context";
 import { Pagination } from "../../../components";
+import { StyledTable } from "../../../components/tableComponents";
 
 function WN8Style(wn8) {
     return {
@@ -44,58 +44,6 @@ const tierConv = {
 
 export default function SessionBreakdown(props) {
     const { theme } = React.useContext(ThemeContext);
-    const Styles = styled.div`
-        table {
-            border-spacing: 0;
-            width: 100%;
-            font-size: 0.8rem;
-            tr {
-                :last-child {
-                    td {
-                        border-bottom: solid 1px
-                            ${theme === "dark"
-                                ? "rgb(100, 100, 100)"
-                                : "rgb(200, 200, 200)"};
-                    }
-                }
-                color: ${theme === "dark"
-                    ? "rgb(220, 220, 220)"
-                    : "rgb(100, 100, 100)"};
-                background-color: ${theme === "dark"
-                    ? "rgb(40, 40, 40)"
-                    : "rgb(250, 250, 250)"};
-                :nth-child(even) {
-                    background-color: ${theme === "dark"
-                        ? "rgb(50, 50, 50)"
-                        : "rgb(240, 240, 240)"};
-                }
-                :hover {
-                    background-color: ${theme === "dark"
-                        ? "rgb(30, 30, 30)"
-                        : "rgb(220, 220, 230)"};
-                }
-            }
-            th {
-                text-align: left;
-                padding: 10px;
-                background-color: ${theme === "dark"
-                    ? "rgb(50, 50, 50)"
-                    : "rgb(255, 255, 255)"};
-                border-bottom: solid 1px
-                    ${theme === "dark"
-                        ? "rgb(100, 100, 100)"
-                        : "rgb(200, 200, 200)"};
-                font-weight: 500;
-            }
-            td {
-                margin: 0rem;
-                padding: 0.1rem 0.5rem;
-                :last-child {
-                    border-right: 0;
-                }
-            }
-        }
-    `;
     const data = props.data;
 
     const columns = React.useMemo(
@@ -201,8 +149,8 @@ export default function SessionBreakdown(props) {
     );
 
     return (
-        <Styles>
-            <table {...getTableProps()}>
+        <>
+            <StyledTable theme={theme} {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
@@ -251,7 +199,7 @@ export default function SessionBreakdown(props) {
                         );
                     })}
                 </tbody>
-            </table>
+            </StyledTable>
             <Pagination
                 pageSizes={[10, 20, 30]}
                 {...{
@@ -267,6 +215,6 @@ export default function SessionBreakdown(props) {
                     pageSize,
                 }}
             />
-        </Styles>
+        </>
     );
 }

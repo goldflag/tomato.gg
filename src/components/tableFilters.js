@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { Button, ButtonGroup } from "@material-ui/core";
 import { MoEStars } from "./moeStars";
+import { useAsyncDebounce } from "react-table";
 
 export const FilterButton = styled(Button)`
     background-color: ${({ selected }) =>
@@ -16,6 +17,11 @@ export const FilterButton = styled(Button)`
     &:hover {
         background-color: rgb(230, 85, 125);
     }
+`;
+
+export const FilterButtonGroup = styled(ButtonGroup)`
+    margin-right: 10px;
+    margin-bottom: 10px;
 `;
 
 const premFilterOptions = [
@@ -98,7 +104,7 @@ const MoEFilterOptions = [
 const makeButtonFilter = (ariaLabel, options, Label) => ({
     column: { filterValue, setFilter },
 }) => (
-    <ButtonGroup variant="text" aria-label={ariaLabel}>
+    <FilterButtonGroup variant="text" aria-label={ariaLabel}>
         {options.map(({ label, value, ...labelProps }) => (
             <FilterButton
                 key={value || label}
@@ -112,7 +118,7 @@ const makeButtonFilter = (ariaLabel, options, Label) => ({
                 )}
             </FilterButton>
         ))}
-    </ButtonGroup>
+    </FilterButtonGroup>
 );
 
 export const PremFilter = makeButtonFilter(
@@ -171,3 +177,34 @@ export const MoEFilter = makeButtonFilter(
         </div>
     )
 );
+
+export const GlobalFilter = ({
+    preGlobalFilteredRows,
+    globalFilter,
+    setGlobalFilter,
+}) => {
+    const count = preGlobalFilteredRows.length;
+    const [value, setValue] = React.useState(globalFilter);
+    const onChange = useAsyncDebounce((value) => {
+        setGlobalFilter(value || undefined);
+    }, 200);
+
+    return (
+        <span>
+            <input
+                value={value || ""}
+                onChange={(e) => {
+                    setValue(e.target.value);
+                    onChange(e.target.value);
+                }}
+                placeholder={`Search ${count} records...`}
+                style={{
+                    fontSize: "1rem",
+                    padding: "6px",
+                    borderRadius: "3px",
+                    border: "1px solid rgb(100, 100, 100)",
+                }}
+            />
+        </span>
+    );
+};

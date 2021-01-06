@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { Icon } from "react-icons-kit";
 import { chevronRight } from "react-icons-kit/feather/chevronRight";
 import { chevronDown } from "react-icons-kit/feather/chevronDown";
@@ -12,7 +11,6 @@ import {
     useFilters,
     useExpanded,
     useGlobalFilter,
-    useAsyncDebounce,
 } from "react-table";
 import WN8c from "../../functions/WN8color";
 import WRc from "../../functions/WRcolor";
@@ -22,12 +20,20 @@ import { ThemeContext } from "../../context";
 import { MoEStars, Pagination } from "../../components";
 import {
     ClassFilter,
+    GlobalFilter,
     MasteryFilter,
     MoEFilter,
     NationFilter,
     NumericTierFilter,
     PremFilter,
 } from "../../components/tableFilters";
+import {
+    ButtonFiltersContainer,
+    FiltersContainer,
+    StyledTable,
+    SubRow,
+    TableContainer,
+} from "../../components/tableComponents";
 
 function WN8Style(wn8) {
     return {
@@ -68,81 +74,6 @@ const tierConv = {
 function OverallTable(props) {
     const { theme } = React.useContext(ThemeContext);
 
-    const Styles = styled.div`
-        .tableContainer {
-            overflow-x: auto;
-            background-color: ${theme === "dark"
-                ? "rgb(40, 40, 40)"
-                : "rgb(250, 250, 250)"};
-        }
-
-        table {
-            border-spacing: 0;
-            font-size: 0.8rem;
-            width: 100%;
-            tr {
-                overflow-x: scroll;
-                :last-child {
-                    td {
-                        border-bottom: solid 1px
-                            ${theme === "dark"
-                                ? "rgb(100, 100, 100)"
-                                : "rgb(200, 200, 200)"};
-                    }
-                }
-                color: ${theme === "dark"
-                    ? "rgb(220, 220, 220)"
-                    : "rgb(100, 100, 100)"};
-                background-color: ${theme === "dark"
-                    ? "rgb(40, 40, 40)"
-                    : "rgb(250, 250, 250)"};
-                :nth-child(even) {
-                    background-color: ${theme === "dark"
-                        ? "rgb(50, 50, 50)"
-                        : "rgb(240, 240, 240)"};
-                }
-                :hover {
-                    background-color: ${theme === "dark"
-                        ? "rgb(30, 30, 30)"
-                        : "rgb(220, 220, 230)"};
-                }
-            }
-            th {
-                text-align: left;
-                padding: 10px;
-                background-color: ${theme === "dark"
-                    ? "rgb(50, 50, 50)"
-                    : "rgb(255, 255, 255)"};
-                // color: black;
-                border-bottom: solid 1px
-                    ${theme === "dark"
-                        ? "rgb(100, 100, 100)"
-                        : "rgb(200, 200, 200)"};
-                font-weight: 500;
-            }
-            td {
-                margin: 0;
-                padding: 0.2rem 0.5rem;
-                :last-child {
-                    border-right: 0;
-                }
-            }
-        }
-
-        .filters {
-            background-color: ${theme === "dark"
-                ? "rgb(40, 40, 40)"
-                : "rgb(250, 250, 250)"};
-            padding: 10px 10px 0 10px;
-        }
-
-        .subComponent {
-            background-color: ${theme === "dark"
-                ? "rgb(40, 40, 40)"
-                : "rgb(250, 250, 250)"};
-            padding: 10px;
-        }
-    `;
     let data = props.data;
 
     // Define a default UI for filtering
@@ -158,38 +89,6 @@ function OverallTable(props) {
                 }}
                 placeholder={`Search ${count} records...`}
             />
-        );
-    }
-
-    // Define a default UI for filtering
-    function GlobalFilter({
-        preGlobalFilteredRows,
-        globalFilter,
-        setGlobalFilter,
-    }) {
-        const count = preGlobalFilteredRows.length;
-        const [value, setValue] = React.useState(globalFilter);
-        const onChange = useAsyncDebounce((value) => {
-            setGlobalFilter(value || undefined);
-        }, 200);
-
-        return (
-            <span>
-                <input
-                    value={value || ""}
-                    onChange={(e) => {
-                        setValue(e.target.value);
-                        onChange(e.target.value);
-                    }}
-                    placeholder={`Search ${count} records...`}
-                    style={{
-                        fontSize: "1rem",
-                        padding: "6px",
-                        borderRadius: "3px",
-                        border: "1px solid rgb(100, 100, 100)",
-                    }}
-                />
-            </span>
         );
     }
 
@@ -214,13 +113,7 @@ function OverallTable(props) {
         }, [id, preFilteredRows]);
 
         return (
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-evenly",
-                }}
-            >
+            <>
                 Battles
                 <input
                     value={filterValue[0] || ""}
@@ -260,7 +153,7 @@ function OverallTable(props) {
                         borderRadius: "3px",
                     }}
                 />
-            </div>
+            </>
         );
     }
 
@@ -302,6 +195,8 @@ function OverallTable(props) {
             }),
             []
         );
+
+        const filterOrder = [5, 4, 3, 20, 21, 22];
 
         // Use the state and functions returned from useTable to build your UI
         const {
@@ -381,80 +276,43 @@ function OverallTable(props) {
         // Render the UI for your table
         return (
             <>
-                <div className="filters">
+                <FiltersContainer>
                     <GlobalFilter
                         preGlobalFilteredRows={preGlobalFilteredRows}
                         globalFilter={state.globalFilter}
                         setGlobalFilter={setGlobalFilter}
                     />
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            flexWrap: "wrap",
-                            justifyContent: "flex-start",
-                            margin: "10px 0 0 0",
-                        }}
-                    >
-                        <span
-                            style={{
-                                marginRight: "10px",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            {headerGroups[0].headers[5].render("Filter")}
-                        </span>
-                        <span
-                            style={{
-                                marginRight: "10px",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            {headerGroups[0].headers[4].render("Filter")}
-                        </span>
-                        <span
-                            style={{
-                                marginRight: "10px",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            {headerGroups[0].headers[3].render("Filter")}
-                        </span>
-                        <span
-                            style={{
-                                marginRight: "10px",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            {headerGroups[0].headers[20].render("Filter")}
-                        </span>
-                        <span
-                            style={{
-                                marginRight: "10px",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            {headerGroups[0].headers[21].render("Filter")}
-                        </span>
-                        <span
-                            style={{
-                                marginRight: "10px",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            {headerGroups[0].headers[22].render("Filter")}
-                        </span>
-                        <span
-                            style={{
-                                marginRight: "10px",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            {headerGroups[0].headers[6].render("Filter")}
-                        </span>
-                    </div>
-                </div>
-                <table {...getTableProps()}>
+                    {headerGroups.map((headerGroup, i) => (
+                        <>
+                            <ButtonFiltersContainer key={i}>
+                                {filterOrder.map(
+                                    (n) =>
+                                        !headerGroup.headers[n]
+                                            .disableFilters && (
+                                            <span key={n}>
+                                                {headerGroup.headers[n].render(
+                                                    "Filter"
+                                                )}
+                                            </span>
+                                        )
+                                )}
+                            </ButtonFiltersContainer>
+                            <div
+                                style={{
+                                    marginRight: "10px",
+                                    marginBottom: "10px",
+                                }}
+                            >
+                                {headerGroup.headers[6].render("Filter")}
+                            </div>
+                        </>
+                    ))}
+                </FiltersContainer>
+                <StyledTable
+                    theme={theme}
+                    tdOverride={"padding: 0.2rem 0.5rem;"}
+                    {...getTableProps()}
+                >
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -500,17 +358,17 @@ function OverallTable(props) {
                                         ))}
                                     </tr>
                                     {row.isExpanded ? (
-                                        <tr className="subComponent">
+                                        <SubRow theme={theme}>
                                             <td colSpan={visibleColumns.length}>
                                                 {renderRowSubComponent({ row })}
                                             </td>
-                                        </tr>
+                                        </SubRow>
                                     ) : null}
                                 </React.Fragment>
                             );
                         })}
                     </tbody>
-                </table>
+                </StyledTable>
                 <Pagination
                     pageSizes={[15, 25, 100, 250, 500]}
                     {...{
@@ -561,6 +419,7 @@ function OverallTable(props) {
                         )}
                     </span>
                 ),
+                disableFilters: true,
             },
             {
                 Cell: ({ value }) => {
@@ -635,6 +494,7 @@ function OverallTable(props) {
                 accessor: "wn8",
                 Filter: NumberRangeColumnFilter,
                 filter: "between",
+                disableFilters: true,
                 cellStyle: (state, rowInfo) => {
                     return {
                         style: {
@@ -651,12 +511,14 @@ function OverallTable(props) {
                 accessor: "winrate",
                 Filter: NumberRangeColumnFilter,
                 filter: "between",
+                disableFilters: true,
             },
             {
                 Header: "DPG",
                 accessor: "dpg",
                 Filter: NumberRangeColumnFilter,
                 filter: "between",
+                disableFilters: true,
             },
             { Header: "KPG", accessor: "kpg", disableFilters: true },
             {
@@ -709,11 +571,9 @@ function OverallTable(props) {
     );
 
     return (
-        <Styles>
-            <div className="tableContainer">
-                <Table columns={columns} data={data} />
-            </div>
-        </Styles>
+        <TableContainer theme={theme}>
+            <Table columns={columns} data={data} />
+        </TableContainer>
     );
 }
 

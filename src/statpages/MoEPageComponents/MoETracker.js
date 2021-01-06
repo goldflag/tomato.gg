@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
-import styled from "styled-components";
 import { Icon } from "react-icons-kit";
 import { chevronRight } from "react-icons-kit/feather/chevronRight";
 import { chevronDown } from "react-icons-kit/feather/chevronDown";
@@ -12,7 +11,6 @@ import {
     useFilters,
     useExpanded,
     useGlobalFilter,
-    useAsyncDebounce,
 } from "react-table";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
@@ -21,10 +19,18 @@ import MoEGraph from "./MoEGraph";
 import { Pagination } from "../../components";
 import {
     ClassFilter,
+    GlobalFilter,
     MoETierFilter,
     NationFilter,
     PremFilter,
 } from "../../components/tableFilters";
+import {
+    ButtonFiltersContainer,
+    FiltersContainer,
+    StyledTable,
+    SubRow,
+    TableContainer,
+} from "../../components/tableComponents";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -51,79 +57,6 @@ function MoETracker(props) {
     const { theme } = useContext(ThemeContext);
     const { server } = useContext(ServerContext);
 
-    const Styles = styled.div`
-        .tableContainer {
-            overflow-x: auto;
-            background-color: ${theme === "dark"
-                ? "rgb(40, 40, 40)"
-                : "rgb(250, 250, 250)"};
-        }
-
-        table {
-            position: sticky;
-            border-spacing: 0;
-            width: 100%;
-            font-size: 0.8rem;
-
-            tr {
-                overflow-x: scroll;
-                :last-child {
-                    td {
-                        border-bottom: solid 1px
-                            ${theme === "dark"
-                                ? "rgb(100, 100, 100)"
-                                : "rgb(200, 200, 200)"};
-                    }
-                }
-                color: ${theme === "dark"
-                    ? "rgb(220, 220, 220)"
-                    : "rgb(100, 100, 100)"};
-                background-color: ${theme === "dark"
-                    ? "rgb(40, 40, 40)"
-                    : "rgb(250, 250, 250)"};
-                :nth-child(even) {
-                    background-color: ${theme === "dark"
-                        ? "rgb(50, 50, 50)"
-                        : "rgb(240, 240, 240)"};
-                }
-                :hover {
-                    background-color: ${theme === "dark"
-                        ? "rgb(30, 30, 30)"
-                        : "rgb(220, 220, 230)"};
-                }
-            }
-            th {
-                text-align: left;
-                padding: 10px;
-                background-color: ${theme === "dark"
-                    ? "rgb(50, 50, 50)"
-                    : "rgb(255, 255, 255)"};
-                border-bottom: solid 1px
-                    ${theme === "dark"
-                        ? "rgb(100, 100, 100)"
-                        : "rgb(200, 200, 200)"};
-                font-weight: 500;
-            }
-            td {
-                margin: 0;
-                padding: 0rem 0rem 0rem 0.5rem;
-                :last-child {
-                    border-right: 0;
-                }
-            }
-        }
-
-        .filters {
-            padding: 10px 10px 0 10px;
-        }
-
-        .subComponent {
-            background-color: ${theme === "dark"
-                ? "rgb(40, 40, 40)"
-                : "rgb(250, 250, 250)"};
-            padding: 10px;
-        }
-    `;
     let data = props.data;
 
     // Define a default UI for filtering
@@ -139,38 +72,6 @@ function MoETracker(props) {
                 }}
                 placeholder={`Search ${count} records...`}
             />
-        );
-    }
-
-    // Define a default UI for filtering
-    function GlobalFilter({
-        preGlobalFilteredRows,
-        globalFilter,
-        setGlobalFilter,
-    }) {
-        const count = preGlobalFilteredRows.length;
-        const [value, setValue] = useState(globalFilter);
-        const onChange = useAsyncDebounce((value) => {
-            setGlobalFilter(value || undefined);
-        }, 200);
-
-        return (
-            <span>
-                <input
-                    value={value || ""}
-                    onChange={(e) => {
-                        setValue(e.target.value);
-                        onChange(e.target.value);
-                    }}
-                    placeholder={`Search ${count} records...`}
-                    style={{
-                        fontSize: "1rem",
-                        padding: "6px",
-                        borderRadius: "3px",
-                        border: "1px solid rgb(100, 100, 100)",
-                    }}
-                />
-            </span>
         );
     }
 
@@ -312,56 +213,24 @@ function MoETracker(props) {
         // Render the UI for your table
         return (
             <>
-                <div className="filters">
+                <FiltersContainer>
                     <GlobalFilter
                         preGlobalFilteredRows={preGlobalFilteredRows}
                         globalFilter={state.globalFilter}
                         setGlobalFilter={setGlobalFilter}
                     />
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            flexWrap: "wrap",
-                            justifyContent: "flex-start",
-                            margin: "10px 0 0 0",
-                        }}
-                    >
-                        <span
-                            style={{
-                                marginRight: "10px",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            {headerGroups[0].headers[1].render("Filter")}
-                        </span>
-                        <span
-                            style={{
-                                marginRight: "10px",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            {headerGroups[0].headers[2].render("Filter")}
-                        </span>
-                        <span
-                            style={{
-                                marginRight: "10px",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            {headerGroups[0].headers[3].render("Filter")}
-                        </span>
-                        <span
-                            style={{
-                                marginRight: "10px",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            {headerGroups[0].headers[13].render("Filter")}
-                        </span>
-                    </div>
-                </div>
-                <table {...getTableProps()}>
+                    {headerGroups.map((headerGroup, i) => (
+                        <ButtonFiltersContainer key={i}>
+                            {headerGroup.headers.map(
+                                ({ disableFilters, render }, i) =>
+                                    !disableFilters && (
+                                        <span key={i}>{render("Filter")}</span>
+                                    )
+                            )}
+                        </ButtonFiltersContainer>
+                    ))}
+                </FiltersContainer>
+                <StyledTable theme={theme} {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -407,17 +276,17 @@ function MoETracker(props) {
                                         ))}
                                     </tr>
                                     {row.isExpanded ? (
-                                        <tr className="subComponent">
+                                        <SubRow theme={theme}>
                                             <td colSpan={visibleColumns.length}>
                                                 {renderRowSubComponent({ row })}
                                             </td>
-                                        </tr>
+                                        </SubRow>
                                     ) : null}
                                 </React.Fragment>
                             );
                         })}
                     </tbody>
-                </table>
+                </StyledTable>
                 <Pagination
                     pageSizes={[100, 250, 500]}
                     {...{
@@ -497,6 +366,7 @@ function MoETracker(props) {
                         )}
                     </span>
                 ),
+                disableFilters: true,
             },
             {
                 Cell: ({ value }) => {
@@ -612,11 +482,9 @@ function MoETracker(props) {
     );
 
     return (
-        <Styles>
-            <div className="tableContainer">
-                <Table columns={columns} data={data} />
-            </div>
-        </Styles>
+        <TableContainer theme={theme}>
+            <Table columns={columns} data={data} />
+        </TableContainer>
     );
 }
 
