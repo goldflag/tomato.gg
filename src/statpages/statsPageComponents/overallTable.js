@@ -800,6 +800,7 @@ function OverallTable(props) {
             </ButtonGroup>
         );
     }
+    
     // This is a custom UI for our 'between' or number range
     // filter. It uses two number boxes and filters rows to
     // ones that have values between the two
