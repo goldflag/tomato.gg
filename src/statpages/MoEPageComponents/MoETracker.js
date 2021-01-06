@@ -17,10 +17,14 @@ import {
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
 import { ThemeContext, ServerContext } from "../../context";
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
 import MoEGraph from "./MoEGraph";
 import { Pagination } from "../../components";
+import {
+    ClassFilter,
+    MoETierFilter,
+    NationFilter,
+    PremFilter,
+} from "../../components/tableFilters";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -41,9 +45,6 @@ const MoEConv = {
     95: "3",
     85: "2",
     65: "1",
-    '95': "3",
-    '85': "2",
-    '65': "1",
 };
 
 function MoETracker(props) {
@@ -54,8 +55,8 @@ function MoETracker(props) {
         .tableContainer {
             overflow-x: auto;
             background-color: ${theme === "dark"
-            ? "rgb(40, 40, 40)"
-            : "rgb(250, 250, 250)"};
+                ? "rgb(40, 40, 40)"
+                : "rgb(250, 250, 250)"};
         }
 
         table {
@@ -110,20 +111,6 @@ function MoETracker(props) {
                     border-right: 0;
                 }
             }
-        }
-
-        .filterButton {
-            background-color: rgb(227, 48, 98);
-            color: white;
-            padding: 5px 10px;
-            text-align: center;
-            text-decoration: none;
-            display: flex;
-            font-size: 14px;
-        }
-
-        .filterButton:hover {
-            background-color: rgb(230, 85, 125);
         }
 
         .filters {
@@ -184,340 +171,6 @@ function MoETracker(props) {
                     }}
                 />
             </span>
-        );
-    }
-
-    function ClassFilter({
-        column: { filterValue, setFilter, preFilteredRows, id },
-    }) {
-        return (
-            <ButtonGroup variant="text" aria-label="text primary button group">
-                <Button
-                    onClick={() => {
-                        setFilter(undefined);
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    {" "}
-                    ALL{" "}
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("HT");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "HT" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    {" "}
-                    HT{" "}
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("MT");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "MT" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    {" "}
-                    MT{" "}
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("LT");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "LT" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    {" "}
-                    LT{" "}
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("TD");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "TD" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    {" "}
-                    TD{" "}
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("SPG");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "SPG" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    {" "}
-                    SPG{" "}
-                </Button>
-            </ButtonGroup>
-        );
-    }
-
-    function TierFilter({
-        column: { filterValue, setFilter, preFilteredRows, id },
-    }) {
-        return (
-            <ButtonGroup variant="text" aria-label="text primary button group">
-                <Button
-                    onClick={() => setFilter(undefined)}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    All
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter(10);
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === 10 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    X
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter(9);
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === 9 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    IX
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter(8);
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === 8 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    VIII
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter(7);
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === 7 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    VII
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter(6);
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === 6 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    VI
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter(5);
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === 5 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    V
-                </Button>
-            </ButtonGroup>
-        );
-    }
-
-    function NationFilter({
-        column: { filterValue, setFilter, preFilteredRows, id },
-    }) {
-        return (
-            <ButtonGroup variant="text" aria-label="text primary button group">
-                <Button
-                    onClick={() => setFilter(undefined)}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    ALL
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("China");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "China" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    <img
-                        src={require(`../../assets/flagIcons/China.png`)}
-                        style={{ maxHeight: "25px"}}
-                        alt={"China"}
-                    />                
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("France");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "France" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    <img
-                        src={require(`../../assets/flagIcons/France.png`)}
-                        style={{ maxHeight: "25px"}}
-                        alt={"France"}
-                    />                
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("Germany");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "Germany" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    <img
-                        src={require(`../../assets/flagIcons/Germany.png`)}
-                        style={{ maxHeight: "25px"}}
-                        alt={"Germany"}
-                    />                
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("Japan");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "Japan" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    <img
-                        src={require(`../../assets/flagIcons/Japan.png`)}
-                        style={{ maxHeight: "25px"}}
-                        alt={"Japan"}
-                    />                
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("Sweden");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "Sweden" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    <img
-                        src={require(`../../assets/flagIcons/Sweden.png`)}
-                        style={{ maxHeight: "25px"}}
-                        alt={"Sweden"}
-                    />                
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("UK");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "UK" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    <img
-                        src={require(`../../assets/flagIcons/UK.png`)}
-                        style={{ maxHeight: "25px"}}
-                        alt={"UK"}
-                    />                
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("USA");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "USA" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    <img
-                        src={require(`../../assets/flagIcons/USA.png`)}
-                        style={{ maxHeight: "25px"}}
-                        alt={"USA"}
-                    />                
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("USSR");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "USSR" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    <img
-                        src={require(`../../assets/flagIcons/USSR.png`)}
-                        style={{ maxHeight: "25px"}}
-                        alt={"USSR"}
-                    />                
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("Czech");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "Czech" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    <img
-                        src={require(`../../assets/flagIcons/Czech.png`)}
-                        style={{ maxHeight: "25px"}}
-                        alt={"Czech"}
-                    />                  
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("Italy");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "Italy" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    <img
-                        src={require(`../../assets/flagIcons/Italy.png`)}
-                        style={{ maxHeight: "25px"}}
-                        alt={"Italy"}
-                    />                  
-                </Button>
-                <Button
-                        styles={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        paddingTop: '10px',
-                    }}
-                    onClick={() => {
-                        setFilter("Poland");
-                    }}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === "Poland" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    <img
-                        src={require(`../../assets/flagIcons/Poland.png`)}
-                        style={{ maxHeight: "25px"}}
-                        alt={"Poland"}
-                    />
-                </Button>
-            </ButtonGroup>
-        );
-    }
-
-    function PremFilter({
-        column: { filterValue, setFilter, preFilteredRows, id },
-    }) {
-        return (
-            <ButtonGroup variant="text" aria-label="text primary button group">
-                <Button
-                    onClick={() => setFilter(undefined)}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    ALL
-                </Button>
-                <Button
-                    onClick={() => setFilter(true)}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === true ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    Prem
-                </Button>
-                <Button
-                    onClick={() => setFilter(false)}
-                    className={"filterButton"}
-                    style={{backgroundColor: filterValue === false ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
-                >
-                    Regular
-                </Button>
-            </ButtonGroup>
         );
     }
 
@@ -868,7 +521,7 @@ function MoETracker(props) {
                 },
                 Header: "Tier",
                 accessor: "tier",
-                Filter: TierFilter,
+                Filter: MoETierFilter,
                 filter: "equals",
             },
             {
