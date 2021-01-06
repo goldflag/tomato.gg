@@ -192,6 +192,7 @@ function PeriodBreakdown(props) {
                         setFilter(undefined);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     ALL{" "}
@@ -201,6 +202,7 @@ function PeriodBreakdown(props) {
                         setFilter("HT");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "HT" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     HT{" "}
@@ -210,6 +212,7 @@ function PeriodBreakdown(props) {
                         setFilter("MT");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "MT" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     MT{" "}
@@ -219,6 +222,7 @@ function PeriodBreakdown(props) {
                         setFilter("LT");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "LT" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     LT{" "}
@@ -228,6 +232,7 @@ function PeriodBreakdown(props) {
                         setFilter("TD");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "TD" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     TD{" "}
@@ -237,6 +242,7 @@ function PeriodBreakdown(props) {
                         setFilter("SPG");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "SPG" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     SPG{" "}
@@ -253,6 +259,7 @@ function PeriodBreakdown(props) {
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     All
                 </Button>
@@ -261,6 +268,7 @@ function PeriodBreakdown(props) {
                         setFilter(10);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 10 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     X
                 </Button>
@@ -269,6 +277,7 @@ function PeriodBreakdown(props) {
                         setFilter(9);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 9 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     IX
                 </Button>
@@ -277,6 +286,7 @@ function PeriodBreakdown(props) {
                         setFilter(8);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 8 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     VIII
                 </Button>
@@ -285,6 +295,7 @@ function PeriodBreakdown(props) {
                         setFilter(7);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 7 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     VII
                 </Button>
@@ -293,6 +304,7 @@ function PeriodBreakdown(props) {
                         setFilter(6);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 6 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     VI
                 </Button>
@@ -301,6 +313,7 @@ function PeriodBreakdown(props) {
                         setFilter(5);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 5 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     V
                 </Button>
@@ -309,6 +322,7 @@ function PeriodBreakdown(props) {
                         setFilter(4);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 4 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     IV
                 </Button>
@@ -317,6 +331,7 @@ function PeriodBreakdown(props) {
                         setFilter(3);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 3 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     III
                 </Button>
@@ -325,6 +340,7 @@ function PeriodBreakdown(props) {
                         setFilter(2);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 2 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     II
                 </Button>
@@ -333,6 +349,7 @@ function PeriodBreakdown(props) {
                         setFilter(1);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 1 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     I
                 </Button>
@@ -348,6 +365,7 @@ function PeriodBreakdown(props) {
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     ALL
                 </Button>
@@ -356,6 +374,7 @@ function PeriodBreakdown(props) {
                         setFilter("China");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "China" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/China.png`)}
@@ -368,6 +387,7 @@ function PeriodBreakdown(props) {
                         setFilter("France");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "France" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/France.png`)}
@@ -380,6 +400,7 @@ function PeriodBreakdown(props) {
                         setFilter("Germany");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Germany" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Germany.png`)}
@@ -392,6 +413,7 @@ function PeriodBreakdown(props) {
                         setFilter("Japan");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Japan" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Japan.png`)}
@@ -404,6 +426,7 @@ function PeriodBreakdown(props) {
                         setFilter("Sweden");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Sweden" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Sweden.png`)}
@@ -416,6 +439,7 @@ function PeriodBreakdown(props) {
                         setFilter("UK");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "UK" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/UK.png`)}
@@ -428,6 +452,7 @@ function PeriodBreakdown(props) {
                         setFilter("USA");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "USA" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/USA.png`)}
@@ -440,6 +465,7 @@ function PeriodBreakdown(props) {
                         setFilter("USSR");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "USSR" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/USSR.png`)}
@@ -452,6 +478,7 @@ function PeriodBreakdown(props) {
                         setFilter("Czech");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Czech" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Czech.png`)}
@@ -464,6 +491,7 @@ function PeriodBreakdown(props) {
                         setFilter("Italy");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Italy" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Italy.png`)}
@@ -482,6 +510,7 @@ function PeriodBreakdown(props) {
                         setFilter("Poland");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Poland" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Poland.png`)}
@@ -501,18 +530,21 @@ function PeriodBreakdown(props) {
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     ALL
                 </Button>
                 <Button
                     onClick={() => setFilter(true)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === true ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     Prem
                 </Button>
                 <Button
                     onClick={() => setFilter(false)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === false ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     Regular
                 </Button>

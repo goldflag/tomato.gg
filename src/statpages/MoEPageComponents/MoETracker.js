@@ -37,6 +37,15 @@ const tierConv = {
     10: "X",
 };
 
+const MoEConv = {
+    95: "3",
+    85: "2",
+    65: "1",
+    '95': "3",
+    '85': "2",
+    '65': "1",
+};
+
 function MoETracker(props) {
     const { theme } = useContext(ThemeContext);
     const { server } = useContext(ServerContext);
@@ -188,6 +197,7 @@ function MoETracker(props) {
                         setFilter(undefined);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     ALL{" "}
@@ -197,6 +207,7 @@ function MoETracker(props) {
                         setFilter("HT");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "HT" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     HT{" "}
@@ -206,6 +217,7 @@ function MoETracker(props) {
                         setFilter("MT");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "MT" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     MT{" "}
@@ -215,6 +227,7 @@ function MoETracker(props) {
                         setFilter("LT");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "LT" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     LT{" "}
@@ -224,6 +237,7 @@ function MoETracker(props) {
                         setFilter("TD");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "TD" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     TD{" "}
@@ -233,6 +247,7 @@ function MoETracker(props) {
                         setFilter("SPG");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "SPG" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     SPG{" "}
@@ -249,6 +264,7 @@ function MoETracker(props) {
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     All
                 </Button>
@@ -257,6 +273,7 @@ function MoETracker(props) {
                         setFilter(10);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 10 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     X
                 </Button>
@@ -265,6 +282,7 @@ function MoETracker(props) {
                         setFilter(9);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 9 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     IX
                 </Button>
@@ -273,6 +291,7 @@ function MoETracker(props) {
                         setFilter(8);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 8 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     VIII
                 </Button>
@@ -281,6 +300,7 @@ function MoETracker(props) {
                         setFilter(7);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 7 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     VII
                 </Button>
@@ -289,6 +309,7 @@ function MoETracker(props) {
                         setFilter(6);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 6 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     VI
                 </Button>
@@ -297,6 +318,7 @@ function MoETracker(props) {
                         setFilter(5);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === 5 ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     V
                 </Button>
@@ -312,6 +334,7 @@ function MoETracker(props) {
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     ALL
                 </Button>
@@ -320,6 +343,7 @@ function MoETracker(props) {
                         setFilter("China");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "China" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/China.png`)}
@@ -332,6 +356,7 @@ function MoETracker(props) {
                         setFilter("France");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "France" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/France.png`)}
@@ -344,6 +369,7 @@ function MoETracker(props) {
                         setFilter("Germany");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Germany" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Germany.png`)}
@@ -356,6 +382,7 @@ function MoETracker(props) {
                         setFilter("Japan");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Japan" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Japan.png`)}
@@ -368,6 +395,7 @@ function MoETracker(props) {
                         setFilter("Sweden");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Sweden" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Sweden.png`)}
@@ -380,6 +408,7 @@ function MoETracker(props) {
                         setFilter("UK");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "UK" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/UK.png`)}
@@ -392,6 +421,7 @@ function MoETracker(props) {
                         setFilter("USA");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "USA" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/USA.png`)}
@@ -404,6 +434,7 @@ function MoETracker(props) {
                         setFilter("USSR");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "USSR" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/USSR.png`)}
@@ -416,6 +447,7 @@ function MoETracker(props) {
                         setFilter("Czech");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Czech" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Czech.png`)}
@@ -428,6 +460,7 @@ function MoETracker(props) {
                         setFilter("Italy");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Italy" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Italy.png`)}
@@ -446,6 +479,7 @@ function MoETracker(props) {
                         setFilter("Poland");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Poland" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Poland.png`)}
@@ -465,18 +499,21 @@ function MoETracker(props) {
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     ALL
                 </Button>
                 <Button
                     onClick={() => setFilter(true)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === true ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     Prem
                 </Button>
                 <Button
                     onClick={() => setFilter(false)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === false ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     Regular
                 </Button>
@@ -551,8 +588,9 @@ function MoETracker(props) {
                 data,
                 defaultColumn, // Be sure to pass the defaultColumn option
                 filterTypes,
-                hiddenColumns: ["prem"],
                 initialState: {
+                    // hiddenColumns: ["isPrem"],
+
                     pageIndex: 0,
                     pageSize: 100,
                     sortBy: [
@@ -867,6 +905,11 @@ function MoETracker(props) {
                 disableFilters: true,
             },
             {
+                Header: `${MoEConv[props.moe]} MoE Reqs`,
+                accessor: `${props.moe}`,
+                disableFilters: true,
+            },
+            {
                 Header: "7 Day Δ",
                 accessor: `7diff${props.moe}`,
                 disableFilters: true,
@@ -904,11 +947,6 @@ function MoETracker(props) {
                 accessor: `30percent${props.moe}`,
                 disableFilters: true,
                 sortType: "basic",
-            },
-            {
-                Header: `${props.moe}%`,
-                accessor: `${props.moe}`,
-                disableFilters: true,
             },
             {
                 Header: "",

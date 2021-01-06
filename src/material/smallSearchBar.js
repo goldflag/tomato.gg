@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import styled from "styled-components";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import Divider from "@material-ui/core/Divider";
@@ -11,6 +12,19 @@ import { ThemeContext } from "../context";
 
 export default function SmallSearchBar(props) {
     const { theme } = React.useContext(ThemeContext);
+
+    const Styles = styled.div`
+
+        .select {
+            display: none;
+        }
+
+        @media screen and (max-width: 1000px) {
+            .select {
+                display: block;
+            }
+        }
+    `;
 
     const useStyles = makeStyles((t) => ({
         root: {
@@ -41,27 +55,34 @@ export default function SmallSearchBar(props) {
 
     const classes = useStyles();
     return (
-        <Paper elevation={0} className={classes.root}>
-            <InputBase
-                className={classes.input}
-                placeholder="Enter a Username"
-                inputProps={{ "aria-label": "enter a username" }}
-                onChange={(e) => props.setName(e.target.value)}
-            />
-            <Divider className={classes.divider} orientation="vertical" />
-            <SmallSelectQuery
-                setServer={props.setServer}
-                server={props.server}
-                setMode={props.setMode}
-                mode={props.mode}
-            />
-            <IconButton
-                type="submit"
-                className={classes.iconButton}
-                aria-label="search"
-            >
-                <SearchIcon />
-            </IconButton>
-        </Paper>
+        // <Styles>
+            <Paper elevation={0} className={classes.root}>
+                <InputBase
+                    className={classes.input}
+                    placeholder="Enter a Username"
+                    inputProps={{ "aria-label": "enter a username" }}
+                    onChange={(e) => props.setName(e.target.value)}
+                />
+                <Divider className={classes.divider} orientation="vertical" />
+                <Styles>
+                <div className="select">
+                    <SmallSelectQuery
+                        setServer={props.setServer}
+                        server={props.server}
+                        setMode={props.setMode}
+                        mode={props.mode}
+                    />
+                </div>
+                </Styles>
+
+                <IconButton
+                    type="submit"
+                    className={classes.iconButton}
+                    aria-label="search"
+                >
+                    <SearchIcon />
+                </IconButton>
+            </Paper>
+        // </Styles>
     );
 }

@@ -140,6 +140,8 @@ export default function MoEPage(props) {
                         {serverConv[server]} Marks of Excellence Requirements
                     </span>
                     <br />
+
+                    <br />
                     <span
                         style={{
                             fontSize: "0.9rem",
@@ -153,6 +155,8 @@ export default function MoEPage(props) {
                         </a>{" "}
                         &#47;&#47;&#47; Expand rows to see 30 days of MoE
                         history
+                        <br />
+                        *MoE change is calculated using 3-day averages to minimize noise
                     </span>
                     <br />
                 </Info>

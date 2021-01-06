@@ -194,10 +194,10 @@ class StatsPage extends Component {
                             overall={recentStats.overallStats.tankWN8}
                             recents={recentStats.recents}
                         />
-                        <AdSense.Google
+                        {/* <AdSense.Google
                             client='ca-pub-1358649580645755'
                             slot='3903354081'
-                        />
+                        /> */}
                     </div>
                 </>
             );

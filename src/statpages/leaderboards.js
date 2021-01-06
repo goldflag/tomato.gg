@@ -60,22 +60,18 @@ export default function Leaderboards(props) {
     }
 
     function setBattles(e) {
-        e.preventDefault();
         setType("battles");
     }
 
     function setMOECOUNT(e) {
-        e.preventDefault();
         setType("moecount");
     }
 
     function setMOE10(e) {
-        e.preventDefault();
         setType("moe10");
     }
 
     function setCustom(e) {
-        e.preventDefault();
         setType("custom");
     }
 

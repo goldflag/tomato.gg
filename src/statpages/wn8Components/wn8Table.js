@@ -172,6 +172,7 @@ function WN8Table(props) {
                         setFilter(undefined);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     ALL{" "}
@@ -181,6 +182,7 @@ function WN8Table(props) {
                         setFilter("HT");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "HT" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     HT{" "}
@@ -190,6 +192,7 @@ function WN8Table(props) {
                         setFilter("MT");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "MT" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     MT{" "}
@@ -199,6 +202,7 @@ function WN8Table(props) {
                         setFilter("LT");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "LT" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     LT{" "}
@@ -208,6 +212,7 @@ function WN8Table(props) {
                         setFilter("TD");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "TD" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     TD{" "}
@@ -217,6 +222,7 @@ function WN8Table(props) {
                         setFilter("SPG");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "SPG" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     SPG{" "}
@@ -233,6 +239,7 @@ function WN8Table(props) {
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     All
                 </Button>
@@ -241,6 +248,7 @@ function WN8Table(props) {
                         setFilter("X");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "X" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     X
                 </Button>
@@ -249,6 +257,7 @@ function WN8Table(props) {
                         setFilter("IX");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "IX" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     IX
                 </Button>
@@ -257,6 +266,7 @@ function WN8Table(props) {
                         setFilter("VIII");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "VIII" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     VIII
                 </Button>
@@ -265,6 +275,7 @@ function WN8Table(props) {
                         setFilter("VII");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "VII" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     VII
                 </Button>
@@ -273,6 +284,7 @@ function WN8Table(props) {
                         setFilter("VI");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "VI" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     VI
                 </Button>
@@ -281,6 +293,7 @@ function WN8Table(props) {
                         setFilter("V");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "V" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     V
                 </Button>
@@ -289,6 +302,7 @@ function WN8Table(props) {
                         setFilter("IV");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "IV" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     IV
                 </Button>
@@ -297,6 +311,7 @@ function WN8Table(props) {
                         setFilter("III");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "III" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     III
                 </Button>
@@ -305,6 +320,7 @@ function WN8Table(props) {
                         setFilter("II");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "II" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     II
                 </Button>
@@ -313,6 +329,7 @@ function WN8Table(props) {
                         setFilter("I");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "I" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     I
                 </Button>
@@ -328,6 +345,7 @@ function WN8Table(props) {
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     ALL
                 </Button>
@@ -336,88 +354,149 @@ function WN8Table(props) {
                         setFilter("China");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "China" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
-                    CN
+                    <img
+                        src={require(`../../assets/flagIcons/China.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"China"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
                         setFilter("France");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "France" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
-                    FR
+                    <img
+                        src={require(`../../assets/flagIcons/France.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"France"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
                         setFilter("Germany");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Germany" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
-                    DE
+                    <img
+                        src={require(`../../assets/flagIcons/Germany.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"Germany"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
                         setFilter("Japan");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Japan" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
-                    JP
+                    <img
+                        src={require(`../../assets/flagIcons/Japan.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"Japan"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
                         setFilter("Sweden");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Sweden" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
-                    SE
+                    <img
+                        src={require(`../../assets/flagIcons/Sweden.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"Sweden"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
                         setFilter("UK");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "UK" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
-                    UK
+                    <img
+                        src={require(`../../assets/flagIcons/UK.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"UK"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
                         setFilter("USA");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "USA" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
-                    USA
+                    <img
+                        src={require(`../../assets/flagIcons/USA.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"USA"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
                         setFilter("USSR");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "USSR" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
-                    USSR
+                    <img
+                        src={require(`../../assets/flagIcons/USSR.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"USSR"}
+                    />                
                 </Button>
                 <Button
                     onClick={() => {
                         setFilter("Czech");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Czech" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
-                    CZ
+                    <img
+                        src={require(`../../assets/flagIcons/Czech.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"Czech"}
+                    />                  
                 </Button>
                 <Button
                     onClick={() => {
                         setFilter("Italy");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Italy" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
-                    IT
+                    <img
+                        src={require(`../../assets/flagIcons/Italy.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"Italy"}
+                    />                  
                 </Button>
                 <Button
+                        styles={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        paddingTop: '10px',
+                    }}
                     onClick={() => {
                         setFilter("Poland");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Poland" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
-                    PL
+                    <img
+                        src={require(`../../assets/flagIcons/Poland.png`)}
+                        style={{ maxHeight: "25px"}}
+                        alt={"Poland"}
+                    />
                 </Button>
             </ButtonGroup>
         );
@@ -431,18 +510,21 @@ function WN8Table(props) {
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     ALL
                 </Button>
                 <Button
                     onClick={() => setFilter(true)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === true ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     Prem
                 </Button>
                 <Button
                     onClick={() => setFilter(false)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === false ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     Regular
                 </Button>
