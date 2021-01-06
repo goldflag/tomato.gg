@@ -41,11 +41,9 @@ export default function Table(props) {
     useEffect(() => {
         const data = clonedeep(NATankstats);
         data.forEach((row) => {
-            // row[0] = <img src={`${process.env.PUBLIC_URL}/tankIcons/${row[0]}.png`} alt={row[0]}/>;
-            // row[0] = <img src={tankImports[IDtoIndex[row[0]]]} alt={row[0]}/>;
             row[0] = (
                 <img
-                    src={require(`../../assets/flagIcons/${row[0]}.svg`)}
+                    src={require(`../../assets/flagIcons/${row[0]}.png`)}
                     style={{
                         display: "block",
                         maxheight: "20px",
