@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
-import styled from "styled-components";
 import { ThemeContext } from "../context";
 import WN8Table from "./wn8Components/wn8Table";
 import tankNames from "../data/tankNames.json";
@@ -41,30 +40,6 @@ export default function Leaderboards(props) {
     }
 
     const { theme } = React.useContext(ThemeContext);
-    const Styles = styled.div`
-        *:focus {
-            outline: none;
-        }
-
-        .selectButton {
-            font-family: "Segoe UI";
-            font-weight: 600;
-            color: rgb(240, 240, 240);
-            background-color: rgb(71, 99, 214);
-            padding: 1rem 0rem 0.8rem 0rem;
-            width: calc(100% / 6);
-            border-width: 0px;
-            border-bottom: 5px solid rgb(71, 99, 214);
-        }
-
-        .selectButton:hover {
-            border-bottom: 5px solid red;
-        }
-
-        .selectButton:focus {
-            border-bottom: 5px solid red;
-        }
-    `;
 
     let table = <></>;
 
@@ -97,33 +72,31 @@ export default function Leaderboards(props) {
     }
 
     return (
-        <Styles>
-            <FullPageTableWrapper>
-                <Info theme={theme}>
-                    <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                        WN8 Expected Values
-                    </span>
-                    <br />
-                    <br />
-                    <span
-                        style={{
-                            fontSize: "0.9rem",
-                            lineHeight: "1.3rem",
-                            color: "rgb(100,100,100)",
-                        }}
+        <FullPageTableWrapper>
+            <Info theme={theme}>
+                <span style={{ fontSize: "2rem", fontWeight: "500" }}>
+                    WN8 Expected Values
+                </span>
+                <br />
+                <br />
+                <span
+                    style={{
+                        fontSize: "0.9rem",
+                        lineHeight: "1.3rem",
+                        color: "rgb(100,100,100)",
+                    }}
+                >
+                    Maintained by the{" "}
+                    <a
+                        target="blank"
+                        href="https://modxvm.com/en/wn8-expected-values/"
                     >
-                        Maintained by the{" "}
-                        <a
-                            target="blank"
-                            href="https://modxvm.com/en/wn8-expected-values/"
-                        >
-                            XVM team
-                        </a>
-                    </span>{" "}
-                    <br />
-                </Info>
-                {table}
-            </FullPageTableWrapper>
-        </Styles>
+                        XVM team
+                    </a>
+                </span>{" "}
+                <br />
+            </Info>
+            {table}
+        </FullPageTableWrapper>
     );
 }

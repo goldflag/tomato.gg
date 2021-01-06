@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import ReactGA from "react-ga";
-import styled from "styled-components";
 import { ThemeContext, ServerContext } from "../context";
 import MoETable from "./MoEPageComponents/MoETable";
 import MoETracker from "./MoEPageComponents/MoETracker";
@@ -68,32 +67,6 @@ export default function MoEPage(props) {
         getData();
     }, [server]);
 
-    const Styles = styled.div`
-
-        *:focus {
-            outline: none;
-        }
-
-        .selectButton {
-            font-family: "Segoe UI";
-            font-weight: 600;
-            color: rgb(240, 240, 240);
-            background-color: rgb(71, 99, 214);
-            padding: 1rem 0rem 0.8rem 0rem;
-            width: calc(100% / 6);
-            border-width: 0px;
-            border-bottom: 5px solid rgb(71, 99, 214);
-        }
-
-        .selectButton:hover {
-            border-bottom: 5px solid red;
-        }
-
-        .selectButton:focus {
-            border-bottom: 5px solid red;
-        }
-    `;
-
     let table = <></>;
 
     if (data) {
@@ -133,56 +106,54 @@ export default function MoEPage(props) {
     }
 
     return (
-        <Styles>
-            <FullPageTableWrapper>
-                <Info theme={theme}>
-                    <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                        {serverConv[server]} Marks of Excellence Requirements
-                    </span>
-                    <br />
+        <FullPageTableWrapper>
+            <Info theme={theme}>
+                <span style={{ fontSize: "2rem", fontWeight: "500" }}>
+                    {serverConv[server]} Marks of Excellence Requirements
+                </span>
+                <br />
 
-                    <br />
-                    <span
-                        style={{
-                            fontSize: "0.9rem",
-                            lineHeight: "1rem",
-                            color: "rgb(130,130,130)",
-                        }}
-                    >
-                        Data from the creators of the{" "}
-                        <a target="blank" href="https://gunmarks.poliroid.ru/">
-                            Marks of Excellence mod
-                        </a>{" "}
-                        &#47;&#47;&#47; Expand rows to see 30 days of MoE
-                        history
-                        <br />
-                        *MoE change is calculated using 3-day averages to minimize noise
-                    </span>
-                    <br />
-                </Info>
-                <CustomTabs
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="ant example"
+                <br />
+                <span
+                    style={{
+                        fontSize: "0.9rem",
+                        lineHeight: "1rem",
+                        color: "rgb(130,130,130)",
+                    }}
                 >
-                    <CustomTab label="EXPECTED VALUES" />
-                    <CustomTab label="95% EXP. VAL CHANGE" />
-                    <CustomTab label="85% EXP. VAL CHANGE" />
-                    <CustomTab label="65% EXP. VAL CHANGE" />
-                </CustomTabs>
-                <TabPanel value={value} index={0}>
-                    {table}
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    {changeTable95}
-                </TabPanel>
-                <TabPanel value={value} index={2}>
-                    {changeTable85}
-                </TabPanel>
-                <TabPanel value={value} index={3}>
-                    {changeTable65}
-                </TabPanel>
-            </FullPageTableWrapper>
-        </Styles>
+                    Data from the creators of the{" "}
+                    <a target="blank" href="https://gunmarks.poliroid.ru/">
+                        Marks of Excellence mod
+                    </a>{" "}
+                    &#47;&#47;&#47; Expand rows to see 30 days of MoE history
+                    <br />
+                    *MoE change is calculated using 3-day averages to minimize
+                    noise
+                </span>
+                <br />
+            </Info>
+            <CustomTabs
+                value={value}
+                onChange={handleChange}
+                aria-label="ant example"
+            >
+                <CustomTab label="EXPECTED VALUES" />
+                <CustomTab label="95% EXP. VAL CHANGE" />
+                <CustomTab label="85% EXP. VAL CHANGE" />
+                <CustomTab label="65% EXP. VAL CHANGE" />
+            </CustomTabs>
+            <TabPanel value={value} index={0}>
+                {table}
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                {changeTable95}
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                {changeTable85}
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+                {changeTable65}
+            </TabPanel>
+        </FullPageTableWrapper>
     );
 }
