@@ -1,7 +1,6 @@
-import React, {useState, useContext} from "react";
+import React, { useState } from "react";
 import { ThemeContext } from "../context";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
@@ -69,19 +68,9 @@ const Styles = styled.div`
     .wrapper {
         min-height: 100vh;
     }
-    `;
-
-const useStyles = makeStyles({
-    list: {
-        width: 250,
-    },
-    fullList: {
-        width: "auto",
-    },
-});
+`;
 
 export default function TemporaryDrawer() {
-    const classes = useStyles();
     const [state, setState] = useState({
         top: false,
     });
@@ -100,24 +89,24 @@ export default function TemporaryDrawer() {
     };
 
     const textStyle = {
-        color: theme === "dark" ? "rgb(255, 255, 255)" : "rgb(31, 45, 90)"
-    }
+        color: theme === "dark" ? "rgb(255, 255, 255)" : "rgb(31, 45, 90)",
+    };
 
     const list = (anchor) => (
         <Styles>
-        <div
-            className= {theme === "dark" ? "dark-mode" : "light-mode"}
-            role="presentation"
-            onClick={toggleDrawer(anchor, false)}
-            onKeyDown={toggleDrawer(anchor, false)}
-        >
+            <div
+                className={theme === "dark" ? "dark-mode" : "light-mode"}
+                role="presentation"
+                onClick={toggleDrawer(anchor, false)}
+                onKeyDown={toggleDrawer(anchor, false)}
+            >
                 <List>
                     <Link to="/">
                         <ListItem button key={"1"}>
                             <ListItemIcon>
                                 <Apps style={textStyle} />
                             </ListItemIcon>
-                            <ListItemText primary={"Home"} style={textStyle}/>
+                            <ListItemText primary={"Home"} style={textStyle} />
                         </ListItem>
                     </Link>
                     <Link to="/tanks">
@@ -125,7 +114,10 @@ export default function TemporaryDrawer() {
                             <ListItemIcon>
                                 <BarChart style={textStyle} />
                             </ListItemIcon>
-                            <ListItemText primary={"Tank Stats"} style={textStyle}/>
+                            <ListItemText
+                                primary={"Tank Stats"}
+                                style={textStyle}
+                            />
                         </ListItem>
                     </Link>
                     <Link to="/moe">
@@ -133,7 +125,10 @@ export default function TemporaryDrawer() {
                             <ListItemIcon>
                                 <Star style={textStyle} />
                             </ListItemIcon>
-                            <ListItemText primary={"MoE Reqs"} style={textStyle}/>
+                            <ListItemText
+                                primary={"MoE Reqs"}
+                                style={textStyle}
+                            />
                         </ListItem>
                     </Link>
                     <Link to="/mastery">
@@ -141,7 +136,10 @@ export default function TemporaryDrawer() {
                             <ListItemIcon>
                                 <Star style={textStyle} />
                             </ListItemIcon>
-                            <ListItemText primary={"Mastery Reqs"} style={textStyle}/>
+                            <ListItemText
+                                primary={"Mastery Reqs"}
+                                style={textStyle}
+                            />
                         </ListItem>
                     </Link>
                     <Link to="/wn8">
@@ -149,7 +147,10 @@ export default function TemporaryDrawer() {
                             <ListItemIcon>
                                 <Games style={textStyle} />
                             </ListItemIcon>
-                            <ListItemText primary={"WN8 Exp. Values"} style={textStyle}/>
+                            <ListItemText
+                                primary={"WN8 Exp. Values"}
+                                style={textStyle}
+                            />
                         </ListItem>
                     </Link>
                     {/* <Link to="/server-stats">
@@ -165,7 +166,10 @@ export default function TemporaryDrawer() {
                             <ListItemIcon>
                                 <LibraryBooks style={textStyle} />
                             </ListItemIcon>
-                            <ListItemText primary={"Stats Reference"} style={textStyle}/>
+                            <ListItemText
+                                primary={"Stats Reference"}
+                                style={textStyle}
+                            />
                         </ListItem>
                     </Link>
                     <Link to="/about">
@@ -173,12 +177,12 @@ export default function TemporaryDrawer() {
                             <ListItemIcon>
                                 <Info style={textStyle} />
                             </ListItemIcon>
-                            <ListItemText primary={"About"} style={textStyle}/>
+                            <ListItemText primary={"About"} style={textStyle} />
                         </ListItem>
                     </Link>
                 </List>
-            <Divider />
-        </div>
+                <Divider />
+            </div>
         </Styles>
     );
 

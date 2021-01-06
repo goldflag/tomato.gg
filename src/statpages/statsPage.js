@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactGA from "react-ga";
 import TopStats from "./statsPageComponents/topStats";
-import AdSense from "react-adsense";
+// import AdSense from "react-adsense";
 import "../css/style.css";
 import "../css/innerpage.css";
 import serverConv from "../data/serverConv";
