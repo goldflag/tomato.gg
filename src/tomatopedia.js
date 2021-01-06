@@ -5,7 +5,6 @@ import Sidebar from "./sidebar";
 import Search from "./search";
 import About from "./about";
 import TankStatsPage from "./statpages/tankStatsPage";
-import TankList from "./statpages/tankList";
 import StatsPage from "./statpages/statsPage";
 import ServerStatsPage from "./statpages/serverStatsPage";
 import TankPage from "./statpages/tankPage";
@@ -46,9 +45,6 @@ export default function Tomatopedia() {
                         </Route>
                         <Route path="/tank-stats">
                             <TankStatsPage />
-                        </Route>
-                        <Route path="/tank-list">
-                            <TankList />
                         </Route>
                         <Route path="/stats-reference">
                             <StatsReference />

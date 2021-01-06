@@ -173,6 +173,7 @@ function MasteryTable(props) {
                         setFilter(undefined);
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     ALL{" "}
@@ -182,6 +183,7 @@ function MasteryTable(props) {
                         setFilter("HT");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "HT" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     HT{" "}
@@ -191,6 +193,7 @@ function MasteryTable(props) {
                         setFilter("MT");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "MT" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     MT{" "}
@@ -200,6 +203,7 @@ function MasteryTable(props) {
                         setFilter("LT");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "LT" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     LT{" "}
@@ -209,6 +213,7 @@ function MasteryTable(props) {
                         setFilter("TD");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "TD" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     TD{" "}
@@ -218,6 +223,7 @@ function MasteryTable(props) {
                         setFilter("SPG");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "SPG" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     {" "}
                     SPG{" "}
@@ -234,6 +240,7 @@ function MasteryTable(props) {
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     All
                 </Button>
@@ -242,6 +249,7 @@ function MasteryTable(props) {
                         setFilter("X");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "X" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     X
                 </Button>
@@ -250,6 +258,7 @@ function MasteryTable(props) {
                         setFilter("IX");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "IX" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     IX
                 </Button>
@@ -258,6 +267,7 @@ function MasteryTable(props) {
                         setFilter("VIII");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "VIII" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     VIII
                 </Button>
@@ -266,6 +276,7 @@ function MasteryTable(props) {
                         setFilter("VII");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "VII" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     VII
                 </Button>
@@ -274,6 +285,7 @@ function MasteryTable(props) {
                         setFilter("VI");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "VI" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     VI
                 </Button>
@@ -282,40 +294,9 @@ function MasteryTable(props) {
                         setFilter("V");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "V" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     V
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("IV");
-                    }}
-                    className={"filterButton"}
-                >
-                    IV
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("III");
-                    }}
-                    className={"filterButton"}
-                >
-                    III
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("II");
-                    }}
-                    className={"filterButton"}
-                >
-                    II
-                </Button>
-                <Button
-                    onClick={() => {
-                        setFilter("I");
-                    }}
-                    className={"filterButton"}
-                >
-                    I
                 </Button>
             </ButtonGroup>
         );
@@ -329,6 +310,7 @@ function MasteryTable(props) {
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     ALL
                 </Button>
@@ -337,6 +319,7 @@ function MasteryTable(props) {
                         setFilter("China");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "China" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/China.png`)}
@@ -349,6 +332,7 @@ function MasteryTable(props) {
                         setFilter("France");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "France" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/France.png`)}
@@ -361,6 +345,7 @@ function MasteryTable(props) {
                         setFilter("Germany");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Germany" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Germany.png`)}
@@ -373,6 +358,7 @@ function MasteryTable(props) {
                         setFilter("Japan");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Japan" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Japan.png`)}
@@ -385,6 +371,7 @@ function MasteryTable(props) {
                         setFilter("Sweden");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Sweden" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Sweden.png`)}
@@ -397,6 +384,7 @@ function MasteryTable(props) {
                         setFilter("UK");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "UK" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/UK.png`)}
@@ -409,6 +397,7 @@ function MasteryTable(props) {
                         setFilter("USA");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "USA" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/USA.png`)}
@@ -421,6 +410,7 @@ function MasteryTable(props) {
                         setFilter("USSR");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "USSR" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/USSR.png`)}
@@ -433,6 +423,7 @@ function MasteryTable(props) {
                         setFilter("Czech");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Czech" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Czech.png`)}
@@ -445,6 +436,7 @@ function MasteryTable(props) {
                         setFilter("Italy");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Italy" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Italy.png`)}
@@ -463,6 +455,7 @@ function MasteryTable(props) {
                         setFilter("Poland");
                     }}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === "Poland" ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     <img
                         src={require(`../../assets/flagIcons/Poland.png`)}
@@ -482,18 +475,21 @@ function MasteryTable(props) {
                 <Button
                     onClick={() => setFilter(undefined)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === undefined ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     ALL
                 </Button>
                 <Button
                     onClick={() => setFilter(true)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === true ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     Prem
                 </Button>
                 <Button
                     onClick={() => setFilter(false)}
                     className={"filterButton"}
+                    style={{backgroundColor: filterValue === false ? 'rgb(222, 13, 93)' : 'rgb(66, 84, 143)' }} 
                 >
                     Regular
                 </Button>

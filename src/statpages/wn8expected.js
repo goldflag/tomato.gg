@@ -115,6 +115,7 @@ export default function Leaderboards(props) {
                         WN8 Expected Values
                     </span>
                     <br />
+                    <br />
                     <span
                         style={{
                             fontSize: "0.9rem",

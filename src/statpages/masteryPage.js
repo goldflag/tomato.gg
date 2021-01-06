@@ -116,6 +116,7 @@ export default function MasteryPage(props) {
                         {serverConv[server]} Mastery Badge Requirements
                     </span>
                     <br />
+                    <br />
                     <span
                         style={{
                             fontSize: "0.9rem",
