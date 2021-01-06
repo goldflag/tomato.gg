@@ -45,61 +45,69 @@ const PaginationButton = styled.button`
     }
 `;
 
-export const Pagination = (props) => (
-    <PaginationContainer theme={useContext(ThemeContext).theme}>
-        <PaginationButton
-            onClick={() => props.gotoPage(0)}
-            disabled={!props.canPreviousPage}
-        >
-            <Icon size={24} icon={chevronsLeft} />
-        </PaginationButton>{" "}
-        <PaginationButton
-            onClick={() => props.previousPage()}
-            disabled={!props.canPreviousPage}
-        >
-            <Icon size={24} icon={chevronLeft} />
-        </PaginationButton>{" "}
-        <PaginationButton
-            onClick={() => props.nextPage()}
-            disabled={!props.canNextPage}
-        >
-            <Icon size={24} icon={chevronRight} />
-        </PaginationButton>{" "}
-        <PaginationButton
-            onClick={() => props.gotoPage(props.pageCount - 1)}
-            disabled={!props.canNextPage}
-        >
-            <Icon size={24} icon={chevronsRight} />
-        </PaginationButton>{" "}
-        Page {props.pageIndex + 1} of {props.pageOptions.length}{" "}
-        {props.showGoTo ? (
-            <span>
-                | Go to page:{" "}
-                <input
-                    type="number"
-                    defaultValue={props.pageIndex + 1}
-                    onChange={(e) => {
-                        const page = e.target.value
-                            ? Number(e.target.value) - 1
-                            : 0;
-                        props.gotoPage(page);
-                    }}
-                    style={{ width: "100px" }}
-                />
-            </span>
-        ) : null}
-        {"  "}
-        <select
-            value={props.pageSize}
-            onChange={(e) => {
-                props.setPageSize(Number(e.target.value));
-            }}
-        >
-            {props.pageSizes.map((pageSize) => (
-                <option key={pageSize} value={pageSize}>
-                    Show {pageSize}
-                </option>
-            ))}
-        </select>
-    </PaginationContainer>
-);
+export const Pagination = (props) => {
+    const { theme } = useContext(ThemeContext);
+
+    if (props.pageSizes[0] >= props.pageSize * props.pageOptions.length)
+        // hide component when there's no pagination to be done
+        return null;
+
+    return (
+        <PaginationContainer theme={theme}>
+            <PaginationButton
+                onClick={() => props.gotoPage(0)}
+                disabled={!props.canPreviousPage}
+            >
+                <Icon size={24} icon={chevronsLeft} />
+            </PaginationButton>{" "}
+            <PaginationButton
+                onClick={() => props.previousPage()}
+                disabled={!props.canPreviousPage}
+            >
+                <Icon size={24} icon={chevronLeft} />
+            </PaginationButton>{" "}
+            <PaginationButton
+                onClick={() => props.nextPage()}
+                disabled={!props.canNextPage}
+            >
+                <Icon size={24} icon={chevronRight} />
+            </PaginationButton>{" "}
+            <PaginationButton
+                onClick={() => props.gotoPage(props.pageCount - 1)}
+                disabled={!props.canNextPage}
+            >
+                <Icon size={24} icon={chevronsRight} />
+            </PaginationButton>{" "}
+            Page {props.pageIndex + 1} of {props.pageOptions.length}{" "}
+            {props.showGoTo ? (
+                <span>
+                    | Go to page:{" "}
+                    <input
+                        type="number"
+                        defaultValue={props.pageIndex + 1}
+                        onChange={(e) => {
+                            const page = e.target.value
+                                ? Number(e.target.value) - 1
+                                : 0;
+                            props.gotoPage(page);
+                        }}
+                        style={{ width: "100px" }}
+                    />
+                </span>
+            ) : null}
+            {"  "}
+            <select
+                value={props.pageSize}
+                onChange={(e) => {
+                    props.setPageSize(Number(e.target.value));
+                }}
+            >
+                {props.pageSizes.map((pageSize) => (
+                    <option key={pageSize} value={pageSize}>
+                        Show {pageSize}
+                    </option>
+                ))}
+            </select>
+        </PaginationContainer>
+    );
+};
