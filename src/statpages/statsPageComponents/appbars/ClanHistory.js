@@ -6,6 +6,8 @@ import TabPanel from "../../tabs/tabPanel";
 import Grid from "@material-ui/core/Grid";
 import serverConv from "../../../data/serverConv.js";
 import clonedeep from "lodash.clonedeep";
+import RSC from "react-scrollbars-custom";
+
 import { ThemeContext } from "../../../context";
 
 const APIKey = process.env.REACT_APP_API_KEY;
@@ -209,8 +211,8 @@ export default function ClanHistory(props) {
     }
 
     return (
-        <div className={classes.root}>
-            <div>
+        <RSC id="RSC-Example" noScrollX={true}>
+            <div className={classes.root}>
                 <CustomTabs
                     value={value}
                     onChange={handleChange}
@@ -219,13 +221,17 @@ export default function ClanHistory(props) {
                     <CustomTab label="CLAN HISTORY" />
                 </CustomTabs>
                 <TabPanel value={value} index={0}>
-                    <div style={{ padding: "10px 0px 0px 10px" }}>
+                    <div
+                        style={{
+                            padding: "10px 0px 0px 10px",
+                        }}
+                    >
                         <Grid container spacing={1}>
                             {clanInfo}
                         </Grid>
                     </div>
                 </TabPanel>
             </div>
-        </div>
+        </RSC>
     );
 }
