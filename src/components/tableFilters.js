@@ -104,9 +104,10 @@ const MoEFilterOptions = [
 function setFilteredParams(filterArr, val) {
     if (val === undefined) return undefined;
     if (filterArr.includes(val)) {
-        filterArr = filterArr.filter((n) => {return n !== val});
-    }
-    else filterArr.push(val);
+        filterArr = filterArr.filter((n) => {
+            return n !== val;
+        });
+    } else filterArr.push(val);
 
     if (filterArr.length === 0) filterArr = undefined;
     return filterArr;
@@ -115,7 +116,6 @@ function setFilteredParams(filterArr, val) {
 const makeButtonFilter = (ariaLabel, options, Label) => ({
     column: { filterValue = [], setFilter },
 }) => (
-
     <FilterButtonGroup variant="text" aria-label={ariaLabel}>
         {options.map(({ label, value, ...labelProps }) => (
             <FilterButton
@@ -223,11 +223,7 @@ export const GlobalFilter = ({
     );
 };
 
-export const ArrayFilter = (rows, columnIds, filterValue) => {
-    const arr = [];
-    const colID = columnIds[0];
-    rows.forEach((val) => {
-        if (filterValue.includes(val.original[colID])) arr.push(val);
-    });
-    return arr;
-}
+export const ArrayFilter = (rows, [colID], filterValue) =>
+    filterValue.length
+        ? rows.filter((row) => filterValue.includes(row.original[colID]))
+        : rows;
