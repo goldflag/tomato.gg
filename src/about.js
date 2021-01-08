@@ -52,33 +52,38 @@ export default function About() {
                             I created this site to provide an accessible
                             interface to view a huge variety of stats, many of
                             which are only found here. Some stats have taken
-                            inspiration from the other sites.
+                            inspiration from other sites.
                             <br />
-
                             Tomato.gg doesn't aim to do everything. It will
                             never have server stats as detailed as those on
-                            wot-news.com, nor will it have the percise
-                            individual battle accessible on WN8lab.com.
-                            Tomato.gg is being actively developed
-                             and is nowhere near feature complete. In
-                            the future, I plan to expand the player stats
-                            page, expand the tank stats page, implement clan
-                            stats, and finish the leaderboards.
+                            wot-news.com, nor will it have the precise
+                            individual battles as are accessible on WN8lab.com.
+                            Tomato.gg is being actively developed and is nowhere
+                            near feature complete. In the future, I plan to
+                            expand the player stats page, expand the tank stats
+                            page, implement clan stats, and finish the
+                            leaderboards.
                             <br />
                             <br />
-                            Tomato.gg fully supports EU and NA player stats. You can still view stats for RU and ASIA gamers, but there are no automatic daily stat updates. 
+                            Tomato.gg fully supports EU and NA player stats. You
+                            can still view stats for RU and ASIA gamers, but
+                            there are no automatic daily stat updates.
                             <br />
                             <br />
-                            Check out Tomato.gg on mobile as well. I have optimzied the 
-                            mobile site for the best user experience while still 
-                            being nearly 100% feature complete.<br />
+                            Check out Tomato.gg on mobile as well. I have
+                            optimized the mobile site for the best user
+                            experience while still being nearly 100% feature
+                            complete.
+                            <br />
                             <br />
                             <a
                                 target="blank"
                                 href="http://localhost:3000/stats/NA/Superdude3800=1007264827"
                             >
                                 Superdude3800
-                            </a> has helped extensively with the development of Tomato.gg. Thanks so much!
+                            </a>{" "}
+                            has helped extensively with the development of
+                            Tomato.gg. Thanks so much!
                             <br />
                             <br />
                             Join my{" "}
