@@ -56,7 +56,6 @@ export default function ClanHistory(props) {
             let URL = `https://api.worldoftanks.${server}/wot/clans/info/?application_id=${APIKey}&clan_id=`;
 
             const clonedData = clonedeep(props.data);
-            console.log(clonedData);
             if (clonedData !== "NO CLAN HISTORY") {
                 clonedData.forEach((row) => {
                     URL += `${row.clan_id}%2C+`;

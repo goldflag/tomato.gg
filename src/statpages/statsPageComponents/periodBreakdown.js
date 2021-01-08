@@ -22,6 +22,7 @@ import {
     Pagination,
     PremFilter,
     TierFilter,
+    ArrayFilter
 } from "../../components";
 import {
     ButtonFiltersContainer,
@@ -300,8 +301,16 @@ function PeriodBreakdown(props) {
             10: "X",
         };
         return [
-            { Header: "", accessor: "img" },
-            { Header: "Name", accessor: "name" },
+            { 
+                Header: "", 
+                accessor: "img",
+                disableFilters: true
+            },
+            { 
+                Header: "Name", 
+                accessor: "name",
+                disableFilters: true
+            },
             {
                 Cell: ({ value }) => {
                     return (
@@ -315,7 +324,7 @@ function PeriodBreakdown(props) {
                 Header: "Nation",
                 accessor: "nation",
                 Filter: NationFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
             {
                 Cell: ({ value }) => {
@@ -326,7 +335,7 @@ function PeriodBreakdown(props) {
                 Header: "Tier",
                 accessor: "tier",
                 Filter: TierFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
             {
                 Cell: ({ value }) => {
@@ -341,34 +350,63 @@ function PeriodBreakdown(props) {
                 Header: "Class",
                 accessor: "class",
                 Filter: ClassFilter,
-                filter: "equals",
+                filter: ArrayFilter
             },
-            { Header: "Games", accessor: "battles" },
+            { 
+                Header: "Games", 
+                accessor: "battles",
+                disableFilters: true
+            },
             {
                 Cell: ({ value }) => {
                     return <div style={WN8Style(value)}>{value}</div>;
                 },
                 Header: "WN8",
                 accessor: "wn8",
+                disableFilters: true
             },
             {
                 Cell: ({ value }) => {
                     return <div style={WRStyle(value)}>{value + "%"}</div>;
                 },
                 Header: "Winrate",
-                accessor: "winrate",
+                accessor: "winrate",              
+                disableFilters: true
             },
-            { Header: "DPG", accessor: "dpg" },
-            { Header: "KPG", accessor: "kpg" },
-            { Header: "DR", accessor: "dmgRatio" },
-            { Header: "KDR", accessor: "kd" },
-            { Header: "Survival%", accessor: "survived" },
-            { Header: "Spots", accessor: "spots" },
+            { 
+                Header: "DPG", 
+                accessor: "dpg",
+                disableFilters: true
+            },
+            {   Header: "KPG",   
+                accessor: "kpg",
+                disableFilters: true
+            },
+            { 
+                Header: "DR", 
+                accessor: "dmgRatio",
+                disableFilters: true
+            },
+            { 
+                Header: "KDR", 
+                accessor: "kd",
+                disableFilters: true
+            },
+            { 
+                Header: "Survival%", 
+                accessor: "survived" ,
+                disableFilters: true
+            },
+            { 
+                Header: "Spots", 
+                accessor: "spots",
+                disableFilters: true
+            },
             {
                 Header: "",
                 accessor: "isPrem",
                 Filter: PremFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
         ];
     }, []);

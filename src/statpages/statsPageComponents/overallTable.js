@@ -26,6 +26,7 @@ import {
     NationFilter,
     NumericTierFilter,
     PremFilter,
+    ArrayFilter
 } from "../../components/tableFilters";
 import {
     ButtonFiltersContainer,
@@ -452,7 +453,7 @@ function OverallTable(props) {
                 Header: "Nation",
                 accessor: "nation",
                 Filter: NationFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
             {
                 Cell: ({ value }) => {
@@ -463,7 +464,7 @@ function OverallTable(props) {
                 Header: "Tier",
                 accessor: "tier",
                 Filter: NumericTierFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
             {
                 Cell: ({ value }) => {
@@ -478,13 +479,13 @@ function OverallTable(props) {
                 Header: "Class",
                 accessor: "class",
                 Filter: ClassFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
             {
                 Header: "Games",
                 accessor: "battles",
                 Filter: NumberRangeColumnFilter,
-                filter: "between",
+                filter: ArrayFilter,
             },
             {
                 Cell: ({ value }) => {
@@ -543,7 +544,7 @@ function OverallTable(props) {
                 Header: "MOE",
                 accessor: "moe",
                 Filter: MoEFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
             {
                 Cell: ({ value }) => {
@@ -558,13 +559,13 @@ function OverallTable(props) {
                 Header: "Mast",
                 accessor: "mastery",
                 Filter: MasteryFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
             {
                 Header: "",
                 accessor: "isPrem",
                 Filter: PremFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
         ],
         []

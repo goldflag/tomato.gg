@@ -23,6 +23,7 @@ import {
     NationFilter,
     PremFilter,
     TierFilter,
+    ArrayFilter
 } from "../../components/tableFilters";
 import {
     ButtonFiltersContainer,
@@ -331,7 +332,7 @@ function MasteryTable(props) {
                 Header: "Nation",
                 accessor: "nation",
                 Filter: NationFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
             {
                 Cell: ({ value }) => {
@@ -340,7 +341,7 @@ function MasteryTable(props) {
                 Header: "Tier",
                 accessor: "tier",
                 Filter: TierFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
             {
                 Cell: ({ value }) => {
@@ -355,7 +356,7 @@ function MasteryTable(props) {
                 Header: "Class",
                 accessor: "class",
                 Filter: ClassFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
             {
                 Cell: ({ value }) => {
@@ -399,7 +400,7 @@ function MasteryTable(props) {
                 Header: "",
                 accessor: "isPrem",
                 Filter: PremFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
         ],
         []

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
+import styled from "styled-components";
 import { Icon } from "react-icons-kit";
 import { chevronRight } from "react-icons-kit/feather/chevronRight";
 import { chevronDown } from "react-icons-kit/feather/chevronDown";
@@ -23,6 +24,7 @@ import {
     MoETierFilter,
     NationFilter,
     PremFilter,
+    ArrayFilter
 } from "../../components/tableFilters";
 import {
     ButtonFiltersContainer,
@@ -31,6 +33,29 @@ import {
     TableContainer,
     StyledTable,
 } from "../../components/tableComponents";
+
+import { Button, ButtonGroup } from "@material-ui/core";
+import { testModeAPI } from "react-ga";
+
+// background-color: ${({ selected }) =>
+// selected ? css`rgb(222, 13, 93)` : css`rgb(66, 84, 143)`} !important;
+// color: white;
+
+export const FilterButton = styled(Button)`
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    font-size: 14px;
+
+    &:hover {
+        background-color: rgb(230, 85, 125);
+    }
+`;
+export const FilterButtonGroup = styled(ButtonGroup)`
+    margin-right: 10px;
+    margin-bottom: 10px;
+`;
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -286,6 +311,11 @@ function MoETable(props) {
         );
     }
 
+    // const test = useMemo(() =>
+    //     computeExpensiveValue(a, b),
+    //     [a, b]
+    // )
+
     const columns = React.useMemo(
         () => [
             {
@@ -319,7 +349,7 @@ function MoETable(props) {
                 Header: "Nation",
                 accessor: "nation",
                 Filter: NationFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
             {
                 Cell: ({ value }) => {
@@ -328,7 +358,7 @@ function MoETable(props) {
                 Header: "Tier",
                 accessor: "tier",
                 Filter: MoETierFilter,
-                filter: "equals",
+                filter: ArrayFilter
             },
             {
                 Cell: ({ value }) => {
@@ -343,7 +373,7 @@ function MoETable(props) {
                 Header: "Class",
                 accessor: "class",
                 Filter: ClassFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
             {
                 Cell: ({ value }) => {
@@ -367,6 +397,9 @@ function MoETable(props) {
                 Header: "50%",
                 accessor: "50",
                 disableFilters: true,
+                // Filter: NumberRangeColumnFilter,
+                // //filter: "includes"
+                // filter: testfilter
             },
             {
                 Header: "65%",
@@ -392,7 +425,7 @@ function MoETable(props) {
                 Header: "",
                 accessor: "isPrem",
                 Filter: PremFilter,
-                filter: "equals",
+                filter: ArrayFilter,
             },
         ],
         []

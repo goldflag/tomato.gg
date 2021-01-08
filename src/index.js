@@ -7,7 +7,7 @@ import Snowfall from "react-snowfall";
 function Main() {
     return (
         <MultiProvider>
-            <Snowfall snowflakeCount={75} />
+            <Snowfall snowflakeCount={50} />
             <Tomatopedia />
         </MultiProvider>
     );

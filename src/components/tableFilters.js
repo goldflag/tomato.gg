@@ -101,15 +101,29 @@ const MoEFilterOptions = [
     })),
 ];
 
+function setFilteredParams(filterArr, val) {
+    if (val === undefined) return undefined;
+    if (filterArr.includes(val)) {
+        filterArr = filterArr.filter((n) => {return n !== val});
+    }
+    else filterArr.push(val);
+
+    if (filterArr.length === 0) filterArr = undefined;
+    return filterArr;
+}
+
 const makeButtonFilter = (ariaLabel, options, Label) => ({
-    column: { filterValue, setFilter },
+    column: { filterValue = [], setFilter },
 }) => (
+
     <FilterButtonGroup variant="text" aria-label={ariaLabel}>
         {options.map(({ label, value, ...labelProps }) => (
             <FilterButton
                 key={value || label}
-                selected={filterValue === value}
-                onClick={() => setFilter(value)}
+                selected={filterValue.includes(value)}
+                onClick={() => {
+                    setFilter(setFilteredParams(filterValue, value));
+                }}
             >
                 {Label ? (
                     <Label {...{ label, value, ...labelProps }} />
@@ -208,3 +222,12 @@ export const GlobalFilter = ({
         </span>
     );
 };
+
+export const ArrayFilter = (rows, columnIds, filterValue) => {
+    const arr = [];
+    const colID = columnIds[0];
+    rows.forEach((val) => {
+        if (filterValue.includes(val.original[colID])) arr.push(val);
+    });
+    return arr;
+}

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ReactGA from "react-ga";
 import TopStats from "./statsPageComponents/topStats";
-// import AdSense from "react-adsense";
 import "../css/style.css";
 import "../css/innerpage.css";
 import serverConv from "../data/serverConv";
@@ -188,16 +187,13 @@ class StatsPage extends Component {
                             currentClan={clanStats}
                             stats={stats}
                         />
+
                     </div>
                     <div style={{ padding: "1em 0em" }}>
                         <AllTankStats
                             overall={recentStats.overallStats.tankWN8}
                             recents={recentStats.recents}
                         />
-                        {/* <AdSense.Google
-                            client='ca-pub-1358649580645755'
-                            slot='3903354081'
-                        /> */}
                     </div>
                 </>
             );
