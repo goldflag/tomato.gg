@@ -22,7 +22,7 @@ import {
     Pagination,
     PremFilter,
     TierFilter,
-    ArrayFilter
+    arrayFilterFn,
 } from "../../components";
 import {
     ButtonFiltersContainer,
@@ -301,15 +301,15 @@ function PeriodBreakdown(props) {
             10: "X",
         };
         return [
-            { 
-                Header: "", 
+            {
+                Header: "",
                 accessor: "img",
-                disableFilters: true
+                disableFilters: true,
             },
-            { 
-                Header: "Name", 
+            {
+                Header: "Name",
                 accessor: "name",
-                disableFilters: true
+                disableFilters: true,
             },
             {
                 Cell: ({ value }) => {
@@ -324,7 +324,7 @@ function PeriodBreakdown(props) {
                 Header: "Nation",
                 accessor: "nation",
                 Filter: NationFilter,
-                filter: ArrayFilter,
+                filter: arrayFilterFn,
             },
             {
                 Cell: ({ value }) => {
@@ -335,7 +335,7 @@ function PeriodBreakdown(props) {
                 Header: "Tier",
                 accessor: "tier",
                 Filter: TierFilter,
-                filter: ArrayFilter,
+                filter: arrayFilterFn,
             },
             {
                 Cell: ({ value }) => {
@@ -350,12 +350,12 @@ function PeriodBreakdown(props) {
                 Header: "Class",
                 accessor: "class",
                 Filter: ClassFilter,
-                filter: ArrayFilter
+                filter: arrayFilterFn,
             },
-            { 
-                Header: "Games", 
+            {
+                Header: "Games",
                 accessor: "battles",
-                disableFilters: true
+                disableFilters: true,
             },
             {
                 Cell: ({ value }) => {
@@ -363,50 +363,47 @@ function PeriodBreakdown(props) {
                 },
                 Header: "WN8",
                 accessor: "wn8",
-                disableFilters: true
+                disableFilters: true,
             },
             {
                 Cell: ({ value }) => {
                     return <div style={WRStyle(value)}>{value + "%"}</div>;
                 },
                 Header: "Winrate",
-                accessor: "winrate",              
-                disableFilters: true
+                accessor: "winrate",
+                disableFilters: true,
             },
-            { 
-                Header: "DPG", 
+            {
+                Header: "DPG",
                 accessor: "dpg",
-                disableFilters: true
+                disableFilters: true,
             },
-            {   Header: "KPG",   
-                accessor: "kpg",
-                disableFilters: true
-            },
-            { 
-                Header: "DR", 
+            { Header: "KPG", accessor: "kpg", disableFilters: true },
+            {
+                Header: "DR",
                 accessor: "dmgRatio",
-                disableFilters: true
+                disableFilters: true,
             },
-            { 
-                Header: "KDR", 
+            {
+                Header: "KDR",
                 accessor: "kd",
-                disableFilters: true
+                disableFilters: true,
             },
-            { 
-                Header: "Survival%", 
-                accessor: "survived" ,
-                disableFilters: true
+            {
+                Header: "Survival%",
+                accessor: "survived",
+                disableFilters: true,
             },
-            { 
-                Header: "Spots", 
+            {
+                Header: "Spots",
                 accessor: "spots",
-                disableFilters: true
+                disableFilters: true,
             },
             {
                 Header: "",
                 accessor: "isPrem",
                 Filter: PremFilter,
-                filter: ArrayFilter,
+                filter: arrayFilterFn,
             },
         ];
     }, []);

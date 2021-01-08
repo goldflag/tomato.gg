@@ -20,7 +20,7 @@ import {
     Pagination,
     PremFilter,
     TierFilter,
-    ArrayFilter
+    arrayFilterFn,
 } from "../../components";
 import {
     ButtonFiltersContainer,
@@ -266,7 +266,7 @@ function WN8Table(props) {
                 Header: "Nation",
                 accessor: "nation",
                 Filter: NationFilter,
-                filter: ArrayFilter,
+                filter: arrayFilterFn,
             },
             {
                 Cell: ({ value }) => {
@@ -275,13 +275,13 @@ function WN8Table(props) {
                 Header: "Tier",
                 accessor: "tier",
                 Filter: TierFilter,
-                filter: ArrayFilter,
+                filter: arrayFilterFn,
             },
             {
                 Header: "Class",
                 accessor: "class",
                 Filter: ClassFilter,
-                filter: ArrayFilter,
+                filter: arrayFilterFn,
             },
             {
                 Header: "expDef",
@@ -312,7 +312,7 @@ function WN8Table(props) {
                 Header: "",
                 accessor: "isPrem",
                 Filter: PremFilter,
-                filter: ArrayFilter,
+                filter: arrayFilterFn,
             },
         ],
         []

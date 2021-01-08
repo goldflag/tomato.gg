@@ -223,7 +223,7 @@ export const GlobalFilter = ({
     );
 };
 
-export const ArrayFilter = (rows, [colID], filterValue) =>
+export const arrayFilterFn = (rows, [colID], filterValue) =>
     filterValue.length
         ? rows.filter((row) => filterValue.includes(row.original[colID]))
         : rows;

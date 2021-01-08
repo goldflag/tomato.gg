@@ -23,7 +23,7 @@ import {
     MoETierFilter,
     NationFilter,
     PremFilter,
-    ArrayFilter
+    arrayFilterFn,
 } from "../../components/tableFilters";
 import {
     ButtonFiltersContainer,
@@ -382,7 +382,7 @@ function MoETracker(props) {
                 Header: "Nation",
                 accessor: "nation",
                 Filter: NationFilter,
-                filter: ArrayFilter,
+                filter: arrayFilterFn,
             },
             {
                 Cell: ({ value }) => {
@@ -393,7 +393,7 @@ function MoETracker(props) {
                 Header: "Tier",
                 accessor: "tier",
                 Filter: MoETierFilter,
-                filter: ArrayFilter,
+                filter: arrayFilterFn,
             },
             {
                 Cell: ({ value }) => {
@@ -408,7 +408,7 @@ function MoETracker(props) {
                 Header: "Class",
                 accessor: "class",
                 Filter: ClassFilter,
-                filter: ArrayFilter,
+                filter: arrayFilterFn,
             },
             {
                 Cell: ({ value }) => {
@@ -476,7 +476,7 @@ function MoETracker(props) {
                 Header: "",
                 accessor: "isPrem",
                 Filter: PremFilter,
-                filter: ArrayFilter,
+                filter: arrayFilterFn,
             },
         ],
         [props.moe]
