@@ -145,7 +145,6 @@ function MoETracker(props) {
                 filterTypes,
                 initialState: {
                     // hiddenColumns: ["isPrem"],
-
                     pageIndex: 0,
                     pageSize: 100,
                     sortBy: [

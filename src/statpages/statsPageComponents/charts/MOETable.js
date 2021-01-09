@@ -63,39 +63,50 @@ export default function MOETable(props) {
     const numTanks = rows[0].MOE + rows[1].MOE + rows[2].MOE + rows[3].MOE;
 
     return (
-        <table style={demo}>
-            <tbody>
-                <tr>
-                    <td style={tt}>
-                        Vehicles{" "}
-                        <span style={{ float: "right" }}>{numTanks} </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td style={tdc}>
-                        3 Marks{" "}
-                        <span style={{ float: "right" }}>{rows[0].MOE} </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td style={td}>
-                        2 Marks{" "}
-                        <span style={{ float: "right" }}>{rows[1].MOE}</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td style={tdc}>
-                        1 Mark{" "}
-                        <span style={{ float: "right" }}>{rows[2].MOE}</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td style={td}>
-                        None{" "}
-                        <span style={{ float: "right" }}>{rows[3].MOE}</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div>
+            <table style={demo}>
+                <tbody>
+                    <tr>
+                        <td style={tt}>
+                            Vehicles{" "}
+                            <span style={{ float: "right" }}>{numTanks} </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style={tdc}>
+                            3 Marks{" "}
+                            <span style={{ float: "right" }}>{rows[0].MOE} </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style={td}>
+                            2 Marks{" "}
+                            <span style={{ float: "right" }}>{rows[1].MOE}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style={tdc}>
+                            1 Mark{" "}
+                            <span style={{ float: "right" }}>{rows[2].MOE}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style={td}>
+                            None{" "}
+                            <span style={{ float: "right" }}>{rows[3].MOE}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style={{paddingTop: '0.5rem'}}>
+                <a 
+                    style={{fontSize: '0.8rem'}}
+                    target="blank"
+                    href="https://herhor.net/wot/moe/"
+                >
+                    Generate a cool image of all your marks
+                </a>
+            </div>
+        </div>
     );
 }

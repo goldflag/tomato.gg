@@ -68,7 +68,7 @@ export default withRouter(function Search(props) {
                     </form>
                 </div>
                 <div className={"leaderboard"}>
-                    <LeaderboardGrid />
+                    {/* <LeaderboardGrid /> */}
                 </div>
             </div>
         </div>

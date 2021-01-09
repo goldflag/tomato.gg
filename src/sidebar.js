@@ -140,6 +140,36 @@ const Sidebar = withRouter((props) => {
                         fontWeight: "300",
                         color: "#96a7c7",
                         padding: "15px",
+                        bottom: "90px",
+                        position: "absolute",
+                    }}
+                >
+                    <span style={{fontWeight: "500"}}>Partnered Websites</span> 
+                    <span style={{color: "white"}}>
+                        <br />
+                        <a  style={{color: "white"}}
+                            target="blank"
+                            href="https://herhor.net/wot/"
+                        >
+                            herhor.net
+                        </a>
+                    </span>
+                     - MoE rankings and image generator
+                    <br />
+                </div>
+                <div 
+                    className="line"  
+                    style={{
+                        bottom: "90px",
+                        position: "absolute",
+                }} />
+
+                <div
+                    style={{
+                        fontSize: "0.8rem",
+                        fontWeight: "300",
+                        color: "#96a7c7",
+                        padding: "15px",
                         bottom: "0px",
                         position: "absolute",
                     }}
