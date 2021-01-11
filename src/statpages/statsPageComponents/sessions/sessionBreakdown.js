@@ -9,24 +9,10 @@ import { ThemeContext } from "../../../context";
 import { Pagination } from "../../../components";
 import { StyledTable } from "../../../components/tableComponents";
 
-function WN8Style(wn8) {
-    return {
-        background: WN8c(wn8),
-        color: "white",
-        padding: "10.5px",
-        margin: "-0.3rem -0.5rem -0.3rem -0.5rem",
-        textAlign: "center",
-    };
-}
-
-function WRStyle(wr) {
-    return {
-        background: WRc(wr),
-        color: "white",
-        padding: "10.5px",
-        margin: "-0.3rem -0.5rem -0.3rem -0.5rem",
-        textAlign: "center",
-    };
+function setColor(column, value) {
+    if (column === "WN8") return WN8c(value);
+    else if (column === "Winrate") return WRc(value);
+    else return undefined;
 }
 
 const tierConv = {
@@ -66,7 +52,7 @@ export default function SessionBreakdown(props) {
             {
                 Cell: ({ value }) => {
                     return (
-                        <div style={{ margin: "10px" }}>{tierConv[value]}</div>
+                        <div>{tierConv[value]}</div>
                     );
                 },
                 Header: "Tier",
@@ -87,15 +73,12 @@ export default function SessionBreakdown(props) {
             },
             { Header: "Games", accessor: "battles" },
             {
-                Cell: ({ value }) => {
-                    return <div style={WN8Style(value)}>{value}</div>;
-                },
                 Header: "WN8",
                 accessor: "wn8",
             },
             {
                 Cell: ({ value }) => {
-                    return <div style={WRStyle(value)}>{value + "%"}</div>;
+                    return <div>{value + "%"}</div>;
                 },
                 Header: "Winrate",
                 accessor: "winrate",
@@ -190,7 +173,9 @@ export default function SessionBreakdown(props) {
                             <tr {...row.getRowProps()}>
                                 {row.cells.map((cell) => {
                                     return (
-                                        <td {...cell.getCellProps()}>
+                                        <td {...cell.getCellProps({
+                                            style: {backgroundColor: setColor(cell.column.Header, cell.value)}
+                                        })}>
                                             {cell.render("Cell")}
                                         </td>
                                     );

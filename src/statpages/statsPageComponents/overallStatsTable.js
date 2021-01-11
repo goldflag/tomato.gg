@@ -230,6 +230,46 @@ export default function OverallStatsTable(props) {
 
     return (
         <MuiThemeProvider theme={getMuiTheme()}>
+                        <Paper
+                square
+                elevation={2}
+                style={{
+                    margin: "1rem 0 0 0",
+                    padding: "1rem 1rem 1rem 1rem",
+                    backgroundColor:
+                        theme === "dark" ? "rgb(60, 60, 65)" : "white",
+                }}
+            >
+                <span
+                    style={{
+                        fontSize: "1.3em",
+                        color:
+                            theme === "dark"
+                                ? "rgb(200, 200, 200)"
+                                : "rgb(100,100,100)",
+                        fontWeight: "500",
+                    }}
+                >
+                    Seeing incomplete recent stats?
+                </span>
+                <br />
+                <span
+                    style={{
+                        fontSize: "0.8em",
+                        color:
+                            theme === "dark"
+                                ? "rgb(200, 200, 200)"
+                                : "rgb(100,100,100)",
+                    }}
+                >
+                    Wargaming does not provide recent stats in their API,
+                    meaning that stats sites must generate and store recent
+                    stats on their own servers. This website is new so we do not
+                    have deep records yet. In the future, every active account
+                    will have complete recent stats.
+                </span>
+                <br />
+            </Paper>
             <Paper>
                 <MUIDataTable
                     title={""}

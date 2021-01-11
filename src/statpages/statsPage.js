@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import ReactGA from "react-ga";
-import TopStats from "./statsPageComponents/topStats";
 import "../css/style.css";
 import "../css/innerpage.css";
 import serverConv from "../data/serverConv";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import AllTankStats from "./statsPageComponents/allTankStats";
 import GraphCalculator from "../functions/GraphCalculator";
-import Charts from "./statsPageComponents/charts";
-import SessionsLogParent from "./statsPageComponents/sessions/sessionsLogParent";
+import MainTabs from "./statsPageComponents/mainTabs";
 import { ThemeContext } from "../context";
 import { withRouter } from "react-router-dom";
 
@@ -30,6 +27,7 @@ const styles = () => ({
         textAlign: "center",
     },
 });
+
 
 class StatsPage extends Component {
     constructor(props) {
@@ -165,37 +163,19 @@ class StatsPage extends Component {
             );
         } else if (validID) {
             statTable = (
-                <>
-                    <div style={{ padding: "1em 0em" }}>
-                        <TopStats
-                            username={username}
-                            WGRating={WGRating}
-                            data={graphData}
-                            stats={stats}
-                            clanStats={clanStats}
-                            accountCreationDate={accountCreationDate}
-                            lastPlayedTime={lastPlayedTime}
-                        />
-                    </div>
-                    <div style={{ minHeight: "300px" }}>
-                        <SessionsLogParent data={recentStats.sessions} />
-                    </div>
-                    <div style={{ minHeight: "300px" }}>
-                        <Charts
-                            data={graphData}
-                            clanData={clanHistory}
-                            currentClan={clanStats}
-                            stats={stats}
-                        />
-
-                    </div>
-                    <div style={{ padding: "1em 0em" }}>
-                        <AllTankStats
-                            overall={recentStats.overallStats.tankWN8}
-                            recents={recentStats.recents}
-                        />
-                    </div>
-                </>
+                <MainTabs 
+                    stats={stats}
+                    loading={loading}
+                    validID={validID}
+                    username={username}
+                    WGRating={WGRating}
+                    clanStats={clanStats}
+                    graphData={graphData}
+                    clanHistory={clanHistory}
+                    recentStats={recentStats}
+                    lastPlayedTime={lastPlayedTime}
+                    accountCreationDate={accountCreationDate}
+                />
             );
         } else {
             statTable = (

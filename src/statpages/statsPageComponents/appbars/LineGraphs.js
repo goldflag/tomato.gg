@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import CustomTab from "../../tabs/customTab";
-import CustomTabs from "../../tabs/customTabs";
-import TabPanel from "../../tabs/tabPanel";
+import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
 import LineGraphWN8 from "../charts/LineGraphWN8.js";
 
 export default function LineGraphs(props) {
@@ -17,6 +15,8 @@ export default function LineGraphs(props) {
                 value={value}
                 onChange={handleChange}
                 aria-label="ant example"
+                variant="scrollable"
+                scrollButtons="auto"
             >
                 <CustomTab label="WN8 PROGRESS" />
                 <CustomTab label="DPG PROGRESS" />

@@ -269,9 +269,6 @@ function WN8Table(props) {
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => {
-                    return <div style={{ margin: "10px" }}>{value}</div>;
-                },
                 Header: "Tier",
                 accessor: "tier",
                 Filter: TierFilter,

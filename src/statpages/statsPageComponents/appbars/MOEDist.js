@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import CustomTab from "../../tabs/customTab";
-import CustomTabs from "../../tabs/customTabs";
-import TabPanel from "../../tabs/tabPanel";
+import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
 import Grid from "@material-ui/core/Grid";
 import MOETable from "../charts/MOETable.js";
 import MasteryTable from "../charts/MasteryTable.js";

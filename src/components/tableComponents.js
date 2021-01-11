@@ -67,7 +67,8 @@ export const StyledTable = styled.table`
     }
     td {
         margin: 0;
-        padding: 0rem 0rem 0rem 0.5rem;
+        // padding: 0rem 0rem 0rem 0.5rem;
+        padding: 0.3rem 0.5rem;
         :last-child {
             border-right: 0;
         }

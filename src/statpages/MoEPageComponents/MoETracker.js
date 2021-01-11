@@ -35,19 +35,6 @@ import {
 
 const backend = process.env.REACT_APP_BACKEND;
 
-const tierConv = {
-    1: "I",
-    2: "II",
-    3: "III",
-    4: "IV",
-    5: "V",
-    6: "VI",
-    7: "VII",
-    8: "VIII",
-    9: "IX",
-    10: "X",
-};
-
 const MoEConv = {
     95: "3",
     85: "2",
@@ -270,7 +257,9 @@ function MoETracker(props) {
                                 <React.Fragment key={i}>
                                     <tr {...row.getRowProps()}>
                                         {row.cells.map((cell) => (
-                                            <td {...cell.getCellProps()}>
+                                            <td {...cell.getCellProps({
+                                                style: setColor(cell.column.Header, cell.value)
+                                            })}>
                                                 {cell.render("Cell")}
                                             </td>
                                         ))}
@@ -314,7 +303,20 @@ function MoETracker(props) {
         });
     }
 
-    function percentStyle(val, multiplier) {
+    function setColor(column, value) {
+        let backgroundColor = ""
+        let color = "black";
+        if (column === `7 Day %Δ`) backgroundColor = colorScale(value, 50);
+        else if (column === `14 Day %Δ`) backgroundColor = colorScale(value, 30);
+        else if (column === `30 Day %Δ`) backgroundColor = colorScale(value, 20);
+        else color = undefined;
+        return {
+            color: color,
+            backgroundColor: backgroundColor
+        }
+    }
+
+    function colorScale(val, multiplier) {
         function green(val) {
             val *= -1;
             return `rgb(${255 - val * multiplier}, 255, ${
@@ -328,15 +330,12 @@ function MoETracker(props) {
             })`;
         }
 
+        return val > 0 ? red(val) : green(val);
+    }
+
+    function percentStyle(val) {
         return (
-            <div
-                style={{
-                    color: "black",
-                    backgroundColor: val > 0 ? red(val) : green(val),
-                    padding: "9.5px",
-                    margin: "-0.3rem 1rem -0.3rem -0.5rem",
-                }}
-            >
+            <div>
                 {val > 0 ? "+" : ""}
                 {val}%
             </div>
@@ -384,11 +383,6 @@ function MoETracker(props) {
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => {
-                    return (
-                        <div style={{ margin: "10px" }}>{tierConv[value]}</div>
-                    );
-                },
                 Header: "Tier",
                 accessor: "tier",
                 Filter: MoETierFilter,
@@ -399,7 +393,7 @@ function MoETracker(props) {
                     return (
                         <img
                             src={require(`../../assets/classIcons/${value}.png`)}
-                            style={{ maxWidth: "20px", margin: "3px" }}
+                            style={{ maxWidth: "20px"}}
                             alt={value}
                         />
                     );
@@ -439,7 +433,7 @@ function MoETracker(props) {
                 sortType: "basic",
             },
             {
-                Cell: ({ value }) => percentStyle(value, 50),
+                Cell: ({ value }) => percentStyle(value),
                 Header: "7 Day %Δ",
                 accessor: `7percent${props.moe}`,
                 disableFilters: true,
@@ -452,7 +446,7 @@ function MoETracker(props) {
                 sortType: "basic",
             },
             {
-                Cell: ({ value }) => percentStyle(value, 30),
+                Cell: ({ value }) => percentStyle(value),
                 Header: "14 Day %Δ",
                 accessor: `14percent${props.moe}`,
                 disableFilters: true,
@@ -465,7 +459,7 @@ function MoETracker(props) {
                 sortType: "basic",
             },
             {
-                Cell: ({ value }) => percentStyle(value, 20),
+                Cell: ({ value }) => percentStyle(value),
                 Header: "30 Day %Δ",
                 accessor: `30percent${props.moe}`,
                 disableFilters: true,

@@ -21,7 +21,7 @@ import {
     NationFilter,
     Pagination,
     PremFilter,
-    TierFilter,
+    NumericTierFilter,
     arrayFilterFn,
 } from "../../components";
 import {
@@ -31,24 +31,10 @@ import {
     TableContainer,
 } from "../../components/tableComponents";
 
-function WN8Style(wn8) {
-    return {
-        background: WN8c(wn8),
-        color: "white",
-        padding: "11px",
-        margin: "-0.3rem -0.5rem -0.3rem -0.5rem",
-        textAlign: "center",
-    };
-}
-
-function WRStyle(wr) {
-    return {
-        background: WRc(wr),
-        color: "white",
-        padding: "11px",
-        margin: "-0.3rem -0.5rem -0.3rem -0.5rem",
-        textAlign: "center",
-    };
+function setColor(column, value) {
+    if (column === "WN8") return WN8c(value);
+    else if (column === "Winrate") return WRc(value);
+    else return undefined;
 }
 
 function PeriodBreakdown(props) {
@@ -223,7 +209,9 @@ function PeriodBreakdown(props) {
                                     <tr>
                                         {row.cells.map((cell) => {
                                             return (
-                                                <td {...cell.getCellProps()}>
+                                                <td {...cell.getCellProps({
+                                                    style: {backgroundColor: setColor(cell.column.Header, cell.value)}
+                                                })}>
                                                     {cell.render("Cell")}
                                                 </td>
                                             );
@@ -334,7 +322,7 @@ function PeriodBreakdown(props) {
                 },
                 Header: "Tier",
                 accessor: "tier",
-                Filter: TierFilter,
+                Filter: NumericTierFilter,
                 filter: arrayFilterFn,
             },
             {
@@ -358,16 +346,13 @@ function PeriodBreakdown(props) {
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => {
-                    return <div style={WN8Style(value)}>{value}</div>;
-                },
                 Header: "WN8",
                 accessor: "wn8",
                 disableFilters: true,
             },
             {
                 Cell: ({ value }) => {
-                    return <div style={WRStyle(value)}>{value + "%"}</div>;
+                    return <div>{value + "%"}</div>;
                 },
                 Header: "Winrate",
                 accessor: "winrate",

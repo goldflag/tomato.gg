@@ -12,24 +12,10 @@ import { ThemeContext } from "../../../context";
 import SessionBreakdown from "./sessionBreakdown";
 import { Pagination } from "../../../components";
 
-function WN8Style(wn8) {
-    return {
-        background: WN8c(wn8),
-        color: "white",
-        padding: "10.5px",
-        margin: "-0.3rem 0rem -0.3rem -0.5rem",
-        textAlign: "center",
-    };
-}
-
-function WRStyle(wr) {
-    return {
-        background: WRc(wr),
-        color: "white",
-        padding: "10.5px",
-        margin: "-0.3rem 0rem -0.3rem -0.5rem",
-        textAlign: "center",
-    };
+function setColor(column, value) {
+    if (column === "WN8") return WN8c(value);
+    else if (column === "Winrate") return WRc(value);
+    else return undefined;
 }
 
 export default function SessionsLog(props) {
@@ -76,6 +62,7 @@ export default function SessionsLog(props) {
                 font-weight: 500;
             }
             td {
+                padding: 0.4rem 0.5rem;
             }
         }
     `;
@@ -93,7 +80,7 @@ export default function SessionsLog(props) {
                     // Use Cell to render an expander for each row.
                     // We can use the getToggleRowExpandedProps prop-getter
                     // to build the expander.
-                    <div style={{ margin: "6px" }}>
+                    <div >
                         <span {...row.getToggleRowExpandedProps()}>
                             {row.isExpanded ? (
                                 <Icon size={24} icon={chevronDown} />
@@ -125,13 +112,15 @@ export default function SessionsLog(props) {
                 accessor: "tankcount",
             },
             { 
-                Cell: ({ value }) => { return (<div style={WN8Style(value)}>{value}</div>) },
                 Header: 'WN8', 
                 accessor: 'overallWN8' },
             { 
-                Cell: ({ value }) => { return (<div style={WRStyle(value)}>{value + "%"}</div>) },
+                Cell: ({ value }) => {
+                    return <div>{value + "%"}</div>;
+                },
                 Header: 'Winrate', 
-                accessor: 'winrate' },
+                accessor: 'winrate' 
+            },
             {
                 Header: "DPG",
                 accessor: "damagerate",
@@ -267,7 +256,9 @@ export default function SessionsLog(props) {
                                 <React.Fragment key={i}>
                                     <tr {...row.getRowProps()}>
                                         {row.cells.map((cell) => (
-                                            <td {...cell.getCellProps()}>
+                                            <td {...cell.getCellProps({
+                                                style: {backgroundColor: setColor(cell.column.Header, cell.value)}
+                                            })}>
                                                 {cell.render("Cell")}
                                             </td>
                                         ))}

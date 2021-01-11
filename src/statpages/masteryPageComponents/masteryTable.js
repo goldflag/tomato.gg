@@ -335,9 +335,6 @@ function MasteryTable(props) {
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => {
-                    return <div style={{ margin: "10px" }}>{value}</div>;
-                },
                 Header: "Tier",
                 accessor: "tier",
                 Filter: TierFilter,
@@ -348,7 +345,7 @@ function MasteryTable(props) {
                     return (
                         <img
                             src={require(`../../assets/classIcons/${value}.png`)}
-                            style={{ maxWidth: "20px", margin: "3px" }}
+                            style={{ maxWidth: "20px"}}
                             alt={value}
                         />
                     );

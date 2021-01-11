@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import CustomTab from "../../tabs/customTab";
-import CustomTabs from "../../tabs/customTabs";
-import TabPanel from "../../tabs/tabPanel";
+import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
 import ClassDistribution from "../charts/ClassDistribution.js";
 
 export default function NationDist(props) {

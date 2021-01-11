@@ -3,11 +3,7 @@ import ReactGA from "react-ga";
 import { ThemeContext, ServerContext } from "../context";
 import MoETable from "./MoEPageComponents/MoETable";
 import MoETracker from "./MoEPageComponents/MoETracker";
-
-import CustomTab from "./tabs/customTab";
-import CustomTabs from "./tabs/customTabs";
-import TabPanel from "./tabs/tabPanel";
-
+import { TabPanel, CustomTabs, CustomTab } from "./tabs/customTabs";
 import tankNames from "../data/tankNames.json";
 import nationConversion from "../data/nationConversion";
 import classConversion from "../data/classConversion.json";
@@ -136,6 +132,8 @@ export default function MoEPage(props) {
                 value={value}
                 onChange={handleChange}
                 aria-label="ant example"
+                variant="scrollable"
+                scrollButtons="auto"
             >
                 <CustomTab label="EXPECTED VALUES" />
                 <CustomTab label="95% EXP. VAL CHANGE" />

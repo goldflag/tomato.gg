@@ -36,27 +36,10 @@ import {
     TableContainer,
 } from "../../components/tableComponents";
 
-function WN8Style(wn8) {
-    return {
-        background: WN8c(wn8),
-        color: "white",
-        padding: "11px",
-        margin: "-0.3rem -0.5rem -0.3rem -0.5rem",
-        //margin: "-9px -9px",
-        textAlign: "center",
-    };
-}
-
-function WRStyle(wr) {
-    return {
-        background: WRc(wr),
-        color: "white",
-        padding: "11px",
-        margin: "-0.3rem -0.5rem -0.3rem -0.5rem",
-        //margin: "-9px -9px",
-        textAlign: "center",
-    };
-    //return { background: WRc(wr), color: 'white', width: '100%', height: '100%' }
+function setColor(column, value) {
+    if (column === "WN8") return WN8c(value);
+    else if (column === "Winrate") return WRc(value);
+    else return undefined;
 }
 
 const tierConv = {
@@ -311,7 +294,6 @@ function OverallTable(props) {
                 </FiltersContainer>
                 <StyledTable
                     theme={theme}
-                    tdOverride={"padding: 0.2rem 0.5rem;"}
                     {...getTableProps()}
                 >
                     <thead>
@@ -353,7 +335,9 @@ function OverallTable(props) {
                                 <React.Fragment key={i}>
                                     <tr {...row.getRowProps()}>
                                         {row.cells.map((cell) => (
-                                            <td {...cell.getCellProps()}>
+                                            <td {...cell.getCellProps({
+                                                style: {backgroundColor: setColor(cell.column.Header, cell.value)}
+                                            })}>
                                                 {cell.render("Cell")}
                                             </td>
                                         ))}
@@ -458,7 +442,7 @@ function OverallTable(props) {
             {
                 Cell: ({ value }) => {
                     return (
-                        <div style={{ margin: "8px" }}>{tierConv[value]}</div>
+                        <div>{tierConv[value]}</div>
                     );
                 },
                 Header: "Tier",
@@ -488,9 +472,6 @@ function OverallTable(props) {
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => {
-                    return <div style={WN8Style(value)}>{value}</div>;
-                },
                 Header: "WN8",
                 accessor: "wn8",
                 Filter: NumberRangeColumnFilter,
@@ -506,7 +487,7 @@ function OverallTable(props) {
             },
             {
                 Cell: ({ value }) => {
-                    return <div style={WRStyle(value)}>{value + "%"}</div>;
+                    return <div>{value + "%"}</div>;
                 },
                 Header: "Winrate",
                 accessor: "winrate",

@@ -1,11 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import OverallStatsTable from "./overallStatsTable.js";
 import WN8color from "../../functions/WN8color";
 import WRcolor from "../../functions/WRcolor";
 import PRcolor from "../../functions/PRcolor";
-import { ThemeContext } from "../../context";
 import "../../css/statspage.css";
 
 function battlesColor(battles) {
@@ -63,7 +61,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TopStats(props) {
     const classes = useStyles();
-    const { theme } = React.useContext(ThemeContext);
 
     const squareStats = {
         overallWR: props.data.overallWinrate,
@@ -240,47 +237,6 @@ export default function TopStats(props) {
                     </span>
                 </Paper>
             </div>
-            <Paper
-                square
-                elevation={2}
-                style={{
-                    margin: "1rem 0 1rem 0",
-                    padding: "1rem 1rem 1rem 1rem",
-                    backgroundColor:
-                        theme === "dark" ? "rgb(60, 60, 65)" : "white",
-                }}
-            >
-                <span
-                    style={{
-                        fontSize: "1.3em",
-                        color:
-                            theme === "dark"
-                                ? "rgb(200, 200, 200)"
-                                : "rgb(100,100,100)",
-                        fontWeight: "500",
-                    }}
-                >
-                    Seeing incomplete recent stats?
-                </span>
-                <br />
-                <span
-                    style={{
-                        fontSize: "0.8em",
-                        color:
-                            theme === "dark"
-                                ? "rgb(200, 200, 200)"
-                                : "rgb(100,100,100)",
-                    }}
-                >
-                    Wargaming does not provide recent stats in their API,
-                    meaning that stats sites must generate and store recent
-                    stats on their own servers. This website is new so we do not
-                    have deep records yet. In the future, every active account
-                    will have complete recent stats.
-                </span>
-                <br />
-            </Paper>
-            <OverallStatsTable data={props.data.overallStats} />
         </div>
     );
 }
