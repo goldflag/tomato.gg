@@ -35,6 +35,7 @@ import {
     SubRow,
     TableContainer,
 } from "../../components/tableComponents";
+import styled from "styled-components";
 
 function setColor(column, value) {
     if (column === "WN8") return WN8c(value);
@@ -59,6 +60,16 @@ function OverallTable(props) {
     const { theme } = React.useContext(ThemeContext);
 
     let data = props.data;
+
+    const Styles = styled.div`
+        padding: 0.3rem;
+        .breakdown {
+            display: grid;
+            padding: 0.5rem 0rem;
+            grid-template-columns: 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px;
+            // grid-template-rows: 25% 100px auto;
+        }
+    `;
 
     // Define a default UI for filtering
     function DefaultColumnFilter({
@@ -234,27 +245,72 @@ function OverallTable(props) {
         );
 
         function renderRowSubComponent(row) {
-            // let tankStats = row.row.original.tankStats;
-            // let rowData = [];
-            // for (let i = 0; i < tankStats.length; ++i) {
-            //     let entry = {
-            //         img:  <img src={require(`../../../assets/tankIcons/${tankStats[i][0]}.png`)} alt={tankStats[i][0]}/>,
-            //         name: tankStats[i][1],
-            //         nation: tankStats[i][2],
-            //         tier: tankStats[i][3],
-            //         class: tankStats[i][4],
-            //         battles: tankStats[i][5],
-            //         winrate: tankStats[i][6],
-            //         wn8: tankStats[i][7],
-            //         dpg: tankStats[i][8],
-            //         kpg: tankStats[i][9],
-            //         dmgRatio: tankStats[i][10],
-            //         kd: tankStats[i][11],
-            //         spots: tankStats[i][12],
-            //     }
-            //     rowData.push(entry);
-            // }
-            return <div>Under Construction</div>;
+            function NumberBox(val) {
+                let width;
+                if (val < 10) width = "15px";
+                else if (val < 100) width = "20px";
+                else if (val < 1000) width = "25px";
+                else width = "30px";
+                return (
+                    <div 
+                        style={{
+                            width: width, 
+                            height: "16px", 
+                            backgroundColor: "rgb(199, 38, 81)", 
+                            color: "white",
+                            position: "absolute",  
+                            bottom: '5px', 
+                            left: '30px',
+                            fontSize: '0.6rem',
+                            border: '1px solid black',
+                            borderRadius: '5px',
+                            textAlign: "center",
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                        {val}
+                    </div>
+                )
+            }
+
+            function RenderAwards(type) {
+                let keys = Object.keys(row.row.original.awards[type]);
+                return keys.map((award) => {
+                    const counter = NumberBox(row.row.original.awards[type][award]);
+                    return (row.row.original.awards[type][award] > 0 ? 
+                            <div style={{margin: "0px", position: "relative"}}> 
+                                {counter}
+                                <img style={{width: "50px"}} src={require(`../../assets/awards/${type}/${award}.png`)} alt={award}/>
+                            </div>
+                        : <></>
+                    );
+                })
+            }
+
+            
+
+            let HeroAwards = RenderAwards("battleHeroes");
+            let MainAwards = RenderAwards("main");
+            let EpicAwards = RenderAwards("epic");
+
+            return (
+                <Styles>
+                    Battle Heroes
+                    <div className="breakdown">
+                        {HeroAwards}
+                    </div>
+                    Honorary Ranks
+                    <div className="breakdown">
+                        {MainAwards}
+                    </div>
+                    Epic Medals
+                    <div className="breakdown">
+                        {EpicAwards}
+                    </div>
+                </Styles>
+            );
         }
 
         // Render the UI for your table

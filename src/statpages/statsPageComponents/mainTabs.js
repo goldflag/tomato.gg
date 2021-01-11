@@ -75,15 +75,18 @@ export default function MainTabs(props) {
             >
                 <CustomTab label="MAIN STATS" />
                 <CustomTab label="INFOGRAPHICS" />
-                <CustomTab label="TANK STATS" />
+                <CustomTab label="SESSIONS" />
                 <CustomTab label="ACHIEVEMENTS (Coming Soon™)" disabled />
             </CustomTabs>
             <TabPanel value={value} index={0}>
                 <div style={{ margin: "1rem 0" }}>
                     <OverallStatsTable data={props.graphData.overallStats} />
                 </div>
-                <div style={{ minHeight: "300px" }}>
-                    <SessionsLogParent data={props.recentStats.sessions} />
+                <div style={{ padding: "0rem" }}>
+                    <AllTankStats
+                        overall={props.recentStats.overallStats.tankWN8}
+                        recents={props.recentStats.recents}
+                    />
                 </div>
             </TabPanel>
             <TabPanel value={value} index={1}>
@@ -97,11 +100,8 @@ export default function MainTabs(props) {
                 </div>
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <div style={{ padding: "1em 0em" }}>
-                    <AllTankStats
-                        overall={props.recentStats.overallStats.tankWN8}
-                        recents={props.recentStats.recents}
-                    />
+                <div style={{ marginTop: "1rem", minHeight: "300px" }}>
+                    <SessionsLogParent data={props.recentStats.sessions} />
                 </div>
             </TabPanel>
             <TabPanel value={value} index={3}>

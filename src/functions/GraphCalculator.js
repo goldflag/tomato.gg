@@ -2071,9 +2071,9 @@ export default function GraphCalculator(
     });
 
     recent1000.tankStats.forEach((tank) => {
-        data.tierDistRecent[tank[3] - 1][tank[4]] += tank[5];
-        data.NationDistRecent[tank[2]] += tank[5];
-        data.ClassDistRecent[tank[4]] += tank[5];
+        data.tierDistRecent[tank.tier - 1][tank.class] += tank.battles;
+        data.NationDistRecent[tank.nation] += tank.battles;
+        data.ClassDistRecent[tank.class] += tank.battles;
     });
 
     overallStats.raw.forEach((stats) =>

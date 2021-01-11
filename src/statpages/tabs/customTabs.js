@@ -38,9 +38,9 @@ export const CustomTabs = withStyles({
 export const CustomTab = withStyles((theme) => ({
     root: {
         textTransform: "none",
-        minWidth: 72,
+        minWidth: 90,
         fontWeight: 600,
-        marginRight: theme.spacing(4),
+        padding: "0rem 1rem",
         fontFamily: "Segoe UI, Futura",
         color: "rgb(250, 250, 250)",
         "&:focus": {

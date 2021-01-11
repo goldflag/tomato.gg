@@ -246,33 +246,17 @@ function PeriodBreakdown(props) {
     // Runs once when component mounts
     useEffect(() => {
         let tankStats = props.data;
-        let rowData = [];
+
         for (let i = 0; i < tankStats.length; ++i) {
-            let entry = {
-                img: (
-                    <img
-                        src={require(`../../assets/tankIcons/${tankStats[i][0]}.png`)}
-                        alt={tankStats[i][0]}
-                    />
-                ),
-                name: tankStats[i][1],
-                nation: tankStats[i][2],
-                tier: tankStats[i][3],
-                class: tankStats[i][4],
-                battles: tankStats[i][5],
-                winrate: tankStats[i][6],
-                wn8: tankStats[i][7],
-                dpg: tankStats[i][8],
-                kpg: tankStats[i][9],
-                dmgRatio: tankStats[i][10],
-                kd: tankStats[i][11],
-                spots: tankStats[i][12],
-                survived: tankStats[i][13],
-                isPrem: tankStats[i][14],
-            };
-            rowData.push(entry);
+            tankStats[i]['img'] = (
+                <img
+                    src={require(`../../assets/tankIcons/${tankStats[i].id}.png`)}
+                    alt={tankStats[i].id}
+                />
+            )
         }
-        setData(rowData);
+
+        setData(tankStats);
     }, [props.data]);
 
     const columns = React.useMemo(() => {
