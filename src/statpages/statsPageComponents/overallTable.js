@@ -36,6 +36,8 @@ import {
     TableContainer,
 } from "../../components/tableComponents";
 import styled from "styled-components";
+import Tooltip from 'react-tooltip-lite';
+import awardsData from "../../data/awardsinfo.json";
 
 function setColor(column, value) {
     if (column === "WN8") return WN8c(value);
@@ -56,6 +58,8 @@ const tierConv = {
     10: "X",
 };
 
+
+
 function OverallTable(props) {
     const { theme } = React.useContext(ThemeContext);
 
@@ -68,6 +72,23 @@ function OverallTable(props) {
             padding: 0.5rem 0rem;
             grid-template-columns: 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px;
             // grid-template-rows: 25% 100px auto;
+        }
+
+        
+
+        @media screen and (max-width: 1000px) {
+            .smallMenu {
+                display: block;
+            }
+            .discord {
+                display: none;
+            }
+            .field {
+                right: 59px;
+            }
+            .serverSelectButtons {
+                display: none;
+            }
         }
     `;
 
@@ -243,7 +264,7 @@ function OverallTable(props) {
             useExpanded,
             usePagination
         );
-
+        
         function renderRowSubComponent(row) {
             function NumberBox(val) {
                 let width;
@@ -275,21 +296,37 @@ function OverallTable(props) {
                 )
             }
 
+            function RenderTooltip(award) {
+                return(
+                    <div style={{position: "absolute", left: "-250px", top: "40px", backgroundColor: "rgb(40, 40, 40)", padding: "0.5rem", borderRadius: "5px"}}>
+                        <div style={{ lineHeight: "1.5rem", color: "rgb(255, 255, 255)", fontSize: "0.9rem"}}>
+                            {awardsData[award].name}
+                        </div> 
+                        <div style={{ width: "200px", color: "rgb(200, 200, 200)", fontSize: "0.7rem"}}>
+                            {awardsData[award].desc}
+                        </div> 
+                    </div>
+                )
+            }
+
             function RenderAwards(type) {
                 let keys = Object.keys(row.row.original.awards[type]);
                 return keys.map((award) => {
                     const counter = NumberBox(row.row.original.awards[type][award]);
                     return (row.row.original.awards[type][award] > 0 ? 
-                            <div style={{margin: "0px", position: "relative"}}> 
-                                {counter}
-                                <img style={{width: "50px"}} src={require(`../../assets/awards/${type}/${award}.png`)} alt={award}/>
-                            </div>
+                        <>
+                            <div> 
+                                <Tooltip arrow={false} direction="right" content={RenderTooltip(award)}>
+                                    {counter}
+                                    <img style={{width: "50px"}} src={require(`../../assets/awards/${type}/${award}.png`)} alt={award}/>
+                                </Tooltip>
+                            </div>              
+
+                        </>
                         : <></>
                     );
                 })
             }
-
-            
 
             let HeroAwards = RenderAwards("battleHeroes");
             let MainAwards = RenderAwards("main");

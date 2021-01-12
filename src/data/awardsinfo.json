@@ -1,0 +1,158 @@
+{
+    "highCaliber": {
+        "name": "High Caliber",
+        "desc": "Cause the highest damage per battle without hitting/ramming a friendly vehicle. Damage must be at least 20% of the total HP of enemy vehicles. Caused damage should be at least 1,000 HP."
+    },
+    "topGun":{
+        "name": "Top Gun",
+        "desc": "Destroy more enemy vehicles (at least six) than any other player in a match (If two or more players have destroyed equal amount of enemies, the medal is granted to the player who earned more XP in battle)."
+    },
+    "confederate": {
+        "name": "Confederate",
+        "desc": "Damage more enemy vehicles than any other player on the battlefield (at least six) which are subsequently destroyed by another player (or self-destruct). Granted only on condition that you hit more enemy vehicles than any other player on your team."
+    },
+    "tankSniper": {
+        "name": "Tank Sniper",
+        "desc": "Achieve at least 85% hits out of a minimum of 10 shots fired with potential damage of 1,000 HP or more. Non-penetrating hits count. If two or more tankers have equal hit ratios, the award is given to the tanker with the highest number of hits."
+    },
+    "steelWall": {
+        "name": "Steel Wall",
+        "desc": "Receive more potential damage than any player on your team, at least 1,000 HP, and survive. Receive at least 11 hits. If two or more players receive an equal amount of potential damage, granted to the player who received the greatest amount of hits."
+    },
+    "defender": {
+        "name": "Defender",
+        "desc": "Reduce the number of enemy capture points of a friendly base by 70 or more."
+    },
+    "invader": {
+        "name": "Invader",
+        "desc": "Capture the maximum number of points from the enemy base (no less than 80). Granted on successful base capture and winning."
+    },
+    "scout": {
+        "name": "Scout",
+        "desc": "Detect more enemy tanks and artillery than anyone else on your team (at least nine). Granted to a member of the winning team."
+    },
+    "patrolDuty": {
+        "name": "Patrol Duty",
+        "desc": "Help your team damage at least six enemy vehicles by spotting them. The player must be the only one spotting the enemy vehicles at the moment when they are damaged."
+    },
+    "fireForEffect": {
+        "name": "Fire For Effect",
+        "desc": "Cause more damage to enemy vehicles than the hit points of your vehicle."
+    },
+    "duelist":{
+        "name": "Duelist",
+        "desc": "Destroy at least two enemy vehicles that caused damage to your vehicle in the battle."
+    },
+    "fighter": {
+        "name": "Fighter",
+        "desc": "Destroy four or five enemy vehicles in a single battle."
+    },
+    "shellproof": {
+        "name": "Shellproof",
+        "desc": "Have total damage blocked by your armor exceed the hit points of your vehicle and survive the battle."
+    },
+    "kamikaze": {
+        "name": "Kamikaze",
+        "desc": "Destroy a higher tier enemy vehicle by ramming it. Granted only once in the course of the battle."
+    },
+    "spotter": {
+        "name": "Spotter",
+        "desc": "Awarded for spotting enemy vehicles, allowing allies to cause 1,000 damage in a single, victorious battle. The series is extended for every 1,000 damage caused by allies to enemies spotted by you in one battle. Every vehicle has its own series. The number displayed indicates the longest streak earned."
+    },
+    "reaper": {
+        "name": "Reaper",
+        "desc": "Destroy three or more enemy vehicles in a row with a single shell each. An unbroken series continues in the next battle using the current vehicle.  Every vehicle has its own series. Only the longest series counts. Granted on completion of the next record series."
+    },
+    "masterGunner": {
+        "name": "Master Gunner",
+        "desc": "Score at least five armor-penetrating hits in a row against enemy vehicles.  A series unbroken by a miss, non-penetration, or ricochet continues in the next battle using the current vehicle.  Every vehicle has its own series. Only the longest series is included."
+    },
+    "sharpShooter": {
+        "name": "Sharpshooter",
+        "desc": "Hit an enemy vehicle 10+ times in a row without missing.  The results of the next battle using the same vehicle continue to count towards this number, until the sequence is broken by a miss.  Every vehicle has its own series. Only the longest series is included."
+    },
+    "billotte": {
+        "name": "Billote's Medal",
+        "desc": "Awarded to players who destroy at least two enemy vehicles and survive the battle despite receiving at least five different critical hits and losing 80% or more of their hit points. Destroyed enemy vehicles count after all damage is received."
+    },
+    "bruno":{
+        "name": "Bruno's Medal",
+        "desc": "Awarded to players who destroy three or four enemy vehicles and survive the battle to victory despite receiving five different critical hits and losing 80% of their hit points.  Destroyed enemy vehicles count after all damage is received."
+    },
+    "burda": {
+        "name": "Burda's Medal",
+        "desc": "Destroy 3 enemy SPGs in one battle."
+    },
+    "delanglade": {
+        "name": "De Langlade's Medal",
+        "desc": "Destroy at least 4 enemy vehicles while they are attempting to capture the base in one battle."
+    },
+    "dumitru": {
+        "name": "Dumitru's Medal",
+        "desc": "Destroy 3 enemy SPGs in one battle."
+    },
+    "fadin": {
+        "name": "Fadin's Medal",
+        "desc": "Destroy the last enemy vehicle in the battle with the last shell in the ammo."
+    },
+    "gore": {
+        "name": "Gore's Medal",
+        "desc": "Drive an SPG and cause damage exceeding 8 times the hit points of your vehicle."
+    },
+    "halonen": {
+        "name": "Halonen's Medal",
+        "desc": "Destroy at least 2 enemy tanks or tank destroyers in a tank destroyer in one battle."
+    },
+    "kolobanov": {
+        "name": "Kolobanov's Medal",
+        "desc": "Stand alone against at least five enemy vehicles and win."
+    },
+    "lehvaslaiho": {
+        "name": "Lehvaslaiho's Medal",
+        "desc": "Awarded to medium tank players who destroy two enemy tanks or tank destroyers. The enemy vehicles must be at least 2 tiers higher."
+    },
+    "naydin": {
+        "name": "Naydin's Medal",
+        "desc": "Destroy all enemy light tanks (at least 3) in the course of one battle."
+    },
+    "nicol": {
+        "name": "Nicol's Medal",
+        "desc": "Destroy at least 4 enemy tanks or tank destroyers with a medium tank in one battle."
+    },
+    "orlik": {
+        "name": "Orlik's Medel",
+        "desc": "Awarded for destroying three or more enemy tanks or tank destroyers with a light tank. The targets must be at least two tiers higher than the player's tank."
+    },
+    "oskin": {
+        "name": "Oskin's Medal",
+        "desc": "Awarded to players in medium tanks who destroy three enemy tanks or tank destroyers. The targets must be at least two tiers higher than the player's tank."
+    },
+    "pascucci": {
+        "name": "Pascucci's Medal",
+        "desc": "Awarded for destroying three enemy artillery in one battle with a tank or tank destroyer."
+    },
+    "pool": {
+        "name": "Pool's Medal",
+        "desc": "Awarded to players on vehicles in tier V+ vehicles for destroying 10-13 enemy vehicles in one battle."
+    },
+    "radley": {
+        "name": "Radley-Walter's Medal",
+        "desc": "Awarded to players in tier V+ vehicles for destroying eight or nine enemy vehicles in one battle."
+    },
+    "raseiniai": {
+        "name": "Raseiniai Heros Medal",
+        "desc": "Awarded to players who single-handedly destroy at least 14 enemy vehicles."
+    },
+    "stark": {
+        "name": "Stark's Medal",
+        "desc": "While driving an SPG, destroy at least 2 enemy vehicles and receive at least 2 enemy hits that cause damage or are blocked by armor."
+    },
+    "tamada": {
+        "name": "Tamada Yoshi's Medal",
+        "desc": "Destroy at least three enemy artillery with a light tank and survive in one battle. Destroyed enemy vehicles must be at least two tiers higher than the player's tank."
+    },
+    "tarczay": {
+        "name": "Tarczay's Medal",
+        "desc": "Awarded to players who destroy five enemy vehicles and survive the battle despite receiving five different critical hits and losing 80%+ of their hit points.  Destroyed enemy vehicles count after all damage is received. Ervin Tarczay "
+    }
+}

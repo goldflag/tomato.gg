@@ -9,6 +9,8 @@ import OverallStatsTable from "./overallStatsTable.js";
 import AllTankStats from "./allTankStats";
 import Charts from "./charts";
 import SessionsLogParent from "./sessions/sessionsLogParent";
+import { Helmet } from "react-helmet";
+import ScriptTag from "react-script-tag";
 
 export default function MainTabs(props) {
     const { theme } = useContext(ThemeContext);
@@ -76,7 +78,7 @@ export default function MainTabs(props) {
                 <CustomTab label="MAIN STATS" />
                 <CustomTab label="INFOGRAPHICS" />
                 <CustomTab label="SESSIONS" />
-                <CustomTab label="ACHIEVEMENTS (Coming Soon™)" disabled />
+                <CustomTab label="ACHIEVEMENTS (Coming Soon™)" />
             </CustomTabs>
             <TabPanel value={value} index={0}>
                 <div style={{ margin: "1rem 0" }}>
@@ -105,7 +107,15 @@ export default function MainTabs(props) {
                 </div>
             </TabPanel>
             <TabPanel value={value} index={3}>
-
+                <div>
+                    <Helmet>
+                        <script src="//ap.lijit.com/www/delivery/fpi.js?z=846403&width=160&height=600" type="text/javascript"></script>
+                        <script src="//ap.lijit.com/www/delivery/fpi.js?z=846403&width=160&height=600"></script> 
+                    </Helmet>
+                </div>
+                <div>
+                    <ScriptTag type="text/javascript" src="//ap.lijit.com/www/delivery/fpi.js?z=846403&width=160&height=600" />
+                </div>
             </TabPanel>
         </>
     );
