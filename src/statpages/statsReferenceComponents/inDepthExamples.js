@@ -92,7 +92,7 @@ export default function InDepthExamples() {
                         />
                         <CurveGraph
                             data={WN8Curves["Progetto 46"]}
-                            type="WN8"
+                            type="Tank WN8"
                             smallType="WN8"
                             color="rgb(212, 38, 186)"
                         />
@@ -121,7 +121,7 @@ export default function InDepthExamples() {
                         />
                         <CurveGraph
                             data={WN8Curves["AT 8"]}
-                            type="WN8"
+                            type="Tank WN8"
                             smallType="WN8"
                             color="rgb(212, 38, 186)"
                         />

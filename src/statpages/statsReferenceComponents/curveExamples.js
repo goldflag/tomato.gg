@@ -79,13 +79,13 @@ export default function CurveExamples() {
                         variant="fullWidth"
                         aria-label="full width tabs example"
                     >
-                        <Tab label="Balanced" {...a11yProps(0)} />
-                        <Tab label="Overpowered" {...a11yProps(1)} />
-                        <Tab label="Underpowered" {...a11yProps(2)} />
-                        <Tab label="High Skill Ceiling" {...a11yProps(3)} />
-                        <Tab label="Low Skill Ceiling" {...a11yProps(4)} />
-                        <Tab label="High Skill Floor" {...a11yProps(5)} />
-                        <Tab label="Low Skill Floor" {...a11yProps(6)} />
+                        <Tab label="Balanced(T32)" {...a11yProps(0)} />
+                        <Tab label="Over Powered(Defender)" {...a11yProps(1)} />
+                        <Tab label="Under Powered(CGC)" {...a11yProps(2)} />
+                        <Tab label="High Skill Ceiling(Borrasque)" {...a11yProps(3)} />
+                        <Tab label="Low Skill Ceiling(O-I)" {...a11yProps(4)} />
+                        <Tab label="High Skill Floor(T92 HMC)" {...a11yProps(5)} />
+                        <Tab label="Low Skill Floor(140)" {...a11yProps(6)} />
                     </Tabs>
                 </AppBar>
                 <TabPanel value={value} index={0} dir={t.direction}>
@@ -95,10 +95,11 @@ export default function CurveExamples() {
                             type="Winrate"
                             smallType="WR"
                             color="rgb(230, 57, 103)"
+
                         />
                         <CurveGraph
                             data={WN8Curves["T32"]}
-                            type="WN8"
+                            type="Tank WN8"
                             smallType="WN8"
                             color="rgb(212, 38, 186)"
                         />
@@ -114,7 +115,7 @@ export default function CurveExamples() {
                         />
                         <CurveGraph
                             data={WN8Curves["Defender"]}
-                            type="WN8"
+                            type="Tank WN8"
                             smallType="WN8"
                             color="rgb(212, 38, 186)"
                         />
@@ -130,7 +131,7 @@ export default function CurveExamples() {
                         />
                         <CurveGraph
                             data={WN8Curves["Churchill GC"]}
-                            type="WN8"
+                            type="Tank WN8"
                             smallType="WN8"
                             color="rgb(212, 38, 186)"
                         />
@@ -146,7 +147,7 @@ export default function CurveExamples() {
                         />
                         <CurveGraph
                             data={WN8Curves["Bourrasque"]}
-                            type="WN8"
+                            type="Tank WN8"
                             smallType="WN8"
                             color="rgb(212, 38, 186)"
                         />
@@ -162,7 +163,7 @@ export default function CurveExamples() {
                         />
                         <CurveGraph
                             data={WN8Curves["O-I"]}
-                            type="WN8"
+                            type="Tank WN8"
                             smallType="WN8"
                             color="rgb(212, 38, 186)"
                         />
@@ -178,7 +179,7 @@ export default function CurveExamples() {
                         />
                         <CurveGraph
                             data={WN8Curves["T92 HMC"]}
-                            type="WN8"
+                            type="Tank WN8"
                             smallType="WN8"
                             color="rgb(212, 38, 186)"
                         />
@@ -194,7 +195,7 @@ export default function CurveExamples() {
                         />
                         <CurveGraph
                             data={WN8Curves["Obj. 140"]}
-                            type="WN8"
+                            type="Tank WN8"
                             smallType="WN8"
                             color="rgb(212, 38, 186)"
                         />
