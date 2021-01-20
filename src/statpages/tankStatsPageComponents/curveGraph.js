@@ -7,29 +7,17 @@ export default function CurveGraph(props) {
 
     let ticks = [
         42,
-        43,
         44,
-        45,
         46,
-        47,
         48,
-        49,
         50,
-        51,
         52,
-        53,
         54,
-        55,
         56,
-        57,
         58,
-        59,
         60,
-        61,
         62,
-        63,
         64,
-        65,
     ];
     let referenceData = {
         id: "Overall WR",
@@ -62,23 +50,13 @@ export default function CurveGraph(props) {
     };
     if (props.smallType === "WN8") {
         ticks = [
-            200,
-            400,
-            600,
-            800,
+            500,
             1000,
-            1200,
-            1400,
-            1600,
-            1800,
+            1500,
             2000,
-            2200,
-            2400,
-            2600,
-            2800,
+            2500,
             3000,
-            3200,
-            3400,
+            3500,
         ];
         referenceData = {
             id: "Overall WN8",
