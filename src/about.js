@@ -78,7 +78,7 @@ export default function About() {
                             <br />
                             <a
                                 target="blank"
-                                href="http://localhost:3000/stats/NA/Superdude3800=1007264827"
+                                href="http://tomato.gg/stats/NA/Superdude3800=1007264827"
                             >
                                 Superdude3800
                             </a>{" "}
