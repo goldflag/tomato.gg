@@ -94,12 +94,13 @@ export default function StatsReference(props) {
                             <br />
                             Here are some example tank curves that display
                             various attributes:
-                            <div style={{ margin: "1rem 0 1rem 0" }}>
+                        <div style={{ margin: "1rem 0 1rem 0"}}>
                                 <CurveExamples />
                                 <h2
                                     style={{
                                         fontSize: "1.4rem",
-                                        fontWeight: "500",
+                                        fontWeight: "500", 
+                                        width: "5em",
                                     }}
                                 >
                                     In-depth Examples
@@ -110,6 +111,7 @@ export default function StatsReference(props) {
                                 style={{
                                     fontSize: "1.4rem",
                                     fontWeight: "500",
+                                    width: "5em",
                                 }}
                             >
                                 Understanding Percentile Graphs | Bourrasque
@@ -125,7 +127,8 @@ export default function StatsReference(props) {
                                     />
                                     <PercentileGraph
                                         data={WN8Percentiles["Bourrasque"]}
-                                        type="WN8"
+                                        type="Tank WN8"
+
                                         smallType="WN8"
                                         color="rgb(212, 38, 186)"
                                     />
