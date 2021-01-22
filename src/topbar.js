@@ -73,7 +73,7 @@ export default withRouter(function Topbar(props) {
             display: flex;
             margin-top: 0.4rem;
             /* margin: 0 auto; */
-            right: 500px;
+            right: 440px;
             position: absolute;        
         }
 
@@ -161,13 +161,6 @@ export default withRouter(function Topbar(props) {
                                     className="selectButton"
                                 >
                                     ASIA
-                                </Button>
-                                <Button 
-                                    style={{ borderLeft: '1px solid rgb(30, 30, 30)', backgroundColor: server === "ru" ? 'rgb(222, 13, 93)' : 'rgb(37, 46, 105)' }} 
-                                    onClick={() => toggleServer('ru')}
-                                    className="selectButton"
-                                >
-                                    RU
                                 </Button>
                             </ButtonGroup>
                         </div>  

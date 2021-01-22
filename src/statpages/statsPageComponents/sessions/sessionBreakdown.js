@@ -1,19 +1,12 @@
 import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
-import WN8c from "../../../functions/WN8color";
-import WRc from "../../../functions/WRcolor";
 import { Icon } from "react-icons-kit";
 import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import { ThemeContext } from "../../../context";
 import { Pagination } from "../../../components";
 import { StyledTable } from "../../../components/tableComponents";
-
-function setColor(column, value) {
-    if (column === "WN8") return WN8c(value);
-    else if (column === "Winrate") return WRc(value);
-    else return undefined;
-}
+import setColor from "../../../functions/setColor";
 
 const tierConv = {
     1: "I",
@@ -174,7 +167,7 @@ export default function SessionBreakdown(props) {
                                 {row.cells.map((cell) => {
                                     return (
                                         <td {...cell.getCellProps({
-                                            style: {backgroundColor: setColor(cell.column.Header, cell.value)}
+                                            style: setColor(cell.column.Header, cell.value)
                                         })}>
                                             {cell.render("Cell")}
                                         </td>

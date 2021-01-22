@@ -40,7 +40,6 @@ export default function SmallSelectQuery(props) {
                     <MenuItem value={`com`}>NA</MenuItem>
                     <MenuItem value={`eu`}>EU</MenuItem>
                     <MenuItem value={`asia`}>ASIA</MenuItem>
-                    <MenuItem value={`ru`}>RU</MenuItem>
                 </Select>
             </FormControl>
         </div>

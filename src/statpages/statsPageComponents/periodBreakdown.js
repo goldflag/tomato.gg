@@ -10,8 +10,6 @@ import {
     useExpanded,
     useGlobalFilter,
 } from "react-table";
-import WN8c from "../../functions/WN8color";
-import WRc from "../../functions/WRcolor";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
 import { ThemeContext } from "../../context";
@@ -30,12 +28,7 @@ import {
     StyledTable,
     TableContainer,
 } from "../../components/tableComponents";
-
-function setColor(column, value) {
-    if (column === "WN8") return WN8c(value);
-    else if (column === "Winrate") return WRc(value);
-    else return undefined;
-}
+import setColor from "../../functions/setColor";
 
 function PeriodBreakdown(props) {
     const { theme } = React.useContext(ThemeContext);
@@ -210,7 +203,7 @@ function PeriodBreakdown(props) {
                                         {row.cells.map((cell) => {
                                             return (
                                                 <td {...cell.getCellProps({
-                                                    style: {backgroundColor: setColor(cell.column.Header, cell.value)}
+                                                    style: setColor(cell.column.Header, cell.value)
                                                 })}>
                                                     {cell.render("Cell")}
                                                 </td>

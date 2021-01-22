@@ -12,8 +12,6 @@ import {
     useExpanded,
     useGlobalFilter,
 } from "react-table";
-import WN8c from "../../functions/WN8color";
-import WRc from "../../functions/WRcolor";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
 import { ThemeContext } from "../../context";
@@ -38,12 +36,7 @@ import {
 import styled from "styled-components";
 import Tooltip from 'react-tooltip-lite';
 import awardsData from "../../data/awardsinfo.json";
-
-function setColor(column, value) {
-    if (column === "WN8") return WN8c(value);
-    else if (column === "Winrate") return WRc(value);
-    else return undefined;
-}
+import setColor from "../../functions/setColor";
 
 const tierConv = {
     1: "I",
@@ -57,8 +50,6 @@ const tierConv = {
     9: "IX",
     10: "X",
 };
-
-
 
 function OverallTable(props) {
     const { theme } = React.useContext(ThemeContext);
@@ -429,7 +420,7 @@ function OverallTable(props) {
                                     <tr {...row.getRowProps()}>
                                         {row.cells.map((cell) => (
                                             <td {...cell.getCellProps({
-                                                style: {backgroundColor: setColor(cell.column.Header, cell.value)}
+                                                style: setColor(cell.column.Header, cell.value)
                                             })}>
                                                 {cell.render("Cell")}
                                             </td>

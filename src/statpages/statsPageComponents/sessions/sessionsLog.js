@@ -1,8 +1,6 @@
 import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
 import styled from "styled-components";
-import WN8c from "../../../functions/WN8color";
-import WRc from "../../../functions/WRcolor";
 import { Icon } from "react-icons-kit";
 import { chevronRight } from "react-icons-kit/feather/chevronRight";
 import { chevronDown } from "react-icons-kit/feather/chevronDown";
@@ -11,12 +9,7 @@ import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import { ThemeContext } from "../../../context";
 import SessionBreakdown from "./sessionBreakdown";
 import { Pagination } from "../../../components";
-
-function setColor(column, value) {
-    if (column === "WN8") return WN8c(value);
-    else if (column === "Winrate") return WRc(value);
-    else return undefined;
-}
+import setColor from "../../../functions/setColor";
 
 export default function SessionsLog(props) {
     const { theme } = React.useContext(ThemeContext);
@@ -238,7 +231,7 @@ export default function SessionsLog(props) {
                                     <tr {...row.getRowProps()}>
                                         {row.cells.map((cell) => (
                                             <td {...cell.getCellProps({
-                                                style: {backgroundColor: setColor(cell.column.Header, cell.value)}
+                                                style: setColor(cell.column.Header, cell.value)
                                             })}>
                                                 {cell.render("Cell")}
                                             </td>
