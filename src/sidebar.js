@@ -1,7 +1,8 @@
 import React from "react";
+import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
-import "./css/sidebar.css";
 import TomatoLogo from "./assets/tomato.png";
+import background from './assets/sidebar.jpg';
 import {
     Apps,
     Info,
@@ -34,7 +35,137 @@ const LINKS = [
 ];
 
 const Sidebar = withRouter((props) => {
+
+    const Styles = styled.div`
+        .sidebar {
+            font-family: "Roboto";
+            font-weight: 500;
+            margin-top: 0rem;
+            margin-bottom: 10rem;
+            z-index: 0;
+            height: 100%;
+            width: 14rem;
+            margin-right: 14rem;
+            position: fixed;
+            left: 0;
+            background: url(${background}) no-repeat fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            overflow-x: hidden;
+        }
+        
+        .layer {
+            /* background-color: rgba(23, 20, 51, 0.7); */
+            background-color: rgba(24, 25, 92, 0.7);
+        
+            /* position: absolute; */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .line {
+            width: 100%;
+            height: 0%;
+            border-bottom: 1px solid rgb(100, 95, 129);
+            position: absolute;
+        }
+        
+        .logo {
+            padding: 10px 10px 10px 10px;
+            width: auto;
+            height: 4em;
+        }
+        
+        .menu {
+            font-size: 14px;
+            padding-top: 10px;
+        }
+        
+        .menu a {
+            text-decoration: none;
+            color: #dddddd !important;
+            display: block;
+        }
+        
+        .menu a:hover {
+            color: rgb(207, 12, 116) !important;
+        }
+        
+        .bottom {
+            padding: 10px 10px 10px 10px;
+            margin: 10px;
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: #96a7c7;
+            position: fixed;
+            border-top: 1px solid rgb(100, 95, 129);
+            bottom: 0;
+            /* max-width: calc(10vw + 50px); */
+        }
+        
+        .menu-link {
+            padding: 10px 20px 10px 20px;
+            font-size: 16px;
+            color: #dddddd;
+        }
+        
+        .menu-link-icon {
+            vertical-align: middle;
+            padding: 0px 1px 2px 1px !important;
+        }
+        
+        /* TODO: Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
+        
+        @media screen and (max-width: 1000px) {
+            .sidebar {
+                width: 0px;
+            }
+            .sidebar {
+                padding-top: 15px;
+            }
+            /* .sidebar a {font-size: 18px;} */
+            .bottom {
+                max-width: 0;
+            }
+            .line {
+                width: 0px;
+            }
+        }
+        
+        .donationButton {
+            width: 100%;
+            margin: 10px 0;
+            height: 30px; 
+            padding: 5px;
+            border-radius: 10px; 
+            color: white;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .paypal {
+            background-color: rgb(34, 97, 179);
+        }
+
+        .kofi {
+            background-color: rgb(232, 37, 79);
+        }
+
+        .paypal:hover {
+            background-color: rgb(50, 110, 200);
+        }
+
+        .kofi:hover {
+            background-color: rgb(245, 60, 110);
+        }
+    `;
+
     return (
+        <Styles>
         <div className="sidebar">
             <div className="layer">
                 <Link to="/">
@@ -78,33 +209,13 @@ const Sidebar = withRouter((props) => {
                     <h2 style={{fontSize: "1.1rem", fontWeight: "500", color: "white", lineHeight: "0rem"}}> Support Tomato.gg</h2>
                     Tomato.gg runs on entirely on user donations. If you find value in the website, consider chipping in to help keep the servers running.
                     <a target="blank" href="https://ko-fi.com/goldflag">
-                        <div style={{
-                            width: "100%", 
-                            margin: "10px 0", 
-                            height: "30px", 
-                            padding: "5px", 
-                            borderRadius: "10px", 
-                            color: "white", 
-                            backgroundColor: "rgb(230, 25, 100)",
-                            textAlign: "center",
-                            fontSize: "0.9rem"
-                        }}> 
-                            Support on Ko-fi 
+                        <div className="donationButton kofi"> 
+                            Support on Ko-fi
                         </div>
                     </a>
                     <a target="blank" href="https://www.paypal.com/donate/?hosted_button_id=U457SKR8EQTSQ">
-                        <div style={{
-                            width: "100%", 
-                            margin: "10px 0", 
-                            height: "30px", 
-                            padding: "5px", 
-                            borderRadius: "10px", 
-                            color: "white", 
-                            backgroundColor: "rgb(34, 97, 179)",
-                            textAlign: "center",
-                            fontSize: "0.9rem"
-                        }}> 
-                            Support on Paypal 
+                        <div className="donationButton paypal"> 
+                            Support on Paypal
                         </div>
                     </a>
                 </div>
@@ -161,6 +272,8 @@ const Sidebar = withRouter((props) => {
                 </div>
             </div>
         </div>
+        </Styles>
+
     );
 });
 

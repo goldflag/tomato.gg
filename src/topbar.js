@@ -115,6 +115,9 @@ export default withRouter(function Topbar(props) {
             .serverSelectButtons {
                 display: none;
             }
+            .recent {
+                display: none;
+            }
         }
     `;
     
@@ -154,10 +157,7 @@ export default withRouter(function Topbar(props) {
                 <div className="smallMenu">
                     <SmallMenu />
                 </div>
-
-
                     <Styles>
-
                     <div className="recent"> 
                         {history
                             .slice(0, Math.min(history.length, 5)) // No more than 5 recent searches
@@ -215,9 +215,6 @@ export default withRouter(function Topbar(props) {
                             </Button>
                         </ButtonGroup>
                     </div>  
-
-
-
                     <div className="field">
                         <form onSubmit={searchId}>
                             <SmallSearchBar
