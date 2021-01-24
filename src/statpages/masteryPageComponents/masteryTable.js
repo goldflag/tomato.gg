@@ -301,6 +301,7 @@ function MasteryTable(props) {
         () => [
             {
                 id: "expander", // It needs an ID
+                disableFilters: true,
             },
             {
                 Cell: ({ value }) => {

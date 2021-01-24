@@ -349,6 +349,7 @@ function MoETracker(props) {
         () => [
             {
                 id: "expander", // It needs an ID
+                disableFilters: true,
             },
             {
                 Cell: ({ value }) => {
