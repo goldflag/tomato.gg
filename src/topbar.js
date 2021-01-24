@@ -158,93 +158,92 @@ export default withRouter(function Topbar(props) {
                     <SmallMenu />
                 </div>
                     <Styles>
-                    <div className="recent"> 
-                        {history
-                            .slice(0, Math.min(history.length, 5)) // No more than 5 recent searches
-                            .map(({ name, id, server }) => (
-                                <Chip
-                                    avatar={<Avatar alt={server} src={require(`./assets/flagIcons/${server}mini.png`)} style={{ maxHeight: "21px" }}/>}
-                                    onClick={() =>
-                                        redirectToPlayerStatsPage(
-                                            name,
-                                            id,
-                                            server
-                                        )
-                                    }
-                                    label={name}
+                        <div className="recent"> 
+                            {history
+                                .slice(0, Math.min(history.length, 5)) // No more than 5 recent searches
+                                .map(({ name, id, server }) => (
+                                    <Chip
+                                        avatar={<Avatar alt={server} src={require(`./assets/flagIcons/${server}mini.png`)} style={{ maxHeight: "21px" }}/>}
+                                        onClick={() =>
+                                            redirectToPlayerStatsPage(
+                                                name,
+                                                id,
+                                                server
+                                            )
+                                        }
+                                        label={name}
+                                        style={{
+                                            // backgroundColor: "rgb(219, 55, 96)",
+                                            margin: "10px 5px 5px 5px"
+                                        }}
+                                    />
+                                ))}
+                                <IconButton
+                                    aria-label="clear history"
+                                    size="small"
+                                    onClick={clearHistory}
                                     style={{
-                                        // backgroundColor: "rgb(219, 55, 96)",
-                                        margin: "10px 5px 5px 5px"
+                                        marginTop: "5px",
+                                        color: "white"
                                     }}
-                                />
-                            ))}
-                            <IconButton
-                                aria-label="clear history"
-                                size="small"
-                                onClick={clearHistory}
-                                style={{
-                                    marginTop: "5px",
-                                    color: "white"
-                                }}
-                            >
-                                <DeleteOutline />
-                            </IconButton>
+                                >
+                                    <DeleteOutline />
+                                </IconButton>
+                            </div>
+                        <div className="serverSelectButtons" style={{ padding: '10px', width: '100px', height: '20px' }}>
+                            <ButtonGroup variant="text" aria-label="text primary button group">
+                                <Button 
+                                    style={{ backgroundColor: server === "com" ? 'rgb(222, 13, 93)' : 'rgb(37, 46, 105)' }} 
+                                    onClick={() => toggleServer('com')}
+                                    className="selectButton"
+                                >
+                                    NA
+                                </Button>
+                                <Button 
+                                    style={{ borderLeft: '1px solid rgb(30, 30, 30)', backgroundColor: server === "eu" ? 'rgb(222, 13, 93)' : 'rgb(37, 46, 105)' }} 
+                                    onClick={() => toggleServer('eu')}
+                                    className="selectButton"
+                                >
+                                    EU
+                                </Button>
+                                <Button 
+                                    style={{ borderLeft: '1px solid rgb(30, 30, 30)', backgroundColor: server === "asia" ? 'rgb(222, 13, 93)' : 'rgb(37, 46, 105)' }} 
+                                    onClick={() => toggleServer('asia')}
+                                    className="selectButton"
+                                >
+                                    ASIA
+                                </Button>
+                            </ButtonGroup>
+                        </div>  
+                        <div className="light">
+                            <DarkModeToggle
+                                onChange={toggleTheme}
+                                checked={theme === "light" ? false : true}
+                                size={40}
+                            />
                         </div>
-                    <div className="serverSelectButtons" style={{ padding: '10px', width: '100px', height: '20px' }}>
-                        <ButtonGroup variant="text" aria-label="text primary button group">
-                            <Button 
-                                style={{ backgroundColor: server === "com" ? 'rgb(222, 13, 93)' : 'rgb(37, 46, 105)' }} 
-                                onClick={() => toggleServer('com')}
-                                className="selectButton"
-                            >
-                                NA
-                            </Button>
-                            <Button 
-                                style={{ borderLeft: '1px solid rgb(30, 30, 30)', backgroundColor: server === "eu" ? 'rgb(222, 13, 93)' : 'rgb(37, 46, 105)' }} 
-                                onClick={() => toggleServer('eu')}
-                                className="selectButton"
-                            >
-                                EU
-                            </Button>
-                            <Button 
-                                style={{ borderLeft: '1px solid rgb(30, 30, 30)', backgroundColor: server === "asia" ? 'rgb(222, 13, 93)' : 'rgb(37, 46, 105)' }} 
-                                onClick={() => toggleServer('asia')}
-                                className="selectButton"
-                            >
-                                ASIA
-                            </Button>
-                        </ButtonGroup>
-                    </div>  
-                    <div className="field">
-                        <form onSubmit={searchId}>
-                            <SmallSearchBar
-                                setName={setName}
-                                setServer={toggleServer}
-                                server={server}
-                                setMode={setMode}
-                                mode={mode}
-                            />
-                        </form>
-                    </div>
-                    <div className="light">
-                        <DarkModeToggle
-                            onChange={toggleTheme}
-                            checked={theme === "light" ? false : true}
-                            size={40}
-                        />
-                    </div>
-                    <div className="discord">
-                        <a target="blank" href="https://discord.gg/qA2bV7K">
-                            <img
-                                src={DiscordLogo}
-                                width="33"
-                                height="33"
-                                alt="discordicon"
-                            />
-                        </a>
-                    </div>
+                        <div className="discord">
+                            <a target="blank" href="https://discord.gg/qA2bV7K">
+                                <img
+                                    src={DiscordLogo}
+                                    width="33"
+                                    height="33"
+                                    alt="discordicon"
+                                />
+                            </a>
+                        </div>
                     </Styles>
-
+                    <div className="field">
+                            <form onSubmit={searchId}>
+                                <SmallSearchBar
+                                    setName={setName}
+                                    setServer={toggleServer}
+                                    server={server}
+                                    setMode={setMode}
+                                    mode={mode}
+                                />
+                            </form>
+                        </div>
                 </div>
             {/* </Styles> */}
         </div>
