@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
 import { Icon } from "react-icons-kit";
-import { chevronRight } from "react-icons-kit/feather/chevronRight";
-import { chevronDown } from "react-icons-kit/feather/chevronDown";
 import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import {
@@ -248,7 +246,7 @@ function MasteryTable(props) {
                             prepareRow(row);
                             return (
                                 <React.Fragment key={i}>
-                                    <tr {...row.getRowProps()}>
+                                    <tr {...row.getToggleRowExpandedProps({})}>
                                         {row.cells.map((cell) => (
                                             <td {...cell.getCellProps()}>
                                                 {cell.render("Cell")}
@@ -302,22 +300,7 @@ function MasteryTable(props) {
     const columns = React.useMemo(
         () => [
             {
-                // Make an expander cell
-                Header: () => null, // No header
                 id: "expander", // It needs an ID
-                Cell: ({ row }) => (
-                    // Use Cell to render an expander for each row.
-                    // We can use the getToggleRowExpandedProps prop-getter
-                    // to build the expander.
-                    <span {...row.getToggleRowExpandedProps()}>
-                        {row.isExpanded ? (
-                            <Icon size={24} icon={chevronDown} />
-                        ) : (
-                            <Icon size={24} icon={chevronRight} />
-                        )}
-                    </span>
-                ),
-                disableFilters: true,
             },
             {
                 Cell: ({ value }) => {

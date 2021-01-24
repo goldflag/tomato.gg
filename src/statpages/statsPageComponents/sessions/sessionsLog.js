@@ -2,8 +2,6 @@ import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
 import styled from "styled-components";
 import { Icon } from "react-icons-kit";
-import { chevronRight } from "react-icons-kit/feather/chevronRight";
-import { chevronDown } from "react-icons-kit/feather/chevronDown";
 import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import { ThemeContext } from "../../../context";
@@ -65,23 +63,7 @@ export default function SessionsLog(props) {
     const columns = React.useMemo(
         () => [
             {
-                // Make an expander cell
-                Header: () => null, // No header
                 id: "expander", // It needs an ID
-                Cell: ({ row }) => (
-                    // Use Cell to render an expander for each row.
-                    // We can use the getToggleRowExpandedProps prop-getter
-                    // to build the expander.
-                    <div >
-                        <span {...row.getToggleRowExpandedProps()}>
-                            {row.isExpanded ? (
-                                <Icon size={24} icon={chevronDown} />
-                            ) : (
-                                <Icon size={24} icon={chevronRight} />
-                            )}
-                        </span>
-                    </div>
-                ),
             },
             {
                 Header: "",
@@ -228,7 +210,9 @@ export default function SessionsLog(props) {
                             prepareRow(row);
                             return (
                                 <React.Fragment key={i}>
-                                    <tr {...row.getRowProps()}>
+                                    <tr {...row.getToggleRowExpandedProps({
+                                        style: {height: "40px"}
+                                    })}>
                                         {row.cells.map((cell) => (
                                             <td {...cell.getCellProps({
                                                 style: setColor(cell.column.Header, cell.value)
