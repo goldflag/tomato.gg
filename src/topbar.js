@@ -10,7 +10,6 @@ import { withRouter } from "react-router-dom";
 import DarkModeToggle from "react-dark-mode-toggle";
 import { ThemeContext, ServerContext, SearchHistoryContext } from "./context";
 import serverConv from "./data/serverConv";
-import { makeStyles } from '@material-ui/core/styles';
 import {
     IconButton,
     Chip,
@@ -19,18 +18,6 @@ import {
 import { DeleteOutline } from "@material-ui/icons";
 
 const APIKey = process.env.REACT_APP_API_KEY;
-
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      '& > *': {
-        margin: theme.spacing(0.5),
-      },
-    },
-  }));
 
 export default withRouter(function Topbar(props) {
     const { theme, toggleTheme } = useContext(ThemeContext);
