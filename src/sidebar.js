@@ -1,26 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./css/sidebar.css";
 import TomatoLogo from "./assets/tomato.png";
+import Paypal from "./assets/paypal.png";
 import {
     Apps,
     Info,
     Star,
     Games,
-    DeleteOutline,
     BarChart,
     LibraryBooks,
     FormatListNumbered,
 } from "@material-ui/icons";
-import {
-    IconButton,
-    List,
-    ListItem,
-    ListItemText,
-    Typography,
-} from "@material-ui/core";
-import serverConv from "./data/serverConv";
-import { SearchHistoryContext } from "./context";
 
 const LINKS = [
     { url: "/", title: "Home", Icon: Apps },
@@ -44,13 +35,6 @@ const LINKS = [
 ];
 
 const Sidebar = withRouter((props) => {
-    const { history, clearHistory } = useContext(SearchHistoryContext);
-    const redirectToPlayerStatsPage = (playerName, playerID, playerServer) => {
-        props.history.push(
-            `/stats/${serverConv[playerServer]}/${playerName}=${playerID}`
-        );
-    };
-
     return (
         <div className="sidebar">
             <div className="layer">
@@ -78,61 +62,50 @@ const Sidebar = withRouter((props) => {
                         </Link>
                     ))}
                 </div>
-                <div className="line" />
-                <div className="menu">
-                    <Typography
-                        variant="h6"
-                        className="menu-link"
-                        style={{ marginTop: "-5px", paddingRight: "unset" }}
-                    >
-                        Recent searches
-                        <IconButton
-                            aria-label="clear history"
-                            size="small"
-                            onClick={clearHistory}
-                            style={{
-                                color: "inherit",
-                                marginLeft: ".6rem",
-                                marginBottom: ".1rem",
-                            }}
-                        >
-                            <DeleteOutline />
-                        </IconButton>
-                    </Typography>
-                    <List
-                        aria-label="recent searches"
-                        style={{ marginTop: "-10px" }}
-                    >
-                        {history
-                            .slice(0, Math.min(history.length, 5)) // No more than 5 recent searches
-                            .map(({ name, id, server }) => (
-                                <ListItem
-                                    key={id}
-                                    button
-                                    onClick={() =>
-                                        redirectToPlayerStatsPage(
-                                            name,
-                                            id,
-                                            server
-                                        )
-                                    }
-                                    style={{ padding: "0px 20px 10px 22px" }}
-                                >
-                                    <img
-                                        src={require(`./assets/flagIcons/${server}mini.png`)}
-                                        style={{ maxHeight: "21px" }}
-                                        alt={"4"}
-                                    />
-                                    <ListItemText
-                                        style={{
-                                            marginLeft: "10px",
-                                            color: "white",
-                                        }}
-                                        primary={name}
-                                    />
-                                </ListItem>
-                            ))}
-                    </List>
+                
+                <div style={{
+                        backgroundColor: "rgba(40, 40, 60, 0.6)",
+                        width: "205px",
+                        height: "210px",
+                        margin: "10px",
+                        bottom: "150px",
+                        position: "absolute",
+                        padding: "10px",
+                        fontSize: "0.8rem",
+                        fontWeight: "400",
+                        color: "rgb(161, 181, 214)"
+
+                }}>
+                    <h2 style={{fontSize: "1.1rem", fontWeight: "500", color: "white", lineHeight: "0rem"}}> Support Tomato.gg</h2>
+                    Tomato.gg runs on entirely on user donations. If you find value in the website, consider chipping in to help keep the servers running.
+                    <a target="blank" href="https://ko-fi.com/goldflag">
+                        <div style={{
+                            width: "100%", 
+                            margin: "10px 0", 
+                            height: "30px", 
+                            padding: "5px", 
+                            borderRadius: "10px", 
+                            color: "white", 
+                            backgroundColor: "rgb(230, 25, 100)",
+                            textAlign: "center"
+                        }}> 
+                            Support on Ko-fi 
+                        </div>
+                    </a>
+                    <a target="blank" href="https://www.paypal.com/donate/?hosted_button_id=U457SKR8EQTSQ">
+                        <div style={{
+                            width: "100%", 
+                            margin: "10px 0", 
+                            height: "30px", 
+                            padding: "5px", 
+                            borderRadius: "10px", 
+                            color: "white", 
+                            backgroundColor: "rgb(34, 97, 179)",
+                            textAlign: "center"
+                        }}> 
+                            Support on Paypal 
+                        </div>
+                    </a>
                 </div>
                 <div
                     style={{

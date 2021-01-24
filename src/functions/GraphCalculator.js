@@ -81,17 +81,17 @@ export default function GraphCalculator(
     avgTier,
     recentStats,
     theme
-) {
+    ){
     function clr(recent, overall, flipped) {
         if (recent === "-") return "rgb(50,50,50)";
         if (flipped) {
             if (overall < recent)
                 return theme === "dark" ? "rgb(255, 41, 94)" : "red";
-            else return theme === "dark" ? "rgb(52, 235, 89)" : "green";
+            else return theme === "dark" ? "rgb(34, 199, 66)" : "green";
         }
         if (overall > recent)
             return theme === "dark" ? "rgb(255, 41, 94)" : "red";
-        else return theme === "dark" ? "rgb(52, 235, 89)" : "green";
+        else return theme === "dark" ? "rgb(34, 199, 66)" : "green";
     }
 
     const overallStats = calculateRawOverall(recentStats.overall);

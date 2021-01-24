@@ -52,20 +52,18 @@ export default withRouter(function Search(props) {
                                 width: "80%",
                                 margin: "0 auto",
                                 display: "flex",
-                                alignItems: "center",
-                                padding: "0rem",
                             }}
                         />
+                        <form onSubmit={searchId}>
+                            <SearchBar
+                                setName={setName}
+                                setServer={toggleServer}
+                                server={server}
+                                setMode={setMode}
+                                mode={mode}
+                            />
+                        </form>
                     </div>
-                    <form onSubmit={searchId}>
-                        <SearchBar
-                            setName={setName}
-                            setServer={toggleServer}
-                            server={server}
-                            setMode={setMode}
-                            mode={mode}
-                        />
-                    </form>
                 </div>
                 <div className={"leaderboard"}>
                     {/* <LeaderboardGrid /> */}

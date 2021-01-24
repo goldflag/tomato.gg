@@ -10,13 +10,32 @@ import { withRouter } from "react-router-dom";
 import DarkModeToggle from "react-dark-mode-toggle";
 import { ThemeContext, ServerContext, SearchHistoryContext } from "./context";
 import serverConv from "./data/serverConv";
+import { makeStyles } from '@material-ui/core/styles';
+import {
+    IconButton,
+    Chip,
+    Avatar
+} from "@material-ui/core";
+import { DeleteOutline } from "@material-ui/icons";
 
 const APIKey = process.env.REACT_APP_API_KEY;
+
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      justifyContent: 'center',
+      flexWrap: 'wrap',
+      '& > *': {
+        margin: theme.spacing(0.5),
+      },
+    },
+  }));
 
 export default withRouter(function Topbar(props) {
     const { theme, toggleTheme } = useContext(ThemeContext);
     const { server, toggleServer } = useContext(ServerContext);
-    const { addToHistory } = useContext(SearchHistoryContext);
+    const { history, clearHistory, addToHistory } = useContext(SearchHistoryContext);
     const [ name, setName ] = useState("");
     const [ mode, setMode ] = useState("Player");
 
@@ -40,6 +59,12 @@ export default withRouter(function Topbar(props) {
             display: none;
         }
         
+        .recent {
+            margin-top: 0.4rem;
+            left: 10px;
+            position: absolute;        
+        }
+
         .field {
             padding-top: 1.1rem;
             /* margin: 0 auto; */
@@ -70,9 +95,7 @@ export default withRouter(function Topbar(props) {
         // }
 
         .serverSelectButtons {
-            display: flex;
             margin-top: 0.4rem;
-            /* margin: 0 auto; */
             right: 440px;
             position: absolute;        
         }
@@ -107,6 +130,12 @@ export default withRouter(function Topbar(props) {
             }
         }
     `;
+    
+    const redirectToPlayerStatsPage = (playerName, playerID, playerServer) => {
+        props.history.push(
+            `/stats/${serverConv[playerServer]}/${playerName}=${playerID}`
+        );
+    };
 
     const searchId = async (e) => {
         e.preventDefault();
@@ -138,33 +167,70 @@ export default withRouter(function Topbar(props) {
                 <div className="smallMenu">
                     <SmallMenu />
                 </div>
+
+
                     <Styles>
-                        <div className="serverSelectButtons" style={{ padding: '10px', width: '100px', height: '20px' }}>
-                            <ButtonGroup variant="text" aria-label="text primary button group">
-                                <Button 
-                                    style={{ backgroundColor: server === "com" ? 'rgb(222, 13, 93)' : 'rgb(37, 46, 105)' }} 
-                                    onClick={() => toggleServer('com')}
-                                    className="selectButton"
-                                >
-                                    NA
-                                </Button>
-                                <Button 
-                                    style={{ borderLeft: '1px solid rgb(30, 30, 30)', backgroundColor: server === "eu" ? 'rgb(222, 13, 93)' : 'rgb(37, 46, 105)' }} 
-                                    onClick={() => toggleServer('eu')}
-                                    className="selectButton"
-                                >
-                                    EU
-                                </Button>
-                                <Button 
-                                    style={{ borderLeft: '1px solid rgb(30, 30, 30)', backgroundColor: server === "asia" ? 'rgb(222, 13, 93)' : 'rgb(37, 46, 105)' }} 
-                                    onClick={() => toggleServer('asia')}
-                                    className="selectButton"
-                                >
-                                    ASIA
-                                </Button>
-                            </ButtonGroup>
-                        </div>  
-                    </Styles>
+
+                    <div className="recent"> 
+                        {history
+                            .slice(0, Math.min(history.length, 5)) // No more than 5 recent searches
+                            .map(({ name, id, server }) => (
+                                <Chip
+                                    avatar={<Avatar alt={server} src={require(`./assets/flagIcons/${server}mini.png`)} style={{ maxHeight: "21px" }}/>}
+                                    onClick={() =>
+                                        redirectToPlayerStatsPage(
+                                            name,
+                                            id,
+                                            server
+                                        )
+                                    }
+                                    label={name}
+                                    style={{
+                                        // backgroundColor: "rgb(219, 55, 96)",
+                                        margin: "10px 5px 5px 5px"
+                                    }}
+                                />
+                            ))}
+                            <IconButton
+                                aria-label="clear history"
+                                size="small"
+                                onClick={clearHistory}
+                                style={{
+                                    marginTop: "5px",
+                                    color: "white"
+                                }}
+                            >
+                                <DeleteOutline />
+                            </IconButton>
+                        </div>
+                    <div className="serverSelectButtons" style={{ padding: '10px', width: '100px', height: '20px' }}>
+                        <ButtonGroup variant="text" aria-label="text primary button group">
+                            <Button 
+                                style={{ backgroundColor: server === "com" ? 'rgb(222, 13, 93)' : 'rgb(37, 46, 105)' }} 
+                                onClick={() => toggleServer('com')}
+                                className="selectButton"
+                            >
+                                NA
+                            </Button>
+                            <Button 
+                                style={{ borderLeft: '1px solid rgb(30, 30, 30)', backgroundColor: server === "eu" ? 'rgb(222, 13, 93)' : 'rgb(37, 46, 105)' }} 
+                                onClick={() => toggleServer('eu')}
+                                className="selectButton"
+                            >
+                                EU
+                            </Button>
+                            <Button 
+                                style={{ borderLeft: '1px solid rgb(30, 30, 30)', backgroundColor: server === "asia" ? 'rgb(222, 13, 93)' : 'rgb(37, 46, 105)' }} 
+                                onClick={() => toggleServer('asia')}
+                                className="selectButton"
+                            >
+                                ASIA
+                            </Button>
+                        </ButtonGroup>
+                    </div>  
+
+
+
                     <div className="field">
                         <form onSubmit={searchId}>
                             <SmallSearchBar
@@ -193,6 +259,8 @@ export default withRouter(function Topbar(props) {
                             />
                         </a>
                     </div>
+                    </Styles>
+
                 </div>
             {/* </Styles> */}
         </div>
