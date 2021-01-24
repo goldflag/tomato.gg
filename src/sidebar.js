@@ -2,7 +2,6 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./css/sidebar.css";
 import TomatoLogo from "./assets/tomato.png";
-import Paypal from "./assets/paypal.png";
 import {
     Apps,
     Info,
@@ -87,7 +86,8 @@ const Sidebar = withRouter((props) => {
                             borderRadius: "10px", 
                             color: "white", 
                             backgroundColor: "rgb(230, 25, 100)",
-                            textAlign: "center"
+                            textAlign: "center",
+                            fontSize: "0.9rem"
                         }}> 
                             Support on Ko-fi 
                         </div>
@@ -101,7 +101,8 @@ const Sidebar = withRouter((props) => {
                             borderRadius: "10px", 
                             color: "white", 
                             backgroundColor: "rgb(34, 97, 179)",
-                            textAlign: "center"
+                            textAlign: "center",
+                            fontSize: "0.9rem"
                         }}> 
                             Support on Paypal 
                         </div>
