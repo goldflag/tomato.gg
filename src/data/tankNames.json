@@ -951,6 +951,14 @@
         "tier": 8,
         "type": "heavyTank"
     },
+    "2977": {
+        "is_gift": false,
+        "short_name": "Rinoceronte",
+        "nation": "italy",
+        "is_premium": false,
+        "tier": 10,
+        "type": "heavyTank"
+    },
     "3073": {
         "is_gift": false,
         "short_name": "T-46",
@@ -1021,6 +1029,14 @@
         "nation": "poland",
         "is_premium": false,
         "tier": 9,
+        "type": "heavyTank"
+    },
+    "3233": {
+        "is_gift": false,
+        "short_name": "Carro P.88",
+        "nation": "italy",
+        "is_premium": false,
+        "tier": 7,
         "type": "heavyTank"
     },
     "3329": {
@@ -1095,6 +1111,14 @@
         "tier": 10,
         "type": "heavyTank"
     },
+    "3489": {
+        "is_gift": false,
+        "short_name": "Progetto 66",
+        "nation": "italy",
+        "is_premium": false,
+        "tier": 9,
+        "type": "heavyTank"
+    },
     "3585": {
         "is_gift": false,
         "short_name": "SU-100",
@@ -1166,6 +1190,14 @@
         "is_premium": false,
         "tier": 5,
         "type": "mediumTank"
+    },
+    "3745": {
+        "is_gift": false,
+        "short_name": "Progetto 54",
+        "nation": "italy",
+        "is_premium": false,
+        "tier": 8,
+        "type": "heavyTank"
     },
     "3841": {
         "is_gift": false,
@@ -5422,6 +5454,14 @@
         "is_premium": true,
         "tier": 8,
         "type": "heavyTank"
+    },
+    "65329": {
+        "is_gift": false,
+        "short_name": "122 TM",
+        "nation": "china",
+        "is_premium": true,
+        "tier": 8,
+        "type": "mediumTank"
     },
     "65345": {
         "is_gift": false,
