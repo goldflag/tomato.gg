@@ -53,7 +53,7 @@ export default function NationDist(props) {
             </TabPanel>
             <TabPanel value={value} index={5}>
                 <PeriodBreakdown
-                    data={props.recents.recent30days.tankStats}
+                    data={props.recents.recent60days.tankStats}
                 />
             </TabPanel>
             <TabPanel value={value} index={6}>

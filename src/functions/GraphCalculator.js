@@ -1496,9 +1496,9 @@ export default function GraphCalculator(
                 name: "Experience",
                 Overall: (
                     <>
-                        {OS.battle_avg_xp}{" "}
+                        {OS.xp}{" "}
                         <span style={{ float: "right" }}>
-                            {(OS.battle_avg_xp / OS.battles).toFixed(2)}
+                            {(OS.xp / OS.battles).toFixed(2)}
                         </span>
                     </>
                 ),
