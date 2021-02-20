@@ -16,6 +16,7 @@ import { Button, ButtonGroup } from "@material-ui/core";
 import LeaderboardTable from "./leaderboardTable";
 import Loader from "../../components/loader";
 import serverConv from "../../data/serverConv";
+import { parseURLParams, updateURLParams } from "../../functions/urlParams";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -76,18 +77,6 @@ const Filters = styled.div`
     background-color: rgb(40, 40, 40);
 `;
 
-const parseURLParams = (search_string, opts) => {
-    const params = new URLSearchParams(search_string);
-    const retval = {};
-    Object.entries(opts).forEach(([key, defaultVal]) => {
-        retval[key] = params.get(key) || defaultVal;
-        if (typeof defaultVal === "number") {
-            retval[key] = parseInt(retval[key]);
-        }
-    });
-    return retval;
-};
-
 export default function Leaderboard() {
     const { server } = useContext(ServerContext);
     const [data, setData] = useState("loading");
@@ -101,17 +90,20 @@ export default function Leaderboard() {
         tier: 6,
         page: 0,
     });
-    const updateURLParams = (key, val) => {
+
+    const redirectWithParams = (params) => {
         setData("loading");
-        const params = new URLSearchParams(location.search);
-        params.set(key, val);
-        history.push(location.pathname + "?" + params.toString());
+        history.push(location.pathname + "?" + params);
     };
 
-    const setType = (t) => updateURLParams("type", t);
-    const setTier = (t) => updateURLParams("tier", t);
-    const setTime = (t) => updateURLParams("time", t);
-    const setPage = (p) => updateURLParams("page", p);
+    const setType = (t) =>
+        redirectWithParams(updateURLParams(location.search, "type", t));
+    const setTier = (t) =>
+        redirectWithParams(updateURLParams(location.search, "tier", t));
+    const setTime = (t) =>
+        redirectWithParams(updateURLParams(location.search, "time", t));
+    const setPage = (p) =>
+        redirectWithParams(updateURLParams(location.search, "page", p));
 
     useEffect(() => {
         fetch(
