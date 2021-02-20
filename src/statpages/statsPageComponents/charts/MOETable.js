@@ -75,32 +75,40 @@ export default function MOETable(props) {
                     <tr>
                         <td style={tdc}>
                             3 Marks{" "}
-                            <span style={{ float: "right" }}>{rows[0].MOE} </span>
+                            <span style={{ float: "right" }}>
+                                {rows[0].MOE}{" "}
+                            </span>
                         </td>
                     </tr>
                     <tr>
                         <td style={td}>
                             2 Marks{" "}
-                            <span style={{ float: "right" }}>{rows[1].MOE}</span>
+                            <span style={{ float: "right" }}>
+                                {rows[1].MOE}
+                            </span>
                         </td>
                     </tr>
                     <tr>
                         <td style={tdc}>
                             1 Mark{" "}
-                            <span style={{ float: "right" }}>{rows[2].MOE}</span>
+                            <span style={{ float: "right" }}>
+                                {rows[2].MOE}
+                            </span>
                         </td>
                     </tr>
                     <tr>
                         <td style={td}>
                             None{" "}
-                            <span style={{ float: "right" }}>{rows[3].MOE}</span>
+                            <span style={{ float: "right" }}>
+                                {rows[3].MOE}
+                            </span>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <div style={{paddingTop: '0.5rem'}}>
-                <a 
-                    style={{fontSize: '0.8rem'}}
+            <div style={{ paddingTop: "0.5rem" }}>
+                <a
+                    style={{ fontSize: "0.8rem" }}
                     target="blank"
                     href="https://herhor.net/wot/moe/"
                 >

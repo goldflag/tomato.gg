@@ -15,6 +15,111 @@ import { DeleteOutline } from "@material-ui/icons";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
+const Styles = styled.div`
+    .topbar {
+        font-family: "Roboto";
+        font-size: 12;
+        color: white;
+        background-color: rgba(101, 106, 173, 0.692);
+        padding: 0px 10px 10px 0px;
+        display: flex;
+        float: left;
+        width: 100%;
+        height: 4rem;
+        border-bottom: 1px solid rgb(100, 95, 129);
+        /* position: fixed; */
+        margin-left: 0em;
+    }
+
+    .smallMenu {
+        display: none;
+    }
+
+    .recent {
+        margin-top: 0.4rem;
+        left: 10px;
+        position: absolute;
+    }
+
+    .recent-chip {
+        color: white;
+        border-color: white;
+        svg {
+            color: rgba(255, 255, 255, 0.86);
+        }
+        svg:hover {
+            color: white;
+        }
+    }
+
+    .field {
+        padding-top: 1.1rem;
+        /* margin: 0 auto; */
+        right: 100px;
+        position: absolute;
+    }
+
+    .discord {
+        padding-top: 1rem;
+        /* margin: 0 auto; */
+        right: 58px;
+        position: absolute;
+    }
+
+    .discord:hover {
+        opacity: 0.5;
+    }
+
+    .light {
+        padding-top: 1rem;
+        padding: 22px 0 0 0;
+        right: 10px;
+        position: absolute;
+    }
+
+    // *:focus {
+    //     outline: none;
+    // }
+
+    .serverSelectButtons {
+        margin-top: 0.4rem;
+        right: 440px;
+        position: absolute;
+    }
+
+    .selectButton {
+        font-family: "Segoe UI";
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: rgb(210, 210, 210);
+        // background-color: rgb(71, 99, 214);
+        padding: 1rem 0rem;
+        min-width: 55px;
+        border-width: 0px;
+    }
+
+    .selectButton:hover {
+        color: rgb(255, 255, 255);
+    }
+
+    @media screen and (max-width: 1000px) {
+        .smallMenu {
+            display: block;
+        }
+        .discord {
+            display: none;
+        }
+        .field {
+            right: 59px;
+        }
+        .serverSelectButtons {
+            display: none;
+        }
+        .recent {
+            display: none;
+        }
+    }
+`;
 export default withRouter(function Topbar(props) {
     const { theme, toggleTheme } = useContext(ThemeContext);
     const { server, toggleServer } = useContext(ServerContext);
@@ -26,112 +131,6 @@ export default withRouter(function Topbar(props) {
     } = useContext(SearchHistoryContext);
     const [name, setName] = useState("");
     const [mode, setMode] = useState("Player");
-
-    const Styles = styled.div`
-        .topbar {
-            font-family: "Roboto";
-            font-size: 12;
-            color: white;
-            background-color: rgba(101, 106, 173, 0.692);
-            padding: 0px 10px 10px 0px;
-            display: flex;
-            float: left;
-            width: 100%;
-            height: 4rem;
-            border-bottom: 1px solid rgb(100, 95, 129);
-            /* position: fixed; */
-            margin-left: 0em;
-        }
-
-        .smallMenu {
-            display: none;
-        }
-
-        .recent {
-            margin-top: 0.4rem;
-            left: 10px;
-            position: absolute;
-        }
-
-        .recent-chip {
-            color: white;
-            border-color: white;
-            svg {
-                color: rgba(255, 255, 255, 0.86);
-            }
-            svg:hover {
-                color: white;
-            }
-        }
-
-        .field {
-            padding-top: 1.1rem;
-            /* margin: 0 auto; */
-            right: 100px;
-            position: absolute;
-        }
-
-        .discord {
-            padding-top: 1rem;
-            /* margin: 0 auto; */
-            right: 58px;
-            position: absolute;
-        }
-
-        .discord:hover {
-            opacity: 0.5;
-        }
-
-        .light {
-            padding-top: 1rem;
-            padding: 22px 0 0 0;
-            right: 10px;
-            position: absolute;
-        }
-
-        // *:focus {
-        //     outline: none;
-        // }
-
-        .serverSelectButtons {
-            margin-top: 0.4rem;
-            right: 440px;
-            position: absolute;
-        }
-
-        .selectButton {
-            font-family: "Segoe UI";
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: rgb(210, 210, 210);
-            // background-color: rgb(71, 99, 214);
-            padding: 1rem 0rem;
-            min-width: 55px;
-            border-width: 0px;
-        }
-
-        .selectButton:hover {
-            color: rgb(255, 255, 255);
-        }
-
-        @media screen and (max-width: 1000px) {
-            .smallMenu {
-                display: block;
-            }
-            .discord {
-                display: none;
-            }
-            .field {
-                right: 59px;
-            }
-            .serverSelectButtons {
-                display: none;
-            }
-            .recent {
-                display: none;
-            }
-        }
-    `;
 
     const redirectToPlayerStatsPage = (playerName, playerID, playerServer) => {
         props.history.push(

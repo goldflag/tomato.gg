@@ -6,56 +6,52 @@ import SessionBreakdown from "./sessionBreakdown";
 import { Pagination } from "../../../components";
 import cellStyle from "../../../functions/cellStyle";
 
-export default function SessionsLog(props) {
-    const { theme } = React.useContext(ThemeContext);
+const Styles = styled.div`
+    font-family: Roboto Mono;
 
-    const Styles = styled.div`
-        font-family: Roboto Mono;
-        
-        .tableContainer {
-            overflow-x: auto;
-            background-color: ${theme === "dark"
-            ? "rgb(40, 40, 40)"
-            : "rgb(250, 250, 250)"};
-            margin-bottom: 1rem;
-        }
-        
-        table {
-            border-spacing: 0;
-            width: 100%;
-            font-size: 0.8rem;
-            tr {
-                color: ${theme === "dark"
-                    ? "rgb(220, 220, 220)"
-                    : "rgb(100, 100, 100)"};
-                background-color: ${theme === "dark"
-                    ? "rgb(40, 40, 40)"
-                    : "rgb(250, 250, 250)"};
-                :nth-child(even) {
-                    background-color: ${theme === "dark"
+    .tableContainer {
+        overflow-x: auto;
+        background-color: ${({ theme }) =>
+            theme === "dark" ? "rgb(40, 40, 40)" : "rgb(250, 250, 250)"};
+        margin-bottom: 1rem;
+    }
+
+    table {
+        border-spacing: 0;
+        width: 100%;
+        font-size: 0.8rem;
+        tr {
+            color: ${({ theme }) =>
+                theme === "dark" ? "rgb(220, 220, 220)" : "rgb(100, 100, 100)"};
+            background-color: ${({ theme }) =>
+                theme === "dark" ? "rgb(40, 40, 40)" : "rgb(250, 250, 250)"};
+            :nth-child(even) {
+                background-color: ${({ theme }) =>
+                    theme === "dark"
                         ? "rgb(50, 50, 50)"
                         : "rgb(240, 240, 240)"};
-                }
-                :hover {
-                    background-color: ${theme === "dark"
+            }
+            :hover {
+                background-color: ${({ theme }) =>
+                    theme === "dark"
                         ? "rgb(30, 30, 30)"
                         : "rgb(220, 220, 230)"};
-                }
-            }
-            th {
-                text-align: left;
-                padding: 10px;
-                background-color: ${theme === "dark"
-                    ? "rgb(50, 50, 50)"
-                    : "rgb(255, 255, 255)"};
-                font-weight: 500;
-            }
-            td {
-                padding: 0.4rem 0.5rem;
             }
         }
-    `;
-
+        th {
+            text-align: left;
+            padding: 10px;
+            background-color: ${({ theme }) =>
+                theme === "dark" ? "rgb(50, 50, 50)" : "rgb(255, 255, 255)"};
+            font-weight: 500;
+        }
+        td {
+            padding: 0.4rem 0.5rem;
+        }
+    }
+`;
+export default function SessionsLog(props) {
+    const { theme } = React.useContext(ThemeContext);
 
     const data = props.data;
 
@@ -84,15 +80,16 @@ export default function SessionsLog(props) {
                 Header: "Tanks",
                 accessor: "tankcount",
             },
-            { 
-                Header: 'WN8', 
-                accessor: 'overallWN8' },
-            { 
+            {
+                Header: "WN8",
+                accessor: "overallWN8",
+            },
+            {
                 Cell: ({ value }) => {
                     return <div>{value + "%"}</div>;
                 },
-                Header: 'Winrate', 
-                accessor: 'winrate' 
+                Header: "Winrate",
+                accessor: "winrate",
             },
             {
                 Header: "DPG",
@@ -154,12 +151,12 @@ export default function SessionsLog(props) {
     function renderRowSubComponent(row) {
         let tankStats = row.row.original.tankStats;
         for (let i = 0; i < tankStats.length; ++i) {
-            tankStats[i]['img'] = (
+            tankStats[i]["img"] = (
                 <img
                     src={require(`../../../assets/tankIcons/${tankStats[i].id}.png`)}
                     alt={tankStats[i].id}
                 />
-            )
+            );
         }
         return (
             <div>
@@ -169,7 +166,7 @@ export default function SessionsLog(props) {
     }
 
     return (
-        <Styles>
+        <Styles theme={theme}>
             <div className="tableContainer">
                 <table {...getTableProps()}>
                     <thead>
@@ -181,7 +178,12 @@ export default function SessionsLog(props) {
                                             column.getSortByToggleProps()
                                         )}
                                         {...column.getHeaderProps({
-                                            style: { cursor: "pointer", backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null }
+                                            style: {
+                                                cursor: "pointer",
+                                                backgroundColor: column.isSorted
+                                                    ? "rgb(207, 0, 76)"
+                                                    : null,
+                                            },
                                         })}
                                     >
                                         {column.render("Header")}
@@ -195,13 +197,21 @@ export default function SessionsLog(props) {
                             prepareRow(row);
                             return (
                                 <React.Fragment key={i}>
-                                    <tr {...row.getToggleRowExpandedProps({
-                                        style: {height: "40px"}
-                                    })}>
+                                    <tr
+                                        {...row.getToggleRowExpandedProps({
+                                            style: { height: "40px" },
+                                        })}
+                                    >
                                         {row.cells.map((cell) => (
-                                            <td {...cell.getCellProps({
-                                                style: cellStyle(cell.column.isSorted, cell.column.id, cell.value)
-                                            })}>
+                                            <td
+                                                {...cell.getCellProps({
+                                                    style: cellStyle(
+                                                        cell.column.isSorted,
+                                                        cell.column.id,
+                                                        cell.value
+                                                    ),
+                                                })}
+                                            >
                                                 {cell.render("Cell")}
                                             </td>
                                         ))}

@@ -32,37 +32,25 @@ export default function NationDist(props) {
                 <OverallTable data={props.overall} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <PeriodBreakdown
-                    data={props.recents.recent24hr.tankStats}
-                />
+                <PeriodBreakdown data={props.recents.recent24hr.tankStats} />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <PeriodBreakdown
-                    data={props.recents.recent3days.tankStats}
-                />
+                <PeriodBreakdown data={props.recents.recent3days.tankStats} />
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <PeriodBreakdown
-                    data={props.recents.recent7days.tankStats}
-                />
+                <PeriodBreakdown data={props.recents.recent7days.tankStats} />
             </TabPanel>
             <TabPanel value={value} index={4}>
-                <PeriodBreakdown
-                    data={props.recents.recent30days.tankStats}
-                />
+                <PeriodBreakdown data={props.recents.recent30days.tankStats} />
             </TabPanel>
             <TabPanel value={value} index={5}>
-                <PeriodBreakdown
-                    data={props.recents.recent60days.tankStats}
-                />
+                <PeriodBreakdown data={props.recents.recent60days.tankStats} />
             </TabPanel>
             <TabPanel value={value} index={6}>
                 <PeriodBreakdown data={props.recents.recent100.tankStats} />
             </TabPanel>
             <TabPanel value={value} index={7}>
-                <PeriodBreakdown
-                    data={props.recents.recent1000.tankStats}
-                />
+                <PeriodBreakdown data={props.recents.recent1000.tankStats} />
             </TabPanel>
         </div>
     );

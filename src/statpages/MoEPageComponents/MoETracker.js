@@ -164,7 +164,9 @@ function MoETracker(props) {
                     </div>
                 );
             } else {
-                return <Loader color={'rgb(40, 40, 40)'} bottom={20} top={20}/>;
+                return (
+                    <Loader color={"rgb(40, 40, 40)"} bottom={20} top={20} />
+                );
             }
         }
 
@@ -226,7 +228,12 @@ function MoETracker(props) {
                                             column.getSortByToggleProps()
                                         )}
                                         {...column.getHeaderProps({
-                                            style: { cursor: "pointer", backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null }
+                                            style: {
+                                                cursor: "pointer",
+                                                backgroundColor: column.isSorted
+                                                    ? "rgb(207, 0, 76)"
+                                                    : null,
+                                            },
                                         })}
                                     >
                                         {column.render("Header")}
@@ -259,9 +266,14 @@ function MoETracker(props) {
                                 <React.Fragment key={i}>
                                     <tr {...row.getToggleRowExpandedProps({})}>
                                         {row.cells.map((cell) => (
-                                            <td {...cell.getCellProps({
-                                                style: setColor(cell.column.Header, cell.value)
-                                            })}>
+                                            <td
+                                                {...cell.getCellProps({
+                                                    style: setColor(
+                                                        cell.column.Header,
+                                                        cell.value
+                                                    ),
+                                                })}
+                                            >
                                                 {cell.render("Cell")}
                                             </td>
                                         ))}
@@ -306,16 +318,18 @@ function MoETracker(props) {
     }
 
     function setColor(column, value) {
-        let backgroundColor = ""
+        let backgroundColor = "";
         let color = "black";
         if (column === `7 Day %Δ`) backgroundColor = colorScale(value, 50);
-        else if (column === `14 Day %Δ`) backgroundColor = colorScale(value, 30);
-        else if (column === `30 Day %Δ`) backgroundColor = colorScale(value, 20);
+        else if (column === `14 Day %Δ`)
+            backgroundColor = colorScale(value, 30);
+        else if (column === `30 Day %Δ`)
+            backgroundColor = colorScale(value, 20);
         else color = undefined;
         return {
             color: color,
-            backgroundColor: backgroundColor
-        }
+            backgroundColor: backgroundColor,
+        };
     }
 
     function colorScale(val, multiplier) {
@@ -381,7 +395,7 @@ function MoETracker(props) {
                     return (
                         <img
                             src={require(`../../assets/classIcons/${value}.png`)}
-                            style={{ maxWidth: "20px"}}
+                            style={{ maxWidth: "20px" }}
                             alt={value}
                         />
                     );

@@ -12,9 +12,9 @@ export default function WN8Heatmap(props) {
                 theme={{
                     fontFamily: "Roboto Mono",
                     textColor:
-                    theme === "dark"
-                        ? "rgb(210, 210, 210)"
-                        : "rgb(100,100,100)"
+                        theme === "dark"
+                            ? "rgb(210, 210, 210)"
+                            : "rgb(100,100,100)",
                 }}
                 data={props.data}
                 keys={[

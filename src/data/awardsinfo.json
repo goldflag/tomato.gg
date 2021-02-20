@@ -3,7 +3,7 @@
         "name": "High Caliber",
         "desc": "Cause the highest damage per battle without hitting/ramming a friendly vehicle. Damage must be at least 20% of the total HP of enemy vehicles. Caused damage should be at least 1,000 HP."
     },
-    "topGun":{
+    "topGun": {
         "name": "Top Gun",
         "desc": "Destroy more enemy vehicles (at least six) than any other player in a match (If two or more players have destroyed equal amount of enemies, the medal is granted to the player who earned more XP in battle)."
     },
@@ -39,7 +39,7 @@
         "name": "Fire For Effect",
         "desc": "Cause more damage to enemy vehicles than the hit points of your vehicle."
     },
-    "duelist":{
+    "duelist": {
         "name": "Duelist",
         "desc": "Destroy at least two enemy vehicles that caused damage to your vehicle in the battle."
     },
@@ -75,7 +75,7 @@
         "name": "Billote's Medal",
         "desc": "Awarded to players who destroy at least two enemy vehicles and survive the battle despite receiving at least five different critical hits and losing 80% or more of their hit points. Destroyed enemy vehicles count after all damage is received."
     },
-    "bruno":{
+    "bruno": {
         "name": "Bruno's Medal",
         "desc": "Awarded to players who destroy three or four enemy vehicles and survive the battle to victory despite receiving five different critical hits and losing 80% of their hit points.  Destroyed enemy vehicles count after all damage is received."
     },

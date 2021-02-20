@@ -26,10 +26,10 @@ import {
     StyledTable,
     SubRow,
     TableContainer,
-    Name
+    Name,
 } from "../../components/tableComponents";
 import styled from "styled-components";
-import Tooltip from 'react-tooltip-lite';
+import Tooltip from "react-tooltip-lite";
 import awardsData from "../../data/awardsinfo.json";
 import cellStyle from "../../functions/cellStyle";
 
@@ -46,33 +46,34 @@ const tierConv = {
     10: "X",
 };
 
+const Styles = styled.div`
+    padding: 0.3rem;
+    .breakdown {
+        display: grid;
+        padding: 0.5rem 0rem;
+        grid-template-columns: 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px;
+    }
+
+    @media screen and (max-width: 1000px) {
+        .smallMenu {
+            display: block;
+        }
+        .discord {
+            display: none;
+        }
+        .field {
+            right: 59px;
+        }
+        .serverSelectButtons {
+            display: none;
+        }
+    }
+`;
+
 function OverallTable(props) {
     const { theme } = React.useContext(ThemeContext);
 
     let data = props.data;
-    const Styles = styled.div`
-        padding: 0.3rem;
-        .breakdown {
-            display: grid;
-            padding: 0.5rem 0rem;
-            grid-template-columns: 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px;
-        }
-
-        @media screen and (max-width: 1000px) {
-            .smallMenu {
-                display: block;
-            }
-            .discord {
-                display: none;
-            }
-            .field {
-                right: 59px;
-            }
-            .serverSelectButtons {
-                display: none;
-            }
-        }
-    `;
 
     // Define a default UI for filtering
     function DefaultColumnFilter({
@@ -232,7 +233,7 @@ function OverallTable(props) {
                         {
                             id: "battles",
                             desc: true,
-                        }
+                        },
                     ],
                 },
             },
@@ -242,7 +243,7 @@ function OverallTable(props) {
             useExpanded,
             usePagination
         );
-        
+
         function renderRowSubComponent(row) {
             function NumberBox(val) {
                 let width;
@@ -251,59 +252,90 @@ function OverallTable(props) {
                 else if (val < 1000) width = "25px";
                 else width = "30px";
                 return (
-                    <div 
+                    <div
                         style={{
-                            width: width, 
-                            height: "16px", 
-                            backgroundColor: "rgb(199, 38, 81)", 
+                            width: width,
+                            height: "16px",
+                            backgroundColor: "rgb(199, 38, 81)",
                             color: "white",
-                            position: "absolute",  
-                            bottom: '5px', 
-                            left: '30px',
-                            fontSize: '0.6rem',
-                            border: '1px solid black',
-                            borderRadius: '5px',
+                            position: "absolute",
+                            bottom: "5px",
+                            left: "30px",
+                            fontSize: "0.6rem",
+                            border: "1px solid black",
+                            borderRadius: "5px",
                             textAlign: "center",
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
                         }}
                     >
                         {val}
                     </div>
-                )
+                );
             }
 
             function RenderTooltip(award) {
-                return(
-                    <div style={{position: "absolute", left: "-250px", top: "40px", backgroundColor: "rgb(40, 40, 40)", padding: "0.5rem", borderRadius: "5px"}}>
-                        <div style={{ lineHeight: "1.5rem", color: "rgb(255, 255, 255)", fontSize: "0.9rem"}}>
+                return (
+                    <div
+                        style={{
+                            position: "absolute",
+                            left: "-250px",
+                            top: "40px",
+                            backgroundColor: "rgb(40, 40, 40)",
+                            padding: "0.5rem",
+                            borderRadius: "5px",
+                        }}
+                    >
+                        <div
+                            style={{
+                                lineHeight: "1.5rem",
+                                color: "rgb(255, 255, 255)",
+                                fontSize: "0.9rem",
+                            }}
+                        >
                             {awardsData[award].name}
-                        </div> 
-                        <div style={{ width: "200px", color: "rgb(200, 200, 200)", fontSize: "0.7rem"}}>
+                        </div>
+                        <div
+                            style={{
+                                width: "200px",
+                                color: "rgb(200, 200, 200)",
+                                fontSize: "0.7rem",
+                            }}
+                        >
                             {awardsData[award].desc}
-                        </div> 
+                        </div>
                     </div>
-                )
+                );
             }
 
             function RenderAwards(type) {
                 let keys = Object.keys(row.row.original.awards[type]);
                 return keys.map((award) => {
-                    const counter = NumberBox(row.row.original.awards[type][award]);
-                    return (row.row.original.awards[type][award] > 0 ? 
-                        <>
-                            <div> 
-                                <Tooltip arrow={false} direction="right" content={RenderTooltip(award)}>
-                                    {counter}
-                                    <img style={{width: "50px"}} src={require(`../../assets/awards/${type}/${award}.png`)} alt={award}/>
-                                </Tooltip>
-                            </div>              
-
-                        </>
-                        : <></>
+                    const counter = NumberBox(
+                        row.row.original.awards[type][award]
                     );
-                })
+                    return row.row.original.awards[type][award] > 0 ? (
+                        <>
+                            <div>
+                                <Tooltip
+                                    arrow={false}
+                                    direction="right"
+                                    content={RenderTooltip(award)}
+                                >
+                                    {counter}
+                                    <img
+                                        style={{ width: "50px" }}
+                                        src={require(`../../assets/awards/${type}/${award}.png`)}
+                                        alt={award}
+                                    />
+                                </Tooltip>
+                            </div>
+                        </>
+                    ) : (
+                        <></>
+                    );
+                });
             }
 
             let HeroAwards = RenderAwards("battleHeroes");
@@ -313,17 +345,11 @@ function OverallTable(props) {
             return (
                 <Styles>
                     Battle Heroes
-                    <div className="breakdown">
-                        {HeroAwards}
-                    </div>
+                    <div className="breakdown">{HeroAwards}</div>
                     Honorary Ranks
-                    <div className="breakdown">
-                        {MainAwards}
-                    </div>
+                    <div className="breakdown">{MainAwards}</div>
                     Epic Medals
-                    <div className="breakdown">
-                        {EpicAwards}
-                    </div>
+                    <div className="breakdown">{EpicAwards}</div>
                 </Styles>
             );
         }
@@ -339,35 +365,33 @@ function OverallTable(props) {
                     />
                     {headerGroups.map((headerGroup, i) => {
                         return (
-                        <>
-                            <ButtonFiltersContainer key={i}>
-                                {filterOrder.map(
-                                    (n) =>
-                                        !headerGroup.headers[n]
-                                            .disableFilters && (
-                                            <span key={n}>
-                                                {headerGroup.headers[n].render(
-                                                    "Filter"
-                                                )}
-                                            </span>
-                                        )
-                                )}
-                            </ButtonFiltersContainer>
-                            <div
-                                style={{
-                                    marginRight: "10px",
-                                    marginBottom: "10px",
-                                }}
-                            >
-                                {headerGroup.headers[6].render("Filter")}
-                            </div>
-                        </>
-                    )})}
+                            <>
+                                <ButtonFiltersContainer key={i}>
+                                    {filterOrder.map(
+                                        (n) =>
+                                            !headerGroup.headers[n]
+                                                .disableFilters && (
+                                                <span key={n}>
+                                                    {headerGroup.headers[
+                                                        n
+                                                    ].render("Filter")}
+                                                </span>
+                                            )
+                                    )}
+                                </ButtonFiltersContainer>
+                                <div
+                                    style={{
+                                        marginRight: "10px",
+                                        marginBottom: "10px",
+                                    }}
+                                >
+                                    {headerGroup.headers[6].render("Filter")}
+                                </div>
+                            </>
+                        );
+                    })}
                 </FiltersContainer>
-                <StyledTable
-                    theme={theme}
-                    {...getTableProps()}
-                >
+                <StyledTable theme={theme} {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -377,7 +401,12 @@ function OverallTable(props) {
                                             column.getSortByToggleProps()
                                         )}
                                         {...column.getHeaderProps({
-                                            style: { cursor: "pointer", backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null }
+                                            style: {
+                                                cursor: "pointer",
+                                                backgroundColor: column.isSorted
+                                                    ? "rgb(207, 0, 76)"
+                                                    : null,
+                                            },
                                         })}
                                     >
                                         {column.render("Header")}
@@ -393,9 +422,15 @@ function OverallTable(props) {
                                 <React.Fragment key={i}>
                                     <tr {...row.getToggleRowExpandedProps({})}>
                                         {row.cells.map((cell) => (
-                                            <td {...cell.getCellProps({
-                                                style: cellStyle(cell.column.isSorted, cell.column.id, cell.value)
-                                            })}>
+                                            <td
+                                                {...cell.getCellProps({
+                                                    style: cellStyle(
+                                                        cell.column.isSorted,
+                                                        cell.column.id,
+                                                        cell.value
+                                                    ),
+                                                })}
+                                            >
                                                 {cell.render("Cell")}
                                             </td>
                                         ))}
@@ -447,14 +482,11 @@ function OverallTable(props) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ( data ) => {
+                Cell: (data) => {
                     const value = data.row.original;
                     return (
                         <Name val={value.isPrem}>
-                            <img
-                                src={value.image}
-                                alt={value.name}
-                            />
+                            <img src={value.image} alt={value.name} />
                             {value.name}
                         </Name>
                     );
@@ -480,9 +512,7 @@ function OverallTable(props) {
             },
             {
                 Cell: ({ value }) => {
-                    return (
-                        <div>{tierConv[value]}</div>
-                    );
+                    return <div>{tierConv[value]}</div>;
                 },
                 Header: "Tier",
                 accessor: "tier",

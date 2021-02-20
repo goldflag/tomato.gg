@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 import { FullPageTableWrapper } from "../components";
 import { ServerContext } from "../context";
 import Loader from "../components/loader";
-import RecentLeaderboard from './tankPageComponents/recentLeaderboard';
+import RecentLeaderboard from "./tankPageComponents/recentLeaderboard";
 import serverConv from "../data/serverConv";
 import { Icon } from "react-icons-kit";
 import { chevronRight } from "react-icons-kit/feather/chevronRight";
@@ -47,7 +47,6 @@ const PaginationButton = styled.button`
     }
 `;
 
-
 const Styles = styled.div`
     .top {
         display: grid;
@@ -60,7 +59,7 @@ const Styles = styled.div`
         grid-template-rows: auto;
     }
 
-    .tier {        
+    .tier {
         display: flex;
         justify-content: center;
         margin-top: -10px;
@@ -68,7 +67,7 @@ const Styles = styled.div`
         font-size: 5rem;
     }
 
-    .name {        
+    .name {
         display: flex;
         flex-direction: column;
         font-weight: 400;
@@ -88,29 +87,28 @@ const Styles = styled.div`
 `;
 
 const classConv = {
-    "HT": "Heavy Tank",
-    "MT": "Medium Tank",
-    "LT": "Light Tank",
-    "SPG": "Self Propelled Gun",
-    "TD": "Tank Destroyer",
-}
+    HT: "Heavy Tank",
+    MT: "Medium Tank",
+    LT: "Light Tank",
+    SPG: "Self Propelled Gun",
+    TD: "Tank Destroyer",
+};
 
 const nationConv = {
-    "USA" : "American",
-    "China" : "Chinese",
-    "Czech" : "Czech",
-    "France" : "French",
-    "Germany" : "German",
-    "Italy" : "Italian",
-    "Japan" : "Japanese",
-    "Poland" : "Polish",
-    "Sweden" : "Swedish",
-    "UK" : "British",
-    "USSR" : "Soviet"
-}
+    USA: "American",
+    China: "Chinese",
+    Czech: "Czech",
+    France: "French",
+    Germany: "German",
+    Italy: "Italian",
+    Japan: "Japanese",
+    Poland: "Polish",
+    Sweden: "Swedish",
+    UK: "British",
+    USSR: "Soviet",
+};
 
 export default function TankPage(props) {
-
     const [data, setData] = useState(null);
     const [type, setType] = useState("dpg");
     const [page, setPage] = useState(0);
@@ -131,78 +129,82 @@ export default function TankPage(props) {
 
     async function init(page) {
         const windowUrl = window.location.pathname;
-        const urlParams = windowUrl.substring(6).split('/');
+        const urlParams = windowUrl.substring(6).split("/");
         const url = `${backend}/api/tankpage/${urlParams[0]}/${server}/${type}/${page}`;
         const res = await fetch(url);
         const res2 = await res.json();
         for (let i = 0; i < res2.leaderboard.length; ++i) {
             const link = `/stats/${serverConv[server]}/${res2.leaderboard[i].username}=${res2.leaderboard[i].player_id}`;
-            res2.leaderboard[i].username = <Link to={link}>{res2.leaderboard[i].username}</Link>;
+            res2.leaderboard[i].username = (
+                <Link to={link}>{res2.leaderboard[i].username}</Link>
+            );
         }
         setNumEntries(res2.count);
         setData(res2);
     }
 
     function pagination() {
-        return <PaginationContainer theme={"dark"}>
-            <PaginationButton
-                onClick={() => setPage(0)}
-                disabled={ page === 0 }
-            >
-                <Icon size={24} icon={chevronsLeft} />
-            </PaginationButton>{" "}
-            <PaginationButton
-                onClick={() => setPage( page > 0 ? page - 1 : 0 )}
-                disabled={ page === 0 }
-            >
-                <Icon size={24} icon={chevronLeft} />
-            </PaginationButton>{" "}
-            <PaginationButton
-                onClick={() => { 
-                    setPage( page <= parseInt(numEntries/100) ? page + 1 : parseInt(numEntries/100) )
-                }}
-                disabled={page === parseInt(numEntries/100) - 1}
-            >
-                <Icon size={24} icon={chevronRight} />
-            </PaginationButton>{" "}
-            <PaginationButton
-                onClick={() => {
-                    const wtf = parseInt(numEntries/100);
-                    console.log(wtf);
-                    setPage(wtf - 1);
-                }}
-                disabled={page === parseInt(numEntries/100) - 1}
-            >
-                <Icon size={24} icon={chevronsRight} />
-            </PaginationButton>{" "}
-            Page {page + 1} of {parseInt(numEntries/100)}{" "}
-        </PaginationContainer>
+        return (
+            <PaginationContainer theme={"dark"}>
+                <PaginationButton
+                    onClick={() => setPage(0)}
+                    disabled={page === 0}
+                >
+                    <Icon size={24} icon={chevronsLeft} />
+                </PaginationButton>{" "}
+                <PaginationButton
+                    onClick={() => setPage(page > 0 ? page - 1 : 0)}
+                    disabled={page === 0}
+                >
+                    <Icon size={24} icon={chevronLeft} />
+                </PaginationButton>{" "}
+                <PaginationButton
+                    onClick={() => {
+                        setPage(
+                            page <= parseInt(numEntries / 100)
+                                ? page + 1
+                                : parseInt(numEntries / 100)
+                        );
+                    }}
+                    disabled={page === parseInt(numEntries / 100) - 1}
+                >
+                    <Icon size={24} icon={chevronRight} />
+                </PaginationButton>{" "}
+                <PaginationButton
+                    onClick={() => {
+                        const wtf = parseInt(numEntries / 100);
+                        console.log(wtf);
+                        setPage(wtf - 1);
+                    }}
+                    disabled={page === parseInt(numEntries / 100) - 1}
+                >
+                    <Icon size={24} icon={chevronsRight} />
+                </PaginationButton>{" "}
+                Page {page + 1} of {parseInt(numEntries / 100)}{" "}
+            </PaginationContainer>
+        );
     }
 
-    let content = <Loader bottom={20} top={20}/>;
+    let content = <Loader bottom={20} top={20} />;
 
     if (data) {
-        content =     
-        (        
+        content = (
             <Styles>
                 <div className="top">
                     <div>
-                        <div style={{textAlign: "center"}}>
-                            TIER
-                        </div>
-                        <div className="tier">
-                            {data.meta.tier}
-                        </div>
+                        <div style={{ textAlign: "center" }}>TIER</div>
+                        <div className="tier">{data.meta.tier}</div>
                     </div>
                     <div>
-                        <img src={data.meta.image} alt={data.meta.tank_id}/>
+                        <img src={data.meta.image} alt={data.meta.tank_id} />
                     </div>
                     <div className="name">
-                        <div style={{fontSize: "2rem"}}>
+                        <div style={{ fontSize: "2rem" }}>
                             {data.meta.short_name}
                         </div>
                         <div>
-                            {nationConv[data.meta.nation]} {classConv[data.meta.class]}
+                            {nationConv[data.meta.nation]}{" "}
+                            {classConv[data.meta.class]}
                         </div>
                     </div>
                 </div>
@@ -212,15 +214,15 @@ export default function TankPage(props) {
                         PAST 60 DAYS | MINIMUM 25 BATTLES
                     </div>
                 </div>
-                <RecentLeaderboard data={data.leaderboard} type={type} setType={setType}/>
+                <RecentLeaderboard
+                    data={data.leaderboard}
+                    type={type}
+                    setType={setType}
+                />
                 {pagination()}
             </Styles>
         );
     }
 
-    return (
-        <FullPageTableWrapper>
-            {content}
-        </FullPageTableWrapper>
-    );
+    return <FullPageTableWrapper>{content}</FullPageTableWrapper>;
 }

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { ThemeContext, } from "../../context";
+import { ThemeContext } from "../../context";
 import { withStyles } from "@material-ui/core/styles";
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 import { TabPanel } from "../tabs/customTabs";
 import TopStats from "./topStats";
 import OverallStatsTable from "./overallStatsTable.js";
@@ -14,8 +14,8 @@ import Treemap from "./treemap/treemap";
 
 export default function MainTabs(props) {
     const { theme } = useContext(ThemeContext);
-    const [ value, setValue ] = useState(0);
-    const [ hofData, setHofData ] = useState('');
+    const [value, setValue] = useState(0);
+    const [hofData, setHofData] = useState("");
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -24,18 +24,21 @@ export default function MainTabs(props) {
     const CustomTabs = withStyles({
         root: {
             elevation: 10,
-            // backgroundColor: "rgb(76, 90, 166)",               
+            // backgroundColor: "rgb(76, 90, 166)",
             // color: {theme === "dark" ? "white" : "black"},
 
-            borderBottom: `1px solid ${theme === "dark" ? 'rgb(200, 200, 200)' : 'rgb(57, 82, 150)'}`,
+            borderBottom: `1px solid ${
+                theme === "dark" ? "rgb(200, 200, 200)" : "rgb(57, 82, 150)"
+            }`,
         },
         indicator: {
             display: "flex",
             justifyContent: "center",
-            backgroundColor: theme === "dark" ? 'rgb(200, 200, 200)' : 'rgb(57, 82, 150)',
+            backgroundColor:
+                theme === "dark" ? "rgb(200, 200, 200)" : "rgb(57, 82, 150)",
         },
     })(Tabs);
-    
+
     const CustomTab = withStyles((t) => ({
         root: {
             textTransform: "none",
@@ -44,18 +47,24 @@ export default function MainTabs(props) {
             marginRight: t.spacing(4),
             fontFamily: "Segoe UI, Futura",
             color: theme === "dark" ? "rgb(240, 240, 240)" : "black",
-            '&:hover': {
-                color: theme === "dark" ? 'rgb(142, 147, 245)' : 'rgb(113, 106, 230)',
+            "&:hover": {
+                color:
+                    theme === "dark"
+                        ? "rgb(142, 147, 245)"
+                        : "rgb(113, 106, 230)",
                 opacity: 1,
             },
-            '&$selected': {
-                color: theme === "dark" ? 'rgb(191, 185, 250)' : 'rgb(78, 71, 186)',
+            "&$selected": {
+                color:
+                    theme === "dark"
+                        ? "rgb(191, 185, 250)"
+                        : "rgb(78, 71, 186)",
             },
         },
         selected: {},
     }))((props) => <Tab disableRipple {...props} />);
 
-    return(
+    return (
         <>
             <div style={{ padding: "1em 0em 0.5em 0em" }}>
                 <TopStats
@@ -71,7 +80,7 @@ export default function MainTabs(props) {
             <CustomTabs
                 value={value}
                 indicatorColor="primary"
-                styles={{backgroundColor: "rgb(76, 90, 166)"}}
+                styles={{ backgroundColor: "rgb(76, 90, 166)" }}
                 onChange={handleChange}
                 aria-label="tabs"
                 variant="scrollable"
@@ -116,8 +125,8 @@ export default function MainTabs(props) {
             </TabPanel>
             <TabPanel value={value} index={4}>
                 <div style={{ marginTop: "1rem", minHeight: "300px" }}>
-                    <HallOfFame 
-                        id={props.recentStats.id} 
+                    <HallOfFame
+                        id={props.recentStats.id}
                         server={props.recentStats.server}
                         hofData={hofData}
                         setHofData={setHofData}

@@ -150,15 +150,19 @@ class StatsPage extends Component {
 
         if (loading) {
             statTable = (
-                    <Styles>
-                        <div className="loader">
-                            <img src={loader} className="loadingCircle" alt="loadingCircle"></img>
-                        </div>
-                    </Styles>
-                );
+                <Styles>
+                    <div className="loader">
+                        <img
+                            src={loader}
+                            className="loadingCircle"
+                            alt="loadingCircle"
+                        ></img>
+                    </div>
+                </Styles>
+            );
         } else if (validID) {
             statTable = (
-                <MainTabs 
+                <MainTabs
                     stats={stats}
                     loading={loading}
                     validID={validID}

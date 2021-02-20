@@ -10,28 +10,35 @@ import {
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
 import { ThemeContext } from "../../context";
-import {
-    StyledTable,
-    TableContainer,
-} from "../../components/tableComponents";
+import { StyledTable, TableContainer } from "../../components/tableComponents";
 
 import WN8c from "../../functions/WN8color";
 import WRc from "../../functions/WRcolor";
 
 export default function RecentsLeaderboard(props) {
-
     function setColor(column, value) {
-        if (column === "wn8") return ({backgroundColor: WN8c(value), color: "white", padding: "10px"})
-        else if (column === "winrate") return ({backgroundColor: WRc(value.slice(0, -1)), color: "white", padding: "10px"})
-        else if (column === props.type) return ({backdropFilter: "brightness(1.3)"})
-        else return null;  
+        if (column === "wn8")
+            return {
+                backgroundColor: WN8c(value),
+                color: "white",
+                padding: "10px",
+            };
+        else if (column === "winrate")
+            return {
+                backgroundColor: WRc(value.slice(0, -1)),
+                color: "white",
+                padding: "10px",
+            };
+        else if (column === props.type)
+            return { backdropFilter: "brightness(1.3)" };
+        else return null;
     }
-    
+
     function headerStyle(header) {
         if (header.id === props.type) {
             return {
-                backgroundColor: "rgb(107, 3, 252)"
-            }
+                backgroundColor: "rgb(107, 3, 252)",
+            };
         }
     }
 
@@ -110,7 +117,7 @@ export default function RecentsLeaderboard(props) {
                 filterTypes,
                 initialState: {
                     pageIndex: 0,
-                    pageSize: 101
+                    pageSize: 101,
                 },
             },
             useFilters, // useFilters!
@@ -129,9 +136,10 @@ export default function RecentsLeaderboard(props) {
                             <>
                                 <tr {...headerGroup.getHeaderGroupProps()}>
                                     {headerGroup.headers.map((column) => (
-                                        <th {...column.getHeaderProps({
-                                            style: headerStyle(column)
-                                        })}
+                                        <th
+                                            {...column.getHeaderProps({
+                                                style: headerStyle(column),
+                                            })}
                                         >
                                             {column.render("Header")}
                                             {/* <span>
@@ -167,9 +175,14 @@ export default function RecentsLeaderboard(props) {
                                     <tr {...rowProps}>
                                         {row.cells.map((cell) => {
                                             return (
-                                                <td {...cell.getCellProps({
-                                                    style: setColor(cell.column.id, cell.value)
-                                                })}>
+                                                <td
+                                                    {...cell.getCellProps({
+                                                        style: setColor(
+                                                            cell.column.id,
+                                                            cell.value
+                                                        ),
+                                                    })}
+                                                >
                                                     {cell.render("Cell")}
                                                 </td>
                                             );

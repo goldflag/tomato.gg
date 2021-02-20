@@ -29,7 +29,7 @@ import {
     SubRow,
     TableContainer,
     StyledTable,
-    Name
+    Name,
 } from "../../components/tableComponents";
 import cellStyle from "../../functions/cellStyle";
 
@@ -221,7 +221,12 @@ function MoETable(props) {
                                             column.getSortByToggleProps()
                                         )}
                                         {...column.getHeaderProps({
-                                            style: { cursor: "pointer", backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null }
+                                            style: {
+                                                cursor: "pointer",
+                                                backgroundColor: column.isSorted
+                                                    ? "rgb(207, 0, 76)"
+                                                    : null,
+                                            },
                                         })}
                                     >
                                         {column.render("Header")}
@@ -254,9 +259,15 @@ function MoETable(props) {
                                 <React.Fragment key={i}>
                                     <tr {...row.getToggleRowExpandedProps({})}>
                                         {row.cells.map((cell) => (
-                                            <td {...cell.getCellProps({
-                                                style: cellStyle(cell.column.isSorted, cell.column.id, cell.value)
-                                            })}>
+                                            <td
+                                                {...cell.getCellProps({
+                                                    style: cellStyle(
+                                                        cell.column.isSorted,
+                                                        cell.column.id,
+                                                        cell.value
+                                                    ),
+                                                })}
+                                            >
                                                 {cell.render("Cell")}
                                             </td>
                                         ))}
@@ -340,14 +351,11 @@ function MoETable(props) {
                 filter: arrayFilterFn,
             },
             {
-                Cell: ( data ) => {
+                Cell: (data) => {
                     const value = data.row.original;
                     return (
                         <Name val={value.isPrem}>
-                            <img
-                                src={value.image}
-                                alt={value.name}
-                            />
+                            <img src={value.image} alt={value.name} />
                             {value.name}
                         </Name>
                     );

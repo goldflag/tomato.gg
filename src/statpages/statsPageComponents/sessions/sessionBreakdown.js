@@ -25,14 +25,11 @@ export default function SessionBreakdown(props) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ( data ) => {
+                Cell: (data) => {
                     const value = data.row.original;
                     return (
                         <Name val={value.isPrem}>
-                            <img
-                                src={value.image}
-                                alt={value.name}
-                            />
+                            <img src={value.image} alt={value.name} />
                             {value.name}
                         </Name>
                     );
@@ -56,9 +53,7 @@ export default function SessionBreakdown(props) {
             },
             {
                 Cell: ({ value }) => {
-                    return (
-                        <div>{tierConv[value]}</div>
-                    );
+                    return <div>{tierConv[value]}</div>;
                 },
                 Header: "Tier",
                 accessor: "tier",
@@ -119,17 +114,16 @@ export default function SessionBreakdown(props) {
         {
             columns,
             data,
-            initialState: { 
-                pageIndex: 0, 
+            initialState: {
+                pageIndex: 0,
                 pageSize: 10,
                 sortBy: [
                     {
                         id: "battles",
                         desc: true,
-                    }
-                ]            
+                    },
+                ],
             },
-
         },
         useSortBy,
         useExpanded,
@@ -148,7 +142,12 @@ export default function SessionBreakdown(props) {
                                         column.getSortByToggleProps()
                                     )}
                                     {...column.getHeaderProps({
-                                        style: { cursor: "pointer", backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null }
+                                        style: {
+                                            cursor: "pointer",
+                                            backgroundColor: column.isSorted
+                                                ? "rgb(207, 0, 76)"
+                                                : null,
+                                        },
                                     })}
                                 >
                                     {column.render("Header")}
@@ -164,9 +163,15 @@ export default function SessionBreakdown(props) {
                             <tr {...row.getRowProps()}>
                                 {row.cells.map((cell) => {
                                     return (
-                                        <td {...cell.getCellProps({
-                                            style: cellStyle(cell.column.isSorted, cell.column.id, cell.value)
-                                        })}>
+                                        <td
+                                            {...cell.getCellProps({
+                                                style: cellStyle(
+                                                    cell.column.isSorted,
+                                                    cell.column.id,
+                                                    cell.value
+                                                ),
+                                            })}
+                                        >
                                             {cell.render("Cell")}
                                         </td>
                                     );

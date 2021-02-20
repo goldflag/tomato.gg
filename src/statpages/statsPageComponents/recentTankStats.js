@@ -29,7 +29,6 @@ export default function RecentTankStats(props) {
     const [finaldata, setFinaldata] = useState("");
     const { theme } = React.useContext(ThemeContext);
 
-
     const getMuiTheme = () =>
         createMuiTheme({
             overrides: {

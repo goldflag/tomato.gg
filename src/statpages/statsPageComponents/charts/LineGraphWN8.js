@@ -44,7 +44,7 @@ export default function LineGraphWN8(props) {
                 data={[props.data]}
                 curve="catmullRom"
                 margin={{ top: 23, right: 30, bottom: 73, left: 70 }}
-                xScale={{ 
+                xScale={{
                     type: "linear",
                     min: "auto",
                     max: "auto",
@@ -72,7 +72,7 @@ export default function LineGraphWN8(props) {
                     legendOffset: 45,
                     legendPosition: "middle",
                     tickRotation: -45,
-                    tickValues: 15
+                    tickValues: 15,
                 }}
                 axisLeft={{
                     orient: "left",
@@ -82,11 +82,10 @@ export default function LineGraphWN8(props) {
                     legend: props.type,
                     legendOffset: -55,
                     legendPosition: "middle",
-                    tickValues: 6
+                    tickValues: 6,
                 }}
                 colors={color[props.type]}
                 enableGridX={false}
-
                 pointSize={0}
                 pointColor={{ theme: "background" }}
                 pointBorderWidth={2}

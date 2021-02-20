@@ -26,7 +26,7 @@ export const StyledTable = styled.table`
     width: 100%;
     font-size: 0.8rem;
     font-family: Roboto Mono;
-    cursor: ${({ pointer }) => pointer === true ? 'pointer' : null};
+    cursor: ${({ pointer }) => (pointer === true ? "pointer" : null)};
     tr {
         overflow-x: scroll;
         :last-child {
@@ -93,5 +93,5 @@ export const Name = styled.div`
     display: grid;
     grid-template-columns: 90px 50%;
     align-items: center;
-    color: ${({ val }) => val === true ? `#ffe455` : null};
+    color: ${({ val }) => (val === true ? `#ffe455` : null)};
 `;

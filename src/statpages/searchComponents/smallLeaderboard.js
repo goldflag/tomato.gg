@@ -13,60 +13,62 @@ const rankColors = {
     2: <span style={{ color: "silver", fontWeight: 600 }}>2</span>,
     3: <span style={{ color: "orange", fontWeight: 600 }}>3</span>,
 };
-export default function SmallLeaderboard(props) {
-    const { theme } = React.useContext(ThemeContext);
 
-    const Styles = styled.div`
-        table {
-            border-spacing: 0;
-            width: 100%;
-            font-size: 0.8rem;
-            tr {
-                :last-child {
-                    td {
-                        border-bottom: solid 1px
-                            ${theme === "dark"
+const Styles = styled.div`
+    table {
+        border-spacing: 0;
+        width: 100%;
+        font-size: 0.8rem;
+        tr {
+            :last-child {
+                td {
+                    border-bottom: solid 1px
+                        ${({ theme }) =>
+                            theme === "dark"
                                 ? "rgb(100, 100, 100)"
                                 : "rgb(200, 200, 200)"};
-                    }
                 }
-                background-color: ${theme === "dark"
-                    ? "rgb(40, 40, 40)"
-                    : "rgb(250, 250, 250)"};
-                :nth-child(even) {
-                    background-color: ${theme === "dark"
+            }
+            background-color: ${({ theme }) =>
+                theme === "dark" ? "rgb(40, 40, 40)" : "rgb(250, 250, 250)"};
+            :nth-child(even) {
+                background-color: ${({ theme }) =>
+                    theme === "dark"
                         ? "rgb(50, 50, 50)"
                         : "rgb(240, 240, 240)"};
-                }
-                :hover {
-                    background-color: ${theme === "dark"
+            }
+            :hover {
+                background-color: ${({ theme }) =>
+                    theme === "dark"
                         ? "rgb(30, 30, 30)"
                         : "rgb(220, 220, 230)"};
-                }
-            }
-            th {
-                text-align: left;
-                padding: 10px;
-                background-color: ${theme === "dark"
-                    ? "rgb(50, 50, 50)"
-                    : "rgb(255, 255, 255)"};
-                // color: black;
-                border-bottom: solid 1px
-                    ${theme === "dark"
-                        ? "rgb(100, 100, 100)"
-                        : "rgb(200, 200, 200)"};
-                font-weight: 500;
-            }
-            td {
-                margin: 0;
-                padding: 0.5rem;
-
-                :last-child {
-                    border-right: 0;
-                }
             }
         }
-    `;
+        th {
+            text-align: left;
+            padding: 10px;
+            background-color: ${({ theme }) =>
+                theme === "dark" ? "rgb(50, 50, 50)" : "rgb(255, 255, 255)"};
+            // color: black;
+            border-bottom: solid 1px
+                ${({ theme }) =>
+                    theme === "dark"
+                        ? "rgb(100, 100, 100)"
+                        : "rgb(200, 200, 200)"};
+            font-weight: 500;
+        }
+        td {
+            margin: 0;
+            padding: 0.5rem;
+
+            :last-child {
+                border-right: 0;
+            }
+        }
+    }
+`;
+export default function SmallLeaderboard(props) {
+    const { theme } = React.useContext(ThemeContext);
 
     const [data, setData] = useState([
         { rank: "1", username: "loading...", battles: "", avgtier: "", "": "" },
@@ -237,7 +239,7 @@ export default function SmallLeaderboard(props) {
     } = useTable({ columns, data });
 
     return (
-        <Styles>
+        <Styles theme={theme}>
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (

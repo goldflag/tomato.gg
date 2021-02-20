@@ -49,5 +49,3 @@ export const CustomTab = withStyles((theme) => ({
     },
     selected: {},
 }))((props) => <Tab disableRipple {...props} />);
-
-

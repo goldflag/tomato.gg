@@ -17,9 +17,7 @@ export default function Heatmaps(props) {
                 aria-label="ant example"
             >
                 <CustomTab
-                    label={
-                        props.type === "wn8" ? "WN8 HEATMAP" : "WR HEATMAP"
-                    }
+                    label={props.type === "wn8" ? "WN8 HEATMAP" : "WR HEATMAP"}
                 />
                 <CustomTab label="RECENT" />
             </CustomTabs>

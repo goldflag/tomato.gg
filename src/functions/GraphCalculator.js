@@ -81,7 +81,7 @@ export default function GraphCalculator(
     avgTier,
     recentStats,
     theme
-    ){
+) {
     function clr(recent, overall, flipped) {
         if (recent === "-") return "rgb(50,50,50)";
         if (flipped) {

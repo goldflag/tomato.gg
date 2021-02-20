@@ -1,5 +1,5 @@
 export default function WRcolor(winrate) {
-    if (winrate < 46) return "#930D0D"
+    if (winrate < 46) return "#930D0D";
     else if (winrate < 47) return "#CD3333";
     else if (winrate < 48) return "#CC7A00";
     else if (winrate < 50) return "#CCB800";
@@ -17,4 +17,3 @@ export default function WRcolor(winrate) {
         return "#24073d";
     }
 }
-

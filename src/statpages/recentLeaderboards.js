@@ -8,7 +8,7 @@ export default function RecentLeaderboards(props) {
     const { theme } = useContext(ThemeContext);
     const { server } = useContext(ServerContext);
 
-    return(
+    return (
         <FullPageTableWrapper>
             <Info theme={theme}>
                 <span style={{ fontSize: "2rem", fontWeight: "500" }}>
@@ -29,5 +29,5 @@ export default function RecentLeaderboards(props) {
             </Info>
             <Leaderboard />
         </FullPageTableWrapper>
-    )
+    );
 }

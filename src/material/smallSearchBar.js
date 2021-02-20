@@ -10,21 +10,19 @@ import SmallSelectQuery from "./smallSelect";
 
 import { ThemeContext } from "../context";
 
+const Styles = styled.div`
+    .select {
+        display: none;
+    }
+
+    @media screen and (max-width: 1000px) {
+        .select {
+            display: block;
+        }
+    }
+`;
 export default function SmallSearchBar(props) {
     const { theme } = React.useContext(ThemeContext);
-
-    const Styles = styled.div`
-
-        .select {
-            display: none;
-        }
-
-        @media screen and (max-width: 1000px) {
-            .select {
-                display: block;
-            }
-        }
-    `;
 
     const useStyles = makeStyles((t) => ({
         root: {
@@ -56,15 +54,15 @@ export default function SmallSearchBar(props) {
     const classes = useStyles();
     return (
         // <Styles>
-            <Paper elevation={0} className={classes.root}>
-                <InputBase
-                    className={classes.input}
-                    placeholder="Enter a Username"
-                    inputProps={{ "aria-label": "enter a username" }}
-                    onChange={(e) => props.setName(e.target.value)}
-                />
-                <Divider className={classes.divider} orientation="vertical" />
-                <Styles>
+        <Paper elevation={0} className={classes.root}>
+            <InputBase
+                className={classes.input}
+                placeholder="Enter a Username"
+                inputProps={{ "aria-label": "enter a username" }}
+                onChange={(e) => props.setName(e.target.value)}
+            />
+            <Divider className={classes.divider} orientation="vertical" />
+            <Styles>
                 <div className="select">
                     <SmallSelectQuery
                         setServer={props.setServer}
@@ -73,16 +71,16 @@ export default function SmallSearchBar(props) {
                         mode={props.mode}
                     />
                 </div>
-                </Styles>
+            </Styles>
 
-                <IconButton
-                    type="submit"
-                    className={classes.iconButton}
-                    aria-label="search"
-                >
-                    <SearchIcon />
-                </IconButton>
-            </Paper>
+            <IconButton
+                type="submit"
+                className={classes.iconButton}
+                aria-label="search"
+            >
+                <SearchIcon />
+            </IconButton>
+        </Paper>
         // </Styles>
     );
 }

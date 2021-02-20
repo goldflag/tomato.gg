@@ -24,12 +24,11 @@ import {
     FiltersContainer,
     StyledTable,
     TableContainer,
-    Name
+    Name,
 } from "../../components/tableComponents";
 import cellStyle from "../../functions/cellStyle";
 
 function PeriodBreakdown(props) {
-
     const { theme } = React.useContext(ThemeContext);
 
     // Define a default UI for filtering
@@ -123,7 +122,7 @@ function PeriodBreakdown(props) {
                         {
                             id: "battles",
                             desc: true,
-                        }
+                        },
                     ],
                 },
             },
@@ -165,7 +164,12 @@ function PeriodBreakdown(props) {
                                                 column.getSortByToggleProps()
                                             )}
                                             {...column.getHeaderProps({
-                                                style: { cursor: "pointer", backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null }
+                                                style: {
+                                                    cursor: "pointer",
+                                                    backgroundColor: column.isSorted
+                                                        ? "rgb(207, 0, 76)"
+                                                        : null,
+                                                },
                                             })}
                                         >
                                             {column.render("Header")}
@@ -183,9 +187,16 @@ function PeriodBreakdown(props) {
                                     <tr>
                                         {row.cells.map((cell) => {
                                             return (
-                                                <td {...cell.getCellProps({
-                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value)
-                                                })}>
+                                                <td
+                                                    {...cell.getCellProps({
+                                                        style: cellStyle(
+                                                            cell.column
+                                                                .isSorted,
+                                                            cell.column.id,
+                                                            cell.value
+                                                        ),
+                                                    })}
+                                                >
                                                     {cell.render("Cell")}
                                                 </td>
                                             );
@@ -238,14 +249,11 @@ function PeriodBreakdown(props) {
         };
         return [
             {
-                Cell: ( data ) => {
+                Cell: (data) => {
                     const value = data.row.original;
                     return (
                         <Name val={value.isPrem}>
-                            <img
-                                src={value.image}
-                                alt={value.name}
-                            />
+                            <img src={value.image} alt={value.name} />
                             {value.name}
                         </Name>
                     );

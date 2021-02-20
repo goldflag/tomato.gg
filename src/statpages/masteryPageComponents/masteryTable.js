@@ -21,7 +21,7 @@ import {
     NationFilter,
     PremFilter,
     TierFilter,
-    arrayFilterFn
+    arrayFilterFn,
 } from "../../components/tableFilters";
 import {
     ButtonFiltersContainer,
@@ -29,7 +29,7 @@ import {
     StyledTable,
     SubRow,
     TableContainer,
-    Name
+    Name,
 } from "../../components/tableComponents";
 import cellStyle from "../../functions/cellStyle";
 
@@ -220,7 +220,12 @@ function MasteryTable(props) {
                                             column.getSortByToggleProps()
                                         )}
                                         {...column.getHeaderProps({
-                                            style: { cursor: "pointer", backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null }
+                                            style: {
+                                                cursor: "pointer",
+                                                backgroundColor: column.isSorted
+                                                    ? "rgb(207, 0, 76)"
+                                                    : null,
+                                            },
                                         })}
                                     >
                                         {column.render("Header")}
@@ -253,9 +258,15 @@ function MasteryTable(props) {
                                 <React.Fragment key={i}>
                                     <tr {...row.getToggleRowExpandedProps({})}>
                                         {row.cells.map((cell) => (
-                                            <td {...cell.getCellProps({
-                                                style: cellStyle(cell.column.isSorted, cell.column.id, cell.value)
-                                            })}>
+                                            <td
+                                                {...cell.getCellProps({
+                                                    style: cellStyle(
+                                                        cell.column.isSorted,
+                                                        cell.column.id,
+                                                        cell.value
+                                                    ),
+                                                })}
+                                            >
                                                 {cell.render("Cell")}
                                             </td>
                                         ))}
@@ -332,7 +343,7 @@ function MasteryTable(props) {
                     return (
                         <img
                             src={require(`../../assets/classIcons/${value}.png`)}
-                            style={{ maxWidth: "20px"}}
+                            style={{ maxWidth: "20px" }}
                             alt={value}
                         />
                     );
@@ -343,14 +354,11 @@ function MasteryTable(props) {
                 filter: arrayFilterFn,
             },
             {
-                Cell: ( data ) => {
+                Cell: (data) => {
                     const value = data.row.original;
                     return (
                         <Name val={value.isPrem}>
-                            <img
-                                src={value.image}
-                                alt={value.name}
-                            />
+                            <img src={value.image} alt={value.name} />
                             {value.name}
                         </Name>
                     );
