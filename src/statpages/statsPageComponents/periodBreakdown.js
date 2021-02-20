@@ -24,10 +24,12 @@ import {
     FiltersContainer,
     StyledTable,
     TableContainer,
+    Name
 } from "../../components/tableComponents";
 import cellStyle from "../../functions/cellStyle";
 
 function PeriodBreakdown(props) {
+
     const { theme } = React.useContext(ThemeContext);
 
     // Define a default UI for filtering
@@ -218,16 +220,6 @@ function PeriodBreakdown(props) {
     // Runs once when component mounts
     useEffect(() => {
         let tankStats = props.data;
-
-        for (let i = 0; i < tankStats.length; ++i) {
-            tankStats[i]['img'] = (
-                <img
-                    src={require(`../../assets/tankIcons/${tankStats[i].id}.png`)}
-                    alt={tankStats[i].id}
-                />
-            )
-        }
-
         setData(tankStats);
     }, [props.data]);
 
@@ -246,11 +238,18 @@ function PeriodBreakdown(props) {
         };
         return [
             {
-                Header: "",
-                accessor: "img",
-                disableFilters: true,
-            },
-            {
+                Cell: ( data ) => {
+                    const value = data.row.original;
+                    return (
+                        <Name val={value.isPrem}>
+                            <img
+                                src={value.image}
+                                alt={value.name}
+                            />
+                            {value.name}
+                        </Name>
+                    );
+                },
                 Header: "Name",
                 accessor: "name",
                 disableFilters: true,

@@ -2,7 +2,7 @@ import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
 import { ThemeContext } from "../../../context";
 import { Pagination } from "../../../components";
-import { StyledTable } from "../../../components/tableComponents";
+import { StyledTable, Name } from "../../../components/tableComponents";
 import cellStyle from "../../../functions/cellStyle";
 
 const tierConv = {
@@ -24,8 +24,23 @@ export default function SessionBreakdown(props) {
 
     const columns = React.useMemo(
         () => [
-            { Header: "", accessor: "img" },
-            { Header: "Name", accessor: "name" },
+            {
+                Cell: ( data ) => {
+                    const value = data.row.original;
+                    return (
+                        <Name val={value.isPrem}>
+                            <img
+                                src={value.image}
+                                alt={value.name}
+                            />
+                            {value.name}
+                        </Name>
+                    );
+                },
+                Header: "Name",
+                accessor: "name",
+                disableFilters: true,
+            },
             {
                 Cell: ({ value }) => {
                     return (

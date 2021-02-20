@@ -88,3 +88,10 @@ export const SubRow = styled.tr`
         theme === "dark" ? css`rgb(40, 40, 40)` : css`rgb(250, 250, 250)`};
     padding: 10px;
 `;
+
+export const Name = styled.div`
+    display: grid;
+    grid-template-columns: 90px 50%;
+    align-items: center;
+    color: ${({ val }) => val === true ? `#ffe455` : null};
+`;

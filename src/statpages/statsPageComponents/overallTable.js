@@ -26,6 +26,7 @@ import {
     StyledTable,
     SubRow,
     TableContainer,
+    Name
 } from "../../components/tableComponents";
 import styled from "styled-components";
 import Tooltip from 'react-tooltip-lite';
@@ -49,7 +50,6 @@ function OverallTable(props) {
     const { theme } = React.useContext(ThemeContext);
 
     let data = props.data;
-
     const Styles = styled.div`
         padding: 0.3rem;
         .breakdown {
@@ -194,7 +194,7 @@ function OverallTable(props) {
             []
         );
 
-        const filterOrder = [5, 4, 3, 20, 21, 22];
+        const filterOrder = [3, 2, 1, 18, 19, 20];
 
         // Use the state and functions returned from useTable to build your UI
         const {
@@ -337,7 +337,8 @@ function OverallTable(props) {
                         globalFilter={state.globalFilter}
                         setGlobalFilter={setGlobalFilter}
                     />
-                    {headerGroups.map((headerGroup, i) => (
+                    {headerGroups.map((headerGroup, i) => {
+                        return (
                         <>
                             <ButtonFiltersContainer key={i}>
                                 {filterOrder.map(
@@ -361,7 +362,7 @@ function OverallTable(props) {
                                 {headerGroup.headers[6].render("Filter")}
                             </div>
                         </>
-                    ))}
+                    )})}
                 </FiltersContainer>
                 <StyledTable
                     theme={theme}
@@ -446,22 +447,18 @@ function OverallTable(props) {
     const columns = React.useMemo(
         () => [
             {
-                id: "expander", // It needs an ID
-            },
-            {
-                Cell: ({ value }) => {
+                Cell: ( data ) => {
+                    const value = data.row.original;
                     return (
-                        <img
-                            src={require(`../../assets/tankIcons/${value}.png`)}
-                            alt={value}
-                        />
+                        <Name val={value.isPrem}>
+                            <img
+                                src={value.image}
+                                alt={value.name}
+                            />
+                            {value.name}
+                        </Name>
                     );
                 },
-                Header: "",
-                accessor: "id",
-                disableFilters: true,
-            },
-            {
                 Header: "Name",
                 accessor: "name",
                 disableFilters: true,
