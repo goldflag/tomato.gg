@@ -29,6 +29,7 @@ import {
     SubRow,
     TableContainer,
     StyledTable,
+    Name
 } from "../../components/tableComponents";
 import cellStyle from "../../functions/cellStyle";
 
@@ -126,7 +127,7 @@ function MoETable(props) {
                 hiddenColumns: ["prem"],
                 initialState: {
                     pageIndex: 0,
-                    pageSize: 100,
+                    pageSize: 50,
                     sortBy: [
                         {
                             id: "95",
@@ -273,7 +274,7 @@ function MoETable(props) {
                     </tbody>
                 </StyledTable>
                 <Pagination
-                    pageSizes={[100, 250, 500]}
+                    pageSizes={[50, 100, 250, 500]}
                     {...{
                         canPreviousPage,
                         canNextPage,
@@ -339,19 +340,18 @@ function MoETable(props) {
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => {
+                Cell: ( data ) => {
+                    const value = data.row.original;
                     return (
-                        <img
-                            src={require(`../../assets/tankIcons/${value}.png`)}
-                            alt={value}
-                        />
+                        <Name val={value.isPrem}>
+                            <img
+                                src={value.image}
+                                alt={value.name}
+                            />
+                            {value.name}
+                        </Name>
                     );
                 },
-                Header: "",
-                accessor: "id",
-                disableFilters: true,
-            },
-            {
                 Header: "Name",
                 accessor: "name",
                 disableFilters: true,

@@ -111,7 +111,7 @@ const nationConv = {
 
 export default function TankPage(props) {
 
-    const [data, setData] = useState("");
+    const [data, setData] = useState(null);
     const [type, setType] = useState("dpg");
     const [page, setPage] = useState(0);
     const [numEntries, setNumEntries] = useState();
@@ -121,12 +121,11 @@ export default function TankPage(props) {
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/tank-page");
+        setData(null);
         init(0);
     }, [server]);
 
     useEffect(() => {
-        ReactGA.initialize(trackingId);
-        ReactGA.pageview("/tank-page");
         init(page);
     }, [page]);
 
@@ -208,7 +207,7 @@ export default function TankPage(props) {
                     </div>
                 </div>
                 <div className="tableLabel">
-                    Top 500 Players 
+                    Top 500 Players in {serverConv[server]}
                     <div className="bottomLabel">
                         PAST 60 DAYS | MINIMUM 25 BATTLES
                     </div>
