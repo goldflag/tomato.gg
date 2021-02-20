@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+// NPM
+import React from "react";
 import { useHistory } from "react-router-dom";
 import {
     useTable,
@@ -8,8 +9,9 @@ import {
     useExpanded,
     useGlobalFilter,
 } from "react-table";
-// A great library for fuzzy filtering/sorting items
-import { matchSorter } from "match-sorter";
+import styled from "styled-components";
+
+// LOCAL
 import { ThemeContext } from "../../context";
 import {
     ClassFilter,
@@ -26,215 +28,17 @@ import {
     StyledTable,
     TableContainer,
 } from "../../components/tableComponents";
-// import setColor from "../../functions/setColor";
-import styled from "styled-components";
 import cellStyle from "../../functions/cellStyle";
 
-const Styles = styled.div`
+const TankCell = styled.div`
     display: grid;
     grid-template-columns: 90px 50%;
     align-items: center;
-    color: ${({ val }) => val === true ? `#ffe455` : null};
+    color: ${({ val }) => (val ? `#ffe455` : null)};
 `;
 
-function RecentTanksAvgTable(props) {
+function RecentTanksAvgTable({ data }) {
     const { theme } = React.useContext(ThemeContext);
-    // Define a default UI for filtering
-    function DefaultColumnFilter({
-        column: { filterValue, preFilteredRows, setFilter },
-    }) {
-        const count = preFilteredRows.length;
-        return (
-            <input
-                value={filterValue || ""}
-                onChange={(e) => {
-                    setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
-                }}
-                placeholder={`Search ${count} records...`}
-            />
-        );
-    }
-
-    function fuzzyTextFilterFn(rows, id, filterValue) {
-        return matchSorter(rows, filterValue, {
-            keys: [(row) => row.values[id]],
-        });
-    }
-
-    // Let the table remove the filter if the string is empty
-    fuzzyTextFilterFn.autoRemove = (val) => !val;
-
-    // Be sure to pass our updateMyData and the skipReset option
-    function Table({ columns, data, updateMyData, skipReset }) {
-        const filterTypes = React.useMemo(
-            () => ({
-                // Add a new fuzzyTextFilterFn filter type.
-                fuzzyText: fuzzyTextFilterFn,
-                // Or, override the default text filter to use
-                // "startWith"
-                text: (rows, id, filterValue) => {
-                    return rows.filter((row) => {
-                        const rowValue = row.values[id];
-                        return rowValue !== undefined
-                            ? String(rowValue)
-                                  .toLowerCase()
-                                  .startsWith(String(filterValue).toLowerCase())
-                            : true;
-                    });
-                },
-            }),
-            []
-        );
-
-        const defaultColumn = React.useMemo(
-            () => ({
-                // Let's set up our default Filter UI
-                Filter: DefaultColumnFilter,
-                // And also our default editable cell
-            }),
-            []
-        );
-
-        // Use the state and functions returned from useTable to build your UI
-        const {
-            getTableProps,
-            getTableBodyProps,
-            headerGroups,
-            prepareRow,
-            state,
-            page, // Instead of using 'rows', we'll use page,
-            // which has only the rows for the active page
-            // The rest of these things are super handy, too ;)
-            canPreviousPage,
-            canNextPage,
-            pageOptions,
-            pageCount,
-            gotoPage,
-            nextPage,
-            previousPage,
-            setPageSize,
-            preGlobalFilteredRows,
-            setGlobalFilter,
-            state: { pageIndex, pageSize },
-        } = useTable(
-            {
-                columns,
-                data,
-                defaultColumn, // Be sure to pass the defaultColumn option
-                filterTypes,
-                initialState: {
-                    pageIndex: 0,
-                    pageSize: 100,
-                    hiddenColumns: ["prem"],
-                    sortBy: [
-                        {
-                            id: "battles",
-                            desc: true,
-                        },
-                    ],
-                },
-            },
-            useFilters, // useFilters!
-            useGlobalFilter, // useGlobalFilter!
-            useSortBy,
-            useExpanded,
-            usePagination
-        );
-
-        // Render the UI for your table
-
-        const history = useHistory();
-        const handleRowClick = (row) => {
-            console.log(row.original.tank_id)
-            history.push(`/tank/${row.original.tank_id}`);
-        }  
-
-        return (
-            <>
-                <FiltersContainer>
-                    {/* <GlobalFilter
-                        preGlobalFilteredRows={preGlobalFilteredRows}
-                        globalFilter={state.globalFilter}
-                        setGlobalFilter={setGlobalFilter}
-                    /> */}
-                    {headerGroups.map((headerGroup, i) => (
-                        <ButtonFiltersContainer key={i}>
-                            {headerGroup.headers.map(
-                                ({ disableFilters, render }, i) =>
-                                    !disableFilters && (
-                                        <span key={i}>{render("Filter")}</span>
-                                    )
-                            )}
-                        </ButtonFiltersContainer>
-                    ))}
-                </FiltersContainer>
-                <StyledTable theme={theme} pointer={true} {...getTableProps()}>
-                    <thead>
-                        {headerGroups.map((headerGroup) => (
-                            <>
-                                <tr {...headerGroup.getHeaderGroupProps()}>
-                                    {headerGroup.headers.map((column) => (
-                                        <th
-                                            {...column.getHeaderProps(
-                                                column.getSortByToggleProps()
-                                            )}                                          
-                                            {...column.getHeaderProps({style: {backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null}})}
-                                        >
-                                            {column.render("Header")}
-                                        </th>
-                                    ))}
-                                </tr>
-                            </>
-                        ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {page.map((row, i) => {
-                            prepareRow(row);
-                            const rowProps = row.getRowProps();
-                            return (
-                                <React.Fragment key={rowProps.key}>
-                                    <tr onClick={() => handleRowClick(row)}  {...rowProps}>
-                                        {row.cells.map((cell) => {
-                                            return (
-                                                <td {...cell.getCellProps({
-                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value)
-                                                })}>
-                                                    {cell.render("Cell")}
-                                                </td>
-                                            );
-                                        })}
-                                    </tr>
-                                </React.Fragment>
-                            );
-                        })}
-                    </tbody>
-                </StyledTable>
-                <Pagination
-                    pageSizes={[15, 25, 100, 250, 500]}
-                    {...{
-                        canPreviousPage,
-                        canNextPage,
-                        pageOptions,
-                        pageCount,
-                        gotoPage,
-                        nextPage,
-                        previousPage,
-                        setPageSize,
-                        pageIndex,
-                        pageSize,
-                    }}
-                />
-            </>
-        );
-    }
-
-    const [data, setData] = useState([]);
-
-    // Runs once when component mounts
-    useEffect(() => {
-        let tankStats = props.data;
-        setData(tankStats);
-    }, [props.data]);
 
     const columns = React.useMemo(() => {
         const tierConv = {
@@ -251,21 +55,21 @@ function RecentTanksAvgTable(props) {
         };
         return [
             {
-                Cell: ( data ) => {
+                Cell: (data) => {
                     const value = data.row.original;
                     return (
-                        <Styles val={value.is_premium}>
+                        <TankCell val={value.is_premium}>
                             <img
                                 src={value.image}
                                 style={{ maxWidth: "100px" }}
                                 alt={"test"}
                             />
                             {value.short_name}
-                        </Styles>
+                        </TankCell>
                     );
                 },
                 Header: "Tank",
-                accessor: "name",
+                accessor: "short_name",
                 disableFilters: true,
             },
             {
@@ -287,7 +91,6 @@ function RecentTanksAvgTable(props) {
                 Cell: ({ value }) => {
                     return (
                         <div style={{ margin: "8px" }}>{tierConv[value]}</div>
-
                     );
                 },
                 Header: "Tier",
@@ -366,9 +169,139 @@ function RecentTanksAvgTable(props) {
         ];
     }, []);
 
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        prepareRow,
+        state,
+        page,
+        canPreviousPage,
+        canNextPage,
+        pageOptions,
+        pageCount,
+        gotoPage,
+        nextPage,
+        previousPage,
+        setPageSize,
+        preGlobalFilteredRows,
+        setGlobalFilter,
+        state: { pageIndex, pageSize },
+    } = useTable(
+        {
+            columns,
+            data,
+            initialState: {
+                pageIndex: 0,
+                pageSize: 100,
+                hiddenColumns: ["prem"],
+                sortBy: [
+                    {
+                        id: "battles",
+                        desc: true,
+                    },
+                ],
+            },
+        },
+        useFilters,
+        useGlobalFilter,
+        useSortBy,
+        useExpanded,
+        usePagination
+    );
+
+    const history = useHistory();
+    const handleRowClick = (row) => {
+        history.push(`/tank/${row.original.tank_id}`);
+    };
+
     return (
         <TableContainer theme={theme}>
-            <Table columns={columns} data={data} />
+            <FiltersContainer>
+                <ButtonFiltersContainer>
+                    <GlobalFilter
+                        preGlobalFilteredRows={preGlobalFilteredRows}
+                        globalFilter={state.globalFilter}
+                        setGlobalFilter={setGlobalFilter}
+                    />
+                </ButtonFiltersContainer>
+                {headerGroups.map((headerGroup, i) => (
+                    <ButtonFiltersContainer key={i}>
+                        {headerGroup.headers.map(
+                            ({ disableFilters, render }, i) =>
+                                !disableFilters && (
+                                    <span key={i}>{render("Filter")}</span>
+                                )
+                        )}
+                    </ButtonFiltersContainer>
+                ))}
+            </FiltersContainer>
+            <StyledTable theme={theme} pointer={true} {...getTableProps()}>
+                <thead>
+                    {headerGroups.map((headerGroup) => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map((column) => (
+                                <th
+                                    {...column.getHeaderProps(
+                                        column.getSortByToggleProps()
+                                    )}
+                                    {...column.getHeaderProps({
+                                        style: {
+                                            backgroundColor: column.isSorted
+                                                ? "rgb(207, 0, 76)"
+                                                : null,
+                                        },
+                                    })}
+                                >
+                                    {column.render("Header")}
+                                </th>
+                            ))}
+                        </tr>
+                    ))}
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                    {page.map((row, i) => {
+                        prepareRow(row);
+                        return (
+                            <tr
+                                onClick={() => handleRowClick(row)}
+                                {...row.getRowProps()}
+                            >
+                                {row.cells.map((cell) => {
+                                    return (
+                                        <td
+                                            {...cell.getCellProps({
+                                                style: cellStyle(
+                                                    cell.column.isSorted,
+                                                    cell.column.id,
+                                                    cell.value
+                                                ),
+                                            })}
+                                        >
+                                            {cell.render("Cell")}
+                                        </td>
+                                    );
+                                })}
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </StyledTable>
+            <Pagination
+                pageSizes={[15, 25, 100, 250, 500]}
+                {...{
+                    canPreviousPage,
+                    canNextPage,
+                    pageOptions,
+                    pageCount,
+                    gotoPage,
+                    nextPage,
+                    previousPage,
+                    setPageSize,
+                    pageIndex,
+                    pageSize,
+                }}
+            />
         </TableContainer>
     );
 }
