@@ -78,7 +78,7 @@ export default function About() {
                             <br />
                             <a
                                 target="blank"
-                                href="http://localhost:3000/stats/NA/Superdude3800=1007264827"
+                                href="/stats/NA/Superdude3800=1007264827"
                             >
                                 Superdude3800
                             </a>{" "}
@@ -96,7 +96,7 @@ export default function About() {
                             Thanks for using Tomato.gg! <br />-{" "}
                             <a
                                 target="blank"
-                                href="https://tomato.gg/stats/NA/goldflag=1011694618"
+                                href="/stats/NA/goldflag=1011694618"
                             >
                                 Goldflag
                             </a>
