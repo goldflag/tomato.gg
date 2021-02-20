@@ -31,7 +31,6 @@ import {
     TableContainer,
 } from "../../components/tableComponents";
 import Loader from "../../components/loader";
-import cellStyle from "../../functions/cellStyle";
 
 const backend = process.env.REACT_APP_BACKEND;
 

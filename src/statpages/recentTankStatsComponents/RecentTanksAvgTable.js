@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Icon } from "react-icons-kit";
-import { arrowDown } from "react-icons-kit/feather/arrowDown";
-import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import {
     useTable,
     usePagination,
@@ -275,7 +272,6 @@ function RecentTanksAvgTable(props) {
                 Cell: ({ value }) => {
                     return (
                         <img
-                            // src={require(`../../assets/flagIcons/${nationConv[value]}.png`)}
                             src={require(`../../assets/flagIcons/${value}.png`)}
                             style={{ maxWidth: "40px" }}
                             alt={value}
@@ -291,7 +287,6 @@ function RecentTanksAvgTable(props) {
                 Cell: ({ value }) => {
                     return (
                         <div style={{ margin: "8px" }}>{tierConv[value]}</div>
-                        //<div style={{ margin: "8px" }}>{value}</div>
 
                     );
                 },
@@ -304,7 +299,6 @@ function RecentTanksAvgTable(props) {
                 Cell: ({ value }) => {
                     return (
                         <img
-                            // src={require(`../../assets/classIcons/${classConv[value]}.png`)}
                             src={require(`../../assets/classIcons/${value}.png`)}
                             style={{ maxWidth: "20px" }}
                             alt={value}

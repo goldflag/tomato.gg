@@ -1,7 +1,4 @@
 import React from "react";
-import { Icon } from "react-icons-kit";
-import { arrowDown } from "react-icons-kit/feather/arrowDown";
-import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import {
     useTable,
     usePagination,
@@ -10,7 +7,6 @@ import {
     useExpanded,
     useGlobalFilter,
 } from "react-table";
-// A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
 import { ThemeContext } from "../../context";
 import { MoEStars, Pagination } from "../../components";
@@ -60,10 +56,7 @@ function OverallTable(props) {
             display: grid;
             padding: 0.5rem 0rem;
             grid-template-columns: 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px;
-            // grid-template-rows: 25% 100px auto;
         }
-
-        
 
         @media screen and (max-width: 1000px) {
             .smallMenu {

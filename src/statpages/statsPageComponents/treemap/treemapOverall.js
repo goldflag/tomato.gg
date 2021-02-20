@@ -91,14 +91,13 @@ export default function TreemapOverall(props) {
                 outerPadding={3}
                 innerPadding={3}
                 labelSkipSize={45}
-                labelTextColor={{ from: 'color', modifiers: [ [ 'darker', 1.2 ] ] }}
+                labelTextColor="rgb(220, 220, 220)"
                 borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.1 ] ] }}
                 borderWidth={3}
                 nodeOpacity={0.8}
                 colors={(properties) => {
                     return properties.data.color;
                 }}
-                labelTextColor="rgb(220, 220, 220)"
                 parentLabelTextColor={{ from: 'labelTextColor', modifiers: [ [ 'darker', 0.3 ] ] }}
                 tooltip={node => {
                     if (node.node.id !== "Stats") {
@@ -155,7 +154,7 @@ export default function TreemapOverall(props) {
                                                 <div className="label" style={{marginTop: node.node.data.moe > 0 ? "-2px" : "0px"}}>MoE</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val"><img style={{maxHeight: "20px"}} src={require(`../../../assets/masteryIcons/${node.node.data.mastery}.png`)}/></div>
+                                                <div className="val"><img style={{maxHeight: "20px"}} src={require(`../../../assets/masteryIcons/${node.node.data.mastery}.png`)} alt={node.node.data.mastery}/></div>
                                                 <div className="label" style={{marginTop: "-6px"}}>Mastery</div>
                                             </div>
                                         </div>

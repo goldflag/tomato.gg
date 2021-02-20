@@ -7,7 +7,6 @@ import nationConversion from "../data/nationConversion";
 import classConversion from "../data/classConversion.json";
 import { FullPageTableWrapper, Info } from "../components";
 import Loader from "../components/loader";
-import { rgbToHex } from "@material-ui/core";
 
 const tierConv = {
     1: "I",

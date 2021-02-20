@@ -45,7 +45,6 @@ export default function NationDistribution(props) {
                 ]}
                 borderWidth={2}
                 borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
-                radialLabelsSkipAngle={10}
                 radialLabelsTextXOffset={6}
                 radialLabelsTextColor={
                     theme === "dark" ? "rgb(210, 210, 210)" : "rgb(100,100,100)"

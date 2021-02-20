@@ -15,20 +15,6 @@ const backendKey = process.env.REACT_APP_BACKEND_API_KEY;
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
-const styles = () => ({
-    loading: {
-        display: "flex",
-        justifyContent: "center",
-        paddingTop: "40vh",
-    },
-    root: {
-        flexGrow: 1,
-    },
-    paper: {
-        textAlign: "center",
-    },
-});
-
 const Styles = styled.div`
     .loader {
         display: flex;
@@ -166,7 +152,7 @@ class StatsPage extends Component {
             statTable = (
                     <Styles>
                         <div className="loader">
-                            <img src={loader} className="loadingCircle"></img>
+                            <img src={loader} className="loadingCircle" alt="loadingCircle"></img>
                         </div>
                     </Styles>
                 );
