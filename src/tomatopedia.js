@@ -4,18 +4,12 @@ import Topbar from "./topbar";
 import Sidebar from "./sidebar";
 import Search from "./search";
 import About from "./about";
-//import TankStatsPage from "./statpages/tankStatsPage";
 import TankStatsPage from "./statpages/recentTankStats";
-
 import StatsPage from "./statpages/statsPage";
 import ServerStatsPage from "./statpages/serverStatsPage";
 import TankPage from "./statpages/tankPage";
-
-
 import StatsReference from "./statpages/statsReference";
 import Leaderboards from "./statpages/recentLeaderboards";
-
-//import Leaderboards from "./statpages/leaderboards";
 import WN8Expected from "./statpages/wn8expected";
 import MoEExpected from "./statpages/MoEPage";
 import MasteryExpected from "./statpages/masteryPage";

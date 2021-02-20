@@ -132,7 +132,7 @@ function MoETracker(props) {
                 initialState: {
                     // hiddenColumns: ["isPrem"],
                     pageIndex: 0,
-                    pageSize: 100,
+                    pageSize: 50,
                     sortBy: [
                         {
                             id: `7percent${props.moe}`,
@@ -279,7 +279,7 @@ function MoETracker(props) {
                     </tbody>
                 </StyledTable>
                 <Pagination
-                    pageSizes={[100, 250, 500]}
+                    pageSizes={[50, 100, 250, 500]}
                     {...{
                         canPreviousPage,
                         canNextPage,

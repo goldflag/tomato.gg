@@ -161,15 +161,6 @@ export default function Leaderboard() {
                 >
                     DPG
                 </FilterButton>
-                <FilterButton
-                    // key={value || label}
-                    selected={type === 'dmg_ratio'}
-                    onClick={() => {
-                        setType('dmg_ratio');
-                    }}
-                >
-                    DMG Ratio
-                </FilterButton>
             </FilterButtonGroup>
         )
     }

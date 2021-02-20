@@ -21,7 +21,7 @@ import {
     NationFilter,
     PremFilter,
     TierFilter,
-    arrayFilterFn,
+    arrayFilterFn
 } from "../../components/tableFilters";
 import {
     ButtonFiltersContainer,
@@ -29,6 +29,7 @@ import {
     StyledTable,
     SubRow,
     TableContainer,
+    Name
 } from "../../components/tableComponents";
 import cellStyle from "../../functions/cellStyle";
 
@@ -125,7 +126,7 @@ function MasteryTable(props) {
                 hiddenColumns: ["prem"],
                 initialState: {
                     pageIndex: 0,
-                    pageSize: 100,
+                    pageSize: 50,
                     sortBy: [
                         {
                             id: "ace",
@@ -272,7 +273,7 @@ function MasteryTable(props) {
                     </tbody>
                 </StyledTable>
                 <Pagination
-                    pageSizes={[100, 250, 500]}
+                    pageSizes={[50, 100, 250, 500]}
                     {...{
                         canPreviousPage,
                         canNextPage,
@@ -305,10 +306,6 @@ function MasteryTable(props) {
     filterGreaterThan.autoRemove = (val) => typeof val !== "number";
     const columns = React.useMemo(
         () => [
-            {
-                id: "expander", // It needs an ID
-                disableFilters: true,
-            },
             {
                 Cell: ({ value }) => {
                     return (
@@ -346,19 +343,18 @@ function MasteryTable(props) {
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => {
+                Cell: ( data ) => {
+                    const value = data.row.original;
                     return (
-                        <img
-                            src={require(`../../assets/tankIcons/${value}.png`)}
-                            alt={value}
-                        />
+                        <Name val={value.isPrem}>
+                            <img
+                                src={value.image}
+                                alt={value.name}
+                            />
+                            {value.name}
+                        </Name>
                     );
                 },
-                Header: "",
-                accessor: "id",
-                disableFilters: true,
-            },
-            {
                 Header: "Name",
                 accessor: "name",
                 disableFilters: true,

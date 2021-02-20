@@ -72,10 +72,9 @@ export default function MoEPage(props) {
             if (data[i].id in tankNames) {
                 const id = data[i].id;
                 let entry = {
+                    image: data[i].image,
                     id: id,
-                    name:
-                        tankNames[id].short_name +
-                        (tankNames[id]["is_premium"] ? " 🟊" : ""),
+                    name: tankNames[id].short_name,
                     nation: nationConversion[tankNames[id].nation],
                     tier: tierConv[tankNames[id].tier],
                     class: classConversion[tankNames[id].type],
