@@ -13,6 +13,7 @@
     "@nivo/pie": "^0.67.0",
     "@nivo/radar": "^0.67.0",
     "@nivo/scatterplot": "^0.67.0",
+    "@nivo/treemap": "^0.67.0",
     "@nivo/waffle": "^0.67.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -22,9 +23,11 @@
     "match-sorter": "^6.0.1",
     "mui-datatables": "^3.4.1",
     "nivo": "^0.31.0",
+    "query-string": "^6.14.0",
     "react": "^16.13.1",
     "react-adsense": "^0.1.0",
     "react-adsense-ad": "^3.4.0",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dark-mode-toggle": "0.0.9",
     "react-dom": "^16.13.1",
     "react-ga": "^3.1.2",
@@ -33,10 +36,12 @@
     "react-router-dom": "^5.2.0",
     "react-script-tag": "^1.1.2",
     "react-scripts": "^3.4.3",
+    "react-scroll-horizontal": "^1.6.6",
     "react-scrollbars-custom": "^4.0.25",
     "react-table": "^7.5.2",
     "react-tooltip-lite": "^1.12.0",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "typeface-roboto": "^1.1.13"
   },
   "scripts": {
     "start": "react-scripts start",

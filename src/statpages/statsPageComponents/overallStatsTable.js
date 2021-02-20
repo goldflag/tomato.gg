@@ -80,6 +80,7 @@ export default function OverallStatsTable(props) {
             padding: "2px 8px",
             color: cellValue === 2 || theme === "dark" ? "white" : null,
             backgroundColor: cellValue === 2 ? WN8color(rowIndex) : null,
+            fontFamily: "Roboto Mono"
         };
     }
 
@@ -92,6 +93,7 @@ export default function OverallStatsTable(props) {
                 setCellProps: (row, value) => {
                     return {
                         style: {
+                            fontFamily: "Roboto Mono",
                             backgroundColor:
                                 theme === "dark"
                                     ? "rgb(45, 45, 50)"

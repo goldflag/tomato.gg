@@ -9,12 +9,14 @@ import OverallStatsTable from "./overallStatsTable.js";
 import AllTankStats from "./allTankStats";
 import Charts from "./charts";
 import SessionsLogParent from "./sessions/sessionsLogParent";
-import { Helmet } from "react-helmet";
-import ScriptTag from "react-script-tag";
+import HallOfFame from "./hallOfFame";
+import Treemap from "./treemap/treemap";
 
 export default function MainTabs(props) {
     const { theme } = useContext(ThemeContext);
     const [ value, setValue ] = useState(0);
+    const [ hofData, setHofData ] = useState('');
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -78,7 +80,8 @@ export default function MainTabs(props) {
                 <CustomTab label="MAIN STATS" />
                 <CustomTab label="INFOGRAPHICS" />
                 <CustomTab label="SESSIONS" />
-                <CustomTab label="ACHIEVEMENTS (Coming Soon™)" />
+                <CustomTab label="TREEMAP (NEW!)" />
+                <CustomTab label="HALL OF FAME (NEW!)" />
             </CustomTabs>
             <TabPanel value={value} index={0}>
                 <div style={{ margin: "1rem 0" }}>
@@ -107,14 +110,18 @@ export default function MainTabs(props) {
                 </div>
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <div>
-                    <Helmet>
-                        <script src="//ap.lijit.com/www/delivery/fpi.js?z=846403&width=160&height=600" type="text/javascript"></script>
-                        <script src="//ap.lijit.com/www/delivery/fpi.js?z=846403&width=160&height=600"></script> 
-                    </Helmet>
+                <div style={{ marginTop: "1rem", minHeight: "300px" }}>
+                    <Treemap data={props.recentStats.tree} />
                 </div>
-                <div>
-                    <ScriptTag type="text/javascript" src="//ap.lijit.com/www/delivery/fpi.js?z=846403&width=160&height=600" />
+            </TabPanel>
+            <TabPanel value={value} index={4}>
+                <div style={{ marginTop: "1rem", minHeight: "300px" }}>
+                    <HallOfFame 
+                        id={props.recentStats.id} 
+                        server={props.recentStats.server}
+                        hofData={hofData}
+                        setHofData={setHofData}
+                    />
                 </div>
             </TabPanel>
         </>

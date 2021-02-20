@@ -30,6 +30,7 @@ import {
     SubRow,
     TableContainer,
 } from "../../components/tableComponents";
+import cellStyle from "../../functions/cellStyle";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -217,6 +218,9 @@ function MasteryTable(props) {
                                         {...column.getHeaderProps(
                                             column.getSortByToggleProps()
                                         )}
+                                        {...column.getHeaderProps({
+                                            style: { cursor: "pointer", backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null }
+                                        })}
                                     >
                                         {column.render("Header")}
                                         <span>
@@ -248,7 +252,9 @@ function MasteryTable(props) {
                                 <React.Fragment key={i}>
                                     <tr {...row.getToggleRowExpandedProps({})}>
                                         {row.cells.map((cell) => (
-                                            <td {...cell.getCellProps()}>
+                                            <td {...cell.getCellProps({
+                                                style: cellStyle(cell.column.isSorted, cell.column.id, cell.value)
+                                            })}>
                                                 {cell.render("Cell")}
                                             </td>
                                         ))}

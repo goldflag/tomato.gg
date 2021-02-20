@@ -3,31 +3,30 @@ import ReactGA from "react-ga";
 import "../css/style.css";
 import "../css/innerpage.css";
 import serverConv from "../data/serverConv";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import loader from "../assets/loading.svg";
 import GraphCalculator from "../functions/GraphCalculator";
 import MainTabs from "./statsPageComponents/mainTabs";
 import { ThemeContext } from "../context";
 import { withRouter } from "react-router-dom";
+import styled from "styled-components";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 const backendKey = process.env.REACT_APP_BACKEND_API_KEY;
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
-const styles = () => ({
-    loading: {
-        display: "flex",
-        justifyContent: "center",
-        paddingTop: "40vh",
-    },
-    root: {
-        flexGrow: 1,
-    },
-    paper: {
-        textAlign: "center",
-    },
-});
+const Styles = styled.div`
+    .loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 25%;
+    }
 
+    .loadingCircle {
+        max-width: 75px;
+    }
+`;
 
 class StatsPage extends Component {
     constructor(props) {
@@ -151,16 +150,12 @@ class StatsPage extends Component {
 
         if (loading) {
             statTable = (
-                <div style={styles().loading}>
-                    <CircularProgress
-                        color={
-                            this.context.theme === "dark"
-                                ? "primary"
-                                : "secondary"
-                        }
-                    />
-                </div>
-            );
+                    <Styles>
+                        <div className="loader">
+                            <img src={loader} className="loadingCircle" alt="loadingCircle"></img>
+                        </div>
+                    </Styles>
+                );
         } else if (validID) {
             statTable = (
                 <MainTabs 

@@ -10,6 +10,7 @@ export default function TierDistribution(props) {
         <div style={{ height: "calc(300px)" }}>
             <ResponsiveBar
                 theme={{
+                    fontFamily: "Roboto Mono",
                     textColor:
                         theme === "dark"
                             ? "rgb(210, 210, 210)"

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import {
     useTable,
     usePagination,
@@ -24,14 +25,20 @@ import {
     FiltersContainer,
     StyledTable,
     TableContainer,
-    Name
 } from "../../components/tableComponents";
+// import setColor from "../../functions/setColor";
+import styled from "styled-components";
 import cellStyle from "../../functions/cellStyle";
 
-function PeriodBreakdown(props) {
+const Styles = styled.div`
+    display: grid;
+    grid-template-columns: 90px 50%;
+    align-items: center;
+    color: ${({ val }) => val === true ? `#ffe455` : null};
+`;
 
+function RecentTanksAvgTable(props) {
     const { theme } = React.useContext(ThemeContext);
-
     // Define a default UI for filtering
     function DefaultColumnFilter({
         column: { filterValue, preFilteredRows, setFilter },
@@ -117,13 +124,13 @@ function PeriodBreakdown(props) {
                 filterTypes,
                 initialState: {
                     pageIndex: 0,
-                    pageSize: 25,
+                    pageSize: 100,
                     hiddenColumns: ["prem"],
                     sortBy: [
                         {
                             id: "battles",
                             desc: true,
-                        }
+                        },
                     ],
                 },
             },
@@ -135,14 +142,21 @@ function PeriodBreakdown(props) {
         );
 
         // Render the UI for your table
+
+        const history = useHistory();
+        const handleRowClick = (row) => {
+            console.log(row.original.tank_id)
+            history.push(`/tank/${row.original.tank_id}`);
+        }  
+
         return (
             <>
                 <FiltersContainer>
-                    <GlobalFilter
+                    {/* <GlobalFilter
                         preGlobalFilteredRows={preGlobalFilteredRows}
                         globalFilter={state.globalFilter}
                         setGlobalFilter={setGlobalFilter}
-                    />
+                    /> */}
                     {headerGroups.map((headerGroup, i) => (
                         <ButtonFiltersContainer key={i}>
                             {headerGroup.headers.map(
@@ -154,7 +168,7 @@ function PeriodBreakdown(props) {
                         </ButtonFiltersContainer>
                     ))}
                 </FiltersContainer>
-                <StyledTable theme={theme} {...getTableProps()}>
+                <StyledTable theme={theme} pointer={true} {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <>
@@ -163,10 +177,8 @@ function PeriodBreakdown(props) {
                                         <th
                                             {...column.getHeaderProps(
                                                 column.getSortByToggleProps()
-                                            )}
-                                            {...column.getHeaderProps({
-                                                style: { cursor: "pointer", backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null }
-                                            })}
+                                            )}                                          
+                                            {...column.getHeaderProps({style: {backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null}})}
                                         >
                                             {column.render("Header")}
                                         </th>
@@ -178,9 +190,10 @@ function PeriodBreakdown(props) {
                     <tbody {...getTableBodyProps()}>
                         {page.map((row, i) => {
                             prepareRow(row);
+                            const rowProps = row.getRowProps();
                             return (
-                                <React.Fragment {...row.getRowProps()}>
-                                    <tr>
+                                <React.Fragment key={rowProps.key}>
+                                    <tr onClick={() => handleRowClick(row)}  {...rowProps}>
                                         {row.cells.map((cell) => {
                                             return (
                                                 <td {...cell.getCellProps({
@@ -241,16 +254,17 @@ function PeriodBreakdown(props) {
                 Cell: ( data ) => {
                     const value = data.row.original;
                     return (
-                        <Name val={value.isPrem}>
+                        <Styles val={value.is_premium}>
                             <img
                                 src={value.image}
-                                alt={value.name}
+                                style={{ maxWidth: "100px" }}
+                                alt={"test"}
                             />
-                            {value.name}
-                        </Name>
+                            {value.short_name}
+                        </Styles>
                     );
                 },
-                Header: "Name",
+                Header: "Tank",
                 accessor: "name",
                 disableFilters: true,
             },
@@ -273,6 +287,7 @@ function PeriodBreakdown(props) {
                 Cell: ({ value }) => {
                     return (
                         <div style={{ margin: "8px" }}>{tierConv[value]}</div>
+
                     );
                 },
                 Header: "Tier",
@@ -318,10 +333,10 @@ function PeriodBreakdown(props) {
                 accessor: "dpg",
                 disableFilters: true,
             },
-            { Header: "KPG", accessor: "kpg", disableFilters: true },
+            { Header: "KPG", accessor: "frags", disableFilters: true },
             {
                 Header: "DR",
-                accessor: "dmgRatio",
+                accessor: "dmg_ratio",
                 disableFilters: true,
             },
             {
@@ -330,8 +345,11 @@ function PeriodBreakdown(props) {
                 disableFilters: true,
             },
             {
+                Cell: ({ value }) => {
+                    return <div>{value + "%"}</div>;
+                },
                 Header: "Survival%",
-                accessor: "survived",
+                accessor: "survival",
                 disableFilters: true,
             },
             {
@@ -341,15 +359,12 @@ function PeriodBreakdown(props) {
             },
             {
                 Header: "",
-                accessor: "isPrem",
+                accessor: "is_premium",
                 Filter: PremFilter,
                 filter: arrayFilterFn,
             },
         ];
     }, []);
-
-    // We need to keep the table from resetting the pageIndex when we
-    // Update data. So we can keep track of that flag with a ref.
 
     return (
         <TableContainer theme={theme}>
@@ -358,4 +373,4 @@ function PeriodBreakdown(props) {
     );
 }
 
-export default PeriodBreakdown;
+export default RecentTanksAvgTable;

@@ -8,6 +8,7 @@ export default function WN8Radar(props) {
         <div style={{ height: "calc(300px)" }}>
             <ResponsiveRadar
                 theme={{
+                    fontFamily: "Roboto Mono",
                     textColor:
                         theme === "dark"
                             ? "rgb(210, 210, 210)"

@@ -175,6 +175,7 @@ export default withRouter(function Topbar(props) {
                             .slice(0, Math.min(history.length, 5)) // No more than 5 recent searches
                             .map(({ name, id, server }) => (
                                 <Chip
+                                    key={name}
                                     variant="outlined"
                                     className="recent-chip"
                                     avatar={

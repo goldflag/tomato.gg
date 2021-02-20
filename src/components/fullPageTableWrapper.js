@@ -11,7 +11,7 @@ export const FullPageTableWrapper = styled.div`
 
     @media screen and (max-width: 1000px) {
         & {
-            margin: 1rem;
+            margin: 0rem 0.5rem;
         }
     }
 `;

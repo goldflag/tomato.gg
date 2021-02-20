@@ -6,6 +6,9 @@ export default function TierWN8Distribution(props) {
     return (
         <div style={{ height: "calc(30vh + 100px)" }}>
             <ResponsiveBar
+                theme={{
+                    fontFamily: "Roboto Mono"
+                }}
                 data={data}
                 keys={["HT", "MT", "TD", "LT", "SPG"]}
                 indexBy="Tier"
