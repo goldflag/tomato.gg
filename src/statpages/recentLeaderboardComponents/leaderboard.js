@@ -1,17 +1,20 @@
+// NPM
 import React, { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { ServerContext } from "../../context";
 import styled, { css } from "styled-components";
-
-import LeaderboardTable from "./leaderboardTable";
-import Loader from "../../components/loader";
+import { Icon } from "react-icons-kit";
+import {
+    chevronLeft,
+    chevronRight,
+    chevronsLeft,
+    chevronsRight,
+} from "react-icons-kit/feather";
 import { Button, ButtonGroup } from "@material-ui/core";
 
-import { Icon } from "react-icons-kit";
-import { chevronRight } from "react-icons-kit/feather/chevronRight";
-import { chevronLeft } from "react-icons-kit/feather/chevronLeft";
-import { chevronsRight } from "react-icons-kit/feather/chevronsRight";
-import { chevronsLeft } from "react-icons-kit/feather/chevronsLeft";
+// LOCAL
+import LeaderboardTable from "./leaderboardTable";
+import Loader from "../../components/loader";
 import serverConv from "../../data/serverConv";
 
 const backend = process.env.REACT_APP_BACKEND;
@@ -67,118 +70,120 @@ const PaginationButton = styled.button`
     }
 `;
 
-const Styles = styled.div`
-    .loader {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20% 0% 50% 0%;
-        background-color: rgb(40, 40, 40);
-    }
-    
-    .loadingCircle {
-        max-width: 75px;
-    }
-    
-    .filters {
-        padding: 10px;
-        margin-bottom: -10px;
-        background-color: rgb(40, 40, 40);
-    
-    }
+const Filters = styled.div`
+    padding: 10px;
+    margin-bottom: -10px;
+    background-color: rgb(40, 40, 40);
 `;
 
-export default function Leaderboard() {
+const parseURLParams = (search_string, opts) => {
+    const params = new URLSearchParams(search_string);
+    const retval = {};
+    Object.entries(opts).forEach(([key, defaultVal]) => {
+        retval[key] = params.get(key) || defaultVal;
+        if (typeof defaultVal === "number") {
+            retval[key] = parseInt(retval[key]);
+        }
+    });
+    console.log(retval);
+    return retval;
+};
 
-    const [data, setData] = useState();
-    const [type, setType] = useState('wn8');
-    const [time, setTime] = useState(60);
-    const [tier, setTier] = useState(6);
-    const [page, setPage] = useState(0);
+export default function Leaderboard() {
+    const { server } = useContext(ServerContext);
+    const [data, setData] = useState("loading");
     const [numEntries, setNumEntries] = useState();
 
-    const { server } = useContext(ServerContext);
+    const location = useLocation();
+    const history = useHistory();
+    const { type, time, tier, page } = parseURLParams(location.search, {
+        type: "wn8",
+        time: 60,
+        tier: 6,
+        page: 0,
+    });
+    const updateURLParams = (key, val) => {
+        setData("loading");
+        const params = new URLSearchParams(location.search);
+        params.set(key, val);
+        history.push(location.pathname + "?" + params.toString());
+    };
 
-    async function fetchData(str) {
-        let res = await fetch(str);
-        res = await res.json();
-        const res2 = res.body;
-        for (let i = 0; i < res2.length; ++i) {
-            const link = `/stats/${serverConv[server]}/${res2[i].username}=${res2[i].player_id}`;
-            res2[i].username = <Link to={link}>{res2[i].username}</Link>;
-        }
-        setData(res2);
-        setNumEntries(res.count);
-    }
+    const setType = (t) => updateURLParams("type", t);
+    const setTier = (t) => updateURLParams("tier", t);
+    const setTime = (t) => updateURLParams("time", t);
+    const setPage = (p) => updateURLParams("page", p);
 
     useEffect(() => {
-        setData(null);
-        setPage(0);
-        fetchData(`${backend}/api/leaderboard/${server}/${type}/${time}/${tier}/0`);
-    }, [server, type, tier, time])
-
-    useEffect(() => {
-        setData(null);
-        fetchData(`${backend}/api/leaderboard/${server}/${type}/${time}/${tier}/${page}`);
-    }, [page])
+        fetch(
+            `${backend}/api/leaderboard/${server}/${type}/${time}/${tier}/${page}`
+        )
+            .then((res) => res.json())
+            .then((res) => {
+                let playerList = res.body;
+                if (!playerList) {
+                    playerList = "error";
+                } else {
+                    playerList.forEach((player) => {
+                        player.url = `/stats/${serverConv[server]}/${player.username}=${player.player_id}`;
+                    });
+                }
+                setData(playerList);
+                setNumEntries(res.count);
+            });
+    }, [server, type, time, tier, page]);
 
     function typeFilter() {
         return (
             <FilterButtonGroup variant="text" aria-label={"ariaLabel"}>
                 <FilterButton
-                    // key={value || label}
-                    selected={type === 'wn8'}
+                    selected={type === "wn8"}
                     onClick={() => {
-                        setType('wn8');
+                        setType("wn8");
                     }}
                 >
                     WN8
                 </FilterButton>
                 <FilterButton
-                    // key={value || label}
-                    selected={type === 'winrate'}
+                    selected={type === "winrate"}
                     onClick={() => {
-                        setType('winrate');
+                        setType("winrate");
                     }}
                 >
                     Winrate
                 </FilterButton>
                 <FilterButton
-                    // key={value || label}
-                    selected={type === 'kd'}
+                    selected={type === "kd"}
                     onClick={() => {
-                        setType('kd');
+                        setType("kd");
                     }}
                 >
                     K/D
                 </FilterButton>
                 <FilterButton
-                    // key={value || label}
-                    selected={type === 'dpg'}
+                    selected={type === "dpg"}
                     onClick={() => {
-                        setType('dpg');
+                        setType("dpg");
                     }}
                 >
                     DPG
                 </FilterButton>
                 <FilterButton
-                    // key={value || label}
-                    selected={type === 'dmg_ratio'}
+                    selected={type === "dmg_ratio"}
                     onClick={() => {
-                        setType('dmg_ratio');
+                        setType("dmg_ratio");
                     }}
                 >
                     DMG Ratio
                 </FilterButton>
             </FilterButtonGroup>
-        )
+        );
     }
 
     function tierFilter() {
         return (
             <FilterButtonGroup variant="text" aria-label={"ariaLabel"}>
                 <FilterButton
-                    // key={value || label}
                     selected={tier === 6}
                     onClick={() => {
                         setTier(6);
@@ -187,7 +192,6 @@ export default function Leaderboard() {
                     Tier 6+
                 </FilterButton>
                 <FilterButton
-                    // key={value || label}
                     selected={tier === 8}
                     onClick={() => {
                         setTier(8);
@@ -196,14 +200,13 @@ export default function Leaderboard() {
                     Tier 8+
                 </FilterButton>
             </FilterButtonGroup>
-        )
+        );
     }
 
     function timeFilter() {
         return (
             <FilterButtonGroup variant="text" aria-label={"ariaLabel"}>
                 <FilterButton
-                    // key={value || label}
                     selected={time === 30}
                     onClick={() => {
                         setTime(30);
@@ -212,7 +215,6 @@ export default function Leaderboard() {
                     30 Days
                 </FilterButton>
                 <FilterButton
-                    // key={value || label}
                     selected={time === 60}
                     onClick={() => {
                         setTime(60);
@@ -221,65 +223,70 @@ export default function Leaderboard() {
                     60 Days
                 </FilterButton>
             </FilterButtonGroup>
-        )
+        );
     }
 
     function pagination() {
-
-        return <PaginationContainer theme={"dark"}>
-            <PaginationButton
-                onClick={() => setPage(0)}
-                disabled={ page === 0 }
-            >
-                <Icon size={24} icon={chevronsLeft} />
-            </PaginationButton>{" "}
-            <PaginationButton
-                onClick={() => setPage( page > 0 ? page - 1 : 0 )}
-                disabled={ page === 0 }
-            >
-                <Icon size={24} icon={chevronLeft} />
-            </PaginationButton>{" "}
-            <PaginationButton
-                onClick={() => { 
-                    setPage( page <= parseInt(numEntries/100) ? page + 1 : parseInt(numEntries/100) )
-                }}
-                disabled={page === parseInt(numEntries/100)}
-            >
-                <Icon size={24} icon={chevronRight} />
-            </PaginationButton>{" "}
-            <PaginationButton
-                onClick={() => {
-                    setPage(parseInt(numEntries/100));
-                }}
-                disabled={page === parseInt(numEntries/100)}
-            >
-                <Icon size={24} icon={chevronsRight} />
-            </PaginationButton>{" "}
-            Page {page + 1} of {parseInt(numEntries/100)}{" "}
-        </PaginationContainer>
+        return (
+            <PaginationContainer theme={"dark"}>
+                <PaginationButton
+                    onClick={() => setPage(0)}
+                    disabled={page === 0}
+                >
+                    <Icon size={24} icon={chevronsLeft} />
+                </PaginationButton>{" "}
+                <PaginationButton
+                    onClick={() => setPage(page > 0 ? page - 1 : 0)}
+                    disabled={page === 0}
+                >
+                    <Icon size={24} icon={chevronLeft} />
+                </PaginationButton>{" "}
+                <PaginationButton
+                    onClick={() => {
+                        setPage(
+                            page <= parseInt(numEntries / 100)
+                                ? page + 1
+                                : parseInt(numEntries / 100)
+                        );
+                    }}
+                    disabled={page === parseInt(numEntries / 100)}
+                >
+                    <Icon size={24} icon={chevronRight} />
+                </PaginationButton>{" "}
+                <PaginationButton
+                    onClick={() => {
+                        setPage(parseInt(numEntries / 100));
+                    }}
+                    disabled={page === parseInt(numEntries / 100)}
+                >
+                    <Icon size={24} icon={chevronsRight} />
+                </PaginationButton>{" "}
+                Page {page + 1} of {parseInt(numEntries / 100)}{" "}
+            </PaginationContainer>
+        );
     }
 
-    let table = 
-        <div>
-            <div className="filters">
+    return (
+        <>
+            <Filters>
                 {typeFilter()}
                 {tierFilter()}
                 {timeFilter()}
-            </div>
-            <Loader color={'rgb(40, 40, 40)'} bottom={20} top={20}/>
-        </div>;
-
-    if (data) {
-        table = <div>
-            <div className="filters">
-                {typeFilter()}
-                {tierFilter()}
-                {timeFilter()}
-            </div>
-                <LeaderboardTable data={data} type={type} setType={setType}/>
-                {pagination()}
-            </div>
-    }
-
-    return <Styles>{table}</Styles>;
+            </Filters>
+            {typeof data !== "string" ? (
+                <>
+                    <LeaderboardTable
+                        data={data}
+                        type={type}
+                        setType={setType}
+                    />
+                    {pagination()}
+                </>
+            ) : data === "loading" ? (
+                <Loader color={"rgb(40, 40, 40)"} bottom={50} top={20} />
+            ) : (
+                <h1>Sorry, there was an error loading that leaderboard.</h1>
+            )}
+        </>
+    );
 }
