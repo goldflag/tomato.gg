@@ -2,24 +2,8 @@ import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
 import { ThemeContext } from "../context";
 import WN8Table from "./wn8Components/wn8Table";
-import tankNames from "../data/tankNames.json";
-import nationConversion from "../data/nationConversion";
-import classConversion from "../data/classConversion.json";
 import { FullPageTableWrapper, Info } from "../components";
 import Loader from "../components/loader";
-
-const tierConv = {
-    1: "I",
-    2: "II",
-    3: "III",
-    4: "IV",
-    5: "V",
-    6: "VI",
-    7: "VII",
-    8: "VIII",
-    9: "IX",
-    10: "X",
-};
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -45,31 +29,7 @@ export default function Leaderboards(props) {
     let table = <Loader color={'rgb(40, 40, 40)'} bottom={20} top={20}/>;
 
     if (data) {
-        const ids = Object.keys(data);
-        let rowData = [];
-
-        for (let i = 0; i < ids.length; ++i) {
-            if (ids[i] in tankNames) {
-                let entry = {
-                    id: ids[i],
-                    name:
-                        tankNames[ids[i]].short_name +
-                        (tankNames[ids[i]]["is_premium"] ? " 🟊" : ""),
-                    nation: nationConversion[tankNames[ids[i]].nation],
-                    tier: tierConv[tankNames[ids[i]].tier],
-                    class: classConversion[tankNames[ids[i]].type],
-                    expDef: data[ids[i]].expDef,
-                    expFrag: data[ids[i]].expFrag,
-                    expSpot: data[ids[i]].expSpot,
-                    expDamage: data[ids[i]].expDamage,
-                    expWinRate: data[ids[i]].expWinRate,
-                    isPrem: tankNames[ids[i]].is_premium,
-                };
-                rowData.push(entry);
-            }
-        }
-
-        table = <WN8Table data={rowData} />;
+        table = <WN8Table data={data} />;
     }
 
     return (

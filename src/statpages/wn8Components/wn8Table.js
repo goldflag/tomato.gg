@@ -20,13 +20,14 @@ import {
     Pagination,
     PremFilter,
     TierFilter,
-    arrayFilterFn,
+    arrayFilterFn
 } from "../../components";
 import {
     ButtonFiltersContainer,
     FiltersContainer,
     StyledTable,
     TableContainer,
+    Name
 } from "../../components/tableComponents";
 import cellStyle from "../../functions/cellStyle";
 
@@ -251,19 +252,18 @@ function WN8Table(props) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ({ value }) => {
+                Cell: ( data ) => {
+                    const value = data.row.original;
                     return (
-                        <img
-                            src={require(`../../assets/tankIcons/${value}.png`)}
-                            alt={value}
-                        />
+                        <Name val={value.isPrem}>
+                            <img
+                                src={value.image}
+                                alt={value.name}
+                            />
+                            {value.name}
+                        </Name>
                     );
                 },
-                Header: "",
-                accessor: "id",
-                disableFilters: true,
-            },
-            {
                 Header: "Name",
                 accessor: "name",
                 disableFilters: true,
