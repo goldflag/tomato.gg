@@ -25,7 +25,7 @@ export default function Charts(props) {
         paper: {
             //padding: theme.spacing(2),
             textAlign: "left",
-            fontFamily: "roboto",
+            fontFamily: "Roboto Mono",
             fontSize: "1.2em",
             backgroundColor: theme === "dark" ? "rgb(40, 40, 40)" : "white",
             color: "rgb(30, 30, 30)",

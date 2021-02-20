@@ -1,18 +1,17 @@
 import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
 import styled from "styled-components";
-import { Icon } from "react-icons-kit";
-import { arrowDown } from "react-icons-kit/feather/arrowDown";
-import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import { ThemeContext } from "../../../context";
 import SessionBreakdown from "./sessionBreakdown";
 import { Pagination } from "../../../components";
-import setColor from "../../../functions/setColor";
+import cellStyle from "../../../functions/cellStyle";
 
 export default function SessionsLog(props) {
     const { theme } = React.useContext(ThemeContext);
 
     const Styles = styled.div`
+        font-family: Roboto Mono;
+        
         .tableContainer {
             overflow-x: auto;
             background-color: ${theme === "dark"
@@ -181,25 +180,11 @@ export default function SessionsLog(props) {
                                         {...column.getHeaderProps(
                                             column.getSortByToggleProps()
                                         )}
+                                        {...column.getHeaderProps({
+                                            style: { cursor: "pointer", backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null }
+                                        })}
                                     >
                                         {column.render("Header")}
-                                        <span style={{ textAlign: "center" }}>
-                                            {column.isSorted ? (
-                                                column.isSortedDesc ? (
-                                                    <Icon
-                                                        size={16}
-                                                        icon={arrowDown}
-                                                    />
-                                                ) : (
-                                                    <Icon
-                                                        size={16}
-                                                        icon={arrowUp}
-                                                    />
-                                                )
-                                            ) : (
-                                                ""
-                                            )}
-                                        </span>
                                     </th>
                                 ))}
                             </tr>
@@ -215,7 +200,7 @@ export default function SessionsLog(props) {
                                     })}>
                                         {row.cells.map((cell) => (
                                             <td {...cell.getCellProps({
-                                                style: setColor(cell.column.Header, cell.value)
+                                                style: cellStyle(cell.column.isSorted, cell.column.id, cell.value)
                                             })}>
                                                 {cell.render("Cell")}
                                             </td>

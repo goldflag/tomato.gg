@@ -15,6 +15,7 @@ import styled, { css } from "styled-components";
 import { ThemeContext } from "../context";
 
 const PaginationContainer = styled.div`
+    font-family: Roboto Mono;
     padding: 1rem;
     font-size: 0.8rem;
     background-color: ${({ theme }) =>
@@ -24,7 +25,6 @@ const PaginationContainer = styled.div`
 `;
 
 const PaginationButton = styled.button`
-    font-family: "Segoe UI";
     font-weight: 500;
     height: 2rem;
     width: 2rem;

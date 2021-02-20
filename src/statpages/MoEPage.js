@@ -9,6 +9,7 @@ import nationConversion from "../data/nationConversion";
 import classConversion from "../data/classConversion.json";
 import serverConv from "../data/serverConv";
 import { FullPageTableWrapper, Info } from "../components";
+import Loader from "../components/loader";
 
 const tierConv = {
     1: "I",
@@ -63,7 +64,7 @@ export default function MoEPage(props) {
         getData();
     }, [server]);
 
-    let table = <></>;
+    let table = <Loader color={'rgb(40, 40, 40)'} bottom={20} top={20}/>;
 
     if (data) {
         let rowData = [];

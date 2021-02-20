@@ -13,6 +13,7 @@ export const FilterButton = styled(Button)`
     text-decoration: none;
     display: flex;
     font-size: 14px;
+    font-family: Roboto Mono !important;
 
     &:hover {
         background-color: rgb(230, 85, 125);

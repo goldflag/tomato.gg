@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { Icon } from "react-icons-kit";
+import { arrowDown } from "react-icons-kit/feather/arrowDown";
+import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import {
     useTable,
     usePagination,
@@ -25,11 +29,19 @@ import {
     StyledTable,
     TableContainer,
 } from "../../components/tableComponents";
+// import setColor from "../../functions/setColor";
+import styled from "styled-components";
 import cellStyle from "../../functions/cellStyle";
 
-function PeriodBreakdown(props) {
-    const { theme } = React.useContext(ThemeContext);
+const Styles = styled.div`
+    display: grid;
+    grid-template-columns: 90px 50%;
+    align-items: center;
+    color: ${({ val }) => val === true ? `#ffe455` : null};
+`;
 
+function RecentTanksAvgTable(props) {
+    const { theme } = React.useContext(ThemeContext);
     // Define a default UI for filtering
     function DefaultColumnFilter({
         column: { filterValue, preFilteredRows, setFilter },
@@ -115,13 +127,13 @@ function PeriodBreakdown(props) {
                 filterTypes,
                 initialState: {
                     pageIndex: 0,
-                    pageSize: 25,
+                    pageSize: 100,
                     hiddenColumns: ["prem"],
                     sortBy: [
                         {
                             id: "battles",
                             desc: true,
-                        }
+                        },
                     ],
                 },
             },
@@ -133,14 +145,21 @@ function PeriodBreakdown(props) {
         );
 
         // Render the UI for your table
+
+        const history = useHistory();
+        const handleRowClick = (row) => {
+            console.log(row.original.tank_id)
+            history.push(`/tank/${row.original.tank_id}`);
+        }  
+
         return (
             <>
                 <FiltersContainer>
-                    <GlobalFilter
+                    {/* <GlobalFilter
                         preGlobalFilteredRows={preGlobalFilteredRows}
                         globalFilter={state.globalFilter}
                         setGlobalFilter={setGlobalFilter}
-                    />
+                    /> */}
                     {headerGroups.map((headerGroup, i) => (
                         <ButtonFiltersContainer key={i}>
                             {headerGroup.headers.map(
@@ -152,7 +171,7 @@ function PeriodBreakdown(props) {
                         </ButtonFiltersContainer>
                     ))}
                 </FiltersContainer>
-                <StyledTable theme={theme} {...getTableProps()}>
+                <StyledTable theme={theme} pointer={true} {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <>
@@ -161,10 +180,8 @@ function PeriodBreakdown(props) {
                                         <th
                                             {...column.getHeaderProps(
                                                 column.getSortByToggleProps()
-                                            )}
-                                            {...column.getHeaderProps({
-                                                style: { cursor: "pointer", backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null }
-                                            })}
+                                            )}                                          
+                                            {...column.getHeaderProps({style: {backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null}})}
                                         >
                                             {column.render("Header")}
                                         </th>
@@ -176,9 +193,10 @@ function PeriodBreakdown(props) {
                     <tbody {...getTableBodyProps()}>
                         {page.map((row, i) => {
                             prepareRow(row);
+                            const rowProps = row.getRowProps();
                             return (
-                                <React.Fragment {...row.getRowProps()}>
-                                    <tr>
+                                <React.Fragment key={rowProps.key}>
+                                    <tr onClick={() => handleRowClick(row)}  {...rowProps}>
                                         {row.cells.map((cell) => {
                                             return (
                                                 <td {...cell.getCellProps({
@@ -218,16 +236,6 @@ function PeriodBreakdown(props) {
     // Runs once when component mounts
     useEffect(() => {
         let tankStats = props.data;
-
-        for (let i = 0; i < tankStats.length; ++i) {
-            tankStats[i]['img'] = (
-                <img
-                    src={require(`../../assets/tankIcons/${tankStats[i].id}.png`)}
-                    alt={tankStats[i].id}
-                />
-            )
-        }
-
         setData(tankStats);
     }, [props.data]);
 
@@ -246,12 +254,20 @@ function PeriodBreakdown(props) {
         };
         return [
             {
-                Header: "",
-                accessor: "img",
-                disableFilters: true,
-            },
-            {
-                Header: "Name",
+                Cell: ( data ) => {
+                    const value = data.row.original;
+                    return (
+                        <Styles val={value.is_premium}>
+                            <img
+                                src={value.image}
+                                style={{ maxWidth: "100px" }}
+                                alt={"test"}
+                            />
+                            {value.short_name}
+                        </Styles>
+                    );
+                },
+                Header: "Tank",
                 accessor: "name",
                 disableFilters: true,
             },
@@ -259,6 +275,7 @@ function PeriodBreakdown(props) {
                 Cell: ({ value }) => {
                     return (
                         <img
+                            // src={require(`../../assets/flagIcons/${nationConv[value]}.png`)}
                             src={require(`../../assets/flagIcons/${value}.png`)}
                             style={{ maxWidth: "40px" }}
                             alt={value}
@@ -274,6 +291,8 @@ function PeriodBreakdown(props) {
                 Cell: ({ value }) => {
                     return (
                         <div style={{ margin: "8px" }}>{tierConv[value]}</div>
+                        //<div style={{ margin: "8px" }}>{value}</div>
+
                     );
                 },
                 Header: "Tier",
@@ -285,6 +304,7 @@ function PeriodBreakdown(props) {
                 Cell: ({ value }) => {
                     return (
                         <img
+                            // src={require(`../../assets/classIcons/${classConv[value]}.png`)}
                             src={require(`../../assets/classIcons/${value}.png`)}
                             style={{ maxWidth: "20px" }}
                             alt={value}
@@ -319,10 +339,10 @@ function PeriodBreakdown(props) {
                 accessor: "dpg",
                 disableFilters: true,
             },
-            { Header: "KPG", accessor: "kpg", disableFilters: true },
+            { Header: "KPG", accessor: "frags", disableFilters: true },
             {
                 Header: "DR",
-                accessor: "dmgRatio",
+                accessor: "dmg_ratio",
                 disableFilters: true,
             },
             {
@@ -331,8 +351,11 @@ function PeriodBreakdown(props) {
                 disableFilters: true,
             },
             {
+                Cell: ({ value }) => {
+                    return <div>{value + "%"}</div>;
+                },
                 Header: "Survival%",
-                accessor: "survived",
+                accessor: "survival",
                 disableFilters: true,
             },
             {
@@ -342,15 +365,12 @@ function PeriodBreakdown(props) {
             },
             {
                 Header: "",
-                accessor: "isPrem",
+                accessor: "is_premium",
                 Filter: PremFilter,
                 filter: arrayFilterFn,
             },
         ];
     }, []);
-
-    // We need to keep the table from resetting the pageIndex when we
-    // Update data. So we can keep track of that flag with a ref.
 
     return (
         <TableContainer theme={theme}>
@@ -359,4 +379,4 @@ function PeriodBreakdown(props) {
     );
 }
 
-export default PeriodBreakdown;
+export default RecentTanksAvgTable;

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
-import styled from "styled-components";
 import { ThemeContext, ServerContext } from "../context";
 import MasteryTable from "./masteryPageComponents/masteryTable";
 import tankNames from "../data/tankNames.json";
 import nationConversion from "../data/nationConversion";
 import classConversion from "../data/classConversion.json";
 import { FullPageTableWrapper, Info } from "../components";
+import Loader from "../components/loader";
+import { rgbToHex } from "@material-ui/core";
 
 const tierConv = {
     1: "I",
@@ -44,32 +45,7 @@ export default function MasteryPage(props) {
         getData();
     }, [server]);
 
-    const Styles = styled.div`
-        *:focus {
-            outline: none;
-        }
-
-        .selectButton {
-            font-family: "Segoe UI";
-            font-weight: 600;
-            color: rgb(240, 240, 240);
-            background-color: rgb(71, 99, 214);
-            padding: 1rem 0rem 0.8rem 0rem;
-            width: calc(100% / 6);
-            border-width: 0px;
-            border-bottom: 5px solid rgb(71, 99, 214);
-        }
-
-        .selectButton:hover {
-            border-bottom: 5px solid red;
-        }
-
-        .selectButton:focus {
-            border-bottom: 5px solid red;
-        }
-    `;
-
-    let table = <></>;
+    let table = <Loader color={'rgb(40, 40, 40)'} bottom={20} top={20}/>;
 
     if (data) {
         let rowData = [];
@@ -99,32 +75,30 @@ export default function MasteryPage(props) {
     const serverConv = { com: "NA", eu: "EU", asia: "ASIA", ru: "RU" };
 
     return (
-        <Styles>
-            <FullPageTableWrapper>
-                <Info theme={theme}>
-                    <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                        {serverConv[server]} Mastery Badge Requirements
-                    </span>
-                    <br />
-                    <br />
-                    <span
-                        style={{
-                            fontSize: "0.9rem",
-                            lineHeight: "1rem",
-                            color: "rgb(130,130,130)",
-                        }}
-                    >
-                        Data from the creators of the{" "}
-                        <a target="blank" href="https://mastery.poliroid.ru/">
-                            Marks of Excellence mod
-                        </a>{" "}
-                        &#47;&#47;&#47; Expand rows to see 30 days of mastery
-                        history
-                    </span>{" "}
-                    <br />
-                </Info>
-                {table}
-            </FullPageTableWrapper>
-        </Styles>
+        <FullPageTableWrapper>
+            <Info theme={theme}>
+                <span style={{ fontSize: "2rem", fontWeight: "500" }}>
+                    {serverConv[server]} Mastery Badge Requirements
+                </span>
+                <br />
+                <br />
+                <span
+                    style={{
+                        fontSize: "0.9rem",
+                        lineHeight: "1rem",
+                        color: "rgb(130,130,130)",
+                    }}
+                >
+                    Data from the creators of the{" "}
+                    <a target="blank" href="https://mastery.poliroid.ru/">
+                        Marks of Excellence mod
+                    </a>{" "}
+                    &#47;&#47;&#47; Expand rows to see 30 days of mastery
+                    history
+                </span>{" "}
+                <br />
+            </Info>
+            {table}
+        </FullPageTableWrapper>
     );
 }

@@ -15,10 +15,16 @@ import {
 
 const LINKS = [
     { url: "/", title: "Home", Icon: Apps },
-    { url: "/tank-stats", title: "Tank Stats", Icon: BarChart },
+    { 
+        url: "/tank-stats", 
+        title: "Tank Stats", 
+        newIcon: true,
+        Icon: BarChart 
+    },
     {
         url: "/leaderboards",
         title: "Leaderboards",
+        newIcon: true,
         Icon: FormatListNumbered,
     },
     // {url: "/tank-list", title: "Tank List", Icon: BarChart},
@@ -162,6 +168,14 @@ const Sidebar = withRouter((props) => {
         .kofi:hover {
             background-color: rgb(245, 60, 110);
         }
+
+        .new {
+            font-size: 0.8rem;
+            padding: 3px;
+            color: rgb(255, 255, 255);
+            border-radius: 5px;
+            background-color: rgb(0, 184, 104);
+        }
     `;
 
     return (
@@ -185,10 +199,11 @@ const Sidebar = withRouter((props) => {
                 </Link>
                 <div className="line" />
                 <div className="menu">
-                    {LINKS.map(({ url, title, Icon }) => (
+                    {LINKS.map(({ url, title, Icon, newIcon }) => (
                         <Link to={url} className="menu-link" key={url}>
                             <Icon className="menu-link-icon" />
-                            &nbsp;&nbsp;{title}
+                            &nbsp;&nbsp;{title}&nbsp;&nbsp;
+                            {newIcon === true ? <span className="new">NEW! </span> : null}
                         </Link>
                     ))}
                 </div>

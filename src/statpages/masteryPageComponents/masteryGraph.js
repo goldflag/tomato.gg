@@ -8,6 +8,7 @@ export default function MasteryGraph(props) {
         <div style={{ height: "calc(310px)" }}>
             <ResponsiveLine
                 theme={{
+                    fontFamily: "Roboto Mono",
                     textColor:
                         theme === "dark"
                             ? "rgb(210, 210, 210)"

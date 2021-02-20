@@ -30,6 +30,8 @@ import {
     SubRow,
     TableContainer,
 } from "../../components/tableComponents";
+import Loader from "../../components/loader";
+import cellStyle from "../../functions/cellStyle";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -163,7 +165,7 @@ function MoETracker(props) {
                     </div>
                 );
             } else {
-                return <div style={{ padding: "0.3rem" }}>Loading...</div>;
+                return <Loader color={'rgb(40, 40, 40)'} bottom={20} top={20}/>;
             }
         }
 
@@ -224,6 +226,9 @@ function MoETracker(props) {
                                         {...column.getHeaderProps(
                                             column.getSortByToggleProps()
                                         )}
+                                        {...column.getHeaderProps({
+                                            style: { cursor: "pointer", backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null }
+                                        })}
                                     >
                                         {column.render("Header")}
                                         <span>

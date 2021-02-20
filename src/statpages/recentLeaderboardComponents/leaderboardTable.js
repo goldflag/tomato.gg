@@ -1,7 +1,4 @@
 import React from "react";
-import { Icon } from "react-icons-kit";
-import { arrowDown } from "react-icons-kit/feather/arrowDown";
-import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import {
     useTable,
     usePagination,
@@ -14,24 +11,31 @@ import {
 import { matchSorter } from "match-sorter";
 import { ThemeContext } from "../../context";
 import {
-    ClassFilter,
-    GlobalFilter,
-    NationFilter,
-    Pagination,
-    PremFilter,
-    TierFilter,
-    arrayFilterFn,
-} from "../../components";
-import {
-    ButtonFiltersContainer,
-    FiltersContainer,
     StyledTable,
     TableContainer,
 } from "../../components/tableComponents";
-import cellStyle from "../../functions/cellStyle";
 
-function WN8Table(props) {
+import WN8c from "../../functions/WN8color";
+import WRc from "../../functions/WRcolor";
+
+
+export default function LeaderboardTable(props) {
     const { theme } = React.useContext(ThemeContext);
+
+    function setColor(column, value) {
+        if (column === "wn8") return ({backgroundColor: WN8c(value), color: "white", padding: "10px"})
+        else if (column === "winrate") return ({backgroundColor: WRc(value.slice(0, -1)), color: "white", padding: "10px"})
+        else if (column === props.type) return ({backdropFilter: "brightness(1.3)"})
+        else return null;  
+    }
+
+    function headerStyle(header) {
+        if (header.id === props.type) {
+            return {
+                backgroundColor: "rgb(107, 3, 252)"
+            }
+        }
+    }
 
     let data = props.data;
 
@@ -97,37 +101,16 @@ function WN8Table(props) {
             getTableBodyProps,
             headerGroups,
             prepareRow,
-            state,
-            page, // Instead of using 'rows', we'll use page,
-            // which has only the rows for the active page
-            // The rest of these things are super handy, too ;)
-            canPreviousPage,
-            canNextPage,
-            pageOptions,
-            pageCount,
-            gotoPage,
-            nextPage,
-            previousPage,
-            setPageSize,
-            preGlobalFilteredRows,
-            setGlobalFilter,
-            state: { pageIndex, pageSize },
+            rows,
         } = useTable(
             {
                 columns,
                 data,
                 defaultColumn, // Be sure to pass the defaultColumn option
                 filterTypes,
-                hiddenColumns: ["prem"],
                 initialState: {
                     pageIndex: 0,
-                    pageSize: 100,
-                    sortBy: [
-                        {
-                            id: "expDamage",
-                            desc: true,
-                        },
-                    ],
+                    pageSize: 101
                 },
             },
             useFilters, // useFilters!
@@ -140,39 +123,18 @@ function WN8Table(props) {
         // Render the UI for your table
         return (
             <>
-                <FiltersContainer>
-                    <GlobalFilter
-                        preGlobalFilteredRows={preGlobalFilteredRows}
-                        globalFilter={state.globalFilter}
-                        setGlobalFilter={setGlobalFilter}
-                    />
-                    {headerGroups.map((headerGroup, i) => (
-                        <ButtonFiltersContainer key={i}>
-                            {headerGroup.headers.map(
-                                ({ disableFilters, render }, i) =>
-                                    !disableFilters && (
-                                        <span key={i}>{render("Filter")}</span>
-                                    )
-                            )}
-                        </ButtonFiltersContainer>
-                    ))}
-                </FiltersContainer>
                 <StyledTable theme={theme} {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <>
                                 <tr {...headerGroup.getHeaderGroupProps()}>
                                     {headerGroup.headers.map((column) => (
-                                        <th
-                                            {...column.getHeaderProps(
-                                                column.getSortByToggleProps()
-                                            )}
-                                            {...column.getHeaderProps({
-                                                style: { cursor: "pointer", backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null }
-                                            })}
+                                        <th {...column.getHeaderProps({
+                                            style: headerStyle(column)
+                                        })}
                                         >
                                             {column.render("Header")}
-                                            <span>
+                                            {/* <span>
                                                 {column.isSorted ? (
                                                     column.isSortedDesc ? (
                                                         <Icon
@@ -188,7 +150,7 @@ function WN8Table(props) {
                                                 ) : (
                                                     ""
                                                 )}
-                                            </span>
+                                            </span> */}
                                         </th>
                                     ))}
                                 </tr>
@@ -196,15 +158,17 @@ function WN8Table(props) {
                         ))}
                     </thead>
                     <tbody {...getTableBodyProps()}>
-                        {page.map((row, i) => {
+                        {rows.map((row, i) => {
                             prepareRow(row);
+                            const rowProps = row.getRowProps();
                             return (
-                                <React.Fragment {...row.getRowProps()}>
-                                    <tr>
+                                // <React.Fragment {...row.getRowProps()}>
+                                <React.Fragment key={rowProps.key}>
+                                    <tr {...rowProps}>
                                         {row.cells.map((cell) => {
                                             return (
                                                 <td {...cell.getCellProps({
-                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value)
+                                                    style: setColor(cell.column.id, cell.value)
                                                 })}>
                                                     {cell.render("Cell")}
                                                 </td>
@@ -216,113 +180,80 @@ function WN8Table(props) {
                         })}
                     </tbody>
                 </StyledTable>
-                <Pagination
-                    pageSizes={[100, 250, 500]}
-                    {...{
-                        canPreviousPage,
-                        canNextPage,
-                        pageOptions,
-                        pageCount,
-                        gotoPage,
-                        nextPage,
-                        previousPage,
-                        setPageSize,
-                        pageIndex,
-                        pageSize,
-                    }}
-                />
             </>
         );
     }
 
-    // Define a custom filter filter function!
-    function filterGreaterThan(rows, id, filterValue) {
-        return rows.filter((row) => {
-            const rowValue = row.values[id];
-            return rowValue >= filterValue;
-        });
-    }
-
-    // This is an autoRemove method on the filter function that
-    // when given the new filter value and returns true, the filter
-    // will be automatically removed. Normally this is just an undefined
-    // check, but here, we want to remove the filter if it's not a number
-    filterGreaterThan.autoRemove = (val) => typeof val !== "number";
     const columns = React.useMemo(
         () => [
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img
-                            src={require(`../../assets/tankIcons/${value}.png`)}
-                            alt={value}
-                        />
-                    );
-                },
-                Header: "",
-                accessor: "id",
+                Header: "Rank",
+                accessor: "rank",
                 disableFilters: true,
             },
             {
-                Header: "Name",
-                accessor: "name",
+                Header: "Username",
+                accessor: "username",
                 disableFilters: true,
             },
             {
-                Header: "Nation",
-                accessor: "nation",
-                Filter: NationFilter,
-                filter: arrayFilterFn,
-            },
-            {
-                Header: "Tier",
-                accessor: "tier",
-                Filter: TierFilter,
-                filter: arrayFilterFn,
-            },
-            {
-                Header: "Class",
-                accessor: "class",
-                Filter: ClassFilter,
-                filter: arrayFilterFn,
-            },
-            {
-                Header: "expDef",
-                accessor: "expDef",
+                Header: "Battles",
+                accessor: "battles",
                 disableFilters: true,
             },
             {
-                Header: "expFrag",
-                accessor: "expFrag",
+                Header: "Avg Tier",
+                accessor: "avgtier",
                 disableFilters: true,
             },
             {
-                Header: "expSpot",
-                accessor: "expSpot",
+                Header: "WN8",
+                accessor: "wn8",
                 disableFilters: true,
             },
             {
-                Header: "expDamage",
-                accessor: "expDamage",
+                Header: "Winrate",
+                accessor: "winrate",
                 disableFilters: true,
             },
             {
-                Header: "expWinRate",
-                accessor: "expWinRate",
+                Header: "DPG",
+                accessor: "dpg",
                 disableFilters: true,
             },
             {
-                Header: "",
-                accessor: "isPrem",
-                Filter: PremFilter,
-                filter: arrayFilterFn,
+                Header: "Frags",
+                accessor: "frags",
+                disableFilters: true,
+            },
+            {
+                Header: "DMG Ratio",
+                accessor: "dmg_ratio",
+                disableFilters: true,
+            },
+            {
+                Header: "K/D",
+                accessor: "kd",
+                disableFilters: true,
+            },
+            {
+                Header: "Spots",
+                accessor: "spots",
+                disableFilters: true,
+            },
+            {
+                Header: "Survival",
+                accessor: "survival",
+                disableFilters: true,
+            },
+            {
+                Header: "Decap",
+                accessor: "decap",
+                disableFilters: true,
             },
         ],
         []
     );
-
-    // We need to keep the table from resetting the pageIndex when we
-    // Update data. So we can keep track of that flag with a ref.
 
     return (
         <TableContainer theme={theme}>
@@ -330,5 +261,3 @@ function WN8Table(props) {
         </TableContainer>
     );
 }
-
-export default WN8Table;

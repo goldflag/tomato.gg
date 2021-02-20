@@ -2,6 +2,8 @@ import styled, { css } from "styled-components";
 
 export const TableContainer = styled.div`
     overflow-x: auto;
+    overflow-y: hidden;
+
     background-color: ${({ theme }) =>
         theme === "dark" ? css`rgb(40, 40, 40)` : css`rgb(250, 250, 250)`};
 `;
@@ -10,6 +12,7 @@ export const FiltersContainer = styled.div`
 `;
 
 export const ButtonFiltersContainer = styled.div`
+    font-family: Roboto Mono;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -22,7 +25,8 @@ export const StyledTable = styled.table`
     border-spacing: 0;
     width: 100%;
     font-size: 0.8rem;
-
+    font-family: Roboto Mono;
+    cursor: ${({ pointer }) => pointer === true ? 'pointer' : null};
     tr {
         overflow-x: scroll;
         :last-child {

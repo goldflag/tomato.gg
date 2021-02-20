@@ -34,7 +34,7 @@ import {
 import styled from "styled-components";
 import Tooltip from 'react-tooltip-lite';
 import awardsData from "../../data/awardsinfo.json";
-import setColor from "../../functions/setColor";
+import cellStyle from "../../functions/cellStyle";
 
 const tierConv = {
     1: "I",
@@ -237,13 +237,9 @@ function OverallTable(props) {
                     hiddenColumns: ["prem"],
                     sortBy: [
                         {
-                            id: "tier",
+                            id: "battles",
                             desc: true,
-                        },
-                        {
-                            id: "dpg",
-                            desc: true,
-                        },
+                        }
                     ],
                 },
             },
@@ -386,25 +382,11 @@ function OverallTable(props) {
                                         {...column.getHeaderProps(
                                             column.getSortByToggleProps()
                                         )}
+                                        {...column.getHeaderProps({
+                                            style: { cursor: "pointer", backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null }
+                                        })}
                                     >
                                         {column.render("Header")}
-                                        <span>
-                                            {column.isSorted ? (
-                                                column.isSortedDesc ? (
-                                                    <Icon
-                                                        size={16}
-                                                        icon={arrowDown}
-                                                    />
-                                                ) : (
-                                                    <Icon
-                                                        size={16}
-                                                        icon={arrowUp}
-                                                    />
-                                                )
-                                            ) : (
-                                                ""
-                                            )}
-                                        </span>
                                     </th>
                                 ))}
                             </tr>
@@ -418,7 +400,7 @@ function OverallTable(props) {
                                     <tr {...row.getToggleRowExpandedProps({})}>
                                         {row.cells.map((cell) => (
                                             <td {...cell.getCellProps({
-                                                style: setColor(cell.column.Header, cell.value),
+                                                style: cellStyle(cell.column.isSorted, cell.column.id, cell.value)
                                             })}>
                                                 {cell.render("Cell")}
                                             </td>

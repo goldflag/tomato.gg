@@ -176,6 +176,7 @@ export default withRouter(function Topbar(props) {
                                             // backgroundColor: "rgb(219, 55, 96)",
                                             margin: "10px 5px 5px 5px"
                                         }}
+                                        key={name}
                                     />
                                 ))}
                                 <IconButton

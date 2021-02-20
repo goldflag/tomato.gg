@@ -9,6 +9,13 @@ export default function WN8Heatmap(props) {
     return (
         <div style={{ height: "calc(310px)" }}>
             <ResponsiveHeatMap
+                theme={{
+                    fontFamily: "Roboto Mono",
+                    textColor:
+                    theme === "dark"
+                        ? "rgb(210, 210, 210)"
+                        : "rgb(100,100,100)"
+                }}
                 data={props.data}
                 keys={[
                     "I",
@@ -25,12 +32,6 @@ export default function WN8Heatmap(props) {
                 indexBy="Class"
                 margin={{ top: 30, right: 30, bottom: 20, left: 60 }}
                 forceSquare={true}
-                theme={{
-                    textColor:
-                        theme === "dark"
-                            ? "rgb(210, 210, 210)"
-                            : "rgb(100,100,100)",
-                }}
                 cellShape={({
                     value,
                     x,

@@ -6,6 +6,7 @@ import tankNames from "../data/tankNames.json";
 import nationConversion from "../data/nationConversion";
 import classConversion from "../data/classConversion.json";
 import { FullPageTableWrapper, Info } from "../components";
+import Loader from "../components/loader";
 
 const tierConv = {
     1: "I",
@@ -41,7 +42,7 @@ export default function Leaderboards(props) {
 
     const { theme } = React.useContext(ThemeContext);
 
-    let table = <></>;
+    let table = <Loader color={'rgb(40, 40, 40)'} bottom={20} top={20}/>;
 
     if (data) {
         const ids = Object.keys(data);

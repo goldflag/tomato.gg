@@ -8,6 +8,7 @@ export default function NationDistribution(props) {
         <div style={{ height: "calc(300px)" }}>
             <ResponsivePie
                 theme={{
+                    fontFamily: "Roboto Mono",
                     textColor:
                         theme === "dark"
                             ? "rgb(255, 255, 255)"
@@ -50,11 +51,12 @@ export default function NationDistribution(props) {
                     theme === "dark" ? "rgb(210, 210, 210)" : "rgb(100,100,100)"
                 }
                 radialLabelsLinkOffset={0}
-                radialLabelsLinkDiagonalLength={5}
-                radialLabelsLinkHorizontalLength={5}
+                radialLabelsLinkDiagonalLength={10}
+                radialLabelsLinkHorizontalLength={10}
                 radialLabelsLinkStrokeWidth={1}
                 radialLabelsLinkColor={{ from: "color" }}
-                slicesLabelsSkipAngle={10}
+                radialLabelsSkipAngle={5}
+                sliceLabelsSkipAngle={10}
                 slicesLabelsTextColor="rgb(230, 230, 230)"
                 animate={true}
                 motionStiffness={90}
