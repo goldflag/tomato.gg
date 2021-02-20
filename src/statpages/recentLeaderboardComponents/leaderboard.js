@@ -85,7 +85,6 @@ const parseURLParams = (search_string, opts) => {
             retval[key] = parseInt(retval[key]);
         }
     });
-    console.log(retval);
     return retval;
 };
 
