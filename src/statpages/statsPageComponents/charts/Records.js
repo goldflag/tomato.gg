@@ -6,11 +6,6 @@ export default function Records(props) {
     const { theme } = React.useContext(ThemeContext);
 
     const demo = {
-        borderWidth: "1px 0px 1px 0px",
-        borderStyle: "solid",
-        borderColor:
-            theme === "dark" ? "rgb(100, 100, 100)" : "rgb(220,220,220)",
-        borderCollapse: "collapse",
         padding: 5,
         fontSize: "1rem",
         width: "100%",
@@ -19,22 +14,14 @@ export default function Records(props) {
     };
 
     const td = {
-        borderWidth: "1px 0px 1px 0px",
-        borderStyle: "solid",
-        borderColor:
-            theme === "dark" ? "rgb(100, 100, 100)" : "rgb(220,220,220)",
         maxheight: "50px",
-        padding: "11.4px",
+        padding: "10px",
     };
 
     const tdc = {
-        borderWidth: "1px 0px 1px 0px",
-        borderStyle: "solid",
-        borderColor:
-            theme === "dark" ? "rgb(100, 100, 100)" : "rgb(220,220,220)",
         maxheight: "50px",
-        padding: "11.4px",
-        background: theme === "dark" ? "rgb(50, 50, 50)" : "rgb(242, 243, 247)",
+        padding: "10px",
+        background: theme === "dark" ? "rgba(50, 50, 80, 0.3)" : "rgb(242, 243, 247)",
     };
 
     let res = <></>;

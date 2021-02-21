@@ -70,9 +70,10 @@ export default function TreemapOverall(props) {
                     tooltip: {
                         fontFamily: "Roboto Mono",
                         container: {
+                            backdropFilter: 'blur( 7px )',
                             background:
                                 theme === "dark"
-                                    ? "rgb(40, 40, 40)"
+                                    ? "rgb(40, 40, 70, 0.8)"
                                     : "rgb(255, 255, 255)",
                             color:
                                 theme === "dark"

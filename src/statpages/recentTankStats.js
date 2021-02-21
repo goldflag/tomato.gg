@@ -17,7 +17,6 @@ const backend = process.env.REACT_APP_BACKEND;
 const Filters = styled.div`
     padding: 10px;
     margin-bottom: -30px;
-    background-color: rgb(40, 40, 40);
 `;
 
 export default function RecentLeaderboards() {
@@ -89,7 +88,7 @@ export default function RecentLeaderboards() {
             {typeof data !== "string" ? (
                 <RecentTanksAvgTable data={data} />
             ) : data === "loading" ? (
-                <Loader color={"rgb(40, 40, 40)"} bottom={20} top={20} />
+                <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />
             ) : (
                 <h2>Sorry, recent tank stats could not be loaded.</h2>
             )}

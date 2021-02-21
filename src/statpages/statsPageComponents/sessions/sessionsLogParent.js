@@ -20,7 +20,7 @@ export default function ExpectedDist(props) {
 
     return (
         <div className={classes.root}>
-            <Paper square elevation={2}>
+            <div>
                 <CustomTabs
                     value={value}
                     onChange={handleChange}
@@ -31,7 +31,7 @@ export default function ExpectedDist(props) {
                 <TabPanel value={value} index={0}>
                     <SessionsLog data={props.data} />
                 </TabPanel>
-            </Paper>
+            </div>
         </div>
     );
 }

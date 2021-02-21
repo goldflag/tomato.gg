@@ -3,9 +3,6 @@ import styled, { css } from "styled-components";
 export const TableContainer = styled.div`
     overflow-x: auto;
     overflow-y: hidden;
-
-    background-color: ${({ theme }) =>
-        theme === "dark" ? css`rgb(40, 40, 40)` : css`rgb(250, 250, 250)`};
 `;
 export const FiltersContainer = styled.div`
     padding: 10px 10px 0 10px;
@@ -27,6 +24,7 @@ export const StyledTable = styled.table`
     font-size: 0.8rem;
     font-family: Roboto Mono;
     cursor: ${({ pointer }) => (pointer === true ? "pointer" : null)};
+    backdrop-filter: blur( 7px );
     tr {
         overflow-x: scroll;
         :last-child {
@@ -43,17 +41,17 @@ export const StyledTable = styled.table`
                 ? css`rgb(220, 220, 220)`
                 : css`rgb(100, 100, 100)`};
         background-color: ${({ theme }) =>
-            theme === "dark" ? css`rgb(40, 40, 40)` : css`rgb(250, 250, 250)`};
+            theme === "dark" ? css`rgba(40, 40, 70, 0.5)` : css`rgb(250, 250, 250)`};
         :nth-child(even) {
             background-color: ${({ theme }) =>
                 theme === "dark"
-                    ? css`rgb(50, 50, 50)`
+                    ? css`rgba(50, 50, 80, 0.5)`
                     : css`rgb(240, 240, 240)`};
         }
         :hover {
             background-color: ${({ theme }) =>
                 theme === "dark"
-                    ? css`rgb(30, 30, 30)`
+                    ? css`rgba(30, 30, 60, 0.5)`
                     : css`rgb(220, 220, 230)`};
         }
     }
@@ -61,11 +59,11 @@ export const StyledTable = styled.table`
         text-align: left;
         padding: 10px;
         background-color: ${({ theme }) =>
-            theme === "dark" ? css`rgb(50, 50, 50)` : css`rgb(255, 255, 255)`};
+            theme === "dark" ? css`rgba(50, 50, 80, 0.5)` : css`rgb(255, 255, 255)`};
         border-bottom: solid 1px
             ${({ theme }) =>
                 theme === "dark"
-                    ? css`rgb(100, 100, 100)`
+                    ? css`rgba(100, 100, 100, 0.5)`
                     : css`rgb(200, 200, 200)`};
         font-weight: 500;
     }
@@ -85,7 +83,7 @@ export const StyledTable = styled.table`
 
 export const SubRow = styled.tr`
     background-color: ${({ theme }) =>
-        theme === "dark" ? css`rgb(40, 40, 40)` : css`rgb(250, 250, 250)`};
+        theme === "dark" ? css`rgba(40, 40, 70, 0.5)` : css`rgb(250, 250, 250)`};
     padding: 10px;
 `;
 

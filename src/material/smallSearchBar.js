@@ -32,7 +32,7 @@ export default function SmallSearchBar(props) {
             width: "250px",
             height: "30px",
             borderRadius: 15,
-            backgroundColor: theme === "dark" ? "rgb(40, 40, 40)" : "white",
+            backgroundColor: theme === "dark" ? "rgba(40, 40, 60, 0.8)" : "white",
         },
         input: {
             marginLeft: t.spacing(1),

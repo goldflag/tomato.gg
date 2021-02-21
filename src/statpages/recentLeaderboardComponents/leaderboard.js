@@ -44,7 +44,7 @@ const PaginationContainer = styled.div`
     padding: 1rem;
     font-size: 0.8rem;
     background-color: ${({ theme }) =>
-        theme === "dark" ? css`rgb(40, 40, 40)` : css`rgb(250, 250, 250)`};
+        theme === "dark" ? css`rgba(40, 40, 50, 0.5)` : css`rgb(250, 250, 250)`};
     color: ${({ theme }) =>
         theme === "dark" ? css`rgb(220, 220, 220)` : css`rgb(80, 80, 80)`};
 `;
@@ -60,7 +60,7 @@ const PaginationButton = styled.button`
     border-width: 0px;
 
     &:hover {
-        background-color: rgb(100, 129, 234);
+        background-color: rgba(100, 129, 234, 0.5);
         color: white;
         border-radius: 50%;
     }
@@ -74,7 +74,7 @@ const PaginationButton = styled.button`
 const Filters = styled.div`
     padding: 10px;
     margin-bottom: -10px;
-    background-color: rgb(40, 40, 40);
+    background-color: rgba(40, 40, 70, 0.5);
 `;
 
 export default function Leaderboard() {
@@ -266,7 +266,7 @@ export default function Leaderboard() {
                     {pagination()}
                 </>
             ) : data === "loading" ? (
-                <Loader color={"rgb(40, 40, 40)"} bottom={50} top={20} />
+                <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />
             ) : (
                 <h1>Sorry, there was an error loading that leaderboard.</h1>
             )}

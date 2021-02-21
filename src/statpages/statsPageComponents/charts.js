@@ -27,7 +27,8 @@ export default function Charts(props) {
             textAlign: "left",
             fontFamily: "Roboto Mono",
             fontSize: "1.2em",
-            backgroundColor: theme === "dark" ? "rgb(40, 40, 40)" : "white",
+            backgroundColor: theme === "dark" ? "rgba(40, 40, 70, 0.4)" : "rgba(250, 250, 250, 0.4)",
+            backdropFilter: "blur( 7px )",
             color: "rgb(30, 30, 30)",
         },
         colorBox: {

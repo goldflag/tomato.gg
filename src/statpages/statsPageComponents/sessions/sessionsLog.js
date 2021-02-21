@@ -11,9 +11,9 @@ const Styles = styled.div`
 
     .tableContainer {
         overflow-x: auto;
-        background-color: ${({ theme }) =>
-            theme === "dark" ? "rgb(40, 40, 40)" : "rgb(250, 250, 250)"};
+        background-color: rgba(0, 0, 0, 0);
         margin-bottom: 1rem;
+        backdrop-filter: blur( 7px );
     }
 
     table {
@@ -24,17 +24,17 @@ const Styles = styled.div`
             color: ${({ theme }) =>
                 theme === "dark" ? "rgb(220, 220, 220)" : "rgb(100, 100, 100)"};
             background-color: ${({ theme }) =>
-                theme === "dark" ? "rgb(40, 40, 40)" : "rgb(250, 250, 250)"};
+                theme === "dark" ? "rgba(40, 40, 70, 0.5)" : "rgb(250, 250, 250)"};
             :nth-child(even) {
                 background-color: ${({ theme }) =>
                     theme === "dark"
-                        ? "rgb(50, 50, 50)"
+                        ? "rgba(50, 50, 80, 0.5)"
                         : "rgb(240, 240, 240)"};
             }
             :hover {
                 background-color: ${({ theme }) =>
                     theme === "dark"
-                        ? "rgb(30, 30, 30)"
+                        ? "rgba(30, 30, 60, 0.5)"
                         : "rgb(220, 220, 230)"};
             }
         }
@@ -42,7 +42,7 @@ const Styles = styled.div`
             text-align: left;
             padding: 10px;
             background-color: ${({ theme }) =>
-                theme === "dark" ? "rgb(50, 50, 50)" : "rgb(255, 255, 255)"};
+                theme === "dark" ? "rgba(50, 50, 80, 0.5)" : "rgb(255, 255, 255)"};
             font-weight: 500;
         }
         td {

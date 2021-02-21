@@ -1,5 +1,4 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
 import MUIDataTable from "mui-datatables";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import WN8color from "../../functions/WN8color";
@@ -10,13 +9,8 @@ export default function OverallStatsTable(props) {
     const getMuiTheme = () =>
         createMuiTheme({
             overrides: {
+
                 MUIDataTable: {
-                    root: {
-                        backgroundColor: "blue",
-                    },
-                    paper: {
-                        boxShadow: "none",
-                    },
                     responsiveStacked: {
                         maxHeight: "none",
                         overflowX: "auto",
@@ -26,7 +20,7 @@ export default function OverallStatsTable(props) {
                     root: {
                         backgroundColor:
                             theme === "dark"
-                                ? "rgb(40, 40, 45)"
+                                ? "rgba(40, 40, 70, 0.5)"
                                 : "rgb(220, 220, 223)",
                         color:
                             theme === "dark"
@@ -42,7 +36,7 @@ export default function OverallStatsTable(props) {
                     },
                     root: {
                         backgroundColor:
-                            theme === "dark" ? "rgb(40, 40, 45)" : "white",
+                            theme === "dark" ? "rgba(40, 40, 70, 1)" : "white",
                     },
                 },
                 MUIDataTableSelectCell: {
@@ -55,7 +49,7 @@ export default function OverallStatsTable(props) {
                         "& .MuiToolbar-root": {
                             backgroundColor:
                                 theme === "dark"
-                                    ? "rgb(40, 40, 45)"
+                                    ? "rgba(40, 40, 70, 0.5)"
                                     : "rgb(220, 220, 223)",
                             color:
                                 theme === "dark"
@@ -96,7 +90,7 @@ export default function OverallStatsTable(props) {
                             fontFamily: "Roboto Mono",
                             backgroundColor:
                                 theme === "dark"
-                                    ? "rgb(45, 45, 50)"
+                                    ? "rgba(45, 45, 50, 0.5)"
                                     : "rgb(246, 246, 252)",
                             color: theme === "dark" ? "white" : "black",
                             borderRight:
@@ -232,14 +226,11 @@ export default function OverallStatsTable(props) {
 
     return (
         <MuiThemeProvider theme={getMuiTheme()}>
-            <Paper
-                square
-                elevation={2}
+            <div
                 style={{
                     margin: "1rem 0 0 0",
                     padding: "1rem 1rem 1rem 1rem",
-                    backgroundColor:
-                        theme === "dark" ? "rgb(60, 60, 65)" : "white",
+
                 }}
             >
                 <span
@@ -271,15 +262,15 @@ export default function OverallStatsTable(props) {
                     will have complete recent stats.
                 </span>
                 <br />
-            </Paper>
-            <Paper>
+            </div>
+            <div>
                 <MUIDataTable
                     title={""}
                     data={props.data}
                     columns={columns}
                     options={options}
                 />
-            </Paper>
+            </div>
         </MuiThemeProvider>
     );
 }

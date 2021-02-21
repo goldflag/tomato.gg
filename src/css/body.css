@@ -12,6 +12,12 @@ body {
 .dark-mode {
     background-color: rgb(50, 50, 54);
     color: rgb(234, 238, 248);
+    
+    background: url(../assets/Ocean.svg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 /* unvisited link */
@@ -34,6 +40,11 @@ body {
 
 .light-mode {
     background-color: rgb(234, 238, 248);
+    background: url(../assets/Ocean.svg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 /* unvisited link */

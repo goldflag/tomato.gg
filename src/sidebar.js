@@ -211,7 +211,7 @@ const Sidebar = withRouter((props) => {
 
                     <div
                         style={{
-                            backgroundColor: "rgba(40, 40, 60, 0.6)",
+                            backgroundColor: "rgba(40, 40, 60, 0.4)",
                             width: "205px",
                             height: "210px",
                             margin: "10px",
@@ -221,6 +221,7 @@ const Sidebar = withRouter((props) => {
                             fontSize: "0.8rem",
                             fontWeight: "400",
                             color: "rgb(161, 181, 214)",
+                            backdropFilter: 'blur( 7px )'
                         }}
                     >
                         <h2

@@ -150,7 +150,7 @@ function MoETable(props) {
                         style={{
                             backgroundColor:
                                 theme === "dark"
-                                    ? "rgb(40, 40, 40)"
+                                    ? "rgba(40, 40, 70, 0.5)"
                                     : "rgb(255, 255, 255)",
                             marginLeft: "-0.5rem",
                         }}

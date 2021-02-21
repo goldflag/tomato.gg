@@ -26,7 +26,7 @@ export default function Leaderboards(props) {
 
     const { theme } = React.useContext(ThemeContext);
 
-    let table = <Loader color={"rgb(40, 40, 40)"} bottom={20} top={20} />;
+    let table = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />;
 
     if (data) {
         table = <WN8Table data={data} />;

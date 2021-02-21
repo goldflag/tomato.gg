@@ -5,10 +5,6 @@ export default function MasteryTable(props) {
     const { theme } = React.useContext(ThemeContext);
 
     const demo = {
-        borderWidth: "1px 0px 1px 0px",
-        borderStyle: "solid",
-        borderColor: "rgb(220,220,220)",
-        borderCollapse: "collapse",
         padding: 5,
         fontSize: "1rem",
         width: "100%",
@@ -17,33 +13,21 @@ export default function MasteryTable(props) {
     };
 
     const tt = {
-        borderWidth: "1px 0px 1px 0px",
-        borderStyle: "solid",
-        borderColor:
-            theme === "dark" ? "rgb(100, 100, 100)" : "rgb(220,220,220)",
         maxheight: "20px",
         padding: "9px",
-        background: theme === "dark" ? "rgb(70, 70, 70)" : "rgb(220, 220, 225)",
+        background: theme === "dark" ? "rgba(70, 70, 100, 0.5)" : "rgb(220, 220, 225)",
     };
 
     const td = {
-        borderWidth: "1px 0px 1px 0px",
-        borderStyle: "solid",
-        borderColor:
-            theme === "dark" ? "rgb(100, 100, 100)" : "rgb(220,220,220)",
         maxheight: "20px",
         padding: "9px",
-        background: theme === "dark" ? "rgb(50, 50, 50)" : "rgb(242, 243, 247)",
+        background: theme === "dark" ? "rgba(50, 50, 80, 0.5)" : "rgb(242, 243, 247)",
     };
 
     const tdc = {
-        borderWidth: "1px 0px 1px 0px",
-        borderStyle: "solid",
-        borderColor:
-            theme === "dark" ? "rgb(100, 100, 100)" : "rgb(220,220,220)",
         maxheight: "20px",
         padding: "9px",
-        background: theme === "dark" ? "rgb(40, 40, 40)" : "rgb(252, 252, 254)",
+        background: theme === "dark" ? "rgba(40, 40, 70, 0.5)" : "rgb(252, 252, 254)",
     };
 
     const rows = [

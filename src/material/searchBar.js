@@ -19,7 +19,7 @@ export default function SearchBar(props) {
             width: "100%",
             height: "50px",
             borderRadius: 0,
-            backgroundColor: theme === "dark" ? "rgb(40, 40, 40)" : "white",
+            backgroundColor: theme === "dark" ? "rgba(40, 40, 60, 0.8)" : "white",
         },
         input: {
             marginLeft: t.spacing(1),

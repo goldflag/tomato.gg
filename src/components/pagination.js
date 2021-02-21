@@ -19,16 +19,17 @@ const PaginationContainer = styled.div`
     padding: 1rem;
     font-size: 0.8rem;
     background-color: ${({ theme }) =>
-        theme === "dark" ? css`rgb(40, 40, 40)` : css`rgb(250, 250, 250)`};
+        theme === "dark" ? css`rgba(40, 40, 50, 0.5)` : css`rgb(250, 250, 250)`};
     color: ${({ theme }) =>
         theme === "dark" ? css`rgb(220, 220, 220)` : css`rgb(80, 80, 80)`};
+    backdrop-filter: blur( 7px );
 `;
 
 const PaginationButton = styled.button`
     font-weight: 500;
     height: 2rem;
     width: 2rem;
-    color: rgb(71, 99, 214);
+    color: rgb(100, 129, 234);
     background: none;
     padding: 0rem;
     border-width: 0px;

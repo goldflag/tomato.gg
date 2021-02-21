@@ -74,8 +74,9 @@ const Styles = styled.div`
         padding: 1rem;
         transition: 0.4s ease;
         box-shadow: 0px 2px 3px rgb(30, 30, 30);
-        background-color: rgb(100, 100, 100, 0.5);
+        background-color: rgb(40, 40, 40, 0.4);
         font-size: 1.5rem;
+        backdrop-filter: blur( 7px );
     }
 
     .value {
@@ -102,7 +103,7 @@ const Styles = styled.div`
     }
 
     .overallItem:hover {
-        background-color: rgba(201, 26, 61, 0.7);
+        background-color: rgba(201, 26, 61, 0.5);
     }
 
     .tanksTitle {
@@ -122,26 +123,27 @@ const Styles = styled.div`
         margin: 0.4rem;
         color: rgb(240, 240, 240);
         padding: 0.4rem;
-        min-width: 180px;
+        min-width: 200px;
         height: 290px;
         transition: 0.4s ease;
         box-shadow: 0px 2px 3px rgb(30, 30, 30);
+        backdrop-filter: blur( 7px );
     }
 
     .abovebox {
-        background-color: rgb(100, 100, 100, 0.5);
+        background-color: rgba(40, 40, 40, 0.4);
     }
 
     .underbox {
-        background-color: rgb(60, 60, 60, 0.5);
+        background-color: rgba(20, 20, 20, 0.4);
     }
 
     .abovebox:hover {
-        background-color: rgba(201, 26, 61, 0.7);
+        background-color: rgba(201, 26, 61, 0.5);
     }
 
     .underbox:hover {
-        background-color: rgba(80, 80, 80, 0.7);
+        background-color: rgba(80, 80, 80, 0.5);
     }
 
     .box:hover .image {

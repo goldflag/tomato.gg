@@ -20,7 +20,7 @@ const PaginationContainer = styled.div`
     padding: 1rem;
     font-size: 0.8rem;
     background-color: ${({ theme }) =>
-        theme === "dark" ? css`rgb(40, 40, 40)` : css`rgb(250, 250, 250)`};
+        theme === "dark" ? css`rgba(40, 40, 70, 0.5)` : css`rgb(250, 250, 250)`};
     color: ${({ theme }) =>
         theme === "dark" ? css`rgb(220, 220, 220)` : css`rgb(80, 80, 80)`};
 `;
@@ -185,7 +185,7 @@ export default function TankPage(props) {
         );
     }
 
-    let content = <Loader bottom={20} top={20} />;
+    let content = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />
 
     if (data) {
         content = (

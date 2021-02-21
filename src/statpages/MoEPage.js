@@ -64,7 +64,7 @@ export default function MoEPage(props) {
         getData();
     }, [server]);
 
-    let table = <Loader color={"rgb(40, 40, 40)"} bottom={20} top={20} />;
+    let table = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={40} top={20} />;
 
     if (data) {
         let rowData = [];

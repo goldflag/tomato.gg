@@ -20,7 +20,7 @@ export default function About() {
                 <Paper
                     style={{
                         backgroundColor:
-                            theme === "dark" ? "rgb(40, 40, 40)" : "white",
+                            theme === "dark" ? "rgba(40, 40, 70, 0.5)" : "white",
                         padding: "1rem",
                         color:
                             theme === "dark"
