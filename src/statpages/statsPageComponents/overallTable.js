@@ -32,6 +32,7 @@ import styled from "styled-components";
 import Tooltip from "react-tooltip-lite";
 import awardsData from "../../data/awardsinfo.json";
 import cellStyle from "../../functions/cellStyle";
+import InputBase from "@material-ui/core/InputBase";
 
 const tierConv = {
     1: "I",
@@ -114,7 +115,7 @@ function OverallTable(props) {
         return (
             <>
                 Battles
-                <input
+                <InputBase
                     value={filterValue[0] || ""}
                     type="number"
                     onChange={(e) => {
@@ -126,15 +127,17 @@ function OverallTable(props) {
                     }}
                     placeholder={`Min (${min})`}
                     style={{
-                        width: "90px",
-                        height: "35px",
-                        marginRight: "0.5rem",
-                        marginLeft: "0.5rem",
-                        borderRadius: "3px",
+                        width: "110px",
+                        margin: "0 0.5rem",
+                        fontSize: "1rem",
+                        padding: "0px 15px",
+                        borderRadius: "5px",
+                        backgroundColor: "rgba(100, 100, 150, 0.5)",
+                        color: "white"
                     }}
                 />
                 to
-                <input
+                <InputBase
                     value={filterValue[1] || ""}
                     type="number"
                     onChange={(e) => {
@@ -146,10 +149,13 @@ function OverallTable(props) {
                     }}
                     placeholder={`Max (${max})`}
                     style={{
-                        width: "90px",
-                        height: "35px",
-                        marginLeft: "0.5rem",
-                        borderRadius: "3px",
+                        width: "130px",
+                        margin: "0 0.5rem",
+                        fontSize: "1rem",
+                        padding: "0px 15px",
+                        borderRadius: "5px",
+                        backgroundColor: "rgba(100, 100, 150, 0.5)",
+                        color: "white"
                     }}
                 />
             </>
@@ -358,11 +364,13 @@ function OverallTable(props) {
         return (
             <>
                 <FiltersContainer>
-                    <GlobalFilter
-                        preGlobalFilteredRows={preGlobalFilteredRows}
-                        globalFilter={state.globalFilter}
-                        setGlobalFilter={setGlobalFilter}
-                    />
+                    <div style={{marginBottom: "-10px"}}>
+                        <GlobalFilter
+                            preGlobalFilteredRows={preGlobalFilteredRows}
+                            globalFilter={state.globalFilter}
+                            setGlobalFilter={setGlobalFilter}
+                        />
+                    </div>
                     {headerGroups.map((headerGroup, i) => {
                         return (
                             <>
@@ -382,7 +390,7 @@ function OverallTable(props) {
                                 <div
                                     style={{
                                         marginRight: "10px",
-                                        marginBottom: "10px",
+                                        marginTop: "10px",
                                     }}
                                 >
                                     {headerGroup.headers[6].render("Filter")}

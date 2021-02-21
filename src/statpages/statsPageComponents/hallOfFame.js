@@ -245,7 +245,7 @@ export default function HallOfFame(props) {
     const hof = () =>
         console.log(props.hofData) ||
         props.hofData.above.map((row, i) => (
-            <Link className="box abovebox" to={`/tank/${row.tank_id}?rank=${row.rank}`}>
+            <Link className="box abovebox" to={`/tank/${row.tank_id}?rank=${row.rank}`} target="_blank">
                 <img src={row.image} className="image" alt={row.name} />
                 <div className="name">
                     {tierConv[row.tier]} - {row.name}

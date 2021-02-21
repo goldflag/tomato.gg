@@ -15,8 +15,8 @@ import RecentTanksAvgTable from "./recentTankStatsComponents/RecentTanksAvgTable
 const backend = process.env.REACT_APP_BACKEND;
 
 const Filters = styled.div`
-    padding: 10px;
-    margin-bottom: -30px;
+    // padding: 10px;
+    // margin: -15px;
 `;
 
 export default function RecentLeaderboards() {
@@ -62,29 +62,30 @@ export default function RecentLeaderboards() {
                     Click on a row to view detailed server-wide tank performance
                     and leaderboards
                 </span>
+                <Filters>
+                    <FilterButtonGroup>
+                        <FilterButton
+                            key={30}
+                            selected={time === 30}
+                            onClick={() => {
+                                setTime(30);
+                            }}
+                        >
+                            30 Days
+                        </FilterButton>
+                        <FilterButton
+                            key={60}
+                            selected={time === 60}
+                            onClick={() => {
+                                setTime(60);
+                            }}
+                        >
+                            60 Days
+                        </FilterButton>
+                    </FilterButtonGroup>
+                </Filters>
             </Info>
-            <Filters>
-                <FilterButtonGroup>
-                    <FilterButton
-                        key={30}
-                        selected={time === 30}
-                        onClick={() => {
-                            setTime(30);
-                        }}
-                    >
-                        30 Days
-                    </FilterButton>
-                    <FilterButton
-                        key={60}
-                        selected={time === 60}
-                        onClick={() => {
-                            setTime(60);
-                        }}
-                    >
-                        60 Days
-                    </FilterButton>
-                </FilterButtonGroup>
-            </Filters>
+
             {typeof data !== "string" ? (
                 <RecentTanksAvgTable data={data} />
             ) : data === "loading" ? (

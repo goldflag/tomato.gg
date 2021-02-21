@@ -11,7 +11,7 @@ const MaxHeight = styled.div`
 `;
 
 const Filters = styled(FilterButtonGroup)`
-    margin-bottom: 0px;
+    margin-top: -10px;
 `;
 
 const filters = [

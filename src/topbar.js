@@ -27,7 +27,6 @@ const Styles = styled.div`
         width: 100%;
         height: 4rem;
         border-bottom: 1px solid rgb(100, 95, 129);
-        /* position: fixed; */
         margin-left: 0em;
     }
 
@@ -54,15 +53,13 @@ const Styles = styled.div`
 
     .field {
         padding-top: 1.1rem;
-        /* margin: 0 auto; */
-        right: 100px;
+        right: 30px;
         position: absolute;
     }
 
     .discord {
         padding-top: 1rem;
-        /* margin: 0 auto; */
-        right: 58px;
+        right: 10px;
         position: absolute;
     }
 
@@ -77,13 +74,9 @@ const Styles = styled.div`
         position: absolute;
     }
 
-    // *:focus {
-    //     outline: none;
-    // }
-
     .serverSelectButtons {
         margin-top: 0.4rem;
-        right: 440px;
+        right: 395px;
         position: absolute;
     }
 
@@ -264,13 +257,6 @@ export default withRouter(function Topbar(props) {
                                 ASIA
                             </Button>
                         </ButtonGroup>
-                    </div>
-                    <div className="light">
-                        <DarkModeToggle
-                            onChange={toggleTheme}
-                            checked={theme === "light" ? false : true}
-                            size={40}
-                        />
                     </div>
                     <div className="discord">
                         <a target="blank" href="https://discord.gg/qA2bV7K">

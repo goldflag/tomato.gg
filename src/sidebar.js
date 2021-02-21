@@ -61,10 +61,8 @@ const Styles = styled.div`
     }
 
     .layer {
-        /* background-color: rgba(23, 20, 51, 0.7); */
+        backdrop-filter: blur( 2px );
         background-color: rgba(24, 25, 92, 0.7);
-
-        /* position: absolute; */
         top: 0;
         left: 0;
         width: 100%;
@@ -221,7 +219,7 @@ const Sidebar = withRouter((props) => {
                             fontSize: "0.8rem",
                             fontWeight: "400",
                             color: "rgb(161, 181, 214)",
-                            backdropFilter: 'blur( 7px )'
+                            backdropFilter: 'blur( 4px )'
                         }}
                     >
                         <h2

@@ -25,9 +25,6 @@ export default function MainTabs(props) {
     const CustomTabs = withStyles({
         root: {
             elevation: 10,
-            // backgroundColor: "rgb(76, 90, 166)",
-            // color: {theme === "dark" ? "white" : "black"},
-
             borderBottom: `1px solid ${
                 theme === "dark" ? "rgb(200, 200, 200)" : "rgb(57, 82, 150)"
             }`,

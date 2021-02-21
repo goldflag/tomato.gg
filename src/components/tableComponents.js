@@ -5,7 +5,10 @@ export const TableContainer = styled.div`
     overflow-y: hidden;
 `;
 export const FiltersContainer = styled.div`
-    padding: 10px 10px 0 10px;
+    padding: 10px;
+    background-color: rgba(40, 40, 70, 0.5);
+    width: 100%;
+    backdrop-filter: blur( 7px );
 `;
 
 export const ButtonFiltersContainer = styled.div`
@@ -18,6 +21,7 @@ export const ButtonFiltersContainer = styled.div`
 `;
 
 export const StyledTable = styled.table`
+    white-space: nowrap;
     position: sticky;
     border-spacing: 0;
     width: 100%;

@@ -155,7 +155,7 @@ export default function TankPage(props) {
                 />
             </>
         ) : (
-            <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />
+            <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={30} top={30} />
         );
 
     console.log(data);

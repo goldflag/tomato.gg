@@ -19,14 +19,12 @@
 
 .field {
     padding-top: 1.1rem;
-    /* margin: 0 auto; */
-    right: 100px;
+    right: 55px;
     position: absolute;
 }
 
 .discord {
     padding-top: 1rem;
-    /* margin: 0 auto; */
     right: 58px;
     position: absolute;
 }
@@ -46,7 +44,7 @@
     display: flex;
     margin-top: 0.4rem;
     /* margin: 0 auto; */
-    right: 500px;
+    right: 100px;
     position: absolute;
 }
 
@@ -72,7 +70,7 @@
         display: none;
     }
     .field {
-        right: 59px;
+        right: 15px;
     }
     .serverSelectButtons {
         display: none;

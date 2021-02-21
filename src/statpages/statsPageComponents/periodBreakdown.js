@@ -137,11 +137,13 @@ function PeriodBreakdown(props) {
         return (
             <>
                 <FiltersContainer>
-                    <GlobalFilter
-                        preGlobalFilteredRows={preGlobalFilteredRows}
-                        globalFilter={state.globalFilter}
-                        setGlobalFilter={setGlobalFilter}
-                    />
+                    <div style={{marginBottom: "-10px"}}>
+                        <GlobalFilter
+                            preGlobalFilteredRows={preGlobalFilteredRows}
+                            globalFilter={state.globalFilter}
+                            setGlobalFilter={setGlobalFilter}
+                        />
+                    </div>
                     {headerGroups.map((headerGroup, i) => (
                         <ButtonFiltersContainer key={i}>
                             {headerGroup.headers.map(

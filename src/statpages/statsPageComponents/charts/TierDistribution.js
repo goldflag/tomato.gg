@@ -26,9 +26,10 @@ export default function TierDistribution(props) {
                     },
                     tooltip: {
                         container: {
+                            backdropFilter: 'blur( 7px )',
                             background:
                                 theme === "dark"
-                                    ? "rgb(40, 40, 40)"
+                                    ? "rgb(40, 40, 70, 0.8)"
                                     : "rgb(255, 255, 255)",
                             color:
                                 theme === "dark"

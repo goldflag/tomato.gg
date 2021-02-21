@@ -218,13 +218,13 @@ function RecentTanksAvgTable({ data }) {
     return (
         <TableContainer theme={theme}>
             <FiltersContainer>
-                <ButtonFiltersContainer>
+                <div style={{margin: "-10px 0px"}}>
                     <GlobalFilter
                         preGlobalFilteredRows={preGlobalFilteredRows}
                         globalFilter={state.globalFilter}
                         setGlobalFilter={setGlobalFilter}
                     />
-                </ButtonFiltersContainer>
+                </div>
                 {headerGroups.map((headerGroup, i) => (
                     <ButtonFiltersContainer key={i}>
                         {headerGroup.headers.map(

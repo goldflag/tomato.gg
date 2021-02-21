@@ -74,8 +74,7 @@ const PaginationButton = styled.button`
 `;
 
 const Filters = styled.div`
-    padding: 10px;
-    margin-bottom: -10px;
+    padding: 0px 10px;
     background-color: rgba(40, 40, 70, 0.5);
 `;
 

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
 import SessionsLog from "./sessionsLog";
-import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles((theme) => ({
     root: {

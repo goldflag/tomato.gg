@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { Button, ButtonGroup } from "@material-ui/core";
 import { MoEStars } from "./moeStars";
 import { useAsyncDebounce } from "react-table";
+import InputBase from "@material-ui/core/InputBase";
 
 export const FilterButton = styled(Button)`
     background-color: ${({ selected }) =>
@@ -21,8 +22,9 @@ export const FilterButton = styled(Button)`
 `;
 
 export const FilterButtonGroup = styled(ButtonGroup)`
-    margin-right: 10px;
-    margin-bottom: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+
 `;
 
 const premFilterOptions = [
@@ -206,18 +208,19 @@ export const GlobalFilter = ({
 
     return (
         <span>
-            <input
+            <InputBase
                 value={value || ""}
                 onChange={(e) => {
                     setValue(e.target.value);
                     onChange(e.target.value);
                 }}
-                placeholder={`Search ${count} records...`}
+                placeholder={`Search ${count} tanks...`}
                 style={{
                     fontSize: "1rem",
-                    padding: "6px",
-                    borderRadius: "3px",
-                    border: "1px solid rgb(100, 100, 100)",
+                    padding: "0px 15px",
+                    borderRadius: "5px",
+                    backgroundColor: "rgba(100, 100, 150, 0.5)",
+                    color: "white"
                 }}
             />
         </span>

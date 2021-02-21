@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 export const Info = styled.div`
     background-color: ${({ theme }) =>
-        theme === "dark" ? css`rgba(40, 40, 40, 0.5)` : css`rgb(250, 250, 250)`};
+        theme === "dark" ? css`rgba(40, 40, 70, 0.5)` : css`rgb(250, 250, 250)`};
     color: ${({ theme }) =>
         theme === "dark" ? css`rgb(255, 255, 255)` : css`rgb(60, 60, 60)`};
     padding: 1rem;

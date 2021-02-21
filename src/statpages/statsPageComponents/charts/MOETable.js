@@ -90,13 +90,13 @@ export default function MOETable(props) {
                     </tr>
                 </tbody>
             </table>
-            <div style={{ paddingTop: "0.5rem" }}>
+            <div style={{ paddingTop: "0rem" }}>
                 <a
                     style={{ fontSize: "0.8rem" }}
                     target="blank"
                     href="https://herhor.net/wot/moe/"
                 >
-                    Generate a cool image of your marks
+                    Generate Mark Image
                 </a>
             </div>
         </div>

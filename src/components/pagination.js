@@ -102,9 +102,25 @@ export const Pagination = (props) => {
                 onChange={(e) => {
                     props.setPageSize(Number(e.target.value));
                 }}
+                style={{
+                    color: "rgb(255, 255, 255)", 
+                    backgroundColor: "rgba(100, 100, 150, 0.5)",
+                    fontFamily: "Roboto Mono",
+                    border: "None",
+                    padding: "3px"
+                }}
+
             >
                 {props.pageSizes.map((pageSize) => (
-                    <option key={pageSize} value={pageSize}>
+                    <option 
+                        key={pageSize} 
+                        value={pageSize} 
+                        style={{
+                            color: "rgb(255, 255, 255)", 
+                            backgroundColor: "rgba(40, 40, 70, 0.5)",
+                            fontFamily: "Roboto Mono"
+                        }}
+                    >
                         Show {pageSize}
                     </option>
                 ))}

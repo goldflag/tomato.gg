@@ -126,11 +126,15 @@ export default function RecentsLeaderboard({ data, type, highlightRow }) {
     useEffect(
         () =>
             setTimeout(
-                () =>
-                    highlightedRowRef.current.scrollIntoView({
-                        behavior: "smooth",
-                        block: "center",
-                    }),
+                () =>{
+
+                    if (highlightedRowRef.current) {
+                        highlightedRowRef.current.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center",
+                        })
+                    }
+                },
                 500
             ) && undefined
     );

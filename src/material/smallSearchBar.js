@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
-import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import SmallSelectQuery from "./smallSelect";
@@ -21,6 +20,7 @@ const Styles = styled.div`
         }
     }
 `;
+
 export default function SmallSearchBar(props) {
     const { theme } = React.useContext(ThemeContext);
 
@@ -43,12 +43,7 @@ export default function SmallSearchBar(props) {
         iconButton: {
             padding: 10,
             color: theme === "dark" ? "white" : "rgb(40, 40, 40)",
-        },
-        divider: {
-            height: 25,
-            margin: 8,
-            background: theme === "dark" ? "rgb(40, 40, 40)" : "white",
-        },
+        }
     }));
 
     const classes = useStyles();
@@ -61,7 +56,6 @@ export default function SmallSearchBar(props) {
                 inputProps={{ "aria-label": "enter a username" }}
                 onChange={(e) => props.setName(e.target.value)}
             />
-            <Divider className={classes.divider} orientation="vertical" />
             <Styles>
                 <div className="select">
                     <SmallSelectQuery

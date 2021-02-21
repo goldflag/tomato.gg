@@ -228,7 +228,6 @@ export default function OverallStatsTable(props) {
         <MuiThemeProvider theme={getMuiTheme()}>
             <div
                 style={{
-                    margin: "1rem 0 0 0",
                     padding: "1rem 1rem 1rem 1rem",
 
                 }}

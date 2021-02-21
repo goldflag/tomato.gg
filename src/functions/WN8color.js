@@ -12,7 +12,7 @@ export default function WN8color(wn8) {
     else if (wn8 < 4000) return "#411d73";
     else if (wn8 < 4700) return "#310d59";
     else if (wn8 === "-") {
-        return "rgb(200,200,200)";
+        return "rgba(120, 120 ,120, 0.4)";
     } else {
         return "#24073d";
     }
