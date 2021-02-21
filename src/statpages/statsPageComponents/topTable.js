@@ -54,6 +54,7 @@ const StyledTable = styled.table`
         font-weight: 500;
     }
     td {
+        color: rgb(240, 240, 240);
         padding: 10px;
         margin: 0;
         :last-child {

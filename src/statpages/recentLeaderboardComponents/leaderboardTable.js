@@ -25,7 +25,7 @@ export default function LeaderboardTable({ type, data }) {
                 color: "white",
                 padding: "10px",
             };
-        else if (column === type) return { backdropFilter: "brightness(1.3)" };
+        else if (column === type) return { backdropFilter: "brightness(1.2)" };
         else return null;
     }
 
