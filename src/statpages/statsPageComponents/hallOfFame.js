@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { ThemeContext } from "../../context";
 import styled from "styled-components";
 import Loader from "../../components/loader";
 import { Scrollbars } from "react-custom-scrollbars";
+import { Link } from "react-router-dom";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -21,21 +21,17 @@ const tierConv = {
 
 function colorConv(val) {
     if (val > 99) {
-        return "rgb(191, 139, 240)"; 
+        return "rgb(191, 139, 240)";
     }
     if (val > 97) {
         return "rgb(139, 195, 240)";
-    }
-    else if (val > 90) {
+    } else if (val > 90) {
         return "rgb(245, 191, 66)";
-    }
-    else if (val > 80) {
+    } else if (val > 80) {
         return "rgb(200, 200, 219)";
-    }
-    else if (val > 65) {
+    } else if (val > 65) {
         return "rgb(176, 134, 18)";
-    }
-    else {
+    } else {
         return "rgb(240, 240, 240)";
     }
 }
@@ -244,83 +240,82 @@ export default function HallOfFame(props) {
         const resa = await fetch(url2);
         const resa2 = await resa.json();
         props.setHofmainData(resa2);
-
     }
 
-    function hof() {
-        console.log(props.hofData);
-        return props.hofData.above.map((row, i) => {
-            return (
-                <div className="box abovebox">
-                    <img src={row.image} className="image" alt={row.name} />
-                    <div className="name">
-                        {tierConv[row.tier]} - {row.name}
+    const hof = () =>
+        console.log(props.hofData) ||
+        props.hofData.above.map((row, i) => (
+            <Link className="box abovebox" to={`/tank/${row.tank_id}?rank=${row.rank}`}>
+                <img src={row.image} className="image" alt={row.name} />
+                <div className="name">
+                    {tierConv[row.tier]} - {row.name}
+                </div>
+                <div className="dpg">{row.dpg}</div>
+                <div className="label">Damage Per Game</div>
+                <div
+                    className="percentile"
+                    style={{
+                        backgroundColor: colorConv(
+                            (100 - (row.rank * 100) / row.total).toFixed(2)
+                        ),
+                    }}
+                >
+                    Better than{" "}
+                    {(100 - (row.rank * 100) / row.total).toFixed(2)}%
+                </div>
+                <div className="grid">
+                    <div className="gridItem">
+                        <div className="val">{row.rank}</div>
+                        <div className="label">Rank</div>
                     </div>
-                    <div className="dpg">{row.dpg}</div>
-                    <div className="label">Damage Per Game</div>
-                    <div className="percentile" style={{ backgroundColor: colorConv((100 - (row.rank * 100) / row.total).toFixed(2)) }}>
-                        Better than{" "}
-                        {(100 - (row.rank * 100) / row.total).toFixed(2)}%
+                    <div className="gridItem">
+                        <div className="val">{row.battles}</div>
+                        <div className="label">Battles</div>
                     </div>
-                    <div className="grid">
-                        <div className="gridItem">
-                            <div className="val">{row.rank}</div>
-                            <div className="label">Rank</div>
-                        </div>
-                        <div className="gridItem">
-                            <div className="val">{row.battles}</div>
-                            <div className="label">Battles</div>
-                        </div>
-                        <div className="gridItem">
-                            <div className="val">{row.wn8}</div>
-                            <div className="label">WN8</div>
-                        </div>
-                        <div className="gridItem">
-                            <div className="val">{row.winrate}</div>
-                            <div className="label">Winrate</div>
-                        </div>
+                    <div className="gridItem">
+                        <div className="val">{row.wn8}</div>
+                        <div className="label">WN8</div>
+                    </div>
+                    <div className="gridItem">
+                        <div className="val">{row.winrate}</div>
+                        <div className="label">Winrate</div>
                     </div>
                 </div>
-            );
-        });
-    }
+            </Link>
+        ));
 
-    function underHof() {
-        console.log(props.hofData);
-        return props.hofData.below.map((row, i) => {
-            return (
-                <div className="box underbox">
-                    <img src={row.image} className="image" alt={row.name} />
-                    <div className="name">
-                        {tierConv[row.tier]} - {row.name}
+    const underHof = () =>
+        props.hofData.below.map((row, i) => (
+            <div className="box underbox">
+                <img src={row.image} className="image" alt={row.name} />
+                <div className="name">
+                    {tierConv[row.tier]} - {row.name}
+                </div>
+                <div className="dpg">{row.dpg}</div>
+                <div className="label">Damage Per Game</div>
+                <div className="unrank">
+                    Play {25 - row.battles} more battles to enter rankings
+                </div>
+                <div className="grid">
+                    <div className="gridItem">
+                        <div className="val">-</div>
+                        <div className="label">Rank</div>
                     </div>
-                    <div className="dpg">{row.dpg}</div>
-                    <div className="label">Damage Per Game</div>
-                    <div className="unrank">
-                        Play {25 - row.battles} more battles to enter rankings
+                    <div className="gridItem">
+                        <div className="val">{row.battles}</div>
+                        <div className="label">Battles</div>
                     </div>
-                    <div className="grid">
-                        <div className="gridItem">
-                            <div className="val">-</div>
-                            <div className="label">Rank</div>
-                        </div>
-                        <div className="gridItem">
-                            <div className="val">{row.battles}</div>
-                            <div className="label">Battles</div>
-                        </div>
-                        <div className="gridItem">
-                            <div className="val">{row.wn8}</div>
-                            <div className="label">WN8</div>
-                        </div>
-                        <div className="gridItem">
-                            <div className="val">{row.winrate}</div>
-                            <div className="label">Winrate</div>
-                        </div>
+                    <div className="gridItem">
+                        <div className="val">{row.wn8}</div>
+                        <div className="label">WN8</div>
+                    </div>
+                    <div className="gridItem">
+                        <div className="val">{row.winrate}</div>
+                        <div className="label">Winrate</div>
                     </div>
                 </div>
-            );
-        });
-    }
+            </div>
+        ));
 
     let topTanks = <Loader color={null} bottom={20} top={20} />;
 
@@ -330,38 +325,93 @@ export default function HallOfFame(props) {
         topTanks = (
             <Styles>
                 <div className="tanksTitle">
-                    <span style={{fontSize: "2rem"}}>Hall of Fame</span>
-                    <br/>
-                    <span style={{fontSize: "1rem"}}>60 DAYS | MINIMUM 75 BATTLES | TIER 6+</span>
+                    <span style={{ fontSize: "2rem" }}>Hall of Fame</span>
+                    <br />
+                    <span style={{ fontSize: "1rem" }}>
+                        60 DAYS | MINIMUM 75 BATTLES | TIER 6+
+                    </span>
                 </div>
                 <div className="overall">
                     <div className="overallTop">
                         <div className="overallItem">
-                            <span className="value">{props.hofmainData.top.winrate.value}%</span>
+                            <span className="value">
+                                {props.hofmainData.top.winrate.value}%
+                            </span>
                             <span className="bigLabel"> Winrate </span>
-                            <div className="bigPercentile" style={{backgroundColor: colorConv(100 - (props.hofmainData.top.winrate.ranking) * 100/props.hofmainData.top.total)}}>
+                            <div
+                                className="bigPercentile"
+                                style={{
+                                    backgroundColor: colorConv(
+                                        100 -
+                                            (props.hofmainData.top.winrate
+                                                .ranking *
+                                                100) /
+                                                props.hofmainData.top.total
+                                    ),
+                                }}
+                            >
                                 Better than{" "}
-                                {(100 - (props.hofmainData.top.winrate.ranking) * 100/props.hofmainData.top.total).toFixed(2)}%
+                                {(
+                                    100 -
+                                    (props.hofmainData.top.winrate.ranking *
+                                        100) /
+                                        props.hofmainData.top.total
+                                ).toFixed(2)}
+                                %
                             </div>
                             {props.hofmainData.top.winrate.ranking}
                             <span className="bigLabel">Rank</span>
                         </div>
                         <div className="overallItem">
-                            <span className="value">{props.hofmainData.top.wn8.value}</span>
+                            <span className="value">
+                                {props.hofmainData.top.wn8.value}
+                            </span>
                             <span className="bigLabel"> WN8 </span>
-                            <div className="bigPercentile" style={{backgroundColor: colorConv(100 - (props.hofmainData.top.wn8.ranking) * 100/props.hofmainData.top.total)}}>
+                            <div
+                                className="bigPercentile"
+                                style={{
+                                    backgroundColor: colorConv(
+                                        100 -
+                                            (props.hofmainData.top.wn8.ranking *
+                                                100) /
+                                                props.hofmainData.top.total
+                                    ),
+                                }}
+                            >
                                 Better than{" "}
-                                {(100 - (props.hofmainData.top.wn8.ranking) * 100/props.hofmainData.top.total).toFixed(2)}%
+                                {(
+                                    100 -
+                                    (props.hofmainData.top.wn8.ranking * 100) /
+                                        props.hofmainData.top.total
+                                ).toFixed(2)}
+                                %
                             </div>
                             {props.hofmainData.top.wn8.ranking}
                             <span className="bigLabel">Rank</span>
                         </div>
                         <div className="overallItem">
-                            <span className="value">{props.hofmainData.top.kd.value}</span>
+                            <span className="value">
+                                {props.hofmainData.top.kd.value}
+                            </span>
                             <span className="bigLabel"> K/D Ratio </span>
-                            <div className="bigPercentile" style={{backgroundColor: colorConv(100 - (props.hofmainData.top.kd.ranking) * 100/props.hofmainData.top.total)}}>
+                            <div
+                                className="bigPercentile"
+                                style={{
+                                    backgroundColor: colorConv(
+                                        100 -
+                                            (props.hofmainData.top.kd.ranking *
+                                                100) /
+                                                props.hofmainData.top.total
+                                    ),
+                                }}
+                            >
                                 Better than{" "}
-                                {(100 - (props.hofmainData.top.kd.ranking) * 100/props.hofmainData.top.total).toFixed(2)}%
+                                {(
+                                    100 -
+                                    (props.hofmainData.top.kd.ranking * 100) /
+                                        props.hofmainData.top.total
+                                ).toFixed(2)}
+                                %
                             </div>
                             {props.hofmainData.top.kd.ranking}
                             <span className="bigLabel">Rank</span>
@@ -369,53 +419,123 @@ export default function HallOfFame(props) {
                     </div>
                     <div className="overallBottom">
                         <div className="overallItem">
-                            <span className="value">{props.hofmainData.top.battles.value}</span>
+                            <span className="value">
+                                {props.hofmainData.top.battles.value}
+                            </span>
                             <span className="bigLabel"> Battles </span>
-                            <div className="bigPercentile" style={{backgroundColor: "white"}}>
+                            <div
+                                className="bigPercentile"
+                                style={{ backgroundColor: "white" }}
+                            >
                                 More than{" "}
-                                {(100 - (props.hofmainData.top.battles.ranking) * 100/props.hofmainData.top.total).toFixed(2)}%
+                                {(
+                                    100 -
+                                    (props.hofmainData.top.battles.ranking *
+                                        100) /
+                                        props.hofmainData.top.total
+                                ).toFixed(2)}
+                                %
                             </div>
                             {props.hofmainData.top.battles.ranking}
                             <span className="bigLabel">Rank</span>
                         </div>
                         <div className="overallItem">
-                            <span className="value">{props.hofmainData.top.dpg.value}</span>
+                            <span className="value">
+                                {props.hofmainData.top.dpg.value}
+                            </span>
                             <span className="bigLabel"> Damage Per Game </span>
-                            <div className="bigPercentile" style={{backgroundColor: colorConv(100 - (props.hofmainData.top.dpg.ranking) * 100/props.hofmainData.top.total)}}>
+                            <div
+                                className="bigPercentile"
+                                style={{
+                                    backgroundColor: colorConv(
+                                        100 -
+                                            (props.hofmainData.top.dpg.ranking *
+                                                100) /
+                                                props.hofmainData.top.total
+                                    ),
+                                }}
+                            >
                                 Better than{" "}
-                                {(100 - (props.hofmainData.top.dpg.ranking) * 100/props.hofmainData.top.total).toFixed(2)}%
+                                {(
+                                    100 -
+                                    (props.hofmainData.top.dpg.ranking * 100) /
+                                        props.hofmainData.top.total
+                                ).toFixed(2)}
+                                %
                             </div>
                             {props.hofmainData.top.dpg.ranking}
-                            <span className="bigLabel">Rank</span>                       
+                            <span className="bigLabel">Rank</span>
                         </div>
                         <div className="overallItem">
-                            <span className="value">{props.hofmainData.top.dmg_ratio.value}</span>
+                            <span className="value">
+                                {props.hofmainData.top.dmg_ratio.value}
+                            </span>
                             <span className="bigLabel"> Damage Ratio </span>
-                            <div className="bigPercentile" style={{backgroundColor: colorConv(100 - (props.hofmainData.top.dmg_ratio.ranking) * 100/props.hofmainData.top.total)}}>
+                            <div
+                                className="bigPercentile"
+                                style={{
+                                    backgroundColor: colorConv(
+                                        100 -
+                                            (props.hofmainData.top.dmg_ratio
+                                                .ranking *
+                                                100) /
+                                                props.hofmainData.top.total
+                                    ),
+                                }}
+                            >
                                 Better than{" "}
-                                {(100 - (props.hofmainData.top.dmg_ratio.ranking) * 100/props.hofmainData.top.total).toFixed(2)}%
+                                {(
+                                    100 -
+                                    (props.hofmainData.top.dmg_ratio.ranking *
+                                        100) /
+                                        props.hofmainData.top.total
+                                ).toFixed(2)}
+                                %
                             </div>
                             {props.hofmainData.top.dmg_ratio.ranking}
-                            <span className="bigLabel">Rank</span>                        
+                            <span className="bigLabel">Rank</span>
                         </div>
                         <div className="overallItem">
-                            <span className="value">{props.hofmainData.top.frags.value}</span>
+                            <span className="value">
+                                {props.hofmainData.top.frags.value}
+                            </span>
                             <span className="bigLabel"> Frags Per Game </span>
-                            <div className="bigPercentile" style={{backgroundColor: colorConv(100 - (props.hofmainData.top.frags.ranking) * 100/props.hofmainData.top.total)}}>
+                            <div
+                                className="bigPercentile"
+                                style={{
+                                    backgroundColor: colorConv(
+                                        100 -
+                                            (props.hofmainData.top.frags
+                                                .ranking *
+                                                100) /
+                                                props.hofmainData.top.total
+                                    ),
+                                }}
+                            >
                                 Better than{" "}
-                                {(100 - (props.hofmainData.top.frags.ranking) * 100/props.hofmainData.top.total).toFixed(2)}%
+                                {(
+                                    100 -
+                                    (props.hofmainData.top.frags.ranking *
+                                        100) /
+                                        props.hofmainData.top.total
+                                ).toFixed(2)}
+                                %
                             </div>
                             {props.hofmainData.top.frags.ranking}
-                            <span className="bigLabel">Rank</span>                       
+                            <span className="bigLabel">Rank</span>
                         </div>
                     </div>
                 </div>
                 <div className="tanksTitle">
-                    <span style={{fontSize: "2rem"}}>Tank Rankings</span>
-                    <br/>
-                    <span style={{fontSize: "1rem"}}>60 DAYS | MINIMUM 25 BATTLES</span>
+                    <span style={{ fontSize: "2rem" }}>Tank Rankings</span>
+                    <br />
+                    <span style={{ fontSize: "1rem" }}>
+                        60 DAYS | MINIMUM 25 BATTLES
+                    </span>
                 </div>
-                <Scrollbars style={{ width: "100%", height: "310px", margin: "1rem" }}>
+                <Scrollbars
+                    style={{ width: "100%", height: "310px", margin: "1rem" }}
+                >
                     <div className="tanks">
                         {tankRow}
                         {tankRow2}

@@ -34,8 +34,8 @@ export default function RecentLeaderboards() {
         setData("loading");
         history.push(location.pathname + "?" + params);
     };
-    const setTime = (t) =>
-        redirectWithParams(updateURLParams(location.search, "time", t));
+    const setTime = (time) =>
+        redirectWithParams(updateURLParams(location.search, { time }));
 
     useEffect(() => {
         setData("loading");

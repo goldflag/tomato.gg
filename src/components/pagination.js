@@ -112,3 +112,36 @@ export const Pagination = (props) => {
         </PaginationContainer>
     );
 };
+
+export const ServerPagination = ({ page, numPages, setPage }) => {
+    return (
+        <PaginationContainer theme={"dark"}>
+            <PaginationButton onClick={() => setPage(0)} disabled={page === 0}>
+                <Icon size={24} icon={chevronsLeft} />
+            </PaginationButton>{" "}
+            <PaginationButton
+                onClick={() => setPage(page > 0 ? page - 1 : 0)}
+                disabled={page === 0}
+            >
+                <Icon size={24} icon={chevronLeft} />
+            </PaginationButton>{" "}
+            <PaginationButton
+                onClick={() => {
+                    setPage(page <= numPages ? page + 1 : numPages);
+                }}
+                disabled={page === numPages}
+            >
+                <Icon size={24} icon={chevronRight} />
+            </PaginationButton>{" "}
+            <PaginationButton
+                onClick={() => {
+                    setPage(numPages);
+                }}
+                disabled={page === numPages}
+            >
+                <Icon size={24} icon={chevronsRight} />
+            </PaginationButton>{" "}
+            Page {page + 1} of {numPages + 1}{" "}
+        </PaginationContainer>
+    );
+};

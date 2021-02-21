@@ -43,13 +43,10 @@ export default function LeaderboardTable({ type, data }) {
                 accessor: "rank",
             },
             {
-                accessor: "url",
-            },
-            {
                 Header: "Username",
                 accessor: "username",
-                Cell: ({ row }) => (
-                    <Link to={row.values.url}>{row.values.username}</Link>
+                Cell: ({ row: { original, values } }) => (
+                    <Link to={original.url}> {values.username}</Link>
                 ),
             },
             {

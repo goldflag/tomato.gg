@@ -10,9 +10,9 @@ const parseURLParams = (search_string, opts) => {
     return retval;
 };
 
-const updateURLParams = (existing, updateKey, updateVal) => {
+const updateURLParams = (existing, newParams) => {
     const params = new URLSearchParams(existing);
-    params.set(updateKey, updateVal);
+    Object.entries(newParams).forEach(([key, val]) => params.set(key, val));
     return params.toString();
 };
 

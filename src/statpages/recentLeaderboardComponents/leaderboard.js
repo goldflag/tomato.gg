@@ -44,7 +44,9 @@ const PaginationContainer = styled.div`
     padding: 1rem;
     font-size: 0.8rem;
     background-color: ${({ theme }) =>
-        theme === "dark" ? css`rgba(40, 40, 50, 0.5)` : css`rgb(250, 250, 250)`};
+        theme === "dark"
+            ? css`rgba(40, 40, 50, 0.5)`
+            : css`rgb(250, 250, 250)`};
     color: ${({ theme }) =>
         theme === "dark" ? css`rgb(220, 220, 220)` : css`rgb(80, 80, 80)`};
 `;
@@ -96,14 +98,14 @@ export default function Leaderboard() {
         history.push(location.pathname + "?" + params);
     };
 
-    const setType = (t) =>
-        redirectWithParams(updateURLParams(location.search, "type", t));
-    const setTier = (t) =>
-        redirectWithParams(updateURLParams(location.search, "tier", t));
-    const setTime = (t) =>
-        redirectWithParams(updateURLParams(location.search, "time", t));
-    const setPage = (p) =>
-        redirectWithParams(updateURLParams(location.search, "page", p));
+    const setType = (type) =>
+        redirectWithParams(updateURLParams(location.search, { type }));
+    const setTier = (tier) =>
+        redirectWithParams(updateURLParams(location.search, { tier }));
+    const setTime = (time) =>
+        redirectWithParams(updateURLParams(location.search, { time }));
+    const setPage = (page) =>
+        redirectWithParams(updateURLParams(location.search, { page }));
 
     useEffect(() => {
         fetch(
