@@ -5,7 +5,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { TabPanel } from "../tabs/customTabs";
 import TopStats from "./topStats";
-import OverallStatsTable from "./overallStatsTable.js";
+import TopTable from "./topTable.js";
 import AllTankStats from "./allTankStats";
 import Charts from "./charts";
 import SessionsLogParent from "./sessions/sessionsLogParent";
@@ -92,7 +92,7 @@ export default function MainTabs(props) {
             </CustomTabs>
             <TabPanel value={value} index={0}>
                 <div style={{ margin: "1rem 0" }}>
-                    <OverallStatsTable data={props.graphData.overallStats} />
+                    <TopTable data={props.graphData.overallStats} />
                 </div>
                 <div style={{ padding: "0rem" }}>
                     <AllTankStats
