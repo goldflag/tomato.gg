@@ -15,7 +15,8 @@ import Treemap from "./treemap/treemap";
 export default function MainTabs(props) {
     const { theme } = useContext(ThemeContext);
     const [value, setValue] = useState(0);
-    const [hofData, setHofData] = useState("");
+    const [hofData, setHofData] = useState(null);
+    const [hofmainData, setHofmainData] = useState(null);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -130,6 +131,8 @@ export default function MainTabs(props) {
                         server={props.recentStats.server}
                         hofData={hofData}
                         setHofData={setHofData}
+                        hofmainData={hofmainData}
+                        setHofmainData={setHofmainData}
                     />
                 </div>
             </TabPanel>
