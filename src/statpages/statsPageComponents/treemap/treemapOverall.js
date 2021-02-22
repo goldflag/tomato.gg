@@ -73,11 +73,10 @@ export default function TreemapOverall(props) {
                     },
                 }}
                 data={props.data}
-                identity="name"
+                identity="id"
                 value="battles"
-                label={function (e) {
-                    return `${e.id}`;
-                }}
+                label={(e) => e.data.name}
+                parentLabel={(e) => e.data.name}
                 valueFormat=" >-.2~s"
                 margin={{ top: 10, right: 0, bottom: 0, left: 0 }}
                 outerPadding={3}

@@ -1,5 +1,5 @@
 // React
-import React, { useContext } from "react";
+import React from "react";
 
 // React-Icons-Kit
 import { Icon } from "react-icons-kit";

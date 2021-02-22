@@ -1,6 +1,4 @@
-import React, { useState, useContext } from "react";
-import styled from "styled-components";
-
+import React, { useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -95,8 +93,8 @@ export default function MainTabs(props) {
                 variant="scrollable"
                 scrollButtons="auto"
             >
-                {tabs.map(({ label, value }) => (
-                    <CustomTab label={label} value={value} />
+                {tabs.map(({ label, value }, i) => (
+                    <CustomTab label={label} value={value} key={i} />
                 ))}
             </CustomTabs>
             <TabPanel value={page} index={"main"}>

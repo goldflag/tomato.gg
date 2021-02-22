@@ -220,24 +220,31 @@ const ConditionalLink = ({ makeLink, ...props }) => {
     return <span {...props} />;
 };
 
-export default function HallOfFame(props) {
+export default function HallOfFame({
+    hofData,
+    hofmainData,
+    server,
+    id,
+    setHofData,
+    setHofmainData,
+}) {
     useEffect(() => {
-        if (props.hofData) return;
+        if (hofData && hofmainData) return;
 
-        const url = `${backend}/api/hof/${props.server}/${props.id}`;
-        const url2 = `${backend}/api/hofmain/${props.server}/${props.id}`;
+        const url = `${backend}/api/hof/${server}/${id}`;
+        const url2 = `${backend}/api/hofmain/${server}/${id}`;
 
         Promise.all([
             fetch(url).then((res) => res.json()),
             fetch(url2).then((res) => res.json()),
         ]).then(([hof, hofmain]) => {
-            props.setHofData(hof);
-            props.setHofmainData(hofmain);
+            setHofData(hof);
+            setHofmainData(hofmain);
         });
-    }, []);
+    }, [hofData, hofmainData, server, id, setHofData, setHofmainData]);
 
     const hof = () =>
-        props.hofData.above.map((row, i) => (
+        hofData.above.map((row, i) => (
             <ConditionalLink
                 key={i}
                 makeLink={row.rank && row.rank <= 500}
@@ -284,7 +291,7 @@ export default function HallOfFame(props) {
         ));
 
     const underHof = () =>
-        props.hofData.below.map((row, i) => (
+        hofData.below.map((row, i) => (
             <div className="box underbox" key={i}>
                 <img src={row.image} className="image" alt={row.name} />
                 <div className="name">
@@ -318,7 +325,8 @@ export default function HallOfFame(props) {
 
     let topTanks = <Loader color={null} bottom={20} top={20} />;
 
-    if (props.hofData && props.hofmainData) {
+    if (hofData && hofmainData) {
+        const { top } = hofmainData;
         const tankRow = hof();
         const tankRow2 = underHof();
         topTanks = (
@@ -333,94 +341,75 @@ export default function HallOfFame(props) {
                 <div className="overall">
                     <div className="overallTop">
                         <div className="overallItem">
-                            <span className="value">
-                                {props.hofmainData.top.winrate.value}%
-                            </span>
+                            <span className="value">{top.winrate.value}%</span>
                             <span className="bigLabel"> Winrate </span>
                             <div
                                 className="bigPercentile"
                                 style={{
                                     backgroundColor: colorConv(
                                         100 -
-                                            (props.hofmainData.top.winrate
-                                                .ranking *
-                                                100) /
-                                                props.hofmainData.top.total
+                                            (top.winrate.ranking * 100) /
+                                                top.total
                                     ),
                                 }}
                             >
                                 Better than{" "}
                                 {(
                                     100 -
-                                    (props.hofmainData.top.winrate.ranking *
-                                        100) /
-                                        props.hofmainData.top.total
+                                    (top.winrate.ranking * 100) / top.total
                                 ).toFixed(2)}
                                 %
                             </div>
-                            {props.hofmainData.top.winrate.ranking}
+                            {top.winrate.ranking}
                             <span className="bigLabel">Rank</span>
                         </div>
                         <div className="overallItem">
-                            <span className="value">
-                                {props.hofmainData.top.wn8.value}
-                            </span>
+                            <span className="value">{top.wn8.value}</span>
                             <span className="bigLabel"> WN8 </span>
                             <div
                                 className="bigPercentile"
                                 style={{
                                     backgroundColor: colorConv(
                                         100 -
-                                            (props.hofmainData.top.wn8.ranking *
-                                                100) /
-                                                props.hofmainData.top.total
+                                            (top.wn8.ranking * 100) / top.total
                                     ),
                                 }}
                             >
                                 Better than{" "}
                                 {(
                                     100 -
-                                    (props.hofmainData.top.wn8.ranking * 100) /
-                                        props.hofmainData.top.total
+                                    (top.wn8.ranking * 100) / top.total
                                 ).toFixed(2)}
                                 %
                             </div>
-                            {props.hofmainData.top.wn8.ranking}
+                            {top.wn8.ranking}
                             <span className="bigLabel">Rank</span>
                         </div>
                         <div className="overallItem">
-                            <span className="value">
-                                {props.hofmainData.top.kd.value}
-                            </span>
+                            <span className="value">{top.kd.value}</span>
                             <span className="bigLabel"> K/D Ratio </span>
                             <div
                                 className="bigPercentile"
                                 style={{
                                     backgroundColor: colorConv(
-                                        100 -
-                                            (props.hofmainData.top.kd.ranking *
-                                                100) /
-                                                props.hofmainData.top.total
+                                        100 - (top.kd.ranking * 100) / top.total
                                     ),
                                 }}
                             >
                                 Better than{" "}
                                 {(
                                     100 -
-                                    (props.hofmainData.top.kd.ranking * 100) /
-                                        props.hofmainData.top.total
+                                    (top.kd.ranking * 100) / top.total
                                 ).toFixed(2)}
                                 %
                             </div>
-                            {props.hofmainData.top.kd.ranking}
+                            {top.kd.ranking}
                             <span className="bigLabel">Rank</span>
                         </div>
                     </div>
                     <div className="overallBottom">
                         <div className="overallItem">
-                            <span className="value">
-                                {props.hofmainData.top.battles.value}
-                            </span>
+                            <span className="value">{top.battles.value}</span>
                             <span className="bigLabel"> Battles </span>
                             <div
                                 className="bigPercentile"
@@ -429,98 +418,79 @@ export default function HallOfFame(props) {
                                 More than{" "}
                                 {(
                                     100 -
-                                    (props.hofmainData.top.battles.ranking *
-                                        100) /
-                                        props.hofmainData.top.total
+                                    (top.battles.ranking * 100) / top.total
                                 ).toFixed(2)}
                                 %
                             </div>
-                            {props.hofmainData.top.battles.ranking}
+                            {top.battles.ranking}
                             <span className="bigLabel">Rank</span>
                         </div>
                         <div className="overallItem">
-                            <span className="value">
-                                {props.hofmainData.top.dpg.value}
-                            </span>
+                            <span className="value">{top.dpg.value}</span>
                             <span className="bigLabel"> Damage Per Game </span>
                             <div
                                 className="bigPercentile"
                                 style={{
                                     backgroundColor: colorConv(
                                         100 -
-                                            (props.hofmainData.top.dpg.ranking *
-                                                100) /
-                                                props.hofmainData.top.total
+                                            (top.dpg.ranking * 100) / top.total
                                     ),
                                 }}
                             >
                                 Better than{" "}
                                 {(
                                     100 -
-                                    (props.hofmainData.top.dpg.ranking * 100) /
-                                        props.hofmainData.top.total
+                                    (top.dpg.ranking * 100) / top.total
                                 ).toFixed(2)}
                                 %
                             </div>
-                            {props.hofmainData.top.dpg.ranking}
+                            {top.dpg.ranking}
                             <span className="bigLabel">Rank</span>
                         </div>
                         <div className="overallItem">
-                            <span className="value">
-                                {props.hofmainData.top.dmg_ratio.value}
-                            </span>
+                            <span className="value">{top.dmg_ratio.value}</span>
                             <span className="bigLabel"> Damage Ratio </span>
                             <div
                                 className="bigPercentile"
                                 style={{
                                     backgroundColor: colorConv(
                                         100 -
-                                            (props.hofmainData.top.dmg_ratio
-                                                .ranking *
-                                                100) /
-                                                props.hofmainData.top.total
+                                            (top.dmg_ratio.ranking * 100) /
+                                                top.total
                                     ),
                                 }}
                             >
                                 Better than{" "}
                                 {(
                                     100 -
-                                    (props.hofmainData.top.dmg_ratio.ranking *
-                                        100) /
-                                        props.hofmainData.top.total
+                                    (top.dmg_ratio.ranking * 100) / top.total
                                 ).toFixed(2)}
                                 %
                             </div>
-                            {props.hofmainData.top.dmg_ratio.ranking}
+                            {top.dmg_ratio.ranking}
                             <span className="bigLabel">Rank</span>
                         </div>
                         <div className="overallItem">
-                            <span className="value">
-                                {props.hofmainData.top.frags.value}
-                            </span>
+                            <span className="value">{top.frags.value}</span>
                             <span className="bigLabel"> Frags Per Game </span>
                             <div
                                 className="bigPercentile"
                                 style={{
                                     backgroundColor: colorConv(
                                         100 -
-                                            (props.hofmainData.top.frags
-                                                .ranking *
-                                                100) /
-                                                props.hofmainData.top.total
+                                            (top.frags.ranking * 100) /
+                                                top.total
                                     ),
                                 }}
                             >
                                 Better than{" "}
                                 {(
                                     100 -
-                                    (props.hofmainData.top.frags.ranking *
-                                        100) /
-                                        props.hofmainData.top.total
+                                    (top.frags.ranking * 100) / top.total
                                 ).toFixed(2)}
                                 %
                             </div>
-                            {props.hofmainData.top.frags.ranking}
+                            {top.frags.ranking}
                             <span className="bigLabel">Rank</span>
                         </div>
                     </div>

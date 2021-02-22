@@ -8,7 +8,6 @@ export const useURLState = (key, defaultVal, type) => {
     const redir = (params) => {
         const path = window.location.pathname + "?" + params.toString();
         history.push(path);
-        console.log(path);
     };
 
     const setState = (val) => {
