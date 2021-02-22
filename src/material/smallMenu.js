@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ThemeContext } from "../context";
+
 import { Link } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
@@ -75,8 +75,6 @@ export default function TemporaryDrawer() {
         top: false,
     });
 
-    const { theme } = React.useContext(ThemeContext);
-
     const toggleDrawer = (anchor, open) => (event) => {
         if (
             event.type === "keydown" &&
@@ -89,13 +87,13 @@ export default function TemporaryDrawer() {
     };
 
     const textStyle = {
-        color: theme === "dark" ? "rgb(255, 255, 255)" : "rgb(31, 45, 90)",
+        color: "rgb(255, 255, 255)",
     };
 
     const list = (anchor) => (
         <Styles>
             <div
-                className={theme === "dark" ? "dark-mode" : "light-mode"}
+                className={"dark-mode"}
                 role="presentation"
                 onClick={toggleDrawer(anchor, false)}
                 onKeyDown={toggleDrawer(anchor, false)}

@@ -12,7 +12,7 @@ import {
 } from "react-table";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
-import { ThemeContext } from "../../context";
+
 import {
     ClassFilter,
     GlobalFilter,
@@ -32,8 +32,6 @@ import {
 import cellStyle from "../../functions/cellStyle";
 
 function WN8Table(props) {
-    const { theme } = React.useContext(ThemeContext);
-
     let data = props.data;
 
     // Define a default UI for filtering
@@ -158,7 +156,7 @@ function WN8Table(props) {
                         </ButtonFiltersContainer>
                     ))}
                 </FiltersContainer>
-                <StyledTable theme={theme} {...getTableProps()}>
+                <StyledTable {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <>
@@ -334,7 +332,7 @@ function WN8Table(props) {
     // Update data. So we can keep track of that flag with a ref.
 
     return (
-        <TableContainer theme={theme}>
+        <TableContainer>
             <Table columns={columns} data={data} />
         </TableContainer>
     );

@@ -13,7 +13,7 @@ import { Button, ButtonGroup } from "@material-ui/core";
 
 // LOCAL
 import LeaderboardTable from "./leaderboardTable";
-import Loader from "../../components/loader";
+import { Loader } from "../../components";
 import serverConv from "../../data/serverConv";
 import { useURLState } from "../../functions/hooks";
 

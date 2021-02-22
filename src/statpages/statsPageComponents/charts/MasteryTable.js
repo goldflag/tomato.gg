@@ -1,33 +1,30 @@
 import React from "react";
-import { ThemeContext } from "../../../context";
 
 export default function MasteryTable(props) {
-    const { theme } = React.useContext(ThemeContext);
-
     const demo = {
         padding: 5,
         fontSize: "1rem",
         width: "100%",
         height: "200px",
-        color: theme === "dark" ? "rgb(240, 240, 240)" : "rgb(40, 40, 40)",
+        color: "rgb(240, 240, 240)",
     };
 
     const tt = {
         maxheight: "20px",
         padding: "9px",
-        background: theme === "dark" ? "rgba(70, 70, 100, 0.5)" : "rgb(220, 220, 225)",
+        background: "rgba(70, 70, 100, 0.5)",
     };
 
     const td = {
         maxheight: "20px",
         padding: "9px",
-        background: theme === "dark" ? "rgba(50, 50, 80, 0.5)" : "rgb(242, 243, 247)",
+        background: "rgba(50, 50, 80, 0.5)",
     };
 
     const tdc = {
         maxheight: "20px",
         padding: "9px",
-        background: theme === "dark" ? "rgba(40, 40, 70, 0.5)" : "rgb(252, 252, 254)",
+        background: "rgba(40, 40, 70, 0.5)",
     };
 
     const rows = [

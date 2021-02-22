@@ -4,7 +4,6 @@ import { useTable } from "react-table";
 import styled from "styled-components";
 import WN8c from "../../functions/WN8color";
 import WRc from "../../functions/WRcolor";
-import { ThemeContext } from "../../context";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -22,39 +21,23 @@ const Styles = styled.div`
         tr {
             :last-child {
                 td {
-                    border-bottom: solid 1px
-                        ${({ theme }) =>
-                            theme === "dark"
-                                ? "rgb(100, 100, 100)"
-                                : "rgb(200, 200, 200)"};
+                    border-bottom: solid 1px rgb(100, 100, 100);
                 }
             }
-            background-color: ${({ theme }) =>
-                theme === "dark" ? "rgb(40, 40, 40)" : "rgb(250, 250, 250)"};
+            background-color: rgb(40, 40, 40);
             :nth-child(even) {
-                background-color: ${({ theme }) =>
-                    theme === "dark"
-                        ? "rgb(50, 50, 50)"
-                        : "rgb(240, 240, 240)"};
+                background-color: rgb(50, 50, 50);
             }
             :hover {
-                background-color: ${({ theme }) =>
-                    theme === "dark"
-                        ? "rgb(30, 30, 30)"
-                        : "rgb(220, 220, 230)"};
+                background-color: rgb(30, 30, 30);
             }
         }
         th {
             text-align: left;
             padding: 10px;
-            background-color: ${({ theme }) =>
-                theme === "dark" ? "rgb(50, 50, 50)" : "rgb(255, 255, 255)"};
+            background-color: rgb(50, 50, 50);
             // color: black;
-            border-bottom: solid 1px
-                ${({ theme }) =>
-                    theme === "dark"
-                        ? "rgb(100, 100, 100)"
-                        : "rgb(200, 200, 200)"};
+            border-bottom: solid 1px rgb(100, 100, 100);
             font-weight: 500;
         }
         td {
@@ -68,8 +51,6 @@ const Styles = styled.div`
     }
 `;
 export default function SmallLeaderboard(props) {
-    const { theme } = React.useContext(ThemeContext);
-
     const [data, setData] = useState([
         { rank: "1", username: "loading...", battles: "", avgtier: "", "": "" },
         { rank: "2", username: "loading...", battles: "", avgtier: "", "": "" },
@@ -239,7 +220,7 @@ export default function SmallLeaderboard(props) {
     } = useTable({ columns, data });
 
     return (
-        <Styles theme={theme}>
+        <Styles>
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (

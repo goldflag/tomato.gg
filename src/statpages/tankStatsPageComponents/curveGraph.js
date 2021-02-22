@@ -1,10 +1,7 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
-import { ThemeContext } from "../../context";
 
 export default function CurveGraph(props) {
-    const { theme } = React.useContext(ThemeContext);
-
     let ticks = [
         42,
         43,
@@ -138,16 +135,10 @@ export default function CurveGraph(props) {
         <div style={{ height: "calc(310px)" }}>
             <ResponsiveLine
                 theme={{
-                    textColor:
-                        theme === "dark"
-                            ? "rgb(210, 210, 210)"
-                            : "rgb(100, 100, 100)",
+                    textColor: "rgb(210, 210, 210)",
                     grid: {
                         line: {
-                            stroke:
-                                theme === "dark"
-                                    ? "rgb(100, 100, 100)"
-                                    : "rgb(210, 210, 210)",
+                            stroke: "rgb(100, 100, 100)",
                             strokeWidth: 1,
                         },
                     },
@@ -217,10 +208,7 @@ export default function CurveGraph(props) {
                         symbolSize: 12,
                         symbolShape: "circle",
                         symbolBorderColor: "rgba(0, 0, 0, .5)",
-                        itemTextColor:
-                            theme === "dark"
-                                ? "rgb(210, 210, 210)"
-                                : "rgb(100,100,100)",
+                        itemTextColor: "rgb(210, 210, 210)",
                         effects: [
                             {
                                 on: "hover",

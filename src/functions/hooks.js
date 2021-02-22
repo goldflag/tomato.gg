@@ -3,26 +3,28 @@ import { useHistory, useLocation } from "react-router-dom";
 
 export const useURLState = (key, defaultVal) => {
     const history = useHistory();
-    const location = useLocation();
+    useLocation(); // used to update hook on location change
 
     const redir = (params) => {
-        history.push(location.pathname + "?" + params.toString());
+        const path = window.location.pathname + "?" + params.toString();
+        history.push(path);
+        console.log(path);
     };
 
     const setState = (val) => {
-        const params = new URLSearchParams(location.search);
+        const params = new URLSearchParams(window.location.search);
         params.set(key, val);
         redir(params);
     };
 
     const unsetState = () => {
-        const params = new URLSearchParams(location.search);
+        const params = new URLSearchParams(window.location.search);
         params.delete(key);
         redir(params);
     };
 
     const getState = () => {
-        const params = new URLSearchParams(location.search);
+        const params = new URLSearchParams(window.location.search);
         if (!params.has(key)) return defaultVal;
         let val = params.get(key);
         if (typeof defaultVal === "number") val = parseInt(val);

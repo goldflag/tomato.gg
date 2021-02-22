@@ -3,14 +3,13 @@ import { withRouter } from "react-router-dom";
 import "./css/search.css";
 import SearchBar from "./material/searchBar";
 import TomatoLogo from "./assets/tomato.png";
-import { ThemeContext, ServerContext, SearchHistoryContext } from "./context";
+import { ServerContext, SearchHistoryContext } from "./context";
 //import LeaderboardGrid from "./statpages/searchComponents/leaderboardGrid";
 import serverConv from "./data/serverConv";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
 export default withRouter(function Search(props) {
-    const { theme } = useContext(ThemeContext);
     const { server, toggleServer } = useContext(ServerContext);
     const { addToHistory } = useContext(SearchHistoryContext);
     const [name, setName] = useState("");
@@ -40,8 +39,8 @@ export default withRouter(function Search(props) {
     };
 
     return (
-        <div className={"backbackground"}>
-            <div className={theme === "dark" ? "backgrounddark" : "background"}>
+        <div className="backbackground">
+            <div className="backgrounddark">
                 <div className="center">
                     <div>
                         <img

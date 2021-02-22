@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import ReactGA from "react-ga";
-import { ThemeContext, ServerContext } from "../context";
+import { ServerContext } from "../context";
 import MoETable from "./MoEPageComponents/MoETable";
 import MoETracker from "./MoEPageComponents/MoETracker";
 import { TabPanel, CustomTabs, CustomTab } from "./tabs/customTabs";
@@ -8,8 +8,7 @@ import tankNames from "../data/tankNames.json";
 import nationConversion from "../data/nationConversion";
 import classConversion from "../data/classConversion.json";
 import serverConv from "../data/serverConv";
-import { FullPageTableWrapper, Info } from "../components";
-import Loader from "../components/loader";
+import { Loader, FullPageTableWrapper, Info } from "../components";
 
 const tierConv = {
     1: "I",
@@ -27,7 +26,6 @@ const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
 export default function MoEPage(props) {
-    const { theme } = useContext(ThemeContext);
     const { server } = useContext(ServerContext);
 
     const [data, setData] = useState();
@@ -103,7 +101,7 @@ export default function MoEPage(props) {
 
     return (
         <FullPageTableWrapper>
-            <Info theme={theme}>
+            <Info>
                 <span style={{ fontSize: "2rem", fontWeight: "500" }}>
                     {serverConv[server]} Marks of Excellence Requirements
                 </span>

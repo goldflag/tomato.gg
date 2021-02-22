@@ -9,7 +9,7 @@ import Box from "@material-ui/core/Box";
 import WRCurves from "../../data/WRCurves.json";
 import WN8Curves from "../../data/WN8Curves.json";
 import CurveGraph from "../tankStatsPageComponents/curveGraph";
-import { ThemeContext } from "../../context";
+
 import "../../css/tankstats.css";
 
 function TabPanel(props) {
@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CurveExamples() {
-    const { theme } = React.useContext(ThemeContext);
     const classes = useStyles();
     const t = useTheme();
     const [value, setValue] = React.useState(0);
@@ -66,8 +65,7 @@ export default function CurveExamples() {
         <div className={classes.root}>
             <div
                 style={{
-                    backgroundColor:
-                        theme === "dark" ? "rgb(45, 45, 45)" : "white",
+                    backgroundColor: "rgb(45, 45, 45)",
                 }}
             >
                 <AppBar position="static" color="default">

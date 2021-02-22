@@ -12,6 +12,7 @@ import {
     LibraryBooks,
     FormatListNumbered,
 } from "@material-ui/icons";
+import { NewIcon } from "./components";
 
 const LINKS = [
     { url: "/", title: "Home", Icon: Apps },
@@ -61,7 +62,7 @@ const Styles = styled.div`
     }
 
     .layer {
-        backdrop-filter: blur( 2px );
+        backdrop-filter: blur(2px);
         background-color: rgba(24, 25, 92, 0.7);
         top: 0;
         left: 0;
@@ -200,9 +201,7 @@ const Sidebar = withRouter((props) => {
                             <Link to={url} className="menu-link" key={url}>
                                 <Icon className="menu-link-icon" />
                                 &nbsp;&nbsp;{title}&nbsp;&nbsp;
-                                {newIcon === true ? (
-                                    <span className="new">NEW! </span>
-                                ) : null}
+                                {newIcon ? <NewIcon /> : null}
                             </Link>
                         ))}
                     </div>
@@ -219,7 +218,7 @@ const Sidebar = withRouter((props) => {
                             fontSize: "0.8rem",
                             fontWeight: "400",
                             color: "rgb(161, 181, 214)",
-                            backdropFilter: 'blur( 4px )'
+                            backdropFilter: "blur( 4px )",
                         }}
                     >
                         <h2

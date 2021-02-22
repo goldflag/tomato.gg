@@ -1,29 +1,18 @@
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
-import { ThemeContext } from "../../../context";
 
 export default function ClassDistribution(props) {
-    const { theme } = React.useContext(ThemeContext);
     return (
         <div style={{ height: "calc(300px)" }}>
             <ResponsivePie
                 theme={{
                     fontFamily: "Roboto Mono",
-                    textColor:
-                        theme === "dark"
-                            ? "rgb(255, 255, 255)"
-                            : "rgb(100,100,100)",
+                    textColor: "rgb(255, 255, 255)",
                     tooltip: {
                         container: {
-                            backdropFilter: 'blur( 7px )',
-                            background:
-                                theme === "dark"
-                                    ? "rgb(40, 40, 70, 0.8)"
-                                    : "rgb(255, 255, 255)",
-                            color:
-                                theme === "dark"
-                                    ? "rgb(255, 255, 255)"
-                                    : "rgb(40, 40, 40)",
+                            backdropFilter: "blur( 7px )",
+                            background: "rgb(40, 40, 70, 0.8)",
+                            color: "rgb(255, 255, 255)",
                         },
                     },
                 }}
@@ -41,9 +30,7 @@ export default function ClassDistribution(props) {
                 borderWidth={2}
                 borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
                 radialLabelsTextXOffset={6}
-                radialLabelsTextColor={
-                    theme === "dark" ? "rgb(210, 210, 210)" : "rgb(100,100,100)"
-                }
+                radialLabelsTextColor={"rgb(210, 210, 210)"}
                 radialLabelsLinkOffset={0}
                 radialLabelsLinkDiagonalLength={10}
                 radialLabelsLinkHorizontalLength={10}

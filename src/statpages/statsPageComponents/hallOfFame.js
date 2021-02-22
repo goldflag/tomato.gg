@@ -1,8 +1,11 @@
+// NPM
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import Loader from "../../components/loader";
 import { Scrollbars } from "react-custom-scrollbars";
 import { Link } from "react-router-dom";
+
+// LOCAL
+import { Loader } from "../../components";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -72,7 +75,7 @@ const Styles = styled.div`
         box-shadow: 0px 2px 3px rgb(30, 30, 30);
         background-color: rgb(40, 40, 40, 0.4);
         font-size: 1.5rem;
-        backdrop-filter: blur( 7px );
+        backdrop-filter: blur(7px);
     }
 
     .value {
@@ -123,7 +126,7 @@ const Styles = styled.div`
         height: 290px;
         transition: 0.4s ease;
         box-shadow: 0px 2px 3px rgb(30, 30, 30);
-        backdrop-filter: blur( 7px );
+        backdrop-filter: blur(7px);
     }
 
     .abovebox {
@@ -210,23 +213,16 @@ const Styles = styled.div`
         align-items: center;
         margin: 0.1rem 1rem;
     }
-
-    .loader {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 18%;
-    }
-
-    .loadingCircle {
-        max-width: 75px;
-    }
 `;
+
+const ConditionalLink = ({ makeLink, ...props }) => {
+    if (makeLink) return <Link {...props} />;
+    return <span {...props} />;
+};
 
 export default function HallOfFame(props) {
     useEffect(() => {
         if (props.hofData == null) {
-            console.log("getting data");
             getData();
         }
     }, []);
@@ -243,9 +239,13 @@ export default function HallOfFame(props) {
     }
 
     const hof = () =>
-        console.log(props.hofData) ||
-        props.hofData.above.map((row, i) => (
-            <Link className="box abovebox" to={`/tank/${row.tank_id}?rank=${row.rank}`} target="_blank">
+        props.hofData.above.map((row) => (
+            <ConditionalLink
+                makeLink={row.rank && row.rank <= 500}
+                className="box abovebox"
+                to={`/tank/${row.tank_id}?rank=${row.rank}`}
+                target="_blank"
+            >
                 <img src={row.image} className="image" alt={row.name} />
                 <div className="name">
                     {tierConv[row.tier]} - {row.name}
@@ -281,7 +281,7 @@ export default function HallOfFame(props) {
                         <div className="label">Winrate</div>
                     </div>
                 </div>
-            </Link>
+            </ConditionalLink>
         ));
 
     const underHof = () =>

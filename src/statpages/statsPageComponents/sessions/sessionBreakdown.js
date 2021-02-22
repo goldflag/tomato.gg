@@ -1,6 +1,6 @@
 import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
-import { ThemeContext } from "../../../context";
+
 import { Pagination } from "../../../components";
 import { StyledTable, Name } from "../../../components/tableComponents";
 import cellStyle from "../../../functions/cellStyle";
@@ -19,7 +19,6 @@ const tierConv = {
 };
 
 export default function SessionBreakdown(props) {
-    const { theme } = React.useContext(ThemeContext);
     const data = props.data;
 
     const columns = React.useMemo(
@@ -132,7 +131,7 @@ export default function SessionBreakdown(props) {
 
     return (
         <>
-            <StyledTable theme={theme} {...getTableProps()}>
+            <StyledTable {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>

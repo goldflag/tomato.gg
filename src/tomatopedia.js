@@ -16,7 +16,6 @@ import MasteryExpected from "./statpages/masteryPage";
 
 import "./css/body.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { ThemeContext } from "./context";
 const trackingId = process.env.REACT_APP_GA;
 
 export default function Tomatopedia() {
@@ -25,11 +24,9 @@ export default function Tomatopedia() {
         ReactGA.pageview("/");
     }, []);
 
-    const { theme } = React.useContext(ThemeContext);
-
     return (
         <Router>
-            <div className={theme === "dark" ? "dark-mode" : "light-mode"}>
+            <div className="dark-mode">
                 <Sidebar />
                 <Topbar />
                 <main className="wrapper">

@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsiveTreeMap } from "@nivo/treemap";
-import { ThemeContext } from "../../../context";
+
 import styled from "styled-components";
 import { MoEStars } from "../../../components/moeStars";
 
@@ -54,15 +54,11 @@ const CustomColor = styled.div`
 `;
 
 export default function TreemapOverall(props) {
-    const { theme } = React.useContext(ThemeContext);
     return (
         <div style={{ height: "75vh" }}>
             <ResponsiveTreeMap
                 theme={{
-                    textColor:
-                        theme === "dark"
-                            ? "rgb(210, 210, 210)"
-                            : "rgb(100,100,100)",
+                    textColor: "rgb(210, 210, 210)",
                     textWeight: 600,
                     fontSize: 13,
                     fontWeight: 500,
@@ -70,15 +66,9 @@ export default function TreemapOverall(props) {
                     tooltip: {
                         fontFamily: "Roboto Mono",
                         container: {
-                            backdropFilter: 'blur( 7px )',
-                            background:
-                                theme === "dark"
-                                    ? "rgb(40, 40, 70, 0.8)"
-                                    : "rgb(255, 255, 255)",
-                            color:
-                                theme === "dark"
-                                    ? "rgb(255, 255, 255)"
-                                    : "rgb(40, 40, 40)",
+                            backdropFilter: "blur( 7px )",
+                            background: "rgb(40, 40, 70, 0.8)",
+                            color: "rgb(255, 255, 255)",
                         },
                     },
                 }}

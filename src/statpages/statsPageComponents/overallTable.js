@@ -8,7 +8,7 @@ import {
     useGlobalFilter,
 } from "react-table";
 import { matchSorter } from "match-sorter";
-import { ThemeContext } from "../../context";
+
 import { MoEStars, Pagination } from "../../components";
 import {
     ClassFilter,
@@ -72,8 +72,6 @@ const Styles = styled.div`
 `;
 
 function OverallTable(props) {
-    const { theme } = React.useContext(ThemeContext);
-
     let data = props.data;
 
     // Define a default UI for filtering
@@ -133,7 +131,7 @@ function OverallTable(props) {
                         padding: "0px 15px",
                         borderRadius: "5px",
                         backgroundColor: "rgba(100, 100, 150, 0.5)",
-                        color: "white"
+                        color: "white",
                     }}
                 />
                 to
@@ -155,7 +153,7 @@ function OverallTable(props) {
                         padding: "0px 15px",
                         borderRadius: "5px",
                         backgroundColor: "rgba(100, 100, 150, 0.5)",
-                        color: "white"
+                        color: "white",
                     }}
                 />
             </>
@@ -364,7 +362,7 @@ function OverallTable(props) {
         return (
             <>
                 <FiltersContainer>
-                    <div style={{marginBottom: "-10px"}}>
+                    <div style={{ marginBottom: "-10px" }}>
                         <GlobalFilter
                             preGlobalFilteredRows={preGlobalFilteredRows}
                             globalFilter={state.globalFilter}
@@ -399,7 +397,7 @@ function OverallTable(props) {
                         );
                     })}
                 </FiltersContainer>
-                <StyledTable theme={theme} {...getTableProps()}>
+                <StyledTable {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -444,7 +442,7 @@ function OverallTable(props) {
                                         ))}
                                     </tr>
                                     {row.isExpanded ? (
-                                        <SubRow theme={theme}>
+                                        <SubRow>
                                             <td colSpan={visibleColumns.length}>
                                                 {renderRowSubComponent({ row })}
                                             </td>
@@ -630,7 +628,7 @@ function OverallTable(props) {
     );
 
     return (
-        <TableContainer theme={theme}>
+        <TableContainer>
             <Table columns={columns} data={data} />
         </TableContainer>
     );

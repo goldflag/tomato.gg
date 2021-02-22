@@ -4,14 +4,12 @@ import { Link } from "react-router-dom";
 import { useTable } from "react-table";
 
 // LOCAL
-import { ThemeContext } from "../../context";
+
 import { StyledTable, TableContainer } from "../../components/tableComponents";
 import WN8c from "../../functions/WN8color";
 import WRc from "../../functions/WRcolor";
 
 export default function LeaderboardTable({ type, data }) {
-    const { theme } = React.useContext(ThemeContext);
-
     function setColor(column, value) {
         if (column === "wn8")
             return {
@@ -113,8 +111,8 @@ export default function LeaderboardTable({ type, data }) {
         },
     });
     return (
-        <TableContainer theme={theme}>
-            <StyledTable theme={theme} {...getTableProps()}>
+        <TableContainer>
+            <StyledTable {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>

@@ -9,21 +9,16 @@ import { chevronsRight } from "react-icons-kit/feather/chevronsRight";
 import { chevronsLeft } from "react-icons-kit/feather/chevronsLeft";
 
 // Styled-Components
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 // Local
-import { ThemeContext } from "../context";
 
 const PaginationContainer = styled.div`
     font-family: Roboto Mono;
     padding: 1rem;
     font-size: 0.8rem;
-    background-color: ${({ theme }) =>
-        theme === "dark"
-            ? css`rgba(40, 40, 50, 0.5)`
-            : css`rgb(250, 250, 250)`};
-    color: ${({ theme }) =>
-        theme === "dark" ? css`rgb(220, 220, 220)` : css`rgb(80, 80, 80)`};
+    background-color: rgba(40, 40, 50, 0.5);
+    color: rgb(220, 220, 220);
     backdrop-filter: blur(7px);
 `;
 
@@ -49,14 +44,12 @@ const PaginationButton = styled.button`
 `;
 
 export const Pagination = (props) => {
-    const { theme } = useContext(ThemeContext);
-
     if (props.pageSizes[0] >= props.pageSize * props.pageOptions.length)
         // hide component when there's no pagination to be done
         return null;
 
     return (
-        <PaginationContainer theme={theme}>
+        <PaginationContainer>
             <PaginationButton
                 onClick={() => props.gotoPage(0)}
                 disabled={!props.canPreviousPage}
@@ -132,7 +125,7 @@ export const Pagination = (props) => {
 
 export const ServerPagination = ({ page, numPages, setPage }) => {
     return (
-        <PaginationContainer theme={"dark"}>
+        <PaginationContainer>
             <PaginationButton onClick={() => setPage(0)} disabled={page === 0}>
                 <Icon size={24} icon={chevronsLeft} />
             </PaginationButton>{" "}

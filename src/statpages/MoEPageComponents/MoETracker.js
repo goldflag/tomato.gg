@@ -12,25 +12,23 @@ import {
 } from "react-table";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
-import { ThemeContext, ServerContext } from "../../context";
+import { ServerContext } from "../../context";
 import MoEGraph from "./MoEGraph";
-import { Pagination } from "../../components";
 import {
+    Loader,
+    Pagination,
     ClassFilter,
     GlobalFilter,
     MoETierFilter,
     NationFilter,
     PremFilter,
     arrayFilterFn,
-} from "../../components/tableFilters";
-import {
     ButtonFiltersContainer,
     FiltersContainer,
     StyledTable,
     SubRow,
     TableContainer,
-} from "../../components/tableComponents";
-import Loader from "../../components/loader";
+} from "../../components";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -41,7 +39,6 @@ const MoEConv = {
 };
 
 function MoETracker(props) {
-    const { theme } = useContext(ThemeContext);
     const { server } = useContext(ServerContext);
 
     let data = props.data;
@@ -153,10 +150,7 @@ function MoETracker(props) {
                 return (
                     <div
                         style={{
-                            backgroundColor:
-                                theme === "dark"
-                                    ? "rgba(40, 40, 70, 0.5)"
-                                    : "rgb(255, 255, 255)",
+                            backgroundColor: "rgba(40, 40, 70, 0.5)",
                             marginLeft: "-0.5rem",
                         }}
                     >
@@ -165,7 +159,11 @@ function MoETracker(props) {
                 );
             } else {
                 return (
-                    <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={20} top={20} />
+                    <Loader
+                        color={"rgba(40, 40, 70, 0.5)"}
+                        bottom={20}
+                        top={20}
+                    />
                 );
             }
         }
@@ -202,7 +200,7 @@ function MoETracker(props) {
         return (
             <>
                 <FiltersContainer>
-                    <div style={{marginBottom: "-10px"}}>
+                    <div style={{ marginBottom: "-10px" }}>
                         <GlobalFilter
                             preGlobalFilteredRows={preGlobalFilteredRows}
                             globalFilter={state.globalFilter}
@@ -220,7 +218,7 @@ function MoETracker(props) {
                         </ButtonFiltersContainer>
                     ))}
                 </FiltersContainer>
-                <StyledTable theme={theme} {...getTableProps()}>
+                <StyledTable {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -281,7 +279,7 @@ function MoETracker(props) {
                                         ))}
                                     </tr>
                                     {row.isExpanded ? (
-                                        <SubRow theme={theme}>
+                                        <SubRow>
                                             <td colSpan={visibleColumns.length}>
                                                 {renderRowSubComponent({ row })}
                                             </td>
@@ -480,7 +478,7 @@ function MoETracker(props) {
     );
 
     return (
-        <TableContainer theme={theme}>
+        <TableContainer>
             <Table columns={columns} data={data} />
         </TableContainer>
     );

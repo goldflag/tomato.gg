@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
-import { ThemeContext } from "../../context";
+import styled from "styled-components";
+
 import { withStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -11,9 +12,40 @@ import Charts from "./charts";
 import SessionsLogParent from "./sessions/sessionsLogParent";
 import HallOfFame from "./hallOfFame";
 import Treemap from "./treemap/treemap";
+import { NewIcon } from "../../components";
+
+const CustomTabs = withStyles({
+    root: {
+        elevation: 10,
+        borderBottom: "1px solid rgb(200, 200, 200)",
+    },
+    indicator: {
+        display: "flex",
+        justifyContent: "center",
+        backgroundColor: "rgb(200, 200, 200)",
+    },
+})(Tabs);
+
+const CustomTab = withStyles((t) => ({
+    root: {
+        textTransform: "none",
+        fontWeight: 600,
+        fontSize: "0.9rem",
+        marginRight: t.spacing(4),
+        fontFamily: "Segoe UI, Futura",
+        color: "rgb(240, 240, 240)",
+        "&:hover": {
+            color: "rgb(142, 147, 245)",
+            opacity: 1,
+        },
+        "&$selected": {
+            color: "rgb(191, 185, 250)",
+        },
+    },
+    selected: {},
+}))((props) => <Tab disableRipple {...props} />);
 
 export default function MainTabs(props) {
-    const { theme } = useContext(ThemeContext);
     const [value, setValue] = useState(0);
     const [hofData, setHofData] = useState(null);
     const [hofmainData, setHofmainData] = useState(null);
@@ -21,46 +53,6 @@ export default function MainTabs(props) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-    const CustomTabs = withStyles({
-        root: {
-            elevation: 10,
-            borderBottom: `1px solid ${
-                theme === "dark" ? "rgb(200, 200, 200)" : "rgb(57, 82, 150)"
-            }`,
-        },
-        indicator: {
-            display: "flex",
-            justifyContent: "center",
-            backgroundColor:
-                theme === "dark" ? "rgb(200, 200, 200)" : "rgb(57, 82, 150)",
-        },
-    })(Tabs);
-
-    const CustomTab = withStyles((t) => ({
-        root: {
-            textTransform: "none",
-            fontWeight: 600,
-            fontSize: "0.9rem",
-            marginRight: t.spacing(4),
-            fontFamily: "Segoe UI, Futura",
-            color: theme === "dark" ? "rgb(240, 240, 240)" : "black",
-            "&:hover": {
-                color:
-                    theme === "dark"
-                        ? "rgb(142, 147, 245)"
-                        : "rgb(113, 106, 230)",
-                opacity: 1,
-            },
-            "&$selected": {
-                color:
-                    theme === "dark"
-                        ? "rgb(191, 185, 250)"
-                        : "rgb(78, 71, 186)",
-            },
-        },
-        selected: {},
-    }))((props) => <Tab disableRipple {...props} />);
 
     return (
         <>
@@ -87,8 +79,20 @@ export default function MainTabs(props) {
                 <CustomTab label="MAIN STATS" />
                 <CustomTab label="INFOGRAPHICS" />
                 <CustomTab label="SESSIONS" />
-                <CustomTab label="TREEMAP (NEW!)" />
-                <CustomTab label="HALL OF FAME (NEW!)" />
+                <CustomTab
+                    label={
+                        <div>
+                            TREEMAP <NewIcon />
+                        </div>
+                    }
+                />
+                <CustomTab
+                    label={
+                        <div>
+                            HALL OF FAME <NewIcon />
+                        </div>
+                    }
+                />
             </CustomTabs>
             <TabPanel value={value} index={0}>
                 <div style={{ margin: "1rem 0" }}>

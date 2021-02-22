@@ -7,8 +7,7 @@ import SmallSearchBar from "./material/smallSearchBar";
 import DiscordLogo from "./assets/Discord.svg";
 import SmallMenu from "./material/smallMenu";
 import { withRouter } from "react-router-dom";
-import DarkModeToggle from "react-dark-mode-toggle";
-import { ThemeContext, ServerContext, SearchHistoryContext } from "./context";
+import { ServerContext, SearchHistoryContext } from "./context";
 import serverConv from "./data/serverConv";
 import { IconButton, Chip, Avatar } from "@material-ui/core";
 import { DeleteOutline } from "@material-ui/icons";
@@ -114,7 +113,6 @@ const Styles = styled.div`
     }
 `;
 export default withRouter(function Topbar(props) {
-    const { theme, toggleTheme } = useContext(ThemeContext);
     const { server, toggleServer } = useContext(ServerContext);
     const {
         history,
@@ -126,6 +124,7 @@ export default withRouter(function Topbar(props) {
     const [mode, setMode] = useState("Player");
 
     const redirectToPlayerStatsPage = (playerName, playerID, playerServer) => {
+        toggleServer(playerServer);
         props.history.push(
             `/stats/${serverConv[playerServer]}/${playerName}=${playerID}`
         );

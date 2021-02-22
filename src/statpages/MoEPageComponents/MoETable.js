@@ -12,7 +12,7 @@ import {
 } from "react-table";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
-import { ThemeContext, ServerContext } from "../../context";
+import { ServerContext } from "../../context";
 import MoEGraph from "./MoEGraph";
 import { Pagination } from "../../components";
 import {
@@ -36,7 +36,6 @@ import cellStyle from "../../functions/cellStyle";
 const backend = process.env.REACT_APP_BACKEND;
 
 function MoETable(props) {
-    const { theme } = useContext(ThemeContext);
     const { server } = useContext(ServerContext);
 
     let data = props.data;
@@ -148,10 +147,7 @@ function MoETable(props) {
                 return (
                     <div
                         style={{
-                            backgroundColor:
-                                theme === "dark"
-                                    ? "rgba(40, 40, 70, 0.5)"
-                                    : "rgb(255, 255, 255)",
+                            backgroundColor: "rgba(40, 40, 70, 0.5)",
                             marginLeft: "-0.5rem",
                         }}
                     >
@@ -195,7 +191,7 @@ function MoETable(props) {
         return (
             <>
                 <FiltersContainer>
-                    <div style={{marginBottom: "-10px"}}>
+                    <div style={{ marginBottom: "-10px" }}>
                         <GlobalFilter
                             preGlobalFilteredRows={preGlobalFilteredRows}
                             globalFilter={state.globalFilter}
@@ -213,7 +209,7 @@ function MoETable(props) {
                         </ButtonFiltersContainer>
                     ))}
                 </FiltersContainer>
-                <StyledTable theme={theme} {...getTableProps()}>
+                <StyledTable {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -275,7 +271,7 @@ function MoETable(props) {
                                         ))}
                                     </tr>
                                     {row.isExpanded ? (
-                                        <SubRow theme={theme}>
+                                        <SubRow>
                                             <td colSpan={visibleColumns.length}>
                                                 {renderRowSubComponent({ row })}
                                             </td>
@@ -408,7 +404,7 @@ function MoETable(props) {
     // Update data. So we can keep track of that flag with a ref.
 
     return (
-        <TableContainer theme={theme}>
+        <TableContainer>
             <Table columns={columns} data={data} />
         </TableContainer>
     );

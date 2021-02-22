@@ -12,7 +12,7 @@ import {
 } from "react-table";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
-import { ThemeContext, ServerContext } from "../../context";
+import { ServerContext } from "../../context";
 import MasteryGraph from "./masteryGraph";
 import { Pagination } from "../../components";
 import {
@@ -36,7 +36,6 @@ import cellStyle from "../../functions/cellStyle";
 const backend = process.env.REACT_APP_BACKEND;
 
 function MasteryTable(props) {
-    const { theme } = useContext(ThemeContext);
     const { server } = useContext(ServerContext);
     let data = props.data;
 
@@ -147,10 +146,7 @@ function MasteryTable(props) {
                 return (
                     <div
                         style={{
-                            backgroundColor:
-                                theme === "dark"
-                                    ? "rgba(40, 40, 70, 0.5)"
-                                    : "rgb(255, 255, 255)",
+                            backgroundColor: "rgba(40, 40, 70, 0.5)",
                             marginLeft: "-0.5rem",
                         }}
                     >
@@ -194,7 +190,7 @@ function MasteryTable(props) {
         return (
             <>
                 <FiltersContainer>
-                    <div style={{marginBottom: "-10px"}}>
+                    <div style={{ marginBottom: "-10px" }}>
                         <GlobalFilter
                             preGlobalFilteredRows={preGlobalFilteredRows}
                             globalFilter={state.globalFilter}
@@ -212,7 +208,7 @@ function MasteryTable(props) {
                         </ButtonFiltersContainer>
                     ))}
                 </FiltersContainer>
-                <StyledTable theme={theme} {...getTableProps()}>
+                <StyledTable {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -274,7 +270,7 @@ function MasteryTable(props) {
                                         ))}
                                     </tr>
                                     {row.isExpanded ? (
-                                        <SubRow theme={theme}>
+                                        <SubRow>
                                             <td colSpan={visibleColumns.length}>
                                                 {renderRowSubComponent({ row })}
                                             </td>
@@ -400,7 +396,7 @@ function MasteryTable(props) {
     );
 
     return (
-        <TableContainer theme={theme}>
+        <TableContainer>
             <Table columns={columns} data={data} />
         </TableContainer>
     );

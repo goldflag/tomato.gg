@@ -3,10 +3,9 @@ import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 
 // LOCAL
-import Loader from "../components/loader";
 import serverConv from "../data/serverConv";
-import { ThemeContext, ServerContext } from "../context";
-import { FullPageTableWrapper, Info } from "../components";
+import { ServerContext } from "../context";
+import { Loader, FullPageTableWrapper, Info } from "../components";
 import { FilterButtonGroup, FilterButton } from "../components/tableFilters";
 import RecentTanksAvgTable from "./recentTankStatsComponents/RecentTanksAvgTable";
 import { useURLState } from "../functions/hooks";
@@ -19,7 +18,6 @@ const Filters = styled.div`
 `;
 
 export default function RecentLeaderboards() {
-    const { theme } = useContext(ThemeContext);
     const { server } = useContext(ServerContext);
     const [data, setData] = useState("loading");
     const [time, setTime] = useURLState("time", 60);
@@ -33,7 +31,7 @@ export default function RecentLeaderboards() {
 
     return (
         <FullPageTableWrapper>
-            <Info theme={theme}>
+            <Info>
                 <span style={{ fontSize: "2rem", fontWeight: "500" }}>
                     {serverConv[server]} Recent Tank Stats
                 </span>

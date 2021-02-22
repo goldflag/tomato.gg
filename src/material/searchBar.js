@@ -6,11 +6,8 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import SelectQuery from "./select";
-import { ThemeContext } from "../context";
 
 export default function SearchBar(props) {
-    const { theme } = React.useContext(ThemeContext);
-
     const useStyles = makeStyles((t) => ({
         root: {
             padding: "2px 4px",
@@ -19,22 +16,22 @@ export default function SearchBar(props) {
             width: "100%",
             height: "50px",
             borderRadius: 0,
-            backgroundColor: theme === "dark" ? "rgba(40, 40, 60, 0.8)" : "white",
+            backgroundColor: "rgba(40, 40, 60, 0.8)",
         },
         input: {
             marginLeft: t.spacing(1),
             flex: 1,
             fontSize: 16,
-            color: theme === "dark" ? "white" : "rgb(40, 40, 40)",
+            color: "white",
         },
         iconButton: {
             padding: 10,
-            color: theme === "dark" ? "white" : "rgb(40, 40, 40)",
+            color: "white",
         },
         divider: {
             height: 40,
             margin: 10,
-            color: theme === "dark" ? "white" : "rgb(40, 40, 40)",
+            color: "white",
         },
     }));
 

@@ -1,32 +1,21 @@
+// NPM
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import ReactGA from "react-ga";
+
+// LOCAL
 import "../css/style.css";
 import "../css/innerpage.css";
 import serverConv from "../data/serverConv";
-import loader from "../assets/loading.svg";
 import GraphCalculator from "../functions/GraphCalculator";
 import MainTabs from "./statsPageComponents/mainTabs";
-import { ThemeContext } from "../context";
-import { withRouter } from "react-router-dom";
-import styled from "styled-components";
+
+import { Loader } from "../components";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 const backendKey = process.env.REACT_APP_BACKEND_API_KEY;
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
-
-const Styles = styled.div`
-    .loader {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 25%;
-    }
-
-    .loadingCircle {
-        max-width: 75px;
-    }
-`;
 
 class StatsPage extends Component {
     constructor(props) {
@@ -150,15 +139,16 @@ class StatsPage extends Component {
 
         if (loading) {
             statTable = (
-                <Styles>
-                    <div className="loader">
-                        <img
-                            src={loader}
-                            className="loadingCircle"
-                            alt="loadingCircle"
-                        ></img>
-                    </div>
-                </Styles>
+                <Loader top={20} bottom={50} />
+                // <Styles>
+                //     <div className="loader">
+                //         <img
+                //             src={loader}
+                //             className="loadingCircle"
+                //             alt="loadingCircle"
+                //         ></img>
+                //     </div>
+                // </Styles>
             );
         } else if (validID) {
             statTable = (
@@ -193,6 +183,5 @@ class StatsPage extends Component {
     }
 }
 
-StatsPage.contextType = ThemeContext;
 StatsPage = withRouter(StatsPage);
 export default StatsPage;

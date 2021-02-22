@@ -9,7 +9,7 @@ import {
 } from "react-table";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
-import { ThemeContext } from "../../context";
+
 import {
     ClassFilter,
     GlobalFilter,
@@ -29,8 +29,6 @@ import {
 import cellStyle from "../../functions/cellStyle";
 
 function PeriodBreakdown(props) {
-    const { theme } = React.useContext(ThemeContext);
-
     // Define a default UI for filtering
     function DefaultColumnFilter({
         column: { filterValue, preFilteredRows, setFilter },
@@ -137,7 +135,7 @@ function PeriodBreakdown(props) {
         return (
             <>
                 <FiltersContainer>
-                    <div style={{marginBottom: "-10px"}}>
+                    <div style={{ marginBottom: "-10px" }}>
                         <GlobalFilter
                             preGlobalFilteredRows={preGlobalFilteredRows}
                             globalFilter={state.globalFilter}
@@ -155,7 +153,7 @@ function PeriodBreakdown(props) {
                         </ButtonFiltersContainer>
                     ))}
                 </FiltersContainer>
-                <StyledTable theme={theme} {...getTableProps()}>
+                <StyledTable {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <>
@@ -362,7 +360,7 @@ function PeriodBreakdown(props) {
     // Update data. So we can keep track of that flag with a ref.
 
     return (
-        <TableContainer theme={theme}>
+        <TableContainer>
             <Table columns={columns} data={data} />
         </TableContainer>
     );

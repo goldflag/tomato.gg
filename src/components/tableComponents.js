@@ -31,34 +31,19 @@ export const StyledTable = styled.table`
     backdrop-filter: blur(7px);
     tr {
         overflow-x: scroll;
-        color: ${({ theme }) =>
-            theme === "dark"
-                ? css`rgb(220, 220, 220)`
-                : css`rgb(100, 100, 100)`};
-        background-color: ${({ theme }) =>
-            theme === "dark"
-                ? css`rgba(40, 40, 70, 0.5)`
-                : css`rgb(250, 250, 250)`};
+        color: rgb(220, 220, 220);
+        background-color: rgba(40, 40, 70, 0.5);
         :nth-child(even) {
-            background-color: ${({ theme }) =>
-                theme === "dark"
-                    ? css`rgba(50, 50, 80, 0.5)`
-                    : css`rgb(240, 240, 240)`};
+            background-color: rgba(50, 50, 80, 0.5);
         }
         :hover {
-            background-color: ${({ theme }) =>
-                theme === "dark"
-                    ? css`rgba(30, 30, 60, 0.5)`
-                    : css`rgb(220, 220, 230)`};
+            background-color: rgba(30, 30, 60, 0.5);
         }
     }
     th {
         text-align: left;
         padding: 10px;
-        background-color: ${({ theme }) =>
-            theme === "dark"
-                ? css`rgba(50, 50, 80, 0.5)`
-                : css`rgb(255, 255, 255)`};
+        background-color: rgba(50, 50, 80, 0.5);
         font-weight: 500;
     }
     td {
@@ -76,10 +61,7 @@ export const StyledTable = styled.table`
 `;
 
 export const SubRow = styled.tr`
-    background-color: ${({ theme }) =>
-        theme === "dark"
-            ? css`rgba(40, 40, 70, 0.5)`
-            : css`rgb(250, 250, 250)`};
+    background-color: rgba(40, 40, 70, 0.5);
     padding: 10px;
 `;
 

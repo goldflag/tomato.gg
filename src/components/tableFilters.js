@@ -24,7 +24,6 @@ export const FilterButton = styled(Button)`
 export const FilterButtonGroup = styled(ButtonGroup)`
     padding-right: 10px;
     padding-top: 10px;
-
 `;
 
 const premFilterOptions = [
@@ -220,7 +219,7 @@ export const GlobalFilter = ({
                     padding: "0px 15px",
                     borderRadius: "5px",
                     backgroundColor: "rgba(100, 100, 150, 0.5)",
-                    color: "white"
+                    color: "white",
                 }}
             />
         </span>

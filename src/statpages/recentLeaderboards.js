@@ -1,16 +1,15 @@
 import React, { useContext } from "react";
 import Leaderboard from "./recentLeaderboardComponents/leaderboard";
 import { FullPageTableWrapper, Info } from "../components";
-import { ThemeContext, ServerContext } from "../context";
+import { ServerContext } from "../context";
 import serverConv from "../data/serverConv";
 
 export default function RecentLeaderboards(props) {
-    const { theme } = useContext(ThemeContext);
     const { server } = useContext(ServerContext);
 
     return (
         <FullPageTableWrapper>
-            <Info theme={theme}>
+            <Info>
                 <span style={{ fontSize: "2rem", fontWeight: "500" }}>
                     {serverConv[server]} Recent Stats Leaderboard
                 </span>

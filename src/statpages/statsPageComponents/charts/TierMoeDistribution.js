@@ -1,38 +1,24 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
-import { ThemeContext } from "../../../context";
 
 export default function TierMoeDistribution(props) {
-    const { theme } = React.useContext(ThemeContext);
     return (
         <div style={{ height: "calc(292px)" }}>
             <ResponsiveBar
                 theme={{
                     fontFamily: "Roboto Mono",
-                    textColor:
-                        theme === "dark"
-                            ? "rgb(210, 210, 210)"
-                            : "rgb(100,100,100)",
+                    textColor: "rgb(210, 210, 210)",
                     grid: {
                         line: {
-                            stroke:
-                                theme === "dark"
-                                    ? "rgb(100, 100, 100)"
-                                    : "rgb(210, 210, 210)",
+                            stroke: "rgb(100, 100, 100)",
                             strokeWidth: 1,
                         },
                     },
                     tooltip: {
                         container: {
-                            backdropFilter: 'blur( 7px )',
-                            background:
-                                theme === "dark"
-                                    ? "rgb(40, 40, 70, 0.8)"
-                                    : "rgb(255, 255, 255)",
-                            color:
-                                theme === "dark"
-                                    ? "rgb(255, 255, 255)"
-                                    : "rgb(40, 40, 40)",
+                            backdropFilter: "blur( 7px )",
+                            background: "rgb(40, 40, 70, 0.8)",
+                            color: "rgb(255, 255, 255)",
                         },
                     },
                 }}
@@ -84,10 +70,7 @@ export default function TierMoeDistribution(props) {
                         itemDirection: "left-to-right",
                         itemOpacity: 0.85,
                         symbolSize: 20,
-                        itemTextColor:
-                            theme === "dark"
-                                ? "rgb(210, 210, 210)"
-                                : "rgb(100,100,100)",
+                        itemTextColor: "rgb(210, 210, 210)",
                         effects: [
                             {
                                 on: "hover",

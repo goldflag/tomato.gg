@@ -9,12 +9,10 @@ import CurveExamples from "./statsReferenceComponents/curveExamples";
 import InDepthExamples from "./statsReferenceComponents/inDepthExamples";
 import DPGPercentiles from "../data/DPGPercentiles.json";
 import WN8Percentiles from "../data/WN8Percentiles.json";
-import { ThemeContext } from "../context";
+
 const trackingId = process.env.REACT_APP_GA;
 
 export default function StatsReference(props) {
-    const { theme } = React.useContext(ThemeContext);
-
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/stats-reference");
@@ -25,17 +23,13 @@ export default function StatsReference(props) {
             <div className="narrowpage">
                 <Paper
                     style={{
-                        backgroundColor:
-                            theme === "dark" ? "rgba(40, 40, 70, 0.5)" : "white",
+                        backgroundColor: "rgba(40, 40, 70, 0.5)",
                     }}
                 >
                     <div
                         style={{
                             padding: "1rem",
-                            color:
-                                theme === "dark"
-                                    ? "rgb(220,220,220)"
-                                    : "rgb(50,50,50)",
+                            color: "rgb(220,220,220)",
                         }}
                     >
                         <h1 style={{ fontWeight: "500", lineHeight: "1rem" }}>
@@ -45,10 +39,7 @@ export default function StatsReference(props) {
                             style={{
                                 fontSize: "0.8rem",
                                 lineHeight: "1.3rem",
-                                color:
-                                    theme === "dark"
-                                        ? "rgb(150,150,150)"
-                                        : "rgb(100, 100, 100)",
+                                color: "rgb(150,150,150)",
                             }}
                         >
                             UPDATED 8/27/2020

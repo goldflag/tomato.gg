@@ -2,19 +2,14 @@ import React from "react";
 import { ResponsiveHeatMap } from "@nivo/heatmap";
 import WN8color from "../../../functions/WN8color";
 import WRcolor from "../../../functions/WRcolor";
-import { ThemeContext } from "../../../context";
 
 export default function WN8Heatmap(props) {
-    const { theme } = React.useContext(ThemeContext);
     return (
         <div style={{ height: "calc(310px)" }}>
             <ResponsiveHeatMap
                 theme={{
                     fontFamily: "Roboto Mono",
-                    textColor:
-                        theme === "dark"
-                            ? "rgb(210, 210, 210)"
-                            : "rgb(100,100,100)",
+                    textColor: "rgb(210, 210, 210)",
                 }}
                 data={props.data}
                 keys={[

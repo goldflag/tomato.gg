@@ -3,12 +3,9 @@ import ReactGA from "react-ga";
 import Paper from "@material-ui/core/Paper";
 import "./css/tankstats.css";
 import "./css/innerpage.css";
-import { ThemeContext } from "./context";
 const trackingId = process.env.REACT_APP_GA;
 
 export default function About() {
-    const { theme } = React.useContext(ThemeContext);
-
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/about");
@@ -19,13 +16,9 @@ export default function About() {
             <div className="narrowpage">
                 <Paper
                     style={{
-                        backgroundColor:
-                            theme === "dark" ? "rgba(40, 40, 70, 0.5)" : "white",
+                        backgroundColor: "rgba(40, 40, 70, 0.5)",
                         padding: "1rem",
-                        color:
-                            theme === "dark"
-                                ? "rgb(230, 230, 230)"
-                                : "rgb(50,50,50)",
+                        color: "rgb(230, 230, 230)",
                     }}
                 >
                     <div>
@@ -36,10 +29,7 @@ export default function About() {
                             style={{
                                 fontSize: "0.8rem",
                                 lineHeight: "1.3rem",
-                                color:
-                                    theme === "dark"
-                                        ? "rgb(150,150,150)"
-                                        : "rgb(100,100,100)",
+                                color: "rgb(150,150,150)",
                             }}
                         >
                             UPDATED 5/1/2021

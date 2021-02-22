@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
-import { ThemeContext } from "../context";
+
 import WN8Table from "./wn8Components/wn8Table";
-import { FullPageTableWrapper, Info } from "../components";
-import Loader from "../components/loader";
+import { Loader, FullPageTableWrapper, Info } from "../components";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -24,8 +23,6 @@ export default function Leaderboards(props) {
         setData(res);
     }
 
-    const { theme } = React.useContext(ThemeContext);
-
     let table = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />;
 
     if (data) {
@@ -34,7 +31,7 @@ export default function Leaderboards(props) {
 
     return (
         <FullPageTableWrapper>
-            <Info theme={theme}>
+            <Info>
                 <span style={{ fontSize: "2rem", fontWeight: "500" }}>
                     WN8 Expected Values
                 </span>

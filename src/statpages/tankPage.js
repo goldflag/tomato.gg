@@ -1,13 +1,11 @@
 // NPM
 import React, { useContext, useEffect, useState } from "react";
 import ReactGA from "react-ga";
-import { useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 // LOCAL
-import { FullPageTableWrapper } from "../components";
+import { Loader, FullPageTableWrapper } from "../components";
 import { ServerContext } from "../context";
-import Loader from "../components/loader";
 import RecentLeaderboard from "./tankPageComponents/recentLeaderboard";
 import serverConv from "../data/serverConv";
 import { ServerPagination } from "../components";
@@ -145,8 +143,6 @@ export default function TankPage(props) {
         ) : (
             <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={30} top={30} />
         );
-
-    console.log(data);
 
     return <FullPageTableWrapper>{content}</FullPageTableWrapper>;
 }

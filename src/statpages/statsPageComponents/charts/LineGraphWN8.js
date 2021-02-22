@@ -1,6 +1,5 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
-import { ThemeContext } from "../../../context";
 
 const color = {
     WR: "rgb(58, 124, 199)",
@@ -9,36 +8,23 @@ const color = {
 };
 
 export default function LineGraphWN8(props) {
-    const { theme } = React.useContext(ThemeContext);
     return (
         <div style={{ height: "calc(310px)" }}>
             <ResponsiveLine
                 theme={{
                     fontFamily: "Roboto Mono",
-                    textColor:
-                        theme === "dark"
-                            ? "rgb(210, 210, 210)"
-                            : "rgb(100, 100, 100)",
+                    textColor: "rgb(210, 210, 210)",
                     grid: {
                         line: {
-                            stroke:
-                                theme === "dark"
-                                    ? "rgb(100, 100, 100)"
-                                    : "rgb(210, 210, 210)",
+                            stroke: "rgb(100, 100, 100)",
                             strokeWidth: 1,
                         },
                     },
                     tooltip: {
                         container: {
-                            backdropFilter: 'blur( 7px )',
-                            background:
-                                theme === "dark"
-                                    ? "rgb(40, 40, 70, 0.8)"
-                                    : "rgb(255, 255, 255)",
-                            color:
-                                theme === "dark"
-                                    ? "rgb(255, 255, 255)"
-                                    : "rgb(40, 40, 40)",
+                            backdropFilter: "blur( 7px )",
+                            background: "rgb(40, 40, 70, 0.8)",
+                            color: "rgb(255, 255, 255)",
                         },
                     },
                 }}

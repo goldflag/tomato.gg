@@ -11,12 +11,11 @@ import ClassDist from "./appbars/ClassDist";
 import ExpectedDist from "./appbars/ExpectedDist";
 import RecordsBar from "./appbars/RecordsBar";
 import LineGraphs from "./appbars/LineGraphs";
-import { ThemeContext } from "../../context";
+
 import "../../css/statspage.css";
 
 export default function Charts(props) {
     const size = useWindowSize();
-    const { theme } = React.useContext(ThemeContext);
 
     const useStyles = makeStyles((t) => ({
         root: {
@@ -27,7 +26,7 @@ export default function Charts(props) {
             textAlign: "left",
             fontFamily: "Roboto Mono",
             fontSize: "1.2em",
-            backgroundColor: theme === "dark" ? "rgba(40, 40, 70, 0.4)" : "rgba(250, 250, 250, 0.4)",
+            backgroundColor: "rgba(40, 40, 70, 0.4)",
             backdropFilter: "blur( 7px )",
             color: "rgb(30, 30, 30)",
         },
@@ -168,16 +167,12 @@ export default function Charts(props) {
         );
     } else {
         const darkStyle = {
-            backgroundColor: theme === "dark" ? "rgb(40, 40, 40)" : "white",
+            backgroundColor: "rgb(40, 40, 40)",
             marginBottom: "1rem",
         };
 
         output = (
-            <div
-                className={
-                    theme === "dark" ? "mobilechartsdark" : "mobilecharts"
-                }
-            >
+            <div className={"mobilechartsdark"}>
                 <Paper square elevation={2} style={darkStyle}>
                     <Heatmap
                         data={props.data.tankWN8byClassTier}
@@ -206,8 +201,7 @@ export default function Charts(props) {
                         height: 358,
                         overflowX: "hidden",
                         overflowY: "auto",
-                        backgroundColor:
-                            theme === "dark" ? "rgb(40, 40, 40)" : "white",
+                        backgroundColor: "rgb(40, 40, 40)",
                     }}
                 >
                     {clanHistory}
@@ -217,8 +211,7 @@ export default function Charts(props) {
                     elevation={2}
                     style={{
                         marginBottom: "1.5rem",
-                        backgroundColor:
-                            theme === "dark" ? "rgb(40, 40, 40)" : "white",
+                        backgroundColor: "rgb(40, 40, 40)",
                     }}
                 >
                     <MOEDist
@@ -247,8 +240,7 @@ export default function Charts(props) {
                     style={{
                         marginBottom: "1.5rem",
                         height: 348,
-                        backgroundColor:
-                            theme === "dark" ? "rgb(40, 40, 40)" : "white",
+                        backgroundColor: "rgb(40, 40, 40)",
                     }}
                 >
                     <RecordsBar data={props.stats} />
@@ -259,8 +251,7 @@ export default function Charts(props) {
                     style={{
                         marginBottom: "-1rem",
                         height: 348,
-                        backgroundColor:
-                            theme === "dark" ? "rgb(40, 40, 40)" : "white",
+                        backgroundColor: "rgb(40, 40, 40)",
                     }}
                 >
                     <LineGraphs

@@ -12,7 +12,7 @@ import {
 import styled from "styled-components";
 
 // LOCAL
-import { ThemeContext } from "../../context";
+
 import {
     ClassFilter,
     GlobalFilter,
@@ -38,8 +38,6 @@ const TankCell = styled.div`
 `;
 
 function RecentTanksAvgTable({ data }) {
-    const { theme } = React.useContext(ThemeContext);
-
     const columns = React.useMemo(() => {
         const tierConv = {
             1: "I",
@@ -216,7 +214,7 @@ function RecentTanksAvgTable({ data }) {
     };
 
     return (
-        <TableContainer theme={theme}>
+        <TableContainer>
             <FiltersContainer>
                 <div style={{ margin: "-10px 0px" }}>
                     <GlobalFilter
@@ -236,7 +234,7 @@ function RecentTanksAvgTable({ data }) {
                     </ButtonFiltersContainer>
                 ))}
             </FiltersContainer>
-            <StyledTable theme={theme} pointer={true} {...getTableProps()}>
+            <StyledTable pointer={true} {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>

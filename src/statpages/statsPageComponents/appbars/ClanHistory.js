@@ -6,8 +6,6 @@ import serverConv from "../../../data/serverConv.js";
 import clonedeep from "lodash.clonedeep";
 import RSC from "react-scrollbars-custom";
 
-import { ThemeContext } from "../../../context";
-
 const APIKey = process.env.REACT_APP_API_KEY;
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +30,7 @@ const roleConv = {
 
 export default function ClanHistory(props) {
     const classes = useStyles();
-    const { theme } = React.useContext(ThemeContext);
+
     const [value, setValue] = useState(0);
     const [clanList, setClanList] = useState("");
     const handleChange = (event, newValue) => {
@@ -153,10 +151,7 @@ export default function ClanHistory(props) {
                                         style={{
                                             textAlign: "left",
                                             fontSize: "14px",
-                                            color:
-                                                theme === "dark"
-                                                    ? "rgb(220, 220, 220)"
-                                                    : "black",
+                                            color: "rgb(220, 220, 220)",
                                         }}
                                     >
                                         <span

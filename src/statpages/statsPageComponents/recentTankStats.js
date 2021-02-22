@@ -1,34 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MUIDataTable from "mui-datatables";
-import {
-    createMuiTheme,
-    MuiThemeProvider,
-    withStyles,
-    rgbToHex,
-} from "@material-ui/core/styles";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import WN8color from "../../functions/WN8color";
 import WRcolor from "../../functions/WRcolor";
 import nationVal from "../../data/nationVal";
 import classVal from "../../data/classVal";
-import { ThemeContext } from "../../style/theme.js";
-
-const customStyles = (theme) => ({
-    wn8row: {
-        "& td": { backgroundColor: "blue" },
-    },
-    GreyLine: {
-        "& td": { backgroundColor: theme.palette.grey[100] },
-    },
-    NameCell: {
-        fontWeight: 900,
-        backgroundColor: theme.palette.grey[100],
-    },
-});
 
 export default function RecentTankStats(props) {
-    const [finaldata, setFinaldata] = useState("");
-    const { theme } = React.useContext(ThemeContext);
-
     const getMuiTheme = () =>
         createMuiTheme({
             overrides: {
@@ -43,20 +21,13 @@ export default function RecentTankStats(props) {
                 },
                 MuiToolbar: {
                     root: {
-                        backgroundColor:
-                            theme === "dark" ? "rgb(40, 40, 45)" : "white",
-                        color:
-                            theme === "dark"
-                                ? "rgb(230, 230, 230)"
-                                : "rgb(20, 20, 20)",
+                        backgroundColor: "rgb(40, 40, 45)",
+                        color: "rgb(230, 230, 230)",
                     },
                 },
                 MUIDataTableToolbar: {
                     icon: {
-                        color:
-                            theme === "dark"
-                                ? "rgb(230, 230, 230)"
-                                : "rgb(100, 100, 100)",
+                        color: "rgb(230, 230, 230)",
                         "&:hover": {
                             color: "dark"
                                 ? "rgb(150, 150, 150)"
@@ -66,16 +37,10 @@ export default function RecentTankStats(props) {
                 },
                 MuiTableCell: {
                     head: {
-                        backgroundColor:
-                            theme === "dark"
-                                ? "rgb(60, 60, 65)"
-                                : "rgb(220, 220, 223)",
+                        backgroundColor: "rgb(60, 60, 65)",
                         padding: "5px 5px 5px 12px",
-                        borderBottom:
-                            theme === "dark"
-                                ? "rgb(60, 60, 65)"
-                                : "rgb(220, 220, 223)",
-                        color: theme === "dark" ? "white" : "black",
+                        borderBottom: "rgb(60, 60, 65)",
+                        color: "white",
                     },
                     root: {
                         padding: "3px 10px 3px 12px",
@@ -89,12 +54,8 @@ export default function RecentTankStats(props) {
                 MuiTableFooter: {
                     root: {
                         "& .MuiToolbar-root": {
-                            backgroundColor:
-                                theme === "dark" ? "rgb(40, 40, 45)" : "white",
-                            color:
-                                theme === "dark"
-                                    ? "rgb(230, 230, 230)"
-                                    : "rgb(20, 20, 20)",
+                            backgroundColor: "rgb(40, 40, 45)",
+                            color: "rgb(230, 230, 230)",
                         },
                     },
                 },
@@ -102,12 +63,9 @@ export default function RecentTankStats(props) {
         });
 
     const colStyle = {
-        borderBottom:
-            theme === "dark"
-                ? "1px solid rgb(80, 80, 85)"
-                : "1px solid rgb(220, 220, 220)",
+        borderBottom: "1px solid rgb(80, 80, 85)",
         padding: "6px 8px",
-        color: theme === "dark" ? "white" : null,
+        color: "white",
     };
 
     const columns = [
@@ -195,10 +153,7 @@ export default function RecentTankStats(props) {
                         style: {
                             color: "white",
                             backgroundColor: WRcolor(value.slice(0, -1)),
-                            borderBottom:
-                                theme === "dark"
-                                    ? "1px solid rgb(80, 80, 85)"
-                                    : "1px solid rgb(220, 220, 220)",
+                            borderBottom: "1px solid rgb(80, 80, 85)",
                         },
                     };
                 },
@@ -220,10 +175,7 @@ export default function RecentTankStats(props) {
                         style: {
                             color: "white",
                             backgroundColor: WN8color(value),
-                            borderBottom:
-                                theme === "dark"
-                                    ? "1px solid rgb(80, 80, 85)"
-                                    : "1px solid rgb(220, 220, 220)",
+                            borderBottom: "1px solid rgb(80, 80, 85)",
                         },
                     };
                 },

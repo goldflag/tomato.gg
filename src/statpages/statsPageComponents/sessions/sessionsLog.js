@@ -1,7 +1,7 @@
 import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
 import styled from "styled-components";
-import { ThemeContext } from "../../../context";
+
 import SessionBreakdown from "./sessionBreakdown";
 import { Pagination } from "../../../components";
 import cellStyle from "../../../functions/cellStyle";
@@ -13,7 +13,7 @@ const Styles = styled.div`
         overflow-x: auto;
         background-color: rgba(0, 0, 0, 0);
         margin-bottom: 1rem;
-        backdrop-filter: blur( 7px );
+        backdrop-filter: blur(7px);
     }
 
     table {
@@ -21,28 +21,19 @@ const Styles = styled.div`
         width: 100%;
         font-size: 0.8rem;
         tr {
-            color: ${({ theme }) =>
-                theme === "dark" ? "rgb(220, 220, 220)" : "rgb(100, 100, 100)"};
-            background-color: ${({ theme }) =>
-                theme === "dark" ? "rgba(40, 40, 70, 0.5)" : "rgb(250, 250, 250)"};
+            color: rgb(220, 220, 220);
+            background-color: rgba(40, 40, 70, 0.5);
             :nth-child(even) {
-                background-color: ${({ theme }) =>
-                    theme === "dark"
-                        ? "rgba(50, 50, 80, 0.5)"
-                        : "rgb(240, 240, 240)"};
+                background-color: rgba(50, 50, 80, 0.5);
             }
             :hover {
-                background-color: ${({ theme }) =>
-                    theme === "dark"
-                        ? "rgba(30, 30, 60, 0.5)"
-                        : "rgb(220, 220, 230)"};
+                background-color: rgba(30, 30, 60, 0.5);
             }
         }
         th {
             text-align: left;
             padding: 10px;
-            background-color: ${({ theme }) =>
-                theme === "dark" ? "rgba(50, 50, 80, 0.5)" : "rgb(255, 255, 255)"};
+            background-color: rgba(50, 50, 80, 0.5);
             font-weight: 500;
         }
         td {
@@ -51,8 +42,6 @@ const Styles = styled.div`
     }
 `;
 export default function SessionsLog(props) {
-    const { theme } = React.useContext(ThemeContext);
-
     const data = props.data;
 
     const columns = React.useMemo(
@@ -166,7 +155,7 @@ export default function SessionsLog(props) {
     }
 
     return (
-        <Styles theme={theme}>
+        <Styles>
             <div className="tableContainer">
                 <table {...getTableProps()}>
                     <thead>
