@@ -320,25 +320,21 @@ function OverallTable(props) {
                         row.row.original.awards[type][award]
                     );
                     return row.row.original.awards[type][award] > 0 ? (
-                        <>
-                            <div>
-                                <Tooltip
-                                    arrow={false}
-                                    direction="right"
-                                    content={RenderTooltip(award)}
-                                >
-                                    {counter}
-                                    <img
-                                        style={{ width: "50px" }}
-                                        src={require(`../../assets/awards/${type}/${award}.png`)}
-                                        alt={award}
-                                    />
-                                </Tooltip>
-                            </div>
-                        </>
-                    ) : (
-                        <></>
-                    );
+                        <div>
+                            <Tooltip
+                                arrow={false}
+                                direction="right"
+                                content={RenderTooltip(award)}
+                            >
+                                {counter}
+                                <img
+                                    style={{ width: "50px" }}
+                                    src={require(`../../assets/awards/${type}/${award}.png`)}
+                                    alt={award}
+                                />
+                            </Tooltip>
+                        </div>
+                    ) : null;
                 });
             }
 
@@ -369,33 +365,31 @@ function OverallTable(props) {
                             setGlobalFilter={setGlobalFilter}
                         />
                     </div>
-                    {headerGroups.map((headerGroup, i) => {
-                        return (
-                            <>
-                                <ButtonFiltersContainer key={i}>
-                                    {filterOrder.map(
-                                        (n) =>
-                                            !headerGroup.headers[n]
-                                                .disableFilters && (
-                                                <span key={n}>
-                                                    {headerGroup.headers[
-                                                        n
-                                                    ].render("Filter")}
-                                                </span>
-                                            )
-                                    )}
-                                </ButtonFiltersContainer>
-                                <div
-                                    style={{
-                                        marginRight: "10px",
-                                        marginTop: "10px",
-                                    }}
-                                >
-                                    {headerGroup.headers[6].render("Filter")}
-                                </div>
-                            </>
-                        );
-                    })}
+                    {headerGroups.map((headerGroup, i) => (
+                        <React.Fragment key={i}>
+                            <ButtonFiltersContainer key={i}>
+                                {filterOrder.map(
+                                    (n) =>
+                                        !headerGroup.headers[n]
+                                            .disableFilters && (
+                                            <span key={n}>
+                                                {headerGroup.headers[n].render(
+                                                    "Filter"
+                                                )}
+                                            </span>
+                                        )
+                                )}
+                            </ButtonFiltersContainer>
+                            <div
+                                style={{
+                                    marginRight: "10px",
+                                    marginTop: "10px",
+                                }}
+                            >
+                                {headerGroup.headers[6].render("Filter")}
+                            </div>
+                        </React.Fragment>
+                    ))}
                 </FiltersContainer>
                 <StyledTable {...getTableProps()}>
                     <thead>

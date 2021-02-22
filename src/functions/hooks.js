@@ -1,7 +1,7 @@
 // NPM
 import { useHistory, useLocation } from "react-router-dom";
 
-export const useURLState = (key, defaultVal) => {
+export const useURLState = (key, defaultVal, type) => {
     const history = useHistory();
     useLocation(); // used to update hook on location change
 
@@ -27,7 +27,8 @@ export const useURLState = (key, defaultVal) => {
         const params = new URLSearchParams(window.location.search);
         if (!params.has(key)) return defaultVal;
         let val = params.get(key);
-        if (typeof defaultVal === "number") val = parseInt(val);
+        if (typeof defaultVal === "number" || type === "number")
+            val = parseInt(val);
         return val;
     };
 

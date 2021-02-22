@@ -25,6 +25,7 @@ const Tier = styled.div`
     margin-top: -10px;
     font-weight: 500;
     font-size: 5rem;
+    user-select: none;
 `;
 
 const Name = styled.div`
@@ -80,9 +81,9 @@ export default function TankPage(props) {
 
     const [page, setPage] = useURLState("page", 0);
     const [type, setType] = useURLState("type", "dpg");
-    const [rank, , clearRank] = useURLState("rank", false);
+    const [rank, , clearRank] = useURLState("rank", false, "number");
 
-    const actualPage = rank ? Math.floor(rank / PAGE_SIZE) : page;
+    const actualPage = rank ? Math.ceil(rank / PAGE_SIZE - 1) : page;
 
     useEffect(() => {
         setData("loading");
@@ -100,8 +101,16 @@ export default function TankPage(props) {
             });
     }, [server, type, actualPage, rank]);
 
-    let content =
-        typeof data !== "string" ? (
+    let content;
+    if (typeof data === "string") {
+        content = (
+            <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={30} top={30} />
+        );
+    } else {
+        const realPageSize = data.leaderboard.length;
+        const highlightRow =
+            rank && (rank === realPageSize ? rank : rank % realPageSize) - 1;
+        content = (
             <>
                 <Top>
                     <div>
@@ -129,7 +138,7 @@ export default function TankPage(props) {
                     data={data.leaderboard}
                     type={type}
                     setType={setType}
-                    highlightRow={rank && (rank % PAGE_SIZE) - 1}
+                    highlightRow={highlightRow}
                 />
                 <ServerPagination
                     page={actualPage}
@@ -140,9 +149,8 @@ export default function TankPage(props) {
                     }}
                 />
             </>
-        ) : (
-            <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={30} top={30} />
         );
+    }
 
     return <FullPageTableWrapper>{content}</FullPageTableWrapper>;
 }

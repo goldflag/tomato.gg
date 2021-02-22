@@ -13,6 +13,7 @@ import SessionsLogParent from "./sessions/sessionsLogParent";
 import HallOfFame from "./hallOfFame";
 import Treemap from "./treemap/treemap";
 import { NewIcon } from "../../components";
+import { useURLState } from "../../functions/hooks";
 
 const CustomTabs = withStyles({
     root: {
@@ -45,14 +46,32 @@ const CustomTab = withStyles((t) => ({
     selected: {},
 }))((props) => <Tab disableRipple {...props} />);
 
+const tabs = [
+    { label: "MAIN STATS", value: "main" },
+    { label: "INFOGRAPHICS", value: "infographics" },
+    { label: "SESSIONS", value: "sessions" },
+    {
+        label: (
+            <div>
+                TREEMAP <NewIcon />
+            </div>
+        ),
+        value: "treemap",
+    },
+    {
+        label: (
+            <div>
+                HALL OF FAME <NewIcon />
+            </div>
+        ),
+        value: "hall-of-fame",
+    },
+];
+
 export default function MainTabs(props) {
-    const [value, setValue] = useState(0);
+    const [page, setPage] = useURLState("page", "main");
     const [hofData, setHofData] = useState(null);
     const [hofmainData, setHofmainData] = useState(null);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
 
     return (
         <>
@@ -68,33 +87,19 @@ export default function MainTabs(props) {
                 />
             </div>
             <CustomTabs
-                value={value}
+                value={page}
                 indicatorColor="primary"
                 styles={{ backgroundColor: "rgb(76, 90, 166)" }}
-                onChange={handleChange}
+                onChange={(e, val) => setPage(val)}
                 aria-label="tabs"
                 variant="scrollable"
                 scrollButtons="auto"
             >
-                <CustomTab label="MAIN STATS" />
-                <CustomTab label="INFOGRAPHICS" />
-                <CustomTab label="SESSIONS" />
-                <CustomTab
-                    label={
-                        <div>
-                            TREEMAP <NewIcon />
-                        </div>
-                    }
-                />
-                <CustomTab
-                    label={
-                        <div>
-                            HALL OF FAME <NewIcon />
-                        </div>
-                    }
-                />
+                {tabs.map(({ label, value }) => (
+                    <CustomTab label={label} value={value} />
+                ))}
             </CustomTabs>
-            <TabPanel value={value} index={0}>
+            <TabPanel value={page} index={"main"}>
                 <div style={{ margin: "1rem 0" }}>
                     <TopTable data={props.graphData.overallStats} />
                 </div>
@@ -105,7 +110,7 @@ export default function MainTabs(props) {
                     />
                 </div>
             </TabPanel>
-            <TabPanel value={value} index={1}>
+            <TabPanel value={page} index={"infographics"}>
                 <div style={{ marginTop: "1rem", minHeight: "300px" }}>
                     <Charts
                         data={props.graphData}
@@ -115,17 +120,17 @@ export default function MainTabs(props) {
                     />
                 </div>
             </TabPanel>
-            <TabPanel value={value} index={2}>
+            <TabPanel value={page} index={"sessions"}>
                 <div style={{ marginTop: "1rem", minHeight: "300px" }}>
                     <SessionsLogParent data={props.recentStats.sessions} />
                 </div>
             </TabPanel>
-            <TabPanel value={value} index={3}>
+            <TabPanel value={page} index={"treemap"}>
                 <div style={{ marginTop: "1rem", minHeight: "300px" }}>
                     <Treemap data={props.recentStats.tree} />
                 </div>
             </TabPanel>
-            <TabPanel value={value} index={4}>
+            <TabPanel value={page} index={"hall-of-fame"}>
                 <div style={{ marginTop: "1rem", minHeight: "300px" }}>
                     <HallOfFame
                         id={props.recentStats.id}

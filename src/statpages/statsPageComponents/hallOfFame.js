@@ -222,29 +222,28 @@ const ConditionalLink = ({ makeLink, ...props }) => {
 
 export default function HallOfFame(props) {
     useEffect(() => {
-        if (props.hofData == null) {
-            getData();
-        }
+        if (props.hofData) return;
+
+        const url = `${backend}/api/hof/${props.server}/${props.id}`;
+        const url2 = `${backend}/api/hofmain/${props.server}/${props.id}`;
+
+        Promise.all([
+            fetch(url).then((res) => res.json()),
+            fetch(url2).then((res) => res.json()),
+        ]).then(([hof, hofmain]) => {
+            props.setHofData(hof);
+            props.setHofmainData(hofmain);
+        });
     }, []);
 
-    async function getData() {
-        const url = `${backend}/api/hof/${props.server}/${props.id}`;
-        const res = await fetch(url);
-        const res2 = await res.json();
-        props.setHofData(res2);
-        const url2 = `${backend}/api/hofmain/${props.server}/${props.id}`;
-        const resa = await fetch(url2);
-        const resa2 = await resa.json();
-        props.setHofmainData(resa2);
-    }
-
     const hof = () =>
-        props.hofData.above.map((row) => (
+        props.hofData.above.map((row, i) => (
             <ConditionalLink
+                key={i}
                 makeLink={row.rank && row.rank <= 500}
                 className="box abovebox"
                 to={`/tank/${row.tank_id}?rank=${row.rank}`}
-                target="_blank"
+                // target="_blank"
             >
                 <img src={row.image} className="image" alt={row.name} />
                 <div className="name">
@@ -286,7 +285,7 @@ export default function HallOfFame(props) {
 
     const underHof = () =>
         props.hofData.below.map((row, i) => (
-            <div className="box underbox">
+            <div className="box underbox" key={i}>
                 <img src={row.image} className="image" alt={row.name} />
                 <div className="name">
                     {tierConv[row.tier]} - {row.name}
