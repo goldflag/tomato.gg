@@ -1,8 +1,8 @@
 // NPM
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Scrollbars } from "react-custom-scrollbars";
 import { Link } from "react-router-dom";
+import RSC from "react-scrollbars-custom";
 
 // LOCAL
 import { Loader } from "../../components";
@@ -38,6 +38,7 @@ function colorConv(val) {
         return "rgb(240, 240, 240)";
     }
 }
+
 
 const Styles = styled.div`
     font-family: Roboto Mono;
@@ -103,6 +104,11 @@ const Styles = styled.div`
 
     .overallItem:hover {
         background-color: rgba(201, 26, 61, 0.5);
+    }
+
+    .tanksContainer {
+        height: 320px;
+        margin-top: 1rem;
     }
 
     .tanksTitle {
@@ -502,14 +508,14 @@ export default function HallOfFame({
                         60 DAYS | MINIMUM 25 BATTLES
                     </span>
                 </div>
-                <Scrollbars
-                    style={{ width: "100%", height: "310px", margin: "1rem" }}
-                >
-                    <div className="tanks">
-                        {tankRow}
-                        {tankRow2}
-                    </div>
-                </Scrollbars>
+                <div className="tanksContainer">
+                    <RSC id="RSC-Example" noScrollY={true}>
+                        <div className="tanks">
+                            {tankRow}
+                            {tankRow2}
+                        </div>
+                    </RSC>
+                </div>
             </Styles>
         );
     }

@@ -10,6 +10,7 @@ import RecentLeaderboard from "./tankPageComponents/recentLeaderboard";
 import serverConv from "../data/serverConv";
 import { ServerPagination } from "../components";
 import { useURLState } from "../functions/hooks";
+import { FilterButtonGroup, FilterButton } from "../components/tableFilters";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -133,6 +134,36 @@ export default function TankPage(props) {
                 <TableLabel>
                     Top 500 Players in {serverConv[server]}
                     <BottomLabel>PAST 60 DAYS | MINIMUM 25 BATTLES</BottomLabel>
+
+                    <FilterButtonGroup>
+                        <FilterButton
+                            key={"dpg"}
+                            selected={type === "dpg"}
+                            onClick={() => {
+                                setType("dpg");
+                            }}
+                        >
+                            DPG
+                        </FilterButton>
+                        <FilterButton
+                            key={"wn8"}
+                            selected={type === "wn8"}
+                            onClick={() => {
+                                setType("wn8");
+                            }}
+                        >
+                            WN8
+                        </FilterButton>
+                        <FilterButton
+                            key={"frags"}
+                            selected={type === "frags"}
+                            onClick={() => {
+                                setType("frags");
+                            }}
+                        >
+                            Frags
+                        </FilterButton>
+                    </FilterButtonGroup>
                 </TableLabel>
                 <RecentLeaderboard
                     data={data.leaderboard}
