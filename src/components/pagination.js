@@ -19,10 +19,12 @@ const PaginationContainer = styled.div`
     padding: 1rem;
     font-size: 0.8rem;
     background-color: ${({ theme }) =>
-        theme === "dark" ? css`rgba(40, 40, 50, 0.5)` : css`rgb(250, 250, 250)`};
+        theme === "dark"
+            ? css`rgba(40, 40, 50, 0.5)`
+            : css`rgb(250, 250, 250)`};
     color: ${({ theme }) =>
         theme === "dark" ? css`rgb(220, 220, 220)` : css`rgb(80, 80, 80)`};
-    backdrop-filter: blur( 7px );
+    backdrop-filter: blur(7px);
 `;
 
 const PaginationButton = styled.button`
@@ -103,22 +105,21 @@ export const Pagination = (props) => {
                     props.setPageSize(Number(e.target.value));
                 }}
                 style={{
-                    color: "rgb(255, 255, 255)", 
+                    color: "rgb(255, 255, 255)",
                     backgroundColor: "rgba(100, 100, 150, 0.5)",
                     fontFamily: "Roboto Mono",
                     border: "None",
-                    padding: "3px"
+                    padding: "3px",
                 }}
-
             >
                 {props.pageSizes.map((pageSize) => (
-                    <option 
-                        key={pageSize} 
-                        value={pageSize} 
+                    <option
+                        key={pageSize}
+                        value={pageSize}
                         style={{
-                            color: "rgb(255, 255, 255)", 
+                            color: "rgb(255, 255, 255)",
                             backgroundColor: "rgba(40, 40, 70, 0.5)",
-                            fontFamily: "Roboto Mono"
+                            fontFamily: "Roboto Mono",
                         }}
                     >
                         Show {pageSize}
@@ -143,21 +144,21 @@ export const ServerPagination = ({ page, numPages, setPage }) => {
             </PaginationButton>{" "}
             <PaginationButton
                 onClick={() => {
-                    setPage(page <= numPages ? page + 1 : numPages);
+                    setPage(page < numPages ? page + 1 : numPages);
                 }}
-                disabled={page === numPages}
+                disabled={page === numPages - 1}
             >
                 <Icon size={24} icon={chevronRight} />
             </PaginationButton>{" "}
             <PaginationButton
                 onClick={() => {
-                    setPage(numPages);
+                    setPage(numPages - 1);
                 }}
-                disabled={page === numPages}
+                disabled={page === numPages - 1}
             >
                 <Icon size={24} icon={chevronsRight} />
             </PaginationButton>{" "}
-            Page {page + 1} of {numPages + 1}{" "}
+            Page {page + 1} of {numPages}{" "}
         </PaginationContainer>
     );
 };

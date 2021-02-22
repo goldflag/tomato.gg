@@ -5,10 +5,10 @@ export const TableContainer = styled.div`
     overflow-y: hidden;
 `;
 export const FiltersContainer = styled.div`
-    padding: 10px;
+    padding: 16px;
     background-color: rgba(40, 40, 70, 0.5);
     width: 100%;
-    backdrop-filter: blur( 7px );
+    backdrop-filter: blur(7px);
 `;
 
 export const ButtonFiltersContainer = styled.div`
@@ -28,7 +28,7 @@ export const StyledTable = styled.table`
     font-size: 0.8rem;
     font-family: Roboto Mono;
     cursor: ${({ pointer }) => (pointer === true ? "pointer" : null)};
-    backdrop-filter: blur( 7px );
+    backdrop-filter: blur(7px);
     tr {
         overflow-x: scroll;
         color: ${({ theme }) =>
@@ -36,7 +36,9 @@ export const StyledTable = styled.table`
                 ? css`rgb(220, 220, 220)`
                 : css`rgb(100, 100, 100)`};
         background-color: ${({ theme }) =>
-            theme === "dark" ? css`rgba(40, 40, 70, 0.5)` : css`rgb(250, 250, 250)`};
+            theme === "dark"
+                ? css`rgba(40, 40, 70, 0.5)`
+                : css`rgb(250, 250, 250)`};
         :nth-child(even) {
             background-color: ${({ theme }) =>
                 theme === "dark"
@@ -54,7 +56,9 @@ export const StyledTable = styled.table`
         text-align: left;
         padding: 10px;
         background-color: ${({ theme }) =>
-            theme === "dark" ? css`rgba(50, 50, 80, 0.5)` : css`rgb(255, 255, 255)`};
+            theme === "dark"
+                ? css`rgba(50, 50, 80, 0.5)`
+                : css`rgb(255, 255, 255)`};
         font-weight: 500;
     }
     td {
@@ -73,7 +77,9 @@ export const StyledTable = styled.table`
 
 export const SubRow = styled.tr`
     background-color: ${({ theme }) =>
-        theme === "dark" ? css`rgba(40, 40, 70, 0.5)` : css`rgb(250, 250, 250)`};
+        theme === "dark"
+            ? css`rgba(40, 40, 70, 0.5)`
+            : css`rgb(250, 250, 250)`};
     padding: 10px;
 `;
 

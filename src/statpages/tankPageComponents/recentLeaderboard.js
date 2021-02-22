@@ -112,32 +112,26 @@ export default function RecentsLeaderboard({ data, type, highlightRow }) {
         usePagination
     );
 
-    const highlightedRowRef = React.useRef(null);
+    const [rowRef, setRowRef] = React.useState(null);
     const highlightRowProps = (rowIndex) => {
         if (rowIndex !== highlightRow) return {};
-
         return {
             style: {
-                backgroundColor: "rgba(110,40,80, 0.8)",
+                backgroundColor: "rgba(30,30,60,0.8)",
+                color: "white",
+                fontWeight: "bolder",
             },
-            ref: highlightedRowRef,
+            ref: setRowRef,
         };
     };
-    useEffect(
-        () =>
-            setTimeout(
-                () =>{
-
-                    if (highlightedRowRef.current) {
-                        highlightedRowRef.current.scrollIntoView({
-                            behavior: "smooth",
-                            block: "center",
-                        })
-                    }
-                },
-                500
-            ) && undefined
-    );
+    useEffect(() => {
+        if (rowRef) {
+            rowRef.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+            });
+        }
+    }, [rowRef]);
 
     // Render the UI for your table
     return (

@@ -10,8 +10,8 @@ import { ServerContext } from "../context";
 import Loader from "../components/loader";
 import RecentLeaderboard from "./tankPageComponents/recentLeaderboard";
 import serverConv from "../data/serverConv";
-import { parseURLParams, updateURLParams } from "../functions/urlParams";
 import { ServerPagination } from "../components";
+import { useURLState } from "../functions/hooks";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -72,29 +72,19 @@ const nationConv = {
 const PAGE_SIZE = 100;
 
 export default function TankPage(props) {
-    const [data, setData] = useState("loading");
-    const location = useLocation();
-    const history = useHistory();
-
+    useEffect(() => {
+        ReactGA.initialize(trackingId);
+        ReactGA.pageview("/tank-page");
+    }, []);
     const { server } = useContext(ServerContext);
 
-    const { type, page, rank } = parseURLParams(location.search, {
-        type: "dpg",
-        page: 0,
-        rank: false,
-    });
-    const actualPage = rank ? Math.floor(rank / PAGE_SIZE) : page;
+    const [data, setData] = useState("loading");
 
-    const redirectWithParams = (params) => {
-        setData("loading");
-        history.push(location.pathname + "?" + params);
-    };
-    const setType = (type) =>
-        redirectWithParams(updateURLParams(location.search, { type }));
-    const setPage = (page) =>
-        redirectWithParams(
-            updateURLParams(location.search, { page, rank: undefined })
-        );
+    const [page, setPage] = useURLState("page", 0);
+    const [type, setType] = useURLState("type", "dpg");
+    const [rank, , clearRank] = useURLState("rank", false);
+
+    const actualPage = rank ? Math.floor(rank / PAGE_SIZE) : page;
 
     useEffect(() => {
         setData("loading");
@@ -111,11 +101,6 @@ export default function TankPage(props) {
                 setData(data);
             });
     }, [server, type, actualPage, rank]);
-
-    useEffect(() => {
-        ReactGA.initialize(trackingId);
-        ReactGA.pageview("/tank-page");
-    }, []);
 
     let content =
         typeof data !== "string" ? (
@@ -150,8 +135,11 @@ export default function TankPage(props) {
                 />
                 <ServerPagination
                     page={actualPage}
-                    numPages={Math.floor(data.leaderboard.length / 100)}
-                    setPage={setPage}
+                    numPages={5}
+                    setPage={(page) => {
+                        clearRank();
+                        setPage(page);
+                    }}
                 />
             </>
         ) : (

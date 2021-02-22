@@ -1,6 +1,5 @@
 // NPM
 import React, { useEffect, useState, useContext } from "react";
-import { useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 // LOCAL
@@ -8,9 +7,9 @@ import Loader from "../components/loader";
 import serverConv from "../data/serverConv";
 import { ThemeContext, ServerContext } from "../context";
 import { FullPageTableWrapper, Info } from "../components";
-import { parseURLParams, updateURLParams } from "../functions/urlParams";
 import { FilterButtonGroup, FilterButton } from "../components/tableFilters";
 import RecentTanksAvgTable from "./recentTankStatsComponents/RecentTanksAvgTable";
+import { useURLState } from "../functions/hooks";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -23,19 +22,7 @@ export default function RecentLeaderboards() {
     const { theme } = useContext(ThemeContext);
     const { server } = useContext(ServerContext);
     const [data, setData] = useState("loading");
-
-    const location = useLocation();
-    const history = useHistory();
-    const { time } = parseURLParams(location.search, {
-        time: 60,
-    });
-
-    const redirectWithParams = (params) => {
-        setData("loading");
-        history.push(location.pathname + "?" + params);
-    };
-    const setTime = (time) =>
-        redirectWithParams(updateURLParams(location.search, { time }));
+    const [time, setTime] = useURLState("time", 60);
 
     useEffect(() => {
         setData("loading");

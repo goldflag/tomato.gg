@@ -1,6 +1,5 @@
 // NPM
 import React, { useEffect, useState, useContext } from "react";
-import { useLocation, useHistory } from "react-router-dom";
 import { ServerContext } from "../../context";
 import styled, { css } from "styled-components";
 import { Icon } from "react-icons-kit";
@@ -16,7 +15,7 @@ import { Button, ButtonGroup } from "@material-ui/core";
 import LeaderboardTable from "./leaderboardTable";
 import Loader from "../../components/loader";
 import serverConv from "../../data/serverConv";
-import { parseURLParams, updateURLParams } from "../../functions/urlParams";
+import { useURLState } from "../../functions/hooks";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -83,30 +82,13 @@ export default function Leaderboard() {
     const [data, setData] = useState("loading");
     const [numEntries, setNumEntries] = useState();
 
-    const location = useLocation();
-    const history = useHistory();
-    const { type, time, tier, page } = parseURLParams(location.search, {
-        type: "wn8",
-        time: 60,
-        tier: 6,
-        page: 0,
-    });
-
-    const redirectWithParams = (params) => {
-        setData("loading");
-        history.push(location.pathname + "?" + params);
-    };
-
-    const setType = (type) =>
-        redirectWithParams(updateURLParams(location.search, { type }));
-    const setTier = (tier) =>
-        redirectWithParams(updateURLParams(location.search, { tier }));
-    const setTime = (time) =>
-        redirectWithParams(updateURLParams(location.search, { time }));
-    const setPage = (page) =>
-        redirectWithParams(updateURLParams(location.search, { page }));
+    const [type, setType] = useURLState("type", "wn8");
+    const [time, setTime] = useURLState("time", 60);
+    const [tier, setTier] = useURLState("tier", 6);
+    const [page, setPage] = useURLState("page", 0);
 
     useEffect(() => {
+        setData("loading");
         fetch(
             `${backend}/api/leaderboard/${server}/${type}/${time}/${tier}/${page}`
         )

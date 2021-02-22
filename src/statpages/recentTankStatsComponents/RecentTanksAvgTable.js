@@ -218,7 +218,7 @@ function RecentTanksAvgTable({ data }) {
     return (
         <TableContainer theme={theme}>
             <FiltersContainer>
-                <div style={{margin: "-10px 0px"}}>
+                <div style={{ margin: "-10px 0px" }}>
                     <GlobalFilter
                         preGlobalFilteredRows={preGlobalFilteredRows}
                         globalFilter={state.globalFilter}
