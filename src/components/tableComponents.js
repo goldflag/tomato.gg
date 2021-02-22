@@ -31,15 +31,6 @@ export const StyledTable = styled.table`
     backdrop-filter: blur( 7px );
     tr {
         overflow-x: scroll;
-        :last-child {
-            td {
-                border-bottom: solid 1px
-                    ${({ theme }) =>
-                        theme === "dark"
-                            ? "rgb(100, 100, 100)"
-                            : "rgb(200, 200, 200)"};
-            }
-        }
         color: ${({ theme }) =>
             theme === "dark"
                 ? css`rgb(220, 220, 220)`
@@ -64,11 +55,6 @@ export const StyledTable = styled.table`
         padding: 10px;
         background-color: ${({ theme }) =>
             theme === "dark" ? css`rgba(50, 50, 80, 0.5)` : css`rgb(255, 255, 255)`};
-        border-bottom: solid 1px
-            ${({ theme }) =>
-                theme === "dark"
-                    ? css`rgba(100, 100, 100, 0.5)`
-                    : css`rgb(200, 200, 200)`};
         font-weight: 500;
     }
     td {

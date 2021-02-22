@@ -26,7 +26,7 @@ export default function StatsReference(props) {
                 <Paper
                     style={{
                         backgroundColor:
-                            theme === "dark" ? "rgb(40, 40, 40)" : "white",
+                            theme === "dark" ? "rgba(40, 40, 70, 0.5)" : "white",
                     }}
                 >
                     <div

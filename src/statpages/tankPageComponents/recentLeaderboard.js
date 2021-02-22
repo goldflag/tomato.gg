@@ -106,7 +106,7 @@ export default function RecentsLeaderboard({ data, type, highlightRow }) {
             data,
             initialState: {
                 pageIndex: 0,
-                pageSize: 101,
+                pageSize: 100,
             },
         },
         usePagination
