@@ -50,16 +50,6 @@ const CustomTab = withStyles((t) => ({
 
 const tabs = [
     { label: "MAIN STATS", value: "main" },
-    { label: "INFOGRAPHICS", value: "infographics" },
-    { label: "SESSIONS", value: "sessions" },
-    {
-        label: (
-            <div>
-                TREEMAP <NewIcon />
-            </div>
-        ),
-        value: "treemap",
-    },
     {
         label: (
             <div>
@@ -67,6 +57,16 @@ const tabs = [
             </div>
         ),
         value: "hall-of-fame",
+    },
+    { label: "SESSIONS", value: "sessions" },
+    { label: "INFOGRAPHICS", value: "infographics" },
+    {
+        label: (
+            <div>
+                TREEMAP <NewIcon />
+            </div>
+        ),
+        value: "treemap",
     },
 ];
 
@@ -148,6 +148,18 @@ export default function MainTabs(props) {
                     />
                 </div>
             </TabPanel>
+            <TabPanel value={page} index={"hall-of-fame"}>
+                <div style={{ marginTop: "1rem", minHeight: "300px" }}>
+                    <HallOfFame
+                        id={props.recentStats.id}
+                        server={props.recentStats.server}
+                        hofData={hofData}
+                        setHofData={setHofData}
+                        hofmainData={hofmainData}
+                        setHofmainData={setHofmainData}
+                    />
+                </div>
+            </TabPanel>
             <TabPanel value={page} index={"infographics"}>
                 <div style={{ marginTop: "1rem", minHeight: "300px" }}>
                     <Charts
@@ -166,18 +178,6 @@ export default function MainTabs(props) {
             <TabPanel value={page} index={"treemap"}>
                 <div style={{ marginTop: "1rem", minHeight: "300px" }}>
                     <Treemap data={props.recentStats.tree} />
-                </div>
-            </TabPanel>
-            <TabPanel value={page} index={"hall-of-fame"}>
-                <div style={{ marginTop: "1rem", minHeight: "300px" }}>
-                    <HallOfFame
-                        id={props.recentStats.id}
-                        server={props.recentStats.server}
-                        hofData={hofData}
-                        setHofData={setHofData}
-                        hofmainData={hofmainData}
-                        setHofmainData={setHofmainData}
-                    />
                 </div>
             </TabPanel>
         </>

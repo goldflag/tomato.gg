@@ -68,6 +68,15 @@ export default function Charts(props) {
                             />
                         </Paper>
                     </Grid>
+                    <Grid item xs={12}>
+                        <Paper className={classes.paper} square elevation={2} style={{ height: 387 }}>
+                            <LineGraphs
+                                WN8={props.data.lineGraphWN8}
+                                WR={props.data.lineGraphWR}
+                                DPG={props.data.lineGraphDPG}
+                            />
+                        </Paper>
+                    </Grid>
                     <Grid item xs={6}>
                         <Grid container spacing={2}>
                             <Grid item xs={6}>
@@ -114,15 +123,6 @@ export default function Charts(props) {
                             }}
                         >
                             {clanHistory}
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={8}>
-                        <Paper className={classes.paper} square elevation={2} style={{ height: 358 }}>
-                            <LineGraphs
-                                WN8={props.data.lineGraphWN8}
-                                WR={props.data.lineGraphWR}
-                                DPG={props.data.lineGraphDPG}
-                            />
                         </Paper>
                     </Grid>
                 </Grid>

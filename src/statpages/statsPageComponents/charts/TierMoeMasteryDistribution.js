@@ -37,7 +37,7 @@ export default function TierMasteryDistribution({data, keys, colors}) {
                     tickRotation: 0,
                     legend: "Tier",
                     legendPosition: "middle",
-                    legendOffset: 32,
+                    legendOffset: 38,
                 }}
                 axisLeft={{
                     tickSize: 5,

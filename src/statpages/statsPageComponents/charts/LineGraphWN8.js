@@ -9,7 +9,7 @@ const color = {
 
 export default function LineGraphWN8({ data, type }) {
     return (
-        <div style={{ height: "calc(310px)" }}>
+        <div style={{ height: "340px" }}>
             <ResponsiveLine
                 theme={{
                     fontFamily: "Roboto Mono",
@@ -29,7 +29,7 @@ export default function LineGraphWN8({ data, type }) {
                     },
                 }}
                 data={[data]}
-                curve="catmullRom"
+                curve="natural"
                 margin={{ top: 23, right: 30, bottom: 73, left: 70 }}
                 xScale={{
                     type: "linear",
@@ -56,9 +56,9 @@ export default function LineGraphWN8({ data, type }) {
                     tickSize: 5,
                     tickPadding: 10,
                     legend: "Battles",
-                    legendOffset: 45,
+                    legendOffset: 50,
                     legendPosition: "middle",
-                    tickRotation: -45,
+                    tickRotation: -25,
                     tickValues: 15,
                 }}
                 axisLeft={{
