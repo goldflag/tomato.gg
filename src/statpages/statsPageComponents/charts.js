@@ -129,14 +129,23 @@ export default function Charts(props) {
             </div>
         );
     } else {
-        const darkStyle = {
-            backgroundColor: "rgb(40, 40, 40)",
-            marginBottom: "1rem",
-        };
-
         output = (
             <div className={"mobilechartsdark"}>
-                <Paper square elevation={2} style={darkStyle}>
+                <Paper
+                    className={classes.paper}
+                    square
+                    elevation={2}
+                    style={{
+                        height: 387,
+                    }}
+                >
+                    <LineGraphs
+                        WN8={props.data.lineGraphWN8}
+                        WR={props.data.lineGraphWR}
+                        DPG={props.data.lineGraphDPG}
+                    />
+                </Paper>
+                <Paper className={classes.paper} square elevation={2}>
                     <Heatmap
                         data={props.data.tankWN8byClassTier}
                         recentData={props.data.recentTankWN8byClassTier}
@@ -150,66 +159,47 @@ export default function Charts(props) {
                         type={"wr"}
                     />
                 </Paper>
-                <Paper square elevation={2} style={darkStyle}>
+                <Paper className={classes.paper} square elevation={2}>
                     <TierDist data={props.data.tierDist} recentData={props.data.tierDistRecent} />
                 </Paper>
                 <Paper
+                    className={classes.paper}
                     square
                     elevation={2}
                     style={{
-                        marginBottom: "1rem",
                         height: 358,
                         overflowX: "hidden",
                         overflowY: "auto",
-                        backgroundColor: "rgb(40, 40, 40)",
                     }}
                 >
                     {clanHistory}
                 </Paper>
                 <Paper
+                    className={classes.paper}
                     square
                     elevation={2}
-                    style={{
-                        marginBottom: "1.5rem",
-                        backgroundColor: "rgb(40, 40, 40)",
-                    }}
+
                 >
                     <MOEDist MOEdata={props.data.tierMoeDist} MasteryData={props.data.tierMasteryDist} />
                 </Paper>
-                <Paper square elevation={2} style={darkStyle}>
+                <Paper className={classes.paper} square elevation={2}>
                     <NationDist data={props.data.NationDist} recentData={props.data.NationDistRecent} />
                 </Paper>
-                <Paper square elevation={2} style={darkStyle}>
+                <Paper className={classes.paper} square elevation={2}>
                     <ClassDist data={props.data.ClassDist} recentData={props.data.ClassDistRecent} />
                 </Paper>
-                <Paper square elevation={2} style={darkStyle}>
+                <Paper className={classes.paper} square elevation={2}>
                     <ExpectedDist data={props.data.expectedRatios} />
                 </Paper>
                 <Paper
+                    className={classes.paper}
                     square
                     elevation={2}
                     style={{
-                        marginBottom: "1.5rem",
                         height: 348,
-                        backgroundColor: "rgb(40, 40, 40)",
                     }}
                 >
                     <RecordsBar data={props.stats} />
-                </Paper>
-                <Paper
-                    square
-                    elevation={2}
-                    style={{
-                        marginBottom: "-1rem",
-                        height: 348,
-                        backgroundColor: "rgb(40, 40, 40)",
-                    }}
-                >
-                    <LineGraphs
-                        WN8={props.data.lineGraphWN8}
-                        WR={props.data.lineGraphWR}
-                        DPG={props.data.lineGraphDPG}
-                    />
                 </Paper>
             </div>
         );

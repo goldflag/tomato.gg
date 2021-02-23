@@ -180,7 +180,7 @@ function WN8Table(props) {
                         {page.map((row, i) => {
                             prepareRow(row);
                             return (
-                                <React.Fragment {...row.getRowProps()}>
+                                <React.Fragment key={i} {...row.getRowProps()}>
                                     <tr>
                                         {row.cells.map((cell) => {
                                             return (

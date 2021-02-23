@@ -97,7 +97,7 @@ export default function TemporaryDrawer() {
                             <ListItemText primary={"Home"} style={textStyle} />
                         </ListItem>
                     </Link>
-                    <Link to="/tanks">
+                    <Link to="/tank-stats">
                         <ListItem button key={"2"}>
                             <ListItemIcon>
                                 <BarChart style={textStyle} />

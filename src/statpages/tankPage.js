@@ -18,6 +18,9 @@ const backend = process.env.REACT_APP_BACKEND;
 const Top = styled.div`
     display: grid;
     grid-template-columns: 110px 160px auto;
+    @media screen and (max-width: 1000px) {
+        grid-template-columns: 15% 35% 50%;
+    }
 `;
 
 const Tier = styled.div`
@@ -27,6 +30,9 @@ const Tier = styled.div`
     font-weight: 500;
     font-size: 5rem;
     user-select: none;
+    @media screen and (max-width: 1000px) {
+        font-size: 2.5rem;
+    }
 `;
 
 const Name = styled.div`
@@ -34,6 +40,17 @@ const Name = styled.div`
     flex-direction: column;
     font-weight: 400;
     margin-top: 30px;
+    @media screen and (max-width: 1000px) {
+        margin-top: 8px;
+        font-size: 0.8rem;
+    }
+`;
+
+const ShortName = styled.div`
+    font-size: 2rem;
+    @media screen and (max-width: 1000px) {
+        font-size: 1.7rem;
+    }
 `;
 
 const TableLabel = styled.div`
@@ -46,6 +63,13 @@ const BottomLabel = styled.div`
     margin: 0.5rem 0;
     color: rgb(160, 160, 160);
 `;
+
+const TankImage = styled.img`
+    max-width: 200px;
+    @media screen and (max-width: 1000px) {
+        max-width: 120px;
+    }
+`
 
 const classConv = {
     HT: "Heavy Tank",
@@ -119,10 +143,10 @@ export default function TankPage(props) {
                         <Tier>{data.meta.tier}</Tier>
                     </div>
                     <div>
-                        <img src={data.meta.image} alt={data.meta.tank_id} />
+                        <TankImage src={data.meta.image} alt={data.meta.tank_id} />
                     </div>
                     <Name>
-                        <div style={{ fontSize: "2rem" }}>{data.meta.short_name}</div>
+                        <ShortName>{data.meta.short_name}</ShortName>
                         <div>
                             {nationConv[data.meta.nation]} {classConv[data.meta.class]}
                         </div>

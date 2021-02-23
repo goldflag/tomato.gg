@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CustomTabs, CustomTab } from "../../tabs/customTabs";
-import LineGraphWN8 from "../charts/LineGraphWN8.js";
+import LineGraphWN8 from "../charts/LineGraph.js";
 
 export default function LineGraphs({ WN8, DPG, WR }) {
     const [value, setValue] = useState(0);

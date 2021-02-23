@@ -29,7 +29,7 @@ export default function LineGraphWN8({ data, type }) {
                     },
                 }}
                 data={[data]}
-                curve="natural"
+                curve="linear"
                 margin={{ top: 23, right: 30, bottom: 73, left: 70 }}
                 xScale={{
                     type: "linear",

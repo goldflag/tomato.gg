@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
 import Grid from "@material-ui/core/Grid";
 import serverConv from "../../../data/serverConv.js";
@@ -7,12 +6,6 @@ import clonedeep from "lodash.clonedeep";
 import RSC from "react-scrollbars-custom";
 
 const APIKey = process.env.REACT_APP_API_KEY;
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-}));
 
 const roleConv = {
     intelligence_officer: "Intelligence Officer",
@@ -29,8 +22,6 @@ const roleConv = {
 };
 
 export default function ClanHistory(props) {
-    const classes = useStyles();
-
     const [value, setValue] = useState(0);
     const [clanList, setClanList] = useState("");
     const handleChange = (event, newValue) => {
@@ -42,7 +33,7 @@ export default function ClanHistory(props) {
         clanInfo = Unit();
     }
     if (props.data === "NO CLAN HISTORY") {
-        clanInfo = <>This player has no clan data</>;
+        clanInfo = <div>This player has no clan data</div>;
     }
 
     // Runs once when component mounts
@@ -197,22 +188,21 @@ export default function ClanHistory(props) {
 
     return (
         <RSC id="RSC-Example" noScrollX={true}>
-            <div className={classes.root}>
-                <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
-                    <CustomTab label="CLAN HISTORY" />
-                </CustomTabs>
-                <TabPanel value={value} index={0}>
-                    <div
-                        style={{
-                            padding: "10px 0px 0px 10px",
-                        }}
-                    >
-                        <Grid container spacing={1}>
-                            {clanInfo}
-                        </Grid>
-                    </div>
-                </TabPanel>
-            </div>
+            <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
+                <CustomTab label="CLAN HISTORY" />
+            </CustomTabs>
+            <TabPanel value={value} index={0}>
+                <div
+                    style={{
+                        padding: "10px 0px 0px 10px",
+                        color: "rgb(220, 220, 220)"
+                    }}
+                >
+                    <Grid container spacing={1}>
+                        {clanInfo}
+                    </Grid>
+                </div>
+            </TabPanel>
         </RSC>
     );
 }
