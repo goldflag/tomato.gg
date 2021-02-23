@@ -21,6 +21,7 @@ import {
     StyledTable,
     SubRow,
     TableContainer,
+    Name,
 } from "Components";
 
 const backend = process.env.REACT_APP_BACKEND;
@@ -197,30 +198,32 @@ function MoETracker(props) {
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map((column) => (
-                                    <th
-                                        {...column.getHeaderProps(column.getSortByToggleProps())}
-                                        {...column.getHeaderProps({
-                                            style: {
-                                                cursor: "pointer",
-                                                backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
-                                            },
-                                        })}
-                                    >
-                                        {column.render("Header")}
-                                        <span>
-                                            {column.isSorted ? (
-                                                column.isSortedDesc ? (
-                                                    <Icon size={16} icon={arrowDown} />
+                                {headerGroup.headers.map((column) =>
+                                    column.hidden ? null : (
+                                        <th
+                                            {...column.getHeaderProps(column.getSortByToggleProps())}
+                                            {...column.getHeaderProps({
+                                                style: {
+                                                    cursor: "pointer",
+                                                    backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
+                                                },
+                                            })}
+                                        >
+                                            {column.render("Header")}
+                                            <span>
+                                                {column.isSorted ? (
+                                                    column.isSortedDesc ? (
+                                                        <Icon size={16} icon={arrowDown} />
+                                                    ) : (
+                                                        <Icon size={16} icon={arrowUp} />
+                                                    )
                                                 ) : (
-                                                    <Icon size={16} icon={arrowUp} />
-                                                )
-                                            ) : (
-                                                ""
-                                            )}
-                                        </span>
-                                    </th>
-                                ))}
+                                                    ""
+                                                )}
+                                            </span>
+                                        </th>
+                                    )
+                                )}
                             </tr>
                         ))}
                     </thead>
@@ -230,15 +233,17 @@ function MoETracker(props) {
                             return (
                                 <React.Fragment key={i}>
                                     <tr {...row.getToggleRowExpandedProps({})}>
-                                        {row.cells.map((cell) => (
-                                            <td
-                                                {...cell.getCellProps({
-                                                    style: setColor(cell.column.Header, cell.value),
-                                                })}
-                                            >
-                                                {cell.render("Cell")}
-                                            </td>
-                                        ))}
+                                        {row.cells.map((cell) =>
+                                            cell.column.hidden ? null : (
+                                                <td
+                                                    {...cell.getCellProps({
+                                                        style: setColor(cell.column.Header, cell.value),
+                                                    })}
+                                                >
+                                                    {cell.render("Cell")}
+                                                </td>
+                                            )
+                                        )}
                                     </tr>
                                     {row.isExpanded ? (
                                         <SubRow>
@@ -320,7 +325,14 @@ function MoETracker(props) {
     const columns = React.useMemo(
         () => [
             {
-                id: "expander", // It needs an ID
+                Cell: ({ row: { original } }) => (
+                    <Name val={original.isPrem}>
+                        <img src={original.image} alt={original.name} />
+                        {original.name}
+                    </Name>
+                ),
+                Header: "Name",
+                accessor: "name",
                 disableFilters: true,
             },
             {
@@ -350,11 +362,6 @@ function MoETracker(props) {
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
-            },
-            {
-                Header: "Name",
-                accessor: "name",
-                disableFilters: true,
             },
             {
                 Header: `${MoEConv[props.moe]} MoE Reqs`,
@@ -405,6 +412,7 @@ function MoETracker(props) {
                 accessor: "isPrem",
                 Filter: PremFilter,
                 filter: arrayFilterFn,
+                hidden: true,
             },
         ],
         [props.moe]
