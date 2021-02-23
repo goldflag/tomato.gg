@@ -41,7 +41,6 @@ const TableContainer = styled.div`
     font-family: Roboto Mono;
     overflow-x: auto;
     background-color: rgba(0, 0, 0, 0);
-    margin-bottom: 1rem;
     backdrop-filter: blur(7px);
 `;
 
@@ -54,18 +53,9 @@ const SubTd = styled.td`
     padding: 0;
 `;
 
-export default function SessionsLog(props) {
-    const data = props.data;
-
+export default function SessionsLog({ data }) {
     const columns = React.useMemo(
         () => [
-            {
-                id: "expander", // It needs an ID
-            },
-            {
-                Header: "",
-                accessor: "rank",
-            },
             {
                 Header: "Date",
                 accessor: "date",
@@ -125,9 +115,7 @@ export default function SessionsLog(props) {
         headerGroups,
         prepareRow,
         visibleColumns,
-        page, // Instead of using 'rows', we'll use page,
-        // which has only the rows for the active page
-        // The rest of these things are super handy, too ;)
+        page,
         canPreviousPage,
         canNextPage,
         pageOptions,
@@ -148,51 +136,56 @@ export default function SessionsLog(props) {
         usePagination
     );
     return (
-        <TableContainer>
-            <Table {...getTableProps()}>
-                <thead>
-                    {headerGroups.map((headerGroup) => (
-                        <Tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) => (
-                                <Th {...column.getHeaderProps(column.getSortByToggleProps())} active={column.isSorted}>
-                                    {column.render("Header")}
-                                </Th>
-                            ))}
-                        </Tr>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {page.map((row, i) => {
-                        prepareRow(row);
-                        return (
-                            <React.Fragment key={i}>
-                                <Tr
-                                    {...row.getToggleRowExpandedProps({
-                                        style: { height: "40px" },
-                                    })}
-                                >
-                                    {row.cells.map((cell) => (
-                                        <Td
-                                            {...cell.getCellProps({
-                                                style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
-                                            })}
-                                        >
-                                            {cell.render("Cell")}
-                                        </Td>
-                                    ))}
-                                </Tr>
-                                <SubTr style={{ height: row.isExpanded || "0px" }}>
-                                    <SubTd colSpan={visibleColumns.length}>
-                                        <Collapse in={row.isExpanded}>
-                                            <SessionBreakdown data={row.original.tankStats} />
-                                        </Collapse>
-                                    </SubTd>
-                                </SubTr>
-                            </React.Fragment>
-                        );
-                    })}
-                </tbody>
-            </Table>
+        <>
+            <TableContainer>
+                <Table {...getTableProps()}>
+                    <thead>
+                        {headerGroups.map((headerGroup) => (
+                            <Tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) => (
+                                    <Th
+                                        {...column.getHeaderProps(column.getSortByToggleProps())}
+                                        active={column.isSorted}
+                                    >
+                                        {column.render("Header")}
+                                    </Th>
+                                ))}
+                            </Tr>
+                        ))}
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {page.map((row, i) => {
+                            prepareRow(row);
+                            return (
+                                <React.Fragment key={i}>
+                                    <Tr
+                                        {...row.getToggleRowExpandedProps({
+                                            style: { height: "40px" },
+                                        })}
+                                    >
+                                        {row.cells.map((cell) => (
+                                            <Td
+                                                {...cell.getCellProps({
+                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
+                                                })}
+                                            >
+                                                {cell.render("Cell")}
+                                            </Td>
+                                        ))}
+                                    </Tr>
+                                    <SubTr style={{ height: row.isExpanded || "0px" }}>
+                                        <SubTd colSpan={visibleColumns.length}>
+                                            <Collapse in={row.isExpanded}>
+                                                <SessionBreakdown data={row.original.tankStats} />
+                                            </Collapse>
+                                        </SubTd>
+                                    </SubTr>
+                                </React.Fragment>
+                            );
+                        })}
+                    </tbody>
+                </Table>
+            </TableContainer>
             <Pagination
                 pageSizes={[7, 14, 30, 90, 180]}
                 {...{
@@ -208,6 +201,6 @@ export default function SessionsLog(props) {
                     pageSize,
                 }}
             />
-        </TableContainer>
+        </>
     );
 }

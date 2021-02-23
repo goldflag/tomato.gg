@@ -157,7 +157,6 @@ const TableContainer = styled.div`
     font-family: Roboto Mono;
     overflow-x: auto;
     background-color: rgba(0, 0, 0, 0);
-    margin-bottom: 1rem;
     backdrop-filter: blur(7px);
 `;
 
@@ -327,7 +326,7 @@ function OverallTable({ data }) {
     );
 
     return (
-        <TableContainer>
+        <>
             <FiltersContainer>
                 <div style={{ marginBottom: "-10px" }}>
                     <GlobalFilter
@@ -346,69 +345,68 @@ function OverallTable({ data }) {
                                     )
                             )}
                         </ButtonFiltersContainer>
-                        <div
-                            style={{
-                                marginRight: "10px",
-                                marginTop: "10px",
-                            }}
-                        >
-                            {headerGroup.headers[6].render("Filter")}
-                        </div>
+                        {headerGroup.headers[6].render("Filter")}
                     </React.Fragment>
                 ))}
             </FiltersContainer>
-            <Table {...getTableProps()}>
-                <thead>
-                    {headerGroups.map((headerGroup) => (
-                        <Tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) =>
-                                column.hidden ? null : (
-                                    <Th
-                                        {...column.getHeaderProps(column.getSortByToggleProps())}
-                                        {...column.getHeaderProps({
-                                            style: {
-                                                cursor: "pointer",
-                                                backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
-                                            },
-                                        })}
-                                    >
-                                        {column.render("Header")}
-                                    </Th>
-                                )
-                            )}
-                        </Tr>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {page.map((row, i) => {
-                        prepareRow(row);
-                        return (
-                            <React.Fragment key={i}>
-                                <Tr {...row.getToggleRowExpandedProps({})}>
-                                    {row.cells.map((cell) =>
-                                        cell.column.hidden ? null : (
-                                            <Td
-                                                {...cell.getCellProps({
-                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
-                                                })}
-                                            >
-                                                {cell.render("Cell")}
-                                            </Td>
-                                        )
-                                    )}
-                                </Tr>
-                                <SubTr style={{ height: row.isExpanded || "0px" }}>
-                                    <SubTd colSpan={visibleColumns.length}>
-                                        <Collapse in={row.isExpanded}>
-                                            <Awards {...row.original} />
-                                        </Collapse>
-                                    </SubTd>
-                                </SubTr>
-                            </React.Fragment>
-                        );
-                    })}
-                </tbody>
-            </Table>
+            <TableContainer>
+                <Table {...getTableProps()}>
+                    <thead>
+                        {headerGroups.map((headerGroup) => (
+                            <Tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) =>
+                                    column.hidden ? null : (
+                                        <Th
+                                            {...column.getHeaderProps(column.getSortByToggleProps())}
+                                            {...column.getHeaderProps({
+                                                style: {
+                                                    cursor: "pointer",
+                                                    backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
+                                                },
+                                            })}
+                                        >
+                                            {column.render("Header")}
+                                        </Th>
+                                    )
+                                )}
+                            </Tr>
+                        ))}
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {page.map((row, i) => {
+                            prepareRow(row);
+                            return (
+                                <React.Fragment key={i}>
+                                    <Tr {...row.getToggleRowExpandedProps({})}>
+                                        {row.cells.map((cell) =>
+                                            cell.column.hidden ? null : (
+                                                <Td
+                                                    {...cell.getCellProps({
+                                                        style: cellStyle(
+                                                            cell.column.isSorted,
+                                                            cell.column.id,
+                                                            cell.value
+                                                        ),
+                                                    })}
+                                                >
+                                                    {cell.render("Cell")}
+                                                </Td>
+                                            )
+                                        )}
+                                    </Tr>
+                                    <SubTr style={{ height: row.isExpanded || "0px" }}>
+                                        <SubTd colSpan={visibleColumns.length}>
+                                            <Collapse in={row.isExpanded}>
+                                                <Awards {...row.original} />
+                                            </Collapse>
+                                        </SubTd>
+                                    </SubTr>
+                                </React.Fragment>
+                            );
+                        })}
+                    </tbody>
+                </Table>
+            </TableContainer>
             <Pagination
                 pageSizes={[15, 25, 100, 250, 500]}
                 {...{
@@ -424,7 +422,7 @@ function OverallTable({ data }) {
                     pageSize,
                 }}
             />
-        </TableContainer>
+        </>
     );
 }
 

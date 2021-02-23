@@ -9,6 +9,9 @@ export const FiltersContainer = styled.div`
     background-color: rgba(40, 40, 70, 0.5);
     width: 100%;
     backdrop-filter: blur(7px);
+    @media screen and (max-width: 1000px) {
+        overflow-x: scroll;
+    }
 `;
 
 export const ButtonFiltersContainer = styled.div`

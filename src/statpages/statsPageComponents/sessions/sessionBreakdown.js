@@ -7,9 +7,7 @@ import { Pagination, StyledTable, Name } from "Components";
 import cellStyle from "Functions/cellStyle";
 import { tierConv } from "Data/conversions";
 
-export default function SessionBreakdown(props) {
-    const data = props.data;
-
+export default function SessionBreakdown({ data }) {
     const columns = React.useMemo(
         () => [
             {

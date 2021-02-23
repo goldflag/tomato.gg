@@ -13,21 +13,13 @@ export default function Leaderboards(props) {
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/wn8");
-        getData();
     }, []);
 
-    async function getData() {
-        const url = `${backend}/api/abcd/wn8`;
-        const raw = await fetch(url);
-        let res = await raw.json();
-        setData(res);
-    }
-
-    let table = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />;
-
-    if (data) {
-        table = <WN8Table data={data} />;
-    }
+    useEffect(() => {
+        fetch(`${backend}/api/abcd/wn8`)
+            .then((res) => res.json())
+            .then((data) => setData(data));
+    }, []);
 
     return (
         <FullPageTableWrapper>
@@ -49,7 +41,7 @@ export default function Leaderboards(props) {
                 </span>{" "}
                 <br />
             </Info>
-            {table}
+            {data ? <WN8Table data={data} /> : <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />}
         </FullPageTableWrapper>
     );
 }

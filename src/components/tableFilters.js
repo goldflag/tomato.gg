@@ -182,7 +182,7 @@ export const NumberRangeColumnFilter = ({ column: { filterValue = [], preFiltere
     }, [id, preFilteredRows]);
 
     return (
-        <>
+        <div style={{ marginTop: "8px", display: "flex", alignItems: "center" }}>
             Battles
             <InputBase
                 value={filterValue[0] || ""}
@@ -221,7 +221,7 @@ export const NumberRangeColumnFilter = ({ column: { filterValue = [], preFiltere
                     color: "white",
                 }}
             />
-        </>
+        </div>
     );
 };
 

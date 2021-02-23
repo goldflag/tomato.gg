@@ -155,7 +155,7 @@ function PeriodBreakdown({ data }) {
     );
 
     return (
-        <TableContainer>
+        <>
             <FiltersContainer>
                 <div style={{ marginBottom: "-10px" }}>
                     <GlobalFilter
@@ -173,47 +173,49 @@ function PeriodBreakdown({ data }) {
                     </ButtonFiltersContainer>
                 ))}
             </FiltersContainer>
-            <StyledTable {...getTableProps()}>
-                <thead>
-                    {headerGroups.map((headerGroup) => (
-                        <>
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map((column) => (
-                                    <th
-                                        {...column.getHeaderProps(column.getSortByToggleProps())}
-                                        {...column.getHeaderProps({
-                                            style: {
-                                                cursor: "pointer",
-                                                backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
-                                            },
-                                        })}
-                                    >
-                                        {column.render("Header")}
-                                    </th>
-                                ))}
-                            </tr>
-                        </>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {page.map((row) => {
-                        prepareRow(row);
-                        return (
-                            <tr {...row.getRowProps()}>
-                                {row.cells.map((cell) => (
-                                    <td
-                                        {...cell.getCellProps({
-                                            style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
-                                        })}
-                                    >
-                                        {cell.render("Cell")}
-                                    </td>
-                                ))}
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </StyledTable>
+            <TableContainer>
+                <StyledTable {...getTableProps()}>
+                    <thead>
+                        {headerGroups.map((headerGroup) => (
+                            <>
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map((column) => (
+                                        <th
+                                            {...column.getHeaderProps(column.getSortByToggleProps())}
+                                            {...column.getHeaderProps({
+                                                style: {
+                                                    cursor: "pointer",
+                                                    backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
+                                                },
+                                            })}
+                                        >
+                                            {column.render("Header")}
+                                        </th>
+                                    ))}
+                                </tr>
+                            </>
+                        ))}
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {page.map((row) => {
+                            prepareRow(row);
+                            return (
+                                <tr {...row.getRowProps()}>
+                                    {row.cells.map((cell) => (
+                                        <td
+                                            {...cell.getCellProps({
+                                                style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
+                                            })}
+                                        >
+                                            {cell.render("Cell")}
+                                        </td>
+                                    ))}
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </StyledTable>
+            </TableContainer>
             <Pagination
                 pageSizes={[15, 25, 100, 250, 500]}
                 {...{
@@ -229,7 +231,7 @@ function PeriodBreakdown({ data }) {
                     pageSize,
                 }}
             />
-        </TableContainer>
+        </>
     );
 }
 
