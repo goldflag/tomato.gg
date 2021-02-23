@@ -1,46 +1,59 @@
 import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
 import styled from "styled-components";
+import { Collapse } from "@material-ui/core";
 
 import SessionBreakdown from "./sessionBreakdown";
 import { Pagination } from "../../../components";
 import cellStyle from "../../../functions/cellStyle";
 
-const Styles = styled.div`
-    font-family: Roboto Mono;
+const Table = styled.table`
+    border-spacing: 0;
+    width: 100%;
+    font-size: 0.8rem;
+`;
 
-    .tableContainer {
-        overflow-x: auto;
-        background-color: rgba(0, 0, 0, 0);
-        margin-bottom: 1rem;
-        backdrop-filter: blur(7px);
+const Tr = styled.tr`
+    color: rgb(220, 220, 220);
+    background-color: rgba(40, 40, 70, 0.5);
+    :nth-child(4n + 1) {
+        background-color: rgba(50, 50, 80, 0.5);
     }
-
-    table {
-        border-spacing: 0;
-        width: 100%;
-        font-size: 0.8rem;
-        tr {
-            color: rgb(220, 220, 220);
-            background-color: rgba(40, 40, 70, 0.5);
-            :nth-child(even) {
-                background-color: rgba(50, 50, 80, 0.5);
-            }
-            :hover {
-                background-color: rgba(30, 30, 60, 0.5);
-            }
-        }
-        th {
-            text-align: left;
-            padding: 10px;
-            background-color: rgba(50, 50, 80, 0.5);
-            font-weight: 500;
-        }
-        td {
-            padding: 0.4rem 0.5rem;
-        }
+    :hover {
+        background-color: rgba(30, 30, 60, 0.5);
     }
 `;
+
+const Th = styled.th`
+    cursor: "pointer";
+    text-align: left;
+    padding: 10px;
+    background-color: rgba(50, 50, 80, 0.5);
+    font-weight: 500;
+    background-color: ${({ active }) => (active ? "rgb(207, 0, 76)" : "")};
+`;
+
+const Td = styled.td`
+    padding: 0.4rem 0.5rem;
+`;
+
+const TableContainer = styled.div`
+    font-family: Roboto Mono;
+    overflow-x: auto;
+    background-color: rgba(0, 0, 0, 0);
+    margin-bottom: 1rem;
+    backdrop-filter: blur(7px);
+`;
+
+const SubTr = styled.tr`
+    color: rgb(220, 220, 220);
+    background-color: rgba(40, 40, 70, 0.25);
+`;
+
+const SubTd = styled.td`
+    padding: 0;
+`;
+
 export default function SessionsLog(props) {
     const data = props.data;
 
@@ -74,9 +87,7 @@ export default function SessionsLog(props) {
                 accessor: "overallWN8",
             },
             {
-                Cell: ({ value }) => {
-                    return <div>{value + "%"}</div>;
-                },
+                Cell: ({ value }) => `${value}%`,
                 Header: "Winrate",
                 accessor: "winrate",
             },
@@ -136,98 +147,67 @@ export default function SessionsLog(props) {
         useExpanded,
         usePagination
     );
-
-    function renderRowSubComponent(row) {
-        let tankStats = row.row.original.tankStats;
-        return (
-            <div>
-                <SessionBreakdown data={tankStats} />
-            </div>
-        );
-    }
-
     return (
-        <Styles>
-            <div className="tableContainer">
-                <table {...getTableProps()}>
-                    <thead>
-                        {headerGroups.map((headerGroup) => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map((column) => (
-                                    <th
-                                        {...column.getHeaderProps(column.getSortByToggleProps())}
-                                        {...column.getHeaderProps({
-                                            style: {
-                                                cursor: "pointer",
-                                                backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
-                                            },
-                                        })}
-                                    >
-                                        {column.render("Header")}
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {page.map((row, i) => {
-                            prepareRow(row);
-                            return (
-                                <React.Fragment key={i}>
-                                    <tr
-                                        {...row.getToggleRowExpandedProps({
-                                            style: { height: "40px" },
-                                        })}
-                                    >
-                                        {row.cells.map((cell) => (
-                                            <td
-                                                {...cell.getCellProps({
-                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
-                                                })}
-                                            >
-                                                {cell.render("Cell")}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                    {/*
-                                    If the row is in an expanded state, render a row with a
-                                    column that fills the entire length of the table.
-                                */}
-                                    {row.isExpanded ? (
-                                        <tr>
-                                            <td colSpan={visibleColumns.length}>
-                                                {/*
-                                                    Inside it, call our renderRowSubComponent function. In reality,
-                                                    you could pass whatever you want as props to
-                                                    a component like this, including the entire
-                                                    table instance. But for this example, we'll just
-                                                    pass the row
-                                                */}
-                                                {renderRowSubComponent({ row })}
-                                            </td>
-                                        </tr>
-                                    ) : null}
-                                </React.Fragment>
-                            );
-                        })}
-                    </tbody>
-                </table>
-                <Pagination
-                    pageSizes={[7, 14, 30, 90, 180]}
-                    {...{
-                        canPreviousPage,
-                        canNextPage,
-                        pageOptions,
-                        pageCount,
-                        gotoPage,
-                        nextPage,
-                        previousPage,
-                        setPageSize,
-                        pageIndex,
-                        pageSize,
-                    }}
-                />
-            </div>
-        </Styles>
+        <TableContainer>
+            <Table {...getTableProps()}>
+                <thead>
+                    {headerGroups.map((headerGroup) => (
+                        <Tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map((column) => (
+                                <Th {...column.getHeaderProps(column.getSortByToggleProps())} active={column.isSorted}>
+                                    {column.render("Header")}
+                                </Th>
+                            ))}
+                        </Tr>
+                    ))}
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                    {page.map((row, i) => {
+                        prepareRow(row);
+                        return (
+                            <React.Fragment key={i}>
+                                <Tr
+                                    {...row.getToggleRowExpandedProps({
+                                        style: { height: "40px" },
+                                    })}
+                                >
+                                    {row.cells.map((cell) => (
+                                        <Td
+                                            {...cell.getCellProps({
+                                                style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
+                                            })}
+                                        >
+                                            {cell.render("Cell")}
+                                        </Td>
+                                    ))}
+                                </Tr>
+                                <SubTr style={{ height: row.isExpanded || "0px" }}>
+                                    <SubTd colSpan={visibleColumns.length}>
+                                        <Collapse in={row.isExpanded}>
+                                            <SessionBreakdown data={row.original.tankStats} />
+                                        </Collapse>
+                                    </SubTd>
+                                </SubTr>
+                            </React.Fragment>
+                        );
+                    })}
+                </tbody>
+            </Table>
+            <Pagination
+                pageSizes={[7, 14, 30, 90, 180]}
+                {...{
+                    canPreviousPage,
+                    canNextPage,
+                    pageOptions,
+                    pageCount,
+                    gotoPage,
+                    nextPage,
+                    previousPage,
+                    setPageSize,
+                    pageIndex,
+                    pageSize,
+                }}
+            />
+        </TableContainer>
     );
 }
