@@ -3,31 +3,59 @@ import { ResponsiveHeatMap } from "@nivo/heatmap";
 import WN8color from "../../../functions/WN8color";
 import WRcolor from "../../../functions/WRcolor";
 
-export default function WN8Heatmap(props) {
+export default function WN8Heatmap({ data, type }) {
     return (
         <div style={{ height: "calc(310px)" }}>
             <ResponsiveHeatMap
                 theme={{
-                    fontFamily: "Roboto Mono",
                     textColor: "rgb(210, 210, 210)",
+                    fontFamily: "Roboto Mono",
+                    tooltip: {
+                        fontFamily: "Roboto Mono",
+                        container: {
+                            backdropFilter: "blur( 7px )",
+                            background: "rgb(40, 40, 70, 0.8)",
+                            color: "rgb(255, 255, 255)",
+                        },
+                    },
                 }}
-                data={props.data}
+                data={data}
                 keys={["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]}
                 indexBy="Class"
                 margin={{ top: 30, right: 30, bottom: 20, left: 60 }}
                 forceSquare={true}
-                cellShape={({ value, x, y, width, height, color, opacity, borderWidth, borderColor, textColor }) => (
-                    <g transform={`translate(${x}, ${y})`}>
+                cellShape={({ 
+                    data,
+                    value,
+                    x,
+                    y,
+                    width,
+                    height,
+                    color,
+                    opacity,
+                    borderWidth,
+                    borderColor,
+                    enableLabel,
+                    textColor,
+                    onHover,
+                    onLeave,
+                    onClick,
+                    theme,
+                }) => (
+                    <g 
+                        transform={`translate(${x}, ${y})`}
+                        onMouseEnter={onHover}
+                        onMouseMove={onHover}
+                        onMouseLeave={onLeave}
+                        onClick={e => onClick(data, e)}
+                        style={{ cursor: 'pointer' }}
+                    
+                    >
                         <path
-                            fill={props.type === "wn8" ? WN8color(value) : WRcolor(value)}
+                            fill={type === "wn8" ? WN8color(value) : WRcolor(value)}
                             fillOpacity={opacity}
-                            strokeWidth={borderWidth}
-                            stroke={borderColor}
-                            // m -${Math.round(width)/2} -${Math.round(width)/2}
-                            // h ${Math.round(width)}
-                            // v ${Math.round(width)}
-                            // h -${Math.round(width)}
-                            // v -${Math.round(width)}
+                            strokeWidth={1}
+                            stroke={"rgba(0, 0, 0, 0)"}
                             d={`
                             m -${Math.round(width) / 2} -${Math.round(width) / 2}
                             h ${Math.round(width)}
@@ -84,8 +112,11 @@ export default function WN8Heatmap(props) {
                 animate={true}
                 motionStiffness={80}
                 motionDamping={9}
-                hoverTarget="cell"
-                cellHoverOthersOpacity={0.85}
+                hoverTarget="rowColumn"
+                cellHoverOthersOpacity={0.5}
+                // tooltip={(node) => {
+                //     console.log(node);
+                // }}
             />
         </div>
     );

@@ -7,7 +7,7 @@ const color = {
     DPG: "rgb(148, 36, 173)",
 };
 
-export default function LineGraphWN8(props) {
+export default function LineGraphWN8({ data, type }) {
     return (
         <div style={{ height: "calc(310px)" }}>
             <ResponsiveLine
@@ -28,7 +28,7 @@ export default function LineGraphWN8(props) {
                         },
                     },
                 }}
-                data={[props.data]}
+                data={[data]}
                 curve="catmullRom"
                 margin={{ top: 23, right: 30, bottom: 73, left: 70 }}
                 xScale={{
@@ -47,7 +47,7 @@ export default function LineGraphWN8(props) {
                     reverse: false,
                 }}
                 yFormat={function (e) {
-                    return e + " " + props.type;
+                    return e + " " + type;
                 }}
                 axisTop={null}
                 axisRight={null}
@@ -66,12 +66,12 @@ export default function LineGraphWN8(props) {
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: props.type,
+                    legend: type,
                     legendOffset: -55,
                     legendPosition: "middle",
                     tickValues: 6,
                 }}
-                colors={color[props.type]}
+                colors={color[type]}
                 enableGridX={false}
                 pointSize={0}
                 pointColor={{ theme: "background" }}

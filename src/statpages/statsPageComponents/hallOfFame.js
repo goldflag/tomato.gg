@@ -22,20 +22,23 @@ const tierConv = {
     10: "X",
 };
 
-function colorConv(val) {
-    if (val > 99) {
-        return "rgb(191, 139, 240)";
-    }
-    if (val > 97) {
-        return "rgb(139, 195, 240)";
-    } else if (val > 90) {
-        return "rgb(245, 191, 66)";
-    } else if (val > 80) {
-        return "rgb(200, 200, 219)";
-    } else if (val > 65) {
-        return "rgb(176, 134, 18)";
-    } else {
-        return "rgb(240, 240, 240)";
+
+
+function rankColor(rank) {
+    if (rank < 8) return "#930D0D";
+    else if (rank < 15) return "#CD3333";
+    else if (rank < 30) return "#CC7A00";
+    else if (rank < 45) return "#CCB800";
+    else if (rank < 65) return "#849B24";
+    else if (rank < 80) return "#4D7326";
+    else if (rank < 90) return "#4099BF";
+    else if (rank < 95) return "#3972C6";
+    else if (rank < 98) return "#6844d4";
+    else if (rank < 99) return "#522b99";
+    else if (rank < 99.5) return "#411d73";
+    else if (rank < 99.9) return "#310d59";
+    else {
+        return "#24073d";
     }
 }
 
@@ -84,7 +87,7 @@ const Styles = styled.div`
     }
 
     .bigPercentile {
-        color: rgb(50, 50, 50);
+        color: rgb(255, 255, 255);
         font-weight: 400;
         padding: 5px;
         text-align: center;
@@ -187,7 +190,7 @@ const Styles = styled.div`
     }
 
     .percentile {
-        color: rgb(50, 50, 50);
+        color: rgb(255, 255, 255);
         font-weight: 400;
         background-color: rgb(245, 191, 66);
         padding: 5px;
@@ -258,7 +261,7 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                 <div
                     className="percentile"
                     style={{
-                        backgroundColor: colorConv((100 - (row.rank * 100) / row.total).toFixed(2)),
+                        backgroundColor: rankColor((100 - (row.rank * 100) / row.total).toFixed(2)),
                     }}
                 >
                     Better than {(100 - (row.rank * 100) / row.total).toFixed(2)}%
@@ -336,7 +339,7 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                             <div
                                 className="bigPercentile"
                                 style={{
-                                    backgroundColor: colorConv(100 - (top.winrate.ranking * 100) / top.total),
+                                    backgroundColor: rankColor(100 - (top.winrate.ranking * 100) / top.total),
                                 }}
                             >
                                 Better than {(100 - (top.winrate.ranking * 100) / top.total).toFixed(2)}%
@@ -350,7 +353,7 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                             <div
                                 className="bigPercentile"
                                 style={{
-                                    backgroundColor: colorConv(100 - (top.wn8.ranking * 100) / top.total),
+                                    backgroundColor: rankColor(100 - (top.wn8.ranking * 100) / top.total),
                                 }}
                             >
                                 Better than {(100 - (top.wn8.ranking * 100) / top.total).toFixed(2)}%
@@ -364,7 +367,7 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                             <div
                                 className="bigPercentile"
                                 style={{
-                                    backgroundColor: colorConv(100 - (top.kd.ranking * 100) / top.total),
+                                    backgroundColor: rankColor(100 - (top.kd.ranking * 100) / top.total),
                                 }}
                             >
                                 Better than {(100 - (top.kd.ranking * 100) / top.total).toFixed(2)}%
@@ -377,7 +380,7 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                         <div className="overallItem">
                             <span className="value">{top.battles.value}</span>
                             <span className="bigLabel"> Battles </span>
-                            <div className="bigPercentile" style={{ backgroundColor: "white" }}>
+                            <div className="bigPercentile" style={{ backgroundColor: "white", color: "rgb(50, 50, 50)" }}>
                                 More than {(100 - (top.battles.ranking * 100) / top.total).toFixed(2)}%
                             </div>
                             {top.battles.ranking}
@@ -389,7 +392,7 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                             <div
                                 className="bigPercentile"
                                 style={{
-                                    backgroundColor: colorConv(100 - (top.dpg.ranking * 100) / top.total),
+                                    backgroundColor: rankColor(100 - (top.dpg.ranking * 100) / top.total),
                                 }}
                             >
                                 Better than {(100 - (top.dpg.ranking * 100) / top.total).toFixed(2)}%
@@ -403,7 +406,7 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                             <div
                                 className="bigPercentile"
                                 style={{
-                                    backgroundColor: colorConv(100 - (top.dmg_ratio.ranking * 100) / top.total),
+                                    backgroundColor: rankColor(100 - (top.dmg_ratio.ranking * 100) / top.total),
                                 }}
                             >
                                 Better than {(100 - (top.dmg_ratio.ranking * 100) / top.total).toFixed(2)}%
@@ -417,7 +420,7 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                             <div
                                 className="bigPercentile"
                                 style={{
-                                    backgroundColor: colorConv(100 - (top.frags.ranking * 100) / top.total),
+                                    backgroundColor: rankColor(100 - (top.frags.ranking * 100) / top.total),
                                 }}
                             >
                                 Better than {(100 - (top.frags.ranking * 100) / top.total).toFixed(2)}%

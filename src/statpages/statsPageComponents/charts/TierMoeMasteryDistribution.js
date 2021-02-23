@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 
-export default function TierMasteryDistribution(props) {
+export default function TierMasteryDistribution({data, keys, colors}) {
     return (
         <div style={{ height: "calc(292px)" }}>
             <ResponsiveBar
@@ -22,18 +22,12 @@ export default function TierMasteryDistribution(props) {
                         },
                     },
                 }}
-                data={props.data}
-                keys={["None", "3rd", "2nd", "1st", "Ace"]}
+                data={data}
+                keys={keys}
                 indexBy="Tier"
                 margin={{ top: 30, right: 100, bottom: 50, left: 50 }}
                 padding={0.3}
-                colors={[
-                    "rgb(97, 97, 97)",
-                    "rgb(115, 83, 53)",
-                    "rgb(145, 106, 44)",
-                    "rgb(194, 194, 194)",
-                    "rgb(235, 191, 47)",
-                ]}
+                colors={colors}
                 borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
                 axisTop={null}
                 axisRight={null}

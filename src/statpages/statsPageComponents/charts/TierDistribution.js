@@ -1,8 +1,7 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 
-export default function TierDistribution(props) {
-    const data = props.data;
+export default function TierDistribution({ data }) {
     return (
         <div style={{ height: "calc(300px)" }}>
             <ResponsiveBar

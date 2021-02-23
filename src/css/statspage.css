@@ -3,9 +3,6 @@
 .topstats {
     display: flex;
     flex-direction: row;
-    /* grid-template-columns: auto  14% 14% 14% 14% 14% 14%;
-    grid-template-rows: 100%;
-    grid-gap: 1rem; */
     justify-content: space-between;
     max-width: 100%;
 }

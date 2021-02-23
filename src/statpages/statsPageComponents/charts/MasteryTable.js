@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function MasteryTable(props) {
+export default function MasteryTable({ data }) {
     const demo = {
         padding: 5,
         fontSize: "1rem",
@@ -36,11 +36,11 @@ export default function MasteryTable(props) {
     ];
 
     for (let i = 0; i < 10; ++i) {
-        rows[4].Mastery += props.data[i]["None"];
-        rows[3].Mastery += props.data[i]["3rd"];
-        rows[2].Mastery += props.data[i]["2nd"];
-        rows[1].Mastery += props.data[i]["1st"];
-        rows[0].Mastery += props.data[i]["Ace"];
+        rows[4].Mastery += data[i]["None"];
+        rows[3].Mastery += data[i]["3rd"];
+        rows[2].Mastery += data[i]["2nd"];
+        rows[1].Mastery += data[i]["1st"];
+        rows[0].Mastery += data[i]["Ace"];
     }
 
     const numTanks = rows[0].Mastery + rows[1].Mastery + rows[2].Mastery + rows[3].Mastery + rows[4].Mastery;

@@ -13,6 +13,10 @@ import Treemap from "./treemap/treemap";
 import { NewIcon } from "../../components";
 import { useURLState } from "../../functions/hooks";
 
+// import Heatmaps from "./appbars/Heatmaps";
+// import Grid from "@material-ui/core/Grid";
+// import Paper from "@material-ui/core/Paper";
+
 const CustomTabs = withStyles({
     root: {
         elevation: 10,
@@ -100,8 +104,44 @@ export default function MainTabs(props) {
             <TabPanel value={page} index={"main"}>
                 <div style={{ margin: "1rem 0" }}>
                     <TopTable data={props.graphData.overallStats} />
+                    {/* <div style={{ margin: "1rem 0" }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={6}>
+                                <Paper style={{
+                                    textAlign: "left",
+                                    fontFamily: "Roboto Mono",
+                                    fontSize: "1.2em",
+                                    backgroundColor: "rgba(40, 40, 70, 0.4)",
+                                    backdropFilter: "blur( 7px )",
+                                    color: "rgb(30, 30, 30)",
+                                }} square elevation={2}>
+                                    <Heatmaps
+                                        data={props.graphData.tankWN8byClassTier}
+                                        recentData={props.graphData.recentTankWN8byClassTier}
+                                        type={"wn8"}
+                                    />
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Paper style={{
+                                    textAlign: "left",
+                                    fontFamily: "Roboto Mono",
+                                    fontSize: "1.2em",
+                                    backgroundColor: "rgba(40, 40, 70, 0.4)",
+                                    backdropFilter: "blur( 7px )",
+                                    color: "rgb(30, 30, 30)",
+                                }} square elevation={2}>
+                                <Heatmaps
+                                        data={props.graphData.tankWRbyClassTier}
+                                        recentData={props.graphData.recentTankWRbyClassTier}
+                                        type={"wr"}
+                                    />
+                                </Paper>
+                            </Grid>
+                        </Grid>
+                    </div> */}
                 </div>
-                <div style={{ padding: "0rem" }}>
+                <div style={{ margin: "1rem 0" }}>
                     <AllTankStats
                         overall={props.recentStats.overallStats.tankWN8}
                         recents={props.recentStats.recents}

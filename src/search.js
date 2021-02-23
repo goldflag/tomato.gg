@@ -33,33 +33,31 @@ export default withRouter(function Search(props) {
     };
 
     return (
-        <div className="backbackground">
-            <div className="backgrounddark">
-                <div className="center">
-                    <div>
-                        <img
-                            src={TomatoLogo}
-                            alt="logo"
-                            style={{
-                                height: "auto",
-                                width: "80%",
-                                margin: "0 auto",
-                                display: "flex",
-                            }}
+        <div>
+            <div className="center">
+                <div>
+                    <img
+                        src={TomatoLogo}
+                        alt="logo"
+                        style={{
+                            height: "auto",
+                            width: "80%",
+                            margin: "0 auto",
+                            display: "flex",
+                        }}
+                    />
+                    <form onSubmit={searchId}>
+                        <SearchBar
+                            setName={setName}
+                            setServer={toggleServer}
+                            server={server}
+                            setMode={setMode}
+                            mode={mode}
                         />
-                        <form onSubmit={searchId}>
-                            <SearchBar
-                                setName={setName}
-                                setServer={toggleServer}
-                                server={server}
-                                setMode={setMode}
-                                mode={mode}
-                            />
-                        </form>
-                    </div>
+                    </form>
                 </div>
-                <div className={"leaderboard"}>{/* <LeaderboardGrid /> */}</div>
             </div>
+            <div className={"leaderboard"}>{/* <LeaderboardGrid /> */}</div>
         </div>
     );
 });

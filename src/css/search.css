@@ -1,31 +1,8 @@
-.backbackground {
-    background-color: rgb(50, 50, 54);
-}
-
-.background {
-    background: url(../assets/Ocean.svg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    height: 100vh;
-    padding-top: 20vh;
-}
-
-.backgrounddark {
-    background: url(../assets/Ocean.svg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    height: 100vh;
-    padding-top: 20vh;
-}
-
 .center {
     margin: 0 auto;
     display: block;
     padding: 20px;
+    padding-top: 20vh;
     max-width: 800px;
 }
 

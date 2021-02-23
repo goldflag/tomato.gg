@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
+import {  CustomTabs, CustomTab } from "../../tabs/customTabs";
 import NationDistribution from "../charts/NationDistribution.js";
 
 const useStyles = makeStyles((theme) => ({
@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function NationDist(props) {
+export default function NationDist({ data, recentData }) {
     const classes = useStyles();
     const [value, setValue] = useState(0);
 
@@ -24,12 +24,7 @@ export default function NationDist(props) {
                     <CustomTab label="NATIONS" />
                     <CustomTab label="RECENT" />
                 </CustomTabs>
-                <TabPanel value={value} index={0}>
-                    <NationDistribution data={props.data} />
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <NationDistribution data={props.recentData} />
-                </TabPanel>
+                <NationDistribution data={value === 0 ? data : recentData} />
             </div>
         </div>
     );

@@ -139,11 +139,6 @@ export default function SessionsLog(props) {
 
     function renderRowSubComponent(row) {
         let tankStats = row.row.original.tankStats;
-        for (let i = 0; i < tankStats.length; ++i) {
-            tankStats[i]["img"] = (
-                <img src={require(`../../../assets/tankIcons/${tankStats[i].id}.png`)} alt={tankStats[i].id} />
-            );
-        }
         return (
             <div>
                 <SessionBreakdown data={tankStats} />

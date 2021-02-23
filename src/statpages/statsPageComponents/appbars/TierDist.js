@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
+import {CustomTabs, CustomTab } from "../../tabs/customTabs";
 import TierDistribution from "../charts/TierDistribution.js";
 
-export default function TierDist(props) {
+export default function TierDist({ data, recentData }) {
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -15,12 +15,7 @@ export default function TierDist(props) {
                 <CustomTab label="TIER DISTRIBUTION" />
                 <CustomTab label="RECENT" />
             </CustomTabs>
-            <TabPanel value={value} index={0}>
-                <TierDistribution data={props.data} />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <TierDistribution data={props.recentData} />
-            </TabPanel>
+            <TierDistribution data={value === 0 ? data : recentData} />
         </div>
     );
 }

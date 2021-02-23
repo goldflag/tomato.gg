@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
 
-export default function NationDistribution(props) {
+export default function NationDistribution({ data }) {
     return (
         <div style={{ height: "calc(300px)" }}>
             <ResponsivePie
@@ -16,7 +16,7 @@ export default function NationDistribution(props) {
                         },
                     },
                 }}
-                data={props.data}
+                data={data}
                 margin={{ top: 30, right: 20, bottom: 30, left: 20 }}
                 innerRadius={0.5}
                 padAngle={0.7}

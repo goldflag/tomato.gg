@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
+import { CustomTabs, CustomTab } from "../../tabs/customTabs";
 import LineGraphWN8 from "../charts/LineGraphWN8.js";
 
-export default function LineGraphs(props) {
+export default function LineGraphs({ WN8, DPG, WR }) {
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -22,15 +22,10 @@ export default function LineGraphs(props) {
                 <CustomTab label="DPG PROGRESS" />
                 <CustomTab label="WR PROGRESS" />
             </CustomTabs>
-            <TabPanel value={value} index={0}>
-                <LineGraphWN8 data={props.WN8} type="WN8" />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <LineGraphWN8 data={props.DPG} type="DPG" />
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                <LineGraphWN8 data={props.WR} type="WR" />
-            </TabPanel>
+            <LineGraphWN8 
+                data={value === 0 ? WN8 : value === 1 ? DPG : WR} 
+                type={value === 0 ? "WN8" : value === 1 ? "DPG" : "WR"} 
+            />
         </div>
     );
 }

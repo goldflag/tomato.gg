@@ -360,14 +360,6 @@ function MoETracker(props) {
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => {
-                    return <img src={require(`../../assets/tankIcons/${value}.png`)} alt={value} />;
-                },
-                Header: "",
-                accessor: "id",
-                disableFilters: true,
-            },
-            {
                 Header: "Name",
                 accessor: "name",
                 disableFilters: true,

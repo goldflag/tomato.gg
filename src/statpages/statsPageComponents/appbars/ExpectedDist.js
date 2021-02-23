@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
+import { CustomTabs, CustomTab } from "../../tabs/customTabs";
 import WN8Radar from "../charts/WN8Radar";
 
-export default function ExpectedDist(props) {
+export default function ExpectedDist({ data }) {
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -14,9 +14,7 @@ export default function ExpectedDist(props) {
             <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
                 <CustomTab label="WN8 ACTUAL TO EXP. RATIO" />
             </CustomTabs>
-            <TabPanel value={value} index={0}>
-                <WN8Radar data={props.data} />
-            </TabPanel>
+            <WN8Radar data={data} />
         </div>
     );
 }

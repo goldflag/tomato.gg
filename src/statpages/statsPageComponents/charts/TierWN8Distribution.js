@@ -1,8 +1,7 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 
-export default function TierWN8Distribution(props) {
-    const data = props.data;
+export default function TierWN8Distribution({ data }) {
     return (
         <div style={{ height: "calc(30vh + 100px)" }}>
             <ResponsiveBar

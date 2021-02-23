@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsiveRadar } from "@nivo/radar";
 
-export default function WN8Radar(props) {
+export default function WN8Radar({ data }) {
     return (
         <div style={{ height: "calc(300px)" }}>
             <ResponsiveRadar
@@ -16,7 +16,7 @@ export default function WN8Radar(props) {
                         },
                     },
                 }}
-                data={props.data}
+                data={data}
                 keys={["overall", "recent"]}
                 indexBy="stat"
                 maxValue="auto"
