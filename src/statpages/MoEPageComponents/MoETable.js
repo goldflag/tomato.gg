@@ -112,7 +112,6 @@ function MoETable(props) {
                 data,
                 defaultColumn, // Be sure to pass the defaultColumn option
                 filterTypes,
-                hiddenColumns: ["prem"],
                 initialState: {
                     pageIndex: 0,
                     pageSize: 50,
@@ -122,6 +121,7 @@ function MoETable(props) {
                             desc: true,
                         },
                     ],
+                    hiddenColumns: ["isPrem"],
                 },
             },
             useFilters, // useFilters!
@@ -274,7 +274,14 @@ function MoETable(props) {
     const columns = React.useMemo(
         () => [
             {
-                id: "expander", // It needs an ID
+                Cell: ({ row: { original } }) => (
+                    <Name val={original.isPrem}>
+                        <img src={original.image} alt={original.name} />
+                        {original.name}
+                    </Name>
+                ),
+                Header: "Name",
+                accessor: "name",
                 disableFilters: true,
             },
             {
@@ -304,20 +311,6 @@ function MoETable(props) {
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
-            },
-            {
-                Cell: (data) => {
-                    const value = data.row.original;
-                    return (
-                        <Name val={value.isPrem}>
-                            <img src={value.image} alt={value.name} />
-                            {value.name}
-                        </Name>
-                    );
-                },
-                Header: "Name",
-                accessor: "name",
-                disableFilters: true,
             },
             {
                 Header: "50%",

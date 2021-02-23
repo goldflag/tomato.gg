@@ -98,7 +98,6 @@ function WN8Table(props) {
                 data,
                 defaultColumn, // Be sure to pass the defaultColumn option
                 filterTypes,
-                hiddenColumns: ["prem"],
                 initialState: {
                     pageIndex: 0,
                     pageSize: 100,
@@ -108,6 +107,7 @@ function WN8Table(props) {
                             desc: true,
                         },
                     ],
+                    hiddenColumns: ["isPrem"],
                 },
             },
             useFilters, // useFilters!
@@ -248,6 +248,9 @@ function WN8Table(props) {
                 accessor: "nation",
                 Filter: NationFilter,
                 filter: arrayFilterFn,
+                Cell: ({ value }) => (
+                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
+                ),
             },
             {
                 Header: "Tier",
@@ -260,6 +263,9 @@ function WN8Table(props) {
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
+                Cell: ({ value }) => (
+                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
+                ),
             },
             {
                 Header: "expDef",

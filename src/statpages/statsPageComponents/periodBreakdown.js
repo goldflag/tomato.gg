@@ -138,7 +138,7 @@ function PeriodBreakdown({ data }) {
             initialState: {
                 pageIndex: 0,
                 pageSize: 25,
-                hiddenColumns: ["prem"],
+                hiddenColumns: ["isPrem"],
                 sortBy: [
                     {
                         id: "battles",

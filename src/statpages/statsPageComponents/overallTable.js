@@ -276,6 +276,7 @@ function OverallTable({ data }) {
                 accessor: "isPrem",
                 Filter: PremFilter,
                 filter: arrayFilterFn,
+                hidden: true,
             },
         ],
         []
@@ -309,7 +310,7 @@ function OverallTable({ data }) {
             initialState: {
                 pageIndex: 0,
                 pageSize: 25,
-                hiddenColumns: ["prem"],
+                // hiddenColumns: ["isPrem"],
                 sortBy: [
                     {
                         id: "battles",
@@ -340,7 +341,7 @@ function OverallTable({ data }) {
                         <ButtonFiltersContainer key={i}>
                             {filterOrder.map(
                                 (n) =>
-                                    !headerGroup.headers[n].disableFilters && (
+                                    !columns[n].disableFilters && (
                                         <span key={n}>{headerGroup.headers[n].render("Filter")}</span>
                                     )
                             )}
@@ -360,19 +361,21 @@ function OverallTable({ data }) {
                 <thead>
                     {headerGroups.map((headerGroup) => (
                         <Tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) => (
-                                <Th
-                                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                                    {...column.getHeaderProps({
-                                        style: {
-                                            cursor: "pointer",
-                                            backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
-                                        },
-                                    })}
-                                >
-                                    {column.render("Header")}
-                                </Th>
-                            ))}
+                            {headerGroup.headers.map((column) =>
+                                column.hidden ? null : (
+                                    <Th
+                                        {...column.getHeaderProps(column.getSortByToggleProps())}
+                                        {...column.getHeaderProps({
+                                            style: {
+                                                cursor: "pointer",
+                                                backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
+                                            },
+                                        })}
+                                    >
+                                        {column.render("Header")}
+                                    </Th>
+                                )
+                            )}
                         </Tr>
                     ))}
                 </thead>
@@ -382,15 +385,17 @@ function OverallTable({ data }) {
                         return (
                             <React.Fragment key={i}>
                                 <Tr {...row.getToggleRowExpandedProps({})}>
-                                    {row.cells.map((cell) => (
-                                        <Td
-                                            {...cell.getCellProps({
-                                                style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
-                                            })}
-                                        >
-                                            {cell.render("Cell")}
-                                        </Td>
-                                    ))}
+                                    {row.cells.map((cell) =>
+                                        cell.column.hidden ? null : (
+                                            <Td
+                                                {...cell.getCellProps({
+                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
+                                                })}
+                                            >
+                                                {cell.render("Cell")}
+                                            </Td>
+                                        )
+                                    )}
                                 </Tr>
                                 <SubTr style={{ height: row.isExpanded || "0px" }}>
                                     <SubTd colSpan={visibleColumns.length}>

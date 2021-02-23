@@ -111,7 +111,6 @@ function MasteryTable(props) {
                 data,
                 defaultColumn, // Be sure to pass the defaultColumn option
                 filterTypes,
-                hiddenColumns: ["prem"],
                 initialState: {
                     pageIndex: 0,
                     pageSize: 50,
@@ -121,6 +120,7 @@ function MasteryTable(props) {
                             desc: true,
                         },
                     ],
+                    hiddenColumns: ["isPrem"],
                 },
             },
             useFilters, // useFilters!
@@ -281,11 +281,20 @@ function MasteryTable(props) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
-                    );
-                },
+                Cell: ({ row: { original } }) => (
+                    <Name val={original.isPrem}>
+                        <img src={original.image} alt={original.name} />
+                        {original.name}
+                    </Name>
+                ),
+                Header: "Name",
+                accessor: "name",
+                disableFilters: true,
+            },
+            {
+                Cell: ({ value }) => (
+                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
+                ),
                 Header: "Nation",
                 accessor: "nation",
                 Filter: NationFilter,
@@ -298,29 +307,13 @@ function MasteryTable(props) {
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
-                    );
-                },
+                Cell: ({ value }) => (
+                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
+                ),
                 Header: "Class",
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
-            },
-            {
-                Cell: (data) => {
-                    const value = data.row.original;
-                    return (
-                        <Name val={value.isPrem}>
-                            <img src={value.image} alt={value.name} />
-                            {value.name}
-                        </Name>
-                    );
-                },
-                Header: "Name",
-                accessor: "name",
-                disableFilters: true,
             },
             {
                 Header: "3rd Class",
