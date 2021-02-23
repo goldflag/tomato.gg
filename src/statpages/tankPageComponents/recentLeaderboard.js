@@ -7,7 +7,7 @@ import { StyledTable, TableContainer } from "../../components/tableComponents";
 import WN8c from "../../functions/WN8color";
 import WRc from "../../functions/WRcolor";
 
-export default function RecentsLeaderboard({ data, type, highlightRow }) {
+export default function RecentsLeaderboard({ data, type, highlightUserID }) {
     function setColor(column, value) {
         if (column === "wn8")
             return {
@@ -105,17 +105,17 @@ export default function RecentsLeaderboard({ data, type, highlightRow }) {
     );
 
     const [rowRef, setRowRef] = React.useState(null);
-    const highlightRowProps = (rowIndex, row) => {
-        console.log(row);
-        if (rowIndex !== highlightRow) return {};
-        return {
-            style: {
-                backgroundColor: "rgba(30,30,60,0.8)",
-                color: "white",
-                fontWeight: "bolder",
-            },
-            ref: setRowRef,
-        };
+    const highlightRowProps = (row) => {
+        if (row.original.player_id === highlightUserID)
+            return {
+                style: {
+                    backgroundColor: "rgba(30,30,60,0.8)",
+                    color: "white",
+                    fontWeight: "bolder",
+                },
+                ref: setRowRef,
+            };
+        return {};
     };
     useEffect(() => {
         if (rowRef) {
@@ -125,19 +125,6 @@ export default function RecentsLeaderboard({ data, type, highlightRow }) {
             });
         }
     }, [rowRef]);
-
-    // battles: "183"
-    // dpg: "306"
-    // frags: "0.39"
-    // kd: "0.43"
-    // player_id: 1000954084
-    // rank: "98"
-    // spots: "2.65"
-    // survived: "8.74%"
-    // url: "/stats/NA/Bubonic4U=1000954084"
-    // username: "Bubonic4U"
-    // winrate: "50.27%"
-    // wn8: "735"
 
     // Render the UI for your table
     return (
@@ -159,10 +146,10 @@ export default function RecentsLeaderboard({ data, type, highlightRow }) {
                     ))}
                 </thead>
                 <tbody {...getTableBodyProps()}>
-                    {rows.map((row, i) => {
+                    {rows.map((row) => {
                         prepareRow(row);
                         return (
-                            <tr {...row.getRowProps(highlightRowProps(i, row))}>
+                            <tr {...row.getRowProps(highlightRowProps(row))}>
                                 {row.cells.map((cell) => (
                                     <td
                                         {...cell.getCellProps({

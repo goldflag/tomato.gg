@@ -89,6 +89,7 @@ export default function TankPage(props) {
     const [page, setPage] = useURLState("page", 0);
     const [type, setType] = useURLState("type", "dpg");
     const [rank, , clearRank] = useURLState("rank", false, "number");
+    const [userID] = useURLState("userID", false, "number");
 
     const actualPage = rank ? Math.ceil(rank / PAGE_SIZE - 1) : page;
 
@@ -110,8 +111,6 @@ export default function TankPage(props) {
     if (typeof data === "string") {
         content = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={30} top={30} />;
     } else {
-        const realPageSize = data.leaderboard.length;
-        const highlightRow = rank && (rank === realPageSize ? rank : rank % realPageSize) - 1;
         content = (
             <>
                 <Top>
@@ -146,7 +145,7 @@ export default function TankPage(props) {
                         ))}
                     </FilterButtonGroup>
                 </TableLabel>
-                <RecentLeaderboard data={data.leaderboard} type={type} setType={setType} highlightRow={highlightRow} />
+                <RecentLeaderboard data={data.leaderboard} type={type} setType={setType} highlightUserID={userID} />
                 <ServerPagination
                     page={actualPage}
                     numPages={5}

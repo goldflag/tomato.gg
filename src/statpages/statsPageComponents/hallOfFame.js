@@ -247,8 +247,7 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                 key={i}
                 makeLink={row.rank && row.rank <= 500}
                 className="box abovebox"
-                to={`/tank/${row.tank_id}?rank=${row.rank}`}
-                // target="_blank"
+                to={`/tank/${row.tank_id}?rank=${row.rank}&userID=${id}`}
             >
                 <img src={row.image} className="image" alt={row.name} />
                 <div className="name">
