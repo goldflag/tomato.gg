@@ -43,8 +43,8 @@ const AwardBreakdown = styled.div`
     grid-template-columns: 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px;
 `;
 
-function Awards({ awards }) {
-    function NumberBox(val) {
+const Awards = ({ awards }) => {
+    const NumberBox = (val) => {
         // TODO?: replace this with https://material-ui.com/components/badges/#dot-badge
         let width;
         if (val < 10) width = "15px";
@@ -74,46 +74,44 @@ function Awards({ awards }) {
                 {val}
             </div>
         );
-    }
+    };
 
-    function RenderTooltip(award) {
-        return (
+    const RenderTooltip = (award) => (
+        <div
+            style={{
+                position: "absolute",
+                left: "-250px",
+                top: "40px",
+                backgroundColor: "rgb(40, 40, 40)",
+                padding: "0.5rem",
+                borderRadius: "5px",
+            }}
+        >
             <div
                 style={{
-                    position: "absolute",
-                    left: "-250px",
-                    top: "40px",
-                    backgroundColor: "rgb(40, 40, 40)",
-                    padding: "0.5rem",
-                    borderRadius: "5px",
+                    lineHeight: "1.5rem",
+                    color: "rgb(255, 255, 255)",
+                    fontSize: "0.9rem",
                 }}
             >
-                <div
-                    style={{
-                        lineHeight: "1.5rem",
-                        color: "rgb(255, 255, 255)",
-                        fontSize: "0.9rem",
-                    }}
-                >
-                    {awardsData[award].name}
-                </div>
-                <div
-                    style={{
-                        width: "200px",
-                        color: "rgb(200, 200, 200)",
-                        fontSize: "0.7rem",
-                    }}
-                >
-                    {awardsData[award].desc}
-                </div>
+                {awardsData[award].name}
             </div>
-        );
-    }
+            <div
+                style={{
+                    width: "200px",
+                    color: "rgb(200, 200, 200)",
+                    fontSize: "0.7rem",
+                }}
+            >
+                {awardsData[award].desc}
+            </div>
+        </div>
+    );
 
     const RenderAwards = (awards, type) =>
-        Object.entries(awards).map(([awardName, count]) => {
+        Object.entries(awards).map(([awardName, count], i) => {
             return count > 0 ? (
-                <Tooltip arrow={false} direction="right" content={RenderTooltip(awardName)}>
+                <Tooltip key={i} arrow={false} direction="right" content={RenderTooltip(awardName)}>
                     {NumberBox(count)}
                     <img
                         style={{ width: "50px" }}
@@ -128,14 +126,14 @@ function Awards({ awards }) {
     return (
         <AwardContainer>
             {Object.entries(types).map(([key, label]) => (
-                <>
+                <React.Fragment key={key}>
                     {label}
                     <AwardBreakdown>{RenderAwards(awards[key], key)}</AwardBreakdown>
-                </>
+                </React.Fragment>
             ))}
         </AwardContainer>
     );
-}
+};
 
 const Table = styled.table`
     border-spacing: 0;

@@ -224,7 +224,7 @@ const Sidebar = withRouter((props) => {
                             {" "}
                             Support Tomato.gg
                         </h2>
-                        Tomato.gg runs on entirely on user donations. If you find value in the website, consider
+                        Tomato.gg runs entirely on user donations. If you find value in the website, consider
                         chipping in to help keep the servers running.
                         <a target="blank" href="https://ko-fi.com/goldflag">
                             <div className="donationButton kofi">Support on Ko-fi</div>
