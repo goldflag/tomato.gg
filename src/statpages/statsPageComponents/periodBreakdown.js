@@ -9,16 +9,16 @@ import {
     PremFilter,
     NumericTierFilter,
     arrayFilterFn,
-} from "../../components";
+} from "Components";
 import {
     ButtonFiltersContainer,
     FiltersContainer,
     StyledTable,
     TableContainer,
     Name,
-} from "../../components/tableComponents";
-import cellStyle from "../../functions/cellStyle";
-import { tierConv } from "../../data/conversions";
+} from "Components/tableComponents";
+import cellStyle from "Functions/cellStyle";
+import { tierConv } from "Data/conversions";
 
 function PeriodBreakdown({ data }) {
     const columns = React.useMemo(() => {
@@ -36,11 +36,7 @@ function PeriodBreakdown({ data }) {
             },
             {
                 Cell: ({ value }) => (
-                    <img
-                        src={require(`../../assets/flagIcons/${value}.png`)}
-                        style={{ maxWidth: "40px" }}
-                        alt={value}
-                    />
+                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
                 ),
                 Header: "Nation",
                 accessor: "nation",
@@ -56,11 +52,7 @@ function PeriodBreakdown({ data }) {
             },
             {
                 Cell: ({ value }) => (
-                    <img
-                        src={require(`../../assets/classIcons/${value}.png`)}
-                        style={{ maxWidth: "20px" }}
-                        alt={value}
-                    />
+                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
                 ),
                 Header: "Class",
                 accessor: "class",

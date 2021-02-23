@@ -10,8 +10,8 @@ import Charts from "./charts";
 import SessionsLogParent from "./sessions/sessionsLogParent";
 import HallOfFame from "./hallOfFame";
 import Treemap from "./treemap/treemap";
-import { NewIcon } from "../../components";
-import { useURLState } from "../../functions/hooks";
+import { NewIcon } from "Components";
+import { useURLState } from "Functions/hooks";
 
 // import Heatmaps from "./appbars/Heatmaps";
 // import Grid from "@material-ui/core/Grid";

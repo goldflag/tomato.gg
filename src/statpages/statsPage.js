@@ -4,12 +4,12 @@ import { withRouter } from "react-router-dom";
 import ReactGA from "react-ga";
 
 // LOCAL
-import "../css/style.css";
-import "../css/innerpage.css";
-import { serverConv } from "../data/conversions";
-import GraphCalculator from "../functions/GraphCalculator";
+import "CSS/style.css";
+import "CSS/innerpage.css";
+import { serverConv } from "Data/conversions";
+import GraphCalculator from "Functions/GraphCalculator";
 import MainTabs from "./statsPageComponents/mainTabs";
-import { Loader } from "../components";
+import { Loader } from "Components";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 const backendKey = process.env.REACT_APP_BACKEND_API_KEY;

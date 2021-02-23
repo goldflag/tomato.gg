@@ -5,7 +5,7 @@ import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
-import { ServerContext } from "../../context";
+import { ServerContext } from "Context";
 import MoEGraph from "./MoEGraph";
 import {
     Loader,
@@ -21,7 +21,7 @@ import {
     StyledTable,
     SubRow,
     TableContainer,
-} from "../../components";
+} from "Components";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -326,11 +326,7 @@ function MoETracker(props) {
             {
                 Cell: ({ value }) => {
                     return (
-                        <img
-                            src={require(`../../assets/flagIcons/${value}.png`)}
-                            style={{ maxWidth: "40px" }}
-                            alt={value}
-                        />
+                        <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
                     );
                 },
                 Header: "Nation",
@@ -347,11 +343,7 @@ function MoETracker(props) {
             {
                 Cell: ({ value }) => {
                     return (
-                        <img
-                            src={require(`../../assets/classIcons/${value}.png`)}
-                            style={{ maxWidth: "20px" }}
-                            alt={value}
-                        />
+                        <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
                     );
                 },
                 Header: "Class",

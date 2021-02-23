@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import RSC from "react-scrollbars-custom";
 
 // LOCAL
-import { Loader } from "../../components";
-import { tierConv } from "../../data/conversions";
+import { Loader } from "Components";
+import { tierConv } from "Data/conversions";
 
 const backend = process.env.REACT_APP_BACKEND;
 

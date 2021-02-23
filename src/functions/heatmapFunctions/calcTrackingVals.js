@@ -1,5 +1,5 @@
-import tankNames from "../../data/tankNames.json";
-import WN8 from "../../data/wn8.json";
+import tankNames from "Data/tankNames.json";
+import WN8 from "Data/wn8.json";
 
 const classToIndex = { HT: 0, MT: 1, TD: 2, LT: 3, SPG: 4 };
 const tierToKey = {

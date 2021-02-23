@@ -2,7 +2,7 @@ import React from "react";
 import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
 import { Collapse } from "@material-ui/core";
 
-import { MoEStars, Pagination } from "../../components";
+import { MoEStars, Pagination } from "Components";
 import {
     ClassFilter,
     GlobalFilter,
@@ -13,13 +13,13 @@ import {
     PremFilter,
     arrayFilterFn,
     NumberRangeColumnFilter,
-} from "../../components/tableFilters";
-import { ButtonFiltersContainer, FiltersContainer, Name } from "../../components/tableComponents";
+} from "Components/tableFilters";
+import { ButtonFiltersContainer, FiltersContainer, Name } from "Components/tableComponents";
 import styled from "styled-components";
 import Tooltip from "react-tooltip-lite";
-import awardsData from "../../data/awardsinfo.json";
-import cellStyle from "../../functions/cellStyle";
-import { tierConv } from "../../data/conversions";
+import awardsData from "Data/awardsinfo.json";
+import cellStyle from "Functions/cellStyle";
+import { tierConv } from "Data/conversions";
 
 const AwardContainer = styled.div`
     padding: 0.5rem;
@@ -103,7 +103,7 @@ const Awards = ({ awards }) => {
                     {NumberBox(count)}
                     <img
                         style={{ width: "50px" }}
-                        src={require(`../../assets/awards/${type}/${awardName}.png`)}
+                        src={require(`Assets/awards/${type}/${awardName}.png`)}
                         alt={awardName}
                     />
                 </Tooltip>
@@ -186,11 +186,7 @@ function OverallTable({ data }) {
             },
             {
                 Cell: ({ value }) => (
-                    <img
-                        src={require(`../../assets/flagIcons/${value}.png`)}
-                        style={{ maxWidth: "40px" }}
-                        alt={value}
-                    />
+                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
                 ),
                 Header: "Nation",
                 accessor: "nation",
@@ -206,11 +202,7 @@ function OverallTable({ data }) {
             },
             {
                 Cell: ({ value }) => (
-                    <img
-                        src={require(`../../assets/classIcons/${value}.png`)}
-                        style={{ maxWidth: "20px" }}
-                        alt={value}
-                    />
+                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
                 ),
                 Header: "Class",
                 accessor: "class",
@@ -272,11 +264,7 @@ function OverallTable({ data }) {
             },
             {
                 Cell: ({ value }) => (
-                    <img
-                        src={require(`../../assets/masteryIcons/${value}.png`)}
-                        style={{ maxHeight: "23px" }}
-                        alt={value}
-                    />
+                    <img src={require(`Assets/masteryIcons/${value}.png`)} style={{ maxHeight: "23px" }} alt={value} />
                 ),
                 Header: "Mast",
                 accessor: "mastery",

@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsiveWaffleCanvas } from "@nivo/waffle";
-import WRdist from "../../data/WRdist";
+import WRdist from "Data/WRdist";
 
 export default function WRWaffle() {
     return (

@@ -5,11 +5,11 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
-import WRCurves from "../../data/WRCurves.json";
-import WN8Curves from "../../data/WN8Curves.json";
+import WRCurves from "Data/WRCurves.json";
+import WN8Curves from "Data/WN8Curves.json";
 import CurveGraph from "../tankStatsPageComponents/curveGraph";
 
-import "../../css/tankstats.css";
+import "CSS/tankstats.css";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;

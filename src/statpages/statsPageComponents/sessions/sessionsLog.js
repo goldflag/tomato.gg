@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { Collapse } from "@material-ui/core";
 
 import SessionBreakdown from "./sessionBreakdown";
-import { Pagination } from "../../../components";
-import cellStyle from "../../../functions/cellStyle";
+import { Pagination } from "Components";
+import cellStyle from "Functions/cellStyle";
 
 const Table = styled.table`
     border-spacing: 0;

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Tomatopedia from "./tomatopedia.js";
-import { MultiProvider } from "./context";
+import { MultiProvider } from "Context";
 
 function Main() {
     return (

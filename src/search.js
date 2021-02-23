@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
-import "./css/search.css";
-import SearchBar from "./material/searchBar";
-import TomatoLogo from "./assets/tomato.png";
-import { ServerContext, SearchHistoryContext } from "./context";
+import "CSS/search.css";
+import SearchBar from "Material/searchBar";
+import TomatoLogo from "Assets/tomato.png";
+import { ServerContext, SearchHistoryContext } from "Context";
 //import LeaderboardGrid from "./statpages/searchComponents/leaderboardGrid";
-import { serverConv } from "./data/conversions";
+import { serverConv } from "Data/conversions";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 

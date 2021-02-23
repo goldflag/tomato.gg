@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
-import TomatoLogo from "./assets/tomato.png";
-import background from "./assets/sidebar.jpg";
+import TomatoLogo from "Assets/tomato.png";
+import background from "Assets/sidebar.jpg";
 import { Apps, Info, Star, Games, BarChart, LibraryBooks, FormatListNumbered } from "@material-ui/icons";
-import { NewIcon } from "./components";
+import { NewIcon } from "Components";
 
 const LINKS = [
     { url: "/", title: "Home", Icon: Apps },
@@ -224,8 +224,8 @@ const Sidebar = withRouter((props) => {
                             {" "}
                             Support Tomato.gg
                         </h2>
-                        Tomato.gg runs entirely on user donations. If you find value in the website, consider
-                        chipping in to help keep the servers running.
+                        Tomato.gg runs entirely on user donations. If you find value in the website, consider chipping
+                        in to help keep the servers running.
                         <a target="blank" href="https://ko-fi.com/goldflag">
                             <div className="donationButton kofi">Support on Ko-fi</div>
                         </a>

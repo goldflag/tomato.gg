@@ -1,10 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import WN8color from "../../functions/WN8color";
-import WRcolor from "../../functions/WRcolor";
-import PRcolor from "../../functions/PRcolor";
-import "../../css/statspage.css";
+import WN8color from "Functions/WN8color";
+import WRcolor from "Functions/WRcolor";
+import PRcolor from "Functions/PRcolor";
+import "CSS/statspage.css";
 
 function battlesColor(battles) {
     if (battles < 1500) {

@@ -3,12 +3,12 @@ import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 
 // LOCAL
-import { serverConv } from "../data/conversions";
-import { ServerContext } from "../context";
-import { Loader, FullPageTableWrapper, Info } from "../components";
-import { FilterButtonGroup, FilterButton } from "../components/tableFilters";
+import { serverConv } from "Data/conversions";
+import { ServerContext } from "Context";
+import { Loader, FullPageTableWrapper, Info } from "Components";
+import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
 import RecentTanksAvgTable from "./recentTankStatsComponents/RecentTanksAvgTable";
-import { useURLState } from "../functions/hooks";
+import { useURLState } from "Functions/hooks";
 
 const backend = process.env.REACT_APP_BACKEND;
 

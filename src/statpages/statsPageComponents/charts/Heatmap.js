@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsiveHeatMap } from "@nivo/heatmap";
-import WN8color from "../../../functions/WN8color";
-import WRcolor from "../../../functions/WRcolor";
+import WN8color from "Functions/WN8color";
+import WRcolor from "Functions/WRcolor";
 
 export default function WN8Heatmap({ data, type }) {
     return (
@@ -24,7 +24,7 @@ export default function WN8Heatmap({ data, type }) {
                 indexBy="Class"
                 margin={{ top: 30, right: 30, bottom: 20, left: 60 }}
                 forceSquare={true}
-                cellShape={({ 
+                cellShape={({
                     data,
                     value,
                     x,
@@ -42,14 +42,13 @@ export default function WN8Heatmap({ data, type }) {
                     onClick,
                     theme,
                 }) => (
-                    <g 
+                    <g
                         transform={`translate(${x}, ${y})`}
                         onMouseEnter={onHover}
                         onMouseMove={onHover}
                         onMouseLeave={onLeave}
-                        onClick={e => onClick(data, e)}
-                        style={{ cursor: 'pointer' }}
-                    
+                        onClick={(e) => onClick(data, e)}
+                        style={{ cursor: "pointer" }}
                     >
                         <path
                             fill={type === "wn8" ? WN8color(value) : WRcolor(value)}
@@ -114,9 +113,6 @@ export default function WN8Heatmap({ data, type }) {
                 motionDamping={9}
                 hoverTarget="rowColumn"
                 cellHoverOthersOpacity={0.5}
-                // tooltip={(node) => {
-                //     console.log(node);
-                // }}
             />
         </div>
     );

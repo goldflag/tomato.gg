@@ -1,10 +1,10 @@
 import React from "react";
 import MUIDataTable from "mui-datatables";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import WN8color from "../../functions/WN8color";
-import WRcolor from "../../functions/WRcolor";
-import nationVal from "../../data/nationVal";
-import classVal from "../../data/classVal";
+import WN8color from "Functions/WN8color";
+import WRcolor from "Functions/WRcolor";
+import nationVal from "Data/nationVal";
+import classVal from "Data/classVal";
 
 export default function RecentTankStats(props) {
     const getMuiTheme = () =>

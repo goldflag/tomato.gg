@@ -2,7 +2,7 @@ import React from "react";
 import { ResponsiveTreeMap } from "@nivo/treemap";
 
 import styled from "styled-components";
-import { MoEStars } from "../../../components/moeStars";
+import { MoEStars } from "Components/moeStars";
 
 const CustomToolTip = styled.div`
     min-width: 200px;
@@ -166,7 +166,7 @@ export default function TreemapOverall(props) {
                                                         style={{
                                                             maxHeight: "20px",
                                                         }}
-                                                        src={require(`../../../assets/masteryIcons/${node.node.data.mastery}.png`)}
+                                                        src={require(`Assets/masteryIcons/${node.node.data.mastery}.png`)}
                                                         alt={node.node.data.mastery}
                                                     />
                                                 </div>

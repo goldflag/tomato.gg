@@ -69,7 +69,7 @@ const nationFilterOptions = [
     ...nations.map((nation) => ({
         label: nation,
         value: nation,
-        image: require(`../assets/flagIcons/${nation}.png`),
+        image: require(`Assets/flagIcons/${nation}.png`),
     })),
 ];
 
@@ -78,7 +78,7 @@ const masteryFilterOptions = [
     ...[0, 1, 2, 3, 4].map((n) => ({
         label: `${n}`,
         value: n,
-        image: require(`../assets/masteryIcons/${n}.png`),
+        image: require(`Assets/masteryIcons/${n}.png`),
     })),
 ];
 

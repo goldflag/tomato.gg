@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
 
 import WN8Table from "./wn8Components/wn8Table";
-import { Loader, FullPageTableWrapper, Info } from "../components";
+import { Loader, FullPageTableWrapper, Info } from "Components";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;

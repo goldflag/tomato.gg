@@ -18,9 +18,9 @@ import {
     FiltersContainer,
     StyledTable,
     TableContainer,
-} from "../../components";
-import cellStyle from "../../functions/cellStyle";
-import { tierConv } from "../../data/conversions";
+} from "Components";
+import cellStyle from "Functions/cellStyle";
+import { tierConv } from "Data/conversions";
 
 const TankCell = styled.div`
     display: grid;
@@ -49,11 +49,7 @@ function RecentTanksAvgTable({ data }) {
             {
                 Cell: ({ value }) => {
                     return (
-                        <img
-                            src={require(`../../assets/flagIcons/${value}.png`)}
-                            style={{ maxWidth: "40px" }}
-                            alt={value}
-                        />
+                        <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
                     );
                 },
                 Header: "Nation",
@@ -73,11 +69,7 @@ function RecentTanksAvgTable({ data }) {
             {
                 Cell: ({ value }) => {
                     return (
-                        <img
-                            src={require(`../../assets/classIcons/${value}.png`)}
-                            style={{ maxWidth: "20px" }}
-                            alt={value}
-                        />
+                        <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
                     );
                 },
                 Header: "Class",

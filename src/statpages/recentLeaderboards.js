@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import Leaderboard from "./recentLeaderboardComponents/leaderboard";
-import { FullPageTableWrapper, Info } from "../components";
-import { ServerContext } from "../context";
-import { serverConv } from "../data/conversions";
+import { FullPageTableWrapper, Info } from "Components";
+import { ServerContext } from "Context";
+import { serverConv } from "Data/conversions";
 
 export default function RecentLeaderboards(props) {
     const { server } = useContext(ServerContext);

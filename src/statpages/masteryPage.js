@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
-import { ServerContext } from "../context";
+import { ServerContext } from "Context";
 import MasteryTable from "./masteryPageComponents/masteryTable";
-import tankNames from "../data/tankNames.json";
-import { nationConv, classConv, tierConv, serverConv } from "../data/conversions";
-import { Loader, FullPageTableWrapper, Info } from "../components";
+import tankNames from "Data/tankNames.json";
+import { nationConv, classConv, tierConv, serverConv } from "Data/conversions";
+import { Loader, FullPageTableWrapper, Info } from "Components";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;

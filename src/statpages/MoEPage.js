@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import ReactGA from "react-ga";
-import { ServerContext } from "../context";
+import { ServerContext } from "Context";
 import MoETable from "./MoEPageComponents/MoETable";
 import MoETracker from "./MoEPageComponents/MoETracker";
 import { TabPanel, CustomTabs, CustomTab } from "./tabs/customTabs";
-import tankNames from "../data/tankNames.json";
-import { Loader, FullPageTableWrapper, Info } from "../components";
-import { tierConv, serverConv, nationConv, classConv } from "../data/conversions";
+import tankNames from "Data/tankNames.json";
+import { Loader, FullPageTableWrapper, Info } from "Components";
+import { tierConv, serverConv, nationConv, classConv } from "Data/conversions";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;

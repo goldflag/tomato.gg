@@ -2,13 +2,13 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
-import "./css/topbar.css";
-import SmallSearchBar from "./material/smallSearchBar";
-import DiscordLogo from "./assets/Discord.svg";
-import SmallMenu from "./material/smallMenu";
+import "CSS/topbar.css";
+import SmallSearchBar from "Material/smallSearchBar";
+import DiscordLogo from "Assets/Discord.svg";
+import SmallMenu from "Material/smallMenu";
 import { withRouter } from "react-router-dom";
-import { ServerContext, SearchHistoryContext } from "./context";
-import { serverConv } from "./data/conversions";
+import { ServerContext, SearchHistoryContext } from "Context";
+import { serverConv } from "Data/conversions";
 import { IconButton, Chip, Avatar } from "@material-ui/core";
 import { DeleteOutline } from "@material-ui/icons";
 
@@ -159,7 +159,7 @@ export default withRouter(function Topbar(props) {
                                     avatar={
                                         <Avatar
                                             alt={server}
-                                            src={require(`./assets/flagIcons/${server}mini.png`)}
+                                            src={require(`Assets/flagIcons/${server}mini.png`)}
                                             style={{ maxHeight: "21px" }}
                                         />
                                     }

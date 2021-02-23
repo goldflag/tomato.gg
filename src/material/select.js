@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { ServerContext } from "../context";
+import { ServerContext } from "Context";
 
 export default function SelectQuery(props) {
     const { server } = React.useContext(ServerContext);

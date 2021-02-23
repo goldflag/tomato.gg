@@ -1,5 +1,5 @@
 import React from "react";
-import tankNames from "../../../data/tankNames.json";
+import tankNames from "Data/tankNames.json";
 
 export default function Records(props) {
     const demo = {

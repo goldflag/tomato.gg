@@ -3,9 +3,9 @@ import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
 
 // LOCAL
-import { Pagination, StyledTable, Name } from "../../../components";
-import cellStyle from "../../../functions/cellStyle";
-import { tierConv } from "../../../data/conversions";
+import { Pagination, StyledTable, Name } from "Components";
+import cellStyle from "Functions/cellStyle";
+import { tierConv } from "Data/conversions";
 
 export default function SessionBreakdown(props) {
     const data = props.data;
@@ -25,11 +25,7 @@ export default function SessionBreakdown(props) {
             },
             {
                 Cell: ({ value }) => (
-                    <img
-                        src={require(`../../../assets/flagIcons/${value}.png`)}
-                        style={{ maxWidth: "40px" }}
-                        alt={value}
-                    />
+                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
                 ),
                 Header: "Nation",
                 accessor: "nation",
@@ -41,11 +37,7 @@ export default function SessionBreakdown(props) {
             },
             {
                 Cell: ({ value }) => (
-                    <img
-                        src={require(`../../../assets/classIcons/${value}.png`)}
-                        style={{ maxWidth: "20px" }}
-                        alt={value}
-                    />
+                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
                 ),
                 Header: "Class",
                 accessor: "class",

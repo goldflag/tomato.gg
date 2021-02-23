@@ -4,13 +4,13 @@ import ReactGA from "react-ga";
 import styled from "styled-components";
 
 // LOCAL
-import { Loader, FullPageTableWrapper } from "../components";
-import { ServerContext } from "../context";
+import { Loader, FullPageTableWrapper } from "Components";
+import { ServerContext } from "Context";
 import RecentLeaderboard from "./tankPageComponents/recentLeaderboard";
-import { ServerPagination } from "../components";
-import { useURLState } from "../functions/hooks";
-import { FilterButtonGroup, FilterButton } from "../components/tableFilters";
-import { nationAdjConv, classDescConv, serverConv } from "../data/conversions";
+import { ServerPagination } from "Components";
+import { useURLState } from "Functions/hooks";
+import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
+import { nationAdjConv, classDescConv, serverConv } from "Data/conversions";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;

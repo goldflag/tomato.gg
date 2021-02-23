@@ -6,23 +6,15 @@ import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalF
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
 
-import {
-    ClassFilter,
-    GlobalFilter,
-    NationFilter,
-    Pagination,
-    PremFilter,
-    TierFilter,
-    arrayFilterFn,
-} from "../../components";
+import { ClassFilter, GlobalFilter, NationFilter, Pagination, PremFilter, TierFilter, arrayFilterFn } from "Components";
 import {
     ButtonFiltersContainer,
     FiltersContainer,
     StyledTable,
     TableContainer,
     Name,
-} from "../../components/tableComponents";
-import cellStyle from "../../functions/cellStyle";
+} from "Components/tableComponents";
+import cellStyle from "Functions/cellStyle";
 
 function WN8Table(props) {
     let data = props.data;
