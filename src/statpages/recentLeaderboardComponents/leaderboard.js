@@ -1,6 +1,6 @@
 // NPM
 import React, { useEffect, useState, useContext } from "react";
-import { ServerContext } from "../../context";
+import { ServerContext } from "Context";
 import styled, { css } from "styled-components";
 import { Icon } from "react-icons-kit";
 import { chevronLeft, chevronRight, chevronsLeft, chevronsRight } from "react-icons-kit/feather";
@@ -8,9 +8,9 @@ import { Button, ButtonGroup } from "@material-ui/core";
 
 // LOCAL
 import LeaderboardTable from "./leaderboardTable";
-import { Loader } from "../../components";
-import serverConv from "../../data/serverConv";
-import { useURLState } from "../../functions/hooks";
+import { Loader } from "Components";
+import { serverConv } from "Data/conversions";
+import { useURLState } from "Functions/hooks";
 
 const backend = process.env.REACT_APP_BACKEND;
 

@@ -6,23 +6,15 @@ import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalF
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
 
-import {
-    ClassFilter,
-    GlobalFilter,
-    NationFilter,
-    Pagination,
-    PremFilter,
-    TierFilter,
-    arrayFilterFn,
-} from "../../components";
+import { ClassFilter, GlobalFilter, NationFilter, Pagination, PremFilter, TierFilter, arrayFilterFn } from "Components";
 import {
     ButtonFiltersContainer,
     FiltersContainer,
     StyledTable,
     TableContainer,
     Name,
-} from "../../components/tableComponents";
-import cellStyle from "../../functions/cellStyle";
+} from "Components/tableComponents";
+import cellStyle from "Functions/cellStyle";
 
 function WN8Table(props) {
     let data = props.data;
@@ -106,7 +98,6 @@ function WN8Table(props) {
                 data,
                 defaultColumn, // Be sure to pass the defaultColumn option
                 filterTypes,
-                hiddenColumns: ["prem"],
                 initialState: {
                     pageIndex: 0,
                     pageSize: 100,
@@ -116,6 +107,7 @@ function WN8Table(props) {
                             desc: true,
                         },
                     ],
+                    hiddenColumns: ["isPrem"],
                 },
             },
             useFilters, // useFilters!
@@ -256,6 +248,9 @@ function WN8Table(props) {
                 accessor: "nation",
                 Filter: NationFilter,
                 filter: arrayFilterFn,
+                Cell: ({ value }) => (
+                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
+                ),
             },
             {
                 Header: "Tier",
@@ -268,6 +263,9 @@ function WN8Table(props) {
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
+                Cell: ({ value }) => (
+                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
+                ),
             },
             {
                 Header: "expDef",

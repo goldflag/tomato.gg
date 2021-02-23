@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import ReactGA from "react-ga";
 import Paper from "@material-ui/core/Paper";
-import "./css/tankstats.css";
-import "./css/innerpage.css";
+import "CSS/tankstats.css";
+import "CSS/innerpage.css";
 const trackingId = process.env.REACT_APP_GA;
 
 export default function About() {

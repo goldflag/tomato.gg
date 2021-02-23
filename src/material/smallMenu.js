@@ -9,7 +9,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Apps, Info, Star, Games, BarChart, LibraryBooks } from "@material-ui/icons";
-import smallLogo from "../assets/smalllogo.png";
+import smallLogo from "Assets/smalllogo.png";
 import styled from "styled-components";
 
 const Styles = styled.div`

@@ -1,4 +1,4 @@
-const serverConv = {
+export const serverConv = {
     NA: "com",
     EU: "eu",
     ASIA: "asia",
@@ -8,4 +8,3 @@ const serverConv = {
     asia: "ASIA",
     ru: "RU",
 };
-export default serverConv;

@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsiveWaffleCanvas } from "@nivo/waffle";
-import WN8dist from "../../data/WN8dist";
+import WN8dist from "Data/WN8dist";
 
 export default function WN8Waffle() {
     return (

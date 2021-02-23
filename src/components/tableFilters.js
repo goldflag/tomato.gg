@@ -69,7 +69,7 @@ const nationFilterOptions = [
     ...nations.map((nation) => ({
         label: nation,
         value: nation,
-        image: require(`../assets/flagIcons/${nation}.png`),
+        image: require(`Assets/flagIcons/${nation}.png`),
     })),
 ];
 
@@ -78,7 +78,7 @@ const masteryFilterOptions = [
     ...[0, 1, 2, 3, 4].map((n) => ({
         label: `${n}`,
         value: n,
-        image: require(`../assets/masteryIcons/${n}.png`),
+        image: require(`Assets/masteryIcons/${n}.png`),
     })),
 ];
 
@@ -167,6 +167,61 @@ export const GlobalFilter = ({ preGlobalFilteredRows, globalFilter, setGlobalFil
                 }}
             />
         </span>
+    );
+};
+
+export const NumberRangeColumnFilter = ({ column: { filterValue = [], preFilteredRows, setFilter, id } }) => {
+    const [min, max] = React.useMemo(() => {
+        let min = preFilteredRows.length ? preFilteredRows[0].values[id] : 0;
+        let max = preFilteredRows.length ? preFilteredRows[0].values[id] : 0;
+        preFilteredRows.forEach((row) => {
+            min = Math.min(row.values[id], min);
+            max = Math.max(row.values[id], max);
+        });
+        return [min, max];
+    }, [id, preFilteredRows]);
+
+    return (
+        <>
+            Battles
+            <InputBase
+                value={filterValue[0] || ""}
+                type="number"
+                onChange={(e) => {
+                    const val = e.target.value;
+                    setFilter((old = []) => [val ? parseInt(val, 10) : undefined, old[1]]);
+                }}
+                placeholder={`Min (${min})`}
+                style={{
+                    width: "110px",
+                    margin: "0 0.5rem",
+                    fontSize: "1rem",
+                    padding: "0px 15px",
+                    borderRadius: "5px",
+                    backgroundColor: "rgba(100, 100, 150, 0.5)",
+                    color: "white",
+                }}
+            />
+            to
+            <InputBase
+                value={filterValue[1] || ""}
+                type="number"
+                onChange={(e) => {
+                    const val = e.target.value;
+                    setFilter((old = []) => [old[0], val ? parseInt(val, 10) : undefined]);
+                }}
+                placeholder={`Max (${max})`}
+                style={{
+                    width: "130px",
+                    margin: "0 0.5rem",
+                    fontSize: "1rem",
+                    padding: "0px 15px",
+                    borderRadius: "5px",
+                    backgroundColor: "rgba(100, 100, 150, 0.5)",
+                    color: "white",
+                }}
+            />
+        </>
     );
 };
 

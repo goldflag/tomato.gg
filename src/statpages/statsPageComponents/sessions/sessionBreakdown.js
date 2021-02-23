@@ -1,22 +1,11 @@
+// NPM
 import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
 
-import { Pagination } from "../../../components";
-import { StyledTable, Name } from "../../../components/tableComponents";
-import cellStyle from "../../../functions/cellStyle";
-
-const tierConv = {
-    1: "I",
-    2: "II",
-    3: "III",
-    4: "IV",
-    5: "V",
-    6: "VI",
-    7: "VII",
-    8: "VIII",
-    9: "IX",
-    10: "X",
-};
+// LOCAL
+import { Pagination, StyledTable, Name } from "Components";
+import cellStyle from "Functions/cellStyle";
+import { tierConv } from "Data/conversions";
 
 export default function SessionBreakdown(props) {
     const data = props.data;
@@ -24,49 +13,32 @@ export default function SessionBreakdown(props) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: (data) => {
-                    const value = data.row.original;
-                    return (
-                        <Name val={value.isPrem}>
-                            <img src={value.image} alt={value.name} />
-                            {value.name}
-                        </Name>
-                    );
-                },
+                Cell: ({ row: { original } }) => (
+                    <Name val={original.isPrem}>
+                        <img src={original.image} alt={original.name} />
+                        {original.name}
+                    </Name>
+                ),
                 Header: "Name",
                 accessor: "name",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img
-                            src={require(`../../../assets/flagIcons/${value}.png`)}
-                            style={{ maxWidth: "40px" }}
-                            alt={value}
-                        />
-                    );
-                },
+                Cell: ({ value }) => (
+                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
+                ),
                 Header: "Nation",
                 accessor: "nation",
             },
             {
-                Cell: ({ value }) => {
-                    return <div>{tierConv[value]}</div>;
-                },
+                Cell: ({ value }) => tierConv[value],
                 Header: "Tier",
                 accessor: "tier",
             },
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img
-                            src={require(`../../../assets/classIcons/${value}.png`)}
-                            style={{ maxWidth: "20px" }}
-                            alt={value}
-                        />
-                    );
-                },
+                Cell: ({ value }) => (
+                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
+                ),
                 Header: "Class",
                 accessor: "class",
             },
@@ -76,9 +48,7 @@ export default function SessionBreakdown(props) {
                 accessor: "wn8",
             },
             {
-                Cell: ({ value }) => {
-                    return <div>{value + "%"}</div>;
-                },
+                Cell: ({ value }) => `${value}%`,
                 Header: "Winrate",
                 accessor: "winrate",
             },
@@ -97,9 +67,7 @@ export default function SessionBreakdown(props) {
         getTableBodyProps,
         headerGroups,
         prepareRow,
-        page, // Instead of using 'rows', we'll use page,
-        // which has only the rows for the active page
-        // The rest of these things are super handy, too ;)
+        page,
         canPreviousPage,
         canNextPage,
         pageOptions,
@@ -130,7 +98,7 @@ export default function SessionBreakdown(props) {
     );
 
     return (
-        <>
+        <div style={{ margin: "3px 0 3px 0" }}>
             <StyledTable {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
@@ -152,21 +120,19 @@ export default function SessionBreakdown(props) {
                     ))}
                 </thead>
                 <tbody {...getTableBodyProps()}>
-                    {page.map((row, i) => {
+                    {page.map((row) => {
                         prepareRow(row);
                         return (
                             <tr {...row.getRowProps()}>
-                                {row.cells.map((cell) => {
-                                    return (
-                                        <td
-                                            {...cell.getCellProps({
-                                                style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
-                                            })}
-                                        >
-                                            {cell.render("Cell")}
-                                        </td>
-                                    );
-                                })}
+                                {row.cells.map((cell) => (
+                                    <td
+                                        {...cell.getCellProps({
+                                            style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
+                                        })}
+                                    >
+                                        {cell.render("Cell")}
+                                    </td>
+                                ))}
                             </tr>
                         );
                     })}
@@ -187,6 +153,6 @@ export default function SessionBreakdown(props) {
                     pageSize,
                 }}
             />
-        </>
+        </div>
     );
 }

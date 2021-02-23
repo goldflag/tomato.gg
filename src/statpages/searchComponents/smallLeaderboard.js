@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTable } from "react-table";
 import styled from "styled-components";
-import WN8c from "../../functions/WN8color";
-import WRc from "../../functions/WRcolor";
+import WN8c from "Functions/WN8color";
+import WRc from "Functions/WRcolor";
 
 const backend = process.env.REACT_APP_BACKEND;
 

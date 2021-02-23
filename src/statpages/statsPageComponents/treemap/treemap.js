@@ -1,8 +1,8 @@
 import React from "react";
 import TreemapOverall from "./treemapOverall";
-import { FilterButtonGroup, FilterButton } from "../../../components/tableFilters";
+import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
 import styled from "styled-components";
-import { useURLState } from "../../../functions/hooks";
+import { useURLState } from "Functions/hooks";
 
 const MaxHeight = styled.div`
     height: "900px";

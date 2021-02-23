@@ -74,7 +74,7 @@ export default function MOETable(props) {
                     </tr>
                 </tbody>
             </table>
-            <div style={{ paddingTop: "0rem" }}>
+            <div style={{ paddingTop: "0rem", paddingLeft: "8px" }}>
                 <a style={{ fontSize: "0.8rem" }} target="blank" href="https://herhor.net/wot/moe/">
                     Generate Mark Image
                 </a>

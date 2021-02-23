@@ -1,8 +1,8 @@
 import React from "react";
 import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
-import { matchSorter } from "match-sorter";
+import { Collapse } from "@material-ui/core";
 
-import { MoEStars, Pagination } from "../../components";
+import { MoEStars, Pagination } from "Components";
 import {
     ClassFilter,
     GlobalFilter,
@@ -12,479 +12,198 @@ import {
     NumericTierFilter,
     PremFilter,
     arrayFilterFn,
-} from "../../components/tableFilters";
-import {
-    ButtonFiltersContainer,
-    FiltersContainer,
-    StyledTable,
-    SubRow,
-    TableContainer,
-    Name,
-} from "../../components/tableComponents";
+    NumberRangeColumnFilter,
+} from "Components/tableFilters";
+import { ButtonFiltersContainer, FiltersContainer, Name } from "Components/tableComponents";
 import styled from "styled-components";
 import Tooltip from "react-tooltip-lite";
-import awardsData from "../../data/awardsinfo.json";
-import cellStyle from "../../functions/cellStyle";
-import InputBase from "@material-ui/core/InputBase";
+import awardsData from "Data/awardsinfo.json";
+import cellStyle from "Functions/cellStyle";
+import { tierConv } from "Data/conversions";
 
-const tierConv = {
-    1: "I",
-    2: "II",
-    3: "III",
-    4: "IV",
-    5: "V",
-    6: "VI",
-    7: "VII",
-    8: "VIII",
-    9: "IX",
-    10: "X",
+const AwardContainer = styled.div`
+    padding: 0.5rem;
+`;
+
+const AwardBreakdown = styled.div`
+    display: grid;
+    padding: 0.5rem 0rem;
+    grid-template-columns: 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px;
+`;
+
+const Awards = ({ awards }) => {
+    const NumberBox = (val) => {
+        // TODO?: replace this with https://material-ui.com/components/badges/#dot-badge
+        let width;
+        if (val < 10) width = "15px";
+        else if (val < 100) width = "20px";
+        else if (val < 1000) width = "25px";
+        else width = "30px";
+        return (
+            <div
+                style={{
+                    width: width,
+                    height: "16px",
+                    backgroundColor: "rgb(199, 38, 81)",
+                    color: "white",
+                    position: "absolute",
+                    bottom: "5px",
+                    left: "30px",
+                    fontSize: "0.6rem",
+                    border: "1px solid black",
+                    borderRadius: "5px",
+                    textAlign: "center",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    userSelect: "none",
+                }}
+            >
+                {val}
+            </div>
+        );
+    };
+
+    const RenderTooltip = (award) => (
+        <div
+            style={{
+                position: "absolute",
+                left: "-250px",
+                top: "40px",
+                backgroundColor: "rgb(40, 40, 40)",
+                padding: "0.5rem",
+                borderRadius: "5px",
+            }}
+        >
+            <div
+                style={{
+                    lineHeight: "1.5rem",
+                    color: "rgb(255, 255, 255)",
+                    fontSize: "0.9rem",
+                }}
+            >
+                {awardsData[award].name}
+            </div>
+            <div
+                style={{
+                    width: "200px",
+                    color: "rgb(200, 200, 200)",
+                    fontSize: "0.7rem",
+                }}
+            >
+                {awardsData[award].desc}
+            </div>
+        </div>
+    );
+
+    const RenderAwards = (awards, type) =>
+        Object.entries(awards).map(([awardName, count], i) => {
+            return count > 0 ? (
+                <Tooltip key={i} arrow={false} direction="right" content={RenderTooltip(awardName)}>
+                    {NumberBox(count)}
+                    <img
+                        style={{ width: "50px" }}
+                        src={require(`Assets/awards/${type}/${awardName}.png`)}
+                        alt={awardName}
+                    />
+                </Tooltip>
+            ) : null;
+        });
+
+    const types = { battleHeroes: "Battle Heroes", main: "Honorary Ranks", epic: "Epic Medals" };
+    return (
+        <AwardContainer>
+            {Object.entries(types).map(([key, label]) => (
+                <React.Fragment key={key}>
+                    {label}
+                    <AwardBreakdown>{RenderAwards(awards[key], key)}</AwardBreakdown>
+                </React.Fragment>
+            ))}
+        </AwardContainer>
+    );
 };
 
-const Styles = styled.div`
-    padding: 0.3rem;
-    .breakdown {
-        display: grid;
-        padding: 0.5rem 0rem;
-        grid-template-columns: 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px;
-    }
+const Table = styled.table`
+    border-spacing: 0;
+    width: 100%;
+    font-size: 0.8rem;
+`;
 
-    @media screen and (max-width: 1000px) {
-        .smallMenu {
-            display: block;
-        }
-        .discord {
-            display: none;
-        }
-        .field {
-            right: 59px;
-        }
-        .serverSelectButtons {
-            display: none;
-        }
+const Tr = styled.tr`
+    color: rgb(220, 220, 220);
+    background-color: rgba(40, 40, 70, 0.5);
+    :nth-child(4n + 1) {
+        background-color: rgba(50, 50, 80, 0.5);
+    }
+    :hover {
+        background-color: rgba(30, 30, 60, 0.5);
     }
 `;
 
-function OverallTable(props) {
-    let data = props.data;
+const Th = styled.th`
+    cursor: "pointer";
+    text-align: left;
+    padding: 10px;
+    background-color: rgba(50, 50, 80, 0.5);
+    font-weight: 500;
+    background-color: ${({ active }) => (active ? "rgb(207, 0, 76)" : "")};
+`;
 
-    // Define a default UI for filtering
-    function DefaultColumnFilter({ column: { filterValue, preFilteredRows, setFilter } }) {
-        const count = preFilteredRows.length;
-        return (
-            <input
-                value={filterValue || ""}
-                onChange={(e) => {
-                    setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
-                }}
-                placeholder={`Search ${count} records...`}
-            />
-        );
-    }
+const Td = styled.td`
+    padding: 0.4rem 0.5rem;
+`;
 
-    // This is a custom UI for our 'between' or number range
-    // filter. It uses two number boxes and filters rows to
-    // ones that have values between the two
-    function NumberRangeColumnFilter({ column: { filterValue = [], preFilteredRows, setFilter, id } }) {
-        const [min, max] = React.useMemo(() => {
-            let min = preFilteredRows.length ? preFilteredRows[0].values[id] : 0;
-            let max = preFilteredRows.length ? preFilteredRows[0].values[id] : 0;
-            preFilteredRows.forEach((row) => {
-                min = Math.min(row.values[id], min);
-                max = Math.max(row.values[id], max);
-            });
-            return [min, max];
-        }, [id, preFilteredRows]);
+const TableContainer = styled.div`
+    font-family: Roboto Mono;
+    overflow-x: auto;
+    background-color: rgba(0, 0, 0, 0);
+    margin-bottom: 1rem;
+    backdrop-filter: blur(7px);
+`;
 
-        return (
-            <>
-                Battles
-                <InputBase
-                    value={filterValue[0] || ""}
-                    type="number"
-                    onChange={(e) => {
-                        const val = e.target.value;
-                        setFilter((old = []) => [val ? parseInt(val, 10) : undefined, old[1]]);
-                    }}
-                    placeholder={`Min (${min})`}
-                    style={{
-                        width: "110px",
-                        margin: "0 0.5rem",
-                        fontSize: "1rem",
-                        padding: "0px 15px",
-                        borderRadius: "5px",
-                        backgroundColor: "rgba(100, 100, 150, 0.5)",
-                        color: "white",
-                    }}
-                />
-                to
-                <InputBase
-                    value={filterValue[1] || ""}
-                    type="number"
-                    onChange={(e) => {
-                        const val = e.target.value;
-                        setFilter((old = []) => [old[0], val ? parseInt(val, 10) : undefined]);
-                    }}
-                    placeholder={`Max (${max})`}
-                    style={{
-                        width: "130px",
-                        margin: "0 0.5rem",
-                        fontSize: "1rem",
-                        padding: "0px 15px",
-                        borderRadius: "5px",
-                        backgroundColor: "rgba(100, 100, 150, 0.5)",
-                        color: "white",
-                    }}
-                />
-            </>
-        );
-    }
+const SubTr = styled.tr`
+    color: rgb(220, 220, 220);
+    background-color: rgba(40, 40, 70, 0.25);
+`;
 
-    function fuzzyTextFilterFn(rows, id, filterValue) {
-        return matchSorter(rows, filterValue, {
-            keys: [(row) => row.values[id]],
-        });
-    }
+const SubTd = styled.td`
+    padding: 0;
+`;
 
-    // Let the table remove the filter if the string is empty
-    fuzzyTextFilterFn.autoRemove = (val) => !val;
-
-    function Table({ columns, data }) {
-        const filterTypes = React.useMemo(
-            () => ({
-                // Add a new fuzzyTextFilterFn filter type.
-                fuzzyText: fuzzyTextFilterFn,
-                // Or, override the default text filter to use
-                // "startWith"
-                text: (rows, id, filterValue) => {
-                    return rows.filter((row) => {
-                        const rowValue = row.values[id];
-                        return rowValue !== undefined
-                            ? String(rowValue).toLowerCase().startsWith(String(filterValue).toLowerCase())
-                            : true;
-                    });
-                },
-            }),
-            []
-        );
-
-        const defaultColumn = React.useMemo(
-            () => ({
-                // Let's set up our default Filter UI
-                Filter: DefaultColumnFilter,
-                // And also our default editable cell
-            }),
-            []
-        );
-
-        const filterOrder = [3, 2, 1, 18, 19, 20];
-
-        // Use the state and functions returned from useTable to build your UI
-        const {
-            getTableProps,
-            getTableBodyProps,
-            headerGroups,
-            prepareRow,
-            state,
-            visibleColumns,
-            page, // Instead of using 'rows', we'll use page,
-            // which has only the rows for the active page
-            // The rest of these things are super handy, too ;)
-            canPreviousPage,
-            canNextPage,
-            pageOptions,
-            pageCount,
-            gotoPage,
-            nextPage,
-            previousPage,
-            setPageSize,
-            preGlobalFilteredRows,
-            setGlobalFilter,
-            state: { pageIndex, pageSize },
-        } = useTable(
-            {
-                columns,
-                data,
-                defaultColumn, // Be sure to pass the defaultColumn option
-                filterTypes,
-                initialState: {
-                    pageIndex: 0,
-                    pageSize: 25,
-                    hiddenColumns: ["prem"],
-                    sortBy: [
-                        {
-                            id: "battles",
-                            desc: true,
-                        },
-                    ],
-                },
-            },
-            useFilters, // useFilters!
-            useGlobalFilter, // useGlobalFilter!
-            useSortBy,
-            useExpanded,
-            usePagination
-        );
-
-        function renderRowSubComponent(row) {
-            function NumberBox(val) {
-                let width;
-                if (val < 10) width = "15px";
-                else if (val < 100) width = "20px";
-                else if (val < 1000) width = "25px";
-                else width = "30px";
-                return (
-                    <div
-                        style={{
-                            width: width,
-                            height: "16px",
-                            backgroundColor: "rgb(199, 38, 81)",
-                            color: "white",
-                            position: "absolute",
-                            bottom: "5px",
-                            left: "30px",
-                            fontSize: "0.6rem",
-                            border: "1px solid black",
-                            borderRadius: "5px",
-                            textAlign: "center",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                        }}
-                    >
-                        {val}
-                    </div>
-                );
-            }
-
-            function RenderTooltip(award) {
-                return (
-                    <div
-                        style={{
-                            position: "absolute",
-                            left: "-250px",
-                            top: "40px",
-                            backgroundColor: "rgb(40, 40, 40)",
-                            padding: "0.5rem",
-                            borderRadius: "5px",
-                        }}
-                    >
-                        <div
-                            style={{
-                                lineHeight: "1.5rem",
-                                color: "rgb(255, 255, 255)",
-                                fontSize: "0.9rem",
-                            }}
-                        >
-                            {awardsData[award].name}
-                        </div>
-                        <div
-                            style={{
-                                width: "200px",
-                                color: "rgb(200, 200, 200)",
-                                fontSize: "0.7rem",
-                            }}
-                        >
-                            {awardsData[award].desc}
-                        </div>
-                    </div>
-                );
-            }
-
-            function RenderAwards(type) {
-                let keys = Object.keys(row.row.original.awards[type]);
-                return keys.map((award) => {
-                    const counter = NumberBox(row.row.original.awards[type][award]);
-                    return row.row.original.awards[type][award] > 0 ? (
-                        <div>
-                            <Tooltip arrow={false} direction="right" content={RenderTooltip(award)}>
-                                {counter}
-                                <img
-                                    style={{ width: "50px" }}
-                                    src={require(`../../assets/awards/${type}/${award}.png`)}
-                                    alt={award}
-                                />
-                            </Tooltip>
-                        </div>
-                    ) : null;
-                });
-            }
-
-            let HeroAwards = RenderAwards("battleHeroes");
-            let MainAwards = RenderAwards("main");
-            let EpicAwards = RenderAwards("epic");
-
-            return (
-                <Styles>
-                    Battle Heroes
-                    <div className="breakdown">{HeroAwards}</div>
-                    Honorary Ranks
-                    <div className="breakdown">{MainAwards}</div>
-                    Epic Medals
-                    <div className="breakdown">{EpicAwards}</div>
-                </Styles>
-            );
-        }
-
-        // Render the UI for your table
-        return (
-            <>
-                <FiltersContainer>
-                    <div style={{ marginBottom: "-10px" }}>
-                        <GlobalFilter
-                            preGlobalFilteredRows={preGlobalFilteredRows}
-                            globalFilter={state.globalFilter}
-                            setGlobalFilter={setGlobalFilter}
-                        />
-                    </div>
-                    {headerGroups.map((headerGroup, i) => (
-                        <React.Fragment key={i}>
-                            <ButtonFiltersContainer key={i}>
-                                {filterOrder.map(
-                                    (n) =>
-                                        !headerGroup.headers[n].disableFilters && (
-                                            <span key={n}>{headerGroup.headers[n].render("Filter")}</span>
-                                        )
-                                )}
-                            </ButtonFiltersContainer>
-                            <div
-                                style={{
-                                    marginRight: "10px",
-                                    marginTop: "10px",
-                                }}
-                            >
-                                {headerGroup.headers[6].render("Filter")}
-                            </div>
-                        </React.Fragment>
-                    ))}
-                </FiltersContainer>
-                <StyledTable {...getTableProps()}>
-                    <thead>
-                        {headerGroups.map((headerGroup) => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map((column) => (
-                                    <th
-                                        {...column.getHeaderProps(column.getSortByToggleProps())}
-                                        {...column.getHeaderProps({
-                                            style: {
-                                                cursor: "pointer",
-                                                backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
-                                            },
-                                        })}
-                                    >
-                                        {column.render("Header")}
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {page.map((row, i) => {
-                            prepareRow(row);
-                            return (
-                                <React.Fragment key={i}>
-                                    <tr {...row.getToggleRowExpandedProps({})}>
-                                        {row.cells.map((cell) => (
-                                            <td
-                                                {...cell.getCellProps({
-                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
-                                                })}
-                                            >
-                                                {cell.render("Cell")}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                    {row.isExpanded ? (
-                                        <SubRow>
-                                            <td colSpan={visibleColumns.length}>{renderRowSubComponent({ row })}</td>
-                                        </SubRow>
-                                    ) : null}
-                                </React.Fragment>
-                            );
-                        })}
-                    </tbody>
-                </StyledTable>
-                <Pagination
-                    pageSizes={[15, 25, 100, 250, 500]}
-                    {...{
-                        canPreviousPage,
-                        canNextPage,
-                        pageOptions,
-                        pageCount,
-                        gotoPage,
-                        nextPage,
-                        previousPage,
-                        setPageSize,
-                        pageIndex,
-                        pageSize,
-                    }}
-                />
-            </>
-        );
-    }
-
-    // Define a custom filter filter function!
-    function filterGreaterThan(rows, id, filterValue) {
-        return rows.filter((row) => {
-            const rowValue = row.values[id];
-            return rowValue >= filterValue;
-        });
-    }
-
-    // This is an autoRemove method on the filter function that
-    // when given the new filter value and returns true, the filter
-    // will be automatically removed. Normally this is just an undefined
-    // check, but here, we want to remove the filter if it's not a number
-    filterGreaterThan.autoRemove = (val) => typeof val !== "number";
+function OverallTable({ data }) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: (data) => {
-                    const value = data.row.original;
-                    return (
-                        <Name val={value.isPrem}>
-                            <img src={value.image} alt={value.name} />
-                            {value.name}
-                        </Name>
-                    );
-                },
+                Cell: ({ row: { original } }) => (
+                    <Name val={original.isPrem}>
+                        <img src={original.image} alt={original.name} />
+                        {original.name}
+                    </Name>
+                ),
                 Header: "Name",
                 accessor: "name",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img
-                            src={require(`../../assets/flagIcons/${value}.png`)}
-                            style={{ maxWidth: "40px" }}
-                            alt={value}
-                        />
-                    );
-                },
+                Cell: ({ value }) => (
+                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
+                ),
                 Header: "Nation",
                 accessor: "nation",
                 Filter: NationFilter,
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => {
-                    return <div>{tierConv[value]}</div>;
-                },
+                Cell: ({ value }) => tierConv[value],
                 Header: "Tier",
                 accessor: "tier",
                 Filter: NumericTierFilter,
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img
-                            src={require(`../../assets/classIcons/${value}.png`)}
-                            style={{ maxWidth: "20px" }}
-                            alt={value}
-                        />
-                    );
-                },
+                Cell: ({ value }) => (
+                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
+                ),
                 Header: "Class",
                 accessor: "class",
                 Filter: ClassFilter,
@@ -502,18 +221,9 @@ function OverallTable(props) {
                 Filter: NumberRangeColumnFilter,
                 filter: "between",
                 disableFilters: true,
-                cellStyle: (state, rowInfo) => {
-                    return {
-                        style: {
-                            backgroundColor: "red",
-                        },
-                    };
-                },
             },
             {
-                Cell: ({ value }) => {
-                    return <div>{value + "%"}</div>;
-                },
+                Cell: ({ value }) => `${value}%`,
                 Header: "Winrate",
                 accessor: "winrate",
                 Filter: NumberRangeColumnFilter,
@@ -553,15 +263,9 @@ function OverallTable(props) {
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img
-                            src={require(`../../assets/masteryIcons/${value}.png`)}
-                            style={{ maxHeight: "23px" }}
-                            alt={value}
-                        />
-                    );
-                },
+                Cell: ({ value }) => (
+                    <img src={require(`Assets/masteryIcons/${value}.png`)} style={{ maxHeight: "23px" }} alt={value} />
+                ),
                 Header: "Mast",
                 accessor: "mastery",
                 Filter: MasteryFilter,
@@ -572,14 +276,154 @@ function OverallTable(props) {
                 accessor: "isPrem",
                 Filter: PremFilter,
                 filter: arrayFilterFn,
+                hidden: true,
             },
         ],
         []
     );
 
+    const filterOrder = [3, 2, 1, 18, 19, 20];
+
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        prepareRow,
+        state,
+        visibleColumns,
+        page,
+        canPreviousPage,
+        canNextPage,
+        pageOptions,
+        pageCount,
+        gotoPage,
+        nextPage,
+        previousPage,
+        setPageSize,
+        preGlobalFilteredRows,
+        setGlobalFilter,
+        state: { pageIndex, pageSize },
+    } = useTable(
+        {
+            columns,
+            data,
+            initialState: {
+                pageIndex: 0,
+                pageSize: 25,
+                // hiddenColumns: ["isPrem"],
+                sortBy: [
+                    {
+                        id: "battles",
+                        desc: true,
+                    },
+                ],
+            },
+        },
+        useFilters,
+        useGlobalFilter,
+        useSortBy,
+        useExpanded,
+        usePagination
+    );
+
     return (
         <TableContainer>
-            <Table columns={columns} data={data} />
+            <FiltersContainer>
+                <div style={{ marginBottom: "-10px" }}>
+                    <GlobalFilter
+                        preGlobalFilteredRows={preGlobalFilteredRows}
+                        globalFilter={state.globalFilter}
+                        setGlobalFilter={setGlobalFilter}
+                    />
+                </div>
+                {headerGroups.map((headerGroup, i) => (
+                    <React.Fragment key={i}>
+                        <ButtonFiltersContainer key={i}>
+                            {filterOrder.map(
+                                (n) =>
+                                    !columns[n].disableFilters && (
+                                        <span key={n}>{headerGroup.headers[n].render("Filter")}</span>
+                                    )
+                            )}
+                        </ButtonFiltersContainer>
+                        <div
+                            style={{
+                                marginRight: "10px",
+                                marginTop: "10px",
+                            }}
+                        >
+                            {headerGroup.headers[6].render("Filter")}
+                        </div>
+                    </React.Fragment>
+                ))}
+            </FiltersContainer>
+            <Table {...getTableProps()}>
+                <thead>
+                    {headerGroups.map((headerGroup) => (
+                        <Tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map((column) =>
+                                column.hidden ? null : (
+                                    <Th
+                                        {...column.getHeaderProps(column.getSortByToggleProps())}
+                                        {...column.getHeaderProps({
+                                            style: {
+                                                cursor: "pointer",
+                                                backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
+                                            },
+                                        })}
+                                    >
+                                        {column.render("Header")}
+                                    </Th>
+                                )
+                            )}
+                        </Tr>
+                    ))}
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                    {page.map((row, i) => {
+                        prepareRow(row);
+                        return (
+                            <React.Fragment key={i}>
+                                <Tr {...row.getToggleRowExpandedProps({})}>
+                                    {row.cells.map((cell) =>
+                                        cell.column.hidden ? null : (
+                                            <Td
+                                                {...cell.getCellProps({
+                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
+                                                })}
+                                            >
+                                                {cell.render("Cell")}
+                                            </Td>
+                                        )
+                                    )}
+                                </Tr>
+                                <SubTr style={{ height: row.isExpanded || "0px" }}>
+                                    <SubTd colSpan={visibleColumns.length}>
+                                        <Collapse in={row.isExpanded}>
+                                            <Awards {...row.original} />
+                                        </Collapse>
+                                    </SubTd>
+                                </SubTr>
+                            </React.Fragment>
+                        );
+                    })}
+                </tbody>
+            </Table>
+            <Pagination
+                pageSizes={[15, 25, 100, 250, 500]}
+                {...{
+                    canPreviousPage,
+                    canNextPage,
+                    pageOptions,
+                    pageCount,
+                    gotoPage,
+                    nextPage,
+                    previousPage,
+                    setPageSize,
+                    pageIndex,
+                    pageSize,
+                }}
+            />
         </TableContainer>
     );
 }

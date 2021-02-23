@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
 import Grid from "@material-ui/core/Grid";
-import serverConv from "../../../data/serverConv.js";
+import { serverConv } from "Data/conversions";
 import clonedeep from "lodash.clonedeep";
 import RSC from "react-scrollbars-custom";
 

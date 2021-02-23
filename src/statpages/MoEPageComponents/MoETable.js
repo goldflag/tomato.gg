@@ -5,9 +5,9 @@ import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
-import { ServerContext } from "../../context";
+import { ServerContext } from "Context";
 import MoEGraph from "./MoEGraph";
-import { Pagination } from "../../components";
+import { Pagination } from "Components";
 import {
     ClassFilter,
     GlobalFilter,
@@ -15,7 +15,7 @@ import {
     NationFilter,
     PremFilter,
     arrayFilterFn,
-} from "../../components/tableFilters";
+} from "Components/tableFilters";
 import {
     ButtonFiltersContainer,
     FiltersContainer,
@@ -23,8 +23,8 @@ import {
     TableContainer,
     StyledTable,
     Name,
-} from "../../components/tableComponents";
-import cellStyle from "../../functions/cellStyle";
+} from "Components/tableComponents";
+import cellStyle from "Functions/cellStyle";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -112,7 +112,6 @@ function MoETable(props) {
                 data,
                 defaultColumn, // Be sure to pass the defaultColumn option
                 filterTypes,
-                hiddenColumns: ["prem"],
                 initialState: {
                     pageIndex: 0,
                     pageSize: 50,
@@ -122,6 +121,7 @@ function MoETable(props) {
                             desc: true,
                         },
                     ],
+                    hiddenColumns: ["isPrem"],
                 },
             },
             useFilters, // useFilters!
@@ -274,17 +274,20 @@ function MoETable(props) {
     const columns = React.useMemo(
         () => [
             {
-                id: "expander", // It needs an ID
+                Cell: ({ row: { original } }) => (
+                    <Name val={original.isPrem}>
+                        <img src={original.image} alt={original.name} />
+                        {original.name}
+                    </Name>
+                ),
+                Header: "Name",
+                accessor: "name",
                 disableFilters: true,
             },
             {
                 Cell: ({ value }) => {
                     return (
-                        <img
-                            src={require(`../../assets/flagIcons/${value}.png`)}
-                            style={{ maxWidth: "40px" }}
-                            alt={value}
-                        />
+                        <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
                     );
                 },
                 Header: "Nation",
@@ -301,31 +304,13 @@ function MoETable(props) {
             {
                 Cell: ({ value }) => {
                     return (
-                        <img
-                            src={require(`../../assets/classIcons/${value}.png`)}
-                            style={{ maxWidth: "20px" }}
-                            alt={value}
-                        />
+                        <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
                     );
                 },
                 Header: "Class",
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
-            },
-            {
-                Cell: (data) => {
-                    const value = data.row.original;
-                    return (
-                        <Name val={value.isPrem}>
-                            <img src={value.image} alt={value.name} />
-                            {value.name}
-                        </Name>
-                    );
-                },
-                Header: "Name",
-                accessor: "name",
-                disableFilters: true,
             },
             {
                 Header: "50%",

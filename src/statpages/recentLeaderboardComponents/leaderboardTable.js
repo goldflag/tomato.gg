@@ -5,9 +5,9 @@ import { useTable } from "react-table";
 
 // LOCAL
 
-import { StyledTable, TableContainer } from "../../components/tableComponents";
-import WN8c from "../../functions/WN8color";
-import WRc from "../../functions/WRcolor";
+import { StyledTable, TableContainer } from "Components/tableComponents";
+import WN8c from "Functions/WN8color";
+import WRc from "Functions/WRcolor";
 
 export default function LeaderboardTable({ type, data }) {
     function setColor(column, value) {

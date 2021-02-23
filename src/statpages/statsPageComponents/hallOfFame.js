@@ -5,24 +5,10 @@ import { Link } from "react-router-dom";
 import RSC from "react-scrollbars-custom";
 
 // LOCAL
-import { Loader } from "../../components";
+import { Loader } from "Components";
+import { tierConv } from "Data/conversions";
 
 const backend = process.env.REACT_APP_BACKEND;
-
-const tierConv = {
-    1: "I",
-    2: "II",
-    3: "III",
-    4: "IV",
-    5: "V",
-    6: "VI",
-    7: "VII",
-    8: "VIII",
-    9: "IX",
-    10: "X",
-};
-
-
 
 function rankColor(rank) {
     if (rank < 8) return "#930D0D";
@@ -277,8 +263,6 @@ const ConditionalLink = ({ makeLink, ...props }) => {
 
 export default function HallOfFame({ hofData, hofmainData, server, id, setHofData, setHofmainData }) {
     useEffect(() => {
-        if (hofData && hofmainData) return;
-
         const url = `${backend}/api/hof/${server}/${id}`;
         const url2 = `${backend}/api/hofmain/${server}/${id}`;
 
@@ -288,7 +272,7 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                 setHofmainData(hofmain);
             }
         );
-    }, [hofData, hofmainData, server, id, setHofData, setHofmainData]);
+    }, [server, id, setHofData, setHofmainData]);
 
     const hof = () =>
         hofData.above.map((row, i) => (
@@ -426,7 +410,10 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                         <div className="overallItem">
                             <span className="value">{top.battles.value}</span>
                             <span className="bigLabel"> Battles </span>
-                            <div className="bigPercentile" style={{ backgroundColor: "white", color: "rgb(50, 50, 50)" }}>
+                            <div
+                                className="bigPercentile"
+                                style={{ backgroundColor: "white", color: "rgb(50, 50, 50)" }}
+                            >
                                 More than {(100 - (top.battles.ranking * 100) / top.total).toFixed(2)}%
                             </div>
                             {top.battles.ranking}

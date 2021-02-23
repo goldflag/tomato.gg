@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import ReactGA from "react-ga";
 import { Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
-import "../css/tankstats.css";
-import "../css/innerpage.css";
+import "CSS/tankstats.css";
+import "CSS/innerpage.css";
 import PercentileGraph from "./tankStatsPageComponents/percentileGraph";
 import CurveExamples from "./statsReferenceComponents/curveExamples";
 import InDepthExamples from "./statsReferenceComponents/inDepthExamples";
-import DPGPercentiles from "../data/DPGPercentiles.json";
-import WN8Percentiles from "../data/WN8Percentiles.json";
+import DPGPercentiles from "Data/DPGPercentiles.json";
+import WN8Percentiles from "Data/WN8Percentiles.json";
 
 const trackingId = process.env.REACT_APP_GA;
 

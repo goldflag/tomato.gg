@@ -4,13 +4,13 @@ import ReactGA from "react-ga";
 import styled from "styled-components";
 
 // LOCAL
-import { Loader, FullPageTableWrapper } from "../components";
-import { ServerContext } from "../context";
+import { Loader, FullPageTableWrapper } from "Components";
+import { ServerContext } from "Context";
 import RecentLeaderboard from "./tankPageComponents/recentLeaderboard";
-import serverConv from "../data/serverConv";
-import { ServerPagination } from "../components";
-import { useURLState } from "../functions/hooks";
-import { FilterButtonGroup, FilterButton } from "../components/tableFilters";
+import { ServerPagination } from "Components";
+import { useURLState } from "Functions/hooks";
+import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
+import { nationAdjConv, classDescConv, serverConv } from "Data/conversions";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -71,28 +71,6 @@ const TankImage = styled.img`
     }
 `
 
-const classConv = {
-    HT: "Heavy Tank",
-    MT: "Medium Tank",
-    LT: "Light Tank",
-    SPG: "Self Propelled Gun",
-    TD: "Tank Destroyer",
-};
-
-const nationConv = {
-    USA: "American",
-    China: "Chinese",
-    Czech: "Czech",
-    France: "French",
-    Germany: "German",
-    Italy: "Italian",
-    Japan: "Japanese",
-    Poland: "Polish",
-    Sweden: "Swedish",
-    UK: "British",
-    USSR: "Soviet",
-};
-
 const PAGE_SIZE = 100;
 
 const filters = {
@@ -148,7 +126,7 @@ export default function TankPage(props) {
                     <Name>
                         <ShortName>{data.meta.short_name}</ShortName>
                         <div>
-                            {nationConv[data.meta.nation]} {classConv[data.meta.class]}
+                            {nationAdjConv[data.meta.nation]} {classDescConv[data.meta.class]}
                         </div>
                     </Name>
                 </Top>

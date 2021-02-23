@@ -1,24 +1,11 @@
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
-import { ServerContext } from "../context";
+import { ServerContext } from "Context";
 import MasteryTable from "./masteryPageComponents/masteryTable";
-import tankNames from "../data/tankNames.json";
-import nationConversion from "../data/nationConversion";
-import classConversion from "../data/classConversion.json";
-import { Loader, FullPageTableWrapper, Info } from "../components";
+import tankNames from "Data/tankNames.json";
+import { nationConv, classConv, tierConv, serverConv } from "Data/conversions";
+import { Loader, FullPageTableWrapper, Info } from "Components";
 
-const tierConv = {
-    1: "I",
-    2: "II",
-    3: "III",
-    4: "IV",
-    5: "V",
-    6: "VI",
-    7: "VII",
-    8: "VIII",
-    9: "IX",
-    10: "X",
-};
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -53,9 +40,9 @@ export default function MasteryPage(props) {
                     image: data[i].image,
                     id: id,
                     name: tankNames[id].short_name,
-                    nation: nationConversion[tankNames[id].nation],
+                    nation: nationConv[tankNames[id].nation],
                     tier: tierConv[tankNames[id].tier],
-                    class: classConversion[tankNames[id].type],
+                    class: classConv[tankNames[id].type],
                     "3rd": data[i]["3rd"] || "-",
                     "2nd": data[i]["2nd"] || "-",
                     "1st": data[i]["1st"] || "-",
@@ -67,8 +54,6 @@ export default function MasteryPage(props) {
         }
         table = <MasteryTable data={rowData} />;
     }
-
-    const serverConv = { com: "NA", eu: "EU", asia: "ASIA", ru: "RU" };
 
     return (
         <FullPageTableWrapper>

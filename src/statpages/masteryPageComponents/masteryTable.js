@@ -5,9 +5,9 @@ import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
-import { ServerContext } from "../../context";
+import { ServerContext } from "Context";
 import MasteryGraph from "./masteryGraph";
-import { Pagination } from "../../components";
+import { Pagination } from "Components";
 import {
     ClassFilter,
     GlobalFilter,
@@ -15,7 +15,7 @@ import {
     PremFilter,
     TierFilter,
     arrayFilterFn,
-} from "../../components/tableFilters";
+} from "Components/tableFilters";
 import {
     ButtonFiltersContainer,
     FiltersContainer,
@@ -23,8 +23,8 @@ import {
     SubRow,
     TableContainer,
     Name,
-} from "../../components/tableComponents";
-import cellStyle from "../../functions/cellStyle";
+} from "Components/tableComponents";
+import cellStyle from "Functions/cellStyle";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -111,7 +111,6 @@ function MasteryTable(props) {
                 data,
                 defaultColumn, // Be sure to pass the defaultColumn option
                 filterTypes,
-                hiddenColumns: ["prem"],
                 initialState: {
                     pageIndex: 0,
                     pageSize: 50,
@@ -121,6 +120,7 @@ function MasteryTable(props) {
                             desc: true,
                         },
                     ],
+                    hiddenColumns: ["isPrem"],
                 },
             },
             useFilters, // useFilters!
@@ -281,15 +281,20 @@ function MasteryTable(props) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img
-                            src={require(`../../assets/flagIcons/${value}.png`)}
-                            style={{ maxWidth: "40px" }}
-                            alt={value}
-                        />
-                    );
-                },
+                Cell: ({ row: { original } }) => (
+                    <Name val={original.isPrem}>
+                        <img src={original.image} alt={original.name} />
+                        {original.name}
+                    </Name>
+                ),
+                Header: "Name",
+                accessor: "name",
+                disableFilters: true,
+            },
+            {
+                Cell: ({ value }) => (
+                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
+                ),
                 Header: "Nation",
                 accessor: "nation",
                 Filter: NationFilter,
@@ -302,33 +307,13 @@ function MasteryTable(props) {
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img
-                            src={require(`../../assets/classIcons/${value}.png`)}
-                            style={{ maxWidth: "20px" }}
-                            alt={value}
-                        />
-                    );
-                },
+                Cell: ({ value }) => (
+                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
+                ),
                 Header: "Class",
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
-            },
-            {
-                Cell: (data) => {
-                    const value = data.row.original;
-                    return (
-                        <Name val={value.isPrem}>
-                            <img src={value.image} alt={value.name} />
-                            {value.name}
-                        </Name>
-                    );
-                },
-                Header: "Name",
-                accessor: "name",
-                disableFilters: true,
             },
             {
                 Header: "3rd Class",

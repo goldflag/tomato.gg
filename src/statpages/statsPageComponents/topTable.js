@@ -5,8 +5,8 @@ import styled, { css } from "styled-components";
 
 // LOCAL
 
-import { TableContainer } from "../../components/tableComponents";
-import WN8c from "../../functions/WN8color";
+import { TableContainer } from "Components/tableComponents";
+import WN8c from "Functions/WN8color";
 
 const StyledTable = styled.table`
     white-space: nowrap;

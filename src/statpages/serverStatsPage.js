@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import ReactGA from "react-ga";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
-import "../css/tankstats.css";
-import "../css/innerpage.css";
+import "CSS/tankstats.css";
+import "CSS/innerpage.css";
 import WN8Waffle from "./serverStatsPageComponents/WN8Waffle";
 import WRWaffle from "./serverStatsPageComponents/WRWaffle";
 import Scatterplot from "./serverStatsPageComponents/scatterplot";
-import scatterdata from "../data/scatterdata.json";
-import scatterdata10000 from "../data/scatterdata10000.json";
+import scatterdata from "Data/scatterdata.json";
+import scatterdata10000 from "Data/scatterdata10000.json";
 const trackingId = process.env.REACT_APP_GA;
 
 export default function ServerStatsPage(props) {

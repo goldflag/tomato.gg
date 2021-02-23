@@ -12,7 +12,7 @@ import ExpectedDist from "./appbars/ExpectedDist";
 import RecordsBar from "./appbars/RecordsBar";
 import LineGraphs from "./appbars/LineGraphs";
 
-import "../../css/statspage.css";
+import "CSS/statspage.css";
 
 export default function Charts(props) {
     const size = useWindowSize();

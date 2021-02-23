@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import loader from "../assets/loading.svg";
+import loader from "Assets/loading.svg";
 
 const LoaderWrapper = styled.div`
     display: flex;

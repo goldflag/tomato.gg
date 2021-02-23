@@ -14,7 +14,7 @@ import WN8Expected from "./statpages/wn8expected";
 import MoEExpected from "./statpages/MoEPage";
 import MasteryExpected from "./statpages/masteryPage";
 
-import "./css/body.css";
+import "CSS/body.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const trackingId = process.env.REACT_APP_GA;
 

@@ -14,14 +14,13 @@ import {
     PremFilter,
     NumericTierFilter,
     arrayFilterFn,
-} from "../../components";
-import {
     ButtonFiltersContainer,
     FiltersContainer,
     StyledTable,
     TableContainer,
-} from "../../components/tableComponents";
-import cellStyle from "../../functions/cellStyle";
+} from "Components";
+import cellStyle from "Functions/cellStyle";
+import { tierConv } from "Data/conversions";
 
 const TankCell = styled.div`
     display: grid;
@@ -32,18 +31,6 @@ const TankCell = styled.div`
 
 function RecentTanksAvgTable({ data }) {
     const columns = React.useMemo(() => {
-        const tierConv = {
-            1: "I",
-            2: "II",
-            3: "III",
-            4: "IV",
-            5: "V",
-            6: "VI",
-            7: "VII",
-            8: "VIII",
-            9: "IX",
-            10: "X",
-        };
         return [
             {
                 Cell: (data) => {
@@ -62,11 +49,7 @@ function RecentTanksAvgTable({ data }) {
             {
                 Cell: ({ value }) => {
                     return (
-                        <img
-                            src={require(`../../assets/flagIcons/${value}.png`)}
-                            style={{ maxWidth: "40px" }}
-                            alt={value}
-                        />
+                        <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
                     );
                 },
                 Header: "Nation",
@@ -86,11 +69,7 @@ function RecentTanksAvgTable({ data }) {
             {
                 Cell: ({ value }) => {
                     return (
-                        <img
-                            src={require(`../../assets/classIcons/${value}.png`)}
-                            style={{ maxWidth: "20px" }}
-                            alt={value}
-                        />
+                        <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
                     );
                 },
                 Header: "Class",
@@ -150,6 +129,7 @@ function RecentTanksAvgTable({ data }) {
                 accessor: "is_premium",
                 Filter: PremFilter,
                 filter: arrayFilterFn,
+                hidden: true,
             },
         ];
     }, []);
@@ -223,18 +203,20 @@ function RecentTanksAvgTable({ data }) {
                 <thead>
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) => (
-                                <th
-                                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                                    {...column.getHeaderProps({
-                                        style: {
-                                            backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
-                                        },
-                                    })}
-                                >
-                                    {column.render("Header")}
-                                </th>
-                            ))}
+                            {headerGroup.headers.map((column) =>
+                                column.hidden ? null : (
+                                    <th
+                                        {...column.getHeaderProps(column.getSortByToggleProps())}
+                                        {...column.getHeaderProps({
+                                            style: {
+                                                backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
+                                            },
+                                        })}
+                                    >
+                                        {column.render("Header")}
+                                    </th>
+                                )
+                            )}
                         </tr>
                     ))}
                 </thead>
@@ -243,8 +225,8 @@ function RecentTanksAvgTable({ data }) {
                         prepareRow(row);
                         return (
                             <tr onClick={() => handleRowClick(row)} {...row.getRowProps()}>
-                                {row.cells.map((cell) => {
-                                    return (
+                                {row.cells.map((cell) =>
+                                    cell.column.hidden ? null : (
                                         <td
                                             {...cell.getCellProps({
                                                 style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
@@ -252,8 +234,8 @@ function RecentTanksAvgTable({ data }) {
                                         >
                                             {cell.render("Cell")}
                                         </td>
-                                    );
-                                })}
+                                    )
+                                )}
                             </tr>
                         );
                     })}

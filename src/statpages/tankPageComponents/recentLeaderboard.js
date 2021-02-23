@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { useTable, usePagination } from "react-table";
 import { Link } from "react-router-dom";
 
-import { StyledTable, TableContainer } from "../../components/tableComponents";
+import { StyledTable, TableContainer } from "Components/tableComponents";
 
-import WN8c from "../../functions/WN8color";
-import WRc from "../../functions/WRcolor";
+import WN8c from "Functions/WN8color";
+import WRc from "Functions/WRcolor";
 
 export default function RecentsLeaderboard({ data, type, highlightUserID }) {
     function setColor(column, value) {
