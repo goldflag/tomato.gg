@@ -7,10 +7,10 @@ import styled from "styled-components";
 import { Loader, FullPageTableWrapper } from "../components";
 import { ServerContext } from "../context";
 import RecentLeaderboard from "./tankPageComponents/recentLeaderboard";
-import serverConv from "../data/serverConv";
 import { ServerPagination } from "../components";
 import { useURLState } from "../functions/hooks";
 import { FilterButtonGroup, FilterButton } from "../components/tableFilters";
+import { nationAdjConv, classDescConv, serverConv } from "../data/conversions";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -46,28 +46,6 @@ const BottomLabel = styled.div`
     margin: 0.5rem 0;
     color: rgb(160, 160, 160);
 `;
-
-const classConv = {
-    HT: "Heavy Tank",
-    MT: "Medium Tank",
-    LT: "Light Tank",
-    SPG: "Self Propelled Gun",
-    TD: "Tank Destroyer",
-};
-
-const nationConv = {
-    USA: "American",
-    China: "Chinese",
-    Czech: "Czech",
-    France: "French",
-    Germany: "German",
-    Italy: "Italian",
-    Japan: "Japanese",
-    Poland: "Polish",
-    Sweden: "Swedish",
-    UK: "British",
-    USSR: "Soviet",
-};
 
 const PAGE_SIZE = 100;
 
@@ -124,7 +102,7 @@ export default function TankPage(props) {
                     <Name>
                         <div style={{ fontSize: "2rem" }}>{data.meta.short_name}</div>
                         <div>
-                            {nationConv[data.meta.nation]} {classConv[data.meta.class]}
+                            {nationAdjConv[data.meta.nation]} {classDescConv[data.meta.class]}
                         </div>
                     </Name>
                 </Top>

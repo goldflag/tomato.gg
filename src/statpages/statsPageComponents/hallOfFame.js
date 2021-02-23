@@ -6,21 +6,9 @@ import RSC from "react-scrollbars-custom";
 
 // LOCAL
 import { Loader } from "../../components";
+import { tierConv } from "../../data/conversions";
 
 const backend = process.env.REACT_APP_BACKEND;
-
-const tierConv = {
-    1: "I",
-    2: "II",
-    3: "III",
-    4: "IV",
-    5: "V",
-    6: "VI",
-    7: "VII",
-    8: "VIII",
-    9: "IX",
-    10: "X",
-};
 
 function rankColor(rank) {
     if (rank < 8) return "#930D0D";

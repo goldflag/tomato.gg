@@ -5,7 +5,7 @@ import SearchBar from "./material/searchBar";
 import TomatoLogo from "./assets/tomato.png";
 import { ServerContext, SearchHistoryContext } from "./context";
 //import LeaderboardGrid from "./statpages/searchComponents/leaderboardGrid";
-import serverConv from "./data/serverConv";
+import { serverConv } from "./data/conversions";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 

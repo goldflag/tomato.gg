@@ -6,10 +6,9 @@ import ReactGA from "react-ga";
 // LOCAL
 import "../css/style.css";
 import "../css/innerpage.css";
-import serverConv from "../data/serverConv";
+import { serverConv } from "../data/conversions";
 import GraphCalculator from "../functions/GraphCalculator";
 import MainTabs from "./statsPageComponents/mainTabs";
-
 import { Loader } from "../components";
 
 const APIKey = process.env.REACT_APP_API_KEY;

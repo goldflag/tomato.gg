@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 
 // LOCAL
-import serverConv from "../data/serverConv";
+import { serverConv } from "../data/conversions";
 import { ServerContext } from "../context";
 import { Loader, FullPageTableWrapper, Info } from "../components";
 import { FilterButtonGroup, FilterButton } from "../components/tableFilters";

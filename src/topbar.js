@@ -8,7 +8,7 @@ import DiscordLogo from "./assets/Discord.svg";
 import SmallMenu from "./material/smallMenu";
 import { withRouter } from "react-router-dom";
 import { ServerContext, SearchHistoryContext } from "./context";
-import serverConv from "./data/serverConv";
+import { serverConv } from "./data/conversions";
 import { IconButton, Chip, Avatar } from "@material-ui/core";
 import { DeleteOutline } from "@material-ui/icons";
 

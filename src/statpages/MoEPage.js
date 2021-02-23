@@ -5,23 +5,9 @@ import MoETable from "./MoEPageComponents/MoETable";
 import MoETracker from "./MoEPageComponents/MoETracker";
 import { TabPanel, CustomTabs, CustomTab } from "./tabs/customTabs";
 import tankNames from "../data/tankNames.json";
-import nationConversion from "../data/nationConversion";
-import classConversion from "../data/classConversion.json";
-import serverConv from "../data/serverConv";
 import { Loader, FullPageTableWrapper, Info } from "../components";
+import { tierConv, serverConv, nationConv, classConv } from "../data/conversions";
 
-const tierConv = {
-    1: "I",
-    2: "II",
-    3: "III",
-    4: "IV",
-    5: "V",
-    6: "VI",
-    7: "VII",
-    8: "VIII",
-    9: "IX",
-    10: "X",
-};
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -71,9 +57,9 @@ export default function MoEPage(props) {
                     image: data[i].image,
                     id: id,
                     name: tankNames[id].short_name,
-                    nation: nationConversion[tankNames[id].nation],
+                    nation: nationConv[tankNames[id].nation],
                     tier: tierConv[tankNames[id].tier],
-                    class: classConversion[tankNames[id].type],
+                    class: classConv[tankNames[id].type],
                     50: data[i]["50"] || "-",
                     65: data[i]["65"] || "-",
                     85: data[i]["85"] || "-",

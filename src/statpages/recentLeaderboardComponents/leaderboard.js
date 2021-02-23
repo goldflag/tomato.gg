@@ -9,7 +9,7 @@ import { Button, ButtonGroup } from "@material-ui/core";
 // LOCAL
 import LeaderboardTable from "./leaderboardTable";
 import { Loader } from "../../components";
-import serverConv from "../../data/serverConv";
+import { serverConv } from "../../data/conversions";
 import { useURLState } from "../../functions/hooks";
 
 const backend = process.env.REACT_APP_BACKEND;

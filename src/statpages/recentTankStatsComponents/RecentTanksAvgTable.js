@@ -14,14 +14,13 @@ import {
     PremFilter,
     NumericTierFilter,
     arrayFilterFn,
-} from "../../components";
-import {
     ButtonFiltersContainer,
     FiltersContainer,
     StyledTable,
     TableContainer,
-} from "../../components/tableComponents";
+} from "../../components";
 import cellStyle from "../../functions/cellStyle";
+import { tierConv } from "../../data/conversions";
 
 const TankCell = styled.div`
     display: grid;
@@ -32,18 +31,6 @@ const TankCell = styled.div`
 
 function RecentTanksAvgTable({ data }) {
     const columns = React.useMemo(() => {
-        const tierConv = {
-            1: "I",
-            2: "II",
-            3: "III",
-            4: "IV",
-            5: "V",
-            6: "VI",
-            7: "VII",
-            8: "VIII",
-            9: "IX",
-            10: "X",
-        };
         return [
             {
                 Cell: (data) => {

@@ -19,19 +19,7 @@ import styled from "styled-components";
 import Tooltip from "react-tooltip-lite";
 import awardsData from "../../data/awardsinfo.json";
 import cellStyle from "../../functions/cellStyle";
-
-const tierConv = {
-    1: "I",
-    2: "II",
-    3: "III",
-    4: "IV",
-    5: "V",
-    6: "VI",
-    7: "VII",
-    8: "VIII",
-    9: "IX",
-    10: "X",
-};
+import { tierConv } from "../../data/conversions";
 
 const AwardContainer = styled.div`
     padding: 0.5rem;

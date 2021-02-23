@@ -5,19 +5,7 @@ import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
 // LOCAL
 import { Pagination, StyledTable, Name } from "../../../components";
 import cellStyle from "../../../functions/cellStyle";
-
-const tierConv = {
-    1: "I",
-    2: "II",
-    3: "III",
-    4: "IV",
-    5: "V",
-    6: "VI",
-    7: "VII",
-    8: "VIII",
-    9: "IX",
-    10: "X",
-};
+import { tierConv } from "../../../data/conversions";
 
 export default function SessionBreakdown(props) {
     const data = props.data;
