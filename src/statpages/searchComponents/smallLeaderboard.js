@@ -211,13 +211,7 @@ export default function SmallLeaderboard(props) {
         []
     )[props.type];
 
-    const {
-        getTableProps,
-        headerGroups,
-        footerGroups,
-        rows,
-        prepareRow,
-    } = useTable({ columns, data });
+    const { getTableProps, headerGroups, footerGroups, rows, prepareRow } = useTable({ columns, data });
 
     return (
         <Styles>
@@ -226,9 +220,7 @@ export default function SmallLeaderboard(props) {
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map((column) => (
-                                <th {...column.getHeaderProps()}>
-                                    {column.render("Header")}
-                                </th>
+                                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
                             ))}
                         </tr>
                     ))}
@@ -239,11 +231,7 @@ export default function SmallLeaderboard(props) {
                         return (
                             <tr {...row.getRowProps()}>
                                 {row.cells.map((cell) => {
-                                    return (
-                                        <td {...cell.getCellProps()}>
-                                            {cell.render("Cell")}
-                                        </td>
-                                    );
+                                    return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
                                 })}
                             </tr>
                         );
@@ -253,9 +241,7 @@ export default function SmallLeaderboard(props) {
                     {footerGroups.map((group) => (
                         <tr {...group.getFooterGroupProps()}>
                             {group.headers.map((column) => (
-                                <td {...column.getFooterProps()}>
-                                    {column.render("Footer")}
-                                </td>
+                                <td {...column.getFooterProps()}>{column.render("Footer")}</td>
                             ))}
                         </tr>
                     ))}

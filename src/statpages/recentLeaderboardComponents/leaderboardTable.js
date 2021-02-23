@@ -43,9 +43,7 @@ export default function LeaderboardTable({ type, data }) {
             {
                 Header: "Username",
                 accessor: "username",
-                Cell: ({ row: { original, values } }) => (
-                    <Link to={original.url}> {values.username}</Link>
-                ),
+                Cell: ({ row: { original, values } }) => <Link to={original.url}> {values.username}</Link>,
             },
             {
                 Header: "Battles",
@@ -95,13 +93,7 @@ export default function LeaderboardTable({ type, data }) {
         []
     );
 
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        prepareRow,
-        rows,
-    } = useTable({
+    const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } = useTable({
         columns,
         data,
         initialState: {
@@ -137,10 +129,7 @@ export default function LeaderboardTable({ type, data }) {
                                 {row.cells.map((cell) => (
                                     <td
                                         {...cell.getCellProps({
-                                            style: setColor(
-                                                cell.column.id,
-                                                cell.value
-                                            ),
+                                            style: setColor(cell.column.id, cell.value),
                                         })}
                                     >
                                         {cell.render("Cell")}

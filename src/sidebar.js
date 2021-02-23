@@ -3,15 +3,7 @@ import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import TomatoLogo from "./assets/tomato.png";
 import background from "./assets/sidebar.jpg";
-import {
-    Apps,
-    Info,
-    Star,
-    Games,
-    BarChart,
-    LibraryBooks,
-    FormatListNumbered,
-} from "@material-ui/icons";
+import { Apps, Info, Star, Games, BarChart, LibraryBooks, FormatListNumbered } from "@material-ui/icons";
 import { NewIcon } from "./components";
 
 const LINKS = [
@@ -232,21 +224,13 @@ const Sidebar = withRouter((props) => {
                             {" "}
                             Support Tomato.gg
                         </h2>
-                        Tomato.gg runs on entirely on user donations. If you
-                        find value in the website, consider chipping in to help
-                        keep the servers running.
+                        Tomato.gg runs on entirely on user donations. If you find value in the website, consider
+                        chipping in to help keep the servers running.
                         <a target="blank" href="https://ko-fi.com/goldflag">
-                            <div className="donationButton kofi">
-                                Support on Ko-fi
-                            </div>
+                            <div className="donationButton kofi">Support on Ko-fi</div>
                         </a>
-                        <a
-                            target="blank"
-                            href="https://www.paypal.com/donate/?hosted_button_id=U457SKR8EQTSQ"
-                        >
-                            <div className="donationButton paypal">
-                                Support on Paypal
-                            </div>
+                        <a target="blank" href="https://www.paypal.com/donate/?hosted_button_id=U457SKR8EQTSQ">
+                            <div className="donationButton paypal">Support on Paypal</div>
                         </a>
                     </div>
                     <div
@@ -259,16 +243,10 @@ const Sidebar = withRouter((props) => {
                             position: "absolute",
                         }}
                     >
-                        <span style={{ fontWeight: "500" }}>
-                            Partnered Websites
-                        </span>
+                        <span style={{ fontWeight: "500" }}>Partnered Websites</span>
                         <span style={{ color: "white" }}>
                             <br />
-                            <a
-                                style={{ color: "white" }}
-                                target="blank"
-                                href="https://herhor.net/wot/"
-                            >
+                            <a style={{ color: "white" }} target="blank" href="https://herhor.net/wot/">
                                 herhor.net
                             </a>
                         </span>
@@ -294,10 +272,7 @@ const Sidebar = withRouter((props) => {
                         }}
                     >
                         Tomato.gg is a website created by{" "}
-                        <Link
-                            style={{ color: "rgb(205, 205, 205)" }}
-                            to="/stats/NA/goldflag=1011694618"
-                        >
+                        <Link style={{ color: "rgb(205, 205, 205)" }} to="/stats/NA/goldflag=1011694618">
                             Goldflag
                         </Link>{" "}
                         and is not affiliated with Wargaming.net.

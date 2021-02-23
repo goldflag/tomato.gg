@@ -90,9 +90,7 @@ export default function TopStats(props) {
     }
 
     const date = new Date(props.accountCreationDate * 1000);
-    const creationDate = `${
-        date.getMonth() + 1
-    }/${date.getDate()}/${date.getFullYear()}`;
+    const creationDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 
     return (
         <div className={classes.root}>
@@ -116,9 +114,7 @@ export default function TopStats(props) {
                     {props.username}
                 </div>
                 {clanInfo}
-                <span style={{ color: "white", fontSize: "0.8rem" }}>
-                    Account created {creationDate}
-                </span>
+                <span style={{ color: "white", fontSize: "0.8rem" }}>Account created {creationDate}</span>
                 <br />
             </Paper>
             <div className="topstats">
@@ -141,9 +137,7 @@ export default function TopStats(props) {
                         {props.username}
                     </div>
                     {clanInfo}
-                    <span style={{ color: "white", fontSize: "0.8rem" }}>
-                        Account created {creationDate}
-                    </span>
+                    <span style={{ color: "white", fontSize: "0.8rem" }}>Account created {creationDate}</span>
                     <br />
                 </Paper>
                 <Paper
@@ -157,9 +151,7 @@ export default function TopStats(props) {
                 >
                     <span style={{ fontSize: "0.8em" }}>Overall WN8</span>
                     <br />
-                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>
-                        {squareStats["overallWN8"]}
-                    </span>
+                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>{squareStats["overallWN8"]}</span>
                 </Paper>
                 <Paper
                     className="paper"
@@ -172,9 +164,7 @@ export default function TopStats(props) {
                 >
                     <span style={{ fontSize: "0.8em" }}>Overall WR</span>
                     <br />
-                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>
-                        {squareStats["overallWR"]}%
-                    </span>
+                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>{squareStats["overallWR"]}%</span>
                 </Paper>
                 <Paper
                     className="paper"
@@ -187,9 +177,7 @@ export default function TopStats(props) {
                 >
                     <span style={{ fontSize: "0.8em" }}>Recent WN8</span>
                     <br />
-                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>
-                        {squareStats["recentWN8"]}
-                    </span>
+                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>{squareStats["recentWN8"]}</span>
                 </Paper>
                 <Paper
                     className="paper"
@@ -202,9 +190,7 @@ export default function TopStats(props) {
                 >
                     <span style={{ fontSize: "0.8em" }}>Recent WR</span>
                     <br />
-                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>
-                        {squareStats["recentWR"]}%
-                    </span>
+                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>{squareStats["recentWR"]}%</span>
                 </Paper>
                 <Paper
                     className="paper"
@@ -217,9 +203,7 @@ export default function TopStats(props) {
                 >
                     <span style={{ fontSize: "0.8em" }}>WG Rating</span>
                     <br />
-                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>
-                        {squareStats["PR"]}
-                    </span>
+                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>{squareStats["PR"]}</span>
                 </Paper>
                 <Paper
                     className="paper"
@@ -232,9 +216,7 @@ export default function TopStats(props) {
                 >
                     <span style={{ fontSize: "0.8em" }}>Battles</span>
                     <br />
-                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>
-                        {props.stats.battles}
-                    </span>
+                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>{props.stats.battles}</span>
                 </Paper>
             </div>
         </div>

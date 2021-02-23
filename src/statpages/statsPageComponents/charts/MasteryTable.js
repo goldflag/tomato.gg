@@ -43,60 +43,39 @@ export default function MasteryTable(props) {
         rows[0].Mastery += props.data[i]["Ace"];
     }
 
-    const numTanks =
-        rows[0].Mastery +
-        rows[1].Mastery +
-        rows[2].Mastery +
-        rows[3].Mastery +
-        rows[4].Mastery;
+    const numTanks = rows[0].Mastery + rows[1].Mastery + rows[2].Mastery + rows[3].Mastery + rows[4].Mastery;
 
     return (
         <table style={demo}>
             <tbody>
                 <tr>
                     <td style={tt}>
-                        Vehicles{" "}
-                        <span style={{ float: "right" }}>{numTanks} </span>
+                        Vehicles <span style={{ float: "right" }}>{numTanks} </span>
                     </td>
                 </tr>
                 <tr>
                     <td style={tdc}>
-                        Ace{" "}
-                        <span style={{ float: "right" }}>
-                            {rows[0].Mastery}{" "}
-                        </span>
+                        Ace <span style={{ float: "right" }}>{rows[0].Mastery} </span>
                     </td>
                 </tr>
                 <tr>
                     <td style={td}>
-                        1st Class{" "}
-                        <span style={{ float: "right" }}>
-                            {rows[1].Mastery}
-                        </span>
+                        1st Class <span style={{ float: "right" }}>{rows[1].Mastery}</span>
                     </td>
                 </tr>
                 <tr>
                     <td style={tdc}>
-                        2nd Class{" "}
-                        <span style={{ float: "right" }}>
-                            {rows[2].Mastery}
-                        </span>
+                        2nd Class <span style={{ float: "right" }}>{rows[2].Mastery}</span>
                     </td>
                 </tr>
                 <tr>
                     <td style={td}>
-                        3rd Class{" "}
-                        <span style={{ float: "right" }}>
-                            {rows[3].Mastery}
-                        </span>
+                        3rd Class <span style={{ float: "right" }}>{rows[3].Mastery}</span>
                     </td>
                 </tr>
                 <tr>
                     <td style={td}>
-                        None{" "}
-                        <span style={{ float: "right" }}>
-                            {rows[4].Mastery}
-                        </span>
+                        None <span style={{ float: "right" }}>{rows[4].Mastery}</span>
                     </td>
                 </tr>
             </tbody>

@@ -1,14 +1,7 @@
 // NPM
 import React from "react";
 import { useHistory } from "react-router-dom";
-import {
-    useTable,
-    usePagination,
-    useSortBy,
-    useFilters,
-    useExpanded,
-    useGlobalFilter,
-} from "react-table";
+import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
 import styled from "styled-components";
 
 // LOCAL
@@ -57,11 +50,7 @@ function RecentTanksAvgTable({ data }) {
                     const value = data.row.original;
                     return (
                         <TankCell val={value.is_premium}>
-                            <img
-                                src={value.image}
-                                style={{ maxWidth: "100px" }}
-                                alt={"test"}
-                            />
+                            <img src={value.image} style={{ maxWidth: "100px" }} alt={"test"} />
                             {value.short_name}
                         </TankCell>
                     );
@@ -87,9 +76,7 @@ function RecentTanksAvgTable({ data }) {
             },
             {
                 Cell: ({ value }) => {
-                    return (
-                        <div style={{ margin: "8px" }}>{tierConv[value]}</div>
-                    );
+                    return <div style={{ margin: "8px" }}>{tierConv[value]}</div>;
                 },
                 Header: "Tier",
                 accessor: "tier",
@@ -227,9 +214,7 @@ function RecentTanksAvgTable({ data }) {
                     <ButtonFiltersContainer key={i}>
                         {headerGroup.headers.map(
                             ({ disableFilters, render }, i) =>
-                                !disableFilters && (
-                                    <span key={i}>{render("Filter")}</span>
-                                )
+                                !disableFilters && <span key={i}>{render("Filter")}</span>
                         )}
                     </ButtonFiltersContainer>
                 ))}
@@ -240,14 +225,10 @@ function RecentTanksAvgTable({ data }) {
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map((column) => (
                                 <th
-                                    {...column.getHeaderProps(
-                                        column.getSortByToggleProps()
-                                    )}
+                                    {...column.getHeaderProps(column.getSortByToggleProps())}
                                     {...column.getHeaderProps({
                                         style: {
-                                            backgroundColor: column.isSorted
-                                                ? "rgb(207, 0, 76)"
-                                                : null,
+                                            backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
                                         },
                                     })}
                                 >
@@ -261,19 +242,12 @@ function RecentTanksAvgTable({ data }) {
                     {page.map((row, i) => {
                         prepareRow(row);
                         return (
-                            <tr
-                                onClick={() => handleRowClick(row)}
-                                {...row.getRowProps()}
-                            >
+                            <tr onClick={() => handleRowClick(row)} {...row.getRowProps()}>
                                 {row.cells.map((cell) => {
                                     return (
                                         <td
                                             {...cell.getCellProps({
-                                                style: cellStyle(
-                                                    cell.column.isSorted,
-                                                    cell.column.id,
-                                                    cell.value
-                                                ),
+                                                style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
                                             })}
                                         >
                                             {cell.render("Cell")}

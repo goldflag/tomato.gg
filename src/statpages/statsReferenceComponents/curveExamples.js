@@ -88,18 +88,8 @@ export default function CurveExamples() {
                 </AppBar>
                 <TabPanel value={value} index={0} dir={t.direction}>
                     <div className="grid">
-                        <CurveGraph
-                            data={WRCurves["T32"]}
-                            type="Winrate"
-                            smallType="WR"
-                            color="rgb(230, 57, 103)"
-                        />
-                        <CurveGraph
-                            data={WN8Curves["T32"]}
-                            type="WN8"
-                            smallType="WN8"
-                            color="rgb(212, 38, 186)"
-                        />
+                        <CurveGraph data={WRCurves["T32"]} type="Winrate" smallType="WR" color="rgb(230, 57, 103)" />
+                        <CurveGraph data={WN8Curves["T32"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
                     </div>
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={t.direction}>
@@ -110,12 +100,7 @@ export default function CurveExamples() {
                             smallType="WR"
                             color="rgb(230, 57, 103)"
                         />
-                        <CurveGraph
-                            data={WN8Curves["Defender"]}
-                            type="WN8"
-                            smallType="WN8"
-                            color="rgb(212, 38, 186)"
-                        />
+                        <CurveGraph data={WN8Curves["Defender"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
                     </div>
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={t.direction}>
@@ -152,18 +137,8 @@ export default function CurveExamples() {
                 </TabPanel>
                 <TabPanel value={value} index={4} dir={t.direction}>
                     <div className="grid">
-                        <CurveGraph
-                            data={WRCurves["O-I"]}
-                            type="Winrate"
-                            smallType="WR"
-                            color="rgb(230, 57, 103)"
-                        />
-                        <CurveGraph
-                            data={WN8Curves["O-I"]}
-                            type="WN8"
-                            smallType="WN8"
-                            color="rgb(212, 38, 186)"
-                        />
+                        <CurveGraph data={WRCurves["O-I"]} type="Winrate" smallType="WR" color="rgb(230, 57, 103)" />
+                        <CurveGraph data={WN8Curves["O-I"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
                     </div>
                 </TabPanel>
                 <TabPanel value={value} index={5} dir={t.direction}>
@@ -174,12 +149,7 @@ export default function CurveExamples() {
                             smallType="WR"
                             color="rgb(230, 57, 103)"
                         />
-                        <CurveGraph
-                            data={WN8Curves["T92 HMC"]}
-                            type="WN8"
-                            smallType="WN8"
-                            color="rgb(212, 38, 186)"
-                        />
+                        <CurveGraph data={WN8Curves["T92 HMC"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
                     </div>
                 </TabPanel>
                 <TabPanel value={value} index={6} dir={t.direction}>
@@ -190,12 +160,7 @@ export default function CurveExamples() {
                             smallType="WR"
                             color="rgb(230, 57, 103)"
                         />
-                        <CurveGraph
-                            data={WN8Curves["Obj. 140"]}
-                            type="WN8"
-                            smallType="WN8"
-                            color="rgb(212, 38, 186)"
-                        />
+                        <CurveGraph data={WN8Curves["Obj. 140"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
                     </div>
                 </TabPanel>
             </div>

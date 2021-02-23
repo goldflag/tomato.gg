@@ -141,10 +141,7 @@ export default function SessionsLog(props) {
         let tankStats = row.row.original.tankStats;
         for (let i = 0; i < tankStats.length; ++i) {
             tankStats[i]["img"] = (
-                <img
-                    src={require(`../../../assets/tankIcons/${tankStats[i].id}.png`)}
-                    alt={tankStats[i].id}
-                />
+                <img src={require(`../../../assets/tankIcons/${tankStats[i].id}.png`)} alt={tankStats[i].id} />
             );
         }
         return (
@@ -163,15 +160,11 @@ export default function SessionsLog(props) {
                             <tr {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map((column) => (
                                     <th
-                                        {...column.getHeaderProps(
-                                            column.getSortByToggleProps()
-                                        )}
+                                        {...column.getHeaderProps(column.getSortByToggleProps())}
                                         {...column.getHeaderProps({
                                             style: {
                                                 cursor: "pointer",
-                                                backgroundColor: column.isSorted
-                                                    ? "rgb(207, 0, 76)"
-                                                    : null,
+                                                backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
                                             },
                                         })}
                                     >
@@ -194,11 +187,7 @@ export default function SessionsLog(props) {
                                         {row.cells.map((cell) => (
                                             <td
                                                 {...cell.getCellProps({
-                                                    style: cellStyle(
-                                                        cell.column.isSorted,
-                                                        cell.column.id,
-                                                        cell.value
-                                                    ),
+                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
                                                 })}
                                             >
                                                 {cell.render("Cell")}

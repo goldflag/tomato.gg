@@ -89,8 +89,7 @@ export default function MasteryPage(props) {
                     <a target="blank" href="https://mastery.poliroid.ru/">
                         Marks of Excellence mod
                     </a>{" "}
-                    &#47;&#47;&#47; Expand rows to see 30 days of mastery
-                    history
+                    &#47;&#47;&#47; Expand rows to see 30 days of mastery history
                 </span>{" "}
                 <br />
             </Info>

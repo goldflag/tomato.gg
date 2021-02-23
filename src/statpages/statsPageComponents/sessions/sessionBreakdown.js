@@ -137,15 +137,11 @@ export default function SessionBreakdown(props) {
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map((column) => (
                                 <th
-                                    {...column.getHeaderProps(
-                                        column.getSortByToggleProps()
-                                    )}
+                                    {...column.getHeaderProps(column.getSortByToggleProps())}
                                     {...column.getHeaderProps({
                                         style: {
                                             cursor: "pointer",
-                                            backgroundColor: column.isSorted
-                                                ? "rgb(207, 0, 76)"
-                                                : null,
+                                            backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
                                         },
                                     })}
                                 >
@@ -164,11 +160,7 @@ export default function SessionBreakdown(props) {
                                     return (
                                         <td
                                             {...cell.getCellProps({
-                                                style: cellStyle(
-                                                    cell.column.isSorted,
-                                                    cell.column.id,
-                                                    cell.value
-                                                ),
+                                                style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
                                             })}
                                         >
                                             {cell.render("Cell")}

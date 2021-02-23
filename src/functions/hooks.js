@@ -26,8 +26,7 @@ export const useURLState = (key, defaultVal, type) => {
         const params = new URLSearchParams(window.location.search);
         if (!params.has(key)) return defaultVal;
         let val = params.get(key);
-        if (typeof defaultVal === "number" || type === "number")
-            val = parseInt(val);
+        if (typeof defaultVal === "number" || type === "number") val = parseInt(val);
         return val;
     };
 

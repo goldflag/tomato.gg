@@ -22,18 +22,12 @@ export default withRouter(function Search(props) {
         const url = `https://api.worldoftanks.${server}/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`;
         fetch(url)
             .then((res) => res.json())
-            .then((data) =>
-                data.status === "error" || data.meta.count === 0
-                    ? "FAIL"
-                    : data.data[0].account_id
-            )
+            .then((data) => (data.status === "error" || data.meta.count === 0 ? "FAIL" : data.data[0].account_id))
             .then((playerID) => {
                 if (playerID !== "FAIL") {
                     addToHistory(name, playerID, server);
                 }
-                props.history.push(
-                    `/stats/${serverConv[server]}/${name}=${playerID}`
-                );
+                props.history.push(`/stats/${serverConv[server]}/${name}=${playerID}`);
             })
             .catch(console.error);
     };

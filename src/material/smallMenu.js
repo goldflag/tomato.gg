@@ -8,14 +8,7 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import {
-    Apps,
-    Info,
-    Star,
-    Games,
-    BarChart,
-    LibraryBooks,
-} from "@material-ui/icons";
+import { Apps, Info, Star, Games, BarChart, LibraryBooks } from "@material-ui/icons";
 import smallLogo from "../assets/smalllogo.png";
 import styled from "styled-components";
 
@@ -76,10 +69,7 @@ export default function TemporaryDrawer() {
     });
 
     const toggleDrawer = (anchor, open) => (event) => {
-        if (
-            event.type === "keydown" &&
-            (event.key === "Tab" || event.key === "Shift")
-        ) {
+        if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
             return;
         }
 
@@ -112,10 +102,7 @@ export default function TemporaryDrawer() {
                             <ListItemIcon>
                                 <BarChart style={textStyle} />
                             </ListItemIcon>
-                            <ListItemText
-                                primary={"Tank Stats"}
-                                style={textStyle}
-                            />
+                            <ListItemText primary={"Tank Stats"} style={textStyle} />
                         </ListItem>
                     </Link>
                     <Link to="/moe">
@@ -123,10 +110,7 @@ export default function TemporaryDrawer() {
                             <ListItemIcon>
                                 <Star style={textStyle} />
                             </ListItemIcon>
-                            <ListItemText
-                                primary={"MoE Reqs"}
-                                style={textStyle}
-                            />
+                            <ListItemText primary={"MoE Reqs"} style={textStyle} />
                         </ListItem>
                     </Link>
                     <Link to="/mastery">
@@ -134,10 +118,7 @@ export default function TemporaryDrawer() {
                             <ListItemIcon>
                                 <Star style={textStyle} />
                             </ListItemIcon>
-                            <ListItemText
-                                primary={"Mastery Reqs"}
-                                style={textStyle}
-                            />
+                            <ListItemText primary={"Mastery Reqs"} style={textStyle} />
                         </ListItem>
                     </Link>
                     <Link to="/wn8">
@@ -145,10 +126,7 @@ export default function TemporaryDrawer() {
                             <ListItemIcon>
                                 <Games style={textStyle} />
                             </ListItemIcon>
-                            <ListItemText
-                                primary={"WN8 Exp. Values"}
-                                style={textStyle}
-                            />
+                            <ListItemText primary={"WN8 Exp. Values"} style={textStyle} />
                         </ListItem>
                     </Link>
                     {/* <Link to="/server-stats">
@@ -164,10 +142,7 @@ export default function TemporaryDrawer() {
                             <ListItemIcon>
                                 <LibraryBooks style={textStyle} />
                             </ListItemIcon>
-                            <ListItemText
-                                primary={"Stats Reference"}
-                                style={textStyle}
-                            />
+                            <ListItemText primary={"Stats Reference"} style={textStyle} />
                         </ListItem>
                     </Link>
                     <Link to="/about">
@@ -189,18 +164,10 @@ export default function TemporaryDrawer() {
             <React.Fragment key={"top"}>
                 <Button onClick={toggleDrawer("top", true)}>
                     <span style={{ fontSize: "1.7rem" }}>
-                        <img
-                            src={smallLogo}
-                            alt="smalllogo"
-                            style={{ maxWidth: "70px", padding: "0 15px 0 0" }}
-                        />
+                        <img src={smallLogo} alt="smalllogo" style={{ maxWidth: "70px", padding: "0 15px 0 0" }} />
                     </span>
                 </Button>
-                <Drawer
-                    anchor={"top"}
-                    open={state["top"]}
-                    onClose={toggleDrawer("top", false)}
-                >
+                <Drawer anchor={"top"} open={state["top"]} onClose={toggleDrawer("top", false)}>
                     {list("🍅")}
                 </Drawer>
             </React.Fragment>

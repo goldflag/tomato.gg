@@ -29,9 +29,7 @@ export default function RecentTankStats(props) {
                     icon: {
                         color: "rgb(230, 230, 230)",
                         "&:hover": {
-                            color: "dark"
-                                ? "rgb(150, 150, 150)"
-                                : "rgb(110, 110, 110)",
+                            color: "dark" ? "rgb(150, 150, 150)" : "rgb(110, 110, 110)",
                         },
                     },
                 },
@@ -99,10 +97,7 @@ export default function RecentTankStats(props) {
                     return (obj1, obj2) => {
                         let val1 = obj1.data.props.alt;
                         let val2 = obj2.data.props.alt;
-                        return (
-                            (nationVal[val1] - nationVal[val2]) *
-                            (order === "asc" ? 1 : -1)
-                        );
+                        return (nationVal[val1] - nationVal[val2]) * (order === "asc" ? 1 : -1);
                     };
                 },
             },
@@ -127,10 +122,7 @@ export default function RecentTankStats(props) {
                     return (obj1, obj2) => {
                         let val1 = obj1.data.props.alt;
                         let val2 = obj2.data.props.alt;
-                        return (
-                            (classVal[val1] - classVal[val2]) *
-                            (order === "asc" ? 1 : -1)
-                        );
+                        return (classVal[val1] - classVal[val2]) * (order === "asc" ? 1 : -1);
                     };
                 },
             },
@@ -280,8 +272,7 @@ export default function RecentTankStats(props) {
         setRowProps: (row, dataIndex, rowIndex) => {
             return {
                 style: {
-                    backgroundColor:
-                        rowIndex % 2 === 0 ? "rgb(242, 243, 247)" : "white",
+                    backgroundColor: rowIndex % 2 === 0 ? "rgb(242, 243, 247)" : "white",
                 },
             };
         },
@@ -295,12 +286,7 @@ export default function RecentTankStats(props) {
         table = (
             <>
                 <MuiThemeProvider theme={getMuiTheme()}>
-                    <MUIDataTable
-                        title={""}
-                        data={props.overallStats}
-                        columns={columns}
-                        options={options}
-                    />
+                    <MUIDataTable title={""} data={props.overallStats} columns={columns} options={options} />
                 </MuiThemeProvider>
             </>
         );

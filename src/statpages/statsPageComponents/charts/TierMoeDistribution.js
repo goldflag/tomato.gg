@@ -27,12 +27,7 @@ export default function TierMoeDistribution(props) {
                 indexBy="Tier"
                 margin={{ top: 30, right: 80, bottom: 50, left: 50 }}
                 padding={0.3}
-                colors={[
-                    "rgb(224, 224, 224)",
-                    "rgb(103, 174, 224)",
-                    "rgb(92, 108, 196)",
-                    "rgb(138, 53, 212)",
-                ]}
+                colors={["rgb(224, 224, 224)", "rgb(103, 174, 224)", "rgb(92, 108, 196)", "rgb(138, 53, 212)"]}
                 borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
                 axisTop={null}
                 axisRight={null}

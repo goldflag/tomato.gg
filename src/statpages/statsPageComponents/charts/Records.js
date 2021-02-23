@@ -37,11 +37,7 @@ export default function Records(props) {
                                 {props.data.max_damage}
                                 <span style={{ color: "rgb(120,120,120)" }}>
                                     {" "}
-                                    in{" "}
-                                    {
-                                        tankNames[props.data.max_damage_tank_id]
-                                            .short_name
-                                    }
+                                    in {tankNames[props.data.max_damage_tank_id].short_name}
                                 </span>
                             </span>
                         </td>
@@ -53,11 +49,7 @@ export default function Records(props) {
                                 {props.data.max_frags}
                                 <span style={{ color: "rgb(120,120,120)" }}>
                                     {" "}
-                                    in{" "}
-                                    {
-                                        tankNames[props.data.max_frags_tank_id]
-                                            .short_name
-                                    }
+                                    in {tankNames[props.data.max_frags_tank_id].short_name}
                                 </span>
                             </span>
                         </td>
@@ -69,45 +61,31 @@ export default function Records(props) {
                                 {props.data.max_xp}
                                 <span style={{ color: "rgb(120,120,120)" }}>
                                     {" "}
-                                    in{" "}
-                                    {
-                                        tankNames[props.data.max_xp_tank_id]
-                                            .short_name
-                                    }{" "}
+                                    in {tankNames[props.data.max_xp_tank_id].short_name}{" "}
                                 </span>
                             </span>
                         </td>
                     </tr>
                     <tr>
                         <td style={td}>
-                            Avg Assist{" "}
-                            <span style={{ float: "right" }}>
-                                {props.data.avg_damage_assisted}{" "}
-                            </span>
+                            Avg Assist <span style={{ float: "right" }}>{props.data.avg_damage_assisted} </span>
                         </td>
                     </tr>
                     <tr>
                         <td style={tdc}>
                             Avg Spot Assist{" "}
-                            <span style={{ float: "right" }}>
-                                {props.data.avg_damage_assisted_radio}{" "}
-                            </span>
+                            <span style={{ float: "right" }}>{props.data.avg_damage_assisted_radio} </span>
                         </td>
                     </tr>
                     <tr>
                         <td style={td}>
                             Avg Tracking Assist{" "}
-                            <span style={{ float: "right" }}>
-                                {props.data.avg_damage_assisted_track}
-                            </span>
+                            <span style={{ float: "right" }}>{props.data.avg_damage_assisted_track}</span>
                         </td>
                     </tr>
                     <tr>
                         <td style={tdc}>
-                            Armor-use Efficiency{" "}
-                            <span style={{ float: "right" }}>
-                                {props.data.tanking_factor}
-                            </span>
+                            Armor-use Efficiency <span style={{ float: "right" }}>{props.data.tanking_factor}</span>
                         </td>
                     </tr>
                 </tbody>

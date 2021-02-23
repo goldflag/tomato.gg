@@ -15,21 +15,14 @@ export default function NationDist(props) {
 
     return (
         <div>
-            <CustomTabs
-                value={value}
-                onChange={handleChange}
-                aria-label="ant example"
-            >
+            <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
                 <CustomTab label="MARKS OF EXCELLENCE" />
                 <CustomTab label="MASTERY" />
             </CustomTabs>
             <TabPanel value={value} index={0}>
                 <Grid container spacing={2}>
                     <Grid item xs={4}>
-                        <div
-                            style={{ padding: "1em 0em 1em 1em" }}
-                            elevation={0}
-                        >
+                        <div style={{ padding: "1em 0em 1em 1em" }} elevation={0}>
                             <MOETable data={props.MOEdata} />
                         </div>
                     </Grid>
@@ -41,10 +34,7 @@ export default function NationDist(props) {
             <TabPanel value={value} index={1}>
                 <Grid container spacing={2}>
                     <Grid item xs={4}>
-                        <div
-                            style={{ padding: "1em 0em 1em 1em" }}
-                            elevation={0}
-                        >
+                        <div style={{ padding: "1em 0em 1em 1em" }} elevation={0}>
                             <MasteryTable data={props.MasteryData} />
                         </div>
                     </Grid>

@@ -32,9 +32,7 @@ export default function Leaderboards(props) {
     return (
         <FullPageTableWrapper>
             <Info>
-                <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                    WN8 Expected Values
-                </span>
+                <span style={{ fontSize: "2rem", fontWeight: "500" }}>WN8 Expected Values</span>
                 <br />
                 <br />
                 <span
@@ -45,10 +43,7 @@ export default function Leaderboards(props) {
                     }}
                 >
                     Maintained by the{" "}
-                    <a
-                        target="blank"
-                        href="https://modxvm.com/en/wn8-expected-values/"
-                    >
+                    <a target="blank" href="https://modxvm.com/en/wn8-expected-values/">
                         XVM team
                     </a>
                 </span>{" "}

@@ -20,11 +20,7 @@ export default function NationDist(props) {
     return (
         <div className={classes.root}>
             <div>
-                <CustomTabs
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="ant example"
-                >
+                <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
                     <CustomTab label="NATIONS" />
                     <CustomTab label="RECENT" />
                 </CustomTabs>

@@ -12,40 +12,14 @@ export default function WN8Heatmap(props) {
                     textColor: "rgb(210, 210, 210)",
                 }}
                 data={props.data}
-                keys={[
-                    "I",
-                    "II",
-                    "III",
-                    "IV",
-                    "V",
-                    "VI",
-                    "VII",
-                    "VIII",
-                    "IX",
-                    "X",
-                ]}
+                keys={["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]}
                 indexBy="Class"
                 margin={{ top: 30, right: 30, bottom: 20, left: 60 }}
                 forceSquare={true}
-                cellShape={({
-                    value,
-                    x,
-                    y,
-                    width,
-                    height,
-                    color,
-                    opacity,
-                    borderWidth,
-                    borderColor,
-                    textColor,
-                }) => (
+                cellShape={({ value, x, y, width, height, color, opacity, borderWidth, borderColor, textColor }) => (
                     <g transform={`translate(${x}, ${y})`}>
                         <path
-                            fill={
-                                props.type === "wn8"
-                                    ? WN8color(value)
-                                    : WRcolor(value)
-                            }
+                            fill={props.type === "wn8" ? WN8color(value) : WRcolor(value)}
                             fillOpacity={opacity}
                             strokeWidth={borderWidth}
                             stroke={borderColor}
@@ -55,9 +29,7 @@ export default function WN8Heatmap(props) {
                             // h -${Math.round(width)}
                             // v -${Math.round(width)}
                             d={`
-                            m -${Math.round(width) / 2} -${
-                                Math.round(width) / 2
-                            }
+                            m -${Math.round(width) / 2} -${Math.round(width) / 2}
                             h ${Math.round(width)}
                             v ${Math.round(width)}
                             h -${Math.round(width)}

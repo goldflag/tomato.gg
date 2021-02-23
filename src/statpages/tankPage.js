@@ -96,9 +96,7 @@ export default function TankPage(props) {
         setData("loading");
         const windowUrl = window.location.pathname;
         const urlParams = windowUrl.substring(6).split("/");
-        fetch(
-            `${backend}/api/tankpage/${urlParams[0]}/${server}/${type}/${actualPage}`
-        )
+        fetch(`${backend}/api/tankpage/${urlParams[0]}/${server}/${type}/${actualPage}`)
             .then((res) => res.json())
             .then((data) => {
                 data.leaderboard.forEach((player) => {
@@ -110,13 +108,10 @@ export default function TankPage(props) {
 
     let content;
     if (typeof data === "string") {
-        content = (
-            <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={30} top={30} />
-        );
+        content = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={30} top={30} />;
     } else {
         const realPageSize = data.leaderboard.length;
-        const highlightRow =
-            rank && (rank === realPageSize ? rank : rank % realPageSize) - 1;
+        const highlightRow = rank && (rank === realPageSize ? rank : rank % realPageSize) - 1;
         content = (
             <>
                 <Top>
@@ -128,12 +123,9 @@ export default function TankPage(props) {
                         <img src={data.meta.image} alt={data.meta.tank_id} />
                     </div>
                     <Name>
-                        <div style={{ fontSize: "2rem" }}>
-                            {data.meta.short_name}
-                        </div>
+                        <div style={{ fontSize: "2rem" }}>{data.meta.short_name}</div>
                         <div>
-                            {nationConv[data.meta.nation]}{" "}
-                            {classConv[data.meta.class]}
+                            {nationConv[data.meta.nation]} {classConv[data.meta.class]}
                         </div>
                     </Name>
                 </Top>
@@ -154,12 +146,7 @@ export default function TankPage(props) {
                         ))}
                     </FilterButtonGroup>
                 </TableLabel>
-                <RecentLeaderboard
-                    data={data.leaderboard}
-                    type={type}
-                    setType={setType}
-                    highlightRow={highlightRow}
-                />
+                <RecentLeaderboard data={data.leaderboard} type={type} setType={setType} highlightRow={highlightRow} />
                 <ServerPagination
                     page={actualPage}
                     numPages={5}

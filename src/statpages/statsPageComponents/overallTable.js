@@ -1,12 +1,5 @@
 import React from "react";
-import {
-    useTable,
-    usePagination,
-    useSortBy,
-    useFilters,
-    useExpanded,
-    useGlobalFilter,
-} from "react-table";
+import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
 import { matchSorter } from "match-sorter";
 
 import { MoEStars, Pagination } from "../../components";
@@ -75,9 +68,7 @@ function OverallTable(props) {
     let data = props.data;
 
     // Define a default UI for filtering
-    function DefaultColumnFilter({
-        column: { filterValue, preFilteredRows, setFilter },
-    }) {
+    function DefaultColumnFilter({ column: { filterValue, preFilteredRows, setFilter } }) {
         const count = preFilteredRows.length;
         return (
             <input
@@ -93,16 +84,10 @@ function OverallTable(props) {
     // This is a custom UI for our 'between' or number range
     // filter. It uses two number boxes and filters rows to
     // ones that have values between the two
-    function NumberRangeColumnFilter({
-        column: { filterValue = [], preFilteredRows, setFilter, id },
-    }) {
+    function NumberRangeColumnFilter({ column: { filterValue = [], preFilteredRows, setFilter, id } }) {
         const [min, max] = React.useMemo(() => {
-            let min = preFilteredRows.length
-                ? preFilteredRows[0].values[id]
-                : 0;
-            let max = preFilteredRows.length
-                ? preFilteredRows[0].values[id]
-                : 0;
+            let min = preFilteredRows.length ? preFilteredRows[0].values[id] : 0;
+            let max = preFilteredRows.length ? preFilteredRows[0].values[id] : 0;
             preFilteredRows.forEach((row) => {
                 min = Math.min(row.values[id], min);
                 max = Math.max(row.values[id], max);
@@ -118,10 +103,7 @@ function OverallTable(props) {
                     type="number"
                     onChange={(e) => {
                         const val = e.target.value;
-                        setFilter((old = []) => [
-                            val ? parseInt(val, 10) : undefined,
-                            old[1],
-                        ]);
+                        setFilter((old = []) => [val ? parseInt(val, 10) : undefined, old[1]]);
                     }}
                     placeholder={`Min (${min})`}
                     style={{
@@ -140,10 +122,7 @@ function OverallTable(props) {
                     type="number"
                     onChange={(e) => {
                         const val = e.target.value;
-                        setFilter((old = []) => [
-                            old[0],
-                            val ? parseInt(val, 10) : undefined,
-                        ]);
+                        setFilter((old = []) => [old[0], val ? parseInt(val, 10) : undefined]);
                     }}
                     placeholder={`Max (${max})`}
                     style={{
@@ -180,9 +159,7 @@ function OverallTable(props) {
                     return rows.filter((row) => {
                         const rowValue = row.values[id];
                         return rowValue !== undefined
-                            ? String(rowValue)
-                                  .toLowerCase()
-                                  .startsWith(String(filterValue).toLowerCase())
+                            ? String(rowValue).toLowerCase().startsWith(String(filterValue).toLowerCase())
                             : true;
                     });
                 },
@@ -316,16 +293,10 @@ function OverallTable(props) {
             function RenderAwards(type) {
                 let keys = Object.keys(row.row.original.awards[type]);
                 return keys.map((award) => {
-                    const counter = NumberBox(
-                        row.row.original.awards[type][award]
-                    );
+                    const counter = NumberBox(row.row.original.awards[type][award]);
                     return row.row.original.awards[type][award] > 0 ? (
                         <div>
-                            <Tooltip
-                                arrow={false}
-                                direction="right"
-                                content={RenderTooltip(award)}
-                            >
+                            <Tooltip arrow={false} direction="right" content={RenderTooltip(award)}>
                                 {counter}
                                 <img
                                     style={{ width: "50px" }}
@@ -370,13 +341,8 @@ function OverallTable(props) {
                             <ButtonFiltersContainer key={i}>
                                 {filterOrder.map(
                                     (n) =>
-                                        !headerGroup.headers[n]
-                                            .disableFilters && (
-                                            <span key={n}>
-                                                {headerGroup.headers[n].render(
-                                                    "Filter"
-                                                )}
-                                            </span>
+                                        !headerGroup.headers[n].disableFilters && (
+                                            <span key={n}>{headerGroup.headers[n].render("Filter")}</span>
                                         )
                                 )}
                             </ButtonFiltersContainer>
@@ -397,15 +363,11 @@ function OverallTable(props) {
                             <tr {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map((column) => (
                                     <th
-                                        {...column.getHeaderProps(
-                                            column.getSortByToggleProps()
-                                        )}
+                                        {...column.getHeaderProps(column.getSortByToggleProps())}
                                         {...column.getHeaderProps({
                                             style: {
                                                 cursor: "pointer",
-                                                backgroundColor: column.isSorted
-                                                    ? "rgb(207, 0, 76)"
-                                                    : null,
+                                                backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
                                             },
                                         })}
                                     >
@@ -424,11 +386,7 @@ function OverallTable(props) {
                                         {row.cells.map((cell) => (
                                             <td
                                                 {...cell.getCellProps({
-                                                    style: cellStyle(
-                                                        cell.column.isSorted,
-                                                        cell.column.id,
-                                                        cell.value
-                                                    ),
+                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
                                                 })}
                                             >
                                                 {cell.render("Cell")}
@@ -437,9 +395,7 @@ function OverallTable(props) {
                                     </tr>
                                     {row.isExpanded ? (
                                         <SubRow>
-                                            <td colSpan={visibleColumns.length}>
-                                                {renderRowSubComponent({ row })}
-                                            </td>
+                                            <td colSpan={visibleColumns.length}>{renderRowSubComponent({ row })}</td>
                                         </SubRow>
                                     ) : null}
                                 </React.Fragment>

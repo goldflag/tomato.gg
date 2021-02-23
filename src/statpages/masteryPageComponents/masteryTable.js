@@ -2,14 +2,7 @@ import React, { useState, useEffect, useCallback, useContext } from "react";
 import { Icon } from "react-icons-kit";
 import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
-import {
-    useTable,
-    usePagination,
-    useSortBy,
-    useFilters,
-    useExpanded,
-    useGlobalFilter,
-} from "react-table";
+import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
 import { ServerContext } from "../../context";
@@ -40,9 +33,7 @@ function MasteryTable(props) {
     let data = props.data;
 
     // Define a default UI for filtering
-    function DefaultColumnFilter({
-        column: { filterValue, preFilteredRows, setFilter },
-    }) {
+    function DefaultColumnFilter({ column: { filterValue, preFilteredRows, setFilter } }) {
         const count = preFilteredRows.length;
         return (
             <input
@@ -75,9 +66,7 @@ function MasteryTable(props) {
                     return rows.filter((row) => {
                         const rowValue = row.values[id];
                         return rowValue !== undefined
-                            ? String(rowValue)
-                                  .toLowerCase()
-                                  .startsWith(String(filterValue).toLowerCase())
+                            ? String(rowValue).toLowerCase().startsWith(String(filterValue).toLowerCase())
                             : true;
                     });
                 },
@@ -162,9 +151,7 @@ function MasteryTable(props) {
             const [data, setData] = useState();
             useEffect(() => {
                 async function get() {
-                    fetch(
-                        `${backend}/api/abcd/masterytank/${row.original.id}/${server}`
-                    )
+                    fetch(`${backend}/api/abcd/masterytank/${row.original.id}/${server}`)
                         .then((res) => res.json())
                         .then((res) => setData(res));
                 }
@@ -177,11 +164,7 @@ function MasteryTable(props) {
 
         const renderRowSubComponent = useCallback(
             ({ row, rowProps, visibleColumns }) => (
-                <SubRowAsync
-                    row={row}
-                    rowProps={rowProps}
-                    visibleColumns={visibleColumns}
-                />
+                <SubRowAsync row={row} rowProps={rowProps} visibleColumns={visibleColumns} />
             ),
             []
         );
@@ -201,9 +184,7 @@ function MasteryTable(props) {
                         <ButtonFiltersContainer key={i}>
                             {headerGroup.headers.map(
                                 ({ disableFilters, render }, i) =>
-                                    !disableFilters && (
-                                        <span key={i}>{render("Filter")}</span>
-                                    )
+                                    !disableFilters && <span key={i}>{render("Filter")}</span>
                             )}
                         </ButtonFiltersContainer>
                     ))}
@@ -214,15 +195,11 @@ function MasteryTable(props) {
                             <tr {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map((column) => (
                                     <th
-                                        {...column.getHeaderProps(
-                                            column.getSortByToggleProps()
-                                        )}
+                                        {...column.getHeaderProps(column.getSortByToggleProps())}
                                         {...column.getHeaderProps({
                                             style: {
                                                 cursor: "pointer",
-                                                backgroundColor: column.isSorted
-                                                    ? "rgb(207, 0, 76)"
-                                                    : null,
+                                                backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
                                             },
                                         })}
                                     >
@@ -230,15 +207,9 @@ function MasteryTable(props) {
                                         <span>
                                             {column.isSorted ? (
                                                 column.isSortedDesc ? (
-                                                    <Icon
-                                                        size={16}
-                                                        icon={arrowDown}
-                                                    />
+                                                    <Icon size={16} icon={arrowDown} />
                                                 ) : (
-                                                    <Icon
-                                                        size={16}
-                                                        icon={arrowUp}
-                                                    />
+                                                    <Icon size={16} icon={arrowUp} />
                                                 )
                                             ) : (
                                                 ""
@@ -258,11 +229,7 @@ function MasteryTable(props) {
                                         {row.cells.map((cell) => (
                                             <td
                                                 {...cell.getCellProps({
-                                                    style: cellStyle(
-                                                        cell.column.isSorted,
-                                                        cell.column.id,
-                                                        cell.value
-                                                    ),
+                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
                                                 })}
                                             >
                                                 {cell.render("Cell")}
@@ -271,9 +238,7 @@ function MasteryTable(props) {
                                     </tr>
                                     {row.isExpanded ? (
                                         <SubRow>
-                                            <td colSpan={visibleColumns.length}>
-                                                {renderRowSubComponent({ row })}
-                                            </td>
+                                            <td colSpan={visibleColumns.length}>{renderRowSubComponent({ row })}</td>
                                         </SubRow>
                                     ) : null}
                                 </React.Fragment>

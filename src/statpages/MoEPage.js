@@ -48,9 +48,7 @@ export default function MoEPage(props) {
 
             try {
                 Promise.all([fetch(url), fetch(url2)])
-                    .then(([res1, res2]) =>
-                        Promise.all([res1.json(), res2.json()])
-                    )
+                    .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
                     .then(([data1, data2]) => {
                         setData(data1);
                         setChangeData(data2);
@@ -121,8 +119,7 @@ export default function MoEPage(props) {
                     </a>{" "}
                     &#47;&#47;&#47; Expand rows to see 30 days of MoE history
                     <br />
-                    *MoE change is calculated using 3-day averages to minimize
-                    noise
+                    *MoE change is calculated using 3-day averages to minimize noise
                 </span>
                 <br />
             </Info>

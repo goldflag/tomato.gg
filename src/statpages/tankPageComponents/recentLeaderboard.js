@@ -44,9 +44,7 @@ export default function RecentsLeaderboard({ data, type, highlightRow }) {
                 Header: "Username",
                 accessor: "username",
                 disableFilters: true,
-                Cell: ({ row: { original, values } }) => (
-                    <Link to={original.url}> {values.username}</Link>
-                ),
+                Cell: ({ row: { original, values } }) => <Link to={original.url}> {values.username}</Link>,
             },
             {
                 Header: "Battles",
@@ -94,13 +92,7 @@ export default function RecentsLeaderboard({ data, type, highlightRow }) {
         []
     );
 
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        prepareRow,
-        rows,
-    } = useTable(
+    const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } = useTable(
         {
             columns,
             data,
@@ -174,10 +166,7 @@ export default function RecentsLeaderboard({ data, type, highlightRow }) {
                                 {row.cells.map((cell) => (
                                     <td
                                         {...cell.getCellProps({
-                                            style: setColor(
-                                                cell.column.id,
-                                                cell.value
-                                            ),
+                                            style: setColor(cell.column.id, cell.value),
                                         })}
                                     >
                                         {cell.render("Cell")}

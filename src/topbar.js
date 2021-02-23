@@ -114,20 +114,13 @@ const Styles = styled.div`
 `;
 export default withRouter(function Topbar(props) {
     const { server, toggleServer } = useContext(ServerContext);
-    const {
-        history,
-        addToHistory,
-        removeFromHistory,
-        clearHistory,
-    } = useContext(SearchHistoryContext);
+    const { history, addToHistory, removeFromHistory, clearHistory } = useContext(SearchHistoryContext);
     const [name, setName] = useState("");
     const [mode, setMode] = useState("Player");
 
     const redirectToPlayerStatsPage = (playerName, playerID, playerServer) => {
         toggleServer(playerServer);
-        props.history.push(
-            `/stats/${serverConv[playerServer]}/${playerName}=${playerID}`
-        );
+        props.history.push(`/stats/${serverConv[playerServer]}/${playerName}=${playerID}`);
     };
 
     const searchId = async (e) => {
@@ -137,18 +130,12 @@ export default withRouter(function Topbar(props) {
 
         fetch(url)
             .then((res) => res.json())
-            .then((data) =>
-                data.status === "error" || data.meta.count === 0
-                    ? "FAIL"
-                    : data.data[0].account_id
-            )
+            .then((data) => (data.status === "error" || data.meta.count === 0 ? "FAIL" : data.data[0].account_id))
             .then((playerID) => {
                 if (playerID !== "FAIL") {
                     addToHistory(name, playerID, server);
                 }
-                props.history.push(
-                    `/stats/${serverConv[server]}/${name}=${playerID}`
-                );
+                props.history.push(`/stats/${serverConv[server]}/${name}=${playerID}`);
             })
             .catch(console.error);
     };
@@ -176,13 +163,7 @@ export default withRouter(function Topbar(props) {
                                             style={{ maxHeight: "21px" }}
                                         />
                                     }
-                                    onClick={() =>
-                                        redirectToPlayerStatsPage(
-                                            name,
-                                            id,
-                                            server
-                                        )
-                                    }
+                                    onClick={() => redirectToPlayerStatsPage(name, id, server)}
                                     onDelete={() => removeFromHistory(id)}
                                     label={name}
                                     style={{
@@ -213,16 +194,10 @@ export default withRouter(function Topbar(props) {
                             height: "20px",
                         }}
                     >
-                        <ButtonGroup
-                            variant="text"
-                            aria-label="text primary button group"
-                        >
+                        <ButtonGroup variant="text" aria-label="text primary button group">
                             <Button
                                 style={{
-                                    backgroundColor:
-                                        server === "com"
-                                            ? "rgb(222, 13, 93)"
-                                            : "rgb(37, 46, 105)",
+                                    backgroundColor: server === "com" ? "rgb(222, 13, 93)" : "rgb(37, 46, 105)",
                                 }}
                                 onClick={() => toggleServer("com")}
                                 className="selectButton"
@@ -232,10 +207,7 @@ export default withRouter(function Topbar(props) {
                             <Button
                                 style={{
                                     borderLeft: "1px solid rgb(30, 30, 30)",
-                                    backgroundColor:
-                                        server === "eu"
-                                            ? "rgb(222, 13, 93)"
-                                            : "rgb(37, 46, 105)",
+                                    backgroundColor: server === "eu" ? "rgb(222, 13, 93)" : "rgb(37, 46, 105)",
                                 }}
                                 onClick={() => toggleServer("eu")}
                                 className="selectButton"
@@ -245,10 +217,7 @@ export default withRouter(function Topbar(props) {
                             <Button
                                 style={{
                                     borderLeft: "1px solid rgb(30, 30, 30)",
-                                    backgroundColor:
-                                        server === "asia"
-                                            ? "rgb(222, 13, 93)"
-                                            : "rgb(37, 46, 105)",
+                                    backgroundColor: server === "asia" ? "rgb(222, 13, 93)" : "rgb(37, 46, 105)",
                                 }}
                                 onClick={() => toggleServer("asia")}
                                 className="selectButton"
@@ -259,12 +228,7 @@ export default withRouter(function Topbar(props) {
                     </div>
                     <div className="discord">
                         <a target="blank" href="https://discord.gg/qA2bV7K">
-                            <img
-                                src={DiscordLogo}
-                                width="33"
-                                height="33"
-                                alt="discordicon"
-                            />
+                            <img src={DiscordLogo} width="33" height="33" alt="discordicon" />
                         </a>
                     </div>
                 </Styles>

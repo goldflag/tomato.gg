@@ -42,9 +42,7 @@ class StatsPage extends Component {
         const { server, user } = match.params;
         const [username, id] = user.split("=");
         if (id !== "FAIL") {
-            this.searchStats(server, id).then(() =>
-                this.setState({ loading: false })
-            );
+            this.searchStats(server, id).then(() => this.setState({ loading: false }));
         } else {
             this.setState({ username });
         }
@@ -56,17 +54,12 @@ class StatsPage extends Component {
     componentDidUpdate({ match: prevMatch }) {
         const { match } = this.props;
         const { server, user } = match.params;
-        if (
-            server !== prevMatch.params.server ||
-            user !== prevMatch.params.user
-        ) {
+        if (server !== prevMatch.params.server || user !== prevMatch.params.user) {
             const [username, id] = user.split("=");
             const validID = id !== "FAIL";
             this.setState({ loading: validID, validID, username });
             if (validID) {
-                this.searchStats(server, id).then(() =>
-                    this.setState({ loading: false })
-                );
+                this.searchStats(server, id).then(() => this.setState({ loading: false }));
             }
         }
     }
@@ -108,9 +101,7 @@ class StatsPage extends Component {
                     recentStats: recent,
                     validID: stats.battles !== 0,
                     clanStats: clanStats.data[id] || "NO CLAN",
-                    clanHistory: clanHistory.data[id].length
-                        ? clanHistory.data[id]
-                        : "NO CLAN HISTORY",
+                    clanHistory: clanHistory.data[id].length ? clanHistory.data[id] : "NO CLAN HISTORY",
                     graphData,
                 };
                 this.setState(newState);
@@ -169,9 +160,7 @@ class StatsPage extends Component {
         } else {
             statTable = (
                 <>
-                    <span style={{ fontSize: "2rem" }}>
-                        Player {username} not found
-                    </span>
+                    <span style={{ fontSize: "2rem" }}>Player {username} not found</span>
                     <br />
                     <br />
                     Make sure the username and region are correct.

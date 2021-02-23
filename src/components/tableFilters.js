@@ -6,8 +6,7 @@ import { useAsyncDebounce } from "react-table";
 import InputBase from "@material-ui/core/InputBase";
 
 export const FilterButton = styled(Button)`
-    background-color: ${({ selected }) =>
-        selected ? css`rgb(222, 13, 93)` : css`rgb(66, 84, 143)`} !important;
+    background-color: ${({ selected }) => (selected ? css`rgb(222, 13, 93)` : css`rgb(66, 84, 143)`)} !important;
     color: white !important;
     padding: 5px 10px;
     text-align: center;
@@ -64,19 +63,7 @@ const classFilterOptions = [
     { value: "SPG" },
 ];
 
-const nations = [
-    "China",
-    "France",
-    "Germany",
-    "Japan",
-    "Sweden",
-    "UK",
-    "USA",
-    "USSR",
-    "Czech",
-    "Italy",
-    "Poland",
-];
+const nations = ["China", "France", "Germany", "Japan", "Sweden", "UK", "USA", "USSR", "Czech", "Italy", "Poland"];
 const nationFilterOptions = [
     { label: "ALL", value: undefined },
     ...nations.map((nation) => ({
@@ -115,9 +102,7 @@ function setFilteredParams(filterArr, val) {
     return filterArr;
 }
 
-const makeButtonFilter = (ariaLabel, options, Label) => ({
-    column: { filterValue = [], setFilter },
-}) => (
+const makeButtonFilter = (ariaLabel, options, Label) => ({ column: { filterValue = [], setFilter } }) => (
     <FilterButtonGroup variant="text" aria-label={ariaLabel}>
         {options.map(({ label, value, ...labelProps }) => (
             <FilterButton
@@ -127,78 +112,37 @@ const makeButtonFilter = (ariaLabel, options, Label) => ({
                     setFilter(setFilteredParams(filterValue, value));
                 }}
             >
-                {Label ? (
-                    <Label {...{ label, value, ...labelProps }} />
-                ) : (
-                    label || value
-                )}
+                {Label ? <Label {...{ label, value, ...labelProps }} /> : label || value}
             </FilterButton>
         ))}
     </FilterButtonGroup>
 );
 
-export const PremFilter = makeButtonFilter(
-    "premium tank filter",
-    premFilterOptions
-);
-export const TierFilter = makeButtonFilter(
-    "tank tier filter",
-    tierFilterOptions
-);
-export const NumericTierFilter = makeButtonFilter(
-    "tank tier filter",
-    numericTierFilterOptions
-);
-export const MoETierFilter = makeButtonFilter(
-    "tank tier filter",
-    tierFilterOptions.slice(0, 7)
-);
+export const PremFilter = makeButtonFilter("premium tank filter", premFilterOptions);
+export const TierFilter = makeButtonFilter("tank tier filter", tierFilterOptions);
+export const NumericTierFilter = makeButtonFilter("tank tier filter", numericTierFilterOptions);
+export const MoETierFilter = makeButtonFilter("tank tier filter", tierFilterOptions.slice(0, 7));
 
-export const ClassFilter = makeButtonFilter(
-    "tank class filter",
-    classFilterOptions
+export const ClassFilter = makeButtonFilter("tank class filter", classFilterOptions);
+export const NationFilter = makeButtonFilter("tank nation filter", nationFilterOptions, ({ label, image }) =>
+    label === "ALL" ? label : <img src={image} style={{ maxHeight: "25px" }} alt={label} />
 );
-export const NationFilter = makeButtonFilter(
-    "tank nation filter",
-    nationFilterOptions,
-    ({ label, image }) =>
-        label === "ALL" ? (
-            label
-        ) : (
-            <img src={image} style={{ maxHeight: "25px" }} alt={label} />
-        )
+export const MasteryFilter = makeButtonFilter("tank mastery filter", masteryFilterOptions, ({ label, image }) =>
+    label === "ALL" ? label : <img src={image} style={{ maxHeight: "23px" }} alt={label} />
 );
-export const MasteryFilter = makeButtonFilter(
-    "tank mastery filter",
-    masteryFilterOptions,
-    ({ label, image }) =>
-        label === "ALL" ? (
-            label
-        ) : (
-            <img src={image} style={{ maxHeight: "23px" }} alt={label} />
-        )
-);
-export const MoEFilter = makeButtonFilter(
-    "tank marks of excellence filter",
-    MoEFilterOptions,
-    ({ label, value }) => (
-        <div
-            style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-evenly",
-            }}
-        >
-            {label === "ALL" ? label : <MoEStars marks={value} />}
-        </div>
-    )
-);
+export const MoEFilter = makeButtonFilter("tank marks of excellence filter", MoEFilterOptions, ({ label, value }) => (
+    <div
+        style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+        }}
+    >
+        {label === "ALL" ? label : <MoEStars marks={value} />}
+    </div>
+));
 
-export const GlobalFilter = ({
-    preGlobalFilteredRows,
-    globalFilter,
-    setGlobalFilter,
-}) => {
+export const GlobalFilter = ({ preGlobalFilteredRows, globalFilter, setGlobalFilter }) => {
     const count = preGlobalFilteredRows.length;
     const [value, setValue] = React.useState(globalFilter);
     const onChange = useAsyncDebounce((value) => {
@@ -227,6 +171,4 @@ export const GlobalFilter = ({
 };
 
 export const arrayFilterFn = (rows, [colID], filterValue) =>
-    filterValue.length
-        ? rows.filter((row) => filterValue.includes(row.original[colID]))
-        : rows;
+    filterValue.length ? rows.filter((row) => filterValue.includes(row.original[colID])) : rows;

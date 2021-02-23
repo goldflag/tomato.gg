@@ -70,8 +70,7 @@ export default function ClanHistory(props) {
                         row["clan_name"] = clanData.data[row.clan_id].tag;
                         row["color"] = clanData.data[row.clan_id].color;
                         if (clanData.data[row.clan_id].emblems != null) {
-                            row["icon"] =
-                                clanData.data[row.clan_id].emblems.x64.wot;
+                            row["icon"] = clanData.data[row.clan_id].emblems.x64.wot;
                         }
                     });
                     if (props.currentClan !== "NO CLAN") {
@@ -97,13 +96,9 @@ export default function ClanHistory(props) {
         return clanList.map((row, i) => {
             if (row.clan_name) {
                 let date = new Date(row.joined_at * 1000);
-                const joinDate = `${
-                    date.getMonth() + 1
-                }/${date.getDate()}/${date.getFullYear()}`;
+                const joinDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
                 date = new Date(row.left_at * 1000);
-                let leftDate = `${
-                    date.getMonth() + 1
-                }/${date.getDate()}/${date.getFullYear()}`;
+                let leftDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
                 if (isNaN(date.getMonth())) leftDate = `Current`;
                 return (
                     <Grid item xs={6} key={i}>
@@ -123,10 +118,7 @@ export default function ClanHistory(props) {
                                             justifyContent: "center",
                                         }}
                                     >
-                                        <img
-                                            src={row.icon}
-                                            alt={row.clan_name}
-                                        />
+                                        <img src={row.icon} alt={row.clan_name} />
                                     </span>
                                     <span
                                         style={{
@@ -206,11 +198,7 @@ export default function ClanHistory(props) {
     return (
         <RSC id="RSC-Example" noScrollX={true}>
             <div className={classes.root}>
-                <CustomTabs
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="ant example"
-                >
+                <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
                     <CustomTab label="CLAN HISTORY" />
                 </CustomTabs>
                 <TabPanel value={value} index={0}>

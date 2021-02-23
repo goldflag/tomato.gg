@@ -24,17 +24,15 @@ const tierToKey = {
 
 function calculateRawOverall(overall) {
     return {
-        raw: overall.tankStats.map(
-            ([id, battles, damage, wins, frags, spots, def]) => ({
-                id,
-                battles,
-                damage,
-                def,
-                frags,
-                spots,
-                winrate: (wins / battles) * 100,
-            })
-        ),
+        raw: overall.tankStats.map(([id, battles, damage, wins, frags, spots, def]) => ({
+            id,
+            battles,
+            damage,
+            def,
+            frags,
+            spots,
+            winrate: (wins / battles) * 100,
+        })),
     };
 }
 
@@ -74,13 +72,7 @@ function ClassDistCalculator(data) {
     return NewClassDist;
 }
 
-export default function GraphCalculator(
-    stats,
-    OS,
-    overallWN8,
-    avgTier,
-    recentStats
-) {
+export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentStats) {
     function clr(recent, overall, flipped) {
         if (recent === "-") return "rgb(50,50,50)";
         if (flipped) {
@@ -151,10 +143,7 @@ export default function GraphCalculator(
                 Overall: (
                     <>
                         {OS.wins}
-                        <span style={{ float: "right" }}>
-                            {" "}
-                            {((OS.wins * 100) / OS.battles).toFixed(2)}%
-                        </span>
+                        <span style={{ float: "right" }}> {((OS.wins * 100) / OS.battles).toFixed(2)}%</span>
                     </>
                 ),
                 "24 Hours": (
@@ -163,10 +152,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent24hr.winrate,
-                                    (OS.wins * 100) / OS.battles
-                                ),
+                                color: clr(recent24hr.winrate, (OS.wins * 100) / OS.battles),
                             }}
                         >
                             {recent24hr.winrate}%
@@ -179,10 +165,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent3days.winrate,
-                                    (OS.wins * 100) / OS.battles
-                                ),
+                                color: clr(recent3days.winrate, (OS.wins * 100) / OS.battles),
                             }}
                         >
                             {recent3days.winrate}%
@@ -195,10 +178,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1week.winrate,
-                                    (OS.wins * 100) / OS.battles
-                                ),
+                                color: clr(recent1week.winrate, (OS.wins * 100) / OS.battles),
                             }}
                         >
                             {recent1week.winrate}%
@@ -211,10 +191,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent30days.winrate,
-                                    (OS.wins * 100) / OS.battles
-                                ),
+                                color: clr(recent30days.winrate, (OS.wins * 100) / OS.battles),
                             }}
                         >
                             {recent30days.winrate}%
@@ -227,10 +204,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent60days.winrate,
-                                    (OS.wins * 100) / OS.battles
-                                ),
+                                color: clr(recent60days.winrate, (OS.wins * 100) / OS.battles),
                             }}
                         >
                             {recent60days.winrate}%
@@ -243,10 +217,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent500.winrate,
-                                    (OS.wins * 100) / OS.battles
-                                ),
+                                color: clr(recent500.winrate, (OS.wins * 100) / OS.battles),
                             }}
                         >
                             {recent500.winrate}%
@@ -259,10 +230,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1000.winrate,
-                                    (OS.wins * 100) / OS.battles
-                                ),
+                                color: clr(recent1000.winrate, (OS.wins * 100) / OS.battles),
                             }}
                         >
                             {recent1000.winrate}%
@@ -275,10 +243,7 @@ export default function GraphCalculator(
                 Overall: (
                     <>
                         {OS.losses}{" "}
-                        <span style={{ float: "right" }}>
-                            {" "}
-                            {((OS.losses * 100) / OS.battles).toFixed(2)}%
-                        </span>
+                        <span style={{ float: "right" }}> {((OS.losses * 100) / OS.battles).toFixed(2)}%</span>
                     </>
                 ),
                 "24 Hours": (
@@ -287,11 +252,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent24hr.lossrate,
-                                    (OS.losses * 100) / OS.battles,
-                                    true
-                                ),
+                                color: clr(recent24hr.lossrate, (OS.losses * 100) / OS.battles, true),
                             }}
                         >
                             {recent24hr.lossrate}%
@@ -304,11 +265,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent3days.lossrate,
-                                    (OS.losses * 100) / OS.battles,
-                                    true
-                                ),
+                                color: clr(recent3days.lossrate, (OS.losses * 100) / OS.battles, true),
                             }}
                         >
                             {recent3days.lossrate}%
@@ -321,11 +278,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1week.lossrate,
-                                    (OS.losses * 100) / OS.battles,
-                                    true
-                                ),
+                                color: clr(recent1week.lossrate, (OS.losses * 100) / OS.battles, true),
                             }}
                         >
                             {recent1week.lossrate}%
@@ -338,11 +291,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent30days.lossrate,
-                                    (OS.losses * 100) / OS.battles,
-                                    true
-                                ),
+                                color: clr(recent30days.lossrate, (OS.losses * 100) / OS.battles, true),
                             }}
                         >
                             {recent30days.lossrate}%
@@ -355,11 +304,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent60days.lossrate,
-                                    (OS.losses * 100) / OS.battles,
-                                    true
-                                ),
+                                color: clr(recent60days.lossrate, (OS.losses * 100) / OS.battles, true),
                             }}
                         >
                             {recent60days.lossrate}%
@@ -372,11 +317,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent500.lossrate,
-                                    (OS.losses * 100) / OS.battles,
-                                    true
-                                ),
+                                color: clr(recent500.lossrate, (OS.losses * 100) / OS.battles, true),
                             }}
                         >
                             {recent500.lossrate}%
@@ -389,11 +330,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1000.lossrate,
-                                    (OS.losses * 100) / OS.battles,
-                                    true
-                                ),
+                                color: clr(recent1000.lossrate, (OS.losses * 100) / OS.battles, true),
                             }}
                         >
                             {recent1000.lossrate}%
@@ -406,10 +343,7 @@ export default function GraphCalculator(
                 Overall: (
                     <>
                         {OS.draws}{" "}
-                        <span style={{ float: "right" }}>
-                            {" "}
-                            {((OS.draws * 100) / OS.battles).toFixed(2)}%
-                        </span>
+                        <span style={{ float: "right" }}> {((OS.draws * 100) / OS.battles).toFixed(2)}%</span>
                     </>
                 ),
                 "24 Hours": (
@@ -418,11 +352,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent24hr.drawrate,
-                                    (OS.draws * 100) / OS.battles,
-                                    true
-                                ),
+                                color: clr(recent24hr.drawrate, (OS.draws * 100) / OS.battles, true),
                             }}
                         >
                             {recent24hr.drawrate}%
@@ -435,11 +365,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent3days.drawrate,
-                                    (OS.draws * 100) / OS.battles,
-                                    true
-                                ),
+                                color: clr(recent3days.drawrate, (OS.draws * 100) / OS.battles, true),
                             }}
                         >
                             {recent3days.drawrate}%
@@ -452,11 +378,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1week.drawrate,
-                                    (OS.draws * 100) / OS.battles,
-                                    true
-                                ),
+                                color: clr(recent1week.drawrate, (OS.draws * 100) / OS.battles, true),
                             }}
                         >
                             {recent1week.drawrate}%
@@ -469,11 +391,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent30days.drawrate,
-                                    (OS.draws * 100) / OS.battles,
-                                    true
-                                ),
+                                color: clr(recent30days.drawrate, (OS.draws * 100) / OS.battles, true),
                             }}
                         >
                             {recent30days.drawrate}%
@@ -486,11 +404,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent60days.drawrate,
-                                    (OS.draws * 100) / OS.battles,
-                                    true
-                                ),
+                                color: clr(recent60days.drawrate, (OS.draws * 100) / OS.battles, true),
                             }}
                         >
                             {recent60days.drawrate}%
@@ -503,11 +417,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent500.drawrate,
-                                    (OS.draws * 100) / OS.battles,
-                                    true
-                                ),
+                                color: clr(recent500.drawrate, (OS.draws * 100) / OS.battles, true),
                             }}
                         >
                             {recent500.drawrate}%
@@ -520,11 +430,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1000.drawrate,
-                                    (OS.draws * 100) / OS.battles,
-                                    true
-                                ),
+                                color: clr(recent1000.drawrate, (OS.draws * 100) / OS.battles, true),
                             }}
                         >
                             {recent1000.drawrate}%
@@ -537,9 +443,7 @@ export default function GraphCalculator(
                 Overall: (
                     <>
                         {OS.damage_dealt}{" "}
-                        <span style={{ float: "right" }}>
-                            {parseInt(OS.damage_dealt / OS.battles)}
-                        </span>
+                        <span style={{ float: "right" }}>{parseInt(OS.damage_dealt / OS.battles)}</span>
                     </>
                 ),
                 "24 Hours": (
@@ -548,10 +452,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent24hr.damagerate,
-                                    OS.damage_dealt / OS.battles
-                                ),
+                                color: clr(recent24hr.damagerate, OS.damage_dealt / OS.battles),
                             }}
                         >
                             {recent24hr.damagerate}
@@ -564,10 +465,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent3days.damagerate,
-                                    OS.damage_dealt / OS.battles
-                                ),
+                                color: clr(recent3days.damagerate, OS.damage_dealt / OS.battles),
                             }}
                         >
                             {recent3days.damagerate}
@@ -580,10 +478,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1week.damagerate,
-                                    OS.damage_dealt / OS.battles
-                                ),
+                                color: clr(recent1week.damagerate, OS.damage_dealt / OS.battles),
                             }}
                         >
                             {recent1week.damagerate}
@@ -596,10 +491,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent30days.damagerate,
-                                    OS.damage_dealt / OS.battles
-                                ),
+                                color: clr(recent30days.damagerate, OS.damage_dealt / OS.battles),
                             }}
                         >
                             {recent30days.damagerate}
@@ -612,10 +504,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent60days.damagerate,
-                                    OS.damage_dealt / OS.battles
-                                ),
+                                color: clr(recent60days.damagerate, OS.damage_dealt / OS.battles),
                             }}
                         >
                             {recent60days.damagerate}
@@ -628,10 +517,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent500.damagerate,
-                                    OS.damage_dealt / OS.battles
-                                ),
+                                color: clr(recent500.damagerate, OS.damage_dealt / OS.battles),
                             }}
                         >
                             {recent500.damagerate}
@@ -644,10 +530,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1000.damagerate,
-                                    OS.damage_dealt / OS.battles
-                                ),
+                                color: clr(recent1000.damagerate, OS.damage_dealt / OS.battles),
                             }}
                         >
                             {recent1000.damagerate}
@@ -659,10 +542,7 @@ export default function GraphCalculator(
                 name: "Frags",
                 Overall: (
                     <>
-                        {OS.frags}{" "}
-                        <span style={{ float: "right" }}>
-                            {(OS.frags / OS.battles).toFixed(2)}
-                        </span>
+                        {OS.frags} <span style={{ float: "right" }}>{(OS.frags / OS.battles).toFixed(2)}</span>
                     </>
                 ),
                 "24 Hours": (
@@ -671,10 +551,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent24hr.fragsrate,
-                                    OS.frags / OS.battles
-                                ),
+                                color: clr(recent24hr.fragsrate, OS.frags / OS.battles),
                             }}
                         >
                             {recent24hr.fragsrate}
@@ -687,10 +564,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent3days.fragsrate,
-                                    OS.frags / OS.battles
-                                ),
+                                color: clr(recent3days.fragsrate, OS.frags / OS.battles),
                             }}
                         >
                             {recent3days.fragsrate}
@@ -703,10 +577,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1week.fragsrate,
-                                    OS.frags / OS.battles
-                                ),
+                                color: clr(recent1week.fragsrate, OS.frags / OS.battles),
                             }}
                         >
                             {recent1week.fragsrate}
@@ -719,10 +590,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent30days.fragsrate,
-                                    OS.frags / OS.battles
-                                ),
+                                color: clr(recent30days.fragsrate, OS.frags / OS.battles),
                             }}
                         >
                             {recent30days.fragsrate}
@@ -735,10 +603,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent60days.fragsrate,
-                                    OS.frags / OS.battles
-                                ),
+                                color: clr(recent60days.fragsrate, OS.frags / OS.battles),
                             }}
                         >
                             {recent60days.fragsrate}
@@ -751,10 +616,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent500.fragsrate,
-                                    OS.frags / OS.battles
-                                ),
+                                color: clr(recent500.fragsrate, OS.frags / OS.battles),
                             }}
                         >
                             {recent500.fragsrate}
@@ -767,10 +629,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1000.fragsrate,
-                                    OS.frags / OS.battles
-                                ),
+                                color: clr(recent1000.fragsrate, OS.frags / OS.battles),
                             }}
                         >
                             {recent1000.fragsrate}
@@ -780,19 +639,12 @@ export default function GraphCalculator(
             },
             {
                 name: "K/D Ratio",
-                Overall: (
-                    OS.frags /
-                    (OS.battles - OS.survived_battles)
-                ).toFixed(2),
+                Overall: (OS.frags / (OS.battles - OS.survived_battles)).toFixed(2),
                 "24 Hours": (
                     <>
                         <span
                             style={{
-                                color: clr(
-                                    recent24hr.KD,
-                                    OS.frags /
-                                        (OS.battles - OS.survived_battles)
-                                ),
+                                color: clr(recent24hr.KD, OS.frags / (OS.battles - OS.survived_battles)),
                             }}
                         >
                             {recent24hr.KD}
@@ -803,11 +655,7 @@ export default function GraphCalculator(
                     <>
                         <span
                             style={{
-                                color: clr(
-                                    recent3days.KD,
-                                    OS.frags /
-                                        (OS.battles - OS.survived_battles)
-                                ),
+                                color: clr(recent3days.KD, OS.frags / (OS.battles - OS.survived_battles)),
                             }}
                         >
                             {recent3days.KD}
@@ -818,11 +666,7 @@ export default function GraphCalculator(
                     <>
                         <span
                             style={{
-                                color: clr(
-                                    recent1week.KD,
-                                    OS.frags /
-                                        (OS.battles - OS.survived_battles)
-                                ),
+                                color: clr(recent1week.KD, OS.frags / (OS.battles - OS.survived_battles)),
                             }}
                         >
                             {recent1week.KD}
@@ -833,11 +677,7 @@ export default function GraphCalculator(
                     <>
                         <span
                             style={{
-                                color: clr(
-                                    recent30days.KD,
-                                    OS.frags /
-                                        (OS.battles - OS.survived_battles)
-                                ),
+                                color: clr(recent30days.KD, OS.frags / (OS.battles - OS.survived_battles)),
                             }}
                         >
                             {recent30days.KD}
@@ -848,11 +688,7 @@ export default function GraphCalculator(
                     <>
                         <span
                             style={{
-                                color: clr(
-                                    recent60days.KD,
-                                    OS.frags /
-                                        (OS.battles - OS.survived_battles)
-                                ),
+                                color: clr(recent60days.KD, OS.frags / (OS.battles - OS.survived_battles)),
                             }}
                         >
                             {recent60days.KD}
@@ -863,11 +699,7 @@ export default function GraphCalculator(
                     <>
                         <span
                             style={{
-                                color: clr(
-                                    recent500.KD,
-                                    OS.frags /
-                                        (OS.battles - OS.survived_battles)
-                                ),
+                                color: clr(recent500.KD, OS.frags / (OS.battles - OS.survived_battles)),
                             }}
                         >
                             {recent500.KD}
@@ -878,11 +710,7 @@ export default function GraphCalculator(
                     <>
                         <span
                             style={{
-                                color: clr(
-                                    recent1000.KD,
-                                    OS.frags /
-                                        (OS.battles - OS.survived_battles)
-                                ),
+                                color: clr(recent1000.KD, OS.frags / (OS.battles - OS.survived_battles)),
                             }}
                         >
                             {recent1000.KD}
@@ -897,10 +725,7 @@ export default function GraphCalculator(
                     <>
                         <span
                             style={{
-                                color: clr(
-                                    recent24hr.DMGratio,
-                                    OS.damage_dealt / OS.damage_received
-                                ),
+                                color: clr(recent24hr.DMGratio, OS.damage_dealt / OS.damage_received),
                             }}
                         >
                             {recent24hr.DMGratio}
@@ -911,10 +736,7 @@ export default function GraphCalculator(
                     <>
                         <span
                             style={{
-                                color: clr(
-                                    recent3days.DMGratio,
-                                    OS.damage_dealt / OS.damage_received
-                                ),
+                                color: clr(recent3days.DMGratio, OS.damage_dealt / OS.damage_received),
                             }}
                         >
                             {recent3days.DMGratio}
@@ -925,10 +747,7 @@ export default function GraphCalculator(
                     <>
                         <span
                             style={{
-                                color: clr(
-                                    recent1week.DMGratio,
-                                    OS.damage_dealt / OS.damage_received
-                                ),
+                                color: clr(recent1week.DMGratio, OS.damage_dealt / OS.damage_received),
                             }}
                         >
                             {recent1week.DMGratio}
@@ -939,10 +758,7 @@ export default function GraphCalculator(
                     <>
                         <span
                             style={{
-                                color: clr(
-                                    recent30days.DMGratio,
-                                    OS.damage_dealt / OS.damage_received
-                                ),
+                                color: clr(recent30days.DMGratio, OS.damage_dealt / OS.damage_received),
                             }}
                         >
                             {recent30days.DMGratio}
@@ -953,10 +769,7 @@ export default function GraphCalculator(
                     <>
                         <span
                             style={{
-                                color: clr(
-                                    recent60days.DMGratio,
-                                    OS.damage_dealt / OS.damage_received
-                                ),
+                                color: clr(recent60days.DMGratio, OS.damage_dealt / OS.damage_received),
                             }}
                         >
                             {recent60days.DMGratio}
@@ -967,10 +780,7 @@ export default function GraphCalculator(
                     <>
                         <span
                             style={{
-                                color: clr(
-                                    recent500.DMGratio,
-                                    OS.damage_dealt / OS.damage_received
-                                ),
+                                color: clr(recent500.DMGratio, OS.damage_dealt / OS.damage_received),
                             }}
                         >
                             {recent500.DMGratio}
@@ -981,10 +791,7 @@ export default function GraphCalculator(
                     <>
                         <span
                             style={{
-                                color: clr(
-                                    recent1000.DMGratio,
-                                    OS.damage_dealt / OS.damage_received
-                                ),
+                                color: clr(recent1000.DMGratio, OS.damage_dealt / OS.damage_received),
                             }}
                         >
                             {recent1000.DMGratio}
@@ -997,12 +804,7 @@ export default function GraphCalculator(
                 Overall: (
                     <>
                         {OS.survived_battles}{" "}
-                        <span style={{ float: "right" }}>
-                            {((OS.survived_battles * 100) / OS.battles).toFixed(
-                                2
-                            )}
-                            %
-                        </span>
+                        <span style={{ float: "right" }}>{((OS.survived_battles * 100) / OS.battles).toFixed(2)}%</span>
                     </>
                 ),
                 "24 Hours": (
@@ -1011,10 +813,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent24hr.survivedrate,
-                                    (OS.survived_battles * 100) / OS.battles
-                                ),
+                                color: clr(recent24hr.survivedrate, (OS.survived_battles * 100) / OS.battles),
                             }}
                         >
                             {recent24hr.survivedrate}%
@@ -1027,10 +826,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent3days.survivedrate,
-                                    (OS.survived_battles * 100) / OS.battles
-                                ),
+                                color: clr(recent3days.survivedrate, (OS.survived_battles * 100) / OS.battles),
                             }}
                         >
                             {recent3days.survivedrate}%
@@ -1043,10 +839,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1week.survivedrate,
-                                    (OS.survived_battles * 100) / OS.battles
-                                ),
+                                color: clr(recent1week.survivedrate, (OS.survived_battles * 100) / OS.battles),
                             }}
                         >
                             {recent1week.survivedrate}%
@@ -1059,10 +852,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent30days.survivedrate,
-                                    (OS.survived_battles * 100) / OS.battles
-                                ),
+                                color: clr(recent30days.survivedrate, (OS.survived_battles * 100) / OS.battles),
                             }}
                         >
                             {recent30days.survivedrate}%
@@ -1075,10 +865,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent60days.survivedrate,
-                                    (OS.survived_battles * 100) / OS.battles
-                                ),
+                                color: clr(recent60days.survivedrate, (OS.survived_battles * 100) / OS.battles),
                             }}
                         >
                             {recent60days.survivedrate}%
@@ -1091,10 +878,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent500.survivedrate,
-                                    (OS.survived_battles * 100) / OS.battles
-                                ),
+                                color: clr(recent500.survivedrate, (OS.survived_battles * 100) / OS.battles),
                             }}
                         >
                             {recent500.survivedrate}%
@@ -1107,10 +891,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1000.survivedrate,
-                                    (OS.survived_battles * 100) / OS.battles
-                                ),
+                                color: clr(recent1000.survivedrate, (OS.survived_battles * 100) / OS.battles),
                             }}
                         >
                             {recent1000.survivedrate}%
@@ -1122,10 +903,7 @@ export default function GraphCalculator(
                 name: "Detected",
                 Overall: (
                     <>
-                        {OS.spotted}{" "}
-                        <span style={{ float: "right" }}>
-                            {(OS.spotted / OS.battles).toFixed(2)}
-                        </span>
+                        {OS.spotted} <span style={{ float: "right" }}>{(OS.spotted / OS.battles).toFixed(2)}</span>
                     </>
                 ),
                 "24 Hours": (
@@ -1134,10 +912,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent24hr.spottedrate,
-                                    OS.spotted / OS.battles
-                                ),
+                                color: clr(recent24hr.spottedrate, OS.spotted / OS.battles),
                             }}
                         >
                             {recent24hr.spottedrate}
@@ -1150,10 +925,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent3days.spottedrate,
-                                    OS.spotted / OS.battles
-                                ),
+                                color: clr(recent3days.spottedrate, OS.spotted / OS.battles),
                             }}
                         >
                             {recent3days.spottedrate}
@@ -1166,10 +938,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1week.spottedrate,
-                                    OS.spotted / OS.battles
-                                ),
+                                color: clr(recent1week.spottedrate, OS.spotted / OS.battles),
                             }}
                         >
                             {recent1week.spottedrate}
@@ -1182,10 +951,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent30days.spottedrate,
-                                    OS.spotted / OS.battles
-                                ),
+                                color: clr(recent30days.spottedrate, OS.spotted / OS.battles),
                             }}
                         >
                             {recent30days.spottedrate}
@@ -1198,10 +964,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent60days.spottedrate,
-                                    OS.spotted / OS.battles
-                                ),
+                                color: clr(recent60days.spottedrate, OS.spotted / OS.battles),
                             }}
                         >
                             {recent60days.spottedrate}
@@ -1214,10 +977,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent500.spottedrate,
-                                    OS.spotted / OS.battles
-                                ),
+                                color: clr(recent500.spottedrate, OS.spotted / OS.battles),
                             }}
                         >
                             {recent500.spottedrate}
@@ -1230,10 +990,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1000.spottedrate,
-                                    OS.spotted / OS.battles
-                                ),
+                                color: clr(recent1000.spottedrate, OS.spotted / OS.battles),
                             }}
                         >
                             {recent1000.spottedrate}
@@ -1246,9 +1003,7 @@ export default function GraphCalculator(
                 Overall: (
                     <>
                         {OS.capture_points}{" "}
-                        <span style={{ float: "right" }}>
-                            {(OS.capture_points / OS.battles).toFixed(2)}
-                        </span>
+                        <span style={{ float: "right" }}>{(OS.capture_points / OS.battles).toFixed(2)}</span>
                     </>
                 ),
                 "24 Hours": (
@@ -1257,10 +1012,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent24hr.caprate,
-                                    OS.capture_points / OS.battles
-                                ),
+                                color: clr(recent24hr.caprate, OS.capture_points / OS.battles),
                             }}
                         >
                             {recent24hr.caprate}
@@ -1273,10 +1025,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent3days.caprate,
-                                    OS.capture_points / OS.battles
-                                ),
+                                color: clr(recent3days.caprate, OS.capture_points / OS.battles),
                             }}
                         >
                             {recent3days.caprate}
@@ -1289,10 +1038,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1week.caprate,
-                                    OS.capture_points / OS.battles
-                                ),
+                                color: clr(recent1week.caprate, OS.capture_points / OS.battles),
                             }}
                         >
                             {recent1week.caprate}
@@ -1305,10 +1051,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent30days.caprate,
-                                    OS.capture_points / OS.battles
-                                ),
+                                color: clr(recent30days.caprate, OS.capture_points / OS.battles),
                             }}
                         >
                             {recent30days.caprate}
@@ -1321,10 +1064,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent60days.caprate,
-                                    OS.capture_points / OS.battles
-                                ),
+                                color: clr(recent60days.caprate, OS.capture_points / OS.battles),
                             }}
                         >
                             {recent60days.caprate}
@@ -1337,10 +1077,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent500.caprate,
-                                    OS.capture_points / OS.battles
-                                ),
+                                color: clr(recent500.caprate, OS.capture_points / OS.battles),
                             }}
                         >
                             {recent500.caprate}
@@ -1353,10 +1090,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1000.caprate,
-                                    OS.capture_points / OS.battles
-                                ),
+                                color: clr(recent1000.caprate, OS.capture_points / OS.battles),
                             }}
                         >
                             {recent1000.caprate}
@@ -1369,11 +1103,7 @@ export default function GraphCalculator(
                 Overall: (
                     <>
                         {OS.dropped_capture_points}{" "}
-                        <span style={{ float: "right" }}>
-                            {(OS.dropped_capture_points / OS.battles).toFixed(
-                                2
-                            )}
-                        </span>
+                        <span style={{ float: "right" }}>{(OS.dropped_capture_points / OS.battles).toFixed(2)}</span>
                     </>
                 ),
                 "24 Hours": (
@@ -1382,10 +1112,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent24hr.defrate,
-                                    OS.dropped_capture_points / OS.battles
-                                ),
+                                color: clr(recent24hr.defrate, OS.dropped_capture_points / OS.battles),
                             }}
                         >
                             {recent24hr.defrate}
@@ -1398,10 +1125,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent3days.defrate,
-                                    OS.dropped_capture_points / OS.battles
-                                ),
+                                color: clr(recent3days.defrate, OS.dropped_capture_points / OS.battles),
                             }}
                         >
                             {recent3days.defrate}
@@ -1414,10 +1138,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1week.defrate,
-                                    OS.dropped_capture_points / OS.battles
-                                ),
+                                color: clr(recent1week.defrate, OS.dropped_capture_points / OS.battles),
                             }}
                         >
                             {recent1week.defrate}
@@ -1430,10 +1151,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent30days.defrate,
-                                    OS.dropped_capture_points / OS.battles
-                                ),
+                                color: clr(recent30days.defrate, OS.dropped_capture_points / OS.battles),
                             }}
                         >
                             {recent30days.defrate}
@@ -1446,10 +1164,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent60days.defrate,
-                                    OS.dropped_capture_points / OS.battles
-                                ),
+                                color: clr(recent60days.defrate, OS.dropped_capture_points / OS.battles),
                             }}
                         >
                             {recent60days.defrate}
@@ -1462,10 +1177,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent500.defrate,
-                                    OS.dropped_capture_points / OS.battles
-                                ),
+                                color: clr(recent500.defrate, OS.dropped_capture_points / OS.battles),
                             }}
                         >
                             {recent500.defrate}
@@ -1478,10 +1190,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1000.defrate,
-                                    OS.dropped_capture_points / OS.battles
-                                ),
+                                color: clr(recent1000.defrate, OS.dropped_capture_points / OS.battles),
                             }}
                         >
                             {recent1000.defrate}
@@ -1493,10 +1202,7 @@ export default function GraphCalculator(
                 name: "Experience",
                 Overall: (
                     <>
-                        {OS.xp}{" "}
-                        <span style={{ float: "right" }}>
-                            {(OS.xp / OS.battles).toFixed(2)}
-                        </span>
+                        {OS.xp} <span style={{ float: "right" }}>{(OS.xp / OS.battles).toFixed(2)}</span>
                     </>
                 ),
                 "24 Hours": (
@@ -1518,10 +1224,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent3days.xprate,
-                                    OS.battle_avg_xp
-                                ),
+                                color: clr(recent3days.xprate, OS.battle_avg_xp),
                             }}
                         >
                             {recent3days.xprate}
@@ -1534,10 +1237,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent1week.xprate,
-                                    OS.battle_avg_xp
-                                ),
+                                color: clr(recent1week.xprate, OS.battle_avg_xp),
                             }}
                         >
                             {recent1week.xprate}
@@ -1550,10 +1250,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent30days.xprate,
-                                    OS.battle_avg_xp
-                                ),
+                                color: clr(recent30days.xprate, OS.battle_avg_xp),
                             }}
                         >
                             {recent30days.xprate}
@@ -1566,10 +1263,7 @@ export default function GraphCalculator(
                         <span
                             style={{
                                 float: "right",
-                                color: clr(
-                                    recent60days.xprate,
-                                    OS.battle_avg_xp
-                                ),
+                                color: clr(recent60days.xprate, OS.battle_avg_xp),
                             }}
                         >
                             {recent60days.xprate}
@@ -2073,25 +1767,11 @@ export default function GraphCalculator(
         data.ClassDistRecent[tank.class] += tank.battles;
     });
 
-    overallStats.raw.forEach((stats) =>
-        calcTrackingVals(
-            BattleCount,
-            BattleTracker,
-            EXPTracker,
-            WinsCount,
-            stats
-        )
-    );
+    overallStats.raw.forEach((stats) => calcTrackingVals(BattleCount, BattleTracker, EXPTracker, WinsCount, stats));
 
     if (recent1000.raw) {
         recent1000.raw.forEach((stats) =>
-            calcTrackingVals(
-                RecentBattleCount,
-                RecentBattleTracker,
-                RecentEXPTracker,
-                RecentWinsCount,
-                stats
-            )
+            calcTrackingVals(RecentBattleCount, RecentBattleTracker, RecentEXPTracker, RecentWinsCount, stats)
         );
     }
 
@@ -2099,9 +1779,7 @@ export default function GraphCalculator(
         for (let i = 0; i < 6; ++i) {
             for (let j = 1; j < 11; ++j) {
                 if (EXPTracker[i][tierToKey[j]].dmg > 0)
-                    data.tankWN8byClassTier[i][tierToKey[j]] = parseInt(
-                        simpleWN8(i, j, BattleTracker, EXPTracker)
-                    );
+                    data.tankWN8byClassTier[i][tierToKey[j]] = parseInt(simpleWN8(i, j, BattleTracker, EXPTracker));
                 else data.tankWN8byClassTier[i][tierToKey[j]] = "-";
                 if (RecentEXPTracker[i][tierToKey[j]].dmg > 0)
                     data.recentTankWN8byClassTier[i][tierToKey[j]] = parseInt(
@@ -2110,15 +1788,13 @@ export default function GraphCalculator(
                 else data.recentTankWN8byClassTier[i][tierToKey[j]] = "-";
                 if (BattleCount[i][tierToKey[j]] > 0)
                     data.tankWRbyClassTier[i][tierToKey[j]] = round(
-                        (WinsCount[i][tierToKey[j]] * 100) /
-                            BattleCount[i][tierToKey[j]],
+                        (WinsCount[i][tierToKey[j]] * 100) / BattleCount[i][tierToKey[j]],
                         2
                     );
                 else data.tankWRbyClassTier[i][tierToKey[j]] = "-";
                 if (RecentBattleCount[i][tierToKey[j]] > 0)
                     data.recentTankWRbyClassTier[i][tierToKey[j]] = round(
-                        (RecentWinsCount[i][tierToKey[j]] * 100) /
-                            RecentBattleCount[i][tierToKey[j]],
+                        (RecentWinsCount[i][tierToKey[j]] * 100) / RecentBattleCount[i][tierToKey[j]],
                         2
                     );
                 else data.recentTankWRbyClassTier[i][tierToKey[j]] = "-";
@@ -2127,10 +1803,7 @@ export default function GraphCalculator(
     }
 
     for (let i = 0; i < recentStats.linegraph.length; ++i) {
-        if (
-            i < recentStats.linegraph.length - 1 &&
-            recentStats.linegraph[i][0] !== recentStats.linegraph[i + 1][0]
-        ) {
+        if (i < recentStats.linegraph.length - 1 && recentStats.linegraph[i][0] !== recentStats.linegraph[i + 1][0]) {
             data.lineGraphWN8.data.push({
                 x: recentStats.linegraph[i][0],
                 y: round(recentStats.linegraph[i][1], 2),

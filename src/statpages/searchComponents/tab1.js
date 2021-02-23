@@ -62,11 +62,7 @@ export default function Tab1(props) {
 
     return (
         <div style={{ margin: "1rem" }}>
-            <CustomTabs
-                value={value}
-                onChange={handleChange}
-                aria-label="ant example"
-            >
+            <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
                 <CustomTab label="WN8" />
                 <CustomTab label="WR" />
                 <CustomTab label="Battles" />

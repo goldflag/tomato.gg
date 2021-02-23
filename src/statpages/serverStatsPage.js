@@ -28,9 +28,7 @@ export default function ServerStatsPage(props) {
             <div style={{ margin: "1rem 0 1rem 0" }}>
                 <Paper className={useStyles.paper}>
                     <div style={{ padding: "1rem", color: "rgb(50,50,50)" }}>
-                        <span style={{ fontSize: "1.6rem", fontWeight: "500" }}>
-                            NA Server Stats
-                        </span>
+                        <span style={{ fontSize: "1.6rem", fontWeight: "500" }}>NA Server Stats</span>
                         <br />
                         <span
                             style={{
@@ -43,9 +41,8 @@ export default function ServerStatsPage(props) {
                         </span>{" "}
                         <br />
                         <span style={{ fontSize: "0.9rem" }}>
-                            Just a collection of experimental charts and graphs.
-                            I have no idea what the final version of this page
-                            will look like.
+                            Just a collection of experimental charts and graphs. I have no idea what the final version
+                            of this page will look like.
                             <br />
                         </span>
                     </div>
@@ -54,9 +51,7 @@ export default function ServerStatsPage(props) {
             <div style={{ margin: "1rem 0 1rem 0" }}>
                 <Paper style={{ padding: "0rem 0rem 2rem 0rem" }}>
                     <div style={{ padding: "1rem", color: "rgb(50,50,50)" }}>
-                        <span style={{ fontSize: "1.2rem", fontWeight: "500" }}>
-                            NA WN8 Distribution
-                        </span>
+                        <span style={{ fontSize: "1.2rem", fontWeight: "500" }}>NA WN8 Distribution</span>
                         <br />
                         <span
                             style={{
@@ -65,16 +60,13 @@ export default function ServerStatsPage(props) {
                                 color: "rgb(100,100,100)",
                             }}
                         >
-                            MINIMUM 100 BATTLES | EACH SQUARE REPRESENTS 0.1% OF
-                            POPULATION
+                            MINIMUM 100 BATTLES | EACH SQUARE REPRESENTS 0.1% OF POPULATION
                         </span>{" "}
                         <br />
                     </div>
                     <WN8Waffle />
                     <div style={{ padding: "1rem", color: "rgb(50,50,50)" }}>
-                        <span style={{ fontSize: "1.2rem", fontWeight: "500" }}>
-                            NA Winrate Distribution
-                        </span>
+                        <span style={{ fontSize: "1.2rem", fontWeight: "500" }}>NA Winrate Distribution</span>
                         <br />
                         <span
                             style={{
@@ -83,8 +75,7 @@ export default function ServerStatsPage(props) {
                                 color: "rgb(100,100,100)",
                             }}
                         >
-                            MINIMUM 100 BATTLES | EACH SQUARE REPRESENTS 0.1% OF
-                            POPULATION
+                            MINIMUM 100 BATTLES | EACH SQUARE REPRESENTS 0.1% OF POPULATION
                         </span>{" "}
                         <br />
                     </div>
@@ -108,10 +99,7 @@ export default function ServerStatsPage(props) {
                             1000 DATAPOINTS
                         </span>{" "}
                         <br />
-                        <Scatterplot
-                            data={scatterdata}
-                            color={"rgb(167, 167, 232)"}
-                        />
+                        <Scatterplot data={scatterdata} color={"rgb(167, 167, 232)"} />
                     </Paper>
                 </div>
                 <div>
@@ -130,10 +118,7 @@ export default function ServerStatsPage(props) {
                             1000 DATAPOINTS
                         </span>{" "}
                         <br />
-                        <Scatterplot
-                            data={scatterdata10000}
-                            color={"rgb(217, 167, 232)"}
-                        />
+                        <Scatterplot data={scatterdata10000} color={"rgb(217, 167, 232)"} />
                     </Paper>
                 </div>
             </div>

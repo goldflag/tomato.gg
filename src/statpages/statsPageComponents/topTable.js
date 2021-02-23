@@ -111,13 +111,7 @@ export default function TopTable({ data }) {
         []
     );
 
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        prepareRow,
-        rows,
-    } = useTable({
+    const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } = useTable({
         columns,
         data,
         initialState: {
@@ -133,9 +127,7 @@ export default function TopTable({ data }) {
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map((column) => (
-                                <th {...column.getHeaderProps()}>
-                                    {column.render("Header")}
-                                </th>
+                                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
                             ))}
                         </tr>
                     ))}
@@ -149,11 +141,7 @@ export default function TopTable({ data }) {
                                 {row.cells.map((cell) => (
                                     <td
                                         {...cell.getCellProps({
-                                            style: setColor(
-                                                cell,
-                                                cell.column.id,
-                                                cell.value
-                                            ),
+                                            style: setColor(cell, cell.column.id, cell.value),
                                         })}
                                     >
                                         {cell.render("Cell")}

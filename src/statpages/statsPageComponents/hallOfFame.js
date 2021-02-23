@@ -226,27 +226,19 @@ const ConditionalLink = ({ makeLink, ...props }) => {
     return <span {...props} />;
 };
 
-export default function HallOfFame({
-    hofData,
-    hofmainData,
-    server,
-    id,
-    setHofData,
-    setHofmainData,
-}) {
+export default function HallOfFame({ hofData, hofmainData, server, id, setHofData, setHofmainData }) {
     useEffect(() => {
         if (hofData && hofmainData) return;
 
         const url = `${backend}/api/hof/${server}/${id}`;
         const url2 = `${backend}/api/hofmain/${server}/${id}`;
 
-        Promise.all([
-            fetch(url).then((res) => res.json()),
-            fetch(url2).then((res) => res.json()),
-        ]).then(([hof, hofmain]) => {
-            setHofData(hof);
-            setHofmainData(hofmain);
-        });
+        Promise.all([fetch(url).then((res) => res.json()), fetch(url2).then((res) => res.json())]).then(
+            ([hof, hofmain]) => {
+                setHofData(hof);
+                setHofmainData(hofmain);
+            }
+        );
     }, [hofData, hofmainData, server, id, setHofData, setHofmainData]);
 
     const hof = () =>
@@ -267,13 +259,10 @@ export default function HallOfFame({
                 <div
                     className="percentile"
                     style={{
-                        backgroundColor: colorConv(
-                            (100 - (row.rank * 100) / row.total).toFixed(2)
-                        ),
+                        backgroundColor: colorConv((100 - (row.rank * 100) / row.total).toFixed(2)),
                     }}
                 >
-                    Better than{" "}
-                    {(100 - (row.rank * 100) / row.total).toFixed(2)}%
+                    Better than {(100 - (row.rank * 100) / row.total).toFixed(2)}%
                 </div>
                 <div className="grid">
                     <div className="gridItem">
@@ -305,9 +294,7 @@ export default function HallOfFame({
                 </div>
                 <div className="dpg">{row.dpg}</div>
                 <div className="label">Damage Per Game</div>
-                <div className="unrank">
-                    Play {25 - row.battles} more battles to enter rankings
-                </div>
+                <div className="unrank">Play {25 - row.battles} more battles to enter rankings</div>
                 <div className="grid">
                     <div className="gridItem">
                         <div className="val">-</div>
@@ -340,9 +327,7 @@ export default function HallOfFame({
                 <div className="tanksTitle">
                     <span style={{ fontSize: "2rem" }}>Hall of Fame</span>
                     <br />
-                    <span style={{ fontSize: "1rem" }}>
-                        60 DAYS | MINIMUM 75 BATTLES | TIER 6+
-                    </span>
+                    <span style={{ fontSize: "1rem" }}>60 DAYS | MINIMUM 75 BATTLES | TIER 6+</span>
                 </div>
                 <div className="overall">
                     <div className="overallTop">
@@ -352,19 +337,10 @@ export default function HallOfFame({
                             <div
                                 className="bigPercentile"
                                 style={{
-                                    backgroundColor: colorConv(
-                                        100 -
-                                            (top.winrate.ranking * 100) /
-                                                top.total
-                                    ),
+                                    backgroundColor: colorConv(100 - (top.winrate.ranking * 100) / top.total),
                                 }}
                             >
-                                Better than{" "}
-                                {(
-                                    100 -
-                                    (top.winrate.ranking * 100) / top.total
-                                ).toFixed(2)}
-                                %
+                                Better than {(100 - (top.winrate.ranking * 100) / top.total).toFixed(2)}%
                             </div>
                             {top.winrate.ranking}
                             <span className="bigLabel">Rank</span>
@@ -375,18 +351,10 @@ export default function HallOfFame({
                             <div
                                 className="bigPercentile"
                                 style={{
-                                    backgroundColor: colorConv(
-                                        100 -
-                                            (top.wn8.ranking * 100) / top.total
-                                    ),
+                                    backgroundColor: colorConv(100 - (top.wn8.ranking * 100) / top.total),
                                 }}
                             >
-                                Better than{" "}
-                                {(
-                                    100 -
-                                    (top.wn8.ranking * 100) / top.total
-                                ).toFixed(2)}
-                                %
+                                Better than {(100 - (top.wn8.ranking * 100) / top.total).toFixed(2)}%
                             </div>
                             {top.wn8.ranking}
                             <span className="bigLabel">Rank</span>
@@ -397,17 +365,10 @@ export default function HallOfFame({
                             <div
                                 className="bigPercentile"
                                 style={{
-                                    backgroundColor: colorConv(
-                                        100 - (top.kd.ranking * 100) / top.total
-                                    ),
+                                    backgroundColor: colorConv(100 - (top.kd.ranking * 100) / top.total),
                                 }}
                             >
-                                Better than{" "}
-                                {(
-                                    100 -
-                                    (top.kd.ranking * 100) / top.total
-                                ).toFixed(2)}
-                                %
+                                Better than {(100 - (top.kd.ranking * 100) / top.total).toFixed(2)}%
                             </div>
                             {top.kd.ranking}
                             <span className="bigLabel">Rank</span>
@@ -417,16 +378,8 @@ export default function HallOfFame({
                         <div className="overallItem">
                             <span className="value">{top.battles.value}</span>
                             <span className="bigLabel"> Battles </span>
-                            <div
-                                className="bigPercentile"
-                                style={{ backgroundColor: "white" }}
-                            >
-                                More than{" "}
-                                {(
-                                    100 -
-                                    (top.battles.ranking * 100) / top.total
-                                ).toFixed(2)}
-                                %
+                            <div className="bigPercentile" style={{ backgroundColor: "white" }}>
+                                More than {(100 - (top.battles.ranking * 100) / top.total).toFixed(2)}%
                             </div>
                             {top.battles.ranking}
                             <span className="bigLabel">Rank</span>
@@ -437,18 +390,10 @@ export default function HallOfFame({
                             <div
                                 className="bigPercentile"
                                 style={{
-                                    backgroundColor: colorConv(
-                                        100 -
-                                            (top.dpg.ranking * 100) / top.total
-                                    ),
+                                    backgroundColor: colorConv(100 - (top.dpg.ranking * 100) / top.total),
                                 }}
                             >
-                                Better than{" "}
-                                {(
-                                    100 -
-                                    (top.dpg.ranking * 100) / top.total
-                                ).toFixed(2)}
-                                %
+                                Better than {(100 - (top.dpg.ranking * 100) / top.total).toFixed(2)}%
                             </div>
                             {top.dpg.ranking}
                             <span className="bigLabel">Rank</span>
@@ -459,19 +404,10 @@ export default function HallOfFame({
                             <div
                                 className="bigPercentile"
                                 style={{
-                                    backgroundColor: colorConv(
-                                        100 -
-                                            (top.dmg_ratio.ranking * 100) /
-                                                top.total
-                                    ),
+                                    backgroundColor: colorConv(100 - (top.dmg_ratio.ranking * 100) / top.total),
                                 }}
                             >
-                                Better than{" "}
-                                {(
-                                    100 -
-                                    (top.dmg_ratio.ranking * 100) / top.total
-                                ).toFixed(2)}
-                                %
+                                Better than {(100 - (top.dmg_ratio.ranking * 100) / top.total).toFixed(2)}%
                             </div>
                             {top.dmg_ratio.ranking}
                             <span className="bigLabel">Rank</span>
@@ -482,19 +418,10 @@ export default function HallOfFame({
                             <div
                                 className="bigPercentile"
                                 style={{
-                                    backgroundColor: colorConv(
-                                        100 -
-                                            (top.frags.ranking * 100) /
-                                                top.total
-                                    ),
+                                    backgroundColor: colorConv(100 - (top.frags.ranking * 100) / top.total),
                                 }}
                             >
-                                Better than{" "}
-                                {(
-                                    100 -
-                                    (top.frags.ranking * 100) / top.total
-                                ).toFixed(2)}
-                                %
+                                Better than {(100 - (top.frags.ranking * 100) / top.total).toFixed(2)}%
                             </div>
                             {top.frags.ranking}
                             <span className="bigLabel">Rank</span>
@@ -504,9 +431,7 @@ export default function HallOfFame({
                 <div className="tanksTitle">
                     <span style={{ fontSize: "2rem" }}>Tank Rankings</span>
                     <br />
-                    <span style={{ fontSize: "1rem" }}>
-                        60 DAYS | MINIMUM 25 BATTLES
-                    </span>
+                    <span style={{ fontSize: "1rem" }}>60 DAYS | MINIMUM 25 BATTLES</span>
                 </div>
                 <div className="tanksContainer">
                     <RSC id="RSC-Example" noScrollY={true}>

@@ -11,11 +11,7 @@ export default function TierDist(props) {
 
     return (
         <div>
-            <CustomTabs
-                value={value}
-                onChange={handleChange}
-                aria-label="ant example"
-            >
+            <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
                 <CustomTab label="TIER DISTRIBUTION" />
                 <CustomTab label="RECENT" />
             </CustomTabs>

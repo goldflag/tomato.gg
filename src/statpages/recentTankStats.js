@@ -32,9 +32,7 @@ export default function RecentLeaderboards() {
     return (
         <FullPageTableWrapper>
             <Info>
-                <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                    {serverConv[server]} Recent Tank Stats
-                </span>
+                <span style={{ fontSize: "2rem", fontWeight: "500" }}>{serverConv[server]} Recent Tank Stats</span>
                 <br />
                 <br />
                 <span
@@ -44,8 +42,7 @@ export default function RecentLeaderboards() {
                         color: "rgb(150,150,150)",
                     }}
                 >
-                    Click on a row to view detailed server-wide tank performance
-                    and leaderboards
+                    Click on a row to view detailed server-wide tank performance and leaderboards
                 </span>
                 <Filters>
                     <FilterButtonGroup>

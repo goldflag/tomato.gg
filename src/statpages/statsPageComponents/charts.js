@@ -44,9 +44,7 @@ export default function Charts(props) {
     const classes = useStyles();
     let output = <></>;
 
-    const clanHistory = (
-        <ClanHistory data={props.clanData} currentClan={props.currentClan} />
-    );
+    const clanHistory = <ClanHistory data={props.clanData} currentClan={props.currentClan} />;
 
     if (size.width > 1000) {
         output = (
@@ -73,64 +71,34 @@ export default function Charts(props) {
                     <Grid item xs={6}>
                         <Grid container spacing={2}>
                             <Grid item xs={6}>
-                                <Paper
-                                    className={classes.paper}
-                                    square
-                                    elevation={2}
-                                >
-                                    <NationDist
-                                        data={props.data.NationDist}
-                                        recentData={props.data.NationDistRecent}
-                                    />
+                                <Paper className={classes.paper} square elevation={2}>
+                                    <NationDist data={props.data.NationDist} recentData={props.data.NationDistRecent} />
                                 </Paper>
                             </Grid>
                             <Grid item xs={6}>
-                                <Paper
-                                    className={classes.paper}
-                                    square
-                                    elevation={2}
-                                >
-                                    <ClassDist
-                                        data={props.data.ClassDist}
-                                        recentData={props.data.ClassDistRecent}
-                                    />
+                                <Paper className={classes.paper} square elevation={2}>
+                                    <ClassDist data={props.data.ClassDist} recentData={props.data.ClassDistRecent} />
                                 </Paper>
                             </Grid>
                         </Grid>
                     </Grid>
                     <Grid item xs={6}>
                         <Paper className={classes.paper} square elevation={2}>
-                            <MOEDist
-                                MOEdata={props.data.tierMoeDist}
-                                MasteryData={props.data.tierMasteryDist}
-                            />
+                            <MOEDist MOEdata={props.data.tierMoeDist} MasteryData={props.data.tierMasteryDist} />
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>
                         <Paper className={classes.paper} square elevation={2}>
-                            <TierDist
-                                data={props.data.tierDist}
-                                recentData={props.data.tierDistRecent}
-                            />
+                            <TierDist data={props.data.tierDist} recentData={props.data.tierDistRecent} />
                         </Paper>
                     </Grid>
                     <Grid item xs={3}>
-                        <Paper
-                            className={classes.paper}
-                            square
-                            elevation={2}
-                            style={{ height: 348 }}
-                        >
+                        <Paper className={classes.paper} square elevation={2} style={{ height: 348 }}>
                             <ExpectedDist data={props.data.expectedRatios} />
                         </Paper>
                     </Grid>
                     <Grid item xs={3}>
-                        <Paper
-                            className={classes.paper}
-                            square
-                            elevation={2}
-                            style={{ height: 348 }}
-                        >
+                        <Paper className={classes.paper} square elevation={2} style={{ height: 348 }}>
                             <RecordsBar data={props.stats} />
                         </Paper>
                     </Grid>
@@ -149,12 +117,7 @@ export default function Charts(props) {
                         </Paper>
                     </Grid>
                     <Grid item xs={8}>
-                        <Paper
-                            className={classes.paper}
-                            square
-                            elevation={2}
-                            style={{ height: 358 }}
-                        >
+                        <Paper className={classes.paper} square elevation={2} style={{ height: 358 }}>
                             <LineGraphs
                                 WN8={props.data.lineGraphWN8}
                                 WR={props.data.lineGraphWR}
@@ -188,10 +151,7 @@ export default function Charts(props) {
                     />
                 </Paper>
                 <Paper square elevation={2} style={darkStyle}>
-                    <TierDist
-                        data={props.data.tierDist}
-                        recentData={props.data.tierDistRecent}
-                    />
+                    <TierDist data={props.data.tierDist} recentData={props.data.tierDistRecent} />
                 </Paper>
                 <Paper
                     square
@@ -214,22 +174,13 @@ export default function Charts(props) {
                         backgroundColor: "rgb(40, 40, 40)",
                     }}
                 >
-                    <MOEDist
-                        MOEdata={props.data.tierMoeDist}
-                        MasteryData={props.data.tierMasteryDist}
-                    />
+                    <MOEDist MOEdata={props.data.tierMoeDist} MasteryData={props.data.tierMasteryDist} />
                 </Paper>
                 <Paper square elevation={2} style={darkStyle}>
-                    <NationDist
-                        data={props.data.NationDist}
-                        recentData={props.data.NationDistRecent}
-                    />
+                    <NationDist data={props.data.NationDist} recentData={props.data.NationDistRecent} />
                 </Paper>
                 <Paper square elevation={2} style={darkStyle}>
-                    <ClassDist
-                        data={props.data.ClassDist}
-                        recentData={props.data.ClassDistRecent}
-                    />
+                    <ClassDist data={props.data.ClassDist} recentData={props.data.ClassDistRecent} />
                 </Paper>
                 <Paper square elevation={2} style={darkStyle}>
                     <ExpectedDist data={props.data.expectedRatios} />

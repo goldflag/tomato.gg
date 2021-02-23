@@ -99,100 +99,54 @@ export default function TreemapOverall(props) {
                             if (props.type === "Overall") {
                                 return (
                                     <CustomToolTip>
-                                        <CustomColor
-                                            color={node.node.data.color}
-                                        >
-                                            {node.node.data.name} |{" "}
-                                            {node.node.data.nation}{" "}
-                                            {node.node.data.class}
+                                        <CustomColor color={node.node.data.color}>
+                                            {node.node.data.name} | {node.node.data.nation} {node.node.data.class}
                                         </CustomColor>
                                         <div className="grid">
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.battles ||
-                                                        0}
-                                                </div>
-                                                <div className="label">
-                                                    Battles
-                                                </div>
+                                                <div className="val">{node.node.data.battles || 0}</div>
+                                                <div className="label">Battles</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.winrate +
-                                                        "%" || 0}
-                                                </div>
-                                                <div className="label">
-                                                    Winrate
-                                                </div>
+                                                <div className="val">{node.node.data.winrate + "%" || 0}</div>
+                                                <div className="label">Winrate</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.wn8 || 0}
-                                                </div>
+                                                <div className="val">{node.node.data.wn8 || 0}</div>
                                                 <div className="label">WN8</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.dpg || 0}
-                                                </div>
+                                                <div className="val">{node.node.data.dpg || 0}</div>
                                                 <div className="label">DPG</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.frags || 0}
-                                                </div>
-                                                <div className="label">
-                                                    Frags
-                                                </div>
+                                                <div className="val">{node.node.data.frags || 0}</div>
+                                                <div className="label">Frags</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.spots || 0}
-                                                </div>
-                                                <div className="label">
-                                                    Spots
-                                                </div>
+                                                <div className="val">{node.node.data.spots || 0}</div>
+                                                <div className="label">Spots</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.dmgratio ||
-                                                        0}
-                                                </div>
-                                                <div className="label">
-                                                    DMG Ratio
-                                                </div>
+                                                <div className="val">{node.node.data.dmgratio || 0}</div>
+                                                <div className="label">DMG Ratio</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.kd || 0}
-                                                </div>
+                                                <div className="val">{node.node.data.kd || 0}</div>
                                                 <div className="label">K/D</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.hits || 0}
-                                                </div>
-                                                <div className="label">
-                                                    Hits
-                                                </div>
+                                                <div className="val">{node.node.data.hits || 0}</div>
+                                                <div className="label">Hits</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.armor || 0}
-                                                </div>
-                                                <div className="label">
-                                                    Armor Eff
-                                                </div>
+                                                <div className="val">{node.node.data.armor || 0}</div>
+                                                <div className="label">Armor Eff</div>
                                             </div>
                                             <div className="gridItem">
                                                 <div className="val">
                                                     {node.node.data.moe > 0 ? (
-                                                        <MoEStars
-                                                            marks={
-                                                                node.node.data
-                                                                    .moe
-                                                            }
-                                                        />
+                                                        <MoEStars marks={node.node.data.moe} />
                                                     ) : (
                                                         0
                                                     )}
@@ -200,11 +154,7 @@ export default function TreemapOverall(props) {
                                                 <div
                                                     className="label"
                                                     style={{
-                                                        marginTop:
-                                                            node.node.data.moe >
-                                                            0
-                                                                ? "-2px"
-                                                                : "0px",
+                                                        marginTop: node.node.data.moe > 0 ? "-2px" : "0px",
                                                     }}
                                                 >
                                                     MoE
@@ -217,10 +167,7 @@ export default function TreemapOverall(props) {
                                                             maxHeight: "20px",
                                                         }}
                                                         src={require(`../../../assets/masteryIcons/${node.node.data.mastery}.png`)}
-                                                        alt={
-                                                            node.node.data
-                                                                .mastery
-                                                        }
+                                                        alt={node.node.data.mastery}
                                                     />
                                                 </div>
                                                 <div
@@ -238,83 +185,45 @@ export default function TreemapOverall(props) {
                             } else {
                                 return (
                                     <CustomToolTip>
-                                        <CustomColor
-                                            color={node.node.data.color}
-                                        >
-                                            {node.node.data.name} |{" "}
-                                            {node.node.data.nation}{" "}
-                                            {node.node.data.class}
+                                        <CustomColor color={node.node.data.color}>
+                                            {node.node.data.name} | {node.node.data.nation} {node.node.data.class}
                                         </CustomColor>
                                         <div className="grid">
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.battles ||
-                                                        0}
-                                                </div>
-                                                <div className="label">
-                                                    Battles
-                                                </div>
+                                                <div className="val">{node.node.data.battles || 0}</div>
+                                                <div className="label">Battles</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.winrate +
-                                                        "%" || 0}
-                                                </div>
-                                                <div className="label">
-                                                    Winrate
-                                                </div>
+                                                <div className="val">{node.node.data.winrate + "%" || 0}</div>
+                                                <div className="label">Winrate</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.wn8 || 0}
-                                                </div>
+                                                <div className="val">{node.node.data.wn8 || 0}</div>
                                                 <div className="label">WN8</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.dpg || 0}
-                                                </div>
+                                                <div className="val">{node.node.data.dpg || 0}</div>
                                                 <div className="label">DPG</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.frags || 0}
-                                                </div>
-                                                <div className="label">
-                                                    Frags
-                                                </div>
+                                                <div className="val">{node.node.data.frags || 0}</div>
+                                                <div className="label">Frags</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.dmgratio ||
-                                                        0}
-                                                </div>
-                                                <div className="label">
-                                                    DMG Ratio
-                                                </div>
+                                                <div className="val">{node.node.data.dmgratio || 0}</div>
+                                                <div className="label">DMG Ratio</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.kd || 0}
-                                                </div>
+                                                <div className="val">{node.node.data.kd || 0}</div>
                                                 <div className="label">K/D</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.spots || 0}
-                                                </div>
-                                                <div className="label">
-                                                    Spots
-                                                </div>
+                                                <div className="val">{node.node.data.spots || 0}</div>
+                                                <div className="label">Spots</div>
                                             </div>
                                             <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.survival ||
-                                                        0}
-                                                </div>
-                                                <div className="label">
-                                                    Survival
-                                                </div>
+                                                <div className="val">{node.node.data.survival || 0}</div>
+                                                <div className="label">Survival</div>
                                             </div>
                                         </div>
                                     </CustomToolTip>
@@ -323,46 +232,30 @@ export default function TreemapOverall(props) {
                         } else {
                             return (
                                 <CustomToolTip>
-                                    <CustomColor
-                                        color={node.node.data.wn8Color}
-                                    >
-                                        {node.node.data.name}
-                                    </CustomColor>
+                                    <CustomColor color={node.node.data.wn8Color}>{node.node.data.name}</CustomColor>
                                     <div className="grid">
                                         <div className="gridItem">
-                                            <div className="val">
-                                                {node.node.data.sumBattles || 0}
-                                            </div>
+                                            <div className="val">{node.node.data.sumBattles || 0}</div>
                                             <div className="label">Battles</div>
                                         </div>
                                         <div className="gridItem">
-                                            <div className="val">
-                                                {node.node.data.wins + "%" || 0}
-                                            </div>
+                                            <div className="val">{node.node.data.wins + "%" || 0}</div>
                                             <div className="label">Winrate</div>
                                         </div>
                                         <div className="gridItem">
-                                            <div className="val">
-                                                {node.node.data.wn8 || 0}
-                                            </div>
+                                            <div className="val">{node.node.data.wn8 || 0}</div>
                                             <div className="label">WN8</div>
                                         </div>
                                         <div className="gridItem">
-                                            <div className="val">
-                                                {node.node.data.dpg || 0}
-                                            </div>
+                                            <div className="val">{node.node.data.dpg || 0}</div>
                                             <div className="label">DPG</div>
                                         </div>
                                         <div className="gridItem">
-                                            <div className="val">
-                                                {node.node.data.frags || 0}
-                                            </div>
+                                            <div className="val">{node.node.data.frags || 0}</div>
                                             <div className="label">Frags</div>
                                         </div>
                                         <div className="gridItem">
-                                            <div className="val">
-                                                {node.node.data.spots || 0}
-                                            </div>
+                                            <div className="val">{node.node.data.spots || 0}</div>
                                             <div className="label">Spots</div>
                                         </div>
                                     </div>

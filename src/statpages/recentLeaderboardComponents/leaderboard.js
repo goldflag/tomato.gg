@@ -3,12 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { ServerContext } from "../../context";
 import styled, { css } from "styled-components";
 import { Icon } from "react-icons-kit";
-import {
-    chevronLeft,
-    chevronRight,
-    chevronsLeft,
-    chevronsRight,
-} from "react-icons-kit/feather";
+import { chevronLeft, chevronRight, chevronsLeft, chevronsRight } from "react-icons-kit/feather";
 import { Button, ButtonGroup } from "@material-ui/core";
 
 // LOCAL
@@ -20,8 +15,7 @@ import { useURLState } from "../../functions/hooks";
 const backend = process.env.REACT_APP_BACKEND;
 
 const FilterButton = styled(Button)`
-    background-color: ${({ selected }) =>
-        selected ? css`rgb(222, 13, 93)` : css`rgb(66, 84, 143)`} !important;
+    background-color: ${({ selected }) => (selected ? css`rgb(222, 13, 93)` : css`rgb(66, 84, 143)`)} !important;
     color: white !important;
     padding: 5px 10px;
     text-align: center;
@@ -42,12 +36,8 @@ const FilterButtonGroup = styled(ButtonGroup)`
 const PaginationContainer = styled.div`
     padding: 1rem;
     font-size: 0.8rem;
-    background-color: ${({ theme }) =>
-        theme === "dark"
-            ? css`rgba(40, 40, 50, 0.5)`
-            : css`rgb(250, 250, 250)`};
-    color: ${({ theme }) =>
-        theme === "dark" ? css`rgb(220, 220, 220)` : css`rgb(80, 80, 80)`};
+    background-color: ${({ theme }) => (theme === "dark" ? css`rgba(40, 40, 50, 0.5)` : css`rgb(250, 250, 250)`)};
+    color: ${({ theme }) => (theme === "dark" ? css`rgb(220, 220, 220)` : css`rgb(80, 80, 80)`)};
 `;
 
 const PaginationButton = styled.button`
@@ -89,9 +79,7 @@ export default function Leaderboard() {
 
     useEffect(() => {
         setData("loading");
-        fetch(
-            `${backend}/api/leaderboard/${server}/${type}/${time}/${tier}/${page}`
-        )
+        fetch(`${backend}/api/leaderboard/${server}/${type}/${time}/${tier}/${page}`)
             .then((res) => res.json())
             .then((res) => {
                 let playerList = res.body;
@@ -195,25 +183,15 @@ export default function Leaderboard() {
     function pagination() {
         return (
             <PaginationContainer theme={"dark"}>
-                <PaginationButton
-                    onClick={() => setPage(0)}
-                    disabled={page === 0}
-                >
+                <PaginationButton onClick={() => setPage(0)} disabled={page === 0}>
                     <Icon size={24} icon={chevronsLeft} />
                 </PaginationButton>{" "}
-                <PaginationButton
-                    onClick={() => setPage(page > 0 ? page - 1 : 0)}
-                    disabled={page === 0}
-                >
+                <PaginationButton onClick={() => setPage(page > 0 ? page - 1 : 0)} disabled={page === 0}>
                     <Icon size={24} icon={chevronLeft} />
                 </PaginationButton>{" "}
                 <PaginationButton
                     onClick={() => {
-                        setPage(
-                            page <= parseInt(numEntries / 100)
-                                ? page + 1
-                                : parseInt(numEntries / 100)
-                        );
+                        setPage(page <= parseInt(numEntries / 100) ? page + 1 : parseInt(numEntries / 100));
                     }}
                     disabled={page === parseInt(numEntries / 100)}
                 >
@@ -241,11 +219,7 @@ export default function Leaderboard() {
             </Filters>
             {typeof data !== "string" ? (
                 <>
-                    <LeaderboardTable
-                        data={data}
-                        type={type}
-                        setType={setType}
-                    />
+                    <LeaderboardTable data={data} type={type} setType={setType} />
                     {pagination()}
                 </>
             ) : data === "loading" ? (

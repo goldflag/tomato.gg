@@ -50,28 +50,16 @@ export const Pagination = (props) => {
 
     return (
         <PaginationContainer>
-            <PaginationButton
-                onClick={() => props.gotoPage(0)}
-                disabled={!props.canPreviousPage}
-            >
+            <PaginationButton onClick={() => props.gotoPage(0)} disabled={!props.canPreviousPage}>
                 <Icon size={24} icon={chevronsLeft} />
             </PaginationButton>{" "}
-            <PaginationButton
-                onClick={() => props.previousPage()}
-                disabled={!props.canPreviousPage}
-            >
+            <PaginationButton onClick={() => props.previousPage()} disabled={!props.canPreviousPage}>
                 <Icon size={24} icon={chevronLeft} />
             </PaginationButton>{" "}
-            <PaginationButton
-                onClick={() => props.nextPage()}
-                disabled={!props.canNextPage}
-            >
+            <PaginationButton onClick={() => props.nextPage()} disabled={!props.canNextPage}>
                 <Icon size={24} icon={chevronRight} />
             </PaginationButton>{" "}
-            <PaginationButton
-                onClick={() => props.gotoPage(props.pageCount - 1)}
-                disabled={!props.canNextPage}
-            >
+            <PaginationButton onClick={() => props.gotoPage(props.pageCount - 1)} disabled={!props.canNextPage}>
                 <Icon size={24} icon={chevronsRight} />
             </PaginationButton>{" "}
             Page {props.pageIndex + 1} of {props.pageOptions.length}{" "}
@@ -82,9 +70,7 @@ export const Pagination = (props) => {
                         type="number"
                         defaultValue={props.pageIndex + 1}
                         onChange={(e) => {
-                            const page = e.target.value
-                                ? Number(e.target.value) - 1
-                                : 0;
+                            const page = e.target.value ? Number(e.target.value) - 1 : 0;
                             props.gotoPage(page);
                         }}
                         style={{ width: "100px" }}
@@ -129,10 +115,7 @@ export const ServerPagination = ({ page, numPages, setPage }) => {
             <PaginationButton onClick={() => setPage(0)} disabled={page === 0}>
                 <Icon size={24} icon={chevronsLeft} />
             </PaginationButton>{" "}
-            <PaginationButton
-                onClick={() => setPage(page > 0 ? page - 1 : 0)}
-                disabled={page === 0}
-            >
+            <PaginationButton onClick={() => setPage(page > 0 ? page - 1 : 0)} disabled={page === 0}>
                 <Icon size={24} icon={chevronLeft} />
             </PaginationButton>{" "}
             <PaginationButton

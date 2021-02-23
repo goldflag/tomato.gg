@@ -49,50 +49,33 @@ export default function MOETable(props) {
                 <tbody>
                     <tr>
                         <td style={tt}>
-                            Vehicles{" "}
-                            <span style={{ float: "right" }}>{numTanks} </span>
+                            Vehicles <span style={{ float: "right" }}>{numTanks} </span>
                         </td>
                     </tr>
                     <tr>
                         <td style={tdc}>
-                            3 Marks{" "}
-                            <span style={{ float: "right" }}>
-                                {rows[0].MOE}{" "}
-                            </span>
+                            3 Marks <span style={{ float: "right" }}>{rows[0].MOE} </span>
                         </td>
                     </tr>
                     <tr>
                         <td style={td}>
-                            2 Marks{" "}
-                            <span style={{ float: "right" }}>
-                                {rows[1].MOE}
-                            </span>
+                            2 Marks <span style={{ float: "right" }}>{rows[1].MOE}</span>
                         </td>
                     </tr>
                     <tr>
                         <td style={tdc}>
-                            1 Mark{" "}
-                            <span style={{ float: "right" }}>
-                                {rows[2].MOE}
-                            </span>
+                            1 Mark <span style={{ float: "right" }}>{rows[2].MOE}</span>
                         </td>
                     </tr>
                     <tr>
                         <td style={td}>
-                            None{" "}
-                            <span style={{ float: "right" }}>
-                                {rows[3].MOE}
-                            </span>
+                            None <span style={{ float: "right" }}>{rows[3].MOE}</span>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div style={{ paddingTop: "0rem" }}>
-                <a
-                    style={{ fontSize: "0.8rem" }}
-                    target="blank"
-                    href="https://herhor.net/wot/moe/"
-                >
+                <a style={{ fontSize: "0.8rem" }} target="blank" href="https://herhor.net/wot/moe/">
                     Generate Mark Image
                 </a>
             </div>

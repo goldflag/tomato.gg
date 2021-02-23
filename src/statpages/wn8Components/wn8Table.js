@@ -2,14 +2,7 @@ import React from "react";
 import { Icon } from "react-icons-kit";
 import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
-import {
-    useTable,
-    usePagination,
-    useSortBy,
-    useFilters,
-    useExpanded,
-    useGlobalFilter,
-} from "react-table";
+import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
 
@@ -35,9 +28,7 @@ function WN8Table(props) {
     let data = props.data;
 
     // Define a default UI for filtering
-    function DefaultColumnFilter({
-        column: { filterValue, preFilteredRows, setFilter },
-    }) {
+    function DefaultColumnFilter({ column: { filterValue, preFilteredRows, setFilter } }) {
         const count = preFilteredRows.length;
         return (
             <input
@@ -71,9 +62,7 @@ function WN8Table(props) {
                     return rows.filter((row) => {
                         const rowValue = row.values[id];
                         return rowValue !== undefined
-                            ? String(rowValue)
-                                  .toLowerCase()
-                                  .startsWith(String(filterValue).toLowerCase())
+                            ? String(rowValue).toLowerCase().startsWith(String(filterValue).toLowerCase())
                             : true;
                     });
                 },
@@ -149,9 +138,7 @@ function WN8Table(props) {
                         <ButtonFiltersContainer key={i}>
                             {headerGroup.headers.map(
                                 ({ disableFilters, render }, i) =>
-                                    !disableFilters && (
-                                        <span key={i}>{render("Filter")}</span>
-                                    )
+                                    !disableFilters && <span key={i}>{render("Filter")}</span>
                             )}
                         </ButtonFiltersContainer>
                     ))}
@@ -163,15 +150,11 @@ function WN8Table(props) {
                                 <tr {...headerGroup.getHeaderGroupProps()}>
                                     {headerGroup.headers.map((column) => (
                                         <th
-                                            {...column.getHeaderProps(
-                                                column.getSortByToggleProps()
-                                            )}
+                                            {...column.getHeaderProps(column.getSortByToggleProps())}
                                             {...column.getHeaderProps({
                                                 style: {
                                                     cursor: "pointer",
-                                                    backgroundColor: column.isSorted
-                                                        ? "rgb(207, 0, 76)"
-                                                        : null,
+                                                    backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
                                                 },
                                             })}
                                         >
@@ -179,15 +162,9 @@ function WN8Table(props) {
                                             <span>
                                                 {column.isSorted ? (
                                                     column.isSortedDesc ? (
-                                                        <Icon
-                                                            size={16}
-                                                            icon={arrowDown}
-                                                        />
+                                                        <Icon size={16} icon={arrowDown} />
                                                     ) : (
-                                                        <Icon
-                                                            size={16}
-                                                            icon={arrowUp}
-                                                        />
+                                                        <Icon size={16} icon={arrowUp} />
                                                     )
                                                 ) : (
                                                     ""
@@ -210,8 +187,7 @@ function WN8Table(props) {
                                                 <td
                                                     {...cell.getCellProps({
                                                         style: cellStyle(
-                                                            cell.column
-                                                                .isSorted,
+                                                            cell.column.isSorted,
                                                             cell.column.id,
                                                             cell.value
                                                         ),

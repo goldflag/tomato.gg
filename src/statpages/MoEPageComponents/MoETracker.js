@@ -2,14 +2,7 @@ import React, { useState, useEffect, useCallback, useContext } from "react";
 import { Icon } from "react-icons-kit";
 import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
-import {
-    useTable,
-    usePagination,
-    useSortBy,
-    useFilters,
-    useExpanded,
-    useGlobalFilter,
-} from "react-table";
+import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
 // A great library for fuzzy filtering/sorting items
 import { matchSorter } from "match-sorter";
 import { ServerContext } from "../../context";
@@ -44,9 +37,7 @@ function MoETracker(props) {
     let data = props.data;
 
     // Define a default UI for filtering
-    function DefaultColumnFilter({
-        column: { filterValue, preFilteredRows, setFilter },
-    }) {
+    function DefaultColumnFilter({ column: { filterValue, preFilteredRows, setFilter } }) {
         const count = preFilteredRows.length;
         return (
             <input
@@ -79,9 +70,7 @@ function MoETracker(props) {
                     return rows.filter((row) => {
                         const rowValue = row.values[id];
                         return rowValue !== undefined
-                            ? String(rowValue)
-                                  .toLowerCase()
-                                  .startsWith(String(filterValue).toLowerCase())
+                            ? String(rowValue).toLowerCase().startsWith(String(filterValue).toLowerCase())
                             : true;
                     });
                 },
@@ -158,13 +147,7 @@ function MoETracker(props) {
                     </div>
                 );
             } else {
-                return (
-                    <Loader
-                        color={"rgba(40, 40, 70, 0.5)"}
-                        bottom={20}
-                        top={20}
-                    />
-                );
+                return <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={20} top={20} />;
             }
         }
 
@@ -172,9 +155,7 @@ function MoETracker(props) {
             const [data, setData] = useState();
             useEffect(() => {
                 async function get() {
-                    fetch(
-                        `${backend}/api/abcd/moetank/${row.original.id}/${server}`
-                    )
+                    fetch(`${backend}/api/abcd/moetank/${row.original.id}/${server}`)
                         .then((res) => res.json())
                         .then((res) => setData(res));
                 }
@@ -187,11 +168,7 @@ function MoETracker(props) {
 
         const renderRowSubComponent = useCallback(
             ({ row, rowProps, visibleColumns }) => (
-                <SubRowAsync
-                    row={row}
-                    rowProps={rowProps}
-                    visibleColumns={visibleColumns}
-                />
+                <SubRowAsync row={row} rowProps={rowProps} visibleColumns={visibleColumns} />
             ),
             []
         );
@@ -211,9 +188,7 @@ function MoETracker(props) {
                         <ButtonFiltersContainer key={i}>
                             {headerGroup.headers.map(
                                 ({ disableFilters, render }, i) =>
-                                    !disableFilters && (
-                                        <span key={i}>{render("Filter")}</span>
-                                    )
+                                    !disableFilters && <span key={i}>{render("Filter")}</span>
                             )}
                         </ButtonFiltersContainer>
                     ))}
@@ -224,15 +199,11 @@ function MoETracker(props) {
                             <tr {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map((column) => (
                                     <th
-                                        {...column.getHeaderProps(
-                                            column.getSortByToggleProps()
-                                        )}
+                                        {...column.getHeaderProps(column.getSortByToggleProps())}
                                         {...column.getHeaderProps({
                                             style: {
                                                 cursor: "pointer",
-                                                backgroundColor: column.isSorted
-                                                    ? "rgb(207, 0, 76)"
-                                                    : null,
+                                                backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
                                             },
                                         })}
                                     >
@@ -240,15 +211,9 @@ function MoETracker(props) {
                                         <span>
                                             {column.isSorted ? (
                                                 column.isSortedDesc ? (
-                                                    <Icon
-                                                        size={16}
-                                                        icon={arrowDown}
-                                                    />
+                                                    <Icon size={16} icon={arrowDown} />
                                                 ) : (
-                                                    <Icon
-                                                        size={16}
-                                                        icon={arrowUp}
-                                                    />
+                                                    <Icon size={16} icon={arrowUp} />
                                                 )
                                             ) : (
                                                 ""
@@ -268,10 +233,7 @@ function MoETracker(props) {
                                         {row.cells.map((cell) => (
                                             <td
                                                 {...cell.getCellProps({
-                                                    style: setColor(
-                                                        cell.column.Header,
-                                                        cell.value
-                                                    ),
+                                                    style: setColor(cell.column.Header, cell.value),
                                                 })}
                                             >
                                                 {cell.render("Cell")}
@@ -280,9 +242,7 @@ function MoETracker(props) {
                                     </tr>
                                     {row.isExpanded ? (
                                         <SubRow>
-                                            <td colSpan={visibleColumns.length}>
-                                                {renderRowSubComponent({ row })}
-                                            </td>
+                                            <td colSpan={visibleColumns.length}>{renderRowSubComponent({ row })}</td>
                                         </SubRow>
                                     ) : null}
                                 </React.Fragment>
@@ -321,10 +281,8 @@ function MoETracker(props) {
         let backgroundColor = "";
         let color = "black";
         if (column === `7 Day %Δ`) backgroundColor = colorScale(value, 50);
-        else if (column === `14 Day %Δ`)
-            backgroundColor = colorScale(value, 30);
-        else if (column === `30 Day %Δ`)
-            backgroundColor = colorScale(value, 20);
+        else if (column === `14 Day %Δ`) backgroundColor = colorScale(value, 30);
+        else if (column === `30 Day %Δ`) backgroundColor = colorScale(value, 20);
         else color = undefined;
         return {
             color: color,
@@ -335,15 +293,11 @@ function MoETracker(props) {
     function colorScale(val, multiplier) {
         function green(val) {
             val *= -1;
-            return `rgb(${255 - val * multiplier}, 255, ${
-                255 - val * multiplier
-            })`;
+            return `rgb(${255 - val * multiplier}, 255, ${255 - val * multiplier})`;
         }
 
         function red(val) {
-            return `rgb(255,${255 - val * multiplier}, ${
-                255 - val * multiplier
-            })`;
+            return `rgb(255,${255 - val * multiplier}, ${255 - val * multiplier})`;
         }
 
         return val > 0 ? red(val) : green(val);
@@ -407,12 +361,7 @@ function MoETracker(props) {
             },
             {
                 Cell: ({ value }) => {
-                    return (
-                        <img
-                            src={require(`../../assets/tankIcons/${value}.png`)}
-                            alt={value}
-                        />
-                    );
+                    return <img src={require(`../../assets/tankIcons/${value}.png`)} alt={value} />;
                 },
                 Header: "",
                 accessor: "id",

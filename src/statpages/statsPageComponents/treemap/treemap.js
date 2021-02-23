@@ -1,9 +1,6 @@
 import React from "react";
 import TreemapOverall from "./treemapOverall";
-import {
-    FilterButtonGroup,
-    FilterButton,
-} from "../../../components/tableFilters";
+import { FilterButtonGroup, FilterButton } from "../../../components/tableFilters";
 import styled from "styled-components";
 import { useURLState } from "../../../functions/hooks";
 
@@ -28,19 +25,12 @@ export default function Treemap({ data }) {
         <MaxHeight>
             <Filters>
                 {Object.entries(filters).map(([key, label]) => (
-                    <FilterButton
-                        key={key}
-                        selected={filterValue === key}
-                        onClick={() => setFilterValue(key)}
-                    >
+                    <FilterButton key={key} selected={filterValue === key} onClick={() => setFilterValue(key)}>
                         {label}
                     </FilterButton>
                 ))}
             </Filters>
-            <TreemapOverall
-                data={data[filterValue]}
-                type={filters[filterValue]}
-            />
+            <TreemapOverall data={data[filterValue]} type={filters[filterValue]} />
         </MaxHeight>
     );
 }

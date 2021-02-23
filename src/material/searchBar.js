@@ -46,17 +46,8 @@ export default function SearchBar(props) {
                 onChange={(e) => props.setName(e.target.value)}
             />
             <Divider className={classes.divider} orientation="vertical" />
-            <SelectQuery
-                setServer={props.setServer}
-                server={props.server}
-                setMode={props.setMode}
-                mode={props.mode}
-            />
-            <IconButton
-                type="submit"
-                className={classes.iconButton}
-                aria-label="search"
-            >
+            <SelectQuery setServer={props.setServer} server={props.server} setMode={props.setMode} mode={props.mode} />
+            <IconButton type="submit" className={classes.iconButton} aria-label="search">
                 <SearchIcon />
             </IconButton>
         </Paper>
