@@ -95,51 +95,6 @@ const Styles = styled.div`
         background-color: rgba(201, 26, 61, 0.5);
     }
 
-    @media screen and (max-width: 1000px) {
-
-        .overallTop {
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: 150px;
-        }
-    
-        .overallBottom {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 150px;
-
-        }
-    
-        .overallItem {
-            margin: 0.5rem;
-            padding: 0.5rem;
-            font-size: 1rem;
-        }
-
-        .value {
-            font-size: 1.5rem;
-            font-weight: 500;
-        }
-  
-        .bigPercentile {
-            color: rgb(255, 255, 255);
-            font-weight: 400;
-            padding: 4px;
-            text-align: center;
-            width: 120px;
-            border-radius: 10px;
-            font-size: 0.6rem;
-            margin: 0.3rem;
-        }
-
-        .bigLabel {
-            color: rgb(180, 180, 180);
-            font-size: 0.7rem;
-            margin-top: -2px;
-            margin-bottom: 5px;
-        }
-    }
-
     .tanksContainer {
         height: 320px;
         margin-top: 1rem;
@@ -162,7 +117,8 @@ const Styles = styled.div`
         margin: 0.4rem;
         color: rgb(240, 240, 240);
         padding: 0.4rem;
-        width: 200px;
+        min-width: 200px;
+        max-width: 200px;
         height: 290px;
         transition: 0.4s ease;
         box-shadow: 0px 2px 3px rgb(30, 30, 30);
@@ -254,6 +210,56 @@ const Styles = styled.div`
         align-items: center;
         margin: 0.1rem 1rem;
     }
+
+
+    @media screen and (max-width: 1000px) {
+
+        .overallTop {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 150px;
+        }
+    
+        .overallBottom {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 150px;
+        }
+    
+        .overallItem {
+            margin: 0.5rem;
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .value {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+  
+        .bigPercentile {
+            color: rgb(255, 255, 255);
+            font-weight: 400;
+            padding: 4px;
+            text-align: center;
+            width: 120px;
+            border-radius: 10px;
+            font-size: 0.6rem;
+            margin: 0.3rem;
+        }
+
+        .bigLabel {
+            color: rgb(180, 180, 180);
+            font-size: 0.7rem;
+            margin-top: -2px;
+            margin-bottom: 5px;
+        }
+
+        .box {
+            min-width: 180px;
+        }
+    }
+
 `;
 
 const ConditionalLink = ({ makeLink, ...props }) => {
