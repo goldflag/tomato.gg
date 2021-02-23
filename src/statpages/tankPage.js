@@ -69,7 +69,7 @@ const TankImage = styled.img`
     @media screen and (max-width: 1000px) {
         max-width: 120px;
     }
-`
+`;
 
 const PAGE_SIZE = 100;
 
@@ -108,6 +108,8 @@ export default function TankPage(props) {
                 setData(data);
             });
     }, [server, type, actualPage, rank]);
+
+    const numPages = Math.ceil(data.count / PAGE_SIZE);
 
     let content;
     if (typeof data === "string") {
@@ -150,7 +152,7 @@ export default function TankPage(props) {
                 <RecentLeaderboard data={data.leaderboard} type={type} setType={setType} highlightUserID={userID} />
                 <ServerPagination
                     page={actualPage}
-                    numPages={5}
+                    numPages={numPages}
                     setPage={(page) => {
                         clearRank();
                         setPage(page);
