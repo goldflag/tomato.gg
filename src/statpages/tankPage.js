@@ -71,6 +71,12 @@ const nationConv = {
 
 const PAGE_SIZE = 100;
 
+const filters = {
+    dpg: "DPG",
+    wn8: "WN8",
+    frags: "FRAGS",
+};
+
 export default function TankPage(props) {
     useEffect(() => {
         ReactGA.initialize(trackingId);
@@ -134,35 +140,18 @@ export default function TankPage(props) {
                 <TableLabel>
                     Top 500 Players in {serverConv[server]}
                     <BottomLabel>PAST 60 DAYS | MINIMUM 25 BATTLES</BottomLabel>
-
                     <FilterButtonGroup>
-                        <FilterButton
-                            key={"dpg"}
-                            selected={type === "dpg"}
-                            onClick={() => {
-                                setType("dpg");
-                            }}
-                        >
-                            DPG
-                        </FilterButton>
-                        <FilterButton
-                            key={"wn8"}
-                            selected={type === "wn8"}
-                            onClick={() => {
-                                setType("wn8");
-                            }}
-                        >
-                            WN8
-                        </FilterButton>
-                        <FilterButton
-                            key={"frags"}
-                            selected={type === "frags"}
-                            onClick={() => {
-                                setType("frags");
-                            }}
-                        >
-                            Frags
-                        </FilterButton>
+                        {Object.entries(filters).map(([val, label]) => (
+                            <FilterButton
+                                key={val}
+                                selected={type === val}
+                                onClick={() => {
+                                    setType(val);
+                                }}
+                            >
+                                {label}
+                            </FilterButton>
+                        ))}
                     </FilterButtonGroup>
                 </TableLabel>
                 <RecentLeaderboard

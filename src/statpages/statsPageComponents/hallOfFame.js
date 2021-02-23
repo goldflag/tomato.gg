@@ -39,7 +39,6 @@ function colorConv(val) {
     }
 }
 
-
 const Styles = styled.div`
     font-family: Roboto Mono;
     font-size: 0.8rem;
@@ -164,6 +163,7 @@ const Styles = styled.div`
 
     .name {
         margin-top: 0.3rem;
+        color: rgb(255, 255, 255);
     }
 
     .dpg {

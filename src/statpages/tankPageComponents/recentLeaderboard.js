@@ -62,6 +62,7 @@ export default function RecentsLeaderboard({ data, type, highlightRow }) {
                 Header: "Winrate",
                 accessor: "winrate",
                 disableFilters: true,
+                Cell: ({ value }) => `${value}%`,
             },
             {
                 Header: "DPG",
@@ -87,6 +88,7 @@ export default function RecentsLeaderboard({ data, type, highlightRow }) {
                 Header: "Survival",
                 accessor: "survived",
                 disableFilters: true,
+                Cell: ({ value }) => `${value}%`,
             },
         ],
         []
@@ -111,7 +113,8 @@ export default function RecentsLeaderboard({ data, type, highlightRow }) {
     );
 
     const [rowRef, setRowRef] = React.useState(null);
-    const highlightRowProps = (rowIndex) => {
+    const highlightRowProps = (rowIndex, row) => {
+        console.log(row);
         if (rowIndex !== highlightRow) return {};
         return {
             style: {
@@ -130,6 +133,19 @@ export default function RecentsLeaderboard({ data, type, highlightRow }) {
             });
         }
     }, [rowRef]);
+
+    // battles: "183"
+    // dpg: "306"
+    // frags: "0.39"
+    // kd: "0.43"
+    // player_id: 1000954084
+    // rank: "98"
+    // spots: "2.65"
+    // survived: "8.74%"
+    // url: "/stats/NA/Bubonic4U=1000954084"
+    // username: "Bubonic4U"
+    // winrate: "50.27%"
+    // wn8: "735"
 
     // Render the UI for your table
     return (
@@ -154,7 +170,7 @@ export default function RecentsLeaderboard({ data, type, highlightRow }) {
                     {rows.map((row, i) => {
                         prepareRow(row);
                         return (
-                            <tr {...row.getRowProps(highlightRowProps(i))}>
+                            <tr {...row.getRowProps(highlightRowProps(i, row))}>
                                 {row.cells.map((cell) => (
                                     <td
                                         {...cell.getCellProps({
