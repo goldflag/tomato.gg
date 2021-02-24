@@ -3,8 +3,6 @@ import { Icon } from "react-icons-kit";
 import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
-// A great library for fuzzy filtering/sorting items
-import { matchSorter } from "match-sorter";
 
 import { ClassFilter, GlobalFilter, NationFilter, Pagination, PremFilter, TierFilter, arrayFilterFn } from "Components";
 import {
