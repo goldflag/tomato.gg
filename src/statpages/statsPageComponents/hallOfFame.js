@@ -465,7 +465,7 @@ const TankRankings = ({ userID, hofData }) => (
                                     <div className="label">WN8</div>
                                 </div>
                                 <div className="gridItem">
-                                    <div className="val">{tank.winrate}</div>
+                                    <div className="val">{tank.winrate}%</div>
                                     <div className="label">Winrate</div>
                                 </div>
                             </div>
@@ -494,7 +494,7 @@ const TankRankings = ({ userID, hofData }) => (
                                     <div className="label">WN8</div>
                                 </div>
                                 <div className="gridItem">
-                                    <div className="val">{tank.winrate}</div>
+                                    <div className="val">{tank.winrate}%</div>
                                     <div className="label">Winrate</div>
                                 </div>
                             </div>
