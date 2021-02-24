@@ -16,6 +16,7 @@ import MasteryExpected from "./statpages/masteryPage";
 
 import "CSS/body.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ScrollToTop } from "./components";
 const trackingId = process.env.REACT_APP_GA;
 
 export default function Tomatopedia() {
@@ -26,6 +27,7 @@ export default function Tomatopedia() {
 
     return (
         <Router>
+            <ScrollToTop />
             <div className="dark-mode">
                 <Sidebar />
                 <Topbar />
