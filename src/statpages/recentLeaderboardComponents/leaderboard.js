@@ -160,14 +160,14 @@ export default function Leaderboard() {
     function timeFilter() {
         return (
             <FilterButtonGroup variant="text" aria-label={"ariaLabel"}>
-                <FilterButton
+                {/* <FilterButton
                     selected={time === 30}
                     onClick={() => {
                         setTime(30);
                     }}
                 >
                     30 Days
-                </FilterButton>
+                </FilterButton> */}
                 <FilterButton
                     selected={time === 60}
                     onClick={() => {

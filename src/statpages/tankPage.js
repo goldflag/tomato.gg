@@ -77,6 +77,7 @@ const filters = {
     dpg: "DPG",
     wn8: "WN8",
     frags: "FRAGS",
+    winrate: "WINRATE",
 };
 
 export default function TankPage(props) {

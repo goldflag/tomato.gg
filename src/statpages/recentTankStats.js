@@ -46,7 +46,7 @@ export default function RecentLeaderboards() {
                 </span>
                 <Filters>
                     <FilterButtonGroup>
-                        <FilterButton
+                        {/* <FilterButton
                             key={30}
                             selected={time === 30}
                             onClick={() => {
@@ -54,7 +54,7 @@ export default function RecentLeaderboards() {
                             }}
                         >
                             30 Days
-                        </FilterButton>
+                        </FilterButton> */}
                         <FilterButton
                             key={60}
                             selected={time === 60}
