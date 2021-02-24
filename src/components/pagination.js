@@ -30,16 +30,20 @@ const PaginationButton = styled.button`
     background: none;
     padding: 0rem;
     border-width: 0px;
-
     &:hover {
         background-color: rgb(100, 129, 234);
         color: white;
         border-radius: 50%;
     }
-
-    :disabled {
+    &:disabled {
         color: rgb(220, 220, 220);
         background: none;
+    }
+    &:focus {
+        outline: unset;
+    }
+    &:focus-visible {
+        outline: -webkit-focus-ring-color auto 1px;
     }
 `;
 
