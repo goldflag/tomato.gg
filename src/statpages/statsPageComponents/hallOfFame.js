@@ -407,7 +407,8 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                         </>
                     ) : (
                         <UnrankedNotice>
-                            Play {75 - top.battles.value} more battles in tanks of tier 6 or higher to enter the Hall of Fame
+                            Play {75 - top.battles.value} more battles in tanks of tier 6 or higher to enter the Hall of
+                            Fame
                         </UnrankedNotice>
                     )}
                 </div>
@@ -429,71 +430,71 @@ const TankRankings = ({ userID, hofData }) => (
         <div className="tanksContainer">
             <RSC id="RSC-Example" noScrollY={true}>
                 <div className="tanks">
-                    {hofData.above.map((row, i) => (
+                    {hofData.above.map((tank, i) => (
                         <ConditionalLink
                             key={i}
-                            makeLink={row.rank && row.rank <= 500}
+                            makeLink={tank.rank && tank.rank <= 500}
                             className="box abovebox"
-                            to={`/tank/${row.tank_id}?rank=${row.rank}&userID=${userID}`}
+                            to={`/tank/${tank.tank_id}?rank=${tank.rank}&userID=${userID}`}
                         >
-                            <img src={row.image} className="image" alt={row.name} />
+                            <img src={tank.image} className="image" alt={tank.short_name} />
                             <div className="name">
-                                {tierConv[row.tier]} - {row.name}
+                                {tierConv[tank.tier]} - {tank.short_name}
                             </div>
-                            <div className="dpg">{row.dpg}</div>
+                            <div className="dpg">{tank.dpg}</div>
                             <div className="label">Damage Per Game</div>
                             <div
                                 className="percentile"
                                 style={{
-                                    backgroundColor: rankColor((100 - (row.rank * 100) / row.total).toFixed(2)),
+                                    backgroundColor: rankColor((100 - (tank.rank * 100) / tank.total).toFixed(2)),
                                 }}
                             >
-                                Better than {(100 - (row.rank * 100) / row.total).toFixed(2)}%
+                                Better than {(100 - (tank.rank * 100) / tank.total).toFixed(2)}%
                             </div>
                             <div className="grid">
                                 <div className="gridItem">
-                                    <div className="val">{row.rank}</div>
+                                    <div className="val">{tank.rank}</div>
                                     <div className="label">Rank</div>
                                 </div>
                                 <div className="gridItem">
-                                    <div className="val">{row.battles}</div>
+                                    <div className="val">{tank.battles}</div>
                                     <div className="label">Battles</div>
                                 </div>
                                 <div className="gridItem">
-                                    <div className="val">{row.wn8}</div>
+                                    <div className="val">{tank.wn8}</div>
                                     <div className="label">WN8</div>
                                 </div>
                                 <div className="gridItem">
-                                    <div className="val">{row.winrate}</div>
+                                    <div className="val">{tank.winrate}</div>
                                     <div className="label">Winrate</div>
                                 </div>
                             </div>
                         </ConditionalLink>
                     ))}
-                    {hofData.below.map((row, i) => (
+                    {hofData.below.map((tank, i) => (
                         <div className="box underbox" key={i}>
-                            <img src={row.image} className="image" alt={row.name} />
+                            <img src={tank.image} className="image" alt={tank.short_name} />
                             <div className="name">
-                                {tierConv[row.tier]} - {row.name}
+                                {tierConv[tank.tier]} - {tank.short_name}
                             </div>
-                            <div className="dpg">{row.dpg}</div>
+                            <div className="dpg">{tank.dpg}</div>
                             <div className="label">Damage Per Game</div>
-                            <div className="unrank">Play {25 - row.battles} more battles to enter rankings</div>
+                            <div className="unrank">Play {25 - tank.battles} more battles to enter rankings</div>
                             <div className="grid">
                                 <div className="gridItem">
                                     <div className="val">-</div>
                                     <div className="label">Rank</div>
                                 </div>
                                 <div className="gridItem">
-                                    <div className="val">{row.battles}</div>
+                                    <div className="val">{tank.battles}</div>
                                     <div className="label">Battles</div>
                                 </div>
                                 <div className="gridItem">
-                                    <div className="val">{row.wn8}</div>
+                                    <div className="val">{tank.wn8}</div>
                                     <div className="label">WN8</div>
                                 </div>
                                 <div className="gridItem">
-                                    <div className="val">{row.winrate}</div>
+                                    <div className="val">{tank.winrate}</div>
                                     <div className="label">Winrate</div>
                                 </div>
                             </div>
