@@ -425,7 +425,7 @@ const TankRankings = ({ userID, hofData }) => (
         <div className="tanksTitle">
             <span style={{ fontSize: "2rem" }}>Tank Rankings</span>
             <br />
-            <span style={{ fontSize: "1rem" }}>60 DAYS | MINIMUM 25 BATTLES</span>
+            <span style={{ fontSize: "1rem" }}>60 DAYS | MINIMUM 25 BATTLES | TIER 6+</span>
         </div>
         <div className="tanksContainer">
             <RSC id="RSC-Example" noScrollY={true}>

@@ -1,48 +1,19 @@
+// NPM
 import React from "react";
 import { ResponsiveTreeMap } from "@nivo/treemap";
-
 import styled from "styled-components";
+
+// LOCAL
 import { MoEStars } from "Components/moeStars";
 
 const CustomToolTip = styled.div`
     min-width: 200px;
-    .name {
-        background-color: ${({ color }) => color};
-        color: rgb(250, 250, 250);
-        padding: 5px;
-        margin: 4px -9px;
-        font-size: 14px;
-    }
+`;
 
-    .entry {
-        font-size: 12px;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: 33% 33% 33%;
-        grid-template-rows: auto;
-    }
-
-    .gridItem {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0.3rem 0.3rem;
-    }
-
-    .val {
-        color: rgb(255, 255, 255);
-        font-size: 0.8rem;
-        font-weight: 500;
-        margin-top: 0rem;
-    }
-
-    .label {
-        color: rgb(180, 180, 180);
-        font-size: 0.6rem;
-        margin-bottom: 0rem;
-    }
+const Grid = styled.div`
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: auto;
 `;
 
 const CustomColor = styled.div`
@@ -53,7 +24,117 @@ const CustomColor = styled.div`
     font-size: 14px;
 `;
 
-export default function TreemapOverall(props) {
+const GridItem = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.3rem 0.3rem;
+`;
+
+const TooltipLabel = styled.div`
+    color: rgb(180, 180, 180);
+    font-size: 0.6rem;
+    margin-bottom: 0rem;
+`;
+
+const TooltipValue = styled.div`
+    color: rgb(255, 255, 255);
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 0rem;
+`;
+
+const TreeMapTooltip = ({ node, type }) => {
+    const { id, isLeaf, data } = node;
+
+    if (id === "Stats") return null;
+    var headerColor, headerContent, gridItems;
+
+    if (isLeaf && type === "Overall") {
+        headerColor = data.color;
+        headerContent = `${data.name} | ${data.nation} ${data.class}`;
+        gridItems = [
+            { label: "Battles", value: data.battles },
+            { label: "Winrate", value: data.winrate + "%" },
+            { label: "WN8", value: data.wn8 },
+            { label: "DPG", value: data.dpg },
+            { label: "Frags", value: data.frags },
+            { label: "Spots", value: data.spots },
+            { label: "DMG Ratio", value: data.dmgratio },
+            { label: "K/D", value: data.kd },
+            { label: "Hits", value: data.hits },
+            { label: "Armor Eff", value: data.armor },
+            {
+                label: "MoE",
+                labelProps: {
+                    style: {
+                        marginTop: data.moe > 0 ? "-2px" : "0px",
+                    },
+                },
+                value: data.moe > 0 ? <MoEStars marks={data.moe} /> : 0,
+            },
+            {
+                label: "Mastery",
+                labelProps: {
+                    className: "label",
+                    style: {
+                        marginTop: "-6px",
+                    },
+                },
+                value: (
+                    <img
+                        style={{
+                            maxHeight: "20px",
+                        }}
+                        src={require(`Assets/masteryIcons/${data.mastery}.png`)}
+                        alt={data.mastery}
+                    />
+                ),
+            },
+        ];
+    } else if (isLeaf) {
+        headerColor = data.color;
+        headerContent = `${data.name} | ${data.nation} ${data.class}`;
+        gridItems = [
+            { label: "Battles", value: data.battles },
+            { label: "Winrate", value: data.winrate + "%" },
+            { label: "WN8", value: data.wn8 },
+            { label: "DPG", value: data.dpg },
+            { label: "Frags", value: data.frags },
+            { label: "DMG Ratio", value: data.dmgratio },
+            { label: "K/D", value: data.kd },
+            { label: "Spots", value: data.spots },
+            { label: "Survival", value: data.survival },
+        ];
+    } else {
+        headerColor = data.wn8Color;
+        headerContent = data.name;
+        gridItems = [
+            { label: "Battles", value: data.sumBattles },
+            { label: "Winrate", value: data.wins + "%" },
+            { label: "WN8", value: data.wn8 },
+            { label: "DPG", value: data.dpg },
+            { label: "Frags", value: data.frags },
+            { label: "Spots", value: data.spots },
+        ];
+    }
+
+    return (
+        <CustomToolTip>
+            <CustomColor color={headerColor}>{headerContent}</CustomColor>
+            <Grid>
+                {gridItems.map(({ label, labelProps, value }) => (
+                    <GridItem>
+                        <TooltipValue>{value}</TooltipValue>
+                        <TooltipLabel {...labelProps}>{label}</TooltipLabel>
+                    </GridItem>
+                ))}
+            </Grid>
+        </CustomToolTip>
+    );
+};
+
+export default function TreemapOverall({ data, type }) {
     return (
         <div style={{ height: "75vh" }}>
             <ResponsiveTreeMap
@@ -72,7 +153,7 @@ export default function TreemapOverall(props) {
                         },
                     },
                 }}
-                data={props.data}
+                data={data}
                 identity="id"
                 value="battles"
                 label={(e) => e.data.name}
@@ -86,184 +167,12 @@ export default function TreemapOverall(props) {
                 borderColor={{ from: "color", modifiers: [["darker", 0.1]] }}
                 borderWidth={3}
                 nodeOpacity={0.8}
-                colors={(properties) => {
-                    return properties.data.color;
-                }}
+                colors={(properties) => properties.data.color}
                 parentLabelTextColor={{
                     from: "labelTextColor",
                     modifiers: [["darker", 0.3]],
                 }}
-                tooltip={(node) => {
-                    if (node.node.id !== "Stats") {
-                        if (node.node.isLeaf) {
-                            if (props.type === "Overall") {
-                                return (
-                                    <CustomToolTip>
-                                        <CustomColor color={node.node.data.color}>
-                                            {node.node.data.name} | {node.node.data.nation} {node.node.data.class}
-                                        </CustomColor>
-                                        <div className="grid">
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.battles || 0}</div>
-                                                <div className="label">Battles</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.winrate + "%" || 0}</div>
-                                                <div className="label">Winrate</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.wn8 || 0}</div>
-                                                <div className="label">WN8</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.dpg || 0}</div>
-                                                <div className="label">DPG</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.frags || 0}</div>
-                                                <div className="label">Frags</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.spots || 0}</div>
-                                                <div className="label">Spots</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.dmgratio || 0}</div>
-                                                <div className="label">DMG Ratio</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.kd || 0}</div>
-                                                <div className="label">K/D</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.hits || 0}</div>
-                                                <div className="label">Hits</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.armor || 0}</div>
-                                                <div className="label">Armor Eff</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">
-                                                    {node.node.data.moe > 0 ? (
-                                                        <MoEStars marks={node.node.data.moe} />
-                                                    ) : (
-                                                        0
-                                                    )}
-                                                </div>
-                                                <div
-                                                    className="label"
-                                                    style={{
-                                                        marginTop: node.node.data.moe > 0 ? "-2px" : "0px",
-                                                    }}
-                                                >
-                                                    MoE
-                                                </div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">
-                                                    <img
-                                                        style={{
-                                                            maxHeight: "20px",
-                                                        }}
-                                                        src={require(`Assets/masteryIcons/${node.node.data.mastery}.png`)}
-                                                        alt={node.node.data.mastery}
-                                                    />
-                                                </div>
-                                                <div
-                                                    className="label"
-                                                    style={{
-                                                        marginTop: "-6px",
-                                                    }}
-                                                >
-                                                    Mastery
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </CustomToolTip>
-                                );
-                            } else {
-                                return (
-                                    <CustomToolTip>
-                                        <CustomColor color={node.node.data.color}>
-                                            {node.node.data.name} | {node.node.data.nation} {node.node.data.class}
-                                        </CustomColor>
-                                        <div className="grid">
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.battles || 0}</div>
-                                                <div className="label">Battles</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.winrate + "%" || 0}</div>
-                                                <div className="label">Winrate</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.wn8 || 0}</div>
-                                                <div className="label">WN8</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.dpg || 0}</div>
-                                                <div className="label">DPG</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.frags || 0}</div>
-                                                <div className="label">Frags</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.dmgratio || 0}</div>
-                                                <div className="label">DMG Ratio</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.kd || 0}</div>
-                                                <div className="label">K/D</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.spots || 0}</div>
-                                                <div className="label">Spots</div>
-                                            </div>
-                                            <div className="gridItem">
-                                                <div className="val">{node.node.data.survival || 0}</div>
-                                                <div className="label">Survival</div>
-                                            </div>
-                                        </div>
-                                    </CustomToolTip>
-                                );
-                            }
-                        } else {
-                            return (
-                                <CustomToolTip>
-                                    <CustomColor color={node.node.data.wn8Color}>{node.node.data.name}</CustomColor>
-                                    <div className="grid">
-                                        <div className="gridItem">
-                                            <div className="val">{node.node.data.sumBattles || 0}</div>
-                                            <div className="label">Battles</div>
-                                        </div>
-                                        <div className="gridItem">
-                                            <div className="val">{node.node.data.wins + "%" || 0}</div>
-                                            <div className="label">Winrate</div>
-                                        </div>
-                                        <div className="gridItem">
-                                            <div className="val">{node.node.data.wn8 || 0}</div>
-                                            <div className="label">WN8</div>
-                                        </div>
-                                        <div className="gridItem">
-                                            <div className="val">{node.node.data.dpg || 0}</div>
-                                            <div className="label">DPG</div>
-                                        </div>
-                                        <div className="gridItem">
-                                            <div className="val">{node.node.data.frags || 0}</div>
-                                            <div className="label">Frags</div>
-                                        </div>
-                                        <div className="gridItem">
-                                            <div className="val">{node.node.data.spots || 0}</div>
-                                            <div className="label">Spots</div>
-                                        </div>
-                                    </div>
-                                </CustomToolTip>
-                            );
-                        }
-                    }
-                }}
+                tooltip={(props) => <TreeMapTooltip {...props} type={type} />}
             />
         </div>
     );
