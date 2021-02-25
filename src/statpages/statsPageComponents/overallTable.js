@@ -211,8 +211,8 @@ function OverallTable({ data }) {
             {
                 Header: "Games",
                 accessor: "battles",
+                filter: "between",
                 Filter: NumberRangeColumnFilter,
-                filter: arrayFilterFn,
             },
             {
                 Header: "WN8",
@@ -345,7 +345,7 @@ function OverallTable({ data }) {
                                     )
                             )}
                         </ButtonFiltersContainer>
-                        {headerGroup.headers[6].render("Filter")}
+                        {headerGroup.headers[4].render("Filter")}
                     </React.Fragment>
                 ))}
             </FiltersContainer>
