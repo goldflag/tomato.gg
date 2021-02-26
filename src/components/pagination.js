@@ -1,17 +1,8 @@
-// React
+// NPM
 import React from "react";
-
-// React-Icons-Kit
-import { Icon } from "react-icons-kit";
-import { chevronRight } from "react-icons-kit/feather/chevronRight";
-import { chevronLeft } from "react-icons-kit/feather/chevronLeft";
-import { chevronsRight } from "react-icons-kit/feather/chevronsRight";
-import { chevronsLeft } from "react-icons-kit/feather/chevronsLeft";
-
-// Styled-Components
 import styled from "styled-components";
-
-// Local
+import { Icon } from "react-icons-kit";
+import { chevronRight, chevronLeft, chevronsRight, chevronsLeft } from "react-icons-kit/feather";
 
 const PaginationContainer = styled.div`
     font-family: Roboto Mono;

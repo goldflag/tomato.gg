@@ -123,8 +123,8 @@ const TreeMapTooltip = ({ node, type }) => {
         <CustomToolTip>
             <CustomColor color={headerColor}>{headerContent}</CustomColor>
             <Grid>
-                {gridItems.map(({ label, labelProps, value }) => (
-                    <GridItem>
+                {gridItems.map(({ label, labelProps, value }, i) => (
+                    <GridItem key={i}>
                         <TooltipValue>{value}</TooltipValue>
                         <TooltipLabel {...labelProps}>{label}</TooltipLabel>
                     </GridItem>
