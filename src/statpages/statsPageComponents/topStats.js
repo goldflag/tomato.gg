@@ -1,224 +1,126 @@
+// NPM
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import WN8color from "Functions/WN8color";
-import WRcolor from "Functions/WRcolor";
-import PRcolor from "Functions/PRcolor";
-import "CSS/statspage.css";
+import styled from "styled-components";
 
-function battlesColor(battles) {
-    if (battles < 1500) {
-        return "#930D0D";
-    } else if (battles < 3000) {
-        return "#CD3333";
-    } else if (battles < 6000) {
-        return "#CC7A00";
-    } else if (battles < 12000) {
-        return "#CCB800";
-    } else if (battles < 15000) {
-        return "#849B24";
-    } else if (battles < 20000) {
-        return "#4D7326";
-    } else if (battles < 30000) {
-        return "#4099BF";
-    } else if (battles < 40000) {
-        return "#3972C6";
-    } else if (battles < 50000) {
-        return "#793DB6";
-    } else {
-        return "#401070";
+// LOCAL
+import { WN8color, WRcolor, PRcolor, battlesColor } from "Functions/colors";
+
+const Root = styled.div`
+    flex-grow: 1;
+    padding: 1rem 0rem 0.5rem 0rem;
+`;
+
+const Square = styled.div`
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    color: white;
+`;
+
+const StatCard = styled(Square)`
+    padding: 1.5rem 0rem;
+    text-align: center;
+    font-family: roboto;
+    width: 11%;
+    background-color: ${({ backgroundColor }) => backgroundColor};
+    @media screen and (max-width: 1000px) {
+        width: 15%;
+        padding: 1rem 0rem 1rem 0rem;
+        font-size: 0.6rem;
     }
-}
+`;
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    paper: {
-        padding: theme.spacing(2),
-        textAlign: "center",
-        fontFamily: "roboto",
-        color: "rgb(30, 30, 30)",
-    },
-    playerName: {
-        padding: theme.spacing(2),
-        textAlign: "left",
-        fontFamily: "roboto",
-        color: "rgb(30, 30, 30)",
-        lineHeight: "1.2em",
-    },
-    colorBox: {
-        padding: theme.spacing(2),
-        textAlign: "center",
-        fontFamily: "roboto",
-        color: "white",
-    },
-    boxData: {
-        fontSize: "1.7em",
-        fontWeight: "500",
-    },
-}));
+const PlayerName = styled(Square)`
+    text-align: left;
+    font-family: roboto;
+    line-height: 1.2em;
+    width: 350px;
+    height: 92.5px;
+    padding: 1.1rem 1rem 1.5rem 1rem;
+    background-color: ${({ backgroundColor }) => backgroundColor};
+    @media screen and (max-width: 1000px) {
+        display: none;
+    }
+`;
+
+const MobilePlayerName = styled(Square)`
+    display: none;
+    padding: 1rem;
+    background-color: ${({ backgroundColor }) => backgroundColor};
+    @media screen and (max-width: 1000px) {
+        display: block;
+        font-size: 0.7em;
+        margin: 0rem 0rem 1rem 0rem;
+    }
+`;
+
+const StatsRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 100%;
+`;
+
+const ClanTag = styled.span`
+    font-weight: 600;
+    color: ${({ color }) => color};
+`;
+
+const Username = styled.div`
+    font-size: 1.5em;
+    font-weight: 500;
+    color: white;
+    padding-bottom: 5px;
+`;
+
+const AccountCreated = styled.span`
+    color: white;
+    font-size: 0.8rem;
+`;
+
+const StatCardLabel = styled.span`
+    font-size: 0.8rem;
+`;
+
+const StatCardValue = styled.span`
+    font-size: 1.3rem;
+    font-weight: 500;
+`;
 
 export default function TopStats(props) {
-    const classes = useStyles();
-
-    const squareStats = {
-        overallWR: props.data.overallWinrate,
-        overallWN8: props.data.overallWN8,
-        recentWR: props.data.recentWinrate,
-        recentWN8: props.data.recentWN8,
-        PR: props.WGRating,
-    };
-
-    let clanInfo = <></>;
-    if (props.clanStats !== "NO CLAN") {
-        clanInfo = (
-            <span style={{ color: "white" }}>
-                {props.clanStats.role_i18n} at
-                <span
-                    style={{
-                        color: props.clanStats.clan.color,
-                        fontWeight: "600",
-                    }}
-                >
-                    {" "}
-                    [{props.clanStats.clan.tag}]{" "}
-                </span>
-                <br />
-            </span>
-        );
-    }
-
     const date = new Date(props.accountCreationDate * 1000);
     const creationDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 
-    return (
-        <div className={classes.root}>
-            <Paper
-                className="mobilePlayerName"
-                square
-                elevation={2}
-                style={{
-                    padding: "1rem",
-                    backgroundColor: WN8color(squareStats["overallWN8"]),
-                }}
-            >
-                <div
-                    style={{
-                        fontSize: "1.5em",
-                        fontWeight: "500",
-                        color: "white",
-                        paddingBottom: "5px",
-                    }}
-                >
-                    {props.username}
-                </div>
-                {clanInfo}
-                <span style={{ color: "white", fontSize: "0.8rem" }}>Account created {creationDate}</span>
+    const playerInfo =
+        props.clanStats !== "NO CLAN" ? (
+            <>
+                <Username>{props.username}</Username>
+                {props.clanStats.role_i18n} at <ClanTag {...props.clanStats.clan}>[{props.clanStats.clan.tag}]</ClanTag>
                 <br />
-            </Paper>
-            <div className="topstats">
-                <Paper
-                    className="playerName"
-                    square
-                    elevation={2}
-                    style={{
-                        backgroundColor: WN8color(squareStats["overallWN8"]),
-                    }}
-                >
-                    <div
-                        style={{
-                            fontSize: "1.5em",
-                            fontWeight: "500",
-                            color: "white",
-                            paddingBottom: "5px",
-                        }}
-                    >
-                        {props.username}
-                    </div>
-                    {clanInfo}
-                    <span style={{ color: "white", fontSize: "0.8rem" }}>Account created {creationDate}</span>
-                    <br />
-                </Paper>
-                <Paper
-                    className="paper"
-                    square
-                    elevation={2}
-                    style={{
-                        color: "white",
-                        backgroundColor: WN8color(squareStats["overallWN8"]),
-                    }}
-                >
-                    <span style={{ fontSize: "0.8em" }}>Overall WN8</span>
-                    <br />
-                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>{squareStats["overallWN8"]}</span>
-                </Paper>
-                <Paper
-                    className="paper"
-                    square
-                    elevation={2}
-                    style={{
-                        color: "white",
-                        backgroundColor: WRcolor(squareStats["overallWR"]),
-                    }}
-                >
-                    <span style={{ fontSize: "0.8em" }}>Overall WR</span>
-                    <br />
-                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>{squareStats["overallWR"]}%</span>
-                </Paper>
-                <Paper
-                    className="paper"
-                    square
-                    elevation={2}
-                    style={{
-                        color: "white",
-                        backgroundColor: WN8color(squareStats["recentWN8"]),
-                    }}
-                >
-                    <span style={{ fontSize: "0.8em" }}>Recent WN8</span>
-                    <br />
-                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>{squareStats["recentWN8"]}</span>
-                </Paper>
-                <Paper
-                    className="paper"
-                    square
-                    elevation={2}
-                    style={{
-                        color: "white",
-                        backgroundColor: WRcolor(squareStats["recentWR"]),
-                    }}
-                >
-                    <span style={{ fontSize: "0.8em" }}>Recent WR</span>
-                    <br />
-                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>{squareStats["recentWR"]}%</span>
-                </Paper>
-                <Paper
-                    className="paper"
-                    square
-                    elevation={2}
-                    style={{
-                        color: "white",
-                        backgroundColor: PRcolor(squareStats["PR"]),
-                    }}
-                >
-                    <span style={{ fontSize: "0.8em" }}>WG Rating</span>
-                    <br />
-                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>{squareStats["PR"]}</span>
-                </Paper>
-                <Paper
-                    className="paper"
-                    square
-                    elevation={2}
-                    style={{
-                        color: "white",
-                        backgroundColor: battlesColor(props.stats.battles),
-                    }}
-                >
-                    <span style={{ fontSize: "0.8em" }}>Battles</span>
-                    <br />
-                    <span style={{ fontSize: "1.3em", fontWeight: "500" }}>{props.stats.battles}</span>
-                </Paper>
-            </div>
-        </div>
+                <AccountCreated>Account created{creationDate}</AccountCreated>
+            </>
+        ) : null;
+
+    const statCards = [
+        { label: "Overall WN8", value: props.data.overallWN8, colorFn: WN8color },
+        { label: "Overall WR", value: props.data.overallWinrate, colorFn: WRcolor },
+        { label: "Recent WN8", value: props.data.recentWN8, colorFn: WN8color },
+        { label: "Recent WR", value: props.data.recentWinrate, colorFn: WRcolor },
+        { label: "WG Rating", value: props.WGRating, colorFn: PRcolor },
+        { label: "Battles", value: props.stats.battles, colorFn: battlesColor },
+    ];
+
+    return (
+        <Root>
+            <MobilePlayerName backgroundColor={WN8color(props.data.overallWN8)}>{playerInfo}</MobilePlayerName>
+            <StatsRow>
+                <PlayerName backgroundColor={WN8color(props.data.overallWN8)}>{playerInfo}</PlayerName>
+                {statCards.map(({ label, value, colorFn }) => (
+                    <StatCard backgroundColor={colorFn(value)}>
+                        <StatCardLabel>{label}</StatCardLabel>
+                        <br />
+                        <StatCardValue>{value}</StatCardValue>
+                    </StatCard>
+                ))}
+            </StatsRow>
+        </Root>
     );
 }

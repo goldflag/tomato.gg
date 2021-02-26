@@ -33,6 +33,8 @@ class StatsPage extends Component {
             recentStats: "",
             lastPlayedTime: "",
             accountCreationDate: "",
+            hofmainData: null,
+            hofData: null,
         };
     }
 
@@ -70,31 +72,28 @@ class StatsPage extends Component {
         const commonArgs = `application_id=${APIKey}&account_id=${id}`;
         const urls = [
             `${domain}/wot/account/info/?${commonArgs}`, //Overall Summary Stats
-            `${domain}/wot/tanks/stats/?${commonArgs}&fields=mark_of_mastery%2C+tank_id%2C+all`, //Overall tank stats TODO: not used?
-            `${domain}/wot/tanks/achievements/?${commonArgs}&fields=achievements%2C+tank_id`, //MOE Data TODO: not used?
             `${domain}/wot/clans/accountinfo/?${commonArgs}`, //Current Clan Data
             `${domain}/wot/clans/memberhistory/?${commonArgs}`, //Clan history
             `${backend}/api/${backendKey}/${server}/${id}`, //Recent stats from our own API
+            `${backend}/api/hofmain/${server}/${id}`,
+            `${backend}/api/hof/${server}/${id}`,
         ];
 
         return Promise.all(urls.map((url) => fetch(url)))
             .then((resps) => Promise.all(resps.map((r) => r.json())))
-            .then(([overall, tank, MOE, clanStats, clanHistory, recent]) => {
+            .then(([overall, clanStats, clanHistory, recent, hofmainData, hofData]) => {
                 const stats = overall.data[id].statistics.all;
                 const graphData = GraphCalculator(
                     recent.overallStats.tankWN8,
                     stats,
                     recent.overallStats.overallWN8,
                     recent.overallStats.avgTier,
-                    recent,
-                    this.context.theme
+                    recent
                 );
                 const newState = {
                     stats,
-                    tanksstats: tank.data[id],
                     username: overall.data[id].nickname,
                     WGRating: overall.data[id].global_rating,
-                    MOEstats: MOE.data[id],
                     accountCreationDate: overall.data[id].created_at,
                     lastPlayedTime: overall.data[id].last_battle_time,
                     recentStats: recent,
@@ -102,6 +101,8 @@ class StatsPage extends Component {
                     clanStats: clanStats.data[id] || "NO CLAN",
                     clanHistory: clanHistory.data[id].length ? clanHistory.data[id] : "NO CLAN HISTORY",
                     graphData,
+                    hofmainData,
+                    hofData,
                 };
                 this.setState(newState);
             })
@@ -109,53 +110,14 @@ class StatsPage extends Component {
     };
 
     render() {
-        const {
-            stats,
-            loading,
-            validID,
-            // MOEstats,
-            username,
-            WGRating,
-            clanStats,
-            graphData,
-            // tanksstats,
-            clanHistory,
-            recentStats,
-            lastPlayedTime,
-            accountCreationDate,
-        } = this.state;
+        const { loading, validID, username } = this.state;
 
         let statTable;
 
         if (loading) {
-            statTable = (
-                <Loader top={20} bottom={50} />
-                // <Styles>
-                //     <div className="loader">
-                //         <img
-                //             src={loader}
-                //             className="loadingCircle"
-                //             alt="loadingCircle"
-                //         ></img>
-                //     </div>
-                // </Styles>
-            );
+            statTable = <Loader top={20} bottom={50} />;
         } else if (validID) {
-            statTable = (
-                <MainTabs
-                    stats={stats}
-                    loading={loading}
-                    validID={validID}
-                    username={username}
-                    WGRating={WGRating}
-                    clanStats={clanStats}
-                    graphData={graphData}
-                    clanHistory={clanHistory}
-                    recentStats={recentStats}
-                    lastPlayedTime={lastPlayedTime}
-                    accountCreationDate={accountCreationDate}
-                />
-            );
+            statTable = <MainTabs {...this.state} />;
         } else {
             statTable = (
                 <>

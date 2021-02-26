@@ -12,8 +12,6 @@ import ExpectedDist from "./appbars/ExpectedDist";
 import RecordsBar from "./appbars/RecordsBar";
 import LineGraphs from "./appbars/LineGraphs";
 
-import "CSS/statspage.css";
-
 export default function Charts(props) {
     const size = useWindowSize();
 
@@ -130,7 +128,7 @@ export default function Charts(props) {
         );
     } else {
         output = (
-            <div className={"mobilechartsdark"}>
+            <div style={{ marginBottom: "1rem" }}>
                 <Paper
                     className={classes.paper}
                     square
@@ -174,12 +172,7 @@ export default function Charts(props) {
                 >
                     {clanHistory}
                 </Paper>
-                <Paper
-                    className={classes.paper}
-                    square
-                    elevation={2}
-
-                >
+                <Paper className={classes.paper} square elevation={2}>
                     <MOEDist MOEdata={props.data.tierMoeDist} MasteryData={props.data.tierMasteryDist} />
                 </Paper>
                 <Paper className={classes.paper} square elevation={2}>

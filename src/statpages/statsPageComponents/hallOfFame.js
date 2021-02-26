@@ -278,18 +278,6 @@ const ConditionalLink = ({ makeLink, ...props }) => {
 };
 
 export default function HallOfFame({ hofData, hofmainData, server, id, setHofData, setHofmainData }) {
-    useEffect(() => {
-        const url = `${backend}/api/hof/${server}/${id}`;
-        const url2 = `${backend}/api/hofmain/${server}/${id}`;
-
-        Promise.all([fetch(url).then((res) => res.json()), fetch(url2).then((res) => res.json())]).then(
-            ([hof, hofmain]) => {
-                setHofData(hof);
-                setHofmainData(hofmain);
-            }
-        );
-    }, [server, id, setHofData, setHofmainData]);
-
     let topTanks = <Loader color={null} bottom={20} top={20} />;
 
     if (hofData && hofmainData) {
