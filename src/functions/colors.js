@@ -60,3 +60,19 @@ export function battlesColor(battles) {
     else if (battles < 50000) return "#793DB6";
     else return "#401070";
 }
+
+export function rankColor(rank) {
+    if (rank < 8) return "#930D0D";
+    else if (rank < 15) return "#CD3333";
+    else if (rank < 30) return "#CC7A00";
+    else if (rank < 45) return "#CCB800";
+    else if (rank < 65) return "#849B24";
+    else if (rank < 80) return "#4D7326";
+    else if (rank < 90) return "#4099BF";
+    else if (rank < 95) return "#3972C6";
+    else if (rank < 98) return "#6844d4";
+    else if (rank < 99) return "#522b99";
+    else if (rank < 99.5) return "#411d73";
+    else if (rank < 99.9) return "#310d59";
+    else return "#24073d";
+}
