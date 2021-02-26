@@ -1,8 +1,10 @@
+// NPM
 import React from "react";
 import MUIDataTable from "mui-datatables";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import WN8color from "Functions/WN8color";
-import WRcolor from "Functions/WRcolor";
+
+// LOCAL
+import { WN8color, WRcolor } from "Functions/colors";
 import nationVal from "Data/nationVal";
 import classVal from "Data/classVal";
 

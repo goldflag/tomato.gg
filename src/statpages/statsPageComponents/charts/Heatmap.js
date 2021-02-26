@@ -1,8 +1,6 @@
 import React from "react";
 import { ResponsiveHeatMap } from "@nivo/heatmap";
-import WN8color from "Functions/WN8color";
-import WRcolor from "Functions/WRcolor";
-
+import { WN8color, WRcolor } from "Functions/colors";
 export default function WN8Heatmap({ data, type }) {
     return (
         <div style={{ height: "calc(310px)" }}>

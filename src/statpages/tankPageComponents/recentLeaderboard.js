@@ -1,30 +1,12 @@
+// NPM
 import React, { useEffect } from "react";
 import { useTable, usePagination } from "react-table";
 import { Link } from "react-router-dom";
 
+// Local
 import { StyledTable, TableContainer } from "Components/tableComponents";
-
-import WN8c from "Functions/WN8color";
-import WRc from "Functions/WRcolor";
-
+import setColor from "Functions/cellStyle";
 export default function RecentsLeaderboard({ data, type, highlightUserID }) {
-    function setColor(column, value) {
-        if (column === "wn8")
-            return {
-                backgroundColor: WN8c(value),
-                color: "white",
-                padding: "10px",
-            };
-        else if (column === "winrate")
-            return {
-                backgroundColor: WRc(value.slice(0, -1)),
-                color: "white",
-                padding: "10px",
-            };
-        else if (column === type) return { backdropFilter: "brightness(1.2)" };
-        else return null;
-    }
-
     function headerStyle(header) {
         if (header.id === type) {
             return {
@@ -126,7 +108,6 @@ export default function RecentsLeaderboard({ data, type, highlightUserID }) {
         }
     }, [rowRef]);
 
-    // Render the UI for your table
     return (
         <TableContainer>
             <StyledTable {...getTableProps()}>
@@ -153,7 +134,7 @@ export default function RecentsLeaderboard({ data, type, highlightUserID }) {
                                 {row.cells.map((cell) => (
                                     <td
                                         {...cell.getCellProps({
-                                            style: setColor(cell.column.id, cell.value),
+                                            style: setColor(type === cell.column.id, cell.column.id, cell.value),
                                         })}
                                     >
                                         {cell.render("Cell")}

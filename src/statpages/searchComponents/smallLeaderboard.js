@@ -1,9 +1,11 @@
+// NPM
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTable } from "react-table";
 import styled from "styled-components";
-import WN8c from "Functions/WN8color";
-import WRc from "Functions/WRcolor";
+
+// LOCAL
+import { WN8color, WRcolor } from "Functions/colors";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -98,7 +100,7 @@ export default function SmallLeaderboard(props) {
                                 padding: "8px",
                                 margin: "-8px -8px",
                                 color: "white",
-                                backgroundColor: WN8c(res[i][props.type]),
+                                backgroundColor: WN8color(res[i][props.type]),
                             }}
                         >
                             {res[i][props.type]}
@@ -111,7 +113,7 @@ export default function SmallLeaderboard(props) {
                                 padding: "8px",
                                 margin: "-8px -8px",
                                 color: "white",
-                                backgroundColor: WRc(res[i][props.type]),
+                                backgroundColor: WRcolor(res[i][props.type]),
                             }}
                         >
                             {res[i][props.type]}

@@ -1,16 +1,15 @@
-import WN8c from "./WN8color";
-import WRc from "./WRcolor";
+import { WN8color, WRcolor } from "./colors";
 
 export default function setColor(isSorted, column, value) {
     if (column === "wn8" || column === "overallWN8")
         return {
-            backgroundColor: WN8c(value),
+            backgroundColor: WN8color(value),
             color: "white",
             padding: "10px",
         };
     else if (column === "winrate")
         return {
-            backgroundColor: WRc(value.slice(0, -1)),
+            backgroundColor: WRcolor(value.slice(0, -1)),
             color: "white",
             padding: "10px",
         };

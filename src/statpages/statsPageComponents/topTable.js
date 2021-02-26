@@ -6,7 +6,7 @@ import styled, { css } from "styled-components";
 // LOCAL
 
 import { TableContainer } from "Components/tableComponents";
-import WN8c from "Functions/WN8color";
+import { WN8color } from "Functions/colors";
 
 const StyledTable = styled.table`
     white-space: nowrap;
@@ -62,7 +62,7 @@ export default function TopTable({ data }) {
             };
         else if (cell.row.original.name === "WN8")
             return {
-                backgroundColor: WN8c(value),
+                backgroundColor: WN8color(value),
                 color: "white",
                 padding: "10px",
             };
