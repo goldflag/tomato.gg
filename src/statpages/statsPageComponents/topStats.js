@@ -95,9 +95,14 @@ export default function TopStats(props) {
                 <Username>{props.username}</Username>
                 {props.clanStats.role_i18n} at <ClanTag {...props.clanStats.clan}>[{props.clanStats.clan.tag}]</ClanTag>
                 <br />
-                <AccountCreated>Account created{creationDate}</AccountCreated>
+                <AccountCreated>Account created {creationDate}</AccountCreated>
             </>
-        ) : null;
+        ) : (
+            <>
+                <Username>{props.username}</Username>
+                <AccountCreated>Account created {creationDate}</AccountCreated>
+            </>
+        );
 
     const statCards = [
         { label: "Overall WN8", value: props.data.overallWN8, colorFn: WN8color },

@@ -82,6 +82,7 @@ class StatsPage extends Component {
         return Promise.all(urls.map((url) => fetch(url)))
             .then((resps) => Promise.all(resps.map((r) => r.json())))
             .then(([overall, clanStats, clanHistory, recent, hofmainData, hofData]) => {
+                console.log(overall);
                 const stats = overall.data[id].statistics.all;
                 const graphData = GraphCalculator(
                     recent.overallStats.tankWN8,
@@ -111,9 +112,7 @@ class StatsPage extends Component {
 
     render() {
         const { loading, validID, username } = this.state;
-
         let statTable;
-
         if (loading) {
             statTable = <Loader top={20} bottom={50} />;
         } else if (validID) {
