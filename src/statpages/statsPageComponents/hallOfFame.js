@@ -299,7 +299,7 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                 <div className="tanksTitle">
                     <span style={{ fontSize: "2rem" }}>Hall of Fame</span>
                     <br />
-                    <span style={{ fontSize: "1rem" }}>60 DAYS | MINIMUM 75 BATTLES | TIER 6+</span>
+                    <span style={{ fontSize: "1rem" }}>60 DAYS | MINIMUM 75 BATTLES | VEHICLES TIER 6+</span>
                 </div>
                 <div className="overall">
                     {top.battles.value >= 75 ? (
@@ -425,7 +425,7 @@ const TankRankings = ({ userID, hofData }) => (
         <div className="tanksTitle">
             <span style={{ fontSize: "2rem" }}>Tank Rankings</span>
             <br />
-            <span style={{ fontSize: "1rem" }}>60 DAYS | MINIMUM 25 BATTLES | TIER 6+</span>
+            <span style={{ fontSize: "1rem" }}>60 DAYS | MINIMUM 25 BATTLES | VEHICLES TIER 6+</span>
         </div>
         <div className="tanksContainer">
             <RSC id="RSC-Example" noScrollY={true}>

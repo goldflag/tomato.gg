@@ -143,7 +143,7 @@ export default function Leaderboard() {
                         setTier(6);
                     }}
                 >
-                    Tier 6+
+                    In Vehicles Tier 6+
                 </FilterButton>
                 <FilterButton
                     selected={tier === 8}
@@ -151,7 +151,7 @@ export default function Leaderboard() {
                         setTier(8);
                     }}
                 >
-                    Tier 8+
+                    In Vehicles Tier 8+
                 </FilterButton>
             </FilterButtonGroup>
         );
