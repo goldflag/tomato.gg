@@ -39,11 +39,12 @@ const StyledTable = styled.table`
         font-weight: 500;
     }
     td {
+        border-left: 1px solid rgb(13, 21, 64); 
         color: rgb(240, 240, 240);
         padding: 10px;
         margin: 0;
-        :last-child {
-            border-right: 0;
+        :first-child {
+            border-left: 0;
         }
         ${({ tdOverride }) =>
             css`
