@@ -4,6 +4,7 @@ import { Button, ButtonGroup } from "@material-ui/core";
 import { MoEStars } from "./moeStars";
 import { useAsyncDebounce } from "react-table";
 import InputBase from "@material-ui/core/InputBase";
+import { classConv } from "Data/conversions";
 
 export const FilterButton = styled(Button)`
     background-color: ${({ selected }) => (selected ? css`rgb(222, 13, 93)` : css`rgb(66, 84, 143)`)} !important;
@@ -56,11 +57,11 @@ const numericTierFilterOptions = tierFilterOptions.map(({ label, value }, i) =>
 
 const classFilterOptions = [
     { label: "ALL", value: undefined },
-    { value: "HT" },
-    { value: "MT" },
-    { value: "LT" },
-    { value: "TD" },
-    { value: "SPG" },
+    ...Object.entries(classConv).map(([key, val]) => ({
+        value: key,
+        label: val,
+        image: require(`Assets/classIcons/${val}.png`),
+    })),
 ];
 
 const nations = ["China", "France", "Germany", "Japan", "Sweden", "UK", "USA", "USSR", "Czech", "Italy", "Poland"];
@@ -123,7 +124,9 @@ export const TierFilter = makeButtonFilter("tank tier filter", tierFilterOptions
 export const NumericTierFilter = makeButtonFilter("tank tier filter", numericTierFilterOptions);
 export const MoETierFilter = makeButtonFilter("tank tier filter", tierFilterOptions.slice(0, 7));
 
-export const ClassFilter = makeButtonFilter("tank class filter", classFilterOptions);
+export const ClassFilter = makeButtonFilter("tank class filter", classFilterOptions, ({ label, image }) =>
+    label === "ALL" ? label : <img src={image} style={{ maxHeight: "20px", filter: "brightness(1.5)" }} alt={label} />
+);
 export const NationFilter = makeButtonFilter("tank nation filter", nationFilterOptions, ({ label, image }) =>
     label === "ALL" ? label : <img src={image} style={{ maxHeight: "25px" }} alt={label} />
 );
