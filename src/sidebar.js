@@ -13,8 +13,8 @@ import { NewIcon } from "Components";
 const strings = new LocalizedStrings({
     en: {
         support: "Support Tomato.gg",
-        donations: `Tomato.gg runs entirely on user donations. If you find value in the website, consider chipping
-        in to help keep the servers running.`,
+        donations: `Tomato.gg runs entirely on user donations. If you find value in the website, 
+        consider chipping in to help keep the servers running.`,
         kofi: "Support on Ko-fi",
         paypal: "Support on Paypal",
         partnered: "Partnered Websites",
@@ -22,257 +22,213 @@ const strings = new LocalizedStrings({
         createdBy: "Tomato.gg is a website created by",
         notAffiliated: "and is not affiliated with Wargaming.net.",
     },
+    fr: {
+        support: "Soutenez Tomato.gg",
+        donations: `Tomato.gg fonctionne pleinement sur les dons par utilisateurs. Si vous trouvez de 
+        la valeur sur ce site web, considérez de faire un don pour aider à maintenir les serveurs.`,
+        kofi: "Soutenez avec Ko-fi",
+        paypal: "Soutenez avec Paypal",
+        partnered: "Site web partenaire",
+        herhor: "Classement des marques d'excellence et générateur d'image",
+        createdBy: "Tomato.gg est un site web créé par",
+        notAffiliated: "et n'est pas affilié avec Wargaming.net.",
+    },
 });
 
-const Styles = styled.div`
-    .sidebar {
-        font-family: "Roboto";
-        font-weight: 500;
-        margin-top: 0rem;
-        margin-bottom: 10rem;
-        z-index: 0;
-        height: 100%;
-        width: 14rem;
-        margin-right: 14rem;
-        position: fixed;
-        left: 0;
-        background: url(${background}) no-repeat fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        overflow-x: hidden;
-    }
+const StyledSidebar = styled.div`
+    font-family: "Roboto";
+    font-weight: 500;
+    margin-top: 0rem;
+    margin-bottom: 10rem;
+    z-index: 0;
+    height: 100%;
+    width: 14rem;
+    margin-right: 14rem;
+    position: fixed;
+    left: 0;
+    background: url(${background}) no-repeat fixed;
+    background-size: cover;
+    overflow-x: hidden;
 
-    .layer {
-        backdrop-filter: blur(2px);
-        background-color: rgba(24, 25, 92, 0.7);
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+    @media screen and (max-width: 1000px) {
+        width: 0px;
+        padding-top: 15px;
     }
+`;
 
-    .line {
-        width: 100%;
-        height: 0%;
-        border-bottom: 1px solid rgb(100, 95, 129);
-        position: absolute;
+const LogoImg = styled.img`
+    height: 110%;
+    width: auto;
+    display: flex;
+    alignitems: center;
+    padding: 0rem;
+`;
+
+const Layer = styled.div`
+    backdrop-filter: blur(2px);
+    background-color: rgba(24, 25, 92, 0.7);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+`;
+
+const Line = styled.div`
+    width: 100%;
+    height: 0%;
+    border-bottom: 1px solid rgb(100, 95, 129);
+    @media screen and (max-width: 1000px) {
+        width: 0px;
     }
+`;
 
-    .logo {
-        padding: 10px 10px 10px 10px;
-        width: auto;
-        height: 4em;
-    }
+const Logo = styled.div`
+    padding: 10px 10px 10px 10px;
+    width: auto;
+    height: 4em;
+`;
 
-    .menu {
-        font-size: 14px;
-        padding-top: 10px;
-    }
-
-    .menu a {
+const Menu = styled.div`
+    font-size: 14px;
+    padding-top: 10px;
+    a {
         text-decoration: none;
         color: #dddddd !important;
         display: block;
     }
-
-    .menu a:hover {
+    a:hover {
         color: rgb(207, 12, 116) !important;
-    }
-
-    .bottom {
-        padding: 10px 10px 10px 10px;
-        margin: 10px;
-        font-size: 0.8rem;
-        font-weight: 300;
-        color: #96a7c7;
-        position: fixed;
-        border-top: 1px solid rgb(100, 95, 129);
-        bottom: 0;
-        /* max-width: calc(10vw + 50px); */
-    }
-
-    .menu-link {
-        padding: 10px 20px 10px 20px;
-        font-size: 16px;
-        color: #dddddd;
-    }
-
-    .menu-link-icon {
-        vertical-align: middle;
-        padding: 0px 1px 2px 1px !important;
-    }
-
-    /* TODO: Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
-
-    @media screen and (max-width: 1000px) {
-        .sidebar {
-            width: 0px;
-        }
-        .sidebar {
-            padding-top: 15px;
-        }
-        /* .sidebar a {font-size: 18px;} */
-        .bottom {
-            max-width: 0;
-        }
-        .line {
-            width: 0px;
-        }
-    }
-
-    .donationButton {
-        width: 100%;
-        margin: 10px 0;
-        height: 30px;
-        padding: 5px;
-        border-radius: 10px;
-        color: white;
-        text-align: center;
-        font-size: 0.9rem;
-    }
-
-    .paypal {
-        background-color: rgb(34, 97, 179);
-    }
-
-    .kofi {
-        background-color: rgb(232, 37, 79);
-    }
-
-    .paypal:hover {
-        background-color: rgb(50, 110, 200);
-    }
-
-    .kofi:hover {
-        background-color: rgb(245, 60, 110);
-    }
-
-    .new {
-        font-size: 0.8rem;
-        padding: 3px;
-        color: rgb(255, 255, 255);
-        border-radius: 5px;
-        background-color: rgb(0, 184, 104);
     }
 `;
 
-const Sidebar = withRouter((props) => {
-    return (
-        <Styles>
-            <div className="sidebar">
-                <div className="layer">
-                    <Link to="/">
-                        <div className="logo">
-                            <img
-                                src={TomatoLogo}
-                                alt="logo"
-                                style={{
-                                    height: "110%",
-                                    width: "auto",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    padding: "0rem",
-                                }}
-                            />
-                        </div>
-                    </Link>
-                    <div className="line" />
-                    <div className="menu">
-                        {menuRoutes.map(({ path, title, Icon, isNew }) => (
-                            <Link to={path} className="menu-link" key={path}>
-                                <Icon className="menu-link-icon" />
-                                &nbsp;&nbsp;{title}&nbsp;&nbsp;
-                                {isNew ? <NewIcon /> : null}
-                            </Link>
-                        ))}
-                    </div>
+const MenuLink = styled(Link)`
+    padding: 10px 20px 10px 20px;
+    font-size: 16px;
+    color: #dddddd;
 
-                    <div
-                        style={{
-                            backgroundColor: "rgba(40, 40, 60, 0.4)",
-                            width: "205px",
-                            height: "210px",
-                            margin: "10px",
-                            bottom: "150px",
-                            position: "absolute",
-                            padding: "10px",
-                            fontSize: "0.8rem",
-                            fontWeight: "400",
-                            color: "rgb(161, 181, 214)",
-                            backdropFilter: "blur( 4px )",
-                        }}
-                    >
-                        <h2
-                            style={{
-                                fontSize: "1.1rem",
-                                fontWeight: "500",
-                                color: "white",
-                                lineHeight: "0rem",
-                            }}
-                        >
-                            {" "}
-                            {strings.support}
-                        </h2>
-                        {strings.donations}
-                        <a target="blank" href="https://ko-fi.com/goldflag">
-                            <div className="donationButton kofi">{strings.kofi}</div>
-                        </a>
-                        <a target="blank" href="https://www.paypal.com/donate/?hosted_button_id=U457SKR8EQTSQ">
-                            <div className="donationButton paypal">{strings.paypal}</div>
-                        </a>
-                    </div>
-                    <div
-                        style={{
-                            fontSize: "0.8rem",
-                            fontWeight: "300",
-                            color: "#96a7c7",
-                            padding: "15px",
-                            bottom: "90px",
-                            position: "absolute",
-                        }}
-                    >
-                        <span style={{ fontWeight: "500" }}>{strings.partnered}</span>
-                        <span style={{ color: "white" }}>
-                            <br />
-                            <a style={{ color: "white" }} target="blank" href="https://herhor.net/wot/">
-                                herhor.net
-                            </a>
-                        </span>
-                        - {strings.herhor}
-                        <br />
-                    </div>
-                    <div
-                        className="line"
-                        style={{
-                            bottom: "90px",
-                            position: "absolute",
-                        }}
-                    />
+    svg {
+        vertical-align: middle;
+        padding: 0px 1px 2px 1px !important;
+    }
+`;
 
-                    <div
-                        style={{
-                            fontSize: "0.8rem",
-                            fontWeight: "300",
-                            color: "#96a7c7",
-                            padding: "15px",
-                            bottom: "0px",
-                            position: "absolute",
-                        }}
-                    >
-                        {strings.createdBy}{" "}
-                        <Link style={{ color: "rgb(205, 205, 205)" }} to="/stats/NA/goldflag=1011694618">
-                            Goldflag
-                        </Link>{" "}
-                        {strings.notAffiliated}
+const Bottom = styled.div`
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+`;
+
+const DonationButton = styled.div`
+    width: 100%;
+    margin: 10px 0;
+    height: 30px;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    font-size: 0.9rem;
+`;
+const Kofi = styled(DonationButton)`
+    background-color: rgb(232, 37, 79);
+    &hover {
+        background-color: rgb(245, 60, 110);
+    }
+`;
+const PayPal = styled(DonationButton)`
+    background-color: rgb(34, 97, 179);
+    &hover {
+        background-color: rgb(50, 110, 200);
+    }
+`;
+
+const Support = styled.div`
+    background-color: rgba(40, 40, 60, 0.4);
+    margin: 10px 10px 0px 10px;
+    padding: 10px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: rgb(161, 181, 214);
+    backdrop-filter: blur(4px);
+    h2 {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: white;
+        line-height: 0rem;
+    }
+`;
+
+const Partnered = styled.div`
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: #96a7c7;
+    padding: 15px;
+    a {
+        color: white;
+    }
+`;
+
+const CopyrightNotice = styled.div`
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: #96a7c7;
+    padding: 15px;
+    a {
+        color: white;
+    }
+`;
+
+const Sidebar = withRouter((props) => (
+    <StyledSidebar>
+        <Layer>
+            <Link to="/">
+                <Logo>
+                    <LogoImg src={TomatoLogo} alt="logo" />
+                </Logo>
+            </Link>
+            <Line />
+            <Menu>
+                {menuRoutes.map(({ path, title, Icon, isNew }) => (
+                    <MenuLink to={path} key={path}>
+                        <Icon />
+                        &nbsp;&nbsp;{title}&nbsp;&nbsp;
+                        {isNew ? <NewIcon /> : null}
+                    </MenuLink>
+                ))}
+            </Menu>
+            <Bottom>
+                <Support>
+                    <h2>{strings.support}</h2>
+                    {strings.donations}
+                    <a target="blank" href="https://ko-fi.com/goldflag">
+                        <Kofi>{strings.kofi}</Kofi>
+                    </a>
+                    <a target="blank" href="https://www.paypal.com/donate/?hosted_button_id=U457SKR8EQTSQ">
+                        <PayPal className="donationButton paypal">{strings.paypal}</PayPal>
+                    </a>
+                </Support>
+                <Partnered>
+                    <span style={{ fontWeight: "500" }}>{strings.partnered}</span>
+                    <span>
                         <br />
-                        Zeyu Yang © 2021
-                    </div>
-                </div>
-            </div>
-        </Styles>
-    );
-});
+                        <a target="blank" href="https://herhor.net/wot/">
+                            herhor.net
+                        </a>{" "}
+                    </span>
+                    - {strings.herhor}
+                    <br />
+                </Partnered>
+                <Line />
+                <CopyrightNotice>
+                    {strings.createdBy} <Link to="/stats/NA/goldflag=1011694618">Goldflag</Link> {strings.notAffiliated}
+                    <br />
+                    Zeyu Yang © 2021
+                </CopyrightNotice>
+            </Bottom>
+        </Layer>
+    </StyledSidebar>
+));
 
 export default Sidebar;
