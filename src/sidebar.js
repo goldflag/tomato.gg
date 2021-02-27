@@ -1,37 +1,13 @@
+// NPM
 import React from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
+
+// LOCAL
+import { menuRoutes } from "./routes";
 import TomatoLogo from "Assets/tomato.png";
 import background from "Assets/sidebar.jpg";
-import { Apps, Info, Star, Games, BarChart, LibraryBooks, FormatListNumbered } from "@material-ui/icons";
 import { NewIcon } from "Components";
-
-const LINKS = [
-    { url: "/", title: "Home", Icon: Apps },
-    {
-        url: "/tank-stats",
-        title: "Tank Stats",
-        newIcon: true,
-        Icon: BarChart,
-    },
-    {
-        url: "/leaderboards",
-        title: "Leaderboards",
-        newIcon: true,
-        Icon: FormatListNumbered,
-    },
-    // {url: "/tank-list", title: "Tank List", Icon: BarChart},
-    // { url: "/server-stats", title: "Server Stats", Icon: Public },
-    { url: "/moe", title: "MoE Reqs", Icon: Star },
-    { url: "/mastery", title: "Mastery Reqs", Icon: Star },
-    { url: "/wn8", title: "WN8 Exp. Values", Icon: Games },
-    {
-        url: "/stats-reference",
-        title: "Stats Reference",
-        Icon: LibraryBooks,
-    },
-    { url: "/about", title: "About", Icon: Info },
-];
 
 const Styles = styled.div`
     .sidebar {
@@ -189,11 +165,11 @@ const Sidebar = withRouter((props) => {
                     </Link>
                     <div className="line" />
                     <div className="menu">
-                        {LINKS.map(({ url, title, Icon, newIcon }) => (
-                            <Link to={url} className="menu-link" key={url}>
+                        {menuRoutes.map(({ path, title, Icon, isNew }) => (
+                            <Link to={path} className="menu-link" key={path}>
                                 <Icon className="menu-link-icon" />
                                 &nbsp;&nbsp;{title}&nbsp;&nbsp;
-                                {newIcon ? <NewIcon /> : null}
+                                {isNew ? <NewIcon /> : null}
                             </Link>
                         ))}
                     </div>

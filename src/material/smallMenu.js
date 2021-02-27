@@ -8,9 +8,11 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { Apps, Info, Star, Games, BarChart, LibraryBooks } from "@material-ui/icons";
 import smallLogo from "Assets/smalllogo.png";
 import styled from "styled-components";
+
+import { mobileMenuRoutes } from "../routes";
+import { NewIcon } from "Components";
 
 const Styles = styled.div`
     .dark-mode {
@@ -89,70 +91,17 @@ export default function TemporaryDrawer() {
                 onKeyDown={toggleDrawer(anchor, false)}
             >
                 <List>
-                    <Link to="/">
-                        <ListItem button key={"1"}>
-                            <ListItemIcon>
-                                <Apps style={textStyle} />
-                            </ListItemIcon>
-                            <ListItemText primary={"Home"} style={textStyle} />
-                        </ListItem>
-                    </Link>
-                    <Link to="/tank-stats">
-                        <ListItem button key={"2"}>
-                            <ListItemIcon>
-                                <BarChart style={textStyle} />
-                            </ListItemIcon>
-                            <ListItemText primary={"Tank Stats"} style={textStyle} />
-                        </ListItem>
-                    </Link>
-                    <Link to="/moe">
-                        <ListItem button key={"3"}>
-                            <ListItemIcon>
-                                <Star style={textStyle} />
-                            </ListItemIcon>
-                            <ListItemText primary={"MoE Reqs"} style={textStyle} />
-                        </ListItem>
-                    </Link>
-                    <Link to="/mastery">
-                        <ListItem button key={"3"}>
-                            <ListItemIcon>
-                                <Star style={textStyle} />
-                            </ListItemIcon>
-                            <ListItemText primary={"Mastery Reqs"} style={textStyle} />
-                        </ListItem>
-                    </Link>
-                    <Link to="/wn8">
-                        <ListItem button key={"3"}>
-                            <ListItemIcon>
-                                <Games style={textStyle} />
-                            </ListItemIcon>
-                            <ListItemText primary={"WN8 Exp. Values"} style={textStyle} />
-                        </ListItem>
-                    </Link>
-                    {/* <Link to="/server-stats">
-                        <ListItem button key={"3"}>
-                            <ListItemIcon>
-                                <Star style={iconStyle} />
-                            </ListItemIcon>
-                            <ListItemText primary={"Server Stats"} style={textStyle}/>
-                        </ListItem>
-                    </Link> */}
-                    <Link to="/stats-reference">
-                        <ListItem button key={"4"}>
-                            <ListItemIcon>
-                                <LibraryBooks style={textStyle} />
-                            </ListItemIcon>
-                            <ListItemText primary={"Stats Reference"} style={textStyle} />
-                        </ListItem>
-                    </Link>
-                    <Link to="/about">
-                        <ListItem button key={"5"}>
-                            <ListItemIcon>
-                                <Info style={textStyle} />
-                            </ListItemIcon>
-                            <ListItemText primary={"About"} style={textStyle} />
-                        </ListItem>
-                    </Link>
+                    {mobileMenuRoutes.map(({ Icon, title, path, isNew }, i) => (
+                        <Link to={path} key={i}>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <Icon style={textStyle} />
+                                </ListItemIcon>
+                                <ListItemText primary={title} style={textStyle} />
+                                {isNew ? <NewIcon /> : null}
+                            </ListItem>
+                        </Link>
+                    ))}
                 </List>
                 <Divider />
             </div>
