@@ -1,11 +1,23 @@
+// NPM
 import React from "react";
+import LocalizedStrings from "react-localization";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
+
+// LOCAL
 import SelectQuery from "./select";
+
+const strings = new LocalizedStrings({
+    en: {
+        placeholder: "Enter a Username (e.g. Goldflag)",
+        ariaLabel: "search for a player",
+        searchAriaLabel: "search",
+    },
+});
 
 export default function SearchBar(props) {
     const useStyles = makeStyles((t) => ({
@@ -41,13 +53,13 @@ export default function SearchBar(props) {
         <Paper className={classes.root}>
             <InputBase
                 className={classes.input}
-                placeholder="Enter Username (e.g. Goldflag)"
-                inputProps={{ "aria-label": "search google maps" }}
+                placeholder={strings.placeholder}
+                inputProps={{ "aria-label": strings.ariaLabel }}
                 onChange={(e) => props.setName(e.target.value)}
             />
             <Divider className={classes.divider} orientation="vertical" />
             <SelectQuery setServer={props.setServer} server={props.server} setMode={props.setMode} mode={props.mode} />
-            <IconButton type="submit" className={classes.iconButton} aria-label="search">
+            <IconButton type="submit" className={classes.iconButton} aria-label={strings.searchAriaLabel}>
                 <SearchIcon />
             </IconButton>
         </Paper>

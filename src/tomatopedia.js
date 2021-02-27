@@ -26,8 +26,10 @@ export default function Tomatopedia() {
                 <Topbar />
                 <main className="wrapper">
                     <Switch>
-                        {routes.map(({ path, Component }) => (
-                            <Route path={path}>{Component}</Route>
+                        {routes.map(({ path, Component }, i) => (
+                            <Route path={path} key={i}>
+                                {Component}
+                            </Route>
                         ))}
                         <Redirect to="/" />
                     </Switch>

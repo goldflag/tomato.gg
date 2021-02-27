@@ -1,16 +1,20 @@
+// NPM
 import React, { useState, useContext } from "react";
+import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
+import { IconButton, Chip, Avatar } from "@material-ui/core";
+import { DeleteOutline } from "@material-ui/icons";
+import LocalizedStrings from "react-localization";
+
+// LOCAL
 import "CSS/topbar.css";
 import SmallSearchBar from "Material/smallSearchBar";
 import DiscordLogo from "Assets/Discord.svg";
 import SmallMenu from "Material/smallMenu";
-import { withRouter } from "react-router-dom";
 import { ServerContext, SearchHistoryContext } from "Context";
 import { serverConv } from "Data/conversions";
-import { IconButton, Chip, Avatar } from "@material-ui/core";
-import { DeleteOutline } from "@material-ui/icons";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
@@ -112,6 +116,16 @@ const Styles = styled.div`
         }
     }
 `;
+
+const servers = ["com", "eu", "asia"];
+
+const strings = new LocalizedStrings({
+    en: {
+        clearHistory: "clear history",
+        server: "select default server",
+    },
+});
+
 export default withRouter(function Topbar(props) {
     const { server, toggleServer } = useContext(ServerContext);
     const { history, addToHistory, removeFromHistory, clearHistory } = useContext(SearchHistoryContext);
@@ -142,7 +156,6 @@ export default withRouter(function Topbar(props) {
 
     return (
         <div>
-            {/* <Styles> */}
             <div className="topbar">
                 <div className="smallMenu">
                     <SmallMenu />
@@ -174,7 +187,7 @@ export default withRouter(function Topbar(props) {
                             ))}
                         {history.length ? (
                             <IconButton
-                                aria-label="clear history"
+                                aria-label={strings.clearHistory}
                                 size="small"
                                 onClick={clearHistory}
                                 style={{
@@ -194,36 +207,19 @@ export default withRouter(function Topbar(props) {
                             height: "20px",
                         }}
                     >
-                        <ButtonGroup variant="text" aria-label="text primary button group">
-                            <Button
-                                style={{
-                                    backgroundColor: server === "com" ? "rgb(222, 13, 93)" : "rgb(37, 46, 105)",
-                                }}
-                                onClick={() => toggleServer("com")}
-                                className="selectButton"
-                            >
-                                NA
-                            </Button>
-                            <Button
-                                style={{
-                                    borderLeft: "1px solid rgb(30, 30, 30)",
-                                    backgroundColor: server === "eu" ? "rgb(222, 13, 93)" : "rgb(37, 46, 105)",
-                                }}
-                                onClick={() => toggleServer("eu")}
-                                className="selectButton"
-                            >
-                                EU
-                            </Button>
-                            <Button
-                                style={{
-                                    borderLeft: "1px solid rgb(30, 30, 30)",
-                                    backgroundColor: server === "asia" ? "rgb(222, 13, 93)" : "rgb(37, 46, 105)",
-                                }}
-                                onClick={() => toggleServer("asia")}
-                                className="selectButton"
-                            >
-                                ASIA
-                            </Button>
+                        <ButtonGroup variant="text" aria-label={strings.server}>
+                            {servers.map((id, i) => (
+                                <Button
+                                    key={i}
+                                    style={{
+                                        backgroundColor: server === id ? "rgb(222, 13, 93)" : "rgb(37, 46, 105)",
+                                    }}
+                                    onClick={() => toggleServer(id)}
+                                    className="selectButton"
+                                >
+                                    {serverConv[id]}
+                                </Button>
+                            ))}
                         </ButtonGroup>
                     </div>
                     <div className="discord">
@@ -244,7 +240,6 @@ export default withRouter(function Topbar(props) {
                     </form>
                 </div>
             </div>
-            {/* </Styles> */}
         </div>
     );
 });

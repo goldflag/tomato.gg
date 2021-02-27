@@ -1,8 +1,45 @@
+// NPM
 import React, { useEffect } from "react";
 import ReactGA from "react-ga";
 import Paper from "@material-ui/core/Paper";
+import LocalizedStrings from "react-localization";
+
+// LOCAL
 import "CSS/tankstats.css";
 import "CSS/innerpage.css";
+
+const strings = new LocalizedStrings({
+    en: {
+        h1: `About Tomato.gg`,
+
+        updated: `UPDATED `,
+
+        about0: `I created this site to provide an accessible interface to view a huge variety of stats, 
+        many of which are only found here. Some stats have taken inspiration from other sites.`,
+
+        about1: `Tomato.gg doesn't aim to do everything. It will never have server stats as detailed as those
+        on wot-news.com, nor will it have the precise individual battles as are accessible on
+        WN8lab.com. Tomato.gg is being actively developed and is nowhere near feature complete. In
+        the future, I plan to expand the player stats page, expand the tank stats page, implement
+        clan stats, and finish the leaderboards.`,
+
+        about2: `Tomato.gg fully supports EU, NA, and ASIA player stats. You can still view stats for RU 
+        gamers, but there are no automatic daily stat updates.`,
+
+        about3: `Check out Tomato.gg on mobile as well. I have optimized the mobile site for the best user
+        experience while still being nearly 100% feature complete.`,
+
+        about4: `has helped extensively with the development of Tomato.gg. Thanks so much!`,
+        joinMy: `Join my`,
+
+        discord: `Discord server`,
+
+        feedback: `If you would like to provide feedback, suggestions, and bug reports.`,
+
+        thanks: `Thanks for using Tomato.gg!`,
+    },
+});
+
 const trackingId = process.env.REACT_APP_GA;
 
 export default function About() {
@@ -22,7 +59,7 @@ export default function About() {
                     }}
                 >
                     <div>
-                        <h1 style={{ fontSize: "1.5rem", fontWeight: "500" }}>About Tomato.gg</h1>
+                        <h1 style={{ fontSize: "1.5rem", fontWeight: "500" }}>{strings.h1}</h1>
                         <span
                             style={{
                                 fontSize: "0.8rem",
@@ -30,42 +67,36 @@ export default function About() {
                                 color: "rgb(150,150,150)",
                             }}
                         >
-                            UPDATED 5/1/2021
+                            {strings.updated} 5/1/2021
                         </span>{" "}
                         <br />
                         <br />
                         <span style={{ fontSize: "0.9rem", lineHeight: "1.4rem" }}>
-                            I created this site to provide an accessible interface to view a huge variety of stats, many
-                            of which are only found here. Some stats have taken inspiration from other sites.
+                            {strings.about0}
                             <br />
-                            Tomato.gg doesn't aim to do everything. It will never have server stats as detailed as those
-                            on wot-news.com, nor will it have the precise individual battles as are accessible on
-                            WN8lab.com. Tomato.gg is being actively developed and is nowhere near feature complete. In
-                            the future, I plan to expand the player stats page, expand the tank stats page, implement
-                            clan stats, and finish the leaderboards.
+                            {strings.about1}
                             <br />
                             <br />
-                            Tomato.gg fully supports EU and NA player stats. You can still view stats for RU and ASIA
-                            gamers, but there are no automatic daily stat updates.
+                            {strings.about2}
                             <br />
                             <br />
-                            Check out Tomato.gg on mobile as well. I have optimized the mobile site for the best user
-                            experience while still being nearly 100% feature complete.
+                            {strings.about3}
                             <br />
                             <br />
                             <a target="blank" href="/stats/NA/Superdude3800=1007264827">
                                 Superdude3800
                             </a>{" "}
-                            has helped extensively with the development of Tomato.gg. Thanks so much!
+                            {strings.about4}
                             <br />
                             <br />
                             Join my{" "}
                             <a target="blank" href="https://discord.gg/qA2bV7K">
-                                Discord server
+                                {strings.discord}
                             </a>{" "}
-                            If you would like to provide feedback, suggestions, and bug reports. <br />
+                            {strings.feedback}
                             <br />
-                            Thanks for using Tomato.gg! <br />-{" "}
+                            <br />
+                            {strings.thanks} <br />-{" "}
                             <a target="blank" href="/stats/NA/goldflag=1011694618">
                                 Goldflag
                             </a>

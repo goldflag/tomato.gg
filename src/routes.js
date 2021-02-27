@@ -1,6 +1,7 @@
 // NPM
 import React from "react";
 import { Apps, Info, Star, Games, BarChart, LibraryBooks, FormatListNumbered, Public } from "@material-ui/icons";
+import LocalizedStrings from "react-localization";
 
 // LOCAL
 import Search from "./search";
@@ -15,8 +16,24 @@ import WN8Expected from "./statpages/wn8expected";
 import MoEExpected from "./statpages/MoEPage";
 import MasteryExpected from "./statpages/masteryPage";
 
+const strings = new LocalizedStrings({
+    en: {
+        home: "Home",
+        playerStats: "Player Stats",
+        tankStats: "Tank Stats",
+        leaderboards: "Leaderboards",
+        moeReqs: "MoE Reqs",
+        masteryReqs: "Mastery Reqs",
+        WN8Expected: "WN8 Exp. Values",
+        statsReference: "Stats Reference",
+        about: "About",
+        tankList: "Tank List",
+        serverStats: "Server Stats",
+    },
+});
+
 const home = {
-    title: "Home",
+    title: strings.home,
     path: "/",
     Icon: Apps,
     Component: <Search />,
@@ -24,7 +41,7 @@ const home = {
 };
 
 const playerStats = {
-    title: "Player Stats",
+    title: strings.playerStats,
     path: "/stats/:server/:user",
     Icon: <></>,
     Component: <StatsPage />,
@@ -32,7 +49,7 @@ const playerStats = {
 };
 
 const tankStats = {
-    title: "Tank Stats",
+    title: strings.tankStats,
     path: "/tank-stats",
     Icon: BarChart,
     Component: <TankStatsPage />,
@@ -40,7 +57,7 @@ const tankStats = {
 };
 
 const leaderboards = {
-    title: "Leaderboards",
+    title: strings.leaderboards,
     path: "/leaderboards",
     Icon: FormatListNumbered,
     Component: <Leaderboards />,
@@ -48,7 +65,7 @@ const leaderboards = {
 };
 
 const moe = {
-    title: "MoE Reqs",
+    title: strings.moeReqs,
     path: "/moe",
     Icon: Star,
     Component: <MoEExpected />,
@@ -56,7 +73,7 @@ const moe = {
 };
 
 const mastery = {
-    title: "Mastery Reqs",
+    title: strings.masteryReqs,
     path: "/mastery",
     Icon: Star,
     Component: <MasteryExpected />,
@@ -64,7 +81,7 @@ const mastery = {
 };
 
 const wn8 = {
-    title: "WN8 Exp. Values",
+    title: strings.WN8Expected,
     path: "/wn8",
     Icon: Games,
     Component: <WN8Expected />,
@@ -72,7 +89,7 @@ const wn8 = {
 };
 
 const statsReference = {
-    title: "Stats Reference",
+    title: strings.statsReference,
     path: "/stats-reference",
     Icon: LibraryBooks,
     Component: <StatsReference />,
@@ -80,7 +97,7 @@ const statsReference = {
 };
 
 const about = {
-    title: "About",
+    title: strings.about,
     path: "/about",
     Icon: Info,
     Component: <About />,
@@ -93,7 +110,7 @@ const about = {
 
 // eslint-disable-next-line no-unused-vars
 const tankList = {
-    title: "Tank List",
+    title: strings.WN8Expected,
     path: "/tank-list",
     Icon: BarChart,
     Component: <TankPage />,
@@ -102,7 +119,7 @@ const tankList = {
 
 // eslint-disable-next-line no-unused-vars
 const serverStats = {
-    title: "Server Stats",
+    title: strings.serverStats,
     path: "/server-stats",
     Icon: Public,
     Component: <ServerStatsPage />,

@@ -1,10 +1,12 @@
+// NPM
 import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
+
+// LOCAL
 import "CSS/search.css";
 import SearchBar from "Material/searchBar";
 import TomatoLogo from "Assets/tomato.png";
 import { ServerContext, SearchHistoryContext } from "Context";
-//import LeaderboardGrid from "./statpages/searchComponents/leaderboardGrid";
 import { serverConv } from "Data/conversions";
 
 const APIKey = process.env.REACT_APP_API_KEY;

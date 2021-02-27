@@ -2,12 +2,27 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
+import LocalizedStrings from "react-localization";
 
 // LOCAL
 import { menuRoutes } from "./routes";
 import TomatoLogo from "Assets/tomato.png";
 import background from "Assets/sidebar.jpg";
 import { NewIcon } from "Components";
+
+const strings = new LocalizedStrings({
+    en: {
+        support: "Support Tomato.gg",
+        donations: `Tomato.gg runs entirely on user donations. If you find value in the website, consider chipping
+        in to help keep the servers running.`,
+        kofi: "Support on Ko-fi",
+        paypal: "Support on Paypal",
+        partnered: "Partnered Websites",
+        herhor: "MoE rankings and image generator",
+        createdBy: "Tomato.gg is a website created by",
+        notAffiliated: "and is not affiliated with Wargaming.net.",
+    },
+});
 
 const Styles = styled.div`
     .sidebar {
@@ -198,15 +213,14 @@ const Sidebar = withRouter((props) => {
                             }}
                         >
                             {" "}
-                            Support Tomato.gg
+                            {strings.support}
                         </h2>
-                        Tomato.gg runs entirely on user donations. If you find value in the website, consider chipping
-                        in to help keep the servers running.
+                        {strings.donations}
                         <a target="blank" href="https://ko-fi.com/goldflag">
-                            <div className="donationButton kofi">Support on Ko-fi</div>
+                            <div className="donationButton kofi">{strings.kofi}</div>
                         </a>
                         <a target="blank" href="https://www.paypal.com/donate/?hosted_button_id=U457SKR8EQTSQ">
-                            <div className="donationButton paypal">Support on Paypal</div>
+                            <div className="donationButton paypal">{strings.paypal}</div>
                         </a>
                     </div>
                     <div
@@ -219,14 +233,14 @@ const Sidebar = withRouter((props) => {
                             position: "absolute",
                         }}
                     >
-                        <span style={{ fontWeight: "500" }}>Partnered Websites</span>
+                        <span style={{ fontWeight: "500" }}>{strings.partnered}</span>
                         <span style={{ color: "white" }}>
                             <br />
                             <a style={{ color: "white" }} target="blank" href="https://herhor.net/wot/">
                                 herhor.net
                             </a>
                         </span>
-                        - MoE rankings and image generator
+                        - {strings.herhor}
                         <br />
                     </div>
                     <div
@@ -247,11 +261,11 @@ const Sidebar = withRouter((props) => {
                             position: "absolute",
                         }}
                     >
-                        Tomato.gg is a website created by{" "}
+                        {strings.createdBy}{" "}
                         <Link style={{ color: "rgb(205, 205, 205)" }} to="/stats/NA/goldflag=1011694618">
                             Goldflag
                         </Link>{" "}
-                        and is not affiliated with Wargaming.net.
+                        {strings.notAffiliated}
                         <br />
                         Zeyu Yang © 2021
                     </div>
