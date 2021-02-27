@@ -17,6 +17,11 @@ const strings = new LocalizedStrings({
         ariaLabel: "search for a player",
         searchAriaLabel: "search",
     },
+    fr: {
+        placeholder: "Entrez un nom d'un joueur (exemple Goldflag)",
+        ariaLabel: "recherchez un joueur",
+        searchAriaLabel: "recherche",
+    },
 });
 
 export default function SearchBar(props) {

@@ -11,32 +11,42 @@ import "CSS/innerpage.css";
 const strings = new LocalizedStrings({
     en: {
         h1: `About Tomato.gg`,
-
         updated: `UPDATED `,
-
         about0: `I created this site to provide an accessible interface to view a huge variety of stats, 
         many of which are only found here. Some stats have taken inspiration from other sites.`,
-
         about1: `Tomato.gg doesn't aim to do everything. It will never have server stats as detailed as those
         on wot-news.com, nor will it have the precise individual battles as are accessible on
         WN8lab.com. Tomato.gg is being actively developed and is nowhere near feature complete. In
         the future, I plan to expand the player stats page, expand the tank stats page, implement
         clan stats, and finish the leaderboards.`,
-
         about2: `Tomato.gg fully supports EU, NA, and ASIA player stats. You can still view stats for RU 
         gamers, but there are no automatic daily stat updates.`,
-
         about3: `Check out Tomato.gg on mobile as well. I have optimized the mobile site for the best user
         experience while still being nearly 100% feature complete.`,
-
         about4: `has helped extensively with the development of Tomato.gg. Thanks so much!`,
         joinMy: `Join my`,
-
         discord: `Discord server`,
-
         feedback: `If you would like to provide feedback, suggestions, and bug reports.`,
-
         thanks: `Thanks for using Tomato.gg!`,
+    },
+    fr: {
+        h1: `À propos de Tomato.gg`,
+        updated: `Mis à jour`,
+        about0: `J'ai créé ce site pour fournir une interface accessible pour voir une grande variété de statistiques, 
+        dont beaucoup qui se trouvent seulement ici. Quelques statistiques ont été inspiré par d'autres sites.`,
+        about1: `Tomato.gg ne vise pas à faire tout. Il n'y aura jamais les statistiques sur les serveurs si détaillés
+        sur wotnews.com, ni il n'y aura-t-il les précis combats individuels sur
+        WN8lab.com. Tomato.gg est activement développé et n'est pas du tout proche d'être terminé. Dans le futur, je prévois agrandir les pages sur les statistiques des joueurs, agrandir les pages pour les statistiques pour chars, ajouter les statistiques pour clans et 
+        finaliser les classements.`,
+        about2: `Tomato.gg soutient pleinement EU, NA, and ASIE pour les statistiques pour joeurs. Vous pouvez quand même regarder les statistiques 
+        pour les joueurs sur le serveur russe, mais il n'y aura pas de mise à jour quotidien automatique des statistiques.`,
+        about3: `Jetez un coup d'œil sur Tomato.gg pour Mobile aussi. J'ai optimisé le site Mobile pour la meilleure expérience d'utilisateur 
+        tout en étant presque 100% fonction complète.`,
+        about4: `a contribué largement au développement de Tomato.gg. Merci beaucoup!`,
+        joinMy: `Rejoignez mon`,
+        discord: `Serveur Discord`,
+        feedback: `Si vous voulez dire quelque chose sur le site, faire des suggestions, ou faire un rapport de bogue.`,
+        thanks: `Merci d'utiliser Tomato.gg!`,
     },
 });
 
@@ -67,7 +77,7 @@ export default function About() {
                                 color: "rgb(150,150,150)",
                             }}
                         >
-                            {strings.updated} 5/1/2021
+                            {strings.updated} 27/2/2021
                         </span>{" "}
                         <br />
                         <br />

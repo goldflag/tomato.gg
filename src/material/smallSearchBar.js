@@ -1,3 +1,4 @@
+// NPM
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
@@ -5,6 +6,8 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
+import LocalizedStrings from "react-localization";
+
 import SmallSelectQuery from "./smallSelect";
 
 const Styles = styled.div`
@@ -18,6 +21,19 @@ const Styles = styled.div`
         }
     }
 `;
+
+const strings = new LocalizedStrings({
+    en: {
+        placeholder: "Enter Username",
+        ariaLabel: "search for a player",
+        searchAriaLabel: "search",
+    },
+    fr: {
+        placeholder: "Entrez nom d'un joueur",
+        ariaLabel: "recherchez un joueur",
+        searchAriaLabel: "recherche",
+    },
+});
 
 export default function SmallSearchBar(props) {
     const useStyles = makeStyles((t) => ({
@@ -44,12 +60,11 @@ export default function SmallSearchBar(props) {
 
     const classes = useStyles();
     return (
-        // <Styles>
         <Paper elevation={0} className={classes.root}>
             <InputBase
                 className={classes.input}
-                placeholder="Enter a Username"
-                inputProps={{ "aria-label": "enter a username" }}
+                placeholder={strings.placeholder}
+                inputProps={{ "aria-label": strings.ariaLabel }}
                 onChange={(e) => props.setName(e.target.value)}
             />
             <Styles>
@@ -63,10 +78,9 @@ export default function SmallSearchBar(props) {
                 </div>
             </Styles>
 
-            <IconButton type="submit" className={classes.iconButton} aria-label="search">
+            <IconButton type="submit" className={classes.iconButton} aria-label={strings.searchAriaLabel}>
                 <SearchIcon />
             </IconButton>
         </Paper>
-        // </Styles>
     );
 }

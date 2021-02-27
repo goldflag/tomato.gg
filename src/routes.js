@@ -30,6 +30,19 @@ const strings = new LocalizedStrings({
         tankList: "Tank List",
         serverStats: "Server Stats",
     },
+    fr: {
+        home: "Accueil",
+        playerStats: "Stats Joueur",
+        tankStats: "Stats Chars",
+        leaderboards: "Classement",
+        moeReqs: "Obtention Marques",
+        masteryReqs: "Obtention Maîtrises",
+        WN8Expected: "Valeurs WN8",
+        statsReference: "Référence Stats",
+        about: "À propos",
+        tankList: "Liste Chars",
+        serverStats: "Statistiques Serveur",
+    }
 });
 
 const home = {
