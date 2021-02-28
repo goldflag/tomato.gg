@@ -38,6 +38,16 @@ const strings = new LocalizedStrings({
         ariaLabel: "oyuncu ara",
         searchAriaLabel: "arama",
     },
+    zh: {
+        placeholder: "輸入使用者名稱",
+        ariaLabel: "搜尋玩家",
+        searchAriaLabel: "搜尋",
+    },
+    pl: {
+        placeholder: "Wpisz nick",
+        ariaLabel: "Wyszukaj gracza",
+        searchAriaLabel: "Szukaj",
+    },
 });
 
 export default function SmallSearchBar(props) {

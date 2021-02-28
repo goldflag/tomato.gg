@@ -1,13 +1,43 @@
+// NPM
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
+import LocalizedStrings from "react-localization";
+
+// LOCAL
 import { ServerContext } from "Context";
 import MasteryTable from "./masteryPageComponents/masteryTable";
-import tankNames from "Data/tankNames.json";
-import { nationConv, classConv, tierConv, serverConv } from "Data/conversions";
+import { serverConv } from "Data/conversions";
 import { Loader, FullPageTableWrapper, Info } from "Components";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
+
+const strings = new LocalizedStrings({
+    en: {
+        mastery: "Mastery Badge Requirements",
+        dataFrom: "Data from the creators of the {0}",
+        moeMod: "Marks of Excellence mod",
+        expand: "Expand rows to see 30 days of mastery history",
+    },
+    fr: {
+        mastery: "Obtention Maîtrises de Char",
+        dataFrom: "Données venant des créateurs du {0}",
+        moeMod: "mod des Marques d'Excellence",
+        expand: "Cliquez sur les lignes pour voir l'historique des maîtrises des 30 derniers jours",
+    },
+    tr: {
+        mastery: "Mükemmellik İşaretleri Gereksinimleri",
+        dataFrom: "{0} tarafından oluşturulan veriler.",
+        moeMod: "Mükemmellik İşaretleri modu",
+        expand: "30 günlük Tank Asları geçmişini görmek için satırları aç",
+    },
+    pl: {
+        mastery: "Wymagania na odznakę mistrzowską",
+        dataFrom: "Dane twórców {0}",
+        moeMod: "moda Marks of Excellence",
+        expand: "Kliknij aby zobaczyć historię zmian w Odznakach Mistrzowskich",
+    },
+});
 
 export default function MasteryPage(props) {
     const { server } = React.useContext(ServerContext);
@@ -39,7 +69,7 @@ export default function MasteryPage(props) {
         <FullPageTableWrapper>
             <Info>
                 <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                    {serverConv[server]} Mastery Badge Requirements
+                    {serverConv[server]} {strings.mastery}
                 </span>
                 <br />
                 <br />
@@ -50,11 +80,14 @@ export default function MasteryPage(props) {
                         color: "rgb(130,130,130)",
                     }}
                 >
-                    Data from the creators of the{" "}
-                    <a target="blank" href="https://mastery.poliroid.ru/">
-                        Marks of Excellence mod
-                    </a>{" "}
-                    &#47;&#47;&#47; Expand rows to see 30 days of mastery history
+                    {strings.formatString(
+                        strings.dataFrom,
+                        <a target="blank" href="https://mastery.poliroid.ru/">
+                            {" "}
+                            {strings.moeMod}{" "}
+                        </a>
+                    )}{" "}
+                    &#47;&#47;&#47; {strings.expand}
                 </span>{" "}
                 <br />
             </Info>

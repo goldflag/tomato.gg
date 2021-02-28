@@ -37,6 +37,33 @@ const strings = new LocalizedStrings({
         to: "to",
         max: "Max",
     },
+    fr: {
+        all: "TOUT",
+        prem: "PREM",
+        regular: "NORMAL",
+        searchTanks: "Chercher {0} chars",
+        min: "Min",
+        to: "à",
+        max: "Max",
+    },
+    tr: {
+        all: "HEPSİ",
+        prem: "PREM",
+        regular: "NORMAL",
+        searchTanks: "{0} tank arasında ara",
+        min: "En Az",
+        to: "->",
+        max: "En Çok",
+    },
+    pl: {
+        all: "Wszystkie",
+        prem: "Premium",
+        regular: "Zwykłe",
+        searchTanks: "Przeszukaj {0} czołgów",
+        min: "Min",
+        to: "do",
+        max: "Maks",
+    },
 });
 
 const premFilterOptions = [

@@ -44,6 +44,27 @@ const strings = new LocalizedStrings({
         createdBy: "Tomato.gg sitesini yapan kişi ",
         notAffiliated: "ve Wargaming.net ile bağlantılı değildir.",
     },
+    zh: {
+        support: "支持 Tomato.gg",
+        donations: `Tomato.gg 完全依靠用戶們捐贈來運行。 如果您在網站上找到了價值，請考慮加入以幫助維護網站運作。`,
+        kofi: "使用Ko-fi贊助",
+        paypal: "使用Paypal贊助",
+        partnerd: "合作網站",
+        herhor: "M牌排行榜及圖片產生器",
+        createdBy: "Tomato.gg 創自於",
+        notAffiliated: "網站不隸屬於 Wargaming.net.",
+    },
+    pl: {
+        support: "Wesprzyj Tomato.gg",
+        donations: `Tomato.gg jest utrzymywane całkowicie z darowizn użytkowników. Jeśli uważasz witrynę za wartościową, rozważ pomoc
+        w utrzymaniu działania serwerów.`,
+        kofi: "Wesprzyj na Ko-fi",
+        paypal: "Wesprzyj na Paypal",
+        partnered: "Witryny partnerskie",
+        herhor: "Rankingi i generator obrazków biegłości",
+        createdBy: "Tomato.gg to witryna stworzona przez",
+        notAffiliated: "i nie jest powiązana z Wargaming.net.",
+    },
 });
 
 const StyledSidebar = styled.div`
@@ -167,7 +188,6 @@ const Support = styled.div`
         font-size: 1.1rem;
         font-weight: 500;
         color: white;
-        line-height: 0rem;
     }
 `;
 

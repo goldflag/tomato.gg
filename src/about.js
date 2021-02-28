@@ -36,12 +36,13 @@ const strings = new LocalizedStrings({
         dont beaucoup qui se trouvent seulement ici. Quelques statistiques ont été inspiré par d'autres sites.`,
         about1: `Tomato.gg ne vise pas à faire tout. Il n'y aura jamais les statistiques sur les serveurs si détaillés
         sur wotnews.com, ni il n'y aura-t-il les précis combats individuels sur
-        WN8lab.com. Tomato.gg est activement développé et n'est pas du tout proche d'être terminé. Dans le futur, je prévois agrandir les pages sur les statistiques des joueurs, agrandir les pages pour les statistiques pour chars, ajouter les statistiques pour clans et 
-        finaliser les classements.`,
-        about2: `Tomato.gg soutient pleinement EU, NA, and ASIE pour les statistiques pour joeurs. Vous pouvez quand même regarder les statistiques 
-        pour les joueurs sur le serveur russe, mais il n'y aura pas de mise à jour quotidien automatique des statistiques.`,
-        about3: `Jetez un coup d'œil sur Tomato.gg pour Mobile aussi. J'ai optimisé le site Mobile pour la meilleure expérience d'utilisateur 
-        tout en étant presque 100% fonction complète.`,
+        WN8lab.com. Tomato.gg est activement développé et n'est pas du tout proche d'être terminé. Dans le futur, 
+        je prévois agrandir les pages sur les statistiques des joueurs, agrandir les pages pour les statistiques pour 
+        chars, ajouter les statistiques pour clans et finaliser les classements.`,
+        about2: `Tomato.gg soutient pleinement EU, NA, and ASIE pour les statistiques pour joeurs. Vous pouvez quand même regarder 
+        les statistiques pour les joueurs sur le serveur russe, mais il n'y aura pas de mise à jour quotidien automatique des statistiques.`,
+        about3: `Jetez un coup d'œil sur Tomato.gg pour Mobile aussi. J'ai optimisé le site Mobile 
+        pour la meilleure expérience d'utilisateur tout en étant presque 100% fonction complète.`,
         about4: `a contribué largement au développement de Tomato.gg. Merci beaucoup!`,
         joinMy: `Rejoignez mon`,
         discord: `Serveur Discord`,
@@ -67,6 +68,40 @@ const strings = new LocalizedStrings({
         discord: `Discord sunucusu`,
         feedback: `Geri bildirim, öneri ve hata raporları sağlamak isterseniz. `,
         thanks: `Tomato.gg'yi kullandığınız için teşekkürler!`,
+    },
+    zh: {
+        h1: `關於 Tomato.gg`,
+        updated: `更新 `,
+        about0: `我創建網站的目的是提供一個能查看各種統計數據、只能在這邊查找的介面，並從其他網站提供的統計資料中獲得了一些靈感。`,
+        about1: `Tomato.gg並非旨在做所有的事。 它永遠不會擁有wot-news.com上詳細的伺服器統計數據，也不會擁有WN8lab.com上的精確個人戰鬥。
+        Tomato.gg正在積極開發中，功能尚不完善。在未來，我計劃擴展玩家的數據頁面、戰車的統計數據、實行公會統計數據並完成排行榜的內容。`,
+        about2: `Tomato.gg完全支援EU、NA和ASIA伺服器玩家的數據資訊。 您仍然可以查看RU伺服器玩家的統計數據，但沒有每日自動更新。`,
+        about3: `可以在移動設備上使用Tomato.gg。 我已經針對用戶優化了移動網站體驗，同時仍有將近100％能完善所有功能。`,
+        about4: `在Tomato.gg的開發中提供了廣泛的幫助。 非常感謝！`,
+        joinMy: `joinMy`,
+        Discord: `Discord服務器`,
+        feedback: `如果您想提供反饋，建議和錯誤報告。`,
+        thanks: `感謝使用Tomato.gg!`,
+    },
+    pl: {
+        h1: `O Tomato.gg`,
+        updated: `ZAKTUALIZOWANE `,
+        about0: `Stworzyłem tę witrynę, aby zapewnić przystępny interfejs do przeglądania różnych statystyk.
+        Wiele z nich można znaleźć tylko tutaj, zaś niektóre zostały zainspirowane innymi witrynami.`,
+        about1: `Tomato.gg nie ma na celu zrobienia wszystkiego. Nigdy nie będzie miało tak szczegółowych statystyk 
+        serwera jak te na wot-news.com, nie będzie też miało precyzyjnych pojedynczych bitew, jakie są dostępne na
+        WN8lab.com. Tomato.gg jest aktywnie rozwijane i nie jest nawet blisko bycia ukończonym. W przyszłości,
+        Planuję rozwinąć stronę ze statystykami graczy, rozwinąć stronę ze statystykami czołgów, wdrożyć
+        statystyki klanów i ukończyć rankingi.`,
+        about2: `Tomato.gg w pełni wspiera statystyki graczy z regionów EU, NA, i ASIA. Można wyświetlić statystyki 
+        dla graczy z RU, ale nie mają automatycznych codziennych aktualizacji.`,
+        about3: `Sprawdź również Tomato.gg na telefonie. Zoptymalizowałem witrynę mobilną pod kątem najlepszych wrażeń 
+        użytkownika, a jej funkcje są prawie w 100% gotowe.`,
+        about4: `bardzo pomógł w rozwoju Tomato.gg. Wielkie dzięki!`,
+        joinMy: `Dołącz do naszego`,
+        discord: `serwera Discord`,
+        feedback: `Jeśli chcesz przekazać opinie, sugestie lub zgłosić błędy.`,
+        thanks: `Dziękujemy za używanie Tomato.gg!`,
     },
 });
 

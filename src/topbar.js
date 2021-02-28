@@ -124,6 +124,18 @@ const strings = new LocalizedStrings({
         clearHistory: "clear history",
         server: "select default server",
     },
+    fr: {
+        clearHistory: "Effacer l'historique",
+        server: "Sélectionnez un serveur par défaut",
+    },
+    tr: {
+        clearHistory: "Geçmişi temizle",
+        server: "Varsayılan sunucuyu seç",
+    },
+    pl: {
+        clearHistory: "Wyczyść historię",
+        server: "Wybierz domyślny serwer",
+    },
 });
 
 export default withRouter(function Topbar(props) {

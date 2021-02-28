@@ -43,7 +43,22 @@ const strings = new LocalizedStrings({
     en: {
         pageOf: "Page {0} of {1}",
         gotoPage: "Go to page:",
-        show: "Show", // as in, "show 50 items on a page"
+        show: "Show",
+    },
+    fr: {
+        pageOf: "Page {0} sur {1}",
+        gotoPage: "Aller à la page:",
+        show: "Montrer",
+    },
+    tr: {
+        pageOf: "Sayfa {0} / {1}",
+        gotoPage: "Git:",
+        show: "Gösterilen",
+    },
+    pl: {
+        pageOf: "Strona {0} z {1}",
+        gotoPage: "Idź na stronę:",
+        show: "Pokaż",
     },
 });
 

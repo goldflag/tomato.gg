@@ -1,5 +1,9 @@
+// NPM
 import React, { useEffect, useState, useContext } from "react";
 import ReactGA from "react-ga";
+import LocalizedStrings from "react-localization";
+
+// LOCAL
 import { ServerContext } from "Context";
 import MoETable from "./MoEPageComponents/MoETable";
 import MoETracker from "./MoEPageComponents/MoETracker";
@@ -9,6 +13,54 @@ import { serverConv } from "Data/conversions";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
+
+const strings = new LocalizedStrings({
+    en: {
+        moe: "Marks of Excellence Requirements",
+        dataFrom: "Data from the creators of the {0}",
+        moeMod: "Marks of Excellence mod",
+        expand: "Expand rows to see 30 days of MoE history",
+        avg: "*MoE change is calculated using 3-day averages to minimize noise",
+        expected: "EXPECTED VALUES",
+        exp95change: "95% EXP. VAL CHANGE",
+        exp85change: "85% EXP. VAL CHANGE",
+        exp65change: "65% EXP. VAL CHANGE",
+    },
+    fr: {
+        moe: "Obtention des Marques d'Excellence",
+        dataFrom: "Données venant des créateurs du {0}",
+        moeMod: "mod des Marques d'Excellence",
+        expand: "Cliquez sur les lignes pour voir l'historique des marques des 30 derniers jours",
+        avg:
+            "*Le changement des marques est calculé en utilisant les moyennes des 3 derniers jours pour réduire les erreurs",
+        expected: "VALEURS ATTENDUES",
+        exp95change: "CHANGEMENT ATTENDU 95%",
+        exp85change: "CHANGEMENT ATTENDU 85%",
+        exp65change: "CHANGEMENT ATTENDU 65%",
+    },
+    tr: {
+        moe: "Mükemmellik İşaretleri Gereksinimleri",
+        dataFrom: "{0} tarafından oluşturulan veriler.",
+        moeMod: "Mükemmellik İşaretleri modu",
+        expand: "30 günlük MoE geçmişini görmek için satırları aç",
+        avg: "*MoE değişiklikleri hatayı en aza indirgemek için 3-gün ortalaması alınarak hesaplanır",
+        expected: "BEKLENEN DEĞERLER",
+        exp95change: "95% BEK. DEG DEĞİŞİM",
+        exp85change: "85% BEK. DEG DEĞİŞİM",
+        exp65change: "65% BEK. DEG DEĞİŞİM",
+    },
+    pl: {
+        moe: "Wymagania biegłości",
+        dataFrom: "Dane od twórców {0}",
+        moeMod: "moda Marks of Excellence",
+        expand: "Rozszerz rzędy aby zobaczyć 30-dniową historię zmian wartości oczekiwanych",
+        avg: "*Zmiana oczekiwanych jest liczona 3-dniową średnią, żeby zminimalizować zakłócenia",
+        expected: "OCZEKIWANE WARTOŚCI",
+        exp95change: "Zmiany oczekiwanych dla 95%",
+        exp85change: "Zmiany oczekiwanych dla 85%",
+        exp65change: "Zmiany oczekiwanych dla 65%",
+    },
+});
 
 export default function MoEPage(props) {
     const { server } = useContext(ServerContext);
@@ -65,7 +117,7 @@ export default function MoEPage(props) {
         <FullPageTableWrapper>
             <Info>
                 <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                    {serverConv[server]} Marks of Excellence Requirements
+                    {serverConv[server]} {strings.moe}
                 </span>
                 <br />
 
@@ -77,27 +129,24 @@ export default function MoEPage(props) {
                         color: "rgb(130,130,130)",
                     }}
                 >
-                    Data from the creators of the{" "}
-                    <a target="blank" href="https://gunmarks.poliroid.ru/">
-                        Marks of Excellence mod
-                    </a>{" "}
-                    &#47;&#47;&#47; Expand rows to see 30 days of MoE history
+                    {strings.formatString(
+                        strings.dataFrom,
+                        <a target="blank" href="https://gunmarks.poliroid.ru/">
+                            {" "}
+                            {strings.moeMod}{" "}
+                        </a>
+                    )}{" "}
+                    &#47;&#47;&#47; {strings.expand}
                     <br />
-                    *MoE change is calculated using 3-day averages to minimize noise
+                    {strings.avg}
                 </span>
                 <br />
             </Info>
-            <CustomTabs
-                value={value}
-                onChange={handleChange}
-                aria-label="ant example"
-                variant="scrollable"
-                scrollButtons="auto"
-            >
-                <CustomTab label="EXPECTED VALUES" />
-                <CustomTab label="95% EXP. VAL CHANGE" />
-                <CustomTab label="85% EXP. VAL CHANGE" />
-                <CustomTab label="65% EXP. VAL CHANGE" />
+            <CustomTabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto">
+                <CustomTab label={strings.expected} />
+                <CustomTab label={strings.exp95change} />
+                <CustomTab label={strings.exp85change} />
+                <CustomTab label={strings.exp65change} />
             </CustomTabs>
             <TabPanel value={value} index={0}>
                 {table}

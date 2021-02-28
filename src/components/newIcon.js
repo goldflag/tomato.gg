@@ -15,6 +15,15 @@ const strings = new LocalizedStrings({
     en: {
         new: "NEW!",
     },
+    fr: {
+        new: "NEW!",
+    },
+    tr: {
+        new: "YENİ!",
+    },
+    pl: {
+        new: "NOWE!",
+    },
 });
 
 export const NewIcon = () => <GreenIcon>{strings.new}</GreenIcon>;

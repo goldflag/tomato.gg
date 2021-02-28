@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import ReactGA from "react-ga";
 import styled from "styled-components";
+import LocalizedStrings from "react-localization";
 
 // LOCAL
 import { Loader, FullPageTableWrapper } from "Components";
@@ -73,11 +74,46 @@ const TankImage = styled.img`
 
 const PAGE_SIZE = 100;
 
+const strings = new LocalizedStrings({
+    en: {
+        dpg: "DPG",
+        frags: "FRAGS",
+        winrate: "WINRATE",
+        tier: "TIER",
+        top500: "Top 500 Players in",
+        past60min25: "PAST 60 DAYS | MINIMUM 25 BATTLES",
+    },
+    fr: {
+        dpg: "DPG",
+        frags: "TUÉS",
+        winrate: "TAUX VICTOIRE",
+        tier: "RANG",
+        top500: "Top 500 Joueurs sur",
+        past60min25: "60 DERNIERS JOURS | MINIMUM 25 BATAILLES",
+    },
+    tr: {
+        dpg: "DPG",
+        frags: "FRAGS",
+        winrate: "WINRATE",
+        tier: "TIER",
+        top500: "En iyi 500 Oyuncu içinde",
+        past60min25: "SON 60 GÜN | MİNİMUM 25 SAVAŞ",
+    },
+    pl: {
+        dpg: "Średnio uszkodzeń", // or just "DPG"
+        frags: "Średnio zniszczeń",
+        winrate: "Procent wygranych",
+        tier: "Poziom",
+        top500: "500 najlepszych graczy w",
+        past60min25: "OSTATNICH 60 DNIACH | MINIMUM 25 BITEW",
+    },
+});
+
 const filters = {
-    dpg: "DPG",
+    dpg: strings.dpg,
     wn8: "WN8",
-    frags: "FRAGS",
-    winrate: "WINRATE",
+    frags: strings.frags,
+    winrate: strings.winrate,
 };
 
 export default function TankPage(props) {
@@ -120,7 +156,7 @@ export default function TankPage(props) {
             <>
                 <Top>
                     <div>
-                        <div style={{ textAlign: "center" }}>TIER</div>
+                        <div style={{ textAlign: "center" }}>{strings.tier}</div>
                         <Tier>{tierConv[data.meta.tier]}</Tier>
                     </div>
                     <div>
@@ -134,8 +170,8 @@ export default function TankPage(props) {
                     </Name>
                 </Top>
                 <TableLabel>
-                    Top 500 Players in {serverConv[server]}
-                    <BottomLabel>PAST 60 DAYS | MINIMUM 25 BATTLES</BottomLabel>
+                    {strings.top500} {serverConv[server]}
+                    <BottomLabel>{strings.past60min25}</BottomLabel>
                     <FilterButtonGroup>
                         {Object.entries(filters).map(([val, label]) => (
                             <FilterButton

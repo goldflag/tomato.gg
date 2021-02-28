@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import ReactGA from "react-ga";
+import LocalizedStrings from "react-localization";
 
 // LOCAL
 import "CSS/style.css";
@@ -16,6 +17,24 @@ const backendKey = process.env.REACT_APP_BACKEND_API_KEY;
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
+const strings = new LocalizedStrings({
+    en: {
+        notFound: "Player {0} not found",
+        correct: "Make sure the username and region are correct.",
+    },
+    fr: {
+        notFound: "Joueur {0} introuvable",
+        correct: "Vérifiez que le pseudo et la région sont corrects.",
+    },
+    tr: {
+        notFound: "{0} oyuncusu bulunamadı",
+        correct: "Oyuncu adı ve bölgenin doğru olduğuna emin olunuz.",
+    },
+    pl: {
+        notFound: "Nie znaleziono gracza {0}",
+        correct: "Sprawdź, czy nick i region są poprawne",
+    },
+});
 class StatsPage extends Component {
     constructor(props) {
         super(props);
@@ -121,10 +140,10 @@ class StatsPage extends Component {
         } else {
             statTable = (
                 <>
-                    <span style={{ fontSize: "2rem" }}>Player {username} not found</span>
+                    <span style={{ fontSize: "2rem" }}>{strings.formatString(strings.notFound, username)}</span>
                     <br />
                     <br />
-                    Make sure the username and region are correct.
+                    {strings.correct}
                 </>
             );
         }

@@ -56,6 +56,32 @@ const strings = new LocalizedStrings({
         tankList: "Tank Listesi",
         serverStats: "Sunucu İstatistik",
     },
+    zh: {
+        home: "主頁",
+        playerStats: "玩家數據統計",
+        tankStats: "戰車數據統計",
+        leaderboards: "排行榜",
+        moeReqs: "卓越水深",
+        masteryReqs: "M牌水深",
+        WN8Expected: "WN8 期望值",
+        statsReference: "統計參考",
+        about: "關於",
+        tankList: "車輛列表",
+        serverStats: "伺服器數據統計",
+    },
+    pl: {
+        home: "Strona Główna",
+        playerStats: "Staty Graczy",
+        tankStats: "Staty Czołów",
+        leaderboards: "Rankingi",
+        moeReqs: "Wymagania o. biegłości",
+        masteryReqs: "Wymagania o. mistrzowskich",
+        WN8Expected: "Oczekiwane WN8",
+        statsReference: "Staty - odniesienie",
+        about: "O Stronie",
+        tankList: "Lista Czołgów",
+        serverStats: "Staty Serwerowe",
+    },
 });
 
 const home = {
