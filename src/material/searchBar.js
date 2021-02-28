@@ -18,7 +18,7 @@ const strings = new LocalizedStrings({
         searchAriaLabel: "search",
     },
     fr: {
-        placeholder: "Entrez un nom d'un joueur (exemple Goldflag)",
+        placeholder: "Entrez le nom d'un joueur (ex: Goldflag)",
         ariaLabel: "recherchez un joueur",
         searchAriaLabel: "recherche",
     },

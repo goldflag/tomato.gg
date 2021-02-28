@@ -29,7 +29,7 @@ const strings = new LocalizedStrings({
         searchAriaLabel: "search",
     },
     fr: {
-        placeholder: "Entrez nom d'un joueur",
+        placeholder: "Entrez le nom d'un joueur",
         ariaLabel: "recherchez un joueur",
         searchAriaLabel: "recherche",
     },
