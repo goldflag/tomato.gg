@@ -1,3 +1,5 @@
+import LocalizedStrings from "react-localization";
+
 export const nationConv = {
     usa: "USA",
     china: "China",
@@ -11,17 +13,74 @@ export const nationConv = {
     uk: "UK",
     ussr: "USSR",
 };
+export const localNationConv = new LocalizedStrings({
+    en: nationConv,
+    fr: {
+        usa: "USA",
+        china: "Chine",
+        czech: "République Tchèque",
+        france: "France",
+        germany: "Allemagne",
+        italy: "Italie",
+        japan: "Japon",
+        poland: "Pologne",
+        sweden: "Suède",
+        uk: "UK",
+        ussr: "USSR",
+    },
+    pl: {
+        usa: "USA",
+        china: "Chiny",
+        czech: "Czechy",
+        france: "Francja",
+        germany: "Niemcy",
+        italy: "Włochy",
+        japan: "Japonia",
+        poland: "Polska",
+        sweden: "Szwecja",
+        uk: "Wielka Brytania",
+        ussr: "ZSRR",
+    },
+});
 
-export const nationAdjConv = {
-    USA: "American",
-    China: "Chinese",
-    Czech: "Czech",
-    France: "French",
-    Germany: "German",
-    Italy: "Italian",
-    Japan: "Japanese",
-    Poland: "Polish",
-    Sweden: "Swedish",
-    UK: "British",
-    USSR: "Soviet",
-};
+export const nationAdjConv = new LocalizedStrings({
+    en: {
+        usa: "American {0}",
+        china: "Chinese {0}",
+        czech: "Czech {0}",
+        france: "French {0}",
+        germany: "German {0}",
+        italy: "Italian {0}",
+        japan: "Japanese {0}",
+        poland: "Polish {0}",
+        sweden: "Swedish {0}",
+        uk: "British {0}",
+        ussr: "Soviet {0}",
+    },
+    fr: {
+        usa: "{0} Américain",
+        china: "{0} Chinois",
+        czech: "{0} Tchèque",
+        france: "{0} Français",
+        germany: "{0} Allemand",
+        italy: "{0} Italien",
+        japan: "{0} Japonais",
+        poland: "{0} Polonais",
+        sweden: "{0} Suédois",
+        uk: "{0} Britanique",
+        ussr: "{0} Soviétique",
+    },
+    pl: {
+        usa: "Amerykański {0}",
+        china: "Chiński {0}",
+        czech: "Czeski {0}",
+        france: "Francuski {0}",
+        germany: "Niemiecki {0}",
+        italy: "Włoski {0}",
+        japan: "Japoński {0}",
+        poland: "Polski {0}",
+        sweden: "Szwedzki {0}",
+        uk: "Brytyjski {0}",
+        ussr: "Radziecki {0}",
+    },
+});

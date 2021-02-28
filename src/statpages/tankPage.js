@@ -11,7 +11,7 @@ import RecentLeaderboard from "./tankPageComponents/recentLeaderboard";
 import { ServerPagination } from "Components";
 import { useURLState } from "Functions/hooks";
 import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
-import { nationAdjConv, classDescConv, serverConv, tierConv, nationConv } from "Data/conversions";
+import { nationAdjConv, classDescConv, serverConv, tierConv, classConv } from "Data/conversions";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -88,7 +88,7 @@ const strings = new LocalizedStrings({
         frags: "TUÉS",
         winrate: "TAUX VICTOIRE",
         tier: "RANG",
-        top500: "Top 500 Joueurs sur",
+        top500: "Top 500 sur le serveur",
         past60min25: "60 DERNIERS JOURS | MINIMUM 25 BATAILLES",
     },
     tr: {
@@ -165,7 +165,10 @@ export default function TankPage(props) {
                     <Name>
                         <ShortName>{data.meta.short_name}</ShortName>
                         <div>
-                            {nationAdjConv[nationConv[data.meta.nation]]} {classDescConv[data.meta.type]}
+                            {nationAdjConv.formatString(
+                                nationAdjConv[data.meta.nation],
+                                classDescConv[classConv[data.meta.type]]
+                            )}
                         </div>
                     </Name>
                 </Top>

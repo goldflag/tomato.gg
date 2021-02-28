@@ -188,6 +188,7 @@ const Support = styled.div`
         font-size: 1.1rem;
         font-weight: 500;
         color: white;
+        margin-top: 0;
     }
 `;
 
