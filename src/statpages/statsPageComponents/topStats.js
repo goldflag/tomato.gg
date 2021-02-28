@@ -113,8 +113,8 @@ export default function TopStats(props) {
             <MobilePlayerName backgroundColor={WN8color(props.data.overallWN8)}>{playerInfo}</MobilePlayerName>
             <StatsRow>
                 <PlayerName backgroundColor={WN8color(props.data.overallWN8)}>{playerInfo}</PlayerName>
-                {statCards.map(({ label, value, colorFn }) => (
-                    <StatCard backgroundColor={colorFn(value)}>
+                {statCards.map(({ label, value, colorFn }, i) => (
+                    <StatCard backgroundColor={colorFn(value)} key={i}>
                         <StatCardLabel>{label}</StatCardLabel>
                         <br />
                         <StatCardValue>{value}</StatCardValue>

@@ -127,10 +127,10 @@ export default function MainTabs(props) {
                     <CustomTab label={<div>{label} {icon}</div>} value={value} key={i} />
                 )}
             </CustomTabs>
-            {tabs.map(({ body, value }) => (
-                <TabPanel value={page} index={value}>
-                    {body.map((Section) => (
-                        <div style={{ marginTop: "1rem", minHeight: "300px" }}>
+            {tabs.map(({ body, value }, i) => (
+                <TabPanel value={page} index={value} key={i}>
+                    {body.map((Section, i) => (
+                        <div style={{ marginTop: "1rem", minHeight: "300px" }} key={i}>
                             <Section {...props} />
                         </div>
                     ))}

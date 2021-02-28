@@ -20,7 +20,6 @@ export default function Charts(props) {
             flexGrow: 1,
         },
         paper: {
-            //padding: theme.spacing(2),
             textAlign: "left",
             fontFamily: "Roboto Mono",
             fontSize: "1.2em",
