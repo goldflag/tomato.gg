@@ -47,7 +47,7 @@ const TooltipValue = styled.div`
 
 const TreeMapTooltip = ({ node, type }) => {
     const { id, isLeaf, data } = node;
-    const classDesc = classDescConv[classConv[data.class]];
+    const classDesc = classDescConv[data.class];
     const nationAdj = nationAdjConv[nationConv[data.nation]];
 
     if (id === "Stats") return null;
