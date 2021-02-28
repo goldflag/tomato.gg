@@ -42,7 +42,7 @@ const strings = new LocalizedStrings({
         about: "À propos",
         tankList: "Liste Chars",
         serverStats: "Statistiques Serveur",
-    }
+    },
 });
 
 const home = {
@@ -67,6 +67,11 @@ const tankStats = {
     Icon: BarChart,
     Component: <TankStatsPage />,
     isNew: true,
+};
+
+const tank = {
+    path: "/tank",
+    Component: <TankPage />,
 };
 
 const leaderboards = {
@@ -139,6 +144,6 @@ const serverStats = {
     isNew: false,
 };
 
-export const routes = [playerStats, tankStats, leaderboards, moe, mastery, wn8, statsReference, about, home];
+export const routes = [playerStats, tankStats, tank, leaderboards, moe, mastery, wn8, statsReference, about, home];
 export const menuRoutes = [home, tankStats, leaderboards, moe, mastery, wn8, statsReference, about];
 export const mobileMenuRoutes = [home, tankStats, leaderboards, moe, mastery, wn8, about];
