@@ -101,9 +101,9 @@ export default function TopStats(props) {
 
     const statCards = [
         { label: "Overall WN8", value: props.data.overallWN8, colorFn: WN8color },
-        { label: "Overall WR", value: props.data.overallWinrate, colorFn: WRcolor },
+        { label: "Overall WR", value: props.data.overallWinrate + '%', colorFn: WRcolor },
         { label: "Recent WN8", value: props.data.recentWN8, colorFn: WN8color },
-        { label: "Recent WR", value: props.data.recentWinrate, colorFn: WRcolor },
+        { label: "Recent WR", value: props.data.recentWinrate + '%', colorFn: WRcolor },
         { label: "WG Rating", value: props.WGRating, colorFn: PRcolor },
         { label: "Battles", value: props.stats.battles, colorFn: battlesColor },
     ];
