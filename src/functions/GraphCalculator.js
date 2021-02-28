@@ -1698,13 +1698,13 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
         }
         data.tierMasteryDist[row.tier - 1][numToMastery[row.mastery]] += 1;
         data.NationDist[nationConv[row.nation]] += row.battles;
-        data.ClassDist[classConv[row.class]] += row.battles;
+        data.ClassDist[row.class] += row.battles;
     });
 
     recent1000.tankStats.forEach((tank) => {
         data.tierDistRecent[tank.tier - 1][tank.class] += tank.battles;
         data.NationDistRecent[nationConv[tank.nation]] += tank.battles;
-        data.ClassDistRecent[classConv[tank.class]] += tank.battles;
+        data.ClassDistRecent[tank.class] += tank.battles;
     });
 
     overallStats.raw.forEach((stats) => calcTrackingVals(BattleCount, BattleTracker, EXPTracker, WinsCount, stats));

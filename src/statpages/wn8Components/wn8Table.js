@@ -4,7 +4,7 @@ import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
 
-import { ClassFilter, GlobalFilter, NationFilter, Pagination, PremFilter, TierFilter, arrayFilterFn } from "Components";
+import { ClassFilter, GlobalFilter, NationFilter, Pagination, PremFilter, arrayFilterFn } from "Components";
 import {
     ButtonFiltersContainer,
     ClassCell,

@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 // LOCAL
 import { MoEStars } from "Components/moeStars";
-import { classConv, classDescConv, nationAdjConv, nationConv } from "Data/conversions";
+import { classDescConv, nationAdjConv, nationConv } from "Data/conversions";
 
 const CustomToolTip = styled.div`
     min-width: 200px;
