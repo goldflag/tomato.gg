@@ -1,5 +1,9 @@
+// NPM
+import React from "react";
 import styled, { css } from "styled-components";
 
+// LOCAL
+import { tierConv, nationConv, classConv } from "Data/conversions";
 export const TableContainer = styled.div`
     overflow-x: auto;
     overflow-y: hidden;
@@ -71,5 +75,30 @@ export const Name = styled.div`
     display: grid;
     grid-template-columns: 90px 50%;
     align-items: center;
-    color: ${({ val }) => (val === true ? `#ffe455` : null)};
+    color: ${({ isPrem }) => (isPrem ? `#ffe455` : null)};
 `;
+
+export const TankNameCell = ({ row: { original } }) => (
+    <Name isPrem={original.is_premium || original.isPrem}>
+        <img src={original.image} alt={original.short_name || original.name} />
+        {original.short_name || original.name}
+    </Name>
+);
+
+export const NationCell = ({ value, maxWidth }) => (
+    <img
+        src={require(`Assets/flagIcons/${nationConv[value] || value}.png`)}
+        style={{ maxWidth: maxWidth || "40px" }}
+        alt={value}
+    />
+);
+
+export const ClassCell = ({ value, maxWidth }) => (
+    <img
+        src={require(`Assets/classIcons/${classConv[value] || value}.png`)}
+        style={{ maxWidth: maxWidth || "20px" }}
+        alt={value}
+    />
+);
+
+export const TierCell = ({ value }) => tierConv[value] || value;

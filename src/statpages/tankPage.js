@@ -10,7 +10,7 @@ import RecentLeaderboard from "./tankPageComponents/recentLeaderboard";
 import { ServerPagination } from "Components";
 import { useURLState } from "Functions/hooks";
 import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
-import { nationAdjConv, classDescConv, serverConv } from "Data/conversions";
+import { nationAdjConv, classDescConv, serverConv, tierConv, nationConv } from "Data/conversions";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -121,7 +121,7 @@ export default function TankPage(props) {
                 <Top>
                     <div>
                         <div style={{ textAlign: "center" }}>TIER</div>
-                        <Tier>{data.meta.tier}</Tier>
+                        <Tier>{tierConv[data.meta.tier]}</Tier>
                     </div>
                     <div>
                         <TankImage src={data.meta.image} alt={data.meta.tank_id} />
@@ -129,7 +129,7 @@ export default function TankPage(props) {
                     <Name>
                         <ShortName>{data.meta.short_name}</ShortName>
                         <div>
-                            {nationAdjConv[data.meta.nation]} {classDescConv[data.meta.class]}
+                            {nationAdjConv[nationConv[data.meta.nation]]} {classDescConv[data.meta.type]}
                         </div>
                     </Name>
                 </Top>

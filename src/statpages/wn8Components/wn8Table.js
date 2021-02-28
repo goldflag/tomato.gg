@@ -7,25 +7,24 @@ import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalF
 import { ClassFilter, GlobalFilter, NationFilter, Pagination, PremFilter, TierFilter, arrayFilterFn } from "Components";
 import {
     ButtonFiltersContainer,
+    ClassCell,
     FiltersContainer,
+    NationCell,
     StyledTable,
     TableContainer,
-    Name,
+    TankNameCell,
+    TierCell,
 } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
+import { NumericTierFilter } from "Components/";
 
 function WN8Table({ data }) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ({ row: { original } }) => (
-                    <Name val={original.isPrem}>
-                        <img src={original.image} alt={original.name} />
-                        {original.name}
-                    </Name>
-                ),
+                Cell: TankNameCell,
                 Header: "Name",
-                accessor: "name",
+                accessor: "short_name",
                 disableFilters: true,
             },
             {
@@ -33,24 +32,21 @@ function WN8Table({ data }) {
                 accessor: "nation",
                 Filter: NationFilter,
                 filter: arrayFilterFn,
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
-                ),
+                Cell: NationCell,
             },
             {
                 Header: "Tier",
                 accessor: "tier",
-                Filter: TierFilter,
+                Filter: NumericTierFilter,
                 filter: arrayFilterFn,
+                Cell: TierCell,
             },
             {
                 Header: "Class",
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
-                ),
+                Cell: ClassCell,
             },
             {
                 Header: "expDef",
@@ -79,7 +75,7 @@ function WN8Table({ data }) {
             },
             {
                 Header: "",
-                accessor: "isPrem",
+                accessor: "is_premium",
                 Filter: PremFilter,
                 filter: arrayFilterFn,
                 hidden: true,
@@ -185,25 +181,19 @@ function WN8Table({ data }) {
                         {page.map((row, i) => {
                             prepareRow(row);
                             return (
-                                <React.Fragment key={i} {...row.getRowProps()}>
-                                    <tr>
-                                        {row.cells.map((cell) =>
-                                            cell.column.hidden ? null : (
-                                                <td
-                                                    {...cell.getCellProps({
-                                                        style: cellStyle(
-                                                            cell.column.isSorted,
-                                                            cell.column.id,
-                                                            cell.value
-                                                        ),
-                                                    })}
-                                                >
-                                                    {cell.render("Cell")}
-                                                </td>
-                                            )
-                                        )}
-                                    </tr>
-                                </React.Fragment>
+                                <tr {...row.getRowProps()}>
+                                    {row.cells.map((cell) =>
+                                        cell.column.hidden ? null : (
+                                            <td
+                                                {...cell.getCellProps({
+                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
+                                                })}
+                                            >
+                                                {cell.render("Cell")}
+                                            </td>
+                                        )
+                                    )}
+                                </tr>
                             );
                         })}
                     </tbody>

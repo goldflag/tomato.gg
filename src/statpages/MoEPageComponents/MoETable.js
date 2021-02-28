@@ -20,7 +20,10 @@ import {
     SubRow,
     TableContainer,
     StyledTable,
-    Name,
+    TankNameCell,
+    NationCell,
+    ClassCell,
+    TierCell,
 } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
 
@@ -32,22 +35,13 @@ function MoETable({ data }) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ({ row: { original } }) => (
-                    <Name val={original.isPrem}>
-                        <img src={original.image} alt={original.name} />
-                        {original.name}
-                    </Name>
-                ),
+                Cell: TankNameCell,
                 Header: "Name",
-                accessor: "name",
+                accessor: "short_name",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
-                    );
-                },
+                Cell: NationCell,
                 Header: "Nation",
                 accessor: "nation",
                 Filter: NationFilter,
@@ -58,13 +52,10 @@ function MoETable({ data }) {
                 accessor: "tier",
                 Filter: MoETierFilter,
                 filter: arrayFilterFn,
+                Cell: TierCell,
             },
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
-                    );
-                },
+                Cell: ClassCell,
                 Header: "Class",
                 accessor: "class",
                 Filter: ClassFilter,
@@ -97,7 +88,7 @@ function MoETable({ data }) {
             },
             {
                 Header: "",
-                accessor: "isPrem",
+                accessor: "is_premium",
                 Filter: PremFilter,
                 filter: arrayFilterFn,
             },

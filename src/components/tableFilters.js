@@ -4,7 +4,7 @@ import { Button, ButtonGroup } from "@material-ui/core";
 import { MoEStars } from "./moeStars";
 import { useAsyncDebounce } from "react-table";
 import InputBase from "@material-ui/core/InputBase";
-import { classConv } from "Data/conversions";
+import { classConv, nationConv } from "Data/conversions";
 
 export const FilterButton = styled(Button)`
     background-color: ${({ selected }) => (selected ? css`rgb(222, 13, 93)` : css`rgb(66, 84, 143)`)} !important;
@@ -57,17 +57,25 @@ const numericTierFilterOptions = tierFilterOptions.map(({ label, value }, i) =>
 
 const classFilterOptions = [
     { label: "ALL", value: undefined },
-    ...Object.entries(classConv).map(([key, val]) => ({
-        value: key,
+    ...Object.values(classConv).map((val) => ({
+        value: val,
         label: val,
         image: require(`Assets/classIcons/${val}.png`),
     })),
 ];
 
-const nations = ["China", "France", "Germany", "Japan", "Sweden", "UK", "USA", "USSR", "Czech", "Italy", "Poland"];
 const nationFilterOptions = [
     { label: "ALL", value: undefined },
-    ...nations.map((nation) => ({
+    ...Object.keys(nationConv).map((nation) => ({
+        label: nation,
+        value: nation,
+        image: require(`Assets/flagIcons/${nationConv[nation]}.png`),
+    })),
+];
+
+const convertedNationFilterOptions = [
+    { label: "ALL", value: undefined },
+    ...Object.values(nationConv).map((nation) => ({
         label: nation,
         value: nation,
         image: require(`Assets/flagIcons/${nation}.png`),
@@ -122,13 +130,21 @@ const makeButtonFilter = (ariaLabel, options, Label) => ({ column: { filterValue
 export const PremFilter = makeButtonFilter("premium tank filter", premFilterOptions);
 export const TierFilter = makeButtonFilter("tank tier filter", tierFilterOptions);
 export const NumericTierFilter = makeButtonFilter("tank tier filter", numericTierFilterOptions);
-export const MoETierFilter = makeButtonFilter("tank tier filter", tierFilterOptions.slice(0, 7));
+export const MoETierFilter = makeButtonFilter("tank tier filter", numericTierFilterOptions.slice(0, 7));
+
+export const MoETrackerTierFilter = makeButtonFilter("tank tier filter", tierFilterOptions.slice(0, 7));
 
 export const ClassFilter = makeButtonFilter("tank class filter", classFilterOptions, ({ label, image }) =>
     label === "ALL" ? label : <img src={image} style={{ maxHeight: "20px", filter: "brightness(1.5)" }} alt={label} />
 );
+
 export const NationFilter = makeButtonFilter("tank nation filter", nationFilterOptions, ({ label, image }) =>
     label === "ALL" ? label : <img src={image} style={{ maxHeight: "25px" }} alt={label} />
+);
+export const ConvertedNationFilter = makeButtonFilter(
+    "tank nation filter",
+    convertedNationFilterOptions,
+    ({ label, image }) => (label === "ALL" ? label : <img src={image} style={{ maxHeight: "25px" }} alt={label} />)
 );
 export const MasteryFilter = makeButtonFilter("tank mastery filter", masteryFilterOptions, ({ label, image }) =>
     label === "ALL" ? label : <img src={image} style={{ maxHeight: "23px" }} alt={label} />

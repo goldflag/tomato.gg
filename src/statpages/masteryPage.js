@@ -32,27 +32,7 @@ export default function MasteryPage(props) {
     let table = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />;
 
     if (data) {
-        let rowData = [];
-        for (let i = 0; i < data.length; ++i) {
-            if (data[i].id in tankNames) {
-                const id = data[i].id;
-                let entry = {
-                    image: data[i].image,
-                    id: id,
-                    name: tankNames[id].short_name,
-                    nation: nationConv[tankNames[id].nation],
-                    tier: tierConv[tankNames[id].tier],
-                    class: classConv[tankNames[id].type],
-                    "3rd": data[i]["3rd"] || "-",
-                    "2nd": data[i]["2nd"] || "-",
-                    "1st": data[i]["1st"] || "-",
-                    ace: data[i]["ace"] || "-",
-                    isPrem: tankNames[id].is_premium,
-                };
-                rowData.push(entry);
-            }
-        }
-        table = <MasteryTable data={rowData} />;
+        table = <MasteryTable data={data} />;
     }
 
     return (

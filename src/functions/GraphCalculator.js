@@ -5,22 +5,11 @@ import EXPTrackerTemplate from "../templates/EXPTrackerTemplate";
 import BattleCountTemplate from "../templates/BattleCountTemplate";
 import simpleWN8 from "./heatmapFunctions/simpleWN8";
 import calcTrackingVals from "./heatmapFunctions/calcTrackingVals";
+import { classConv, nationConv, tierConv } from "Data/conversions";
 
 function round(value, decimals) {
     return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
 }
-const tierToKey = {
-    1: "I",
-    2: "II",
-    3: "III",
-    4: "IV",
-    5: "V",
-    6: "VI",
-    7: "VII",
-    8: "VIII",
-    9: "IX",
-    10: "X",
-};
 
 function calculateRawOverall(overall) {
     return {
@@ -37,39 +26,14 @@ function calculateRawOverall(overall) {
 }
 
 function NationDistCalculator(data) {
-    const NewNationDist = [
-        { id: "USA", value: 1 },
-        { id: "USSR", value: 1 },
-        { id: "France", value: 1 },
-        { id: "Germany", value: 1 },
-        { id: "UK", value: 1 },
-        { id: "China", value: 1 },
-        { id: "Czech", value: 1 },
-        { id: "Sweden", value: 1 },
-        { id: "Poland", value: 1 },
-        { id: "Italy", value: 1 },
-        { id: "Japan", value: 1 },
-    ];
-
-    NewNationDist.forEach((nation) => {
-        nation.value = data[nation.id];
-    });
-    return NewNationDist;
+    return Object.values(nationConv).map((key) => ({
+        id: key,
+        value: data[key],
+    }));
 }
 
 function ClassDistCalculator(data) {
-    const NewClassDist = [
-        { id: "HT", value: 1 },
-        { id: "MT", value: 1 },
-        { id: "TD", value: 1 },
-        { id: "LT", value: 1 },
-        { id: "SPG", value: 1 },
-    ];
-
-    NewClassDist.forEach((tankClass) => {
-        tankClass.value = data[tankClass.id];
-    });
-    return NewClassDist;
+    return Object.values(classConv).map((key) => ({ id: key, value: data[key] }));
 }
 
 export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentStats) {
@@ -1342,46 +1306,22 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
             { Tier: "IX", None: 0, "3rd": 0, "2nd": 0, "1st": 0, Ace: 0 },
             { Tier: "X", None: 0, "3rd": 0, "2nd": 0, "1st": 0, Ace: 0 },
         ],
-        NationDist: {
-            USA: 0,
-            USSR: 0,
-            France: 0,
-            Germany: 0,
-            UK: 0,
-            China: 0,
-            Japan: 0,
-            Czech: 0,
-            Sweden: 0,
-            Poland: 0,
-            Italy: 0,
-        },
-        NationDistRecent: {
-            USA: 0,
-            USSR: 0,
-            France: 0,
-            Germany: 0,
-            UK: 0,
-            China: 0,
-            Japan: 0,
-            Czech: 0,
-            Sweden: 0,
-            Poland: 0,
-            Italy: 0,
-        },
-        ClassDist: {
-            HT: 0,
-            MT: 0,
-            TD: 0,
-            LT: 0,
-            SPG: 0,
-        },
-        ClassDistRecent: {
-            HT: 0,
-            MT: 0,
-            TD: 0,
-            LT: 0,
-            SPG: 0,
-        },
+        NationDist: Object.values(nationConv).reduce((acc, nation) => {
+            acc[nation] = 0;
+            return acc;
+        }, {}),
+        NationDistRecent: Object.values(nationConv).reduce((acc, nation) => {
+            acc[nation] = 0;
+            return acc;
+        }, {}),
+        ClassDist: Object.values(classConv).reduce((acc, _class) => {
+            acc[_class] = 0;
+            return acc;
+        }, {}),
+        ClassDistRecent: Object.values(classConv).reduce((acc, _class) => {
+            acc[_class] = 0;
+            return acc;
+        }, {}),
         lineGraphWN8: {
             data: [],
         },
@@ -1757,14 +1697,14 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
             data.tierMoeDist[row.tier - 5][row.moe] += 1;
         }
         data.tierMasteryDist[row.tier - 1][numToMastery[row.mastery]] += 1;
-        data.NationDist[row.nation] += row.battles;
-        data.ClassDist[row.class] += row.battles;
+        data.NationDist[nationConv[row.nation]] += row.battles;
+        data.ClassDist[classConv[row.class]] += row.battles;
     });
 
     recent1000.tankStats.forEach((tank) => {
         data.tierDistRecent[tank.tier - 1][tank.class] += tank.battles;
-        data.NationDistRecent[tank.nation] += tank.battles;
-        data.ClassDistRecent[tank.class] += tank.battles;
+        data.NationDistRecent[nationConv[tank.nation]] += tank.battles;
+        data.ClassDistRecent[classConv[tank.class]] += tank.battles;
     });
 
     overallStats.raw.forEach((stats) => calcTrackingVals(BattleCount, BattleTracker, EXPTracker, WinsCount, stats));
@@ -1778,26 +1718,26 @@ export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentSt
     function calculateWN8Distribution() {
         for (let i = 0; i < 6; ++i) {
             for (let j = 1; j < 11; ++j) {
-                if (EXPTracker[i][tierToKey[j]].dmg > 0)
-                    data.tankWN8byClassTier[i][tierToKey[j]] = parseInt(simpleWN8(i, j, BattleTracker, EXPTracker));
-                else data.tankWN8byClassTier[i][tierToKey[j]] = "-";
-                if (RecentEXPTracker[i][tierToKey[j]].dmg > 0)
-                    data.recentTankWN8byClassTier[i][tierToKey[j]] = parseInt(
+                if (EXPTracker[i][tierConv[j]].dmg > 0)
+                    data.tankWN8byClassTier[i][tierConv[j]] = parseInt(simpleWN8(i, j, BattleTracker, EXPTracker));
+                else data.tankWN8byClassTier[i][tierConv[j]] = "-";
+                if (RecentEXPTracker[i][tierConv[j]].dmg > 0)
+                    data.recentTankWN8byClassTier[i][tierConv[j]] = parseInt(
                         simpleWN8(i, j, RecentBattleTracker, RecentEXPTracker)
                     );
-                else data.recentTankWN8byClassTier[i][tierToKey[j]] = "-";
-                if (BattleCount[i][tierToKey[j]] > 0)
-                    data.tankWRbyClassTier[i][tierToKey[j]] = round(
-                        (WinsCount[i][tierToKey[j]] * 100) / BattleCount[i][tierToKey[j]],
+                else data.recentTankWN8byClassTier[i][tierConv[j]] = "-";
+                if (BattleCount[i][tierConv[j]] > 0)
+                    data.tankWRbyClassTier[i][tierConv[j]] = round(
+                        (WinsCount[i][tierConv[j]] * 100) / BattleCount[i][tierConv[j]],
                         2
                     );
-                else data.tankWRbyClassTier[i][tierToKey[j]] = "-";
-                if (RecentBattleCount[i][tierToKey[j]] > 0)
-                    data.recentTankWRbyClassTier[i][tierToKey[j]] = round(
-                        (RecentWinsCount[i][tierToKey[j]] * 100) / RecentBattleCount[i][tierToKey[j]],
+                else data.tankWRbyClassTier[i][tierConv[j]] = "-";
+                if (RecentBattleCount[i][tierConv[j]] > 0)
+                    data.recentTankWRbyClassTier[i][tierConv[j]] = round(
+                        (RecentWinsCount[i][tierConv[j]] * 100) / RecentBattleCount[i][tierConv[j]],
                         2
                     );
-                else data.recentTankWRbyClassTier[i][tierToKey[j]] = "-";
+                else data.recentTankWRbyClassTier[i][tierConv[j]] = "-";
             }
         }
     }

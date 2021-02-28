@@ -4,9 +4,8 @@ import { ServerContext } from "Context";
 import MoETable from "./MoEPageComponents/MoETable";
 import MoETracker from "./MoEPageComponents/MoETracker";
 import { TabPanel, CustomTabs, CustomTab } from "./tabs/customTabs";
-import tankNames from "Data/tankNames.json";
 import { Loader, FullPageTableWrapper, Info } from "Components";
-import { tierConv, serverConv, nationConv, classConv } from "Data/conversions";
+import { serverConv } from "Data/conversions";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -49,28 +48,7 @@ export default function MoEPage(props) {
     let table = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={40} top={20} />;
 
     if (data) {
-        let rowData = [];
-        for (let i = 0; i < data.length; ++i) {
-            if (data[i].id in tankNames) {
-                const id = data[i].id;
-                let entry = {
-                    image: data[i].image,
-                    id: id,
-                    name: tankNames[id].short_name,
-                    nation: nationConv[tankNames[id].nation],
-                    tier: tierConv[tankNames[id].tier],
-                    class: classConv[tankNames[id].type],
-                    50: data[i]["50"] || "-",
-                    65: data[i]["65"] || "-",
-                    85: data[i]["85"] || "-",
-                    95: data[i]["95"] || "-",
-                    100: data[i]["100"] || "-",
-                    isPrem: tankNames[id].is_premium,
-                };
-                rowData.push(entry);
-            }
-        }
-        table = <MoETable data={rowData} />;
+        table = <MoETable data={data} />;
     }
 
     let changeTable95 = <></>;

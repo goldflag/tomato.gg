@@ -14,12 +14,18 @@ import {
     arrayFilterFn,
     NumberRangeColumnFilter,
 } from "Components/tableFilters";
-import { ButtonFiltersContainer, FiltersContainer, Name } from "Components/tableComponents";
+import {
+    ButtonFiltersContainer,
+    ClassCell,
+    FiltersContainer,
+    NationCell,
+    TankNameCell,
+    TierCell,
+} from "Components/tableComponents";
 import styled from "styled-components";
 import Tooltip from "react-tooltip-lite";
 import awardsData from "Data/awardsinfo.json";
 import cellStyle from "Functions/cellStyle";
-import { tierConv } from "Data/conversions";
 
 const AwardContainer = styled.div`
     padding: 0.5rem;
@@ -175,36 +181,27 @@ function OverallTable({ data }) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ({ row: { original } }) => (
-                    <Name val={original.isPrem}>
-                        <img src={original.image} alt={original.name} />
-                        {original.name}
-                    </Name>
-                ),
+                Cell: TankNameCell,
                 Header: "Name",
                 accessor: "name",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
-                ),
+                Cell: NationCell,
                 Header: "Nation",
                 accessor: "nation",
                 Filter: NationFilter,
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => tierConv[value],
+                Cell: TierCell,
                 Header: "Tier",
                 accessor: "tier",
                 Filter: NumericTierFilter,
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
-                ),
+                Cell: ClassCell,
                 Header: "Class",
                 accessor: "class",
                 Filter: ClassFilter,
@@ -311,7 +308,6 @@ function OverallTable({ data }) {
             initialState: {
                 pageIndex: 0,
                 pageSize: 25,
-                // hiddenColumns: ["isPrem"],
                 sortBy: [
                     {
                         id: "battles",

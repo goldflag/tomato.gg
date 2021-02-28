@@ -10,8 +10,8 @@ import {
     Pagination,
     ClassFilter,
     GlobalFilter,
-    MoETierFilter,
-    NationFilter,
+    MoETrackerTierFilter,
+    ConvertedNationFilter,
     PremFilter,
     arrayFilterFn,
     ButtonFiltersContainer,
@@ -19,7 +19,10 @@ import {
     StyledTable,
     SubRow,
     TableContainer,
-    Name,
+    NationCell,
+    TankNameCell,
+    ClassCell,
+    TierCell,
 } from "Components";
 
 const backend = process.env.REACT_APP_BACKEND;
@@ -71,35 +74,27 @@ function MoETracker({ data, moe }) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ({ row: { original } }) => (
-                    <Name val={original.isPrem}>
-                        <img src={original.image} alt={original.name} />
-                        {original.name}
-                    </Name>
-                ),
+                Cell: TankNameCell,
                 Header: "Name",
                 accessor: "name",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
-                ),
+                Cell: NationCell,
                 Header: "Nation",
                 accessor: "nation",
-                Filter: NationFilter,
+                Filter: ConvertedNationFilter,
                 filter: arrayFilterFn,
             },
             {
+                Cell: TierCell,
                 Header: "Tier",
                 accessor: "tier",
-                Filter: MoETierFilter,
+                Filter: MoETrackerTierFilter,
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
-                ),
+                Cell: ClassCell,
                 Header: "Class",
                 accessor: "class",
                 Filter: ClassFilter,
@@ -107,7 +102,7 @@ function MoETracker({ data, moe }) {
             },
             {
                 Header: `${MoEConv[moe]} MoE Reqs`,
-                accessor: `${moe}`,
+                accessor: moe,
                 disableFilters: true,
             },
             {

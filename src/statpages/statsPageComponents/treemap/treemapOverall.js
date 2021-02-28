@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 // LOCAL
 import { MoEStars } from "Components/moeStars";
+import { classConv, classDescConv, nationAdjConv, nationConv } from "Data/conversions";
 
 const CustomToolTip = styled.div`
     min-width: 200px;
@@ -46,13 +47,15 @@ const TooltipValue = styled.div`
 
 const TreeMapTooltip = ({ node, type }) => {
     const { id, isLeaf, data } = node;
+    const classDesc = classDescConv[classConv[data.class]];
+    const nationAdj = nationAdjConv[nationConv[data.nation]];
 
     if (id === "Stats") return null;
     var headerColor, headerContent, gridItems;
 
     if (isLeaf && type === "Overall") {
         headerColor = data.color;
-        headerContent = `${data.name} | ${data.nation} ${data.class}`;
+        headerContent = `${data.name} | ${nationAdj} ${classDesc}`;
         gridItems = [
             { label: "Battles", value: data.battles },
             { label: "Winrate", value: data.winrate + "%" },
@@ -94,7 +97,7 @@ const TreeMapTooltip = ({ node, type }) => {
         ];
     } else if (isLeaf) {
         headerColor = data.color;
-        headerContent = `${data.name} | ${data.nation} ${data.class}`;
+        headerContent = `${data.name} | ${nationAdj} ${classDesc}`;
         gridItems = [
             { label: "Battles", value: data.battles },
             { label: "Winrate", value: data.winrate + "%" },
