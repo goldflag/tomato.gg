@@ -130,6 +130,7 @@ const Table = styled.table`
 `;
 
 const Tr = styled.tr`
+    white-space: nowrap;
     color: rgb(220, 220, 220);
     background-color: rgba(40, 40, 70, 0.5);
     :nth-child(4n + 1) {
@@ -156,6 +157,7 @@ const Td = styled.td`
 const TableContainer = styled.div`
     font-family: Roboto Mono;
     overflow-x: auto;
+    overflow-y: hidden;
     background-color: rgba(0, 0, 0, 0);
     backdrop-filter: blur(7px);
 `;
