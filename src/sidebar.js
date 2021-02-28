@@ -33,6 +33,17 @@ const strings = new LocalizedStrings({
         createdBy: "Tomato.gg est un site web créé par",
         notAffiliated: "et n'est pas affilié avec Wargaming.net.",
     },
+    tr: {
+        support: "Tomato.gg'yi destekleyin",
+        donations: `Tomato.gg tamamen kullanıcı bağışlarıyla çalışır. Web sitesinde bir değer bulursanız, 
+        sunucuların çalışmaya devam etmesine yardımcı olmak için bağış yapabilirsiniz.`,
+        kofi: "Ko-fi'den Bağış",
+        paypal: "Paypal'dan Bağış",
+        partnered: "Ortak Web Siteleri",
+        herhor: "MoE sıralaması ve görüntü oluşturucu",
+        createdBy: "Tomato.gg sitesini yapan kişi ",
+        notAffiliated: "ve Wargaming.net ile bağlantılı değildir.",
+    },
 });
 
 const StyledSidebar = styled.div`

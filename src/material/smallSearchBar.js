@@ -24,7 +24,7 @@ const Styles = styled.div`
 
 const strings = new LocalizedStrings({
     en: {
-        placeholder: "Enter Username",
+        placeholder: "Enter a Username",
         ariaLabel: "search for a player",
         searchAriaLabel: "search",
     },
@@ -32,6 +32,11 @@ const strings = new LocalizedStrings({
         placeholder: "Entrez le nom d'un joueur",
         ariaLabel: "recherchez un joueur",
         searchAriaLabel: "recherche",
+    },
+    tr: {
+        placeholder: "Kullanıcı adı girin",
+        ariaLabel: "oyuncu ara",
+        searchAriaLabel: "arama",
     },
 });
 

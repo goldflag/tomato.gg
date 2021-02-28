@@ -43,6 +43,19 @@ const strings = new LocalizedStrings({
         tankList: "Liste Chars",
         serverStats: "Statistiques Serveur",
     },
+    tr: {
+        home: "Anasayfa",
+        playerStats: "Oyuncu İst.",
+        tankStats: "Tank İst.",
+        leaderboards: "En İyiler",
+        moeReqs: "MoE Değerleri",
+        masteryReqs: "Tank Ası Değ.",
+        WN8Expected: "WN8 Değerleri",
+        statsReference: "İstatistik Ref.",
+        about: "Hakkında",
+        tankList: "Tank Listesi",
+        serverStats: "Sunucu İstatistik",
+    },
 });
 
 const home = {

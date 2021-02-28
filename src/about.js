@@ -48,6 +48,26 @@ const strings = new LocalizedStrings({
         feedback: `Si vous voulez dire quelque chose sur le site, faire des suggestions, ou faire un rapport de bogue.`,
         thanks: `Merci d'utiliser Tomato.gg!`,
     },
+    tr: {
+        h1: `Tomato.gg Hakkında`,
+        updated: `GÜNCELLENDİ `,
+        about0: `Çok çeşitli istatistikleri görüntülemek için erişilebilir bir arayüz sağlamak adına bu siteyi 
+        oluşturdum. Birçok araç sadece burada var. Bazı istatistikler için diğer sitelerden ilham alındı.`,
+        about1: `Tomato.gg her şeyi yapmayı hedeflemiyor. Hiçbir zaman wot-news.com'da olduğu kadar detaylı 
+        sunucu istatistiklerine sahip olmayacak ve WN8lab.com'daki kadar hassas bireysel istatistikleri 
+        göstermeyecek. Tomato.gg aktif olarak geliştiriliyor ve özellik tamamlanmaya yakın değil, Gelecekte, 
+        oyuncu istatistikleri sayfasını genişletmeyi, tank istatistikleri sayfasını genişletmeyi, klan 
+        istatistiklerini uygulamayı ve skor tablolarını bitirmeyi planlıyorum.`,
+        about2: `Tomato.gg; EU, NA ve ASIA oyuncu istatistiklerini tam olarak destekler. RU oyuncularının 
+        istatistiklerini de görüntüleyebilirsiniz, ancak otomatik günlük istatistik güncellemeleri yoktur. `,
+        about3: `Mobil cihazlarda da Tomato.gg'ye  göz atın. Neredeyse tüm özelliklere sahip en iyi kullanıcı 
+        deneyimi için mobil siteyi optimize ettim. `,
+        about4: `Tomato.gg'in geliştirilmesine büyük ölçüde yardımcı oldu. Çok teşekkürler! `,
+        joinMy: `Katılmak istersen `,
+        discord: `Discord sunucusu`,
+        feedback: `Geri bildirim, öneri ve hata raporları sağlamak isterseniz. `,
+        thanks: `Tomato.gg'yi kullandığınız için teşekkürler!`,
+    },
 });
 
 const trackingId = process.env.REACT_APP_GA;

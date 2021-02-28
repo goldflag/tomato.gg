@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Icon } from "react-icons-kit";
 import { chevronRight, chevronLeft, chevronsRight, chevronsLeft } from "react-icons-kit/feather";
+import LocalizedStrings from "react-localization";
 
 const PaginationContainer = styled.div`
     font-family: Roboto Mono;
@@ -38,6 +39,14 @@ const PaginationButton = styled.button`
     }
 `;
 
+const strings = new LocalizedStrings({
+    en: {
+        pageOf: "Page {0} of {1}",
+        gotoPage: "Go to page:",
+        show: "Show", // as in, "show 50 items on a page"
+    },
+});
+
 export const Pagination = (props) => {
     if (props.pageSizes[0] >= props.pageSize * props.pageOptions.length)
         // hide component when there's no pagination to be done
@@ -57,10 +66,10 @@ export const Pagination = (props) => {
             <PaginationButton onClick={() => props.gotoPage(props.pageCount - 1)} disabled={!props.canNextPage}>
                 <Icon size={24} icon={chevronsRight} />
             </PaginationButton>{" "}
-            Page {props.pageIndex + 1} of {props.pageOptions.length}{" "}
+            {strings.formatString(strings.pageOf, props.pageIndex + 1, props.pageOptions.length)}
             {props.showGoTo ? (
                 <span>
-                    | Go to page:{" "}
+                    | {strings.gotoPage}{" "}
                     <input
                         type="number"
                         defaultValue={props.pageIndex + 1}
@@ -96,7 +105,7 @@ export const Pagination = (props) => {
                             fontFamily: "Roboto Mono",
                         }}
                     >
-                        Show {pageSize}
+                        {strings.show} {pageSize}
                     </option>
                 ))}
             </select>
@@ -129,7 +138,7 @@ export const ServerPagination = ({ page, numPages, setPage }) => {
             >
                 <Icon size={24} icon={chevronsRight} />
             </PaginationButton>{" "}
-            Page {page + 1} of {numPages}{" "}
+            {strings.formatString(strings.pageOf, page + 1, numPages)}{" "}
         </PaginationContainer>
     );
 };

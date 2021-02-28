@@ -1,6 +1,7 @@
 // NPM
 import React from "react";
 import styled from "styled-components";
+import LocalizedStrings from "react-localization";
 
 const GreenIcon = styled.span`
     font-size: 0.8rem;
@@ -10,4 +11,10 @@ const GreenIcon = styled.span`
     background-color: rgb(0, 184, 104);
 `;
 
-export const NewIcon = () => <GreenIcon>NEW!</GreenIcon>;
+const strings = new LocalizedStrings({
+    en: {
+        new: "NEW!",
+    },
+});
+
+export const NewIcon = () => <GreenIcon>{strings.new}</GreenIcon>;
