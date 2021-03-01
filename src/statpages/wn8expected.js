@@ -1,11 +1,22 @@
+// NPM
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
+import LocalizedStrings from "react-localization";
 
+// LOCAL
 import WN8Table from "./wn8Components/wn8Table";
 import { Loader, FullPageTableWrapper, Info } from "Components";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
+
+const strings = new LocalizedStrings({
+    en: {
+        expected: "WN8 Expected Values",
+        maintained: "Maintained by the {0}",
+        xvm: "XVM team",
+    },
+});
 
 export default function Leaderboards(props) {
     const [data, setData] = useState();
@@ -24,7 +35,7 @@ export default function Leaderboards(props) {
     return (
         <FullPageTableWrapper>
             <Info>
-                <span style={{ fontSize: "2rem", fontWeight: "500" }}>WN8 Expected Values</span>
+                <span style={{ fontSize: "2rem", fontWeight: "500" }}>{strings.expected}</span>
                 <br />
                 <br />
                 <span
@@ -34,11 +45,13 @@ export default function Leaderboards(props) {
                         color: "rgb(100,100,100)",
                     }}
                 >
-                    Maintained by the{" "}
-                    <a target="blank" href="https://modxvm.com/en/wn8-expected-values/">
-                        XVM team
-                    </a>
-                </span>{" "}
+                    {strings.formatString(
+                        strings.maintained,
+                        <a target="blank" href="https://modxvm.com/en/wn8-expected-values/">
+                            {strings.xvm}
+                        </a>
+                    )}
+                </span>
                 <br />
             </Info>
             {data ? <WN8Table data={data} /> : <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />}
