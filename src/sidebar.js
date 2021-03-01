@@ -1,14 +1,16 @@
 // NPM
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import LocalizedStrings from "react-localization";
+import Switch from '@material-ui/core/Switch';
 
 // LOCAL
 import { menuRoutes } from "./routes";
 import TomatoLogo from "Assets/tomato.png";
 import background from "Assets/sidebar.jpg";
 import { NewIcon } from "Components";
+import { BackgroundContext } from "Context";
 
 const strings = new LocalizedStrings({
     en: {
@@ -202,6 +204,12 @@ const Support = styled.div`
     }
 `;
 
+const Background = styled.div`
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: #96a7c7;
+`;
+
 const Partnered = styled.div`
     font-size: 0.8rem;
     font-weight: 300;
@@ -222,7 +230,9 @@ const CopyrightNotice = styled.div`
     }
 `;
 
-const Sidebar = withRouter((props) => (
+const Sidebar = withRouter((props) => {    
+    const { background, toggleBackground } = useContext(BackgroundContext);
+    return (
     <StyledSidebar>
         <Layer>
             <Link to="/">
@@ -242,6 +252,16 @@ const Sidebar = withRouter((props) => (
                 ))}
             </Menu>
             <Bottom>
+                <Background>
+                    <Switch
+                        checked={background === "black"}
+                        onChange={() => toggleBackground(background === "black" ? "blue" : "black")}
+                        color="primary"
+                        name="background"
+                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                    />
+                    Toggle Boomer Background
+                </Background>
                 <Support>
                     <h2>{strings.support}</h2>
                     {strings.donations}
@@ -272,6 +292,6 @@ const Sidebar = withRouter((props) => (
             </Bottom>
         </Layer>
     </StyledSidebar>
-));
+)});
 
 export default Sidebar;

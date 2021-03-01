@@ -9,8 +9,7 @@ body {
     color: #333; */
 }
 
-.dark-mode {
-    background-color: rgb(50, 50, 54);
+.blue {
     color: rgb(234, 238, 248);
     background: url(../assets/Ocean.svg) no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -20,26 +19,25 @@ body {
 }
 
 /* unvisited link */
-.dark-mode a {
+.blue a {
     color: rgb(161, 177, 230);
     text-decoration: none;
 }
 
 /* mouse over link */
-.dark-mode a:hover {
+.blue a:hover {
     color: rgb(180, 70, 129);
     text-decoration: none;
 }
 
 /* selected link */
-.dark-mode a:active {
+.blue a:active {
     color: rgb(120, 60, 131);
     text-decoration: none;
 }
 
-.light-mode {
-    background-color: rgb(234, 238, 248);
-    background: url(../assets/Ocean.svg) no-repeat center center fixed;
+.black {
+    background-color: rgb(30, 30, 50);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -47,19 +45,19 @@ body {
 }
 
 /* unvisited link */
-.light-mode a {
+.black a {
     color: rgb(58, 89, 189);
     text-decoration: none;
 }
 
 /* mouse over link */
-.light-mode a:hover {
+.black a:hover {
     color: rgb(207, 12, 116);
     text-decoration: none;
 }
 
 /* selected link */
-.light-mode a:active {
+.black a:active {
     color: rgb(108, 37, 121);
     text-decoration: none;
 }
