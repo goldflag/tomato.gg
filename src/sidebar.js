@@ -234,9 +234,10 @@ const Sidebar = withRouter((props) => (
             <Menu>
                 {menuRoutes.map(({ path, title, Icon, isNew }) => (
                     <MenuLink to={path} key={path}>
-                        <Icon />
-                        &nbsp;&nbsp;{title}&nbsp;&nbsp;
-                        {isNew ? <NewIcon /> : null}
+                        <nobr>
+                            <Icon />
+                            &nbsp;&nbsp;{title} {isNew ? <NewIcon /> : null}
+                        </nobr>
                     </MenuLink>
                 ))}
             </Menu>

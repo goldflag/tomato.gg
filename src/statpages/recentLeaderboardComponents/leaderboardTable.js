@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useTable } from "react-table";
 
 // LOCAL
-import { StyledTable, TableContainer } from "Components/tableComponents";
+import { StyledTable, TableContainer, tableHeaders } from "Components/tableComponents";
 import setColor from "Functions/cellStyle";
 
 export default function LeaderboardTable({ type, data }) {
@@ -18,58 +18,58 @@ export default function LeaderboardTable({ type, data }) {
     const columns = React.useMemo(
         () => [
             {
-                Header: "Rank",
+                Header: tableHeaders.rank,
                 accessor: "rank",
             },
             {
-                Header: "Username",
+                Header: tableHeaders.username,
                 accessor: "username",
                 Cell: ({ row: { original, values } }) => <Link to={original.url}> {values.username}</Link>,
             },
             {
-                Header: "Battles",
+                Header: tableHeaders.battles,
                 accessor: "battles",
             },
             {
-                Header: "Avg Tier",
+                Header: tableHeaders.avgTier,
                 accessor: "avgtier",
             },
             {
-                Header: "WN8",
+                Header: tableHeaders.wn8,
                 accessor: "wn8",
             },
             {
-                Header: "Winrate",
+                Header: tableHeaders.winrate,
                 accessor: "winrate",
                 Cell: ({ value }) => `${value}%`,
             },
             {
-                Header: "DPG",
+                Header: tableHeaders.dpg,
                 accessor: "dpg",
             },
             {
-                Header: "Frags",
+                Header: tableHeaders.frags,
                 accessor: "frags",
             },
             {
-                Header: "DMG Ratio",
+                Header: tableHeaders.dmgRatio,
                 accessor: "dmg_ratio",
             },
             {
-                Header: "K/D",
+                Header: tableHeaders.kd,
                 accessor: "kd",
             },
             {
-                Header: "Spots",
+                Header: tableHeaders.spots,
                 accessor: "spots",
             },
             {
-                Header: "Survival",
+                Header: tableHeaders.survival,
                 accessor: "survival",
                 Cell: ({ value }) => `${value}%`,
             },
             {
-                Header: "Decap",
+                Header: tableHeaders.decap,
                 accessor: "decap",
             },
         ],

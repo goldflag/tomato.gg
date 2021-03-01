@@ -4,13 +4,9 @@ import { useHistory } from "react-router-dom";
 import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
 
 // LOCAL
+import cellStyle from "Functions/cellStyle";
+import { Pagination } from "Components";
 import {
-    ClassFilter,
-    GlobalFilter,
-    Pagination,
-    PremFilter,
-    NumericTierFilter,
-    arrayFilterFn,
     ButtonFiltersContainer,
     FiltersContainer,
     StyledTable,
@@ -19,85 +15,91 @@ import {
     TankNameCell,
     TierCell,
     ClassCell,
-} from "Components";
-import cellStyle from "Functions/cellStyle";
-import { ConvertedNationFilter } from "Components/";
+    tableHeaders,
+} from "Components/tableComponents";
+import {
+    ConvertedNationFilter,
+    ClassFilter,
+    GlobalFilter,
+    PremFilter,
+    NumericTierFilter,
+    arrayFilterFn,
+} from "Components/tableFilters";
 
 function RecentTanksAvgTable({ data }) {
     const columns = React.useMemo(() => {
         return [
             {
                 Cell: TankNameCell,
-                Header: "Tank",
+                Header: tableHeaders.name,
                 accessor: "short_name",
                 disableFilters: true,
             },
             {
                 Cell: NationCell,
-                Header: "Nation",
+                Header: tableHeaders.nation,
                 accessor: "nation",
                 Filter: ConvertedNationFilter,
                 filter: arrayFilterFn,
             },
             {
                 Cell: TierCell,
-                Header: "Tier",
+                Header: tableHeaders.tier,
                 accessor: "tier",
                 Filter: NumericTierFilter,
                 filter: arrayFilterFn,
             },
             {
                 Cell: ClassCell,
-                Header: "Class",
+                Header: tableHeaders.class,
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
             },
             {
-                Header: "Games",
+                Header: tableHeaders.battles,
                 accessor: "battles",
                 disableFilters: true,
             },
             {
-                Header: "WN8",
+                Header: tableHeaders.wn8,
                 accessor: "wn8",
                 disableFilters: true,
             },
             {
                 Cell: ({ value }) => `${value}%`,
-                Header: "Winrate",
+                Header: tableHeaders.winrate,
                 accessor: "winrate",
                 disableFilters: true,
             },
             {
-                Header: "DPG",
+                Header: tableHeaders.dpg,
                 accessor: "dpg",
                 disableFilters: true,
             },
-            { Header: "KPG", accessor: "frags", disableFilters: true },
+            { Header: tableHeaders.frags, accessor: "frags", disableFilters: true },
             {
-                Header: "DR",
+                Header: tableHeaders.dmgRatio,
                 accessor: "dmg_ratio",
                 disableFilters: true,
             },
             {
-                Header: "KDR",
+                Header: tableHeaders.kd,
                 accessor: "kd",
                 disableFilters: true,
             },
             {
                 Cell: ({ value }) => `${value}%`,
-                Header: "Survival%",
+                Header: tableHeaders.survival,
                 accessor: "survival",
                 disableFilters: true,
             },
             {
-                Header: "Spots",
+                Header: tableHeaders.spots,
                 accessor: "spots",
                 disableFilters: true,
             },
             {
-                Header: "",
                 accessor: "is_premium",
                 Filter: PremFilter,
                 filter: arrayFilterFn,

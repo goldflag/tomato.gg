@@ -1,11 +1,14 @@
+// NPM
 import React from "react";
 import styled, { css } from "styled-components";
 import { Button, ButtonGroup } from "@material-ui/core";
-import { MoEStars } from "./moeStars";
 import { useAsyncDebounce } from "react-table";
 import InputBase from "@material-ui/core/InputBase";
-import { classConv, nationConv } from "Data/conversions";
 import LocalizedStrings from "react-localization";
+
+// LOCAL
+import { MoEStars } from "./moeStars";
+import { classConv, nationConv } from "Data/conversions";
 
 export const FilterButton = styled(Button)`
     background-color: ${({ selected }) => (selected ? css`rgb(222, 13, 93)` : css`rgb(66, 84, 143)`)} !important;

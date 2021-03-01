@@ -24,6 +24,7 @@ import {
     NationCell,
     ClassCell,
     TierCell,
+    tableHeaders,
 } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
 
@@ -36,19 +37,19 @@ function MoETable({ data }) {
         () => [
             {
                 Cell: TankNameCell,
-                Header: "Name",
+                Header: tableHeaders.name,
                 accessor: "short_name",
                 disableFilters: true,
             },
             {
                 Cell: NationCell,
-                Header: "Nation",
+                Header: tableHeaders.nation,
                 accessor: "nation",
                 Filter: NationFilter,
                 filter: arrayFilterFn,
             },
             {
-                Header: "Tier",
+                Header: tableHeaders.tier,
                 accessor: "tier",
                 Filter: MoETierFilter,
                 filter: arrayFilterFn,
@@ -56,7 +57,7 @@ function MoETable({ data }) {
             },
             {
                 Cell: ClassCell,
-                Header: "Class",
+                Header: tableHeaders.class,
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,

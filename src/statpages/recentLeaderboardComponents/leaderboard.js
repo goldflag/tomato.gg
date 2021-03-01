@@ -46,6 +46,7 @@ const strings = new LocalizedStrings({
         dpg: "DPG",
         6: "In Vehicles Tier 6+",
         8: "In Vehicles Tier 8+",
+        30: "30 Days",
         60: "60 Days",
         typeFilter: "set leaderboard type",
         tierFilter: "set minimum tank tier",

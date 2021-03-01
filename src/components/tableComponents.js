@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 
 // LOCAL
 import { tierConv, nationConv, classConv } from "Data/conversions";
+import LocalizedStrings from "react-localization";
 export const TableContainer = styled.div`
     overflow-x: auto;
     overflow-y: hidden;
@@ -102,3 +103,36 @@ export const ClassCell = ({ value, maxWidth }) => (
 );
 
 export const TierCell = ({ value }) => tierConv[value] || value;
+
+export const tableHeaders = new LocalizedStrings({
+    en: {
+        rank: "Rank",
+        username: "Username",
+        battles: "Battles",
+        avgTier: "Avg Tier",
+        wn8: "WN8",
+        winrate: "Winrate",
+        dpg: "DPG",
+        frags: "Frags",
+        dmgRatio: "DMG Ratio",
+        kd: "K/D",
+        spots: "Spots",
+        survival: "Survival",
+        decap: "Decap",
+        name: "Name",
+        nation: "Nation",
+        tier: "Tier",
+        class: "Class",
+        ace: "Ace Wanker", // Ace Tanker
+        firstClass: "1st Class",
+        secondClass: "2nd Class",
+        thirdClass: "3rd Class",
+        moeReqs: "{0} MoE Reqs",
+        dayChange: "{0} Day {1}",
+        expDef: "expDef",
+        expFrag: "expFrag",
+        expSpot: "expSpot",
+        expDamage: "expDamage",
+        expWinRate: "expWinrate",
+    },
+});

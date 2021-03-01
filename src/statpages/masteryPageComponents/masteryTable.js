@@ -24,6 +24,7 @@ import {
     TankNameCell,
     ClassCell,
     TierCell,
+    tableHeaders,
 } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
 
@@ -36,48 +37,48 @@ function MasteryTable({ data }) {
         () => [
             {
                 Cell: TankNameCell,
-                Header: "Name",
+                Header: tableHeaders.name,
                 accessor: "short_name",
                 disableFilters: true,
             },
             {
                 Cell: NationCell,
-                Header: "Nation",
+                Header: tableHeaders.nation,
                 accessor: "nation",
                 Filter: NationFilter,
                 filter: arrayFilterFn,
             },
             {
                 Cell: TierCell,
-                Header: "Tier",
+                Header: tableHeaders.tier,
                 accessor: "tier",
                 Filter: NumericTierFilter,
                 filter: arrayFilterFn,
             },
             {
                 Cell: ClassCell,
-                Header: "Class",
+                Header: tableHeaders.class,
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
             },
             {
-                Header: "3rd Class",
+                Header: tableHeaders.thirdClass,
                 accessor: "3rd",
                 disableFilters: true,
             },
             {
-                Header: "2nd Class",
+                Header: tableHeaders.secondClass,
                 accessor: "2nd",
                 disableFilters: true,
             },
             {
-                Header: "1st Class",
+                Header: tableHeaders.firstClass,
                 accessor: "1st",
                 disableFilters: true,
             },
             {
-                Header: "Ace Wanker",
+                Header: tableHeaders.ace,
                 accessor: "ace",
                 disableFilters: true,
             },

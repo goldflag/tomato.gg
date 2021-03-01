@@ -37,6 +37,13 @@ export const classDescConv = new LocalizedStrings({
         SPG: "САУ",
         TD: "ПТ-САУ",
     },
+    tr: {
+        HT: "Ağır Tank",
+        MT: "Orta Tank",
+        LT: "Hafif Tank",
+        SPG: "Kundağı Motorlu Topçu",
+        TD: "Tank Avcısı",
+    },
     zh: {
         HT: "重坦",
         MT: "中坦",
