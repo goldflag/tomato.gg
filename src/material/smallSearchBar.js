@@ -28,6 +28,11 @@ const strings = new LocalizedStrings({
         ariaLabel: "search for a player",
         searchAriaLabel: "search",
     },
+    es: {
+        placeholder: "Escribe un nombre de usuario",
+        ariaLabel: "buscar un jugador",
+        searchAriaLabel: "buscar",
+    },
     fr: {
         placeholder: "Entrez le nom d'un joueur",
         ariaLabel: "recherchez un joueur",

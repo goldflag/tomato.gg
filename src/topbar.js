@@ -136,6 +136,10 @@ const strings = new LocalizedStrings({
         clearHistory: "Wyczyść historię",
         server: "Wybierz domyślny serwer",
     },
+    ru: {
+        clearHistory: "Очистить историю",
+        server: "Выберите свой сервер",
+    },
 });
 
 export default withRouter(function Topbar(props) {

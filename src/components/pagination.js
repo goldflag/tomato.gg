@@ -45,6 +45,11 @@ const strings = new LocalizedStrings({
         gotoPage: "Go to page:",
         show: "Show",
     },
+    es: {
+        pageOf: "Página {0} de {1}",
+        gotoPage: "Ir a la página:",
+        show: "Mostrar",
+    },
     fr: {
         pageOf: "Page {0} sur {1}",
         gotoPage: "Aller à la page:",
@@ -59,6 +64,11 @@ const strings = new LocalizedStrings({
         pageOf: "Strona {0} z {1}",
         gotoPage: "Idź na stronę:",
         show: "Pokaż",
+    },
+    ru: {
+        pageOf: "Страница {0} из {1}",
+        gotoPage: "Перейти на страницу:",
+        show: "Показать",
     },
 });
 

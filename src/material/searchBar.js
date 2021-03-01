@@ -17,10 +17,20 @@ const strings = new LocalizedStrings({
         ariaLabel: "search for a player",
         searchAriaLabel: "search",
     },
+    es: {
+        placeholder: "Escribe un nombre de usuario (e.g. Goldflag)",
+        ariaLabel: "buscar un jugador",
+        searchAriaLabel: "buscar",
+    },
     fr: {
         placeholder: "Entrez le nom d'un joueur (ex: Goldflag)",
         ariaLabel: "recherchez un joueur",
         searchAriaLabel: "recherche",
+    },
+    pl: {
+        placeholder: "Wpisz nick (n.p. Goldflag)",
+        ariaLabel: "Wyszukaj gracza",
+        searchAriaLabel: "Szukaj",
     },
     tr: {
         placeholder: "Kullanıcı adı girin (örn. Goldflag)",
@@ -31,11 +41,6 @@ const strings = new LocalizedStrings({
         placeholder: "輸入使用者名稱 (例如: Goldflag)",
         ariaLabel: "搜尋玩家",
         searchAriaLabel: "搜尋",
-    },
-    pl: {
-        placeholder: "Wpisz nick (n.p. Goldflag)",
-        ariaLabel: "Wyszukaj gracza",
-        searchAriaLabel: "Szukaj",
     },
 });
 

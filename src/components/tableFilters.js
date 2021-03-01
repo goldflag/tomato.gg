@@ -64,6 +64,15 @@ const strings = new LocalizedStrings({
         to: "do",
         max: "Maks",
     },
+    ru: {
+        all: "ВСЕ",
+        prem: "ПРЕМ",
+        regular: "ОБЫЧНЫЕ",
+        searchTanks: "Поиск {0} танков",
+        min: "Минимум",
+        to: "до",
+        max: "Максимум",
+    },
 });
 
 const premFilterOptions = [

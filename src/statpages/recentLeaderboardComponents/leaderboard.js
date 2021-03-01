@@ -2,8 +2,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { ServerContext } from "Context";
 import styled, { css } from "styled-components";
-import { Icon } from "react-icons-kit";
-import { chevronLeft, chevronRight, chevronsLeft, chevronsRight } from "react-icons-kit/feather";
+import LocalizedStrings from "react-localization";
 import { Button, ButtonGroup } from "@material-ui/core";
 
 // LOCAL
@@ -11,6 +10,7 @@ import LeaderboardTable from "./leaderboardTable";
 import { Loader } from "Components";
 import { serverConv } from "Data/conversions";
 import { useURLState } from "Functions/hooks";
+import { ServerPagination } from "Components/";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -33,39 +33,51 @@ const FilterButtonGroup = styled(ButtonGroup)`
     margin-bottom: 10px;
 `;
 
-const PaginationContainer = styled.div`
-    padding: 1rem;
-    font-size: 0.8rem;
-    background-color: ${({ theme }) => (theme === "dark" ? css`rgba(40, 40, 50, 0.5)` : css`rgb(250, 250, 250)`)};
-    color: ${({ theme }) => (theme === "dark" ? css`rgb(220, 220, 220)` : css`rgb(80, 80, 80)`)};
-`;
-
-const PaginationButton = styled.button`
-    font-family: "Segoe UI";
-    font-weight: 500;
-    height: 2rem;
-    width: 2rem;
-    color: rgb(71, 99, 214);
-    background: none;
-    padding: 0rem;
-    border-width: 0px;
-
-    &:hover {
-        background-color: rgba(100, 129, 234, 0.5);
-        color: white;
-        border-radius: 50%;
-    }
-
-    :disabled {
-        color: rgb(220, 220, 220);
-        background: none;
-    }
-`;
-
 const Filters = styled.div`
     padding: 0px 10px;
     background-color: rgba(40, 40, 70, 0.5);
 `;
+
+const strings = new LocalizedStrings({
+    en: {
+        wn8: "WN8",
+        winrate: "Winrate",
+        kd: "K/D",
+        dpg: "DPG",
+        6: "In Vehicles Tier 6+",
+        8: "In Vehicles Tier 8+",
+        60: "60 Days",
+        typeFilter: "set leaderboard type",
+        tierFilter: "set minimum tank tier",
+        timeFilter: "set time period",
+        error: "Sorry, there was an error loading that leaderboard.",
+    },
+});
+
+const filters = {
+    type: ["wn8", "winrate", "kd", "dpg"],
+    tier: [6, 8],
+    time: [
+        // 30,
+        60,
+    ],
+};
+
+const ButtonFilterBar = ({ options, filterValue, setFilterValue, ariaLabel }) => (
+    <FilterButtonGroup variant="text" aria-label={"ariaLabel"}>
+        {options.map((value, i) => (
+            <FilterButton
+                key={i}
+                selected={value === filterValue}
+                onClick={() => {
+                    setFilterValue(value);
+                }}
+            >
+                {strings[value]}
+            </FilterButton>
+        ))}
+    </FilterButtonGroup>
+);
 
 export default function Leaderboard() {
     const { server } = useContext(ServerContext);
@@ -73,8 +85,8 @@ export default function Leaderboard() {
     const [numEntries, setNumEntries] = useState();
 
     const [type, setType] = useURLState("type", "wn8");
-    const [time, setTime] = useURLState("time", 60);
     const [tier, setTier] = useURLState("tier", 6);
+    const [time, setTime] = useURLState("time", 60);
     const [page, setPage] = useURLState("page", 0);
 
     useEffect(() => {
@@ -95,137 +107,37 @@ export default function Leaderboard() {
             });
     }, [server, type, time, tier, page]);
 
-    function typeFilter() {
-        return (
-            <FilterButtonGroup variant="text" aria-label={"ariaLabel"}>
-                <FilterButton
-                    selected={type === "wn8"}
-                    onClick={() => {
-                        setType("wn8");
-                    }}
-                >
-                    WN8
-                </FilterButton>
-                <FilterButton
-                    selected={type === "winrate"}
-                    onClick={() => {
-                        setType("winrate");
-                    }}
-                >
-                    Winrate
-                </FilterButton>
-                <FilterButton
-                    selected={type === "kd"}
-                    onClick={() => {
-                        setType("kd");
-                    }}
-                >
-                    K/D
-                </FilterButton>
-                <FilterButton
-                    selected={type === "dpg"}
-                    onClick={() => {
-                        setType("dpg");
-                    }}
-                >
-                    DPG
-                </FilterButton>
-            </FilterButtonGroup>
-        );
-    }
-
-    function tierFilter() {
-        return (
-            <FilterButtonGroup variant="text" aria-label={"ariaLabel"}>
-                <FilterButton
-                    selected={tier === 6}
-                    onClick={() => {
-                        setTier(6);
-                    }}
-                >
-                    In Vehicles Tier 6+
-                </FilterButton>
-                <FilterButton
-                    selected={tier === 8}
-                    onClick={() => {
-                        setTier(8);
-                    }}
-                >
-                    In Vehicles Tier 8+
-                </FilterButton>
-            </FilterButtonGroup>
-        );
-    }
-
-    function timeFilter() {
-        return (
-            <FilterButtonGroup variant="text" aria-label={"ariaLabel"}>
-                {/* <FilterButton
-                    selected={time === 30}
-                    onClick={() => {
-                        setTime(30);
-                    }}
-                >
-                    30 Days
-                </FilterButton> */}
-                <FilterButton
-                    selected={time === 60}
-                    onClick={() => {
-                        setTime(60);
-                    }}
-                >
-                    60 Days
-                </FilterButton>
-            </FilterButtonGroup>
-        );
-    }
-
-    function pagination() {
-        return (
-            <PaginationContainer theme={"dark"}>
-                <PaginationButton onClick={() => setPage(0)} disabled={page === 0}>
-                    <Icon size={24} icon={chevronsLeft} />
-                </PaginationButton>{" "}
-                <PaginationButton onClick={() => setPage(page > 0 ? page - 1 : 0)} disabled={page === 0}>
-                    <Icon size={24} icon={chevronLeft} />
-                </PaginationButton>{" "}
-                <PaginationButton
-                    onClick={() => {
-                        setPage(page <= parseInt(numEntries / 100) ? page + 1 : parseInt(numEntries / 100));
-                    }}
-                    disabled={page === parseInt(numEntries / 100)}
-                >
-                    <Icon size={24} icon={chevronRight} />
-                </PaginationButton>{" "}
-                <PaginationButton
-                    onClick={() => {
-                        setPage(parseInt(numEntries / 100));
-                    }}
-                    disabled={page === parseInt(numEntries / 100)}
-                >
-                    <Icon size={24} icon={chevronsRight} />
-                </PaginationButton>{" "}
-                Page {page + 1} of {parseInt(numEntries / 100)}{" "}
-            </PaginationContainer>
-        );
-    }
-
     return (
         <>
             <Filters>
-                {typeFilter()}
-                {tierFilter()}
-                {timeFilter()}
+                <ButtonFilterBar
+                    options={filters.type}
+                    filterValue={type}
+                    setFilterValue={setType}
+                    ariaLabel={strings.typeFilter}
+                />
+                <ButtonFilterBar
+                    options={filters.tier}
+                    filterValue={tier}
+                    setFilterValue={setTier}
+                    ariaLabel={strings.tierFilter}
+                />
+                <ButtonFilterBar
+                    options={filters.time}
+                    filterValue={time}
+                    setFilterValue={setTime}
+                    ariaLabel={strings.timeFilter}
+                />
             </Filters>
             {typeof data !== "string" ? (
                 <>
                     <LeaderboardTable data={data} type={type} setType={setType} />
-                    {pagination()}
+                    <ServerPagination setPage={setPage} page={page} numPages={Math.ceil(numEntries / 100)} />
                 </>
             ) : data === "loading" ? (
                 <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />
             ) : (
-                <h1>Sorry, there was an error loading that leaderboard.</h1>
+                <h1>{strings.error}</h1>
             )}
         </>
     );

@@ -41,6 +41,7 @@ export default function LeaderboardTable({ type, data }) {
             {
                 Header: "Winrate",
                 accessor: "winrate",
+                Cell: ({ value }) => `${value}%`,
             },
             {
                 Header: "DPG",
@@ -65,6 +66,7 @@ export default function LeaderboardTable({ type, data }) {
             {
                 Header: "Survival",
                 accessor: "survival",
+                Cell: ({ value }) => `${value}%`,
             },
             {
                 Header: "Decap",

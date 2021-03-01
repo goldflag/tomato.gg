@@ -30,4 +30,18 @@ export const classDescConv = new LocalizedStrings({
         SPG: "Działo samobieżne",
         TD: "Niszczyciel czołgów",
     },
+    ru: {
+        HT: "Тяжёлые Танки",
+        MT: "Средние Танки",
+        LT: "Лёгкие Танки",
+        SPG: "САУ",
+        TD: "ПТ-САУ",
+    },
+    zh: {
+        HT: "重坦",
+        MT: "中坦",
+        LT: "輕坦",
+        SPG: "火炮",
+        TD: "驅逐",
+    },
 });

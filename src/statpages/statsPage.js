@@ -34,6 +34,14 @@ const strings = new LocalizedStrings({
         notFound: "Nie znaleziono gracza {0}",
         correct: "Sprawdź, czy nick i region są poprawne",
     },
+    ru: {
+        notFound: "Игрок {0} не найден",
+        correct: "Убедитесь, что имя игрока и регион указаны правильно.",
+    },
+    zh: {
+        notFound: "查無玩家 {0}",
+        correct: "確認為正確的使用者及地區。",
+    },
 });
 class StatsPage extends Component {
     constructor(props) {

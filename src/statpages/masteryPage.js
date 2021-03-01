@@ -37,6 +37,18 @@ const strings = new LocalizedStrings({
         moeMod: "moda Marks of Excellence",
         expand: "Kliknij aby zobaczyć historię zmian w Odznakach Mistrzowskich",
     },
+    ru: {
+        mastery: "Требования к значку мастерства",
+        dataFrom: "Информация от создателей",
+        moeMod: "Информация от создателей",
+        expand: "Разверните, чтобы увидеть историю мастерства за 30 дней",
+    },
+    zh: {
+        mastery: "戰車王牌",
+        dataFrom: "數據源自",
+        moeMod: "戰車王牌 mod",
+        expand: "顯示更多過去30天所得的M牌",
+    },
 });
 
 export default function MasteryPage(props) {

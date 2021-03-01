@@ -22,6 +22,16 @@ const strings = new LocalizedStrings({
         createdBy: "Tomato.gg is a website created by",
         notAffiliated: "and is not affiliated with Wargaming.net.",
     },
+    es: {
+        support: "Apoya a Tomato.gg",
+        donations: `Tomato.gg funciona completamente con donaciones. Si encuentras valor en el sitio, considere hacer una donación para ayudar a mantener los servidores.`,
+        kofi: "Apoya en Ko-fi",
+        paypal: "Apoya en Paypal",
+        partnered: "Sitios asociados",
+        herhor: "Generador de imágenes y rankings de MoE",
+        createdBy: "Tomato.gg es un sitio creado por",
+        notAffiliated: "y no está afiliado a Wargaming.net.",
+    },
     fr: {
         support: "Soutenez Tomato.gg",
         donations: `Tomato.gg fonctionne pleinement sur les dons par utilisateurs. Si vous trouvez de 
@@ -32,6 +42,17 @@ const strings = new LocalizedStrings({
         herhor: "Classement des marques d'excellence et générateur d'image",
         createdBy: "Tomato.gg est un site web créé par",
         notAffiliated: "et n'est pas affilié avec Wargaming.net.",
+    },
+    pl: {
+        support: "Wesprzyj Tomato.gg",
+        donations: `Tomato.gg jest utrzymywane całkowicie z darowizn użytkowników. Jeśli uważasz witrynę za wartościową, rozważ pomoc
+        w utrzymaniu działania serwerów.`,
+        kofi: "Wesprzyj na Ko-fi",
+        paypal: "Wesprzyj na Paypal",
+        partnered: "Witryny partnerskie",
+        herhor: "Rankingi i generator obrazków biegłości",
+        createdBy: "Tomato.gg to witryna stworzona przez",
+        notAffiliated: "i nie jest powiązana z Wargaming.net.",
     },
     tr: {
         support: "Tomato.gg'yi destekleyin",
@@ -53,17 +74,6 @@ const strings = new LocalizedStrings({
         herhor: "M牌排行榜及圖片產生器",
         createdBy: "Tomato.gg 創自於",
         notAffiliated: "網站不隸屬於 Wargaming.net.",
-    },
-    pl: {
-        support: "Wesprzyj Tomato.gg",
-        donations: `Tomato.gg jest utrzymywane całkowicie z darowizn użytkowników. Jeśli uważasz witrynę za wartościową, rozważ pomoc
-        w utrzymaniu działania serwerów.`,
-        kofi: "Wesprzyj na Ko-fi",
-        paypal: "Wesprzyj na Paypal",
-        partnered: "Witryny partnerskie",
-        herhor: "Rankingi i generator obrazków biegłości",
-        createdBy: "Tomato.gg to witryna stworzona przez",
-        notAffiliated: "i nie jest powiązana z Wargaming.net.",
     },
 });
 

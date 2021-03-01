@@ -60,6 +60,28 @@ const strings = new LocalizedStrings({
         exp85change: "Zmiany oczekiwanych dla 85%",
         exp65change: "Zmiany oczekiwanych dla 65%",
     },
+    ru: {
+        moe: "Требования к отличительным знакам",
+        dataFrom: "Информация от создателей",
+        moeMod: "Информация от создателей",
+        expand: "Разверните, чтобы увидеть историю MG за 30 дней",
+        avg: "*Изменение MG рассчитывается с использованием средних значений за 3 дня для минимизации шума.",
+        expected: "EXPECTED VALUES",
+        exp95change: "95% EXP. VAL CHANGE",
+        exp85change: "85% EXP. VAL CHANGE",
+        exp65change: "65% EXP. VAL CHANGE",
+    },
+    zh: {
+        moe: "卓越印記",
+        dataFrom: "數據源自",
+        moeMod: "卓越印記 mod",
+        expand: "顯示更多過去30天所得的卓越印記",
+        avg: "*使用3天平均值計算出卓越印記變化，以最大程度地減少變異",
+        expected: "期望值",
+        exp95change: "三卓",
+        exp85change: "二卓",
+        exp65change: "一卓",
+    },
 });
 
 export default function MoEPage(props) {

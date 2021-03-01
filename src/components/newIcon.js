@@ -15,14 +15,20 @@ const strings = new LocalizedStrings({
     en: {
         new: "NEW!",
     },
+    es: {
+        new: "¡NUEVO!",
+    },
     fr: {
         new: "NEW!",
     },
-    tr: {
-        new: "YENİ!",
-    },
     pl: {
         new: "NOWE!",
+    },
+    ru: {
+        new: "НОВЫЙ!",
+    },
+    tr: {
+        new: "YENİ!",
     },
 });
 

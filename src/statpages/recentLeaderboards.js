@@ -1,8 +1,19 @@
+// NPM
 import React, { useContext } from "react";
+import LocalizedStrings from "react-localization";
+
+// LOCAL
 import Leaderboard from "./recentLeaderboardComponents/leaderboard";
 import { FullPageTableWrapper, Info } from "Components";
 import { ServerContext } from "Context";
 import { serverConv } from "Data/conversions";
+
+const strings = new LocalizedStrings({
+    en: {
+        recentStats: "{server} Recent Stats Leaderboard",
+        minGames: "Mininum 75 games in period",
+    },
+});
 
 export default function RecentLeaderboards(props) {
     const { server } = useContext(ServerContext);
@@ -11,7 +22,7 @@ export default function RecentLeaderboards(props) {
         <FullPageTableWrapper>
             <Info>
                 <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                    {serverConv[server]} Recent Stats Leaderboard
+                    {strings.formatString(strings.recentStats, { server: serverConv[server] })}
                 </span>
                 <br />
                 <br />
@@ -22,7 +33,7 @@ export default function RecentLeaderboards(props) {
                         color: "rgb(150,150,150)",
                     }}
                 >
-                    Mininum 75 games in period
+                    {strings.minGames}
                 </span>{" "}
                 <br />
             </Info>

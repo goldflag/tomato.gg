@@ -80,7 +80,7 @@ const strings = new LocalizedStrings({
         frags: "FRAGS",
         winrate: "WINRATE",
         tier: "TIER",
-        top500: "Top 500 Players in",
+        top500: "Top 500 Players on {0} server",
         past60min25: "PAST 60 DAYS | MINIMUM 25 BATTLES",
     },
     fr: {
@@ -88,7 +88,7 @@ const strings = new LocalizedStrings({
         frags: "TUÉS",
         winrate: "TAUX VICTOIRE",
         tier: "RANG",
-        top500: "Top 500 sur le serveur",
+        top500: "Top 500 sur le serveur {0}",
         past60min25: "60 DERNIERS JOURS | MINIMUM 25 BATAILLES",
     },
     tr: {
@@ -96,7 +96,7 @@ const strings = new LocalizedStrings({
         frags: "FRAGS",
         winrate: "WINRATE",
         tier: "TIER",
-        top500: "En iyi 500 Oyuncu içinde",
+        top500: "En iyi 500 Oyuncu içinde {0}",
         past60min25: "SON 60 GÜN | MİNİMUM 25 SAVAŞ",
     },
     pl: {
@@ -104,8 +104,24 @@ const strings = new LocalizedStrings({
         frags: "Średnio zniszczeń",
         winrate: "Procent wygranych",
         tier: "Poziom",
-        top500: "500 najlepszych graczy w",
+        top500: "500 najlepszych graczy na serwerze {0}",
         past60min25: "OSTATNICH 60 DNIACH | MINIMUM 25 BITEW",
+    },
+    ru: {
+        dpg: "Ущерб",
+        frags: "Уничтожены Танки",
+        winrate: "Победы",
+        tier: "Уровень",
+        top500: "500 лучших игроков в",
+        past60min25: "ПОСЛЕДНИЕ 60 ДНЕЙ | МИНИМУМ 25 СРАЖЕНИЙ",
+    },
+    zh: {
+        dpg: "平均傷害",
+        frags: "擊殺數",
+        winrate: "勝率",
+        tier: "階級",
+        top500: "前500名",
+        past60min25: "過去60天 | 最少25場戰鬥",
     },
 });
 
@@ -173,7 +189,7 @@ export default function TankPage(props) {
                     </Name>
                 </Top>
                 <TableLabel>
-                    {strings.top500} {serverConv[server]}
+                    {strings.formatString(strings.top500, serverConv[server])}
                     <BottomLabel>{strings.past60min25}</BottomLabel>
                     <FilterButtonGroup>
                         {Object.entries(filters).map(([val, label]) => (
