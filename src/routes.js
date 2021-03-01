@@ -17,6 +17,19 @@ import MoEExpected from "./statpages/MoEPage";
 import MasteryExpected from "./statpages/masteryPage";
 
 const strings = new LocalizedStrings({
+    cz: {
+        home: "Domů",
+        playerStats: "Hráčské statistiky",
+        tankStats: "Statistiky vozidel",
+        leaderboards: "Žebříčky",
+        moeReqs: "Nároky na znaky",
+        masteryReqs: "Nároky na vzorného tankistu",
+        WN8Expected: "Předpokládané hodnoty Wn8",
+        statsReference: "Reference statistik",
+        about: "O nás",
+        tankList: "Seznam vozidel",
+        serverStats: "Serverové statistiky",
+    },
     en: {
         home: "Home",
         playerStats: "Player Stats",

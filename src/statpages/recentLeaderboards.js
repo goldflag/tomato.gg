@@ -13,6 +13,22 @@ const strings = new LocalizedStrings({
         recentStats: "{server} Recent Stats Leaderboard",
         minGames: "Mininum 75 games in period",
     },
+    fr: {
+        recentStats: "Classement Stats Récentes {server}",
+        minGames: "Mininum 75 parties sur la période",
+    },
+    pl: {
+        recentStats: "Ranking Bieżących Statystyk na {server}",
+        minGames: "Minimum 75 bitew w okresie",
+    },
+    tr: {
+        recentStats: "{server} Son İstatistikler Tablosu",
+        minGames: "Dönem içi Mininum 75 oyun",
+    },
+    zh: {
+        recentStats: "{伺服器} 近期表現榜",
+        minGames: "期間內需最少75場戰鬥",
+    },
 });
 
 export default function RecentLeaderboards(props) {

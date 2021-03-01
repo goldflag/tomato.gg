@@ -16,6 +16,26 @@ const strings = new LocalizedStrings({
         maintained: "Maintained by the {0}",
         xvm: "XVM team",
     },
+    fr: {
+        expected: "Valeurs Attendues pour le WN8",
+        maintained: "Maintenu par {0}",
+        xvm: "l'équipe XVM",
+    },
+    pl: {
+        expected: "Oczekiwane wartości dla WN8",
+        maintained: "Zarządzane przez {0}",
+        xvm: "XVM team",
+    },
+    tr: {
+        expected: "WN8 Beklenen Değer",
+        maintained: "Sağlayan: {0}",
+        xvm: "XVM team",
+    },
+    zh: {
+        expected: "WN8 期望值",
+        maintained: "由 {0} 維護",
+        xvm: "XVM team",
+    },
 });
 
 export default function Leaderboards(props) {

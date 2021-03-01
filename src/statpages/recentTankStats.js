@@ -1,6 +1,7 @@
 // NPM
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
+import LocalizedStrings from "react-localization";
 
 // LOCAL
 import { serverConv } from "Data/conversions";
@@ -17,6 +18,14 @@ const Filters = styled.div`
     // margin: -15px;
 `;
 
+const strings = new LocalizedStrings({
+    en: {
+        title: "{0} Recent Tank Stats",
+        clickRow: "Click on a row to view detailed server-wide tank performance and leaderboards",
+        error: "Sorry, recent tank stats could not be loaded.",
+    },
+});
+
 export default function RecentLeaderboards() {
     const { server } = useContext(ServerContext);
     const [data, setData] = useState("loading");
@@ -32,7 +41,9 @@ export default function RecentLeaderboards() {
     return (
         <FullPageTableWrapper>
             <Info>
-                <span style={{ fontSize: "2rem", fontWeight: "500" }}>{serverConv[server]} Recent Tank Stats</span>
+                <span style={{ fontSize: "2rem", fontWeight: "500" }}>
+                    {strings.formatString(strings.title, serverConv[server])}
+                </span>
                 <br />
                 <br />
                 <span
@@ -42,7 +53,7 @@ export default function RecentLeaderboards() {
                         color: "rgb(150,150,150)",
                     }}
                 >
-                    Click on a row to view detailed server-wide tank performance and leaderboards
+                    {strings.clickRow}
                 </span>
                 <Filters>
                     <FilterButtonGroup>
@@ -73,7 +84,7 @@ export default function RecentLeaderboards() {
             ) : data === "loading" ? (
                 <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />
             ) : (
-                <h2>Sorry, recent tank stats could not be loaded.</h2>
+                <h2>{strings.error}</h2>
             )}
         </FullPageTableWrapper>
     );
