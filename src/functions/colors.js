@@ -1,4 +1,5 @@
 export function WRcolor(winrate) {
+    if (winrate.charAt(winrate.length-1) === "%") winrate = winrate.slice(0, -1);
     if (winrate < 46) return "#930D0D";
     else if (winrate < 47) return "#CD3333";
     else if (winrate < 48) return "#CC7A00";

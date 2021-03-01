@@ -205,9 +205,10 @@ const Support = styled.div`
 `;
 
 const Background = styled.div`
+    padding: 1px;
     font-size: 0.8rem;
     font-weight: 300;
-    color: #96a7c7;
+    color: rgb(230, 230, 240);
 `;
 
 const Partnered = styled.div`
@@ -256,9 +257,9 @@ const Sidebar = withRouter((props) => {
                     <Switch
                         checked={background === "black"}
                         onChange={() => toggleBackground(background === "black" ? "blue" : "black")}
-                        color="primary"
+                        color="rgb(150, 150, 250)"
                         name="background"
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                        inputProps={{ 'aria-label': 'checkbox with default color' }}
                     />
                     Toggle Boomer Background
                 </Background>

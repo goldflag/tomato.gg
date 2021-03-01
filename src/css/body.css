@@ -62,9 +62,6 @@ body {
     text-decoration: none;
 }
 
-.wrapper {
-    min-height: 100vh;
-}
 
 @media screen and (max-width: 1000px) {
     body {

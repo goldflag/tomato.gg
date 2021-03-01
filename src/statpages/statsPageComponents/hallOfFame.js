@@ -12,230 +12,97 @@ import { rankColor } from "Functions/colors";
 const Styles = styled.div`
     font-family: Roboto Mono;
     font-size: 0.8rem;
+`;
 
-    .overall {
-        max-width: 1700px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
+const TanksTitle = styled.div`
+    text-align: center;
+`;
+
+const Overall = styled.div`
+    max-width: 1700px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+`;
+
+const OverallTop = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 240px;
+
+    @media screen and (max-width: 1000px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 150px;
     }
+`;
 
-    .overallTop {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 240px;
+const OverallBottom = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 230px;
+
+    @media screen and (max-width: 1000px) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 150px;    
     }
+`;
 
-    .overallBottom {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 230px;
-    }
-
-    .overallItem {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0.5rem;
-        color: rgb(240, 240, 240);
-        padding: 1rem;
-        transition: 0.4s ease;
-        box-shadow: 0px 2px 3px rgb(30, 30, 30);
-        background-color: rgb(40, 40, 40, 0.4);
-        font-size: 1.5rem;
-        backdrop-filter: blur(7px);
-    }
-
-    .value {
-        font-size: 3rem;
-        font-weight: 500;
-    }
-
-    .bigPercentile {
-        color: rgb(255, 255, 255);
-        font-weight: 400;
-        padding: 5px;
-        text-align: center;
-        width: 170px;
-        border-radius: 15px;
-        font-size: 0.8rem;
-        margin: 0.5rem;
-    }
-
-    .bigLabel {
-        color: rgb(180, 180, 180);
-        font-size: 1rem;
-        margin-top: -2px;
-        margin-bottom: 5px;
-    }
-
-    .overallItem:hover {
+const OverallItem = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.5rem;
+    color: rgb(240, 240, 240);
+    padding: 1rem 0.5rem;
+    transition: 0.4s ease;
+    box-shadow: 0px 2px 3px rgb(30, 30, 30);
+    background-color: rgb(60, 60, 80, 0.5);
+    font-size: 1.5rem;
+    backdrop-filter: blur(7px);
+    
+    :hover {
         background-color: rgba(201, 26, 61, 0.5);
-    }
-
-    .tanksContainer {
-        height: 320px;
-        margin-top: 1rem;
-    }
-
-    .tanksTitle {
-        text-align: center;
-    }
-
-    .tanks {
-        display: flex;
-        flex-direction: row;
-        min-width: 100%;
-    }
-
-    .box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0.4rem;
-        color: rgb(240, 240, 240);
-        padding: 0.4rem;
-        min-width: 200px;
-        max-width: 200px;
-        height: 290px;
-        transition: 0.4s ease;
-        box-shadow: 0px 2px 3px rgb(30, 30, 30);
-        backdrop-filter: blur(7px);
-    }
-
-    .abovebox {
-        background-color: rgba(40, 40, 40, 0.4);
-    }
-
-    .underbox {
-        background-color: rgba(20, 20, 20, 0.4);
-    }
-
-    .abovebox:hover {
-        background-color: rgba(201, 26, 61, 0.5);
-    }
-
-    .underbox:hover {
-        background-color: rgba(80, 80, 80, 0.5);
-    }
-
-    .box:hover .image {
-        height: 100px;
-        width: 160px;
-    }
-
-    .image {
-        height: 90px;
-        width: 144px;
-        transition: 0.4s ease;
-    }
-
-    .name {
-        margin-top: 0.3rem;
-        color: rgb(255, 255, 255);
-    }
-
-    .dpg {
-        color: rgb(255, 255, 255);
-        font-size: 1.5rem;
-        font-weight: 500;
-        margin-top: 0.4rem;
-    }
-
-    .val {
-        color: rgb(255, 255, 255);
-        font-size: 0.8rem;
-        font-weight: 500;
-        margin-top: 0rem;
-    }
-
-    .label {
-        color: rgb(180, 180, 180);
-        font-size: 0.6rem;
-        margin-bottom: 0rem;
-    }
-
-    .percentile {
-        color: rgb(255, 255, 255);
-        font-weight: 400;
-        background-color: rgb(245, 191, 66);
-        padding: 5px;
-        text-align: center;
-        width: 150px;
-        height: 25px;
-        border-radius: 15px;
-        font-size: 0.7rem;
-        margin: 0.5rem;
-    }
-
-    .unrank {
-        color: rgb(180, 180, 180);
-        font-weight: 400;
-        text-align: center;
-        font-size: 0.7rem;
-        margin: 0.4rem;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: 50% 50%;
-        grid-template-rows: 50% 50%;
-    }
-
-    .gridItem {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0.1rem 1rem;
     }
 
     @media screen and (max-width: 1000px) {
-        .overallTop {
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: 150px;
-        }
+        margin: 0.5rem;
+        padding: 0.5rem;
+        font-size: 1rem;    
+    }
+`;
 
-        .overallBottom {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 150px;
-        }
+const Value = styled.div`
+    font-size: 3rem;
+    font-weight: 500;
+    @media screen and (max-width: 1000px) {
+        font-size: 1.5rem;
+    }
+`;
 
-        .overallItem {
-            margin: 0.5rem;
-            padding: 0.5rem;
-            font-size: 1rem;
-        }
+const BigLabel = styled.div`
+    color: rgb(180, 180, 180);
+    font-size: 1rem;
+    margin-top: -2px;
+    margin-bottom: 5px;
+    @media screen and (max-width: 1000px) {
+        font-size: 0.7rem;
+    }
+`;
 
-        .value {
-            font-size: 1.5rem;
-            font-weight: 500;
-        }
-
-        .bigPercentile {
-            color: rgb(255, 255, 255);
-            font-weight: 400;
-            padding: 4px;
-            text-align: center;
-            width: 120px;
-            border-radius: 10px;
-            font-size: 0.6rem;
-            margin: 0.3rem;
-        }
-
-        .bigLabel {
-            color: rgb(180, 180, 180);
-            font-size: 0.7rem;
-            margin-top: -2px;
-            margin-bottom: 5px;
-        }
-
-        .box {
-            min-width: 180px;
-        }
+const BigPercentile = styled.div`
+    color: rgb(255, 255, 255);
+    background-color: ${({rank, total}) => rankColor(100 - (rank * 100) / total)};
+    font-weight: 400;
+    padding: 4px;
+    text-align: center;
+    width: 150px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    margin: 0.3rem;
+    @media screen and (max-width: 1000px) {
+        width: 140px;
     }
 `;
 
@@ -253,6 +120,105 @@ const UnrankedNotice = styled.div`
     backdrop-filter: blur(7px);
 `;
 
+const TanksContainer = styled.div`
+    height: 320px;
+    margin-top: 1rem;
+`;
+
+const Tanks = styled.div`
+    display: flex;
+    flex-direction: row;
+    min-width: 100%;
+`;
+
+const Box = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.4rem;
+    color: rgb(240, 240, 240);
+    padding: 0.4rem;
+    min-width: 200px;
+    max-width: 200px;
+    height: 290px;
+    transition: 0.4s ease;
+    box-shadow: 0px 2px 3px rgb(30, 30, 30);
+    backdrop-filter: blur(7px);
+
+    background-color: ${({background}) => background};
+    :hover {
+        background-color: ${({backgroundHover}) => backgroundHover};
+    }
+    @media screen and (max-width: 1000px) {
+        min-width: 180px;
+    }
+`
+
+const Val = styled.div`
+    color: rgb(255, 255, 255);
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 0rem;
+`;
+
+const Label = styled.div `
+    color: rgb(180, 180, 180);
+    font-size: 0.6rem;
+    margin-bottom: 0rem;
+`;
+
+const Grid = styled.div `
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+`;
+
+const GridItem = styled.div `
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.1rem 1rem;
+`;
+
+const DPG = styled.div `
+    color: rgb(255, 255, 255);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-top: 0.4rem;
+`;
+
+const Percentile = styled.div `
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    background-color: ${({rank, total}) => rankColor(100 - (rank * 100) / total)};
+    padding: 5px;
+    text-align: center;
+    width: 150px;
+    height: 25px;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    margin: 0.5rem;
+`;
+
+const Unrank = styled.div `
+    color: rgb(180, 180, 180);
+    font-weight: 400;
+    text-align: center;
+    font-size: 0.7rem;
+    margin: 0.4rem;
+`;
+
+const Image = styled.div `
+    height: 90px;
+    width: 144px;
+    transition: 0.4s ease;
+`
+
+const Name = styled.div `
+    margin-top: 0.3rem;
+    color: rgb(255, 255, 255);
+`
+
 const ConditionalLink = ({ makeLink, ...props }) => {
     if (makeLink) return <Link {...props} />;
     return <span {...props} />;
@@ -265,114 +231,102 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
         const { top } = hofmainData;
         topTanks = (
             <Styles>
-                <div className="tanksTitle">
+                <TanksTitle>
                     <span style={{ fontSize: "2rem" }}>Hall of Fame</span>
                     <br />
                     <span style={{ fontSize: "1rem" }}>60 DAYS | MINIMUM 75 BATTLES | VEHICLES TIER 6+</span>
-                </div>
-                <div className="overall">
+                </TanksTitle>
+                <Overall>
                     {top.battles.value >= 75 ? (
                         <>
-                            <div className="overallTop">
-                                <div className="overallItem">
-                                    <span className="value">{top.winrate.value}%</span>
-                                    <span className="bigLabel"> Winrate </span>
-                                    <div
-                                        className="bigPercentile"
-                                        style={{
-                                            backgroundColor: rankColor(100 - (top.winrate.ranking * 100) / top.total),
-                                        }}
+                            <OverallTop>
+                                <OverallItem>
+                                    <Value>{top.winrate.value}%</Value>
+                                    <BigLabel> Winrate </BigLabel>
+                                    <BigPercentile
+                                        rank={top.winrate.ranking}
+                                        total={top.total}
                                     >
                                         Better than {(100 - (top.winrate.ranking * 100) / top.total).toFixed(2)}%
-                                    </div>
+                                    </BigPercentile>
                                     {top.winrate.ranking}
-                                    <span className="bigLabel">Rank</span>
-                                </div>
-                                <div className="overallItem">
-                                    <span className="value">{top.wn8.value}</span>
-                                    <span className="bigLabel"> WN8 </span>
-                                    <div
-                                        className="bigPercentile"
-                                        style={{
-                                            backgroundColor: rankColor(100 - (top.wn8.ranking * 100) / top.total),
-                                        }}
+                                    <BigLabel>Rank</BigLabel>
+                                </OverallItem>
+                                <OverallItem>
+                                    <Value>{top.wn8.value}</Value>
+                                    <BigLabel> WN8 </BigLabel>
+                                    <BigPercentile
+                                        rank={top.wn8.ranking}
+                                        total={top.total}
                                     >
                                         Better than {(100 - (top.wn8.ranking * 100) / top.total).toFixed(2)}%
-                                    </div>
+                                    </BigPercentile>
                                     {top.wn8.ranking}
-                                    <span className="bigLabel">Rank</span>
-                                </div>
-                                <div className="overallItem">
-                                    <span className="value">{top.kd.value}</span>
-                                    <span className="bigLabel"> K/D Ratio </span>
-                                    <div
-                                        className="bigPercentile"
-                                        style={{
-                                            backgroundColor: rankColor(100 - (top.kd.ranking * 100) / top.total),
-                                        }}
+                                    <BigLabel>Rank</BigLabel>
+                                </OverallItem>
+                                <OverallItem>
+                                    <Value>{top.kd.value}</Value>
+                                    <BigLabel> K/D Ratio </BigLabel>
+                                    <BigPercentile
+                                        rank={top.kd.ranking}
+                                        total={top.total}
                                     >
                                         Better than {(100 - (top.kd.ranking * 100) / top.total).toFixed(2)}%
-                                    </div>
+                                    </BigPercentile>
                                     {top.kd.ranking}
-                                    <span className="bigLabel">Rank</span>
-                                </div>
-                            </div>
-                            <div className="overallBottom">
-                                <div className="overallItem">
-                                    <span className="value">{top.battles.value}</span>
-                                    <span className="bigLabel"> Battles </span>
-                                    <div
-                                        className="bigPercentile"
-                                        style={{ backgroundColor: "white", color: "rgb(50, 50, 50)" }}
+                                    <BigLabel>Rank</BigLabel>
+                                </OverallItem>
+                            </OverallTop>
+                            <OverallBottom>
+                                <OverallItem>
+                                    <Value>{top.battles.value}</Value>
+                                    <BigLabel> Battles </BigLabel>
+                                    <BigPercentile
+                                        rank={top.battles.ranking}
+                                        total={top.total}
                                     >
                                         More than {(100 - (top.battles.ranking * 100) / top.total).toFixed(2)}%
-                                    </div>
+                                    </BigPercentile>
                                     {top.battles.ranking}
-                                    <span className="bigLabel">Rank</span>
-                                </div>
-                                <div className="overallItem">
-                                    <span className="value">{top.dpg.value}</span>
-                                    <span className="bigLabel"> Damage Per Game </span>
-                                    <div
-                                        className="bigPercentile"
-                                        style={{
-                                            backgroundColor: rankColor(100 - (top.dpg.ranking * 100) / top.total),
-                                        }}
+                                    <BigLabel>Rank</BigLabel>
+                                </OverallItem>
+                                <OverallItem>
+                                    <Value>{top.dpg.value}</Value>
+                                    <BigLabel> Damage Per Game </BigLabel>
+                                    <BigPercentile
+                                        rank={top.dpg.ranking}
+                                        total={top.total}
                                     >
                                         Better than {(100 - (top.dpg.ranking * 100) / top.total).toFixed(2)}%
-                                    </div>
+                                    </BigPercentile>
                                     {top.dpg.ranking}
-                                    <span className="bigLabel">Rank</span>
-                                </div>
-                                <div className="overallItem">
-                                    <span className="value">{top.dmg_ratio.value}</span>
-                                    <span className="bigLabel"> Damage Ratio </span>
-                                    <div
-                                        className="bigPercentile"
-                                        style={{
-                                            backgroundColor: rankColor(100 - (top.dmg_ratio.ranking * 100) / top.total),
-                                        }}
+                                    <BigLabel>Rank</BigLabel>
+                                </OverallItem>
+                                <OverallItem>
+                                    <Value>{top.dmg_ratio.value}</Value>
+                                    <BigLabel> Damage Ratio </BigLabel>
+                                    <BigPercentile
+                                        rank={top.dmg_ratio.ranking}
+                                        total={top.total}
                                     >
                                         Better than {(100 - (top.dmg_ratio.ranking * 100) / top.total).toFixed(2)}%
-                                    </div>
+                                    </BigPercentile>
                                     {top.dmg_ratio.ranking}
-                                    <span className="bigLabel">Rank</span>
-                                </div>
-                                <div className="overallItem">
-                                    <span className="value">{top.frags.value}</span>
-                                    <span className="bigLabel"> Frags Per Game </span>
-                                    <div
-                                        className="bigPercentile"
-                                        style={{
-                                            backgroundColor: rankColor(100 - (top.frags.ranking * 100) / top.total),
-                                        }}
+                                    <BigLabel>Rank</BigLabel>
+                                </OverallItem>
+                                <OverallItem>
+                                    <Value>{top.frags.value}</Value>
+                                    <BigLabel> Frags Per Game </BigLabel>
+                                    <BigPercentile
+                                        rank={top.frags.ranking}
+                                        total={top.total}
                                     >
                                         Better than {(100 - (top.frags.ranking * 100) / top.total).toFixed(2)}%
-                                    </div>
+                                    </BigPercentile>
                                     {top.frags.ranking}
-                                    <span className="bigLabel">Rank</span>
-                                </div>
-                            </div>
+                                    <BigLabel>Rank</BigLabel>
+                                </OverallItem>
+                            </OverallBottom>
                         </>
                     ) : (
                         <UnrankedNotice>
@@ -380,7 +334,7 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                             Fame
                         </UnrankedNotice>
                     )}
-                </div>
+                </Overall>
                 <TankRankings userID={id} hofData={hofData} />
             </Styles>
         );
@@ -391,86 +345,106 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
 
 const TankRankings = ({ userID, hofData }) => (
     <>
-        <div className="tanksTitle">
+        <TanksTitle>
             <span style={{ fontSize: "2rem" }}>Tank Rankings</span>
             <br />
             <span style={{ fontSize: "1rem" }}>60 DAYS | MINIMUM 25 BATTLES | VEHICLES TIER 6+</span>
-        </div>
-        <div className="tanksContainer">
-            <RSC id="RSC-Example" noScrollY={true}>
-                <div className="tanks">
+        </TanksTitle>
+        <TanksContainer>
+            <RSC
+                id="RSC Hall of Fame"
+                noScrollY={true}
+                trackXProps={{
+                    renderer: props => {
+                        props.style.background = "rgba(100, 100, 120, 0.5)";
+                        const { elementRef, ...restProps } = props;
+                        return <span {...restProps} ref={elementRef} className="TrackX" />;
+                    }
+                }}
+            >
+                <Tanks>
                     {hofData.above.map((tank, i) => (
                         <ConditionalLink
                             key={i}
                             makeLink={tank.rank && tank.rank <= 500}
-                            className="box abovebox"
                             to={`/tank/${tank.tank_id}?rank=${tank.rank}&userID=${userID}`}
                         >
-                            <img src={tank.image} className="image" alt={tank.short_name} />
-                            <div className="name">
-                                {tierConv[tank.tier]} - {tank.short_name}
-                            </div>
-                            <div className="dpg">{tank.dpg}</div>
-                            <div className="label">Damage Per Game</div>
-                            <div
-                                className="percentile"
-                                style={{
-                                    backgroundColor: rankColor((100 - (tank.rank * 100) / tank.total).toFixed(2)),
-                                }}
+                            <Box 
+                                background={"rgba(60, 60, 80, 0.5)"}
+                                backgroundHover={"rgba(201, 26, 61, 0.5)"}
                             >
-                                Better than {(100 - (tank.rank * 100) / tank.total).toFixed(2)}%
-                            </div>
-                            <div className="grid">
-                                <div className="gridItem">
-                                    <div className="val">{tank.rank}</div>
-                                    <div className="label">Rank</div>
-                                </div>
-                                <div className="gridItem">
-                                    <div className="val">{tank.battles}</div>
-                                    <div className="label">Battles</div>
-                                </div>
-                                <div className="gridItem">
-                                    <div className="val">{tank.wn8}</div>
-                                    <div className="label">WN8</div>
-                                </div>
-                                <div className="gridItem">
-                                    <div className="val">{tank.winrate}%</div>
-                                    <div className="label">Winrate</div>
-                                </div>
-                            </div>
+                                <Image>
+                                    <img src={tank.image} alt={tank.short_name} />
+                                </Image>
+                                <Name>
+                                    {tierConv[tank.tier]} - {tank.short_name}
+                                </Name>
+                                <DPG>{tank.dpg}</DPG>
+                                <Label>Damage Per Game</Label>
+                                <Percentile
+                                        rank={tank.rank}
+                                        total={tank.total}
+                                    >
+                                    Better than {(100 - (tank.rank * 100) / tank.total).toFixed(2)}%
+                                </Percentile>
+                                <Grid>
+                                    <GridItem>
+                                        <Val>{tank.rank}</Val>
+                                        <Label>Rank</Label>
+                                    </GridItem>
+                                    <GridItem>
+                                        <Val>{tank.battles}</Val>
+                                        <Label>Battles</Label>
+                                    </GridItem>
+                                    <GridItem>
+                                        <Val>{tank.wn8}</Val>
+                                        <Label>WN8</Label>
+                                    </GridItem>
+                                    <GridItem>
+                                        <Val>{tank.winrate}%</Val>
+                                        <Label>Winrate</Label>
+                                    </GridItem>
+                                </Grid>
+                            </Box>
                         </ConditionalLink>
                     ))}
                     {hofData.below.map((tank, i) => (
-                        <div className="box underbox" key={i}>
-                            <img src={tank.image} className="image" alt={tank.short_name} />
-                            <div className="name">
+                        <Box 
+                            background={"rgba(20, 20, 40, 0.4)"}
+                            backgroundHover={"rgba(80, 80, 80, 0.5)"}
+                            key={i}
+                        >
+                            <Image>
+                                <img src={tank.image} alt={tank.short_name} />
+                            </Image>
+                            <Name>
                                 {tierConv[tank.tier]} - {tank.short_name}
-                            </div>
-                            <div className="dpg">{tank.dpg}</div>
-                            <div className="label">Damage Per Game</div>
-                            <div className="unrank">Play {25 - tank.battles} more battles to enter rankings</div>
-                            <div className="grid">
-                                <div className="gridItem">
-                                    <div className="val">-</div>
-                                    <div className="label">Rank</div>
-                                </div>
-                                <div className="gridItem">
-                                    <div className="val">{tank.battles}</div>
-                                    <div className="label">Battles</div>
-                                </div>
-                                <div className="gridItem">
-                                    <div className="val">{tank.wn8}</div>
-                                    <div className="label">WN8</div>
-                                </div>
-                                <div className="gridItem">
-                                    <div className="val">{tank.winrate}%</div>
-                                    <div className="label">Winrate</div>
-                                </div>
-                            </div>
-                        </div>
+                            </Name>
+                            <DPG>{tank.dpg}</DPG>
+                            <Label>Damage Per Game</Label>
+                            <Unrank>Play {25 - tank.battles} more battles to enter rankings</Unrank>
+                            <Grid>
+                                <GridItem>
+                                    <Val>-</Val>
+                                    <Label>Rank</Label>
+                                </GridItem>
+                                <GridItem>
+                                    <Val>{tank.battles}</Val>
+                                    <Label>Battles</Label>
+                                </GridItem>
+                                <GridItem>
+                                    <Val>{tank.wn8}</Val>
+                                    <Label>WN8</Label>
+                                </GridItem>
+                                <GridItem>
+                                    <Val>{tank.winrate}%</Val>
+                                    <Label>Winrate</Label>
+                                </GridItem>
+                            </Grid>
+                        </Box>
                     ))}
-                </div>
+                </Tanks>
             </RSC>
-        </div>
+        </TanksContainer>
     </>
 );
