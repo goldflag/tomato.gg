@@ -36,10 +36,11 @@ const OverallTop = styled.div`
     @media screen and (max-width: 1000px) {
         grid-template-areas:
             "title"
-            "dpg"
+            "dpg" 
             "wn8";
         grid-template-columns: 1fr;
-        grid-template-rows: 150px;
+        grid-template-rows: 200px;
+                            150px;
     }
 `;
 
@@ -60,6 +61,24 @@ const TopGridItem = styled.div`
     align-items: center;
     margin: 0.5rem;
     grid-area: ${({ slot }) => slot};
+
+    .title {
+        font-size 3rem;
+        font-weight: 800;
+    }
+
+    .subtitle {
+        font-size 1rem;
+    }
+    
+    @media screen and (max-width: 1000px) {
+        .title {
+            font-size 2.5rem;
+        }
+        .subtitle {
+            font-size: .75rem;
+        }
+    }
 `;
 
 const OverallItem = styled(TopGridItem)`
@@ -255,16 +274,16 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                                     <BigLabel>Rank</BigLabel>
                                 </OverallItem>
                                 <TopGridItem slot="title">
-                                    <nobr style={{ fontSize: "3rem", fontWeight: 800 }}>HALL OF FAME</nobr>
-                                    <nobr style={{ fontSize: "1rem" }}>
-                                        60 DAYS | MINIMUM 75 BATTLES | VEHICLES TIER 6+
-                                    </nobr>
-                                    <br />
-                                    <img
-                                        style={{ height: "75%", marginTop: "1rem" }}
-                                        src={require("Assets/hof.png")}
-                                        alt="hall of fame icon"
-                                    />
+                                    <nobr className="title">HALL OF FAME</nobr>
+                                    <nobr className="subtitle">60 DAYS | MINIMUM 75 BATTLES | VEHICLES TIER 6+</nobr>
+                                    <div
+                                        style={{
+                                            marginTop: ".75rem",
+                                            flex: "1",
+                                            width: "100%",
+                                            background: `url(${require("Assets/hof.png")}) no-repeat center / contain`,
+                                        }}
+                                    ></div>
                                 </TopGridItem>
                                 <OverallItem slot="wn8">
                                     <Value>{top.wn8.value}</Value>
