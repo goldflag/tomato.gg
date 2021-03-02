@@ -24,6 +24,28 @@ const strings = new LocalizedStrings({
         clickRow: "Click on a row to view detailed server-wide tank performance and leaderboards",
         error: "Sorry, recent tank stats could not be loaded.",
     },
+    fr: {
+        title: "Stats Récentes Chars {0}",
+        clickRow: `Cliquez sur une ligne pour voir les performances détaillées des joueurs sur 
+        le serveur et les classements pour un char`,
+        error: "Désolé, les statistiques récentes du char n'ont pas pu être chargées.",
+    },
+    pl: {
+        title: "Bieżące Statystyki Czołgów na {0}",
+        clickRow: "Kliknij na rząd żeby wyświetlić szczegółowe wskaźniki serwerowej efektywności czołgu oraz rankingi",
+        error: "Przepraszamy, wystąpił błąd przy ładowaniu bieżących statystyk czołgu.",
+    },
+    tr: {
+        title: "{0} Son Tank İstatistikleri",
+        clickRow: `Ayrıntılı sunucu çapında tank performansını ve 
+        liderlik tablosunu görüntülemek için bir satıra tıklayın`,
+        error: "Üzgünüm, son tank istatistikleri yüklenemedi.",
+    },
+    zh: {
+        title: "{0} 近期戰車數據",
+        clickRow: "點擊以查看伺服器內戰車表現與排名",
+        error: "很抱歉，近期數據目前無法讀取。",
+    },
 });
 
 export default function RecentLeaderboards() {

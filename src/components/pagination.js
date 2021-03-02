@@ -40,6 +40,11 @@ const PaginationButton = styled.button`
 `;
 
 const strings = new LocalizedStrings({
+    cs: {
+        pageOf: "Stránka {0} z {1}",
+        gotoPage: "Jít na stránku:",
+        show: "Zobrazit",
+    },
     en: {
         pageOf: "Page {0} of {1}",
         gotoPage: "Go to page:",

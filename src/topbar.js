@@ -120,6 +120,10 @@ const Styles = styled.div`
 const servers = ["com", "eu", "asia"];
 
 const strings = new LocalizedStrings({
+    cz: {
+        clearHistory: "vymazat historii",
+        server: "vyberte výchozí server",
+    },
     en: {
         clearHistory: "clear history",
         server: "select default server",

@@ -9,6 +9,13 @@ export const classConv = {
 };
 
 export const classDescConv = new LocalizedStrings({
+    cz: {
+        HT: "Těžký tank",
+        MT: "Střední tank",
+        LT: "Lehký tank",
+        SPG: "Dělostřelectvo",
+        TD: "Stíhač tanků",
+    },
     en: {
         HT: "Heavy Tank",
         MT: "Medium Tank",

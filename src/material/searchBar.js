@@ -12,6 +12,11 @@ import SearchIcon from "@material-ui/icons/Search";
 import SelectQuery from "./select";
 
 const strings = new LocalizedStrings({
+    cz: {
+        placeholder: "Vložte přezdívku (e.g. Goldflag)",
+        ariaLabel: "Hledejte hráče",
+        searchAriaLabel: "hledat",
+    },
     en: {
         placeholder: "Enter a Username (e.g. Goldflag)",
         ariaLabel: "search for a player",

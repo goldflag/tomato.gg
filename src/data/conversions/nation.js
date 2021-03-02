@@ -14,7 +14,33 @@ export const nationConv = {
     ussr: "USSR",
 };
 export const localNationConv = new LocalizedStrings({
+    cz: {
+        usa: "USA",
+        china: "Čína",
+        czech: "Československo",
+        france: "Francie",
+        germany: "Německo",
+        italy: "Itálie",
+        japan: "Japonsko",
+        poland: "Polsko",
+        sweden: "Švédsko",
+        uk: "VB",
+        ussr: "SSSR",
+    },
     en: nationConv,
+    es: {
+        usa: "EE.UU.",
+        china: "China",
+        czech: "Chequia",
+        france: "Francia",
+        germany: "Alemania",
+        italy: "Italia",
+        japan: "Japón",
+        poland: "Polonia",
+        sweden: "Suecia",
+        uk: "RU",
+        ussr: "URSS",
+    },
     fr: {
         usa: "USA",
         china: "Chine",
@@ -83,6 +109,19 @@ export const localNationConv = new LocalizedStrings({
 });
 
 export const nationAdjConv = new LocalizedStrings({
+    cz: {
+        usa: "Americký {0}",
+        china: "Čínský {0}",
+        czech: "Československý {0}",
+        france: "Francouzský {0}",
+        germany: "Německý {0}",
+        italy: "Italský {0}",
+        japan: "Japonský {0}",
+        poland: "Polský {0}",
+        sweden: "Švédský {0}",
+        uk: "Britský {0}",
+        ussr: "Sovětský {0}",
+    },
     en: {
         usa: "American {0}",
         china: "Chinese {0}",
@@ -95,6 +134,19 @@ export const nationAdjConv = new LocalizedStrings({
         sweden: "Swedish {0}",
         uk: "British {0}",
         ussr: "Soviet {0}",
+    },
+    es: {
+        usa: "Americano {0}",
+        china: "Chino {0}",
+        czech: "Checo {0}",
+        france: "Francés {0}",
+        germany: "Alemán {0}",
+        italy: "Italiano {0}",
+        japan: "Japonés {0}",
+        poland: "Polaco {0}",
+        sweden: "Sueco {0}",
+        uk: "Británico {0}",
+        ussr: "Soviético {0}",
     },
     fr: {
         usa: "{0} Américain",

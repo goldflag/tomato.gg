@@ -9,6 +9,26 @@ import "CSS/tankstats.css";
 import "CSS/innerpage.css";
 
 const strings = new LocalizedStrings({
+    cz: {
+        h1: `O Tomato.gg`,
+        updated: `AKTUALIZOVÁNO `,
+        about0: `Tento web jsem vytvořil, abych poskytl široce dostupné uživatelské rozhraní pro prohlížení 
+        nejrůznějších statistik, mnoho z nich jedostupných pouze zde. Některé statistiky jsou inspirovány jinými weby.`,
+        about1: `Tomato.gg se nezaměřuje na úplně vše. Nikdy zde nebudou tak detailní serverové statistiky, jako na 
+        na wot-news.com ani zde nebudou zobrazovány důkladně jednotlivé bitvy jako na WN8lab.com. Tomato.gg je ve 
+        vývoji a zdaleka ještě není dokončené. Do budoucna plánuji rozšířit stránku s hráčovými statistikami, rozšířit 
+        stránku se statistikami jednotlivých vozidel, implementovat klanové statistiky a dokončit žebříčky.`,
+        about2: `Tomato.gg plně podporuje statistiky hráčů z NA, EU a ASIA serveru. Stále můžete nahlížet do statistik 
+        hráčů z RU serveru, ale tyto
+        statistiky nejsou automaticky aktualizovány na denní bázi.`,
+        about3: `Podívejte se na Tomato.gg také na mobilu. Optimalizoval jsem mobilní web pro ten nejlepší uživatelský 
+        zážitek. Mobilní web přitom podporuje skoro 100% stávajicíh funkcí.`,
+        about4: `mi značně pomohl s vývojem Tomato.gg. Díky moc!`,
+        joinMy: `Přidejte se na můj`,
+        discord: `Discord server`,
+        feedback: `Pokud byste chtěli poskytnout zpětnou vazbu, návrhy na vylepšení nebo nahlásit chybu.`,
+        thanks: `Děkujeme, že používáte Tomato.gg!`,
+    },
     en: {
         h1: `About Tomato.gg`,
         updated: `UPDATED `,
