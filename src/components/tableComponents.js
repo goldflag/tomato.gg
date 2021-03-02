@@ -72,21 +72,26 @@ export const SubRow = styled.tr`
     padding: 10px;
 `;
 
-export const Name = styled.div`
-    display: grid;
-    grid-template-columns: 90px 50%;
-    align-items: center;
+export const PremField = styled.div`
     color: ${({ isPrem }) => (isPrem ? `#ffe455` : null)};
 `;
 
+export const Name = styled(PremField)`
+    display: grid;
+    grid-template-columns: 90px 50%;
+    align-items: center;
+`;
+
+const isPrem = ({ original }) => original.isPrem || original.is_premium;
+
 export const TankNameCell = ({ row: { original } }) => (
-    <Name isPrem={original.is_premium || original.isPrem}>
+    <Name isPrem={isPrem({ original })}>
         <img src={original.image} alt={original.short_name || original.name} />
         {original.short_name || original.name}
     </Name>
 );
 
-export const NationCell = ({ value, maxWidth }) => (
+export const NationCell = ({ value, maxWidth, row }) => (
     <img
         src={require(`Assets/flagIcons/${nationConv[value] || value}.png`)}
         style={{ maxWidth: maxWidth || "40px" }}
@@ -94,15 +99,15 @@ export const NationCell = ({ value, maxWidth }) => (
     />
 );
 
-export const ClassCell = ({ value, maxWidth }) => (
+export const ClassCell = ({ value, maxWidth, row }) => (
     <img
-        src={require(`Assets/classIcons/${classConv[value] || value}.png`)}
+        src={require(`Assets/classIcons/${isPrem(row) ? "prem" : ""}${classConv[value] || value}.png`)}
         style={{ maxWidth: maxWidth || "20px" }}
         alt={value}
     />
 );
 
-export const TierCell = ({ value }) => tierConv[value] || value;
+export const TierCell = ({ value, row }) => <PremField isPrem={isPrem(row)}>{tierConv[value] || value}</PremField>;
 
 export const tableHeaders = new LocalizedStrings({
     en: {
