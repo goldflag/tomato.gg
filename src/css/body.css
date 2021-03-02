@@ -9,60 +9,6 @@ body {
     color: #333; */
 }
 
-.blue {
-    color: rgb(234, 238, 248);
-    background: url(../assets/Ocean.svg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
-/* unvisited link */
-.blue a {
-    color: rgb(161, 177, 230);
-    text-decoration: none;
-}
-
-/* mouse over link */
-.blue a:hover {
-    color: rgb(180, 70, 129);
-    text-decoration: none;
-}
-
-/* selected link */
-.blue a:active {
-    color: rgb(120, 60, 131);
-    text-decoration: none;
-}
-
-.black {
-    background-color: rgb(30, 30, 50);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
-/* unvisited link */
-.black a {
-    color: rgb(58, 89, 189);
-    text-decoration: none;
-}
-
-/* mouse over link */
-.black a:hover {
-    color: rgb(207, 12, 116);
-    text-decoration: none;
-}
-
-/* selected link */
-.black a:active {
-    color: rgb(108, 37, 121);
-    text-decoration: none;
-}
-
-
 @media screen and (max-width: 1000px) {
     body {
         margin-left: 0px;

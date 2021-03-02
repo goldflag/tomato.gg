@@ -297,7 +297,7 @@ const Sidebar = withRouter((props) => {
                     </Partnered>
                     <Line />
                     <CopyrightNotice>
-                        {strings.createdBy} <Link to="/stats/NA/goldflag=1011694618">Goldflag</Link>{" "}
+                        {strings.createdBy} <Link to="/stats/NA/goldflag=1011694618">Goldflag</Link> + <Link to="/stats/NA/Superdude3800=1007264827">Superdude3800</Link>{" "}
                         {strings.notAffiliated}
                         <br />
                         Zeyu Yang © 2021

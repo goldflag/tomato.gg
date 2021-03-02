@@ -10,29 +10,43 @@ import { ScrollToTop } from "./components";
 import Topbar from "./topbar";
 import Sidebar from "./sidebar";
 import { BackgroundContext } from "Context";
+import Ocean from "./assets/Ocean.svg";
 import "CSS/body.css";
 
 const trackingId = process.env.REACT_APP_GA;
-
-const Mainbody = Styled.div`
-    color: rgb(234, 238, 248);
-`;
 
 const Wrapper = Styled.div`
     min-height: 100vh;
 `;
 
-// const Blue = Styled(Mainbody)`
-//     background: url(../assets/Ocean.svg) no-repeat center center fixed;
-//     -webkit-background-size: cover;
-//     -moz-background-size: cover;
-//     -o-background-size: cover;
-//     background-size: cover;
-// `;
+const Blue = Styled.div`
+    color: rgb(234, 238, 248);
+    background: url(${({ocean}) => ocean}) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: ${({color}) => color};
 
-// const Black = Styled(Mainbody)`
-//     background-color: rgb(30, 30, 50);
-// `;
+    /* unvisited link */
+    a {
+        color: rgb(161, 177, 230);
+        text-decoration: none;
+    }
+
+    /* mouse over link */
+    a:hover {
+        color: rgb(180, 70, 129);
+        text-decoration: none;
+    }
+
+    /* selected link */
+    a:active {
+        color: rgb(120, 60, 131);
+        text-decoration: none;
+    }
+
+`
 
 export default function Tomatopedia() {
 
@@ -46,7 +60,10 @@ export default function Tomatopedia() {
     return (
         <Router>
             <ScrollToTop />
-            <Mainbody className={background === "blue" ? "blue" : "black"}>
+            <Blue 
+                color={background === "blue" ? null : "rgb(30, 30, 50)"}
+                ocean={background === "blue" ? Ocean : null}
+            >
                 <Sidebar />
                 <Topbar />
                 <Wrapper>
@@ -59,7 +76,7 @@ export default function Tomatopedia() {
                         <Redirect to="/" />
                     </Switch>
                 </Wrapper>
-            </Mainbody>
+            </Blue>
         </Router>
     );
 }
