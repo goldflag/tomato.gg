@@ -15,12 +15,6 @@ const strings = new LocalizedStrings({
     en: {
         new: "NEW!",
     },
-    es: {
-        new: "NEW!",
-    },
-    fr: {
-        new: "NEW!",
-    },
     pl: {
         new: "NOWE!",
     },

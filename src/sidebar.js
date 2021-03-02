@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import LocalizedStrings from "react-localization";
-import Switch from '@material-ui/core/Switch';
+import Switch from "@material-ui/core/Switch";
 
 // LOCAL
 import { menuRoutes } from "./routes";
@@ -13,6 +13,17 @@ import { NewIcon } from "Components";
 import { BackgroundContext } from "Context";
 
 const strings = new LocalizedStrings({
+    cz: {
+        support: "Podpořte Tomato.gg",
+        donations: `Tomato.gg funguje jen díky dárcovství jeho uživatelů. Pokud v našem webu 
+        vidíte význam, zvažte příspěvek ,který by mohl zabezpečit chod serverů.`,
+        kofi: "Podpořte nás přes Ko-fi",
+        paypal: "Podpořte nás přes Paypal",
+        partnered: "Partnerské weby",
+        herhor: "Žebříček vítězných znaků a generátor obrázků",
+        createdBy: "Tomato.gg vytvořil",
+        notAffiliated: "a není jakkoliv spojen s Wargaming.net.",
+    },
     en: {
         support: "Support Tomato.gg",
         donations: `Tomato.gg runs entirely on user donations. If you find value in the website, 
@@ -231,68 +242,70 @@ const CopyrightNotice = styled.div`
     }
 `;
 
-const Sidebar = withRouter((props) => {    
+const Sidebar = withRouter((props) => {
     const { background, toggleBackground } = useContext(BackgroundContext);
     return (
-    <StyledSidebar>
-        <Layer>
-            <Link to="/">
-                <Logo>
-                    <LogoImg src={TomatoLogo} alt="logo" />
-                </Logo>
-            </Link>
-            <Line />
-            <Menu>
-                {menuRoutes.map(({ path, title, Icon, isNew }) => (
-                    <MenuLink to={path} key={path}>
-                        <nobr>
-                            <Icon />
-                            &nbsp;&nbsp;{title} {isNew ? <NewIcon /> : null}
-                        </nobr>
-                    </MenuLink>
-                ))}
-            </Menu>
-            <Bottom>
-                <Background>
-                    <Switch
-                        checked={background === "black"}
-                        onChange={() => toggleBackground(background === "black" ? "blue" : "black")}
-                        color="rgb(150, 150, 250)"
-                        name="background"
-                        inputProps={{ 'aria-label': 'checkbox with default color' }}
-                    />
-                    Toggle Boomer Background
-                </Background>
-                <Support>
-                    <h2>{strings.support}</h2>
-                    {strings.donations}
-                    <a target="blank" href="https://ko-fi.com/goldflag">
-                        <Kofi>{strings.kofi}</Kofi>
-                    </a>
-                    <a target="blank" href="https://www.paypal.com/donate/?hosted_button_id=U457SKR8EQTSQ">
-                        <PayPal className="donationButton paypal">{strings.paypal}</PayPal>
-                    </a>
-                </Support>
-                <Partnered>
-                    <span style={{ fontWeight: "500" }}>{strings.partnered}</span>
-                    <span>
-                        <br />
-                        <a target="blank" href="https://herhor.net/wot/">
-                            herhor.net
-                        </a>{" "}
-                    </span>
-                    - {strings.herhor}
-                    <br />
-                </Partnered>
+        <StyledSidebar>
+            <Layer>
+                <Link to="/">
+                    <Logo>
+                        <LogoImg src={TomatoLogo} alt="logo" />
+                    </Logo>
+                </Link>
                 <Line />
-                <CopyrightNotice>
-                    {strings.createdBy} <Link to="/stats/NA/goldflag=1011694618">Goldflag</Link> {strings.notAffiliated}
-                    <br />
-                    Zeyu Yang © 2021
-                </CopyrightNotice>
-            </Bottom>
-        </Layer>
-    </StyledSidebar>
-)});
+                <Menu>
+                    {menuRoutes.map(({ path, title, Icon, isNew }) => (
+                        <MenuLink to={path} key={path}>
+                            <nobr>
+                                <Icon />
+                                &nbsp;&nbsp;{title} {isNew ? <NewIcon /> : null}
+                            </nobr>
+                        </MenuLink>
+                    ))}
+                </Menu>
+                <Bottom>
+                    <Background>
+                        <Switch
+                            checked={background === "black"}
+                            onChange={() => toggleBackground(background === "black" ? "blue" : "black")}
+                            color="primary"
+                            name="background"
+                            inputProps={{ "aria-label": "primary checkbox" }}
+                        />
+                        Toggle Boomer Background
+                    </Background>
+                    <Support>
+                        <h2>{strings.support}</h2>
+                        {strings.donations}
+                        <a target="blank" href="https://ko-fi.com/goldflag">
+                            <Kofi>{strings.kofi}</Kofi>
+                        </a>
+                        <a target="blank" href="https://www.paypal.com/donate/?hosted_button_id=U457SKR8EQTSQ">
+                            <PayPal className="donationButton paypal">{strings.paypal}</PayPal>
+                        </a>
+                    </Support>
+                    <Partnered>
+                        <span style={{ fontWeight: "500" }}>{strings.partnered}</span>
+                        <span>
+                            <br />
+                            <a target="blank" href="https://herhor.net/wot/">
+                                herhor.net
+                            </a>{" "}
+                        </span>
+                        - {strings.herhor}
+                        <br />
+                    </Partnered>
+                    <Line />
+                    <CopyrightNotice>
+                        {strings.createdBy} <Link to="/stats/NA/goldflag=1011694618">Goldflag</Link>{" "}
+                        {strings.notAffiliated}
+                        <br />
+                        Zeyu Yang © 2021
+                    </CopyrightNotice>
+                </Bottom>
+            </Layer>
+        </StyledSidebar>
+    );
+});
 
 export default Sidebar;

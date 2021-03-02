@@ -75,6 +75,14 @@ const TankImage = styled.img`
 const PAGE_SIZE = 100;
 
 const strings = new LocalizedStrings({
+    cz: {
+        dpg: "PZB",
+        frags: "ZABITÍ",
+        winrate: "MÍRA VÍTĚZSTVÍ",
+        tier: "ÚROVEŇ",
+        top500: "500 nejlepších hráčů v",
+        past60min25: "POSLEDNÍCH 60 DNÍ | MINIMÁLNĚ 25 BITEV",
+    },
     en: {
         dpg: "DPG",
         frags: "FRAGS",

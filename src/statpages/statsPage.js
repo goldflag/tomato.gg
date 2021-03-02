@@ -18,6 +18,10 @@ const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
 const strings = new LocalizedStrings({
+    cz: {
+        notFound: "Hráč {0} nebyl nalezen",
+        correct: "Ujistěte se, že přezdívka i region serveru jsou správně.",
+    },
     en: {
         notFound: "Player {0} not found",
         correct: "Make sure the username and region are correct.",

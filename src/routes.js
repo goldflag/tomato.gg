@@ -17,7 +17,7 @@ import MoEExpected from "./statpages/MoEPage";
 import MasteryExpected from "./statpages/masteryPage";
 
 const strings = new LocalizedStrings({
-    cz: {
+    cs: {
         home: "Domů",
         playerStats: "Hráčské statistiky",
         tankStats: "Statistiky vozidel",

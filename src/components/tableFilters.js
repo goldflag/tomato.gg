@@ -31,6 +31,15 @@ export const FilterButtonGroup = styled(ButtonGroup)`
 `;
 
 const strings = new LocalizedStrings({
+    cz: {
+        all: "VŠECHNY",
+        prem: "PRÉMIOVÉ",
+        regular: "STROMOVÉ",
+        searchTanks: "Vyhledávat {0} tanky",
+        min: "Min",
+        to: "do",
+        max: "Max",
+    },
     en: {
         all: "ALL",
         prem: "PREM",
