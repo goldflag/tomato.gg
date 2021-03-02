@@ -23,15 +23,15 @@ const Styles = styled.div`
 `;
 
 const strings = new LocalizedStrings({
-    cz: {
-        placeholder: "Vložte přezdívku",
-        ariaLabel: "Hledejte hráče",
-        searchAriaLabel: "hledat",
-    },
     en: {
         placeholder: "Enter a Username",
         ariaLabel: "search for a player",
         searchAriaLabel: "search",
+    },
+    cs: {
+        placeholder: "Vložte přezdívku",
+        ariaLabel: "Hledejte hráče",
+        searchAriaLabel: "hledat",
     },
     es: {
         placeholder: "Escribe un nombre de usuario",

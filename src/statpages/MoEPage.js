@@ -15,17 +15,6 @@ const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
 const strings = new LocalizedStrings({
-    cz: {
-        moe: "Nároky na vítězné znaky",
-        dataFrom: "Data od vývojářů",
-        moeMod: "Modifikace na vítězné znaky",
-        expand: "Rozbalením řádků zobrazíte 30 dní historie vítězných znaků",
-        avg: "*Změna ve vítězných znacích je kalkulována použitím třídenních průměrů, aby se redukovala chybovost",
-        expected: "OČEKÁVANÉ HODNOTY",
-        exp95change: "ZMĚNA OČEKÁVANÝCH HODNOT PRO 95%",
-        exp85change: "ZMĚNA OČEKÁVANÝCH HODNOT PRO 85%",
-        exp65change: "ZMĚNA OČEKÁVANÝCH HODNOT PRO 65%",
-    },
     en: {
         moe: "Marks of Excellence Requirements",
         dataFrom: "Data from the creators of the {0}",
@@ -36,6 +25,17 @@ const strings = new LocalizedStrings({
         exp95change: "95% EXP. VAL CHANGE",
         exp85change: "85% EXP. VAL CHANGE",
         exp65change: "65% EXP. VAL CHANGE",
+    },
+    cs: {
+        moe: "Nároky na vítězné znaky",
+        dataFrom: "Data od vývojářů",
+        moeMod: "Modifikace na vítězné znaky",
+        expand: "Rozbalením řádků zobrazíte 30 dní historie vítězných znaků",
+        avg: "*Změna ve vítězných znacích je kalkulována použitím třídenních průměrů, aby se redukovala chybovost",
+        expected: "OČEKÁVANÉ HODNOTY",
+        exp95change: "ZMĚNA OČEKÁVANÝCH HODNOT PRO 95%",
+        exp85change: "ZMĚNA OČEKÁVANÝCH HODNOT PRO 85%",
+        exp65change: "ZMĚNA OČEKÁVANÝCH HODNOT PRO 65%",
     },
     fr: {
         moe: "Obtention des Marques d'Excellence",

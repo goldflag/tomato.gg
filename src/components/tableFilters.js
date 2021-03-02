@@ -31,7 +31,17 @@ export const FilterButtonGroup = styled(ButtonGroup)`
 `;
 
 const strings = new LocalizedStrings({
-    cz: {
+    en: {
+        all: "ALL",
+        prem: "PREM",
+        regular: "REGULAR",
+        searchTanks: "Search {0} tanks",
+        battles: "Battles",
+        min: "Min",
+        to: "to",
+        max: "Max",
+    },
+    cs: {
         all: "VŠECHNY",
         prem: "PRÉMIOVÉ",
         regular: "STROMOVÉ",
@@ -40,20 +50,12 @@ const strings = new LocalizedStrings({
         to: "do",
         max: "Max",
     },
-    en: {
-        all: "ALL",
-        prem: "PREM",
-        regular: "REGULAR",
-        searchTanks: "Search {0} tanks",
-        min: "Min",
-        to: "to",
-        max: "Max",
-    },
     fr: {
         all: "TOUT",
         prem: "PREM",
         regular: "NORMAL",
         searchTanks: "Chercher {0} chars",
+        battles: "Batailles",
         min: "Min",
         to: "à",
         max: "Max",
@@ -63,6 +65,7 @@ const strings = new LocalizedStrings({
         prem: "PREM",
         regular: "NORMAL",
         searchTanks: "{0} tank arasında ara",
+        battles: "Savaşlar",
         min: "En Az",
         to: "->",
         max: "En Çok",
@@ -72,6 +75,7 @@ const strings = new LocalizedStrings({
         prem: "Premium",
         regular: "Zwykłe",
         searchTanks: "Przeszukaj {0} czołgów",
+        battles: "Bitwy",
         min: "Min",
         to: "do",
         max: "Maks",
@@ -84,6 +88,9 @@ const strings = new LocalizedStrings({
         min: "Минимум",
         to: "до",
         max: "Максимум",
+    },
+    zh: {
+        battles: "戰鬥場數",
     },
 });
 

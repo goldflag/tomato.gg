@@ -13,17 +13,17 @@ const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
 const strings = new LocalizedStrings({
-    cz: {
-        mastery: "Nároky na vzorného tankistu",
-        dataFrom: "Data od vývojářů",
-        moeMod: "Modifikace na vítězné znaky",
-        expand: "Rozbalením řádků zobrazíte 30 dní historie vzorného tankisty",
-    },
     en: {
         mastery: "Mastery Badge Requirements",
         dataFrom: "Data from the creators of the {0}",
         moeMod: "Marks of Excellence mod",
         expand: "Expand rows to see 30 days of mastery history",
+    },
+    cs: {
+        mastery: "Nároky na vzorného tankistu",
+        dataFrom: "Data od vývojářů",
+        moeMod: "Modifikace na vítězné znaky",
+        expand: "Rozbalením řádků zobrazíte 30 dní historie vzorného tankisty",
     },
     fr: {
         mastery: "Obtention Maîtrises de Char",

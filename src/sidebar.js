@@ -13,18 +13,9 @@ import { NewIcon } from "Components";
 import { BackgroundContext } from "Context";
 
 const strings = new LocalizedStrings({
-    cz: {
-        support: "Podpořte Tomato.gg",
-        donations: `Tomato.gg funguje jen díky dárcovství jeho uživatelů. Pokud v našem webu 
-        vidíte význam, zvažte příspěvek ,který by mohl zabezpečit chod serverů.`,
-        kofi: "Podpořte nás přes Ko-fi",
-        paypal: "Podpořte nás přes Paypal",
-        partnered: "Partnerské weby",
-        herhor: "Žebříček vítězných znaků a generátor obrázků",
-        createdBy: "Tomato.gg vytvořil",
-        notAffiliated: "a není jakkoliv spojen s Wargaming.net.",
-    },
     en: {
+        boomer: "Toggle Boomer Background",
+        boomerAria: "toggle background color",
         support: "Support Tomato.gg",
         donations: `Tomato.gg runs entirely on user donations. If you find value in the website, 
         consider chipping in to help keep the servers running.`,
@@ -34,6 +25,17 @@ const strings = new LocalizedStrings({
         herhor: "MoE rankings and image generator",
         createdBy: "Tomato.gg is a website created by",
         notAffiliated: "and is not affiliated with Wargaming.net.",
+    },
+    cs: {
+        support: "Podpořte Tomato.gg",
+        donations: `Tomato.gg funguje jen díky dárcovství jeho uživatelů. Pokud v našem webu 
+        vidíte význam, zvažte příspěvek ,který by mohl zabezpečit chod serverů.`,
+        kofi: "Podpořte nás přes Ko-fi",
+        paypal: "Podpořte nás přes Paypal",
+        partnered: "Partnerské weby",
+        herhor: "Žebříček vítězných znaků a generátor obrázků",
+        createdBy: "Tomato.gg vytvořil",
+        notAffiliated: "a není jakkoliv spojen s Wargaming.net.",
     },
     es: {
         support: "Apoya a Tomato.gg",
@@ -270,9 +272,9 @@ const Sidebar = withRouter((props) => {
                             onChange={() => toggleBackground(background === "black" ? "blue" : "black")}
                             color="primary"
                             name="background"
-                            inputProps={{ "aria-label": "primary checkbox" }}
+                            inputProps={{ "aria-label": strings.boomerAria }}
                         />
-                        Toggle Boomer Background
+                        {strings.boomer}
                     </Background>
                     <Support>
                         <h2>{strings.support}</h2>
@@ -297,8 +299,8 @@ const Sidebar = withRouter((props) => {
                     </Partnered>
                     <Line />
                     <CopyrightNotice>
-                        {strings.createdBy} <Link to="/stats/NA/goldflag=1011694618">Goldflag</Link> + <Link to="/stats/NA/Superdude3800=1007264827">Superdude3800</Link>{" "}
-                        {strings.notAffiliated}
+                        {strings.createdBy} <Link to="/stats/NA/goldflag=1011694618">Goldflag</Link> +{" "}
+                        <Link to="/stats/NA/Superdude3800=1007264827">Superdude3800</Link> {strings.notAffiliated}
                         <br />
                         Zeyu Yang © 2021
                     </CopyrightNotice>
