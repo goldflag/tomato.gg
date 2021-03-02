@@ -125,14 +125,13 @@ const { formatString, ...strings } = new LocalizedStrings({
         battles: "Bitwy",
     },
     tr: {
-        overall: "GENEL",
-        hrs24: "24 SAATTE",
-        days3: "3 GÜNDE",
-        days7: "7 GÜNDE",
-        days30: "30 GÜNDE",
-        days60: "60 GÜNDE",
-        games100: "100 SAVAŞTA",
-        games1000: "1000 SAVAŞTA",
+        created: "Hesap {0} tarihinde oluşturuldu",
+        overallWN8: "Genel WN8",
+        overallWR: "Genel WR",
+        recentWN8: "Son günler WN8",
+        recentWR: "Son günler WR",
+        wgRating: "WG Rating",
+        battles: "Savaşlar",
     },
 });
 

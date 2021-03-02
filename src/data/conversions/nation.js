@@ -31,7 +31,7 @@ export const localNationConv = new LocalizedStrings({
     es: {
         usa: "EE.UU.",
         china: "China",
-        czech: "Chequia",
+        czech: "Checoslovaquia",
         france: "Francia",
         germany: "Alemania",
         italy: "Italia",
@@ -57,7 +57,7 @@ export const localNationConv = new LocalizedStrings({
     pl: {
         usa: "USA",
         china: "Chiny",
-        czech: "Czechy",
+        czech: "Czechosłowacja",
         france: "Francja",
         germany: "Niemcy",
         italy: "Włochy",
@@ -164,7 +164,7 @@ export const nationAdjConv = new LocalizedStrings({
     pl: {
         usa: "Amerykański {0}",
         china: "Chiński {0}",
-        czech: "Czeski {0}",
+        czech: "Czechosłowacki {0}",
         france: "Francuski {0}",
         germany: "Niemiecki {0}",
         italy: "Włoski {0}",

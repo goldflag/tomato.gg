@@ -1,8 +1,8 @@
 // NPM
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import { Tab, Tabs } from "@material-ui/core";
+import LocalizedStrings from "react-localization";
 
 // LOCAL
 import { TabPanel } from "../tabs/customTabs";
@@ -47,9 +47,19 @@ const CustomTab = withStyles((t) => ({
     selected: {},
 }))((props) => <Tab disableRipple {...props} />);
 
+const strings = new LocalizedStrings({
+    en: {
+        main: "MAIN STATS",
+        hof: "HALL OF FAME",
+        sessions: "SESSIONS",
+        infographics: "INFOGRAPHICS",
+        treemap: "TREEMAP",
+    },
+});
+
 const tabs = [
     {
-        label: "MAIN STATS",
+        label: strings.main,
         value: "main",
         body: [
             (props) => <TopTable data={props.graphData.overallStats} />,
@@ -59,7 +69,7 @@ const tabs = [
         ],
     },
     {
-        label: "HALL OF FAME",
+        label: strings.hof,
         icon: <NewIcon />,
         value: "hall-of-fame",
         body: [
@@ -74,12 +84,12 @@ const tabs = [
         ],
     },
     {
-        label: "SESSIONS",
+        label: strings.sessions,
         value: "sessions",
         body: [(props) => <SessionsLogParent data={props.recentStats.sessions} />],
     },
     {
-        label: "INFOGRAPHICS",
+        label: strings.infographics,
         value: "infographics",
         body: [
             (props) => (
@@ -93,7 +103,7 @@ const tabs = [
         ],
     },
     {
-        label: "TREEMAP",
+        label: strings.treemap,
         icon: <NewIcon />,
         value: "treemap",
         body: [(props) => <Treemap data={props.recentStats.tree} />],

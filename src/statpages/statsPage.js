@@ -26,6 +26,10 @@ const { formatString, ...strings } = new LocalizedStrings({
         notFound: "Hráč {0} nebyl nalezen",
         correct: "Ujistěte se, že přezdívka i region serveru jsou správně.",
     },
+    es: {
+        notFound: "Jugador {0} no encontrado",
+        correct: "Por favor asegúrese de que el nombre de usuario y la región sean correctos",
+    },
     fr: {
         notFound: "Joueur {0} introuvable",
         correct: "Vérifiez que le pseudo et la région sont corrects.",

@@ -50,6 +50,16 @@ const { formatString, ...strings } = new LocalizedStrings({
         to: "do",
         max: "Max",
     },
+    es: {
+        all: "TODO",
+        prem: "PREM",
+        regular: "REGULAR",
+        searchTanks: "Buscar {0} tanques",
+        battles: "Batallas",
+        min: "Mínimo",
+        to: "a",
+        max: "Máximo",
+    },
     fr: {
         all: "TOUT",
         prem: "PREM",

@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import RSC from "react-scrollbars-custom";
+import LocalizedStrings from "react-localization";
 
 // LOCAL
 import { Loader } from "Components";
@@ -48,6 +49,7 @@ const OverallBottom = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 230px;
+    grid-template-areas: "battles dr winrate kd frags";
 
     @media screen and (max-width: 1000px) {
         grid-template-columns: 1fr 1fr;
@@ -252,6 +254,38 @@ const ConditionalLink = ({ makeLink, ...props }) => {
     return <span {...props} />;
 };
 
+const { formatString, ...strings } = new LocalizedStrings({
+    en: {
+        betterThan: "Better than {0}%",
+        moreThan: "More than {0}%",
+    },
+});
+
+const titles = {
+    dpg: "Damage Per Game",
+    wn8: "WN8",
+    battles: "Battles",
+    dr: "Damage Ratio",
+    winrate: "Winrate",
+    kd: "K/D Ratio",
+    frags: "Frags Per game",
+    unranked: "Play {0} more battles in tanks of tier 6 or higher to enter the Hall of Fame",
+};
+
+const percentile = (ranking, total) => (100 - (ranking * 100) / total).toFixed(2);
+
+const StatCard = ({ slot, value, ranking, total, moreThan }) => (
+    <OverallItem slot={slot}>
+        <Value>{value}</Value>
+        <BigLabel>{titles[slot]}</BigLabel>
+        <BigPercentile rank={ranking} total={total}>
+            {formatString(moreThan ? strings.moreThan : strings.betterThan, percentile(ranking, total))}
+        </BigPercentile>
+        {ranking}
+        <BigLabel>Rank</BigLabel>
+    </OverallItem>
+);
+
 export default function HallOfFame({ hofData, hofmainData, server, id, setHofData, setHofmainData }) {
     let topTanks = <Loader color={null} bottom={20} top={20} />;
 
@@ -264,15 +298,7 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                     {top.battles.value >= 75 ? (
                         <>
                             <OverallTop>
-                                <OverallItem slot="dpg">
-                                    <Value>{top.dpg.value}</Value>
-                                    <BigLabel> Damage Per Game </BigLabel>
-                                    <BigPercentile rank={top.dpg.ranking} total={top.total}>
-                                        Better than {(100 - (top.dpg.ranking * 100) / top.total).toFixed(2)}%
-                                    </BigPercentile>
-                                    {top.dpg.ranking}
-                                    <BigLabel>Rank</BigLabel>
-                                </OverallItem>
+                                <StatCard slot="dpg" {...top.dpg} total={top.total} />
                                 <TopGridItem slot="title">
                                     <nobr className="title">HALL OF FAME</nobr>
                                     <nobr className="subtitle">60 DAYS | MINIMUM 75 BATTLES | VEHICLES TIER 6+</nobr>
@@ -285,69 +311,18 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                                         }}
                                     ></div>
                                 </TopGridItem>
-                                <OverallItem slot="wn8">
-                                    <Value>{top.wn8.value}</Value>
-                                    <BigLabel> WN8 </BigLabel>
-                                    <BigPercentile rank={top.wn8.ranking} total={top.total}>
-                                        Better than {(100 - (top.wn8.ranking * 100) / top.total).toFixed(2)}%
-                                    </BigPercentile>
-                                    {top.wn8.ranking}
-                                    <BigLabel>Rank</BigLabel>
-                                </OverallItem>
+                                <StatCard slot="wn8" {...top.wn8} total={top.total} />
                             </OverallTop>
                             <OverallBottom>
-                                <OverallItem>
-                                    <Value>{top.battles.value}</Value>
-                                    <BigLabel> Battles </BigLabel>
-                                    <BigPercentile rank={top.battles.ranking} total={top.total}>
-                                        More than {(100 - (top.battles.ranking * 100) / top.total).toFixed(2)}%
-                                    </BigPercentile>
-                                    {top.battles.ranking}
-                                    <BigLabel>Rank</BigLabel>
-                                </OverallItem>
-                                <OverallItem>
-                                    <Value>{top.dmg_ratio.value}</Value>
-                                    <BigLabel> Damage Ratio </BigLabel>
-                                    <BigPercentile rank={top.dmg_ratio.ranking} total={top.total}>
-                                        Better than {(100 - (top.dmg_ratio.ranking * 100) / top.total).toFixed(2)}%
-                                    </BigPercentile>
-                                    {top.dmg_ratio.ranking}
-                                    <BigLabel>Rank</BigLabel>
-                                </OverallItem>
-                                <OverallItem>
-                                    <Value>{top.winrate.value}%</Value>
-                                    <BigLabel> Winrate </BigLabel>
-                                    <BigPercentile rank={top.winrate.ranking} total={top.total}>
-                                        Better than {(100 - (top.winrate.ranking * 100) / top.total).toFixed(2)}%
-                                    </BigPercentile>
-                                    {top.winrate.ranking}
-                                    <BigLabel>Rank</BigLabel>
-                                </OverallItem>
-                                <OverallItem>
-                                    <Value>{top.kd.value}</Value>
-                                    <BigLabel> K/D Ratio </BigLabel>
-                                    <BigPercentile rank={top.kd.ranking} total={top.total}>
-                                        Better than {(100 - (top.kd.ranking * 100) / top.total).toFixed(2)}%
-                                    </BigPercentile>
-                                    {top.kd.ranking}
-                                    <BigLabel>Rank</BigLabel>
-                                </OverallItem>
-                                <OverallItem>
-                                    <Value>{top.frags.value}</Value>
-                                    <BigLabel> Frags Per Game </BigLabel>
-                                    <BigPercentile rank={top.frags.ranking} total={top.total}>
-                                        Better than {(100 - (top.frags.ranking * 100) / top.total).toFixed(2)}%
-                                    </BigPercentile>
-                                    {top.frags.ranking}
-                                    <BigLabel>Rank</BigLabel>
-                                </OverallItem>
+                                <StatCard slot="battles" {...top.battles} total={top.total} moreThan />
+                                <StatCard slot="dr" {...top.dmg_ratio} total={top.total} />
+                                <StatCard slot="winrate" {...top.winrate} total={top.total} />
+                                <StatCard slot="kd" {...top.kd} total={top.total} />
+                                <StatCard slot="frags" {...top.frags} total={top.total} />
                             </OverallBottom>
                         </>
                     ) : (
-                        <UnrankedNotice>
-                            Play {75 - top.battles.value} more battles in tanks of tier 6 or higher to enter the Hall of
-                            Fame
-                        </UnrankedNotice>
+                        <UnrankedNotice>{formatString(strings.unranked, 75 - top.battles.value)}</UnrankedNotice>
                     )}
                 </Overall>
                 <TankRankings userID={id} hofData={hofData} />

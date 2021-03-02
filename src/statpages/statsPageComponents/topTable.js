@@ -73,6 +73,16 @@ const strings = new LocalizedStrings({
         games100: "100 BITEV",
         games1000: "1000 BITEV",
     },
+    es: {
+        overall: "TOTAL",
+        hrs24: "24 HORAS",
+        days3: "3 DÍAS",
+        days7: "7 DÍAS",
+        days30: "30 DÍAS",
+        days60: "60 DÍAS",
+        games100: "100 JUEGOS",
+        games1000: "1000 JUEGOS",
+    },
     fr: {
         overall: "GLOBAM",
         hrs24: "24 HEURES",
@@ -92,6 +102,16 @@ const strings = new LocalizedStrings({
         days60: "60 DNI",
         games100: "100 BITEW",
         games1000: "1000 BITEW",
+    },
+    tr: {
+        overall: "GENEL",
+        hrs24: "24 SAATTE",
+        days3: "3 GÜNDE",
+        days7: "7 GÜNDE",
+        days30: "30 GÜNDE",
+        days60: "60 GÜNDE",
+        games100: "100 SAVAŞTA",
+        games1000: "1000 SAVAŞTA",
     },
 });
 
