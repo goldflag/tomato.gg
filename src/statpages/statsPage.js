@@ -13,7 +13,6 @@ import MainTabs from "./statsPageComponents/mainTabs";
 import { Loader } from "Components";
 
 const APIKey = process.env.REACT_APP_API_KEY;
-const backendKey = process.env.REACT_APP_BACKEND_API_KEY;
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -110,7 +109,7 @@ class StatsPage extends Component {
             `${domain}/wot/account/info/?${commonArgs}`, //Overall Summary Stats
             `${domain}/wot/clans/accountinfo/?${commonArgs}`, //Current Clan Data
             `${domain}/wot/clans/memberhistory/?${commonArgs}`, //Clan history
-            `${backend}/api/${backendKey}/${server}/${id}`, //Recent stats from our own API
+            `${backend}/api/player/${server}/${id}`, //Recent stats from our own API
             `${backend}/api/hofmain/${server}/${id}`,
             `${backend}/api/hof/${server}/${id}`,
         ];
