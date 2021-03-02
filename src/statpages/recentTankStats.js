@@ -24,6 +24,11 @@ const { formatString, ...strings } = new LocalizedStrings({
         clickRow: "Click on a row to view detailed server-wide tank performance and leaderboards",
         error: "Sorry, recent tank stats could not be loaded.",
     },
+    cs: {
+        title: "{0} Nedávné statistiky vozidla",
+        clickRow: "Kliknutím na řádek zobrazíte podrobné serverové žebříčky vozidla a jeho statistiky",
+        error: "Omlouváme se, nedávné statistiky vozidla nelze načíst.",
+    },
     fr: {
         title: "Stats Récentes Chars {0}",
         clickRow: `Cliquez sur une ligne pour voir les performances détaillées des joueurs sur 

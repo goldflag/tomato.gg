@@ -63,6 +63,36 @@ const strings = new LocalizedStrings({
         games100: "100 GAMES",
         games1000: "1000 GAMES",
     },
+    cs: {
+        overall: "CELKOVĚ",
+        hrs24: "24 HODIN",
+        days3: "3 DNÍ",
+        days7: "7 DNÍ",
+        days30: "30 DNÍ",
+        days60: "60 DNÍ",
+        games100: "100 BITEV",
+        games1000: "1000 BITEV",
+    },
+    fr: {
+        overall: "GLOBAM",
+        hrs24: "24 HEURES",
+        days3: "3 JOURS",
+        days7: "7 JOURS",
+        days30: "30 JOURS",
+        days60: "60 JOURS",
+        games100: "100 PARTIES",
+        games1000: "1000 PARTIES",
+    },
+    pl: {
+        overall: "OGÓLNE",
+        hrs24: "24 GODZINY",
+        days3: "3 DNI",
+        days7: "7 DNI",
+        days30: "30 DNI",
+        days60: "60 DNI",
+        games100: "100 BITEW",
+        games1000: "1000 BITEW",
+    },
 });
 
 export default function TopTable({ data }) {

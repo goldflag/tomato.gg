@@ -16,6 +16,11 @@ const { formatString, ...strings } = new LocalizedStrings({
         maintained: "Maintained by the {0}",
         xvm: "XVM team",
     },
+    cs: {
+        expected: "Očekávané hodnoty Wn8",
+        maintained: "Udržuje {0}",
+        xvm: "XVM týmem",
+    },
     fr: {
         expected: "Valeurs Attendues pour le WN8",
         maintained: "Maintenu par {0}",

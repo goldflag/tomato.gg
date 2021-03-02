@@ -27,6 +27,8 @@ const strings = new LocalizedStrings({
         notAffiliated: "and is not affiliated with Wargaming.net.",
     },
     cs: {
+        boomer: "Přepnout odstín pozadí",
+        boomerAria: "řepnout barvu pozadí",
         support: "Podpořte Tomato.gg",
         donations: `Tomato.gg funguje jen díky dárcovství jeho uživatelů. Pokud v našem webu 
         vidíte význam, zvažte příspěvek ,který by mohl zabezpečit chod serverů.`,
@@ -39,7 +41,8 @@ const strings = new LocalizedStrings({
     },
     es: {
         support: "Apoya a Tomato.gg",
-        donations: `Tomato.gg funciona completamente con donaciones. Si encuentras valor en el sitio, considere hacer una donación para ayudar a mantener los servidores.`,
+        donations: `Tomato.gg funciona completamente con donaciones. Si encuentras valor en el sitio, 
+        considere hacer una donación para ayudar a mantener los servidores.`,
         kofi: "Apoya en Ko-fi",
         paypal: "Apoya en Paypal",
         partnered: "Sitios asociados",
@@ -48,6 +51,8 @@ const strings = new LocalizedStrings({
         notAffiliated: "y no está afiliado a Wargaming.net.",
     },
     fr: {
+        boomer: "Changer l'arrière-plan",
+        boomerAria: "Changer la couleur d'arrière-plan",
         support: "Soutenez Tomato.gg",
         donations: `Tomato.gg fonctionne pleinement sur les dons par utilisateurs. Si vous trouvez de 
         la valeur sur ce site web, considérez de faire un don pour aider à maintenir les serveurs.`,
@@ -59,9 +64,11 @@ const strings = new LocalizedStrings({
         notAffiliated: "et n'est pas affilié avec Wargaming.net.",
     },
     pl: {
+        boomer: "Przełącz Boomerowe Tło",
+        boomerAria: "Przełącz kolor tła",
         support: "Wesprzyj Tomato.gg",
-        donations: `Tomato.gg jest utrzymywane całkowicie z darowizn użytkowników. Jeśli uważasz witrynę za wartościową, rozważ pomoc
-        w utrzymaniu działania serwerów.`,
+        donations: `Tomato.gg jest utrzymywane całkowicie z darowizn użytkowników. Jeśli uważasz 
+        witrynę za wartościową, rozważ pomoc w utrzymaniu działania serwerów.`,
         kofi: "Wesprzyj na Ko-fi",
         paypal: "Wesprzyj na Paypal",
         partnered: "Witryny partnerskie",
@@ -70,6 +77,8 @@ const strings = new LocalizedStrings({
         notAffiliated: "i nie jest powiązana z Wargaming.net.",
     },
     tr: {
+        boomer: "Boomer Arkaplanını Değiştir",
+        boomerAria: "arkaplan rengini değiştir",
         support: "Tomato.gg'yi destekleyin",
         donations: `Tomato.gg tamamen kullanıcı bağışlarıyla çalışır. Web sitesinde bir değer bulursanız, 
         sunucuların çalışmaya devam etmesine yardımcı olmak için bağış yapabilirsiniz.`,
