@@ -154,7 +154,7 @@ function MasteryTable({ data }) {
         const [data, setData] = useState();
         useEffect(() => {
             async function get() {
-                fetch(`${backend}/api/abcd/masterytank/${row.original.id}/${server}`)
+                fetch(`${backend}/api/masterytank/${row.original.id}/${server}`)
                     .then((res) => res.json())
                     .then((res) => setData(res));
             }

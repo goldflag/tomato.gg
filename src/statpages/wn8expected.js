@@ -52,7 +52,7 @@ export default function Leaderboards(props) {
     }, []);
 
     useEffect(() => {
-        fetch(`${backend}/api/abcd/wn8`)
+        fetch(`${backend}/api/wn8`)
             .then((res) => res.json())
             .then((data) => setData(data));
     }, []);

@@ -69,7 +69,7 @@ export default function MasteryPage(props) {
 
     useEffect(() => {
         async function getData() {
-            const url = `${backend}/api/abcd/mastery/${server}`;
+            const url = `${backend}/api/mastery/${server}`;
             const raw = await fetch(url);
             let res = await raw.json();
             setData(res);

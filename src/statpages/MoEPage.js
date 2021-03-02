@@ -113,8 +113,8 @@ export default function MoEPage(props) {
 
     useEffect(() => {
         async function getData() {
-            const url = `${backend}/api/abcd/moe/${server}`;
-            const url2 = `${backend}/api/abcd/moetracker/get/${server}`;
+            const url = `${backend}/api/moe/${server}`;
+            const url2 = `${backend}/api/moetracker/get/${server}`;
 
             try {
                 Promise.all([fetch(url), fetch(url2)])

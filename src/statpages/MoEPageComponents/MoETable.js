@@ -162,7 +162,7 @@ function MoETable({ data }) {
         const [data, setData] = useState();
         useEffect(() => {
             async function get() {
-                fetch(`${backend}/api/abcd/moetank/${row.original.id}/${server}`)
+                fetch(`${backend}/api/moetank/${row.original.id}/${server}`)
                     .then((res) => res.json())
                     .then((res) => setData(res));
             }
