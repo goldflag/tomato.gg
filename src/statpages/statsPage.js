@@ -43,6 +43,7 @@ const strings = new LocalizedStrings({
         correct: "確認為正確的使用者及地區。",
     },
 });
+
 class StatsPage extends Component {
     constructor(props) {
         super(props);
