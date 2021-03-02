@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function GraphCalculator(stats, OS, overallWN8, avgTier, recentStats) {
+export default function GraphCalculator(OS, overallWN8, avgTier, recentStats) {
     function clr(recent, overall, flipped) {
         if (recent === "-") return "rgb(50,50,50)";
         if (flipped) {

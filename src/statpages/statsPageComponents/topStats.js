@@ -95,7 +95,7 @@ export default function TopStats(props) {
                 <Username>{props.username}</Username>
                 {props.clanStats.role_i18n} at <ClanTag {...props.clanStats.clan}>[{props.clanStats.clan.tag}]</ClanTag>
                 <br />
-                <AccountCreated>Account created{creationDate}</AccountCreated>
+                <AccountCreated>Account created {creationDate}</AccountCreated>
             </>
         ) : null;
 

@@ -112,7 +112,6 @@ class StatsPage extends Component {
             .then(([overall, clanStats, clanHistory, recent, hofmainData, hofData]) => {
                 const stats = overall.data[id].statistics.all;
                 const graphData = GraphCalculator(
-                    recent.overallStats.tankWN8,
                     stats,
                     recent.overallStats.overallWN8,
                     recent.overallStats.avgTier,
