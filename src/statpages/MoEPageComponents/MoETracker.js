@@ -199,7 +199,7 @@ function MoETracker({ data, moe }) {
         const [data, setData] = useState();
         useEffect(() => {
             async function get() {
-                fetch(`${backend}/api/moetank/${row.original.id}/${server}`)
+                fetch(`${backend}/api/moetank/${server}/${row.original.id}`)
                     .then((res) => res.json())
                     .then((res) => setData(res));
             }
