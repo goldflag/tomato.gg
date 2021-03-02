@@ -1,6 +1,7 @@
 // NPM
 import React from "react";
 import styled from "styled-components";
+import LocalizedStrings from "react-localization";
 
 // LOCAL
 import { WN8color, WRcolor, PRcolor, battlesColor } from "Functions/colors";
@@ -62,6 +63,7 @@ const StatsRow = styled.div`
 const ClanTag = styled.span`
     font-weight: 600;
     color: ${({ color }) => color};
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.75);
 `;
 
 const Username = styled.div`
@@ -85,34 +87,71 @@ const StatCardValue = styled.span`
     font-weight: 500;
 `;
 
+const { formatString, ...strings } = new LocalizedStrings({
+    en: {
+        created: "Account created {0}",
+        overallWN8: "Overall WN8",
+        overallWR: "Overall WR",
+        recentWN8: "Recent WN8",
+        recentWR: "Recent WR",
+        wgRating: "WG Rating", // Wargaming rating
+        battles: "Battles",
+    },
+});
+
+const clanPositions = new LocalizedStrings({
+    en: {
+        commander: "Commander",
+        executive_officer: "Executive Officer",
+        personnel_officer: "Personnel Officer",
+        combat_officer: "Combat Officer",
+        intelligence_officer: "Intelligence Officer",
+        quartermaster: "Quartermaster",
+        recruitment_officer: "Recruitment Officer",
+        junior_officer: "Junior Officer",
+        private: "Private",
+        recruit: "Recruit",
+        reservist: "Reservist",
+    },
+});
+
 export default function TopStats(props) {
     const date = new Date(props.accountCreationDate * 1000);
-    const creationDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+    const dateOptions = { year: "numeric", month: "long", day: "numeric" };
 
-    const playerInfo =
-        props.clanStats !== "NO CLAN" ? (
+    let clanInfo = null;
+    if (props.clanStats !== "NO CLAN") {
+        const { role, clan } = props.clanStats;
+        clanInfo = (
             <>
-                <Username>{props.username}</Username>
-                {props.clanStats.role_i18n} at <ClanTag {...props.clanStats.clan}>[{props.clanStats.clan.tag}]</ClanTag>
-                <br />
-                <AccountCreated>Account created {creationDate}</AccountCreated>
+                {clanPositions[role]} at <ClanTag {...clan}>[{clan.tag}]</ClanTag>
             </>
-        ) : null;
+        );
+    }
+
+    const playerInfo = (
+        <>
+            <Username>{props.username}</Username>
+            {clanInfo}
+            <br />
+            <AccountCreated>{formatString(strings.created, date.toLocaleDateString(dateOptions))}</AccountCreated>
+        </>
+    );
 
     const statCards = [
-        { label: "Overall WN8", value: props.data.overallWN8, colorFn: WN8color },
-        { label: "Overall WR", value: props.data.overallWinrate + '%', colorFn: WRcolor },
-        { label: "Recent WN8", value: props.data.recentWN8, colorFn: WN8color },
-        { label: "Recent WR", value: props.data.recentWinrate + '%', colorFn: WRcolor },
-        { label: "WG Rating", value: props.WGRating, colorFn: PRcolor },
-        { label: "Battles", value: props.stats.battles, colorFn: battlesColor },
+        { label: strings.overallWN8, value: props.data.overallWN8, colorFn: WN8color },
+        { label: strings.overallWR, value: props.data.overallWinrate + "%", colorFn: WRcolor },
+        { label: strings.recentWN8, value: props.data.recentWN8, colorFn: WN8color },
+        { label: strings.recentWR, value: props.data.recentWinrate + "%", colorFn: WRcolor },
+        { label: strings.wgRating, value: props.WGRating, colorFn: PRcolor },
+        { label: strings.battles, value: props.stats.battles, colorFn: battlesColor },
     ];
 
     return (
         <Root>
-            <MobilePlayerName backgroundColor={WN8color(props.data.overallWN8)}>{playerInfo}</MobilePlayerName>
+            <MobilePlayerName backgroundColor={WN8color(props.data.recentWN8)}>{playerInfo}</MobilePlayerName>
             <StatsRow>
-                <PlayerName backgroundColor={WN8color(props.data.overallWN8)}>{playerInfo}</PlayerName>
+                <PlayerName backgroundColor={WN8color(props.data.recentWN8)}>{playerInfo}</PlayerName>
                 {statCards.map(({ label, value, colorFn }, i) => (
                     <StatCard backgroundColor={colorFn(value)} key={i}>
                         <StatCardLabel>{label}</StatCardLabel>

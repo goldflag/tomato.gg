@@ -17,7 +17,7 @@ const backendKey = process.env.REACT_APP_BACKEND_API_KEY;
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
-const strings = new LocalizedStrings({
+const { formatString, ...strings } = new LocalizedStrings({
     en: {
         notFound: "Player {0} not found",
         correct: "Make sure the username and region are correct.",
@@ -152,7 +152,7 @@ class StatsPage extends Component {
         } else {
             statTable = (
                 <>
-                    <span style={{ fontSize: "2rem" }}>{strings.formatString(strings.notFound, username)}</span>
+                    <span style={{ fontSize: "2rem" }}>{formatString(strings.notFound, username)}</span>
                     <br />
                     <br />
                     {strings.correct}

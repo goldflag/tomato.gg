@@ -10,7 +10,7 @@ import { Loader, FullPageTableWrapper, Info } from "Components";
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
-const strings = new LocalizedStrings({
+const { formatString, ...strings } = new LocalizedStrings({
     en: {
         expected: "WN8 Expected Values",
         maintained: "Maintained by the {0}",
@@ -65,7 +65,7 @@ export default function Leaderboards(props) {
                         color: "rgb(100,100,100)",
                     }}
                 >
-                    {strings.formatString(
+                    {formatString(
                         strings.maintained,
                         <a target="blank" href="https://modxvm.com/en/wn8-expected-values/">
                             {strings.xvm}

@@ -257,7 +257,7 @@ const Sidebar = withRouter((props) => {
                 <Line />
                 <Menu>
                     {menuRoutes.map(({ path, title, Icon, isNew }) => (
-                        <MenuLink to={path} key={path}>
+                        <MenuLink to={path} key={path} style={title.length > 20 ? { fontSize: "12px" } : {}}>
                             <nobr>
                                 <Icon />
                                 &nbsp;&nbsp;{title} {isNew ? <NewIcon /> : null}

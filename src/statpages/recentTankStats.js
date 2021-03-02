@@ -18,7 +18,7 @@ const Filters = styled.div`
     // margin: -15px;
 `;
 
-const strings = new LocalizedStrings({
+const { formatString, ...strings } = new LocalizedStrings({
     en: {
         title: "{0} Recent Tank Stats",
         clickRow: "Click on a row to view detailed server-wide tank performance and leaderboards",
@@ -64,7 +64,7 @@ export default function RecentLeaderboards() {
         <FullPageTableWrapper>
             <Info>
                 <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                    {strings.formatString(strings.title, serverConv[server])}
+                    {formatString(strings.title, serverConv[server])}
                 </span>
                 <br />
                 <br />

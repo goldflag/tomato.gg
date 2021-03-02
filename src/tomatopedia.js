@@ -17,39 +17,43 @@ const trackingId = process.env.REACT_APP_GA;
 
 const Wrapper = Styled.div`
     min-height: 100vh;
-`;
-
-const Blue = Styled.div`
-    color: rgb(234, 238, 248);
-    background: url(${({ocean}) => ocean}) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-color: ${({color}) => color};
 
     /* unvisited link */
     a {
         color: rgb(161, 177, 230);
-        text-decoration: none;
     }
 
     /* mouse over link */
     a:hover {
         color: rgb(180, 70, 129);
-        text-decoration: none;
     }
 
     /* selected link */
     a:active {
         color: rgb(120, 60, 131);
+    }
+`;
+
+const backgrounds = {
+    black: "rgb(30, 30, 50)",
+    blue: `url(${Ocean}) no-repeat center center fixed`,
+};
+
+const Blue = Styled.div`
+    color: rgb(234, 238, 248);
+    background: ${({ background }) => backgrounds[background]};
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: ${({ color }) => color};
+
+    a {
         text-decoration: none;
     }
-
-`
+`;
 
 export default function Tomatopedia() {
-
     const { background } = useContext(BackgroundContext);
 
     useEffect(() => {
@@ -60,10 +64,7 @@ export default function Tomatopedia() {
     return (
         <Router>
             <ScrollToTop />
-            <Blue 
-                color={background === "blue" ? null : "rgb(30, 30, 50)"}
-                ocean={background === "blue" ? Ocean : null}
-            >
+            <Blue background={background}>
                 <Sidebar />
                 <Topbar />
                 <Wrapper>

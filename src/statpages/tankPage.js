@@ -74,7 +74,7 @@ const TankImage = styled.img`
 
 const PAGE_SIZE = 100;
 
-const strings = new LocalizedStrings({
+const { formatString, ...strings } = new LocalizedStrings({
     en: {
         dpg: "DPG",
         frags: "FRAGS",
@@ -197,7 +197,7 @@ export default function TankPage(props) {
                     </Name>
                 </Top>
                 <TableLabel>
-                    {strings.formatString(strings.top500, serverConv[server])}
+                    {formatString(strings.top500, serverConv[server])}
                     <BottomLabel>{strings.past60min25}</BottomLabel>
                     <FilterButtonGroup>
                         {Object.entries(filters).map(([val, label]) => (

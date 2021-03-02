@@ -21,6 +21,7 @@ import {
     TankNameCell,
     ClassCell,
     TierCell,
+    tableHeaders,
 } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
 
@@ -29,70 +30,70 @@ function PeriodBreakdown({ data }) {
         () => [
             {
                 Cell: TankNameCell,
-                Header: "Name",
+                Header: tableHeaders.name,
                 accessor: "name",
                 disableFilters: true,
             },
             {
                 Cell: NationCell,
-                Header: "Nation",
+                Header: tableHeaders.nation,
                 accessor: "nation",
                 Filter: NationFilter,
                 filter: arrayFilterFn,
             },
             {
                 Cell: TierCell,
-                Header: "Tier",
+                Header: tableHeaders.tier,
                 accessor: "tier",
                 Filter: NumericTierFilter,
                 filter: arrayFilterFn,
             },
             {
                 Cell: ClassCell,
-                Header: "Class",
+                Header: tableHeaders.class,
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
             },
             {
-                Header: "Games",
+                Header: tableHeaders.battles,
                 accessor: "battles",
                 disableFilters: true,
             },
             {
-                Header: "WN8",
+                Header: tableHeaders.wn8,
                 accessor: "wn8",
                 disableFilters: true,
             },
             {
                 Cell: ({ value }) => `${value}%`,
-                Header: "Winrate",
+                Header: tableHeaders.winrate,
                 accessor: "winrate",
                 disableFilters: true,
             },
             {
-                Header: "DPG",
+                Header: tableHeaders.dpg,
                 accessor: "dpg",
                 disableFilters: true,
             },
-            { Header: "KPG", accessor: "kpg", disableFilters: true },
+            { Header: tableHeaders.frags, accessor: "kpg", disableFilters: true },
             {
-                Header: "DR",
+                Header: tableHeaders.dmgRatio,
                 accessor: "dmgRatio",
                 disableFilters: true,
             },
             {
-                Header: "KDR",
+                Header: tableHeaders.kd,
                 accessor: "kd",
                 disableFilters: true,
             },
             {
-                Header: "Survival%",
+                Header: tableHeaders.survival,
                 accessor: "survived",
                 disableFilters: true,
             },
             {
-                Header: "Spots",
+                Header: tableHeaders.spots,
                 accessor: "spots",
                 disableFilters: true,
             },

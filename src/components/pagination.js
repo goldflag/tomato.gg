@@ -39,7 +39,7 @@ const PaginationButton = styled.button`
     }
 `;
 
-const strings = new LocalizedStrings({
+const { formatString, ...strings } = new LocalizedStrings({
     en: {
         pageOf: "Page {0} of {1}",
         gotoPage: "Go to page:",
@@ -96,7 +96,7 @@ export const Pagination = (props) => {
             <PaginationButton onClick={() => props.gotoPage(props.pageCount - 1)} disabled={!props.canNextPage}>
                 <Icon size={24} icon={chevronsRight} />
             </PaginationButton>{" "}
-            {strings.formatString(strings.pageOf, props.pageIndex + 1, props.pageOptions.length)}
+            {formatString(strings.pageOf, props.pageIndex + 1, props.pageOptions.length)}
             {props.showGoTo ? (
                 <span>
                     | {strings.gotoPage}{" "}
@@ -168,7 +168,7 @@ export const ServerPagination = ({ page, numPages, setPage }) => {
             >
                 <Icon size={24} icon={chevronsRight} />
             </PaginationButton>{" "}
-            {strings.formatString(strings.pageOf, page + 1, numPages)}{" "}
+            {formatString(strings.pageOf, page + 1, numPages)}{" "}
         </PaginationContainer>
     );
 };

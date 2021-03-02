@@ -30,7 +30,7 @@ export const FilterButtonGroup = styled(ButtonGroup)`
     padding-top: 10px;
 `;
 
-const strings = new LocalizedStrings({
+const { formatString, ...strings } = new LocalizedStrings({
     en: {
         all: "ALL",
         prem: "PREM",
@@ -249,7 +249,7 @@ export const GlobalFilter = ({ preGlobalFilteredRows, globalFilter, setGlobalFil
                     setValue(e.target.value);
                     onChange(e.target.value);
                 }}
-                placeholder={strings.formatString(strings.searchTanks, count)}
+                placeholder={formatString(strings.searchTanks, count)}
                 style={{
                     fontSize: "1rem",
                     padding: "0px 15px",

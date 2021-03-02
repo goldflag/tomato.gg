@@ -6,9 +6,7 @@ import { BackgroundProvider } from "./background";
 export const MultiProvider = ({ children }) => (
     <ServerProvider>
         <SearchHistoryProvider>
-            <BackgroundProvider>
-                {children}
-            </BackgroundProvider>
+            <BackgroundProvider>{children}</BackgroundProvider>
         </SearchHistoryProvider>
     </ServerProvider>
 );

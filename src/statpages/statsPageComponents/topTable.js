@@ -2,9 +2,9 @@
 import React from "react";
 import { useTable } from "react-table";
 import styled, { css } from "styled-components";
+import LocalizedStrings from "react-localization";
 
 // LOCAL
-
 import { TableContainer } from "Components/tableComponents";
 import { WN8color } from "Functions/colors";
 
@@ -52,6 +52,19 @@ const StyledTable = styled.table`
     }
 `;
 
+const strings = new LocalizedStrings({
+    en: {
+        overall: "OVERALL",
+        hrs24: "24 HOURS",
+        days3: "3 DAYS",
+        days7: "7 DAYS",
+        days30: "30 DAYS",
+        days60: "60 DAYS",
+        games100: "100 GAMES",
+        games1000: "1000 GAMES",
+    },
+});
+
 export default function TopTable({ data }) {
     function setColor(cell, column, value) {
         if (column === "name")
@@ -76,35 +89,35 @@ export default function TopTable({ data }) {
                 accessor: "name",
             },
             {
-                Header: "OVERALL",
+                Header: strings.overall,
                 accessor: "Overall",
             },
             {
-                Header: "24 HOURS",
+                Header: strings.hrs24,
                 accessor: "24 Hours",
             },
             {
-                Header: "3 DAYS",
+                Header: strings.days3,
                 accessor: "3 Days",
             },
             {
-                Header: "7 DAYS",
+                Header: strings.days7,
                 accessor: "7 Days",
             },
             {
-                Header: "30 DAYS",
+                Header: strings.days30,
                 accessor: "30 Days",
             },
             {
-                Header: "60 DAYS",
+                Header: strings.days60,
                 accessor: "60 Days",
             },
             {
-                Header: "100 GAMES",
+                Header: strings.games100,
                 accessor: "100 Games",
             },
             {
-                Header: "1000 GAMES",
+                Header: strings.games1000,
                 accessor: "1000 Games",
             },
         ],

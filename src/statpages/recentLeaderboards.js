@@ -8,10 +8,14 @@ import { FullPageTableWrapper, Info } from "Components";
 import { ServerContext } from "Context";
 import { serverConv } from "Data/conversions";
 
-const strings = new LocalizedStrings({
+const { formatString, ...strings } = new LocalizedStrings({
     en: {
         recentStats: "{server} Recent Stats Leaderboard",
         minGames: "Mininum 75 games in period",
+    },
+    cs: {
+        recentStats: "{server} Žebříček nedávných statistik",
+        minGames: "Minimální 75 bitev za období",
     },
     fr: {
         recentStats: "Classement Stats Récentes {server}",
@@ -38,7 +42,7 @@ export default function RecentLeaderboards(props) {
         <FullPageTableWrapper>
             <Info>
                 <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                    {strings.formatString(strings.recentStats, { server: serverConv[server] })}
+                    {formatString(strings.recentStats, { server: serverConv[server] })}
                 </span>
                 <br />
                 <br />

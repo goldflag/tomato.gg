@@ -12,7 +12,7 @@ import { Loader, FullPageTableWrapper, Info } from "Components";
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
-const strings = new LocalizedStrings({
+const { formatString, ...strings } = new LocalizedStrings({
     en: {
         mastery: "Mastery Badge Requirements",
         dataFrom: "Data from the creators of the {0}",
@@ -98,7 +98,7 @@ export default function MasteryPage(props) {
                         color: "rgb(130,130,130)",
                     }}
                 >
-                    {strings.formatString(
+                    {formatString(
                         strings.dataFrom,
                         <a target="blank" href="https://mastery.poliroid.ru/">
                             {" "}

@@ -14,7 +14,7 @@ import { serverConv } from "Data/conversions";
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
-const strings = new LocalizedStrings({
+const { formatString, ...strings } = new LocalizedStrings({
     en: {
         moe: "Marks of Excellence Requirements",
         dataFrom: "Data from the creators of the {0}",
@@ -162,7 +162,7 @@ export default function MoEPage(props) {
                         color: "rgb(130,130,130)",
                     }}
                 >
-                    {strings.formatString(
+                    {formatString(
                         strings.dataFrom,
                         <a target="blank" href="https://gunmarks.poliroid.ru/">
                             {" "}
