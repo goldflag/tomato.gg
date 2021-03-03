@@ -33,9 +33,9 @@ export default function SelectQuery(props) {
                     displayEmpty
                     className={classes.selectEmpty}
                 >
-                    <MenuItem value={"com"}>NA</MenuItem>
-                    <MenuItem value={"eu"}>EU</MenuItem>
-                    <MenuItem value={"asia"}>ASIA</MenuItem>
+                    <MenuItem value="com">NA</MenuItem>
+                    <MenuItem value="eu">EU</MenuItem>
+                    <MenuItem value="asia">ASIA</MenuItem>
                 </Select>
             </FormControl>
         </div>

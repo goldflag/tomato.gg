@@ -3,7 +3,7 @@ import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
 import Grid from "@material-ui/core/Grid";
 import { serverConv } from "Data/conversions";
 import clonedeep from "lodash.clonedeep";
-import RSC from "react-scrollbars-custom";
+import Scrollbar from "react-scrollbars-custom";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
@@ -187,7 +187,7 @@ export default function ClanHistory(props) {
     }
 
     return (
-        <RSC id="RSC-Example" noScrollX={true}>
+        <Scrollbar noScrollX>
             <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
                 <CustomTab label="CLAN HISTORY" />
             </CustomTabs>
@@ -203,6 +203,6 @@ export default function ClanHistory(props) {
                     </Grid>
                 </div>
             </TabPanel>
-        </RSC>
+        </Scrollbar>
     );
 }

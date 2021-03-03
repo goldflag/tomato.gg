@@ -1,6 +1,7 @@
 // NPM
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import styled from "styled-components";
 import ReactGA from "react-ga";
 import LocalizedStrings from "react-localization";
 
@@ -15,6 +16,16 @@ import { Loader } from "Components";
 const APIKey = process.env.REACT_APP_API_KEY;
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
+
+const Container = styled.div`
+    padding: 2rem;
+    padding-top: 1rem;
+
+    @media screen and (max-width: 1000px) {
+        padding: 0.4rem;
+        padding-top: 3.4rem;
+    }
+`;
 
 const { formatString, ...strings } = new LocalizedStrings({
     en: {
@@ -163,7 +174,7 @@ class StatsPage extends Component {
             );
         }
 
-        return <div className="smallpaper">{statTable}</div>;
+        return <Container>{statTable}</Container>;
     }
 }
 

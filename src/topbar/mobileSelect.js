@@ -1,11 +1,22 @@
+// NPM
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import styled from "styled-components";
+
+// LOCAL
 import { ServerContext } from "Context";
 
-export default function SmallSelectQuery(props) {
+const SmallSelectWrapper = styled.div`
+    display: none;
+    @media screen and (max-width: 1000px) {
+        display: block;
+    }
+`;
+
+function MobileSelect(props) {
     const { server } = React.useContext(ServerContext);
 
     const useStyles = makeStyles((t) => ({
@@ -25,7 +36,7 @@ export default function SmallSelectQuery(props) {
 
     const classes = useStyles();
     return (
-        <div>
+        <SmallSelectWrapper>
             <FormControl className={classes.formControl}>
                 <Select
                     MenuProps={{
@@ -36,11 +47,13 @@ export default function SmallSelectQuery(props) {
                     displayEmpty
                     className={classes.selectEmpty}
                 >
-                    <MenuItem value={`com`}>NA</MenuItem>
-                    <MenuItem value={`eu`}>EU</MenuItem>
-                    <MenuItem value={`asia`}>ASIA</MenuItem>
+                    <MenuItem value="com">NA</MenuItem>
+                    <MenuItem value="eu">EU</MenuItem>
+                    <MenuItem value="asia">ASIA</MenuItem>
                 </Select>
             </FormControl>
-        </div>
+        </SmallSelectWrapper>
     );
 }
+
+export default MobileSelect;

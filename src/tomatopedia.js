@@ -2,7 +2,7 @@
 import React, { useEffect, useContext } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import ReactGA from "react-ga";
-import Styled from "styled-components";
+import styled from "styled-components";
 
 // LOCAL
 import { routes } from "./routes";
@@ -12,12 +12,12 @@ import Sidebar from "./sidebar";
 import { BackgroundContext } from "Context";
 import Ocean from "./assets/Ocean.svg";
 import "CSS/body.css";
+import Scrollbar from "react-scrollbars-custom";
 
 const trackingId = process.env.REACT_APP_GA;
 
-const Wrapper = Styled.div`
-    min-height: 100vh;
-
+const Wrapper = styled.div`
+    height: calc(100vh - 4rem);
     /* unvisited link */
     a {
         color: rgb(161, 177, 230);
@@ -39,7 +39,7 @@ const backgrounds = {
     blue: `url(${Ocean}) no-repeat center center fixed`,
 };
 
-const Blue = Styled.div`
+const Blue = styled.div`
     color: rgb(234, 238, 248);
     background: ${({ background }) => backgrounds[background]};
     -webkit-background-size: cover;
@@ -68,14 +68,16 @@ export default function Tomatopedia() {
                 <Sidebar />
                 <Topbar />
                 <Wrapper>
-                    <Switch>
-                        {routes.map(({ path, Component }, i) => (
-                            <Route path={path} key={i}>
-                                {Component}
-                            </Route>
-                        ))}
-                        <Redirect to="/" />
-                    </Switch>
+                    <Scrollbar>
+                        <Switch>
+                            {routes.map(({ path, Component }, i) => (
+                                <Route path={path} key={i}>
+                                    {Component}
+                                </Route>
+                            ))}
+                            <Redirect to="/" />
+                        </Switch>
+                    </Scrollbar>
                 </Wrapper>
             </Blue>
         </Router>

@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import RSC from "react-scrollbars-custom";
+import Scrollbar from "react-scrollbars-custom";
 import LocalizedStrings from "react-localization";
 
 // LOCAL
@@ -341,9 +341,8 @@ const TankRankings = ({ userID, hofData }) => (
             <span style={{ fontSize: "1rem" }}>60 DAYS | MINIMUM 25 BATTLES | VEHICLES TIER 6+</span>
         </TanksTitle>
         <TanksContainer>
-            <RSC
-                id="RSC Hall of Fame"
-                noScrollY={true}
+            <Scrollbar
+                noScrollY
                 trackXProps={{
                     renderer: (props) => {
                         props.style.background = "rgba(100, 100, 120, 0.5)";
@@ -424,7 +423,7 @@ const TankRankings = ({ userID, hofData }) => (
                         </Box>
                     ))}
                 </Tanks>
-            </RSC>
+            </Scrollbar>
         </TanksContainer>
     </>
 );

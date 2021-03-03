@@ -1,26 +1,14 @@
 // NPM
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import styled from "styled-components";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import LocalizedStrings from "react-localization";
 
-import SmallSelectQuery from "./smallSelect";
-
-const Styles = styled.div`
-    .select {
-        display: none;
-    }
-
-    @media screen and (max-width: 1000px) {
-        .select {
-            display: block;
-        }
-    }
-`;
+// LOCAL
+import MobileSelect from "./mobileSelect";
 
 const strings = new LocalizedStrings({
     en: {
@@ -60,7 +48,7 @@ const strings = new LocalizedStrings({
     },
 });
 
-export default function SmallSearchBar(props) {
+function SearchBar({ setName, server, setServer, setMode, mode, onSubmit }) {
     const useStyles = makeStyles((t) => ({
         root: {
             padding: "2px 4px",
@@ -85,27 +73,21 @@ export default function SmallSearchBar(props) {
 
     const classes = useStyles();
     return (
-        <Paper elevation={0} className={classes.root}>
-            <InputBase
-                className={classes.input}
-                placeholder={strings.placeholder}
-                inputProps={{ "aria-label": strings.ariaLabel }}
-                onChange={(e) => props.setName(e.target.value)}
-            />
-            <Styles>
-                <div className="select">
-                    <SmallSelectQuery
-                        setServer={props.setServer}
-                        server={props.server}
-                        setMode={props.setMode}
-                        mode={props.mode}
-                    />
-                </div>
-            </Styles>
-
-            <IconButton type="submit" className={classes.iconButton} aria-label={strings.searchAriaLabel}>
-                <SearchIcon />
-            </IconButton>
-        </Paper>
+        <form onSubmit={onSubmit}>
+            <Paper elevation={0} className={classes.root}>
+                <InputBase
+                    className={classes.input}
+                    placeholder={strings.placeholder}
+                    inputProps={{ "aria-label": strings.ariaLabel }}
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <MobileSelect setServer={setServer} server={server} setMode={setMode} mode={mode} />
+                <IconButton type="submit" className={classes.iconButton} aria-label={strings.searchAriaLabel}>
+                    <SearchIcon />
+                </IconButton>
+            </Paper>
+        </form>
     );
 }
+
+export default SearchBar;
