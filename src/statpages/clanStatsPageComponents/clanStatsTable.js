@@ -149,6 +149,7 @@ export default function ClanStatsTable({ data }) {
             <FiltersContainer>
                 <div style={{ marginBottom: "-10px" }}>
                     <GlobalFilter
+                        defaultType={"players"}
                         preGlobalFilteredRows={preGlobalFilteredRows}
                         globalFilter={state.globalFilter}
                         setGlobalFilter={setGlobalFilter}

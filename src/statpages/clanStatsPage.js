@@ -9,6 +9,7 @@ import { serverConv } from "Data/conversions";
 import "CSS/style.css";
 import "CSS/innerpage.css";
 import { Loader } from "Components";
+import ClanTopStats from "./clanStatsPageComponents/clanTopStats";
 import ClanStatsTable from "./clanStatsPageComponents/clanStatsTable";
 
 const trackingId = process.env.REACT_APP_GA;
@@ -43,8 +44,6 @@ export default function ClanStatsPage() {
         const windowUrl = window.location.pathname;
         const urlParams = windowUrl.substring(12).split("/");
         const [ server, clan ] = urlParams;
-        console.log(serverConv[server], clan)
-
         ReactGA.initialize(trackingId);
         ReactGA.pageview(`/clan-stats/${server}`);
         fetchData(server, clan);
@@ -52,7 +51,22 @@ export default function ClanStatsPage() {
 
 
     let clanPage = <Loader top={20} bottom={50} />;
-    if (clanData) clanPage = <Container><ClanStatsTable data={clanData.members}/></Container>;
+    if (clanData) clanPage = (
+        <Container>
+            <ClanTopStats
+                image={clanData.emblems.x195.portal}
+                tag={clanData.tag}
+                name={clanData.name}
+                motto={clanData.motto}
+                clanColor={clanData.color}
+                overallWN8={clanData.overallWN8}
+                overallWinrate={clanData.overallWinrate}
+                recentWN8={clanData.recentWN8}
+                recentWinrate={clanData.recentWinrate}
+            />
+            <ClanStatsTable data={clanData.members}/>
+        </Container>
+    );
 
     return clanPage;
 }

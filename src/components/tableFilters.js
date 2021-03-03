@@ -36,6 +36,7 @@ const { formatString, ...strings } = new LocalizedStrings({
         prem: "PREM",
         regular: "REGULAR",
         searchTanks: "Search {0} tanks",
+        searchPlayers: "Search {0} players",
         battles: "Battles",
         min: "Min",
         to: "to",
@@ -46,6 +47,7 @@ const { formatString, ...strings } = new LocalizedStrings({
         prem: "PRÉMIOVÉ",
         regular: "STROMOVÉ",
         searchTanks: "Vyhledávat {0} tanky",
+        searchPlayers: "Vyhledávat {0} hráči",
         min: "Min",
         to: "do",
         max: "Max",
@@ -55,6 +57,7 @@ const { formatString, ...strings } = new LocalizedStrings({
         prem: "PREM",
         regular: "REGULAR",
         searchTanks: "Buscar {0} tanques",
+        searchPlayers: "Buscar {0} jugadores",
         battles: "Batallas",
         min: "Mínimo",
         to: "a",
@@ -65,6 +68,7 @@ const { formatString, ...strings } = new LocalizedStrings({
         prem: "PREM",
         regular: "NORMAL",
         searchTanks: "Chercher {0} chars",
+        searchPlayers: "Chercher {0} joueurs",
         battles: "Batailles",
         min: "Min",
         to: "à",
@@ -75,6 +79,7 @@ const { formatString, ...strings } = new LocalizedStrings({
         prem: "PREM",
         regular: "NORMAL",
         searchTanks: "{0} tank arasında ara",
+        searchPlayers: "{0} oyuncu arasında ara",
         battles: "Savaşlar",
         min: "En Az",
         to: "->",
@@ -85,6 +90,7 @@ const { formatString, ...strings } = new LocalizedStrings({
         prem: "Premium",
         regular: "Zwykłe",
         searchTanks: "Przeszukaj {0} czołgów",
+        searchPlayers: "Przeszukaj {0} gracze",
         battles: "Bitwy",
         min: "Min",
         to: "do",
@@ -95,6 +101,7 @@ const { formatString, ...strings } = new LocalizedStrings({
         prem: "ПРЕМ",
         regular: "ОБЫЧНЫЕ",
         searchTanks: "Поиск {0} танков",
+        searchPlayers: "Поиск {0} игроки",
         min: "Минимум",
         to: "до",
         max: "Максимум",
@@ -244,7 +251,7 @@ export const MoEFilter = makeButtonFilter("tank marks of excellence filter", MoE
     </div>
 ));
 
-export const GlobalFilter = ({ preGlobalFilteredRows, globalFilter, setGlobalFilter }) => {
+export const GlobalFilter = ({ defaultType, preGlobalFilteredRows, globalFilter, setGlobalFilter }) => {
     const count = preGlobalFilteredRows.length;
     const [value, setValue] = React.useState(globalFilter);
     const onChange = useAsyncDebounce((value) => {
@@ -259,7 +266,7 @@ export const GlobalFilter = ({ preGlobalFilteredRows, globalFilter, setGlobalFil
                     setValue(e.target.value);
                     onChange(e.target.value);
                 }}
-                placeholder={formatString(strings.searchTanks, count)}
+                placeholder={formatString(defaultType === "players" ? strings.searchPlayers : strings.searchTanks, count)}
                 style={{
                     fontSize: "1rem",
                     padding: "0px 15px",
