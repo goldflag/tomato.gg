@@ -8,6 +8,7 @@ import Search from "./search";
 import About from "./about";
 import TankStatsPage from "./statpages/recentTankStats";
 import StatsPage from "./statpages/statsPage";
+import ClanStatsPage from "./statpages/clanStatsPage";
 import ServerStatsPage from "./statpages/serverStatsPage";
 import TankPage from "./statpages/tankPage";
 import StatsReference from "./statpages/statsReference";
@@ -20,6 +21,7 @@ const strings = new LocalizedStrings({
     en: {
         home: "Home",
         playerStats: "Player Stats",
+        clanStats: "Player Stats",
         tankStats: "Tank Stats",
         leaderboards: "Leaderboards",
         moeReqs: "MoE Reqs",
@@ -33,6 +35,7 @@ const strings = new LocalizedStrings({
     cs: {
         home: "Domů",
         playerStats: "Hráčské statistiky",
+        clanStats: "Player Stats",
         tankStats: "Statistiky vozidel",
         leaderboards: "Žebříčky",
         moeReqs: "Nároky na znaky",
@@ -46,6 +49,7 @@ const strings = new LocalizedStrings({
     es: {
         home: "Página principal",
         playerStats: "Datos del jugador",
+        clanStats: "Player Stats",
         tankStats: "Datos de tanques",
         leaderboards: "Clasificación",
         moeReqs: "Requisitos de MoE",
@@ -59,6 +63,7 @@ const strings = new LocalizedStrings({
     fr: {
         home: "Accueil",
         playerStats: "Stats Joueur",
+        clanStats: "Player Stats",
         tankStats: "Stats Chars",
         leaderboards: "Classement",
         moeReqs: "Obtention Marques",
@@ -72,6 +77,7 @@ const strings = new LocalizedStrings({
     pl: {
         home: "Strona Główna",
         playerStats: "Staty Graczy",
+        clanStats: "Player Stats",
         tankStats: "Staty Czołów",
         leaderboards: "Rankingi",
         moeReqs: "Wymagania o. biegłości",
@@ -85,6 +91,7 @@ const strings = new LocalizedStrings({
     tr: {
         home: "Anasayfa",
         playerStats: "Oyuncu İst.",
+        clanStats: "Player Stats",
         tankStats: "Tank İst.",
         leaderboards: "En İyiler",
         moeReqs: "MoE Değerleri",
@@ -98,6 +105,7 @@ const strings = new LocalizedStrings({
     zh: {
         home: "主頁",
         playerStats: "玩家數據統計",
+        clanStats: "Player Stats",
         tankStats: "戰車數據統計",
         leaderboards: "排行榜",
         moeReqs: "卓越水深",
@@ -123,6 +131,14 @@ const playerStats = {
     path: "/stats/:server/:user",
     Icon: <></>,
     Component: <StatsPage />,
+    isNew: false,
+};
+
+const clanStats = {
+    title: strings.clanStats,
+    path: "/clan-stats/:server/:clan",
+    Icon: <></>,
+    Component: <ClanStatsPage />,
     isNew: false,
 };
 
@@ -209,6 +225,6 @@ const serverStats = {
     isNew: false,
 };
 
-export const routes = [playerStats, tankStats, tank, leaderboards, moe, mastery, wn8, statsReference, about, home];
+export const routes = [playerStats, clanStats, tankStats, tank, leaderboards, moe, mastery, wn8, statsReference, about, home];
 export const menuRoutes = [home, tankStats, leaderboards, moe, mastery, wn8, statsReference, about];
 export const mobileMenuRoutes = [home, tankStats, leaderboards, moe, mastery, wn8, about];
