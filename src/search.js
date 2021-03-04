@@ -12,41 +12,39 @@ import { serverConv } from "Data/conversions";
 const APIKey = process.env.REACT_APP_API_KEY;
 
 export default withRouter(function Search(props) {
-    const { server, toggleServer } = useContext(ServerContext);
-    const { searchmode, toggleSearchmode } = useContext(SearchmodeContext);
+    const { server, setServer } = useContext(ServerContext);
+    const { mode, setMode } = useContext(SearchmodeContext);
 
     const { addToHistory } = useContext(SearchHistoryContext);
     const [name, setName] = useState("");
-    const [mode, setMode] = useState("Player");
-
-    useEffect(() => {}, []);
 
     const searchId = async (e) => {
         e.preventDefault();
         const playerUrl = `https://api.worldoftanks.${server}/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`;
         const clanUrl = `https://api.worldoftanks.${server}/wot/clans/list/?application_id=${APIKey}&search=${name}`;
 
-        if (searchmode === "player") {
+        if (mode === "player") {
             fetch(playerUrl)
-            .then((res) => res.json())
-            .then((data) => (data.status === "error" || data.meta.count === 0 ? "FAIL" : data.data[0].account_id))
-            .then((playerID) => {
-                if (playerID !== "FAIL") {
-                    addToHistory(name, playerID, server);
-                }
-                props.history.push(`/stats/${serverConv[server]}/${name}=${playerID}`);
-            })
-            .catch(console.error);
-        }
-        else {
+                .then((res) => res.json())
+                .then((data) => (data.status === "error" || data.meta.count === 0 ? "FAIL" : data.data[0].account_id))
+                .then((playerID) => {
+                    if (playerID !== "FAIL") {
+                        addToHistory(name, playerID, server, false);
+                    }
+                    props.history.push(`/stats/${serverConv[server]}/${name}=${playerID}`);
+                })
+                .catch(console.error);
+        } else {
             fetch(clanUrl)
-            .then((res) => res.json())
-            .then((data) => (data.status === "error" || data.meta.count === 0 ? "FAIL" : data.data[0].clan_id))
-            .then((clanID) => {
-                console.log(clanID)
-                props.history.push(`/clan-stats/${serverConv[server]}/${clanID}`);
-            })
-            .catch(console.error);
+                .then((res) => res.json())
+                .then((data) => (data.status === "error" || data.meta.count === 0 ? "FAIL" : data.data[0].clan_id))
+                .then((clanID) => {
+                    if (clanID !== "FAIL") {
+                        addToHistory(name, clanID, server, true);
+                    }
+                    props.history.push(`/clan-stats/${serverConv[server]}/${clanID}`);
+                })
+                .catch(console.error);
         }
     };
 
@@ -66,12 +64,12 @@ export default withRouter(function Search(props) {
                     />
                     <form onSubmit={searchId}>
                         <SearchBar
+                            name={name}
                             setName={setName}
-                            setServer={toggleServer}
+                            setServer={setServer}
                             server={server}
                             setMode={setMode}
                             mode={mode}
-
                         />
                     </form>
                 </div>

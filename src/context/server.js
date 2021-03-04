@@ -2,19 +2,19 @@ import React, { useState } from "react";
 
 const initialState = {
     server: "com",
-    toggleServer: () => {},
+    setServer: () => {},
 };
 const ServerContext = React.createContext(initialState);
 
 function ServerProvider({ children }) {
-    const [server, setServer] = useState(localStorage.getItem("server") || "com");
+    const [server, setServerState] = useState(localStorage.getItem("server") || "com");
 
-    const toggleServer = (input) => {
+    const setServer = (input) => {
         localStorage.setItem("server", input);
-        setServer(input);
+        setServerState(input);
     };
 
-    return <ServerContext.Provider value={{ server, toggleServer }}>{children}</ServerContext.Provider>;
+    return <ServerContext.Provider value={{ server, setServer }}>{children}</ServerContext.Provider>;
 }
 
 export { ServerProvider, ServerContext };

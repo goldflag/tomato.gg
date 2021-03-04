@@ -14,6 +14,7 @@ import SelectQuery from "./select";
 const strings = new LocalizedStrings({
     en: {
         placeholder: "Enter a Username (e.g. Goldflag)",
+        clanPlaceholder: "Enter a Clan name",
         ariaLabel: "search for a player",
         searchAriaLabel: "search",
     },
@@ -49,46 +50,47 @@ const strings = new LocalizedStrings({
     },
 });
 
-export default function SearchBar(props) {
-    const useStyles = makeStyles((t) => ({
-        root: {
-            padding: "2px 4px",
-            display: "flex",
-            alignItems: "center",
-            width: "100%",
-            height: "50px",
-            borderRadius: 0,
-            backgroundColor: "rgba(40, 40, 60, 0.8)",
-        },
-        input: {
-            marginLeft: t.spacing(1),
-            flex: 1,
-            fontSize: 16,
-            color: "white",
-        },
-        iconButton: {
-            padding: 10,
-            color: "white",
-        },
-        divider: {
-            height: 40,
-            margin: 10,
-            color: "white",
-        },
-    }));
+const useStyles = makeStyles((t) => ({
+    root: {
+        padding: "2px 4px",
+        display: "flex",
+        alignItems: "center",
+        width: "100%",
+        height: "50px",
+        borderRadius: 0,
+        backgroundColor: "rgba(40, 40, 60, 0.8)",
+    },
+    input: {
+        marginLeft: t.spacing(1),
+        flex: 1,
+        fontSize: 16,
+        color: "white",
+    },
+    iconButton: {
+        padding: 10,
+        color: "white",
+    },
+    divider: {
+        height: 40,
+        margin: 10,
+        color: "white",
+    },
+}));
 
+export default function SearchBar({ name, setName, server, setServer, mode, setMode }) {
     const classes = useStyles();
 
     return (
         <Paper className={classes.root}>
             <InputBase
                 className={classes.input}
-                placeholder={strings.placeholder}
+                placeholder={mode === "player" ? strings.placeholder : strings.clanPlaceholder}
                 inputProps={{ "aria-label": strings.ariaLabel }}
-                onChange={(e) => props.setName(e.target.value)}
+                value={mode === "player" ? name : name.toUpperCase()}
+                onChange={(e) => setName(e.target.value)}
             />
             <Divider className={classes.divider} orientation="vertical" />
-            <SelectQuery setServer={props.setServer} server={props.server} setMode={props.setMode} mode={props.mode} />
+            <SelectQuery setServer={setServer} server={server} setMode={setMode} mode={mode} />
             <IconButton type="submit" className={classes.iconButton} aria-label={strings.searchAriaLabel}>
                 <SearchIcon />
             </IconButton>

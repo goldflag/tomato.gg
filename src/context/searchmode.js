@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 
 const initialState = {
-    searchmode: "player",
-    toggleSearchmode: () => {},
+    mode: "player",
+    setMode: () => {},
 };
 const SearchmodeContext = React.createContext(initialState);
 
 function SearchmodeProvider({ children }) {
-    const [searchmode, setSearchmode] = useState(localStorage.getItem("searchmode") || "player");
+    const [mode, setSearchmode] = useState(localStorage.getItem("searchmode") || "player");
 
-    const toggleSearchmode = (input) => {
+    const setMode = (input) => {
         localStorage.setItem("searchmode", input);
         setSearchmode(input);
     };
 
-    return <SearchmodeContext.Provider value={{ searchmode, toggleSearchmode }}>{children}</SearchmodeContext.Provider>;
+    return <SearchmodeContext.Provider value={{ mode, setMode }}>{children}</SearchmodeContext.Provider>;
 }
 
 export { SearchmodeProvider, SearchmodeContext };

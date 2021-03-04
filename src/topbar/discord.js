@@ -7,7 +7,6 @@ import DiscordLogo from "Assets/Discord.svg";
 
 const Wrapper = styled.div`
     margin-left: 0.5rem;
-    margin-right: 0.5rem;
     margin-bottom: -5px;
     &:hover {
         opacity: 0.5;

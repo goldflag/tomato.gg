@@ -3,14 +3,14 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
+import LocalizedStrings from "react-localization";
 
 // LOCAL
-import { strings } from "./index";
 import { ServerContext } from "Context";
 import { serverConv } from "Data/conversions";
 
 const ButtonWrapper = styled.div`
-    padding: 0px 10px 0px 10px;
+    margin-left: 0.5rem;
 
     @media screen and (max-width: 1000px) {
         display: none;
@@ -31,15 +31,39 @@ const SelectButton = styled(Button)`
     }
 `;
 
+const strings = new LocalizedStrings({
+    en: {
+        server: "select default server",
+    },
+    cs: {
+        server: "vyberte výchozí server",
+    },
+    es: {
+        server: "seleccionar servidor predeterminado",
+    },
+    fr: {
+        server: "Sélectionnez un serveur par défaut",
+    },
+    tr: {
+        server: "Varsayılan sunucuyu seç",
+    },
+    pl: {
+        server: "Wybierz domyślny serwer",
+    },
+    ru: {
+        server: "Выберите свой сервер",
+    },
+});
+
 const servers = ["com", "eu", "asia"];
 
 const ServerSelectButtons = () => {
-    const { server, toggleServer } = useContext(ServerContext);
+    const { server, setServer } = useContext(ServerContext);
     return (
         <ButtonWrapper>
             <ButtonGroup variant="text" aria-label={strings.server}>
                 {servers.map((id, i) => (
-                    <SelectButton key={i} selected={server === id} onClick={() => toggleServer(id)}>
+                    <SelectButton key={i} selected={server === id} onClick={() => setServer(id)}>
                         {serverConv[id]}
                     </SelectButton>
                 ))}

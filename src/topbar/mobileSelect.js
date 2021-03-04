@@ -5,9 +5,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import styled from "styled-components";
-
-// LOCAL
-import { ServerContext } from "Context";
+import LocalizedStrings from "react-localization";
 
 const SmallSelectWrapper = styled.div`
     display: none;
@@ -16,9 +14,14 @@ const SmallSelectWrapper = styled.div`
     }
 `;
 
-function MobileSelect(props) {
-    const { server } = React.useContext(ServerContext);
+const strings = new LocalizedStrings({
+    en: {
+        player: "PLAYER",
+        clan: "CLAN",
+    },
+});
 
+function MobileSelect({ server, setServer, mode, setMode }) {
     const useStyles = makeStyles((t) => ({
         formControl: {
             marginLeft: t.spacing(0),
@@ -43,13 +46,27 @@ function MobileSelect(props) {
                         disableScrollLock: true,
                     }}
                     value={server}
-                    onChange={(e) => props.setServer(e.target.value)}
+                    onChange={(e) => setServer(e.target.value)}
                     displayEmpty
                     className={classes.selectEmpty}
                 >
                     <MenuItem value="com">NA</MenuItem>
                     <MenuItem value="eu">EU</MenuItem>
                     <MenuItem value="asia">ASIA</MenuItem>
+                </Select>
+            </FormControl>
+            <FormControl className={classes.formControl}>
+                <Select
+                    MenuProps={{
+                        disableScrollLock: true,
+                    }}
+                    value={mode}
+                    onChange={(e) => setMode(e.target.value)}
+                    displayEmpty
+                    className={classes.selectEmpty}
+                >
+                    <MenuItem value="player">{strings.player}</MenuItem>
+                    <MenuItem value="clan">{strings.clan}</MenuItem>
                 </Select>
             </FormControl>
         </SmallSelectWrapper>

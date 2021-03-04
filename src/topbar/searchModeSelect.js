@@ -9,8 +9,7 @@ import { strings } from "./index";
 import { SearchmodeContext } from "Context";
 
 const ButtonWrapper = styled.div`
-    padding: 0px 10px 0px 10px;
-
+    margin-left: 0.5rem;
     @media screen and (max-width: 1000px) {
         display: none;
     }
@@ -33,12 +32,12 @@ const SelectButton = styled(Button)`
 const modes = ["player", "clan"];
 
 const ServerSelectButtons = () => {
-    const { searchmode, toggleSearchmode } = useContext(SearchmodeContext);
+    const { mode, setMode } = useContext(SearchmodeContext);
     return (
         <ButtonWrapper>
             <ButtonGroup variant="text">
                 {modes.map((id, i) => (
-                    <SelectButton key={i} selected={searchmode === id} onClick={() => toggleSearchmode(id)}>
+                    <SelectButton key={i} selected={mode === id} onClick={() => setMode(id)}>
                         {id}
                     </SelectButton>
                 ))}

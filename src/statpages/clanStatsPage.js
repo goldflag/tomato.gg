@@ -1,6 +1,6 @@
 // NPM
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
 import ReactGA from "react-ga";
 
@@ -27,10 +27,13 @@ const Container = styled.div`
 `;
 
 export default function ClanStatsPage() {
+    const match = useRouteMatch();
+    const { server, clan } = match.params;
 
-    const [ clanData, setClanData ] = useState();
+    const [clanData, setClanData] = useState("loading");
 
     async function fetchData(server, clanID) {
+        setClanData("loading");
         const clanRes = await fetch(`${backend}/api/clan/${serverConv[server]}/${clanID}`);
         const clanJSON = await clanRes.json();
         clanJSON.members.forEach((player) => {
@@ -43,30 +46,30 @@ export default function ClanStatsPage() {
     useEffect(() => {
         const windowUrl = window.location.pathname;
         const urlParams = windowUrl.substring(12).split("/");
-        const [ server, clan ] = urlParams;
+        const [server, clan] = urlParams;
         ReactGA.initialize(trackingId);
         ReactGA.pageview(`/clan-stats/${server}`);
         fetchData(server, clan);
-    }, []);
-
+    }, [server, clan]);
 
     let clanPage = <Loader top={20} bottom={50} />;
-    if (clanData) clanPage = (
-        <Container>
-            <ClanTopStats
-                image={clanData.emblems.x195.portal}
-                tag={clanData.tag}
-                name={clanData.name}
-                motto={clanData.motto}
-                clanColor={clanData.color}
-                overallWN8={clanData.overallWN8}
-                overallWinrate={clanData.overallWinrate}
-                recentWN8={clanData.recentWN8}
-                recentWinrate={clanData.recentWinrate}
-            />
-            <ClanStatsTable data={clanData.members}/>
-        </Container>
-    );
+    if (clanData !== "loading")
+        clanPage = (
+            <Container>
+                <ClanTopStats
+                    image={clanData.emblems.x195.portal}
+                    tag={clanData.tag}
+                    name={clanData.name}
+                    motto={clanData.motto}
+                    clanColor={clanData.color}
+                    overallWN8={clanData.overallWN8}
+                    overallWinrate={clanData.overallWinrate}
+                    recentWN8={clanData.recentWN8}
+                    recentWinrate={clanData.recentWinrate}
+                />
+                <ClanStatsTable data={clanData.members} />
+            </Container>
+        );
 
     return clanPage;
 }

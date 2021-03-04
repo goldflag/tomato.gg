@@ -44,68 +44,87 @@ const strings = new LocalizedStrings({
 
 const HistoryWrapper = styled.div`
     flex: 1;
+    align-self: flex-start;
+
+    overflow: hidden;
+    max-height: 32px;
+    margin-top: 1rem;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
+
+    background-color: #4d5895;
     @media screen and (max-width: 1000px) {
         display: none;
     }
 `;
 
+const ItemContainer = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: calc(100% - 32px);
+`;
+
 const SearchItem = styled(Chip)`
+    margin: 0rem 0.35rem 0.75rem !important;
     color: white !important;
-    background-color: #214287 !important;
+    background-color: #252e69 !important;
     border-width: 2px !important;
-    // border-color: #881153 !important;
-    border-color: #183061 !important;
-    margin-left: 0.75rem !important;
+    border-color: #606ebb !important;
+    transition border-color 50ms linear !important;
+    &:hover {
+        border-color: rgb(140, 150, 210) !important;
+    }
     svg {
-        color: rgba(255, 255, 255, 0.86);
+        color: #7485E1;
     }
     svg:hover {
-        color: white;
+        color: rgb(140, 150, 210);
     }
+`;
+
+const ClearIcon = styled(IconButton)`
+    color: white !important;
+    display: inline-block;
 `;
 
 const SearchHistory = () => {
     const history = useHistory();
     const { history: searchHistory, addToHistory, removeFromHistory, clearHistory } = useContext(SearchHistoryContext);
-    const redirectToPlayerStatsPage = (playerName, playerID, playerServer) => {
-        addToHistory(playerName, playerID, playerServer);
-        history.push(`/stats/${serverConv[playerServer]}/${playerName}=${playerID}`);
+    const redirectToStatsPage = (name, id, server, isClan) => {
+        addToHistory(name, id, server, isClan);
+        if (isClan) history.push(`/clan-stats/${serverConv[server]}/${id}`);
+        else history.push(`/stats/${serverConv[server]}/${name}=${id}`);
     };
     return (
         <HistoryWrapper>
-            <FlipMove>
-                {searchHistory
-                    .slice(0, Math.min(history.length, 4)) // No more than 4 recent searches TODO: Make this smarter.
-                    .map(({ name, id, server }) => (
-                        <SearchItem
-                            key={name}
-                            variant="outlined"
-                            avatar={
-                                <Avatar
-                                    alt={server}
-                                    src={require(`Assets/flagIcons/${server}mini.png`)}
-                                    style={{ maxHeight: "21px" }}
-                                />
-                            }
-                            onClick={() => redirectToPlayerStatsPage(name, id, server)}
-                            onDelete={() => removeFromHistory(id)}
-                            label={name}
-                        />
-                    ))}
-                {searchHistory.length ? (
-                    <IconButton
-                        aria-label={strings.clearHistory}
-                        size="small"
-                        onClick={clearHistory}
-                        style={{ color: "white", marginLeft: ".25rem" }}
-                    >
-                        <DeleteOutline />
-                    </IconButton>
-                ) : null}
-            </FlipMove>
+            {searchHistory.length ? (
+                <ClearIcon aria-label={strings.clearHistory} size="small" onClick={clearHistory}>
+                    <DeleteOutline />
+                </ClearIcon>
+            ) : null}
+            <ItemContainer>
+                <FlipMove>
+                    {searchHistory
+                        .slice(0, Math.min(history.length)) // No more than 4 recent searches TODO: Make this smarter.
+                        .map(({ name, id, server, isClan }) => (
+                            <SearchItem
+                                key={name}
+                                variant="outlined"
+                                avatar={
+                                    <Avatar
+                                        alt={server}
+                                        src={require(`Assets/flagIcons/${server}mini.png`)}
+                                        style={{ maxHeight: "21px" }}
+                                    />
+                                }
+                                onClick={() => redirectToStatsPage(name, id, server, isClan)}
+                                onDelete={() => removeFromHistory(id)}
+                                label={isClan ? name.toUpperCase() : name}
+                            />
+                        ))}
+                </FlipMove>
+            </ItemContainer>
         </HistoryWrapper>
     );
 };
