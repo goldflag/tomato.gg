@@ -62,7 +62,6 @@ const ItemContainer = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    max-width: calc(100% - 32px);
 `;
 
 const SearchItem = styled(Chip)`
@@ -71,7 +70,6 @@ const SearchItem = styled(Chip)`
     background-color: #252e69 !important;
     border-width: 2px !important;
     border-color: #606ebb !important;
-    transition border-color 50ms linear !important;
     &:hover {
         border-color: rgb(140, 150, 210) !important;
     }
@@ -105,24 +103,22 @@ const SearchHistory = () => {
             ) : null}
             <ItemContainer>
                 <FlipMove>
-                    {searchHistory
-                        .slice(0, Math.min(history.length)) // No more than 4 recent searches TODO: Make this smarter.
-                        .map(({ name, id, server, isClan }) => (
-                            <SearchItem
-                                key={name}
-                                variant="outlined"
-                                avatar={
-                                    <Avatar
-                                        alt={server}
-                                        src={require(`Assets/flagIcons/${server}mini.png`)}
-                                        style={{ maxHeight: "21px" }}
-                                    />
-                                }
-                                onClick={() => redirectToStatsPage(name, id, server, isClan)}
-                                onDelete={() => removeFromHistory(id)}
-                                label={isClan ? name.toUpperCase() : name}
-                            />
-                        ))}
+                    {searchHistory.map(({ name, id, server, isClan }) => (
+                        <SearchItem
+                            key={name}
+                            variant="outlined"
+                            avatar={
+                                <Avatar
+                                    alt={server}
+                                    src={require(`Assets/flagIcons/${server}mini.png`)}
+                                    style={{ maxHeight: "21px" }}
+                                />
+                            }
+                            onClick={() => redirectToStatsPage(name, id, server, isClan)}
+                            onDelete={() => removeFromHistory(id)}
+                            label={isClan ? name.toUpperCase() : name}
+                        />
+                    ))}
                 </FlipMove>
             </ItemContainer>
         </HistoryWrapper>

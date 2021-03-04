@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 
 // LOCAL
-import { strings } from "./index";
 import { SearchmodeContext } from "Context";
 
 const ButtonWrapper = styled.div`
