@@ -14,7 +14,7 @@ function SearchmodeProvider({ children }) {
         setSearchmode(input);
     };
 
-    return <SearchmodeContext.Provider value={{ background: searchmode, toggleSearchmode }}>{children}</SearchmodeContext.Provider>;
+    return <SearchmodeContext.Provider value={{ searchmode, toggleSearchmode }}>{children}</SearchmodeContext.Provider>;
 }
 
 export { SearchmodeProvider, SearchmodeContext };

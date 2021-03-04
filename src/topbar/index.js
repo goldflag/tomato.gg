@@ -9,6 +9,7 @@ import { ServerContext, SearchHistoryContext } from "Context";
 import { serverConv } from "Data/conversions";
 import MobileMenu from "./mobileMenu";
 import SearchHistory from "./searchHistory";
+import SearchmodeSelectButtons from "./searchModeSelect";
 import ServerSelectButtons from "./serverSelect";
 import SearchBar from "./searchBar";
 import Discord from "./discord";
@@ -77,6 +78,7 @@ export default withRouter(function Topbar(props) {
         <StyledTopbar>
             <MobileMenu />
             <SearchHistory />
+            <SearchmodeSelectButtons />
             <ServerSelectButtons />
             <SearchBar
                 onSubmit={searchId}
