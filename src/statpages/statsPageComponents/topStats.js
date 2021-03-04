@@ -133,6 +133,15 @@ const { formatString, ...strings } = new LocalizedStrings({
         wgRating: "WG Rating",
         battles: "Savaşlar",
     },
+    zh: {
+        created: "建立帳號 {0}",
+        overallWN8: "整體 WN8",
+        overallWR: "整體勝率",
+        recentWN8: "近期 WN8",
+        recentWR: "近期勝率",
+        wgRating: "WG 評價",
+        battles: "戰鬥數",
+    },
 });
 
 const clanPositions = new LocalizedStrings({
@@ -200,6 +209,19 @@ const clanPositions = new LocalizedStrings({
         private: "Er",
         recruit: "Acemi",
         reservist: "İhtiyat",
+    },
+    zh: {
+        commander: "指揮官",
+        executive_officer: "執行官",
+        personnel_officer: "人事官",
+        combat_officer: "作戰官",
+        intelligence_officer: "情報官",
+        quartermaster: "軍需官",
+        recruitment_officer: "徵募官",
+        junior_officer: "下級軍官",
+        private: "士兵",
+        recruit: "新兵",
+        reservist: "後備軍人",
     },
 });
 

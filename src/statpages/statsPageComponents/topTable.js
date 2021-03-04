@@ -113,6 +113,16 @@ const strings = new LocalizedStrings({
         games100: "100 SAVAŞTA",
         games1000: "1000 SAVAŞTA",
     },
+    zh: {
+        overall: "整體",
+        hrs24: "24 小時",
+        days3: "3 天",
+        days7: "7 天",
+        days30: "30 天",
+        days60: "60 天",
+        games100: "100 場",
+        games1000: "1000 場",
+    },
 });
 
 export default function TopTable({ data }) {

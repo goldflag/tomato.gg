@@ -91,6 +91,14 @@ const { formatString, ...strings } = new LocalizedStrings({
         top500: "500 nejlepších hráčů v",
         past60min25: "POSLEDNÍCH 60 DNÍ | MINIMÁLNĚ 25 BITEV",
     },
+    es: {
+        dpg: "DPG",
+        frags: "MUERTOS", // or frags
+        winrate: "RATIO DE VICTORIAS", // or winrate
+        tier: "NIVEL",
+        top500: "Los 500 Mejores Jugadores de",
+        past60min25: "ÚLTIMOS 60 DÍAS | MÍNIMO 25 BATALLAS",
+    },
     fr: {
         dpg: "DPG",
         frags: "TUÉS",

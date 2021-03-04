@@ -90,6 +90,8 @@ const strings = new LocalizedStrings({
         notAffiliated: "ve Wargaming.net ile bağlantılı değildir.",
     },
     zh: {
+        boomer: "切換為深色模式",
+        boomerAria: "切換背景顏色",
         support: "支持 Tomato.gg",
         donations: `Tomato.gg 完全依靠用戶們捐贈來運行。 如果您在網站上找到了價值，請考慮加入以幫助維護網站運作。`,
         kofi: "使用Ko-fi贊助",

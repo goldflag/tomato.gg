@@ -29,6 +29,12 @@ const { formatString, ...strings } = new LocalizedStrings({
         clickRow: "Kliknutím na řádek zobrazíte podrobné serverové žebříčky vozidla a jeho statistiky",
         error: "Omlouváme se, nedávné statistiky vozidla nelze načíst.",
     },
+    es: {
+        title: "{0} Estadísticas Recientes del Tanque",
+        clickRow: `Haga clic en una fila para ver el rendimiento y las tablas de 
+        clasificación detallados de los tanques en todo el servidor.`,
+        error: "Lo siento, las estadísticas recientes del tanque no pudieron cargar.",
+    },
     fr: {
         title: "Stats Récentes Chars {0}",
         clickRow: `Cliquez sur une ligne pour voir les performances détaillées des joueurs sur 
