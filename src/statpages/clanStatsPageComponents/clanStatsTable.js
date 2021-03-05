@@ -34,23 +34,28 @@ export default function ClanStatsTable({ data }) {
                 disableFilters: true,
             },
             {
-                Header: "Recent Battles",
+                Header: "Joined",
+                accessor: "joined_at",
+                disableFilters: true,
+            },
+            {
+                Header: "60D Battles",
                 accessor: "recentBattles",
                 disableFilters: true,
             },
             {
-                Header: "Recent Tier",
+                Header: "60D Tier",
                 accessor: "recentAvgtier",
                 disableFilters: true,
             },
             {
-                Header: "Recent WN8",
+                Header: "60D WN8",
                 accessor: "recentWN8",
                 disableFilters: true,
             },
             {
                 Cell: ({ value }) => value === '-' ? value : `${value}%`,
-                Header: "Recent Winrate",
+                Header: "60D Winrate",
                 accessor: "recentWinrate",
                 disableFilters: true,
             },
@@ -68,6 +73,12 @@ export default function ClanStatsTable({ data }) {
                 Cell: ({ value }) => value === '-' ? value : `${value}%`,
                 Header: "Winrate",
                 accessor: "overallWinrate",
+                disableFilters: true,
+            },
+            {
+                Cell: ({ value }) => value === 0 ? `Today` : `${value} Days Ago`,
+                Header: "Last Game",
+                accessor: "last_played",
                 disableFilters: true,
             }
         ],

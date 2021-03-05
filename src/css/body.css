@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap");
 
+
 body {
     font-family: "Roboto";
     margin-left: 14rem;
@@ -7,6 +8,10 @@ body {
     position: relative;
     /* background-color: rgb(234, 238, 248);
     color: #333; */
+}
+
+p {
+    font-size: 1rem;
 }
 
 @media screen and (max-width: 1000px) {

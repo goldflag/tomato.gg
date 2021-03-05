@@ -60,14 +60,19 @@ export default function ClanStatsPage() {
                     image={clanData.emblems.x195.portal}
                     tag={clanData.tag}
                     name={clanData.name}
+                    created_at={clanData.created_at}
                     motto={clanData.motto}
                     clanColor={clanData.color}
+                    members_count={clanData.members_count}
                     overallWN8={clanData.overallWN8}
                     overallWinrate={clanData.overallWinrate}
                     recentWN8={clanData.recentWN8}
                     recentWinrate={clanData.recentWinrate}
+                    rankings={clanData.rankings}
+                    description={clanData.description_html}
+
                 />
-                <ClanStatsTable data={clanData.members} />
+                <ClanStatsTable data={clanData.members}/>
             </Container>
         );
 
