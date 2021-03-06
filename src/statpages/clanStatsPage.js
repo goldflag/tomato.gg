@@ -70,6 +70,9 @@ export default function ClanStatsPage() {
                     recentWinrate={clanData.recentWinrate}
                     rankings={clanData.rankings}
                     description={clanData.description_html}
+                    globalMap={clanData.globalMapHistory.statistics}
+                    strongholdX={clanData.strongholdHistory.battles_series_for_strongholds_statistics}
+                    skirmish={clanData.strongholdHistory.skirmish_statistics}
 
                 />
                 <ClanStatsTable data={clanData.members}/>
