@@ -225,22 +225,22 @@ export default function ClanTopStats({
                     </BottomBox>
                     <BottomBox>
                         <StatBoxLabel>Global Map WR</StatBoxLabel> 
-                        {(globalMap.wins_10_level*100/globalMap.battles_10_level).toFixed(2)}%
+                        {globalMap.battles_10_level > 0 ? (globalMap.wins_10_level*100/globalMap.battles_10_level).toFixed(2) + "%" : "-"}
                         <StatBoxLabel>{globalMap.wins_10_level}/{globalMap.battles_10_level}</StatBoxLabel>                 
                     </BottomBox>
                     <BottomBox>
                         <StatBoxLabel>SH X WR</StatBoxLabel> 
-                        {(strongholdX.win_10*100/strongholdX.total_10).toFixed(2)}%
+                        {skirmish.total_10 > 0 ? (skirmish.win_10*100/skirmish.total_10).toFixed(2) + "%" : "-"}
                         <StatBoxLabel>{strongholdX.win_10}/{strongholdX.total_10}</StatBoxLabel>                 
                     </BottomBox>
                     <BottomBox>
                         <StatBoxLabel>SH VIII WR</StatBoxLabel> 
-                        {(skirmish.win_8*100/skirmish.total_8).toFixed(2)}%
+                        {skirmish.total_8 > 0 ? (skirmish.win_8*100/skirmish.total_8).toFixed(2) + "%" : "-"}
                         <StatBoxLabel>{skirmish.win_8}/{skirmish.total_8}</StatBoxLabel>                 
                     </BottomBox>
                     <BottomBox>
                         <StatBoxLabel>SH VI WR</StatBoxLabel> 
-                        {(skirmish.win_6*100/skirmish.total_6).toFixed(2)}%
+                        {skirmish.total_6 > 0 ? (skirmish.win_6*100/skirmish.total_6).toFixed(2) + "%" : "-"}
                         <StatBoxLabel>{skirmish.win_6}/{skirmish.total_6}</StatBoxLabel>                 
                     </BottomBox>
                     <BottomBox>
@@ -249,17 +249,17 @@ export default function ClanTopStats({
                     </BottomBox>
                     <BottomBox>
                         <StatBoxLabel>28D SH X WR</StatBoxLabel> 
-                        {(strongholdX.win_10_in_28d*100/strongholdX.total_10_in_28d).toFixed(2)}%
+                        {strongholdX.total_10_in_28d > 0 ? (strongholdX.win_10_in_28d*100/strongholdX.total_10_in_28d).toFixed(2) + "%" : "-"}
                         <StatBoxLabel>{strongholdX.win_10_in_28d}/{strongholdX.total_10_in_28d}</StatBoxLabel>                 
                     </BottomBox>
                     <BottomBox>
                         <StatBoxLabel>28D SH VIII WR</StatBoxLabel> 
-                        {(skirmish.win_8_in_28d*100/skirmish.total_8_in_28d).toFixed(2)}%
+                        {skirmish.total_8_in_28d > 0 ? (skirmish.win_8_in_28d*100/skirmish.total_8_in_28d).toFixed(2) + "%" : "-"}
                         <StatBoxLabel>{skirmish.win_8_in_28d}/{skirmish.total_8_in_28d}</StatBoxLabel>                 
                     </BottomBox>
                     <BottomBox>
                         <StatBoxLabel>28D SH VI WR</StatBoxLabel> 
-                        {(skirmish.win_6_in_28d*100/skirmish.total_6_in_28d).toFixed(2)}%
+                        {skirmish.total_6_in_28d > 0 ? (skirmish.win_6_in_28d*100/skirmish.total_6_in_28d).toFixed(2) + "%" : "-"}
                         <StatBoxLabel>{skirmish.win_6_in_28d}/{skirmish.total_6_in_28d}</StatBoxLabel>                 
                     </BottomBox>
                 </BottomGrid>
