@@ -1,11 +1,14 @@
 // NPM
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import LocalizedStrings from "react-localization";
+import { Link } from "react-router-dom";
 
 // LOCAL
 import { WN8color, WRcolor, PRcolor, battlesColor } from "Functions/colors";
 import { Capital, clanPositions, commonStrings } from "Data/localizations";
+import { ServerContext } from "Context";
+import { serverConv } from "Data/conversions";
 
 const Root = styled.div`
     flex-grow: 1;
@@ -148,6 +151,8 @@ const { formatString, ...strings } = new LocalizedStrings({
 });
 
 export default function TopStats(props) {
+    const { server } = useContext(ServerContext);
+
     const date = new Date(props.accountCreationDate * 1000);
     const dateOptions = { year: "numeric", month: "long", day: "numeric" };
 
@@ -156,7 +161,7 @@ export default function TopStats(props) {
         const { role, clan } = props.clanStats;
         clanInfo = (
             <>
-                {clanPositions[role]} at <ClanTag {...clan}>[{clan.tag}]</ClanTag>
+                {clanPositions[role]} at <Link to={`/clan-stats/${serverConv[server]}/${clan.clan_id}`}><ClanTag {...clan}>[{clan.tag}]</ClanTag></Link>
             </>
         );
     }
