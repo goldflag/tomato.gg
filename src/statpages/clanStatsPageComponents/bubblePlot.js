@@ -1,11 +1,15 @@
+// NPM
 import React from "react";
-import { ResponsiveScatterPlot } from '@nivo/scatterplot'
+import { ResponsiveScatterPlot } from "@nivo/scatterplot";
 import styled from "styled-components";
-import { WN8color, WRcolor } from "Functions/colors";
+
+// LOCAL
+import { WN8color } from "Functions/colors";
+import { clanPositions } from "Data/localizations";
 
 const CustomToolTip = styled.div`
     min-width: 200px;
-    backdrop-filter: blur( 7px );
+    backdrop-filter: blur(7px);
     background-color: rgb(40, 40, 70, 0.8);
     color: rgb(255, 255, 255);
     border-radius: 5px;
@@ -50,28 +54,29 @@ const Bubble = styled.div`
     height: 500px;
 `;
 
-
 const TreeMapTooltip = ({ node, data }) => {
-        const { battles, x, y, winrate, username, serieId } = data;
+    const { battles, x, y, winrate, username, serieId } = data;
     let headerContent = `${username}`;
     let gridItems = [
         { label: "Winrate", value: winrate + "%" },
         { label: "WN8", value: x },
         { label: "Battles", value: battles },
-        { label: "Avg. Tier", value: y}
+        { label: "Avg. Tier", value: y },
     ];
 
     return (
         <CustomToolTip>
             <CustomColor color={WN8color(x)}>
                 {headerContent}
-            <TooltipLabel size={0.8}>{RoleConv["en"][serieId]}</TooltipLabel>    
+                <TooltipLabel size={0.8}>{clanPositions[serieId]}</TooltipLabel>
             </CustomColor>
             <Grid>
                 {gridItems.map(({ label, labelProps, value }, i) => (
                     <GridItem key={i}>
                         <TooltipValue>{value}</TooltipValue>
-                        <TooltipLabel size={0.8} {...labelProps}>{label}</TooltipLabel>
+                        <TooltipLabel size={0.8} {...labelProps}>
+                            {label}
+                        </TooltipLabel>
                     </GridItem>
                 ))}
             </Grid>
@@ -79,34 +84,7 @@ const TreeMapTooltip = ({ node, data }) => {
     );
 };
 
-const RoleConv = {
-    "en" : {
-        "intelligence_officer": "Intelligence Officer",
-        "personnel_officer": "Personnel Officer",
-        "quartermaster": "Quartermaster",
-        "executive_officer": "Executive Officer",
-        "recruit": "Recruit",
-        "private": "Private",
-        "commander": "Commander",
-        "reservist": "Reservist",
-        "combat_officer": "Combat Officer",
-        "junior_officer": "Junior Officer",
-        "recruitment_officer": "Recruitment Officer"
-    }
-}
-
-const CustomNode = ({
-    node,
-    x,
-    y,
-    size,
-    color,
-    blendMode,
-    onMouseEnter,
-    onMouseMove,
-    onMouseLeave,
-    onClick,
-}) => {
+const CustomNode = ({ node, x, y, size, color, blendMode, onMouseEnter, onMouseMove, onMouseLeave, onClick }) => {
     return (
         <g transform={`translate(${x},${y})`}>
             <circle
@@ -119,8 +97,8 @@ const CustomNode = ({
                 onClick={onClick}
             />
         </g>
-    )
-}
+    );
+};
 
 const theme = {
     fontFamily: "Roboto Mono",
@@ -139,7 +117,7 @@ const theme = {
             color: "rgb(255, 255, 255)",
         },
     },
-}
+};
 
 export default function BubblePlot({ mode, data }) {
     return (
@@ -147,38 +125,36 @@ export default function BubblePlot({ mode, data }) {
             <ResponsiveScatterPlot
                 data={data}
                 theme={theme}
-                colors={{ scheme: 'purpleRed_green' }}
+                colors={{ scheme: "purpleRed_green" }}
                 margin={{ top: 30, right: 30, bottom: 70, left: 90 }}
-                xScale={{ type: 'linear', min: 'auto', max: 'auto' }}
-                yScale={{ type: 'linear', min: 'auto', max: 'auto' }}
+                xScale={{ type: "linear", min: "auto", max: "auto" }}
+                yScale={{ type: "linear", min: "auto", max: "auto" }}
                 blendMode="multiply"
-                nodeSize={node => Math.sqrt(node.battles/Math.PI)*(mode === 0 ? 0.2 : 1.2)}
+                nodeSize={(node) => Math.sqrt(node.battles / Math.PI) * (mode === 0 ? 0.2 : 1.2)}
                 axisTop={null}
                 axisRight={null}
                 axisBottom={{
-                    orient: 'bottom',
+                    orient: "bottom",
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: 'WN8',
-                    legendPosition: 'middle',
-                    legendOffset: 46
+                    legend: "WN8",
+                    legendPosition: "middle",
+                    legendOffset: 46,
                 }}
                 axisLeft={{
-                    orient: 'left',
+                    orient: "left",
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: 'Avg. Tier',
-                    legendPosition: 'middle',
-                    legendOffset: -60
+                    legend: "Avg. Tier",
+                    legendPosition: "middle",
+                    legendOffset: -60,
                 }}
                 tooltip={(node) => {
-                    return <TreeMapTooltip node={node} data={node.node.data}/>
+                    return <TreeMapTooltip node={node} data={node.node.data} />;
                 }}
-
                 renderNode={CustomNode}
-
             />
         </Bubble>
     );
