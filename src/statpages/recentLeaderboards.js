@@ -17,6 +17,10 @@ const { formatString, ...strings } = new LocalizedStrings({
         recentStats: "{server} Žebříček nedávných statistik",
         minGames: "Minimální 75 bitev za období",
     },
+    es: {
+        recentStats: "{server} Tabla de Clasificación de Estadísticas Recientes",
+        minGames: "Mínima 75 partidas en periodo",
+    },
     fr: {
         recentStats: "Classement Stats Récentes {server}",
         minGames: "Mininum 75 parties sur la période",

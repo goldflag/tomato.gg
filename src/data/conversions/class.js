@@ -23,6 +23,13 @@ export const classDescConv = new LocalizedStrings({
         SPG: "Dělostřelectvo",
         TD: "Stíhač tanků",
     },
+    es: {
+        HT: "Tanque Pesado",
+        MT: "Tanque Mediano",
+        LT: "Tanque Ligero",
+        SPG: "Artillería",
+        TD: "Tanque Destructor",
+    },
     fr: {
         HT: "Char Lourd",
         MT: "Char Moyen",
