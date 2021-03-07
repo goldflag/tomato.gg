@@ -11,25 +11,27 @@ import { serverConv } from "Data/conversions";
 
 const ButtonWrapper = styled.div`
     margin-left: 0.5rem;
-
     @media screen and (max-width: 1000px) {
         display: none;
     }
 `;
 
 const SelectButton = styled(Button)`
-    font-family: "Segoe UI" !important;
+    font-family: "Roboto Mono" !important;
     font-size: 0.9rem !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     color: rgb(210, 210, 210) !important;
-    background-color: ${({ selected }) => (selected ? "rgb(222, 13, 93)" : "rgb(37, 46, 105)")} !important;
-    min-width: 55px !important;
-    border-width: 0px !important;
-
+    background-color: rgb(37, 46, 105) !important;
+    border: 2px solid ${({ selected }) => (selected ? "rgb(222, 13, 93)" : "rgba(0, 0, 0, 0)")}  !important;
+    border-radius: ${({ radius }) => radius} !important;
+    border-right: 0;
+    padding: 1px 0.5rem !important;
     &:hover {
         color: rgb(255, 255, 255) !important;
+        border: 2px solid rgba(150, 150, 200, 1) !important;
     }
 `;
+
 
 const strings = new LocalizedStrings({
     en: {
@@ -56,6 +58,11 @@ const strings = new LocalizedStrings({
 });
 
 const servers = ["com", "eu", "asia"];
+const radiuses = [
+    "20px 0 0 20px",
+    "0",
+    "0 20px 20px 0"
+]
 
 const ServerSelectButtons = () => {
     const { server, setServer } = useContext(ServerContext);
@@ -63,7 +70,7 @@ const ServerSelectButtons = () => {
         <ButtonWrapper>
             <ButtonGroup variant="text" aria-label={strings.server}>
                 {servers.map((id, i) => (
-                    <SelectButton key={i} selected={server === id} onClick={() => setServer(id)}>
+                    <SelectButton key={i} radius={radiuses[i]} selected={server === id} onClick={() => setServer(id)}>
                         {serverConv[id]}
                     </SelectButton>
                 ))}

@@ -15,20 +15,26 @@ const ButtonWrapper = styled.div`
 `;
 
 const SelectButton = styled(Button)`
-    font-family: "Segoe UI" !important;
+    font-family: "Roboto Mono" !important;
     font-size: 0.9rem !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     color: rgb(210, 210, 210) !important;
-    background-color: ${({ selected }) => (selected ? "rgb(222, 13, 93)" : "rgb(37, 46, 105)")} !important;
-    min-width: 55px !important;
-    border-width: 0px !important;
-
+    background-color: rgb(37, 46, 105) !important;
+    border: 2px solid ${({ selected }) => (selected ? "rgb(165, 31, 242)" : "rgba(0, 0, 0, 0)")}  !important;
+    border-radius: ${({ radius }) => radius} !important;
+    border-right: 0;
+    padding: 1px 0.5rem !important;
     &:hover {
         color: rgb(255, 255, 255) !important;
+        border: 2px solid rgba(150, 150, 200, 1) !important;
     }
 `;
 
 const modes = ["player", "clan"];
+const radiuses = [
+    "20px 0 0 20px",
+    "0 20px 20px 0"
+];
 
 const ServerSelectButtons = () => {
     const { mode, setMode } = useContext(SearchmodeContext);
@@ -36,7 +42,7 @@ const ServerSelectButtons = () => {
         <ButtonWrapper>
             <ButtonGroup variant="text">
                 {modes.map((id, i) => (
-                    <SelectButton key={i} selected={mode === id} onClick={() => setMode(id)}>
+                    <SelectButton key={i} radius={radiuses[i]} selected={mode === id} onClick={() => setMode(id)}>
                         {id}
                     </SelectButton>
                 ))}
