@@ -111,14 +111,17 @@ const StatCard = ({ stat, label, value, rankKey, total, rankings }, i) => (
 const { formatString, ...strings } = new LocalizedStrings({
     en: {
         created: "Created: {0}",
+        recentTab: "RECENT",
         recent: "Recent {0}",
+        overallTab: "OVERALL",
         overall: "Overall {0}",
         clanRating: "Clan Rating",
         avgDaily: "Avg. Daily Battles",
         avgPR: "Avg. PR",
         playerCount: "Players",
-        globELO: "Global Map ELO",
+        globalMap: "Global Map {0}", // WR, ELO
         provinces: "Provinces",
+        strongholds: "SH {0} {1}", // {0} = Tier, {1} = WR, ELO
     },
 });
 
@@ -142,12 +145,9 @@ export default function ClanTopStats({
     bubbleRecent,
     bubbleOverall,
 }) {
-    const [value, setValue] = useState(0);
+    const [bubbleTab, setBubbleTab] = useState(0);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
+    const handleChange = (_, newValue) => setBubbleTab(newValue);
     const topCards = [
         {
             stat: "WN8",
@@ -189,38 +189,38 @@ export default function ClanTopStats({
 
     const bottomCards = [
         {
-            label: strings.globELO,
+            label: formatString(strings.globalMap, "ELO"),
             rankKey: "gm_elo_rating_10",
         },
         {
-            label: "SH Tier X ELO",
+            label: formatString(strings.strongholds, Capital(commonStrings.tier) + " X", "ELO"),
             rankKey: "fb_elo_rating_10",
         },
         {
-            label: "SH Tier VIII ELO",
+            label: formatString(strings.strongholds, Capital(commonStrings.tier) + " VIII", "ELO"),
             rankKey: "fb_elo_rating_8",
         },
         {
-            label: "SH Tier VI ELO",
+            label: formatString(strings.strongholds, Capital(commonStrings.tier) + " VI", "ELO"),
             rankKey: "fb_elo_rating_6",
         },
         {
-            label: "Global Map WR",
+            label: formatString(strings.globalMap, "WR"),
             value: globalMap.wins_10_level,
             total: globalMap.battles_10_level,
         },
         {
-            label: "SH X WR",
+            label: formatString(strings.strongholds, Capital(commonStrings.tier) + " X", "WR"),
             value: strongholdX.win_10,
             total: strongholdX.total_10,
         },
         {
-            label: "SH VIII WR",
+            label: formatString(strings.strongholds, Capital(commonStrings.tier) + " VIII", "WR"),
             value: skirmish.win_8,
             total: skirmish.total_8,
         },
         {
-            label: "SH VI WR",
+            label: formatString(strings.strongholds, Capital(commonStrings.tier) + " VI", "WR"),
             value: skirmish.win_6,
             total: skirmish.total_6,
         },
@@ -229,17 +229,17 @@ export default function ClanTopStats({
             value: globalMap.provinces_count,
         },
         {
-            label: "28D SH X WR",
+            label: "28D " + formatString(strings.strongholds, Capital(commonStrings.tier) + " X", "WR"),
             value: strongholdX.win_10_in_28d,
             total: strongholdX.total_10_in_28d,
         },
         {
-            label: "28D SH VIII WR",
+            label: "28D " + formatString(strings.strongholds, Capital(commonStrings.tier) + " VIII", "WR"),
             value: skirmish.win_8_in_28d,
             total: skirmish.total_8_in_28d,
         },
         {
-            label: "28D SH VI WR",
+            label: "28D " + formatString(strings.strongholds, Capital(commonStrings.tier) + " VI", "WR"),
             value: skirmish.win_6_in_28d,
             total: skirmish.total_6_in_28d,
         },
@@ -280,11 +280,11 @@ export default function ClanTopStats({
                     ))}
                 </BottomGrid>
             </SplitSection>
-            <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
-                <CustomTab label="OVERALL" />
-                <CustomTab label="RECENT" />
+            <CustomTabs value={bubbleTab} onChange={handleChange} aria-label="ant example">
+                <CustomTab label={strings.overallTab} />
+                <CustomTab label={strings.recentTab} />
             </CustomTabs>
-            <BubblePlot mode={value} data={value === 0 ? bubbleOverall : bubbleRecent} />
+            <BubblePlot mode={bubbleTab} data={bubbleTab === 0 ? bubbleOverall : bubbleRecent} />
         </div>
     );
 }

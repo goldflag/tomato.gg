@@ -19,15 +19,19 @@ import {
 } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
 import LocalizedStrings from "react-localization";
-import { clanPositions } from "Data/localizations";
+import { Capital, clanPositions, commonStrings } from "Data/localizations";
 
 // const backend = process.env.REACT_APP_BACKEND;
 
-const strings = new LocalizedStrings({
+const { formatString, ...strings } = new LocalizedStrings({
     en: {
         clanRole: "Role",
         joined: "Joined", // when user joined clan
         days60: "60D {0}", // {0} can be Battles, Average Tier, Winrate, etc
+        lastGame: "Last Game",
+        today: "Today",
+        yesterday: "Yesterday",
+        daysAgo: "{0} Days Ago",
     },
 });
 
@@ -54,45 +58,50 @@ export default function ClanStatsTable({ data }) {
                 disableFilters: true,
             },
             {
-                Header: "60D Battles",
+                Header: formatString(strings.days60, Capital(commonStrings.battles)),
                 accessor: "recentBattles",
                 disableFilters: true,
             },
             {
-                Header: "60D Tier",
+                Header: formatString(strings.days60, Capital(commonStrings.tier)),
                 accessor: "recentAvgtier",
                 disableFilters: true,
             },
             {
-                Header: "60D WN8",
+                Header: formatString(strings.days60, commonStrings.wn8),
                 accessor: "recentWN8",
                 disableFilters: true,
             },
             {
                 Cell: ({ value }) => (value === "-" ? value : `${value}%`),
-                Header: "60D Winrate",
+                Header: formatString(strings.days60, Capital(commonStrings.longWR)),
                 accessor: "recentWinrate",
                 disableFilters: true,
             },
             {
-                Header: "Battles",
+                Header: Capital(commonStrings.battles),
                 accessor: "overallBattles",
                 disableFilters: true,
             },
             {
-                Header: "WN8",
+                Header: commonStrings.wn8,
                 accessor: "overallWN8",
                 disableFilters: true,
             },
             {
                 Cell: ({ value }) => (value === "-" ? value : `${value}%`),
-                Header: "Winrate",
+                Header: Capital(commonStrings.longWR),
                 accessor: "overallWinrate",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => (value === 0 ? `Today` : `${value} Days Ago`),
-                Header: "Last Game",
+                Cell: ({ value }) =>
+                    value === 0
+                        ? strings.today
+                        : value === 1
+                        ? strings.yesterday
+                        : formatString(strings.daysAgo, value),
+                Header: strings.lastGame,
                 accessor: "last_played",
                 disableFilters: true,
             },
