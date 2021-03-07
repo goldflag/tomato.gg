@@ -78,6 +78,17 @@ const strings = new LocalizedStrings({
         createdBy: "Tomato.gg to witryna stworzona przez",
         notAffiliated: "i nie jest powiązana z Wargaming.net.",
     },
+    ru: {
+        support: "Поддерживать Tomato.gg",
+        donations: `Tomato.gg полностью работает на пожертвования пользователей. Если вы находите 
+        ценность в веб-сайте, подумайте о пожертвовании для серверов.`,
+        kofi: "Поддержка по Ko-fi",
+        paypal: "Поддержка по Paypal",
+        partnered: "Сайты-партнеры",
+        herhor: "Рейтинги МoE и генератор изображений",
+        createdBy: "Tomato.gg - это веб-сайт, созданный",
+        notAffiliated: "и не связан с Wargaming.net.",
+    },
     tr: {
         boomer: "Boomer Arkaplanını Değiştir",
         boomerAria: "arkaplan rengini değiştir",

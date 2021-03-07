@@ -47,6 +47,11 @@ const strings = new LocalizedStrings({
         clanAriaLabel: "Wyszukaj klan",
         searchAriaLabel: "Szukaj",
     },
+    ru: {
+        placeholder: "Введите имя пользователя (например, Goldflag)",
+        ariaLabel: "искать игрока",
+        searchAriaLabel: "поиск",
+    },
     tr: {
         placeholder: "Kullanıcı adı girin (örn. Goldflag)",
         ariaLabel: "oyuncu ara",

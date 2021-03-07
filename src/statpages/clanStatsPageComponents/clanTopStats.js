@@ -85,7 +85,7 @@ const ClanIcon = styled.img`
 const Bubble = styled.div`
     height: 510px;
     background-color: rgba(40, 40, 70, 0.4);
-    backdrop-filter: blur( 7px );
+    backdrop-filter: blur(7px);
     color: rgb(30, 30, 30);
 `;
 
@@ -144,6 +144,50 @@ const { formatString, ...strings } = new LocalizedStrings({
         provinces: "Provinces",
         strongholds: "SH {0} {1}",
     },
+    cs: {
+        created: "Klan založen: {0}",
+        recentTab: "NEDÁVNÉ",
+        recentWN8: "Nedávné {0}",
+        recentWR: "Nedávná {0}",
+        overallTab: "CELKOVÉ",
+        overallWR: "Celková {0}",
+        overallWN8: "Celkové {0}",
+        clanRating: "Hodnocení klanu",
+        avgDaily: "Průměrně bitev za den",
+        avgPR: "Průměrné osobní hodnocení",
+        playerCount: "hráčů",
+        globalMap: "Globální mapy {0}",
+        provinces: "Provincií",
+        strongholds: "SH {0} {1}",
+    },
+    fr: {
+        created: "Créé: {0}",
+        recentTab: "RÉCENT",
+        recent: "{0} Récent",
+        overallTab: "GLOBAL",
+        overall: "{0} Global",
+        clanRating: "Côte du Clan",
+        avgDaily: "Batailles Quotidiennes Moyennes",
+        avgPR: "Côte Moyenne",
+        playerCount: "Joueurs",
+        globalMap: "{0} Carte Globale",
+        provinces: "Provinces",
+        strongholds: "{1} Bastion {0}",
+    },
+    pl: {
+        created: "Stworzone: {0}",
+        recentTab: "BIEŻĄCE",
+        recent: "Bieżący {0}",
+        overallTab: "OGÓLNE",
+        overall: "Ogólny {0}",
+        clanRating: "Ocena Klanu",
+        avgDaily: "Średnio bitew dziennie",
+        avgPR: "Średnia Ocena Osobista",
+        playerCount: "Gracze",
+        globalMap: "{0} Mapy Globalnej",
+        provinces: "Prowincje",
+        strongholds: "Twierdza {0} {1}",
+    },
     tr: {
         created: "Oluşturuldu: {0}",
         recentTab: "SON ZAMANLAR",
@@ -200,22 +244,22 @@ export default function ClanTopStats({
     const topCards = [
         {
             stat: "WN8",
-            label: formatString(strings.recent, commonStrings.wn8),
+            label: formatString(strings.recentWN8 || strings.recent, commonStrings.wn8),
             value: parseInt(recentWN8),
         },
         {
             stat: "winrate",
-            label: formatString(strings.recent, Capital(commonStrings.longWR)),
+            label: formatString(strings.recentWR || strings.recent, Capital(commonStrings.longWR)),
             value: recentWinrate.toFixed(2) + "%",
         },
         {
             stat: "WN8",
-            label: formatString(strings.overall, commonStrings.wn8),
+            label: formatString(strings.overallWN8 || strings.overall, commonStrings.wn8),
             value: parseInt(overallWN8),
         },
         {
             stat: "winrate",
-            label: formatString(strings.overall, Capital(commonStrings.longWR)),
+            label: formatString(strings.overallWR || strings.overall, Capital(commonStrings.longWR)),
             value: overallWinrate.toFixed(2) + "%",
         },
         {

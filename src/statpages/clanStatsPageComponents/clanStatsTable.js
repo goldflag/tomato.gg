@@ -25,6 +25,38 @@ const { formatString, ...strings } = new LocalizedStrings({
         yesterday: "Yesterday",
         daysAgo: "{0} Days Ago",
     },
+    cs: {
+        clanRole: "Hodnost",
+        joined: "Vstoupil", // when user joined clan??? This is useless first one is better
+        lastGame: "Poslední bitva",
+        today: "Dnes",
+        yesterday: "Včera",
+        daysAgo: "Před {0} dny",
+    },
+    es: {
+        clanRole: "Papel",
+        joined: "Ingreso",
+        lastGame: "Ultima Partida",
+        today: "Hoy",
+        yesterday: "Ayer",
+        daysAgo: "Hace {0} Días",
+    },
+    fr: {
+        clanRole: "Grade",
+        joined: "Rejoint",
+        lastGame: "Dernière Partie",
+        today: "Aujourd'hui",
+        yesterday: "Hier",
+        daysAgo: "Il y a {0} Jours",
+    },
+    pl: {
+        clanRole: "Rola",
+        joined: "Dołączył",
+        lastGame: "Ostatnia bitwa",
+        today: "Dzisiaj",
+        yesterday: "Wczoraj",
+        daysAgo: "{0} dni temu",
+    },
     tr: {
         clanRole: "Rütbe",
         joined: "Katıldı",
