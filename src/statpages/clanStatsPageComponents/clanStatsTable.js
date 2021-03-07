@@ -1,5 +1,5 @@
 // NPM
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React from "react";
 import { Icon } from "react-icons-kit";
 import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
@@ -7,7 +7,7 @@ import { useTable, useSortBy, useFilters, useExpanded, useGlobalFilter } from "r
 import { Link } from "react-router-dom";
 
 // LOCAL
-import { ServerContext } from "Context";
+// import { ServerContext } from "Context";
 import { GlobalFilter } from "Components/tableFilters";
 import {
     ButtonFiltersContainer,
@@ -21,7 +21,7 @@ import cellStyle from "Functions/cellStyle";
 import LocalizedStrings from "react-localization";
 import { clanPositions } from "Data/localizations";
 
-const backend = process.env.REACT_APP_BACKEND;
+// const backend = process.env.REACT_APP_BACKEND;
 
 const strings = new LocalizedStrings({
     en: {
@@ -32,7 +32,7 @@ const strings = new LocalizedStrings({
 });
 
 export default function ClanStatsTable({ data }) {
-    const { server } = useContext(ServerContext);
+    // const { server } = useContext(ServerContext);
 
     const columns = React.useMemo(
         () => [

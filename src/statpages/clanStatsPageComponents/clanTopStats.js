@@ -1,5 +1,5 @@
 // NPM
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import parse from "html-react-parser";
 import Scrollbar from "react-scrollbars-custom";
@@ -8,6 +8,8 @@ import LocalizedStrings from "react-localization";
 // LOCAL
 import { WN8color, WRcolor } from "Functions/colors";
 import { Capital, commonStrings } from "Data/localizations";
+import BubblePlot from "./bubblePlot";
+import { CustomTabs, CustomTab } from "../tabs/customTabs";
 
 const Name = styled.div`
     display: flex;
@@ -34,7 +36,7 @@ const SplitSection = styled.div`
 const Description = styled.div`
     font-size: 0.5rem;
     background-color: rgba(40, 40, 70, 0.5);
-    margin: 0rem 0.5rem 0rem 0.5rem;
+    margin: 0rem 0.5rem;
 `;
 const StatBox = styled.div`
     display: flex;
@@ -137,7 +139,15 @@ export default function ClanTopStats({
     globalMap,
     strongholdX,
     skirmish,
+    bubbleRecent,
+    bubbleOverall,
 }) {
+    const [value, setValue] = useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
     const topCards = [
         {
             stat: "WN8",
@@ -236,7 +246,7 @@ export default function ClanTopStats({
     ];
 
     return (
-        <>
+        <div style={{ marginBottom: "1rem" }}>
             <Name>
                 <ClanIcon src={image} alt={tag} />
                 <ClanName>
@@ -270,6 +280,11 @@ export default function ClanTopStats({
                     ))}
                 </BottomGrid>
             </SplitSection>
-        </>
+            <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
+                <CustomTab label="OVERALL" />
+                <CustomTab label="RECENT" />
+            </CustomTabs>
+            <BubblePlot mode={value} data={value === 0 ? bubbleOverall : bubbleRecent} />
+        </div>
     );
 }
