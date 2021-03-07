@@ -25,6 +25,7 @@ import {
     NumericTierFilter,
     arrayFilterFn,
 } from "Components/tableFilters";
+import { Capital, commonStrings } from "Data/localizations";
 
 function RecentTanksAvgTable({ data }) {
     const columns = React.useMemo(() => {
@@ -44,7 +45,7 @@ function RecentTanksAvgTable({ data }) {
             },
             {
                 Cell: TierCell,
-                Header: tableHeaders.tier,
+                Header: Capital(commonStrings.tier),
                 accessor: "tier",
                 Filter: NumericTierFilter,
                 filter: arrayFilterFn,
@@ -57,29 +58,29 @@ function RecentTanksAvgTable({ data }) {
                 filter: arrayFilterFn,
             },
             {
-                Header: tableHeaders.battles,
+                Header: Capital(commonStrings.battles),
                 accessor: "battles",
                 disableFilters: true,
             },
             {
-                Header: tableHeaders.wn8,
+                Header: commonStrings.wn8,
                 accessor: "wn8",
                 disableFilters: true,
             },
             {
                 Cell: ({ value }) => `${value}%`,
-                Header: tableHeaders.winrate,
+                Header: commonStrings.wr,
                 accessor: "winrate",
                 disableFilters: true,
             },
             {
-                Header: tableHeaders.dpg,
+                Header: commonStrings.dpg,
                 accessor: "dpg",
                 disableFilters: true,
             },
-            { Header: tableHeaders.frags, accessor: "frags", disableFilters: true },
+            { Header: Capital(commonStrings.frags), accessor: "frags", disableFilters: true },
             {
-                Header: tableHeaders.dmgRatio,
+                Header: commonStrings.dmgRatio,
                 accessor: "dmg_ratio",
                 disableFilters: true,
             },

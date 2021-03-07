@@ -27,6 +27,7 @@ import {
     tableHeaders,
 } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
+import { Capital, commonStrings } from "Data/localizations";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -49,11 +50,11 @@ function MoETable({ data }) {
                 filter: arrayFilterFn,
             },
             {
-                Header: tableHeaders.tier,
+                Cell: TierCell,
+                Header: Capital(commonStrings.tier),
                 accessor: "tier",
                 Filter: MoETierFilter,
                 filter: arrayFilterFn,
-                Cell: TierCell,
             },
             {
                 Cell: ClassCell,

@@ -27,6 +27,7 @@ import {
     tableHeaders,
 } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
+import { Capital, commonStrings } from "Data/localizations";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -50,7 +51,7 @@ function MasteryTable({ data }) {
             },
             {
                 Cell: TierCell,
-                Header: tableHeaders.tier,
+                Header: Capital(commonStrings.tier),
                 accessor: "tier",
                 Filter: NumericTierFilter,
                 filter: arrayFilterFn,

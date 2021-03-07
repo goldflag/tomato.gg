@@ -1,8 +1,12 @@
+// NPM
 import React, { useState, useEffect, useCallback, useContext } from "react";
 import { Icon } from "react-icons-kit";
 import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import { useTable, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
+import { Link } from "react-router-dom";
+
+// LOCAL
 import { ServerContext } from "Context";
 import { GlobalFilter } from "Components/tableFilters";
 import {
@@ -14,8 +18,18 @@ import {
     tableHeaders,
 } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
+import LocalizedStrings from "react-localization";
+import { clanPositions } from "Data/localizations";
 
 const backend = process.env.REACT_APP_BACKEND;
+
+const strings = new LocalizedStrings({
+    en: {
+        clanRole: "Role",
+        joined: "Joined", // when user joined clan
+        days60: "60D {0}", // {0} can be Battles, Average Tier, Winrate, etc
+    },
+});
 
 export default function ClanStatsTable({ data }) {
     const { server } = useContext(ServerContext);
@@ -23,18 +37,19 @@ export default function ClanStatsTable({ data }) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ( value ) => value.cell.row.original.link,
-                Header: "Name",
+                Cell: ({ row: { original }, value }) => <Link to={original.url}> {value}</Link>,
+                Header: tableHeaders.username,
                 accessor: "account_name",
                 disableFilters: true,
             },
             {
-                Header: "Role",
-                accessor: "role_i18n",
+                Cell: ({ value }) => clanPositions[value],
+                Header: strings.clanRole,
+                accessor: "role",
                 disableFilters: true,
             },
             {
-                Header: "Joined",
+                Header: strings.joined,
                 accessor: "joined_at",
                 disableFilters: true,
             },
@@ -54,7 +69,7 @@ export default function ClanStatsTable({ data }) {
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => value === '-' ? value : `${value}%`,
+                Cell: ({ value }) => (value === "-" ? value : `${value}%`),
                 Header: "60D Winrate",
                 accessor: "recentWinrate",
                 disableFilters: true,
@@ -70,17 +85,17 @@ export default function ClanStatsTable({ data }) {
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => value === '-' ? value : `${value}%`,
+                Cell: ({ value }) => (value === "-" ? value : `${value}%`),
                 Header: "Winrate",
                 accessor: "overallWinrate",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => value === 0 ? `Today` : `${value} Days Ago`,
+                Cell: ({ value }) => (value === 0 ? `Today` : `${value} Days Ago`),
                 Header: "Last Game",
                 accessor: "last_played",
                 disableFilters: true,
-            }
+            },
         ],
         []
     );
@@ -91,11 +106,7 @@ export default function ClanStatsTable({ data }) {
         headerGroups,
         prepareRow,
         state,
-        visibleColumns,
         rows,
-        page, // Instead of using 'rows', we'll use page,
-        // which has only the rows for the active page
-        // The rest of these things are super handy, too ;)
         preGlobalFilteredRows,
         setGlobalFilter,
     } = useTable(
@@ -108,52 +119,51 @@ export default function ClanStatsTable({ data }) {
                         id: "recentWN8",
                         desc: true,
                     },
-                ]
+                ],
             },
         },
         useFilters,
         useGlobalFilter,
         useSortBy,
-        useExpanded,
+        useExpanded
     );
 
-    function SubRows({ data }) {
-        if (data) {
-            return (
-                <div
-                    style={{
-                        backgroundColor: "rgba(40, 40, 70, 0.5)",
-                        marginLeft: "-0.5rem",
-                    }}
-                >
-                </div>
-            );
-        } else {
-            return <div style={{ padding: "0.3rem" }}>Loading...</div>;
-        }
-    }
+    // function SubRows({ data }) {
+    //     if (data) {
+    //         return (
+    //             <div
+    //                 style={{
+    //                     backgroundColor: "rgba(40, 40, 70, 0.5)",
+    //                     marginLeft: "-0.5rem",
+    //                 }}
+    //             ></div>
+    //         );
+    //     } else {
+    //         return <div style={{ padding: "0.3rem" }}>Loading...</div>;
+    //     }
+    // }
 
-    function SubRowAsync({ row }) {
-        const [data, setData] = useState();
-        useEffect(() => {
-            async function get() {
-                fetch(`${backend}/api/moetank/${server}/${row.original.id}`)
-                    .then((res) => res.json())
-                    .then((res) => setData(res));
-            }
+    // function SubRowAsync({ row }) {
+    //     const [data, setData] = useState();
+    //     useEffect(() => {
+    //         async function get() {
+    //             fetch(`${backend}/api/moetank/${server}/${row.original.id}`)
+    //                 .then((res) => res.json())
+    //                 .then((res) => setData(res));
+    //         }
 
-            get();
-        }, [row.original.id]);
+    //         get();
+    //     }, [row.original.id]);
 
-        return <SubRows data={data} />;
-    }
+    //     return <SubRows data={data} />;
+    // }
 
-    const renderRowSubComponent = useCallback(
-        ({ row, rowProps, visibleColumns }) => (
-            <SubRowAsync row={row} rowProps={rowProps} visibleColumns={visibleColumns} />
-        ),
-        []
-    );
+    // const renderRowSubComponent = useCallback(
+    //     ({ row, rowProps, visibleColumns }) => (
+    //         <SubRowAsync row={row} rowProps={rowProps} visibleColumns={visibleColumns} />
+    //     ),
+    //     []
+    // );
 
     return (
         <>
@@ -238,4 +248,3 @@ export default function ClanStatsTable({ data }) {
         </>
     );
 }
-

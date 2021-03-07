@@ -74,7 +74,7 @@ const SearchItem = styled(Chip)`
         border-color: rgb(140, 150, 210) !important;
     }
     svg {
-        color: #7485E1;
+        color: #7485e1;
     }
     svg:hover {
         color: rgb(140, 150, 210);

@@ -1,6 +1,6 @@
 // NPM
 import React, { useEffect, useState } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
 import ReactGA from "react-ga";
 
@@ -37,8 +37,7 @@ export default function ClanStatsPage() {
         const clanRes = await fetch(`${backend}/api/clan/${serverConv[server]}/${clanID}`);
         const clanJSON = await clanRes.json();
         clanJSON.members.forEach((player) => {
-            const link = `/stats/${server}/${player.account_name}=${player.account_id}`;
-            player.link = <Link to={link}>{player.account_name}</Link>;
+            player.url = `/stats/${server}/${player.account_name}=${player.account_id}`;
         });
         setClanData(clanJSON);
     }
@@ -73,9 +72,8 @@ export default function ClanStatsPage() {
                     globalMap={clanData.globalMapHistory.statistics}
                     strongholdX={clanData.strongholdHistory.battles_series_for_strongholds_statistics}
                     skirmish={clanData.strongholdHistory.skirmish_statistics}
-
                 />
-                <ClanStatsTable data={clanData.members}/>
+                <ClanStatsTable data={clanData.members} />
             </Container>
         );
 

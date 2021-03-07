@@ -27,6 +27,7 @@ import styled from "styled-components";
 import Tooltip from "react-tooltip-lite";
 import awardsData from "Data/awardsinfo.json";
 import cellStyle from "Functions/cellStyle";
+import { Capital, commonStrings } from "Data/localizations";
 
 const AwardContainer = styled.div`
     padding: 0.5rem;
@@ -196,7 +197,7 @@ function OverallTable({ data }) {
             },
             {
                 Cell: TierCell,
-                Header: tableHeaders.tier,
+                Header: Capital(commonStrings.tier),
                 accessor: "tier",
                 Filter: NumericTierFilter,
                 filter: arrayFilterFn,
@@ -209,13 +210,13 @@ function OverallTable({ data }) {
                 filter: arrayFilterFn,
             },
             {
-                Header: tableHeaders.battles,
+                Header: Capital(commonStrings.battles),
                 accessor: "battles",
                 filter: "between",
                 Filter: NumberRangeColumnFilter,
             },
             {
-                Header: tableHeaders.wn8,
+                Header: commonStrings.wn8,
                 accessor: "wn8",
                 Filter: NumberRangeColumnFilter,
                 filter: "between",
@@ -223,20 +224,20 @@ function OverallTable({ data }) {
             },
             {
                 Cell: ({ value }) => `${value}%`,
-                Header: tableHeaders.winrate,
+                Header: Capital(commonStrings.longWR),
                 accessor: "winrate",
                 Filter: NumberRangeColumnFilter,
                 filter: "between",
                 disableFilters: true,
             },
             {
-                Header: tableHeaders.dpg,
+                Header: commonStrings.dpg,
                 accessor: "dpg",
                 Filter: NumberRangeColumnFilter,
                 filter: "between",
                 disableFilters: true,
             },
-            { Header: tableHeaders.frags, accessor: "kpg", disableFilters: true },
+            { Header: Capital(commonStrings.frags), accessor: "kpg", disableFilters: true },
             {
                 Header: "WN8%tile",
                 accessor: "wn8percent",
@@ -247,7 +248,7 @@ function OverallTable({ data }) {
                 accessor: "dpgpercent",
                 disableFilters: true,
             },
-            { Header: tableHeaders.dmgRatio, accessor: "dmgratio", disableFilters: true },
+            { Header: commonStrings.dmgRatio, accessor: "dmgratio", disableFilters: true },
             { Header: tableHeaders.kd, accessor: "kd", disableFilters: true },
             { Header: tableHeaders.survival, accessor: "survival", disableFilters: true },
             { Header: "XP", accessor: "xp", disableFilters: true },

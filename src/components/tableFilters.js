@@ -9,6 +9,7 @@ import LocalizedStrings from "react-localization";
 // LOCAL
 import { MoEStars } from "./moeStars";
 import { classConv, nationConv } from "Data/conversions";
+import { Capital, commonStrings } from "Data/localizations";
 
 export const FilterButton = styled(Button)`
     background-color: ${({ selected }) => (selected ? css`rgb(222, 13, 93)` : css`rgb(66, 84, 143)`)} !important;
@@ -37,7 +38,6 @@ const { formatString, ...strings } = new LocalizedStrings({
         regular: "REGULAR",
         searchTanks: "Search {0} tanks",
         searchPlayers: "Search {0} players",
-        battles: "Battles",
         min: "Min",
         to: "to",
         max: "Max",
@@ -58,7 +58,6 @@ const { formatString, ...strings } = new LocalizedStrings({
         regular: "REGULAR",
         searchTanks: "Buscar {0} tanques",
         searchPlayers: "Buscar {0} jugadores",
-        battles: "Batallas",
         min: "Mínimo",
         to: "a",
         max: "Máximo",
@@ -69,7 +68,6 @@ const { formatString, ...strings } = new LocalizedStrings({
         regular: "NORMAL",
         searchTanks: "Chercher {0} chars",
         searchPlayers: "Chercher {0} joueurs",
-        battles: "Batailles",
         min: "Min",
         to: "à",
         max: "Max",
@@ -80,7 +78,6 @@ const { formatString, ...strings } = new LocalizedStrings({
         regular: "NORMAL",
         searchTanks: "{0} tank arasında ara",
         searchPlayers: "{0} oyuncu arasında ara",
-        battles: "Savaşlar",
         min: "En Az",
         to: "->",
         max: "En Çok",
@@ -91,7 +88,6 @@ const { formatString, ...strings } = new LocalizedStrings({
         regular: "Zwykłe",
         searchTanks: "Przeszukaj {0} czołgów",
         searchPlayers: "Przeszukaj {0} gracze",
-        battles: "Bitwy",
         min: "Min",
         to: "do",
         max: "Maks",
@@ -105,9 +101,6 @@ const { formatString, ...strings } = new LocalizedStrings({
         min: "Минимум",
         to: "до",
         max: "Максимум",
-    },
-    zh: {
-        battles: "戰鬥場數",
     },
 });
 
@@ -266,7 +259,10 @@ export const GlobalFilter = ({ defaultType, preGlobalFilteredRows, globalFilter,
                     setValue(e.target.value);
                     onChange(e.target.value);
                 }}
-                placeholder={formatString(defaultType === "players" ? strings.searchPlayers : strings.searchTanks, count)}
+                placeholder={formatString(
+                    defaultType === "players" ? strings.searchPlayers : strings.searchTanks,
+                    count
+                )}
                 style={{
                     fontSize: "1rem",
                     padding: "0px 15px",
@@ -292,7 +288,7 @@ export const NumberRangeColumnFilter = ({ column: { filterValue = [], preFiltere
 
     return (
         <div style={{ marginTop: "8px", display: "flex", alignItems: "center" }}>
-            {strings.battles}
+            {Capital(commonStrings.battles)}
             <InputBase
                 value={filterValue[0] || ""}
                 type="number"

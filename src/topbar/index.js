@@ -11,7 +11,6 @@ import ServerSelectButtons from "./serverSelect";
 import SearchBar from "./searchBar";
 import Discord from "./discord";
 
-
 const StyledTopbar = styled.div`
     width: 100%;
     height: 4rem;
@@ -27,7 +26,6 @@ const StyledTopbar = styled.div`
         padding: 0;
     }
 `;
-
 
 export default withRouter(function Topbar(props) {
     return (

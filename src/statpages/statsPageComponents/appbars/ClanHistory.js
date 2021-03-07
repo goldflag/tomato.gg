@@ -1,3 +1,4 @@
+// NPM
 import React, { useState, useEffect } from "react";
 import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
 import Grid from "@material-ui/core/Grid";
@@ -5,21 +6,10 @@ import { serverConv } from "Data/conversions";
 import clonedeep from "lodash.clonedeep";
 import Scrollbar from "react-scrollbars-custom";
 
-const APIKey = process.env.REACT_APP_API_KEY;
+// LOCAL
+import { clanPositions } from "Data/localizations";
 
-const roleConv = {
-    intelligence_officer: "Intelligence Officer",
-    personnel_officer: "Personnel Officer",
-    quartermaster: "Quartermaster",
-    executive_officer: "Executive Officer",
-    recruit: "Recruit",
-    private: "Private",
-    commander: "Commander",
-    reservist: "Reservist",
-    combat_officer: "Combat Officer",
-    junior_officer: "Junior Officer",
-    recruitment_officer: "Recruitment Officer",
-};
+const APIKey = process.env.REACT_APP_API_KEY;
 
 export default function ClanHistory(props) {
     const [value, setValue] = useState(0);
@@ -174,7 +164,7 @@ export default function ClanHistory(props) {
                                             Position:
                                         </span>
                                         <br />
-                                        {roleConv[row.role]}
+                                        {clanPositions[row.role]}
                                     </span>
                                 </div>
                             </Grid>
@@ -195,7 +185,7 @@ export default function ClanHistory(props) {
                 <div
                     style={{
                         padding: "10px 0px 0px 10px",
-                        color: "rgb(220, 220, 220)"
+                        color: "rgb(220, 220, 220)",
                     }}
                 >
                     <Grid container spacing={1}>

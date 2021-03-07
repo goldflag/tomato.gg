@@ -21,31 +21,43 @@ const strings = new LocalizedStrings({
     cs: {
         placeholder: "Vložte přezdívku (e.g. Goldflag)",
         ariaLabel: "Hledejte hráče",
+        clanPlaceholder: "Vložte název klanu",
+        clanAriaLabel: "Hledejte klan",
         searchAriaLabel: "hledat",
     },
     es: {
         placeholder: "Escribe un nombre de usuario (e.g. Goldflag)",
         ariaLabel: "buscar un jugador",
+        clanPlaceholder: "Escribe un nombre de Clan",
+        clanAriaLabel: "buscar un clan",
         searchAriaLabel: "buscar",
     },
     fr: {
         placeholder: "Entrez le nom d'un joueur (ex: Goldflag)",
         ariaLabel: "recherchez un joueur",
+        clanPlaceholder: "Entrez un nom de Clan",
+        clanAriaLabel: "recherche pour un clan",
         searchAriaLabel: "recherche",
     },
     pl: {
         placeholder: "Wpisz nick (n.p. Goldflag)",
         ariaLabel: "Wyszukaj gracza",
+        clanPlaceholder: "Wpisz nazwę klanu",
+        clanAriaLabel: "Wyszukaj klan",
         searchAriaLabel: "Szukaj",
     },
     tr: {
         placeholder: "Kullanıcı adı girin (örn. Goldflag)",
         ariaLabel: "oyuncu ara",
+        clanPlaceholder: "Klan adı gir",
+        clanAriaLabel: "klanlarda ara",
         searchAriaLabel: "arama",
     },
     zh: {
         placeholder: "輸入使用者名稱 (例如: Goldflag)",
         ariaLabel: "搜尋玩家",
+        clanPlaceholder: "輸入公會名稱",
+        clanAriaLabel: "搜尋公會",
         searchAriaLabel: "搜尋",
     },
 });
@@ -85,7 +97,7 @@ export default function SearchBar({ name, setName, server, setServer, mode, setM
             <InputBase
                 className={classes.input}
                 placeholder={mode === "player" ? strings.placeholder : strings.clanPlaceholder}
-                inputProps={{ "aria-label": strings.ariaLabel }}
+                inputProps={{ "aria-label": mode === "player" ? strings.ariaLabel : strings.clanAriaLabel }}
                 value={mode === "player" ? name : name.toUpperCase()}
                 onChange={(e) => setName(e.target.value)}
             />

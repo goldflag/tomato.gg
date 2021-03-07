@@ -18,6 +18,7 @@ import {
 } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
 import { NumericTierFilter } from "Components/";
+import { Capital, commonStrings } from "Data/localizations";
 
 function WN8Table({ data }) {
     const columns = React.useMemo(
@@ -36,7 +37,7 @@ function WN8Table({ data }) {
                 Cell: NationCell,
             },
             {
-                Header: tableHeaders.tier,
+                Header: Capital(commonStrings.tier),
                 accessor: "tier",
                 Filter: NumericTierFilter,
                 filter: arrayFilterFn,

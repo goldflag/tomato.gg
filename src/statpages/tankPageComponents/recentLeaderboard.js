@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 // Local
 import { StyledTable, TableContainer, tableHeaders } from "Components/tableComponents";
 import setColor from "Functions/cellStyle";
+import { Capital, commonStrings } from "Data/localizations";
 export default function RecentsLeaderboard({ data, type, highlightUserID }) {
     function headerStyle(header) {
         if (header.id === type) {
@@ -18,7 +19,7 @@ export default function RecentsLeaderboard({ data, type, highlightUserID }) {
     const columns = React.useMemo(
         () => [
             {
-                Header: tableHeaders.rank,
+                Header: Capital(commonStrings.rank),
                 accessor: "rank",
                 disableFilters: true,
             },
@@ -29,28 +30,28 @@ export default function RecentsLeaderboard({ data, type, highlightUserID }) {
                 Cell: ({ row: { original, values } }) => <Link to={original.url}> {values.username}</Link>,
             },
             {
-                Header: tableHeaders.battles,
+                Header: Capital(commonStrings.battles),
                 accessor: "battles",
                 disableFilters: true,
             },
             {
-                Header: tableHeaders.wn8,
+                Header: commonStrings.wn8,
                 accessor: "wn8",
                 disableFilters: true,
             },
             {
-                Header: tableHeaders.winrate,
+                Header: commonStrings.wr,
                 accessor: "winrate",
                 disableFilters: true,
                 Cell: ({ value }) => `${value}%`,
             },
             {
-                Header: tableHeaders.dpg,
+                Header: commonStrings.dpg,
                 accessor: "dpg",
                 disableFilters: true,
             },
             {
-                Header: tableHeaders.frags,
+                Header: Capital(commonStrings.frags),
                 accessor: "frags",
                 disableFilters: true,
             },

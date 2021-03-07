@@ -6,6 +6,7 @@ import { useTable } from "react-table";
 // LOCAL
 import { StyledTable, TableContainer, tableHeaders } from "Components/tableComponents";
 import setColor from "Functions/cellStyle";
+import { Capital, commonStrings } from "Data/localizations";
 
 export default function LeaderboardTable({ type, data }) {
     const headerStyle = (header) =>
@@ -18,7 +19,7 @@ export default function LeaderboardTable({ type, data }) {
     const columns = React.useMemo(
         () => [
             {
-                Header: tableHeaders.rank,
+                Header: Capital(commonStrings.rank),
                 accessor: "rank",
             },
             {
@@ -27,7 +28,7 @@ export default function LeaderboardTable({ type, data }) {
                 Cell: ({ row: { original, values } }) => <Link to={original.url}> {values.username}</Link>,
             },
             {
-                Header: tableHeaders.battles,
+                Header: Capital(commonStrings.battles),
                 accessor: "battles",
             },
             {
@@ -35,24 +36,24 @@ export default function LeaderboardTable({ type, data }) {
                 accessor: "avgtier",
             },
             {
-                Header: tableHeaders.wn8,
+                Header: commonStrings.wn8,
                 accessor: "wn8",
             },
             {
-                Header: tableHeaders.winrate,
+                Header: Capital(commonStrings.longWR),
                 accessor: "winrate",
                 Cell: ({ value }) => `${value}%`,
             },
             {
-                Header: tableHeaders.dpg,
+                Header: commonStrings.dpg,
                 accessor: "dpg",
             },
             {
-                Header: tableHeaders.frags,
+                Header: Capital(commonStrings.frags),
                 accessor: "frags",
             },
             {
-                Header: tableHeaders.dmgRatio,
+                Header: commonStrings.dmgRatio,
                 accessor: "dmg_ratio",
             },
             {

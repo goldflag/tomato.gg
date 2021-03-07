@@ -5,6 +5,7 @@ import LocalizedStrings from "react-localization";
 
 // LOCAL
 import { WN8color, WRcolor, PRcolor, battlesColor } from "Functions/colors";
+import { Capital, clanPositions, commonStrings } from "Data/localizations";
 
 const Root = styled.div`
     flex-grow: 1;
@@ -95,7 +96,6 @@ const { formatString, ...strings } = new LocalizedStrings({
         recentWN8: "Recent WN8",
         recentWR: "Recent WR",
         wgRating: "WG Rating",
-        battles: "Battles",
     },
     cs: {
         created: "Účet vytvořen {0}",
@@ -103,8 +103,15 @@ const { formatString, ...strings } = new LocalizedStrings({
         overallWR: "Celková míra vítězství",
         recentWN8: "Nedávné Wn8",
         recentWR: "Nedávná míra vítězství",
-        wgRating: "WG hodnocení", // Wargaming rating
-        battles: "Bitev",
+        wgRating: "WG hodnocení",
+    },
+    es: {
+        created: "Cuenta creada {0}",
+        overallWN8: "WN8 Total",
+        overallWR: "Ratio de Victorias Total",
+        recentWN8: "WN8 Reciente",
+        recentWR: "Ratio de Victorias Reciente",
+        wgRating: "Clasificación WG",
     },
     fr: {
         created: "Compte créé le {0}",
@@ -113,7 +120,6 @@ const { formatString, ...strings } = new LocalizedStrings({
         recentWN8: "WN8 Récent",
         recentWR: "Taux de Victoire Récent",
         wgRating: "Côte WG",
-        battles: "Batailles",
     },
     pl: {
         created: "Konto stworzone {0}",
@@ -122,7 +128,6 @@ const { formatString, ...strings } = new LocalizedStrings({
         recentWN8: "Bieżące WN8",
         recentWR: "Bieżący % Zwycięstw",
         wgRating: "Klasyfikacja WG",
-        battles: "Bitwy",
     },
     tr: {
         created: "Hesap {0} tarihinde oluşturuldu",
@@ -131,7 +136,6 @@ const { formatString, ...strings } = new LocalizedStrings({
         recentWN8: "Son günler WN8",
         recentWR: "Son günler WR",
         wgRating: "WG Rating",
-        battles: "Savaşlar",
     },
     zh: {
         created: "建立帳號 {0}",
@@ -140,88 +144,6 @@ const { formatString, ...strings } = new LocalizedStrings({
         recentWN8: "近期 WN8",
         recentWR: "近期勝率",
         wgRating: "WG 評價",
-        battles: "戰鬥數",
-    },
-});
-
-const clanPositions = new LocalizedStrings({
-    en: {
-        commander: "Commander",
-        executive_officer: "Executive Officer",
-        personnel_officer: "Personnel Officer",
-        combat_officer: "Combat Officer",
-        intelligence_officer: "Intelligence Officer",
-        quartermaster: "Quartermaster",
-        recruitment_officer: "Recruitment Officer",
-        junior_officer: "Junior Officer",
-        private: "Private",
-        recruit: "Recruit",
-        reservist: "Reservist",
-    },
-    cs: {
-        commander: "Velitel",
-        executive_officer: "Výkonný důstojník",
-        personnel_officer: "Posádkový důstojník",
-        combat_officer: "Bojový důstojník",
-        intelligence_officer: "Zpravodajský důstojník",
-        quartermaster: "Proviantní důstojník",
-        recruitment_officer: "Náborový důstojník",
-        junior_officer: "Mladší důstojník",
-        private: "Vojín",
-        recruit: "Rekrut",
-        reservist: "Záložník",
-    },
-    fr: {
-        commander: "Commandant",
-        executive_officer: "Commandant en Second",
-        personnel_officer: "Officier du Personnel",
-        combat_officer: "Officier de Combat",
-        intelligence_officer: "Officier du Renseignement",
-        quartermaster: "Quartier-Maître",
-        recruitment_officer: "Recruteur",
-        junior_officer: "Officier Subalterne",
-        private: "Soldat",
-        recruit: "Recrue",
-        reservist: "Réserviste",
-    },
-    pl: {
-        commander: "Dowódca",
-        executive_officer: "Oficer wykonawczy",
-        personnel_officer: "Oficer kadrowy",
-        combat_officer: "Oficer grupy bojowej",
-        intelligence_officer: "Oficer wywiadu",
-        quartermaster: "Kwatermistrz",
-        recruitment_officer: "Rekruter",
-        junior_officer: "Podoficer",
-        private: "Szeregowy",
-        recruit: "Rekrut",
-        reservist: "Rezerwista",
-    },
-    tr: {
-        commander: "Komutan",
-        executive_officer: "İkinci Komutan",
-        personnel_officer: "Personel Subayı",
-        combat_officer: "Savaş Komutanı",
-        intelligence_officer: "İstihbarat Subayı",
-        quartermaster: "Levazım Subayı",
-        recruitment_officer: "Üye Alım Subayı",
-        junior_officer: "Yedek Subay",
-        private: "Er",
-        recruit: "Acemi",
-        reservist: "İhtiyat",
-    },
-    zh: {
-        commander: "指揮官",
-        executive_officer: "執行官",
-        personnel_officer: "人事官",
-        combat_officer: "作戰官",
-        intelligence_officer: "情報官",
-        quartermaster: "軍需官",
-        recruitment_officer: "徵募官",
-        junior_officer: "下級軍官",
-        private: "士兵",
-        recruit: "新兵",
-        reservist: "後備軍人",
     },
 });
 
@@ -254,7 +176,7 @@ export default function TopStats(props) {
         { label: strings.recentWN8, value: props.data.recentWN8, colorFn: WN8color },
         { label: strings.recentWR, value: props.data.recentWinrate + "%", colorFn: WRcolor },
         { label: strings.wgRating, value: props.WGRating, colorFn: PRcolor },
-        { label: strings.battles, value: props.stats.battles, colorFn: battlesColor },
+        { label: Capital(commonStrings.battles), value: props.stats.battles, colorFn: battlesColor },
     ];
 
     return (

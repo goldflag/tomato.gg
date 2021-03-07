@@ -37,6 +37,17 @@ const { formatString, ...strings } = new LocalizedStrings({
         exp85change: "ZMĚNA OČEKÁVANÝCH HODNOT PRO 85%",
         exp65change: "ZMĚNA OČEKÁVANÝCH HODNOT PRO 65%",
     },
+    es: {
+        moe: "Requisitos de Las Marcas de Excelencia",
+        dataFrom: "Datos de los creadores de",
+        moeMod: "Mod de marcas de excelencia",
+        expand: "Expanda las filas para ver 30 días de historial de marcas de excelencia",
+        avg: "*El cambio de las marcas de excelencia se calcula utilizando promedios de 3 días para minimizar el ruido",
+        expected: "VALORES ESPERADOS",
+        exp95change: "95% DE CAMBIO DE VALOR ESPERADO",
+        exp85change: "85% DE CAMBIO DE VALOR ESPERADO",
+        exp65change: "65% DE CAMBIO DE VALOR ESPERADO",
+    },
     fr: {
         moe: "Obtention des Marques d'Excellence",
         dataFrom: "Données venant des créateurs du {0}",

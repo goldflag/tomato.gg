@@ -55,6 +55,48 @@ const strings = new LocalizedStrings({
         infographics: "INFOGRAPHICS",
         treemap: "TREEMAP",
     },
+    es: {
+        main: "ESTADÍSTICAS PRINCIPALES",
+        hof: "SALÓN DE LA FAMA",
+        sessions: "SESIONES",
+        infographics: "INFOGRAFÍA",
+        treemap: "TREEMAP",
+    },
+    cs: {
+        main: "HLAVNÍ STATISTIKY",
+        hof: "SÍŇ SLÁVY",
+        sessions: "ZÁZNAM",
+        infographics: "INFOGRAFIKA",
+        treemap: "TREEMAP",
+    },
+    fr: {
+        main: "STATS PRINCIPALES",
+        hof: "PANTHÉON",
+        sessions: "SESSIONS",
+        infographics: "INFOGRAPHIE",
+        treemap: "TREEMAP", // No translation
+    },
+    pl: {
+        main: "GŁÓWNE STATYSTYKI",
+        hof: "ALEJA SŁAW",
+        sessions: "SEJSE",
+        infographics: "INFOGRAFIKI",
+        treemap: "MAPA DRZEWEK", // tbd
+    },
+    tr: {
+        main: "ANA İSTATİSTİKLER",
+        hof: "ŞÖHRET SALONU",
+        sessions: "OTURUMLAR",
+        infographics: "BİLGİ GRAFİKLERİ",
+        treemap: "YOĞUNLUK HARİTASI",
+    },
+    zh: {
+        main: "所有統計",
+        hof: "名人堂",
+        sessions: "每日統計",
+        infographics: "綜合圖表",
+        treemap: "矩陣圖",
+    },
 });
 
 const tabs = [

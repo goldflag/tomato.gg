@@ -5,7 +5,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import styled from "styled-components";
-import LocalizedStrings from "react-localization";
+import { commonStrings, UPPER } from "Data/localizations";
 
 const SmallSelectWrapper = styled.div`
     display: none;
@@ -13,13 +13,6 @@ const SmallSelectWrapper = styled.div`
         display: block;
     }
 `;
-
-const strings = new LocalizedStrings({
-    en: {
-        player: "PLAYER",
-        clan: "CLAN",
-    },
-});
 
 function MobileSelect({ server, setServer, mode, setMode }) {
     const useStyles = makeStyles((t) => ({
@@ -65,8 +58,8 @@ function MobileSelect({ server, setServer, mode, setMode }) {
                     displayEmpty
                     className={classes.selectEmpty}
                 >
-                    <MenuItem value="player">{strings.player}</MenuItem>
-                    <MenuItem value="clan">{strings.clan}</MenuItem>
+                    <MenuItem value="player">{UPPER(commonStrings.player)}</MenuItem>
+                    <MenuItem value="clan">{UPPER(commonStrings.clan)}</MenuItem>
                 </Select>
             </FormControl>
         </SmallSelectWrapper>

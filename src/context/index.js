@@ -8,9 +8,7 @@ export const MultiProvider = ({ children }) => (
     <ServerProvider>
         <SearchHistoryProvider>
             <BackgroundProvider>
-                <SearchmodeProvider>
-                    {children}
-                </SearchmodeProvider>
+                <SearchmodeProvider>{children}</SearchmodeProvider>
             </BackgroundProvider>
         </SearchHistoryProvider>
     </ServerProvider>

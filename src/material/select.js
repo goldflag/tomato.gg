@@ -1,16 +1,12 @@
+// NPM
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import LocalizedStrings from "react-localization";
 
-const strings = new LocalizedStrings({
-    en: {
-        player: "PLAYER",
-        clan: "CLAN",
-    },
-});
+// LOCAL
+import { commonStrings, UPPER } from "Data/localizations";
 
 const useStyles = makeStyles((t) => ({
     formControl: {
@@ -53,8 +49,8 @@ export default function SelectQuery({ server, setServer, mode, setMode }) {
                     displayEmpty
                     className={classes.selectEmpty}
                 >
-                    <MenuItem value="player">{strings.player}</MenuItem>
-                    <MenuItem value="clan">{strings.clan}</MenuItem>
+                    <MenuItem value="player">{UPPER(commonStrings.player)}</MenuItem>
+                    <MenuItem value="clan">{UPPER(commonStrings.clan)}</MenuItem>
                 </Select>
             </FormControl>
         </>

@@ -9,6 +9,7 @@ import LocalizedStrings from "react-localization";
 import { Loader } from "Components";
 import { tierConv } from "Data/conversions";
 import { rankColor } from "Functions/colors";
+import { Capital, commonStrings } from "Data/localizations";
 
 const Styles = styled.div`
     font-family: Roboto Mono;
@@ -262,9 +263,9 @@ const { formatString, ...strings } = new LocalizedStrings({
 });
 
 const titles = {
-    dpg: "Damage Per Game",
-    wn8: "WN8",
-    battles: "Battles",
+    dpg: Capital(commonStrings.longDPG),
+    wn8: commonStrings.wn8,
+    battles: Capital(commonStrings.battles),
     dr: "Damage Ratio",
     winrate: "Winrate",
     kd: "K/D Ratio",

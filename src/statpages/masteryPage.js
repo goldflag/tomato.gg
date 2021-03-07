@@ -25,6 +25,12 @@ const { formatString, ...strings } = new LocalizedStrings({
         moeMod: "Modifikace na vítězné znaky",
         expand: "Rozbalením řádků zobrazíte 30 dní historie vzorného tankisty",
     },
+    es: {
+        mastery: "Requisitos de Las Placas de Maestría",
+        dataFrom: "Datos de los creadores de",
+        moeMod: "Mod de marcas de excelencia",
+        expand: "Expanda las filas para ver 30 días de historial de maestría",
+    },
     fr: {
         mastery: "Obtention Maîtrises de Char",
         dataFrom: "Données venant des créateurs du {0}",

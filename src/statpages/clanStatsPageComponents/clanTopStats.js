@@ -3,68 +3,56 @@ import React from "react";
 import styled from "styled-components";
 import parse from "html-react-parser";
 import Scrollbar from "react-scrollbars-custom";
+import LocalizedStrings from "react-localization";
 
 // LOCAL
 import { WN8color, WRcolor } from "Functions/colors";
+import { Capital, commonStrings } from "Data/localizations";
 
 const Name = styled.div`
     display: flex;
     justify-content: flex-start;
     grid-template-columns: 100px auto;
     margin: -1rem -0.5rem;
-`
+`;
 const TopGrid = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    margin: 0rem -0.5rem;
-`
+    margin: 0rem -0.5rem 0.5rem;
+`;
 const BottomGrid = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     margin: -0.5rem 0rem;
-`
+`;
 
 const SplitSection = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 0rem -0.5rem 1rem -0.5rem;
-`
-
+`;
 const Description = styled.div`
     font-size: 0.5rem;
     background-color: rgba(40, 40, 70, 0.5);
-    margin: 0rem 0rem 0rem 0.5rem;
-    height: 330px;
-`
+    margin: 0rem 0.5rem 0rem 0.5rem;
+`;
 const StatBox = styled.div`
-    display: flex;  
-    flex-direction: column;
-    justify-content: center;
-    background-color: ${({val, stat}) => stat === "WN8" ? WN8color(val) : stat === "winrate" ? WRcolor(val) : "rgba(70, 70, 110, 0.5)"};
-    padding: 1rem;
-    margin: 1rem 0.5rem;
-    font-size: 1.5rem;
-    font-weight: 500;
-    text-align: center;
-`
-const BottomBox = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: rgba(70, 70, 110, 0.5);
+    background-color: ${({ val, stat }) =>
+        stat === "WN8" ? WN8color(val) : stat === "winrate" ? WRcolor(val) : "rgba(70, 70, 110, 0.5)"};
     padding: 1rem;
     margin: 0.5rem 0.5rem;
     font-size: 1.5rem;
     font-weight: 500;
     text-align: center;
-`
-
+`;
 const StatBoxLabel = styled.div`
     font-size: 0.9rem;
     font-weight: 400;
     color: rgb(200, 200, 200);
-`
-
+`;
 const ClanName = styled.div`
     display: flex;
     justify-content: center;
@@ -72,200 +60,216 @@ const ClanName = styled.div`
     flex-direction: column;
     margin: 1rem;
     font-size: 1.5rem;
-`
-
+`;
 const ClanIcon = styled.img`
     margin: 1rem;
     max-width: 100px;
-`
+`;
 
-let rankDelta = ({ rank, delta }) => <span>
-    {rank === null ? "" :
-        <span>Rank: {rank} {delta === null || delta === 0 ? ""
-            :
-            delta > 0 ? <span style={{ color: "rgb(34, 199, 66)" }}>{`(+${delta})`}</span> 
-            : 
-            <span style={{ color: "rgb(255, 41, 94)" }}>{`(${delta})`}</span>
-        }
+const Delta = styled(({ delta, ...props }) =>
+    delta ? (
+        <span {...props}>
+            ({delta > 0 ? "+" : ""}
+            {delta})
         </span>
-    }
-</span>
+    ) : null
+)`
+    color: ${({ delta }) => (delta > 0 ? "rgb(34, 199, 66)" : "rgb(255, 41, 94)")};
+`;
 
+const RankDelta = ({ rank, delta }) =>
+    rank ? (
+        <span>
+            {Capital(commonStrings.rank)}: {rank} <Delta delta={delta} />
+        </span>
+    ) : null;
 
-function statBox({stat, label, value, rank, delta}) {
-    return (
-        <StatBox val={value} stat={stat} key={label}>
-            <StatBoxLabel>{label}</StatBoxLabel> 
-            {value}
-            <StatBoxLabel>{rankDelta({ rank: rank, delta: delta })}</StatBoxLabel>                 
-        </StatBox>
-    )
-}
+const Percent = ({ value, total }) => (total > 0 ? ((value * 100) / total).toFixed(2) + "%" : "-");
 
+const StatCard = ({ stat, label, value, rankKey, total, rankings }, i) => (
+    <StatBox val={value} stat={stat}>
+        <StatBoxLabel>{label}</StatBoxLabel>
+        {total ? null : rankKey ? rankings[rankKey].value : value}
+        {rankKey && rankings[rankKey].rank && (
+            <StatBoxLabel>
+                <RankDelta rank={rankings[rankKey].rank} delta={rankings[rankKey].rank_delta} />
+            </StatBoxLabel>
+        )}
+        {total && (
+            <>
+                <Percent value={value} total={total} />
+                <StatBoxLabel>
+                    {value}/{total}
+                </StatBoxLabel>
+            </>
+        )}
+    </StatBox>
+);
 
-export default function ClanTopStats({ 
+const { formatString, ...strings } = new LocalizedStrings({
+    en: {
+        created: "Created: {0}",
+        recent: "Recent {0}",
+        overall: "Overall {0}",
+        clanRating: "Clan Rating",
+        avgDaily: "Avg. Daily Battles",
+        avgPR: "Avg. PR",
+        playerCount: "Players",
+        globELO: "Global Map ELO",
+        provinces: "Provinces",
+    },
+});
+
+export default function ClanTopStats({
     image,
     tag,
-    name, 
+    name,
     created_at,
     motto,
     clanColor,
     members_count,
-    overallWN8, 
-    overallWinrate, 
-    recentWN8, 
+    overallWN8,
+    overallWinrate,
+    recentWN8,
     recentWinrate,
     rankings,
     description,
     globalMap,
     strongholdX,
-    skirmish
+    skirmish,
 }) {
-
-    const statBoxObj = [
+    const topCards = [
         {
             stat: "WN8",
-            label: "Recent WN8",
+            label: formatString(strings.recent, commonStrings.wn8),
             value: parseInt(recentWN8),
-            rank: null, 
-            delta: null
         },
         {
             stat: "winrate",
-            label: "Recent Winrate",
+            label: formatString(strings.recent, Capital(commonStrings.longWR)),
             value: recentWinrate.toFixed(2) + "%",
-            rank: null, 
-            delta: null
         },
         {
             stat: "WN8",
-            label: "Overall WN8",
+            label: formatString(strings.overall, commonStrings.wn8),
             value: parseInt(overallWN8),
-            rank: null, 
-            delta: null
         },
         {
             stat: "winrate",
-            label: "Overall Winrate",
+            label: formatString(strings.overall, Capital(commonStrings.longWR)),
             value: overallWinrate.toFixed(2) + "%",
-            rank: null, 
-            delta: null
         },
         {
-            stat: "other",
-            label: "Clan Rating",
-            value: rankings.efficiency.value,
-            rank: rankings.efficiency.rank, 
-            delta: rankings.efficiency.rank_delta
+            label: strings.clanRating,
+            rankKey: "efficiency",
         },
         {
-            stat: "other",
-            label: "Avg. Daily Battles",
-            value: rankings.battles_count_avg_daily.value,
-            rank: rankings.battles_count_avg_daily.rank, 
-            delta: rankings.battles_count_avg_daily.rank_delta
+            label: strings.avgDaily,
+            rankKey: "battles_count_avg_daily",
         },
         {
-            stat: "other",
-            label: "Avg. PR",
-            value: parseInt(rankings.global_rating_weighted_avg.value),
-            rank: rankings.global_rating_weighted_avg.rank, 
-            delta: rankings.global_rating_weighted_avg.rank_delta
+            label: strings.avgPR,
+            rankKey: "global_rating_weighted_avg",
         },
         {
-            stat: "other",
-            label: "Players",
+            label: strings.playerCount,
             value: members_count,
-            rank: null, 
-            delta: null
-        }
-    ]
+        },
+    ];
+
+    const bottomCards = [
+        {
+            label: strings.globELO,
+            rankKey: "gm_elo_rating_10",
+        },
+        {
+            label: "SH Tier X ELO",
+            rankKey: "fb_elo_rating_10",
+        },
+        {
+            label: "SH Tier VIII ELO",
+            rankKey: "fb_elo_rating_8",
+        },
+        {
+            label: "SH Tier VI ELO",
+            rankKey: "fb_elo_rating_6",
+        },
+        {
+            label: "Global Map WR",
+            value: globalMap.wins_10_level,
+            total: globalMap.battles_10_level,
+        },
+        {
+            label: "SH X WR",
+            value: strongholdX.win_10,
+            total: strongholdX.total_10,
+        },
+        {
+            label: "SH VIII WR",
+            value: skirmish.win_8,
+            total: skirmish.total_8,
+        },
+        {
+            label: "SH VI WR",
+            value: skirmish.win_6,
+            total: skirmish.total_6,
+        },
+        {
+            label: strings.provinces,
+            value: globalMap.provinces_count,
+        },
+        {
+            label: "28D SH X WR",
+            value: strongholdX.win_10_in_28d,
+            total: strongholdX.total_10_in_28d,
+        },
+        {
+            label: "28D SH VIII WR",
+            value: skirmish.win_8_in_28d,
+            total: skirmish.total_8_in_28d,
+        },
+        {
+            label: "28D SH VI WR",
+            value: skirmish.win_6_in_28d,
+            total: skirmish.total_6_in_28d,
+        },
+    ];
 
     return (
-        <>  
+        <>
             <Name>
                 <ClanIcon src={image} alt={tag} />
                 <ClanName>
-                    <span> <span style={{color: clanColor, textShadow: "1px 1px 1px rgba(0, 0, 0, 0.75)"}}>[{tag}]</span> {name}</span>
-                    <span style={{fontSize: "0.8rem", color: "rgb(200, 200, 200)", padding: "0.4rem"}}>Created: {created_at}</span>
-                    <span style={{fontSize: "0.9rem"}}>{motto}</span>
+                    <span>
+                        {" "}
+                        <span style={{ color: clanColor, textShadow: "1px 1px 1px rgba(0, 0, 0, 0.75)" }}>
+                            [{tag}]
+                        </span>{" "}
+                        {name}
+                    </span>
+                    <span style={{ fontSize: "0.8rem", color: "rgb(200, 200, 200)", padding: "0.4rem" }}>
+                        {formatString(strings.created, created_at)}
+                    </span>
+                    <span style={{ fontSize: "0.9rem" }}>{motto}</span>
                 </ClanName>
             </Name>
             <TopGrid>
-                {statBoxObj.map((props) => statBox(props))}
+                {topCards.map((props, i) => (
+                    <StatCard rankings={rankings} {...props} key={i} />
+                ))}
             </TopGrid>
             <SplitSection>
                 <Description>
                     <Scrollbar noScrollX>
-                        <div style={{padding: "1rem"}}>
-                            {parse(description)}
-                        </div>
+                        <div style={{ padding: "1rem" }}>{parse(description)}</div>
                     </Scrollbar>
                 </Description>
                 <BottomGrid>
-                    <BottomBox>
-                        <StatBoxLabel>Global Map ELO</StatBoxLabel> 
-                        {rankings.gm_elo_rating_10.value}
-                        <StatBoxLabel>{rankDelta({ rank: rankings.gm_elo_rating_10.rank, delta: rankings.gm_elo_rating_10.rank_delta })}</StatBoxLabel>                 
-                    </BottomBox>
-                    <BottomBox>
-                        <StatBoxLabel>SH Tier X ELO</StatBoxLabel> 
-                        {rankings.fb_elo_rating_10.value}
-                        <StatBoxLabel>{rankDelta({ rank: rankings.fb_elo_rating_10.rank, delta: rankings.fb_elo_rating_10.rank_delta })}</StatBoxLabel>                 
-                    </BottomBox>
-                    <BottomBox>
-                        <StatBoxLabel>SH Tier VII ELO</StatBoxLabel> 
-                        {rankings.fb_elo_rating_8.value}
-                        <StatBoxLabel>{rankDelta({ rank: rankings.fb_elo_rating_8.rank, delta: rankings.fb_elo_rating_8.rank_delta })}</StatBoxLabel>                 
-                    </BottomBox>
-                    <BottomBox>
-                        <StatBoxLabel>SH Tier VI ELO</StatBoxLabel> 
-                        {rankings.fb_elo_rating_6.value}
-                        <StatBoxLabel>{rankDelta({ rank: rankings.fb_elo_rating_6.rank, delta: rankings.fb_elo_rating_6.rank_delta })}</StatBoxLabel>                 
-                    </BottomBox>
-                    <BottomBox>
-                        <StatBoxLabel>Global Map WR</StatBoxLabel> 
-                        {globalMap.battles_10_level > 0 ? (globalMap.wins_10_level*100/globalMap.battles_10_level).toFixed(2) + "%" : "-"}
-                        <StatBoxLabel>{globalMap.wins_10_level}/{globalMap.battles_10_level}</StatBoxLabel>                 
-                    </BottomBox>
-                    <BottomBox>
-                        <StatBoxLabel>SH X WR</StatBoxLabel> 
-                        {skirmish.total_10 > 0 ? (skirmish.win_10*100/skirmish.total_10).toFixed(2) + "%" : "-"}
-                        <StatBoxLabel>{strongholdX.win_10}/{strongholdX.total_10}</StatBoxLabel>                 
-                    </BottomBox>
-                    <BottomBox>
-                        <StatBoxLabel>SH VIII WR</StatBoxLabel> 
-                        {skirmish.total_8 > 0 ? (skirmish.win_8*100/skirmish.total_8).toFixed(2) + "%" : "-"}
-                        <StatBoxLabel>{skirmish.win_8}/{skirmish.total_8}</StatBoxLabel>                 
-                    </BottomBox>
-                    <BottomBox>
-                        <StatBoxLabel>SH VI WR</StatBoxLabel> 
-                        {skirmish.total_6 > 0 ? (skirmish.win_6*100/skirmish.total_6).toFixed(2) + "%" : "-"}
-                        <StatBoxLabel>{skirmish.win_6}/{skirmish.total_6}</StatBoxLabel>                 
-                    </BottomBox>
-                    <BottomBox>
-                        <StatBoxLabel>Provinces</StatBoxLabel> 
-                        {globalMap.provinces_count}
-                    </BottomBox>
-                    <BottomBox>
-                        <StatBoxLabel>28D SH X WR</StatBoxLabel> 
-                        {strongholdX.total_10_in_28d > 0 ? (strongholdX.win_10_in_28d*100/strongholdX.total_10_in_28d).toFixed(2) + "%" : "-"}
-                        <StatBoxLabel>{strongholdX.win_10_in_28d}/{strongholdX.total_10_in_28d}</StatBoxLabel>                 
-                    </BottomBox>
-                    <BottomBox>
-                        <StatBoxLabel>28D SH VIII WR</StatBoxLabel> 
-                        {skirmish.total_8_in_28d > 0 ? (skirmish.win_8_in_28d*100/skirmish.total_8_in_28d).toFixed(2) + "%" : "-"}
-                        <StatBoxLabel>{skirmish.win_8_in_28d}/{skirmish.total_8_in_28d}</StatBoxLabel>                 
-                    </BottomBox>
-                    <BottomBox>
-                        <StatBoxLabel>28D SH VI WR</StatBoxLabel> 
-                        {skirmish.total_6_in_28d > 0 ? (skirmish.win_6_in_28d*100/skirmish.total_6_in_28d).toFixed(2) + "%" : "-"}
-                        <StatBoxLabel>{skirmish.win_6_in_28d}/{skirmish.total_6_in_28d}</StatBoxLabel>                 
-                    </BottomBox>
+                    {bottomCards.map((props, i) => (
+                        <StatCard rankings={rankings} {...props} key={i} />
+                    ))}
                 </BottomGrid>
             </SplitSection>
-
         </>
-    )
-
+    );
 }

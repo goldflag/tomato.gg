@@ -27,6 +27,7 @@ import {
     TierCell,
     tableHeaders,
 } from "Components/tableComponents";
+import { Capital, commonStrings } from "Data/localizations";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -67,7 +68,7 @@ function MoETracker({ data, moe }) {
             },
             {
                 Cell: TierCell,
-                Header: tableHeaders.tier,
+                Header: Capital(commonStrings.tier),
                 accessor: "tier",
                 Filter: MoETrackerTierFilter,
                 filter: arrayFilterFn,

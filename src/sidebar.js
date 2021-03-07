@@ -40,6 +40,8 @@ const strings = new LocalizedStrings({
         notAffiliated: "a není jakkoliv spojen s Wargaming.net.",
     },
     es: {
+        boomer: "Alternar Fondo Oscuro",
+        boomerAria: "alternar color de fondo",
         support: "Apoya a Tomato.gg",
         donations: `Tomato.gg funciona completamente con donaciones. Si encuentras valor en el sitio, 
         considere hacer una donación para ayudar a mantener los servidores.`,

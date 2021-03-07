@@ -12,7 +12,7 @@ import { ServerPagination } from "Components";
 import { useURLState } from "Functions/hooks";
 import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
 import { nationAdjConv, classDescConv, serverConv, tierConv, classConv } from "Data/conversions";
-
+import { Capital, commonStrings } from "Data/localizations";
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -76,76 +76,44 @@ const PAGE_SIZE = 100;
 
 const { formatString, ...strings } = new LocalizedStrings({
     en: {
-        dpg: "DPG",
-        frags: "FRAGS",
-        winrate: "WINRATE",
-        tier: "TIER",
         top500: "Top 500 Players on {0} server",
         past60min25: "PAST 60 DAYS | MINIMUM 25 BATTLES",
     },
     cs: {
-        dpg: "PZB",
-        frags: "ZABITÍ",
-        winrate: "MÍRA VÍTĚZSTVÍ",
-        tier: "ÚROVEŇ",
         top500: "500 nejlepších hráčů v",
         past60min25: "POSLEDNÍCH 60 DNÍ | MINIMÁLNĚ 25 BITEV",
     },
     es: {
-        dpg: "DPG",
-        frags: "MUERTOS", // or frags
-        winrate: "RATIO DE VICTORIAS", // or winrate
-        tier: "NIVEL",
         top500: "Los 500 Mejores Jugadores de",
         past60min25: "ÚLTIMOS 60 DÍAS | MÍNIMO 25 BATALLAS",
     },
     fr: {
-        dpg: "DPG",
-        frags: "TUÉS",
-        winrate: "TAUX VICTOIRE",
-        tier: "RANG",
         top500: "Top 500 sur le serveur {0}",
         past60min25: "60 DERNIERS JOURS | MINIMUM 25 BATAILLES",
     },
     tr: {
-        dpg: "DPG",
-        frags: "FRAGS",
-        winrate: "WINRATE",
-        tier: "TIER",
         top500: "En iyi 500 Oyuncu içinde {0}",
         past60min25: "SON 60 GÜN | MİNİMUM 25 SAVAŞ",
     },
     pl: {
-        dpg: "Średnio uszkodzeń", // or just "DPG"
-        frags: "Średnio zniszczeń",
-        winrate: "Procent wygranych",
-        tier: "Poziom",
         top500: "500 najlepszych graczy na serwerze {0}",
         past60min25: "OSTATNICH 60 DNIACH | MINIMUM 25 BITEW",
     },
     ru: {
-        dpg: "Ущерб",
-        frags: "Уничтожены Танки",
-        winrate: "Победы",
-        tier: "Уровень",
         top500: "500 лучших игроков в",
         past60min25: "ПОСЛЕДНИЕ 60 ДНЕЙ | МИНИМУМ 25 СРАЖЕНИЙ",
     },
     zh: {
-        dpg: "平均傷害",
-        frags: "擊殺數",
-        winrate: "勝率",
-        tier: "階級",
         top500: "前500名",
         past60min25: "過去60天 | 最少25場戰鬥",
     },
 });
 
 const filters = {
-    dpg: strings.dpg,
-    wn8: "WN8",
-    frags: strings.frags,
-    winrate: strings.winrate,
+    dpg: commonStrings.dpg,
+    wn8: commonStrings.wn8,
+    frags: Capital(commonStrings.frags),
+    winrate: Capital(commonStrings.longWR),
 };
 
 export default function TankPage(props) {
@@ -188,7 +156,7 @@ export default function TankPage(props) {
             <>
                 <Top>
                     <div>
-                        <div style={{ textAlign: "center" }}>{strings.tier}</div>
+                        <div style={{ textAlign: "center" }}>{Capital(commonStrings.tier)}</div>
                         <Tier>{tierConv[data.meta.tier]}</Tier>
                     </div>
                     <div>
