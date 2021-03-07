@@ -73,6 +73,8 @@ export default function ClanStatsPage() {
                     globalMap={clanData.globalMapHistory.statistics}
                     strongholdX={clanData.strongholdHistory.battles_series_for_strongholds_statistics}
                     skirmish={clanData.strongholdHistory.skirmish_statistics}
+                    bubbleOverall={clanData.bubbleOverall}
+                    bubbleRecent={clanData.bubbleRecent}
 
                 />
                 <ClanStatsTable data={clanData.members}/>
