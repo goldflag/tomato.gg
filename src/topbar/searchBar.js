@@ -26,32 +26,44 @@ const strings = new LocalizedStrings({
     cs: {
         placeholder: "Vložte přezdívku",
         ariaLabel: "Hledejte hráče",
+        clanPlaceholder: "Vložte název klanu",
+        clanAriaLabel: "Hledejte klan",
         searchAriaLabel: "hledat",
     },
     es: {
         placeholder: "Escribe un nombre de usuario",
         ariaLabel: "buscar un jugador",
+        clanPlaceholder: "Escribe un nombre de Clan",
+        clanAriaLabel: "buscar un clan",
         searchAriaLabel: "buscar",
     },
     fr: {
         placeholder: "Entrez le nom d'un joueur",
         ariaLabel: "recherchez un joueur",
+        clanPlaceholder: "Entrez un nom de Clan",
+        clanAriaLabel: "recherche pour un clan",
         searchAriaLabel: "recherche",
+    },
+    pl: {
+        placeholder: "Wpisz nick",
+        ariaLabel: "Wyszukaj gracza",
+        clanPlaceholder: "Wpisz nazwę klanu",
+        clanAriaLabel: "Wyszukaj klan",
+        searchAriaLabel: "Szukaj",
     },
     tr: {
         placeholder: "Kullanıcı adı girin",
         ariaLabel: "oyuncu ara",
+        clanPlaceholder: "Klan adı gir",
+        clanAriaLabel: "klanlarda ara",
         searchAriaLabel: "arama",
     },
     zh: {
         placeholder: "輸入使用者名稱",
         ariaLabel: "搜尋玩家",
+        clanPlaceholder: "輸入公會名稱",
+        clanAriaLabel: "搜尋公會",
         searchAriaLabel: "搜尋",
-    },
-    pl: {
-        placeholder: "Wpisz nick",
-        ariaLabel: "Wyszukaj gracza",
-        searchAriaLabel: "Szukaj",
     },
 });
 

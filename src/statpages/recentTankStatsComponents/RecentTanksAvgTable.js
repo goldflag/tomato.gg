@@ -69,7 +69,7 @@ function RecentTanksAvgTable({ data }) {
             },
             {
                 Cell: ({ value }) => `${value}%`,
-                Header: commonStrings.wr,
+                Header: Capital(commonStrings.longWR),
                 accessor: "winrate",
                 disableFilters: true,
             },
@@ -80,7 +80,7 @@ function RecentTanksAvgTable({ data }) {
             },
             { Header: Capital(commonStrings.frags), accessor: "frags", disableFilters: true },
             {
-                Header: commonStrings.dmgRatio,
+                Header: Capital(commonStrings.dmgRatio),
                 accessor: "dmg_ratio",
                 disableFilters: true,
             },
@@ -134,7 +134,6 @@ function RecentTanksAvgTable({ data }) {
             initialState: {
                 pageIndex: 0,
                 pageSize: 100,
-                hiddenColumns: ["prem"],
                 sortBy: [
                     {
                         id: "battles",

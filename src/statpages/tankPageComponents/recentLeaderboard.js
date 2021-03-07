@@ -40,7 +40,7 @@ export default function RecentsLeaderboard({ data, type, highlightUserID }) {
                 disableFilters: true,
             },
             {
-                Header: commonStrings.wr,
+                Header: Capital(commonStrings.longWR),
                 accessor: "winrate",
                 disableFilters: true,
                 Cell: ({ value }) => `${value}%`,

@@ -9,13 +9,7 @@ import { Link } from "react-router-dom";
 // LOCAL
 // import { ServerContext } from "Context";
 import { GlobalFilter } from "Components/tableFilters";
-import {
-    FiltersContainer,
-    SubRow,
-    TableContainer,
-    StyledTable,
-    tableHeaders,
-} from "Components/tableComponents";
+import { FiltersContainer, SubRow, TableContainer, StyledTable, tableHeaders } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
 import LocalizedStrings from "react-localization";
 import { Capital, clanPositions, commonStrings } from "Data/localizations";
@@ -25,12 +19,27 @@ import { Capital, clanPositions, commonStrings } from "Data/localizations";
 const { formatString, ...strings } = new LocalizedStrings({
     en: {
         clanRole: "Role",
-        joined: "Joined", // when user joined clan
-        days60: "60D {0}", // {0} can be Battles, Average Tier, Winrate, etc
+        joined: "Joined",
         lastGame: "Last Game",
         today: "Today",
         yesterday: "Yesterday",
         daysAgo: "{0} Days Ago",
+    },
+    tr: {
+        clanRole: "Rütbe",
+        joined: "Katıldı",
+        lastGame: "Son Savaş",
+        today: "Bugün",
+        yesterday: "Dün",
+        daysAgo: "{0} Gün önce",
+    },
+    zh: {
+        clanRole: "職位",
+        joined: "已加入",
+        lastGame: "上一場戰鬥",
+        today: "今日",
+        yesterday: "昨日",
+        daysAgo: "{0} 天前",
     },
 });
 
@@ -40,7 +49,7 @@ export default function ClanStatsTable({ data }) {
     const columns = React.useMemo(
         () => [
             {
-                Header: "Player",
+                Header: Capital(commonStrings.player),
                 columns: [
                     {
                         Cell: ({ row: { original }, value }) => <Link to={original.url}> {value}</Link>,
@@ -61,7 +70,7 @@ export default function ClanStatsTable({ data }) {
                 borderLeft: true,
             },
             {
-                Header: "60 Days",
+                Header: Capital(formatString(commonStrings.days, 60)),
                 columns: [
                     {
                         Header: Capital(commonStrings.battles),

@@ -1,6 +1,5 @@
 // NPM
 import React, { useEffect, useState, useContext } from "react";
-import styled from "styled-components";
 import LocalizedStrings from "react-localization";
 
 // LOCAL
@@ -10,13 +9,9 @@ import { Loader, FullPageTableWrapper, Info } from "Components";
 import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
 import RecentTanksAvgTable from "./recentTankStatsComponents/RecentTanksAvgTable";
 import { useURLState } from "Functions/hooks";
+import { commonStrings } from "Data/localizations";
 
 const backend = process.env.REACT_APP_BACKEND;
-
-const Filters = styled.div`
-    // padding: 10px;
-    // margin: -15px;
-`;
 
 const { formatString, ...strings } = new LocalizedStrings({
     en: {
@@ -88,28 +83,15 @@ export default function RecentLeaderboards() {
                 >
                     {strings.clickRow}
                 </span>
-                <Filters>
-                    <FilterButtonGroup>
-                        {/* <FilterButton
-                            key={30}
-                            selected={time === 30}
-                            onClick={() => {
-                                setTime(30);
-                            }}
-                        >
-                            30 Days
-                        </FilterButton> */}
-                        <FilterButton
-                            key={60}
-                            selected={time === 60}
-                            onClick={() => {
-                                setTime(60);
-                            }}
-                        >
-                            60 Days
-                        </FilterButton>
-                    </FilterButtonGroup>
-                </Filters>
+                <br />
+                <FilterButtonGroup>
+                    {/* <FilterButton key={30} selected={time === 30} onClick={() => setTime(30)}>
+                        {formatString(commonStrings.days, 30)}
+                    </FilterButton> */}
+                    <FilterButton key={60} selected={time === 60} onClick={() => setTime(60)}>
+                        {formatString(commonStrings.days, 60)}
+                    </FilterButton>
+                </FilterButtonGroup>
             </Info>
 
             {typeof data !== "string" ? (

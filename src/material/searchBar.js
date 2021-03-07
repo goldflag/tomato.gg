@@ -14,8 +14,9 @@ import SelectQuery from "./select";
 const strings = new LocalizedStrings({
     en: {
         placeholder: "Enter a Username (e.g. Goldflag)",
-        clanPlaceholder: "Enter a Clan name",
         ariaLabel: "search for a player",
+        clanPlaceholder: "Enter a Clan name",
+        clanAriaLabel: "search for a clan",
         searchAriaLabel: "search",
     },
     cs: {

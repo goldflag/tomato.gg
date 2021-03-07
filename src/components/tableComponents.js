@@ -135,7 +135,6 @@ export const tableHeaders = new LocalizedStrings({
     cs: {
         username: "Přezdívka",
         avgTier: "Průměrná úroveň",
-        kd: "Z/S",
         spots: "Odhalená vozidla",
         survival: "Přežití",
         decap: "Obrana základny",
@@ -157,7 +156,6 @@ export const tableHeaders = new LocalizedStrings({
     fr: {
         username: "Pseudo",
         avgTier: "Rang Moyen",
-        kd: "T/M",
         spots: "Détections",
         survival: "Survie",
         decap: "Decap",
@@ -179,7 +177,6 @@ export const tableHeaders = new LocalizedStrings({
     pl: {
         username: "Gracz",
         avgTier: "Średni poziom",
-        kd: "Stosunek zniszczeń/strat",
         spots: "Wykrycia",
         survival: "% Przetrwań",
         decap: "Obrona bazy",
@@ -203,7 +200,6 @@ export const tableHeaders = new LocalizedStrings({
         avgTier: "Ort Seviye",
         winrate: "Kaz.Oranı",
         dmgRatio: "DMG Oranı",
-        kd: "K/D",
         spots: "Spot",
         survival: "Sağ Kalma",
         decap: "Decap",
@@ -227,7 +223,6 @@ export const tableHeaders = new LocalizedStrings({
         avgTier: "平均階級",
         winrate: "勝率",
         dmgRatio: "傷害比",
-        kd: "摧毀比",
         spots: "偵查",
         survival: "存活",
         decap: "基地防禦點",
