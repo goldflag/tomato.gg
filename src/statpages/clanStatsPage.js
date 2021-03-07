@@ -14,6 +14,7 @@ import ClanStatsTable from "./clanStatsPageComponents/clanStatsTable";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
+const APIKey = process.env.REACT_APP_API_KEY;
 
 const Container = styled.div`
     padding: 2rem;
@@ -34,12 +35,28 @@ export default function ClanStatsPage() {
 
     async function fetchData(server, clanID) {
         setClanData("loading");
-        const clanRes = await fetch(`${backend}/api/clan/${serverConv[server]}/${clanID}`);
-        const clanJSON = await clanRes.json();
-        clanJSON.members.forEach((player) => {
+        const base = `https://api.worldoftanks.${serverConv[server]}/wot`;
+        const wgEndpoints = [`/clanratings/clans/`, `/globalmap/claninfo/`, `/stronghold/claninfo/`];
+        const clanData = await Promise.all([
+            fetch(`${backend}/api/clan/${serverConv[server]}/${clanID}`).then((res) => res.json()),
+            ...wgEndpoints.map((endpoint) =>
+                fetch(`${base}${endpoint}?application_id=${APIKey}&clan_id=${clanID}`)
+                    .then((res) => res.json())
+                    .then((json) => json.data[clanID])
+            ),
+        ]).then(([clanData, rankings, globalMapHistory, strongholdHistory]) => ({
+            ...clanData,
+            image: clanData.emblems.x195.portal,
+            rankings,
+            globalMap: globalMapHistory.statistics,
+            strongholdHistory,
+            strongholdX: strongholdHistory.battles_series_for_strongholds_statistics,
+            skirmish: strongholdHistory.skirmish_statistics,
+        }));
+        clanData.members.forEach((player) => {
             player.url = `/stats/${server}/${player.account_name}=${player.account_id}`;
         });
-        setClanData(clanJSON);
+        setClanData(clanData);
     }
 
     useEffect(() => {
@@ -55,26 +72,7 @@ export default function ClanStatsPage() {
     if (clanData !== "loading")
         clanPage = (
             <Container>
-                <ClanTopStats
-                    image={clanData.emblems.x195.portal}
-                    tag={clanData.tag}
-                    name={clanData.name}
-                    created_at={clanData.created_at}
-                    motto={clanData.motto}
-                    clanColor={clanData.color}
-                    members_count={clanData.members_count}
-                    overallWN8={clanData.overallWN8}
-                    overallWinrate={clanData.overallWinrate}
-                    recentWN8={clanData.recentWN8}
-                    recentWinrate={clanData.recentWinrate}
-                    rankings={clanData.rankings}
-                    description={clanData.description_html}
-                    globalMap={clanData.globalMapHistory.statistics}
-                    strongholdX={clanData.strongholdHistory.battles_series_for_strongholds_statistics}
-                    skirmish={clanData.strongholdHistory.skirmish_statistics}
-                    bubbleOverall={clanData.bubbleOverall}
-                    bubbleRecent={clanData.bubbleRecent}
-                />
+                <ClanTopStats {...clanData} />
                 <ClanStatsTable data={clanData.members} />
             </Container>
         );

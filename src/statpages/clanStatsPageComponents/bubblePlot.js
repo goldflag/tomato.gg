@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 // LOCAL
 import { WN8color } from "Functions/colors";
-import { clanPositions } from "Data/localizations";
+import { clanPositions, commonStrings } from "Data/localizations";
 
 const CustomToolTip = styled.div`
     min-width: 200px;
@@ -138,7 +138,7 @@ export default function BubblePlot({ mode, data }) {
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: "WN8",
+                    legend: commonStrings.wn8,
                     legendPosition: "middle",
                     legendOffset: 46,
                 }}

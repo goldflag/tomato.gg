@@ -224,14 +224,14 @@ export default function ClanTopStats({
     name,
     created_at,
     motto,
-    clanColor,
+    color,
     members_count,
     overallWN8,
     overallWinrate,
     recentWN8,
     recentWinrate,
     rankings,
-    description,
+    description_html,
     globalMap,
     strongholdX,
     skirmish,
@@ -345,7 +345,7 @@ export default function ClanTopStats({
                 <ClanName>
                     <span>
                         {" "}
-                        <span style={{ color: clanColor, textShadow: "1px 1px 1px rgba(0, 0, 0, 0.75)" }}>
+                        <span style={{ color: color, textShadow: "1px 1px 1px rgba(0, 0, 0, 0.75)" }}>
                             [{tag}]
                         </span>{" "}
                         {name}
@@ -364,7 +364,7 @@ export default function ClanTopStats({
             <SplitSection>
                 <Description>
                     <Scrollbar noScrollX>
-                        <div style={{ padding: "1rem" }}>{parse(description)}</div>
+                        <div style={{ padding: "1rem" }}>{parse(description_html)}</div>
                     </Scrollbar>
                 </Description>
                 <BottomGrid>
