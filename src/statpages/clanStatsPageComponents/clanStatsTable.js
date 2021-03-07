@@ -41,58 +41,69 @@ export default function ClanStatsTable({ data }) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ({ row: { original }, value }) => <Link to={original.url}> {value}</Link>,
-                Header: tableHeaders.username,
-                accessor: "account_name",
-                disableFilters: true,
+                Header: "Player",
+                columns: [
+                    {
+                        Cell: ({ row: { original }, value }) => <Link to={original.url}> {value}</Link>,
+                        Header: tableHeaders.username,
+                        accessor: "account_name",
+                        borderLeft: true,
+                    },
+                    {
+                        Cell: ({ value }) => clanPositions[value],
+                        Header: strings.clanRole,
+                        accessor: "role",
+                    },
+                    {
+                        Header: strings.joined,
+                        accessor: "joined_at",
+                    },
+                ],
+                borderLeft: true,
             },
             {
-                Cell: ({ value }) => clanPositions[value],
-                Header: strings.clanRole,
-                accessor: "role",
-                disableFilters: true,
+                Header: "60 Days",
+                columns: [
+                    {
+                        Header: Capital(commonStrings.battles),
+                        accessor: "recentBattles",
+                        borderLeft: true,
+                    },
+                    {
+                        Header: Capital(commonStrings.tier),
+                        accessor: "recentAvgtier",
+                    },
+                    {
+                        Header: commonStrings.wn8,
+                        accessor: "recentWN8",
+                    },
+                    {
+                        Cell: ({ value }) => (value === "-" ? value : `${value}%`),
+                        Header: Capital(commonStrings.longWR),
+                        accessor: "recentWinrate",
+                    },
+                ],
+                borderLeft: true,
             },
             {
-                Header: strings.joined,
-                accessor: "joined_at",
-                disableFilters: true,
-            },
-            {
-                Header: formatString(strings.days60, Capital(commonStrings.battles)),
-                accessor: "recentBattles",
-                disableFilters: true,
-            },
-            {
-                Header: formatString(strings.days60, Capital(commonStrings.tier)),
-                accessor: "recentAvgtier",
-                disableFilters: true,
-            },
-            {
-                Header: formatString(strings.days60, commonStrings.wn8),
-                accessor: "recentWN8",
-                disableFilters: true,
-            },
-            {
-                Cell: ({ value }) => (value === "-" ? value : `${value}%`),
-                Header: formatString(strings.days60, Capital(commonStrings.longWR)),
-                accessor: "recentWinrate",
-                disableFilters: true,
-            },
-            {
-                Header: Capital(commonStrings.battles),
-                accessor: "overallBattles",
-                disableFilters: true,
-            },
-            {
-                Header: commonStrings.wn8,
-                accessor: "overallWN8",
-                disableFilters: true,
-            },
-            {
-                Cell: ({ value }) => (value === "-" ? value : `${value}%`),
-                Header: Capital(commonStrings.longWR),
-                accessor: "overallWinrate",
-                disableFilters: true,
+                Header: "Overall",
+                columns: [
+                    {
+                        Header: Capital(commonStrings.battles),
+                        accessor: "overallBattles",
+                        borderLeft: true,
+                    },
+                    {
+                        Header: commonStrings.wn8,
+                        accessor: "overallWN8",
+                    },
+                    {
+                        Cell: ({ value }) => (value === "-" ? value : `${value}%`),
+                        Header: Capital(commonStrings.longWR),
+                        accessor: "overallWinrate",
+                    },
+                ],
+                borderLeft: true,
             },
             {
                 Cell: ({ value }) =>
@@ -103,7 +114,6 @@ export default function ClanStatsTable({ data }) {
                         : formatString(strings.daysAgo, value),
                 Header: strings.lastGame,
                 accessor: "last_played",
-                disableFilters: true,
             },
         ],
         []
@@ -185,27 +195,20 @@ export default function ClanStatsTable({ data }) {
                         setGlobalFilter={setGlobalFilter}
                     />
                 </div>
-                {headerGroups.map((headerGroup, i) => (
-                    <ButtonFiltersContainer key={i}>
-                        {headerGroup.headers.map(
-                            ({ disableFilters, render }, i) =>
-                                !disableFilters && <span key={i}>{render("Filter")}</span>
-                        )}
-                    </ButtonFiltersContainer>
-                ))}
             </FiltersContainer>
             <TableContainer>
                 <StyledTable {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map((column) => (
+                                {headerGroup.headers.map(({ columns, ...column }) => (
                                     <th
                                         {...column.getHeaderProps(column.getSortByToggleProps())}
                                         {...column.getHeaderProps({
                                             style: {
                                                 cursor: "pointer",
                                                 backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
+                                                borderLeft: column.borderLeft ? "solid #CF004C 3px" : null,
                                             },
                                         })}
                                     >
