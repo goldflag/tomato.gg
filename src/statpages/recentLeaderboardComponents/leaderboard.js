@@ -11,6 +11,7 @@ import { Loader } from "Components";
 import { serverConv } from "Data/conversions";
 import { useURLState } from "Functions/hooks";
 import { ServerPagination } from "Components/";
+import { Capital, commonStrings } from "Data/localizations";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -38,86 +39,44 @@ const Filters = styled.div`
     background-color: rgba(40, 40, 70, 0.5);
 `;
 
-const strings = new LocalizedStrings({
+const { formatString, ...strings } = new LocalizedStrings({
     en: {
-        wn8: "WN8",
-        winrate: "Winrate",
-        kd: "K/D",
-        dpg: "DPG",
-        6: "In Vehicles Tier 6+",
-        8: "In Vehicles Tier 8+",
-        30: "30 Days",
-        60: "60 Days",
+        vehicleTier: "In Vehicles Tier {0}+",
         typeFilter: "set leaderboard type",
         tierFilter: "set minimum tank tier",
         timeFilter: "set time period",
         error: "Sorry, there was an error loading that leaderboard.",
     },
     cs: {
-        wn8: "Wn8",
-        winrate: "Míra vítězství",
-        kd: "Z/S",
-        dpg: "PZB",
-        6: "Ve vozidlech úrovně 6+",
-        8: "Ve vozidlech úrovně 8+",
-        30: "30 Dní",
-        60: "60 Dní",
+        vehicleTier: "Ve vozidlech úrovně {0}+",
         typeFilter: "vyberte druh žebříčku",
         tierFilter: "vyerte minimální úroveň vozidla",
         timeFilter: "vyberte období",
         error: "Omlouváme se, při načítání žebříčku se vyskytla chyba.",
     },
     fr: {
-        wn8: "WN8",
-        winrate: " Taux de victoire",
-        kd: "T/M",
-        dpg: "DPG",
-        6: "En Véhicule rang 6+",
-        8: "En Véhicule rang 8+",
-        30: "30 Jours",
-        60: "60 Jours",
+        vehicleTier: "En Véhicule rang {0}+",
         typeFilter: "Choisir le type de classement",
         tierFilter: "Choisir le rang minimum",
         timeFilter: "Choisir la période",
         error: "Désolé, une erreur s'est produite lors du chargement du classement.",
     },
     pl: {
-        wn8: "WN8",
-        winrate: "% Wygranych",
-        kd: "Stosunek zniszczeń/strat",
-        dpg: "Średnie uszkodzenia",
-        6: "W pojazdach poziomu 6+",
-        8: "W pojazdach poziomu 8+",
-        30: "30 dni",
-        60: "60 dni",
+        vehicleTier: "W pojazdach poziomu {0}+",
         typeFilter: "ustaw typ rankingu",
         tierFilter: "ustaw minimalny poziom czołgu",
         timeFilter: "ustaw przedział czasowy",
         error: "Przepraszamy, wystąpił błąd przy ładowaniu rankingu.",
     },
     tr: {
-        wn8: "WN8",
-        winrate: "Kazanma Oranı",
-        kd: "K/D",
-        dpg: "DPG",
-        6: "Seviye 6+ tanklar içinde",
-        8: "Seviye 8+ tanklar içinde",
-        30: "30 Gün",
-        60: "60 Gün",
+        vehicleTier: "Seviye {0}+ tanklar içinde",
         typeFilter: "tablo tipini ayarla",
         tierFilter: "minimum tank seviyesini ayarla",
         timeFilter: "zaman dilimini ayarla",
         error: "Üzgünüm, en iyiler tablosu yüklenirken sorun oluştu.",
     },
     zh: {
-        wn8: "WN8",
-        winrate: "勝率",
-        kd: "摧毀比",
-        dpg: "傷害",
-        6: "六階以上",
-        8: "八階以上",
-        30: "30天",
-        60: "60天",
+        vehicleTier: "{0}階以上",
         typeFilter: "設定排行榜類型",
         tierFilter: "設定最低戰車階級",
         timeFilter: "設定期間",
@@ -126,17 +85,25 @@ const strings = new LocalizedStrings({
 });
 
 const filters = {
-    type: ["wn8", "winrate", "kd", "dpg"],
-    tier: [6, 8],
+    type: [
+        { value: "wn8", label: commonStrings.wn8 },
+        { value: "winrate", label: Capital(commonStrings.longWR) },
+        { value: "kd", label: commonStrings.longKD },
+        { value: "dpg", label: commonStrings.dpg },
+    ],
+    tier: [
+        { value: 6, label: formatString(strings.vehicleTier, 6) },
+        { value: 8, label: formatString(strings.vehicleTier, 8) },
+    ],
     time: [
-        // 30,
-        60,
+        // {value: 30, label: formatString(commonStrings.days, 30) },
+        { value: 60, label: formatString(commonStrings.days, 60) },
     ],
 };
 
 const ButtonFilterBar = ({ options, filterValue, setFilterValue, ariaLabel }) => (
     <FilterButtonGroup variant="text" aria-label={"ariaLabel"}>
-        {options.map((value, i) => (
+        {options.map(({ value, label }, i) => (
             <FilterButton
                 key={i}
                 selected={value === filterValue}
@@ -144,7 +111,7 @@ const ButtonFilterBar = ({ options, filterValue, setFilterValue, ariaLabel }) =>
                     setFilterValue(value);
                 }}
             >
-                {strings[value]}
+                {label}
             </FilterButton>
         ))}
     </FilterButtonGroup>

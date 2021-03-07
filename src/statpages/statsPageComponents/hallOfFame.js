@@ -257,8 +257,31 @@ const ConditionalLink = ({ makeLink, ...props }) => {
 
 const { formatString, ...strings } = new LocalizedStrings({
     en: {
+        hof: "HALL OF FAME",
+        subTitle: "60 DAYS | MINIMUM {0} BATTLES | VEHICLES TIER 6+",
+        tankRankings: "Tank Rankings",
         betterThan: "Better than {0}%",
         moreThan: "More than {0}%",
+        unranked: "Play {0} more battles in tanks of tier 6 or higher to enter the Hall of Fame",
+        unrankedTank: "Play {0} more battles to enter rankings",
+    },
+    tr: {
+        hof: "ŞÖHRET SALONU",
+        subTitle: "60 GÜN | MİNİMUM {0} SAVAŞ | 6+ SEVİYE TANKLARDA",
+        tankRankings: "Tank Sıralamaları",
+        betterThan: "{0}%'den daha iyi",
+        moreThan: "{0}%'den daha fazla",
+        unranked: "Şöhret Salonuna girmek için 6 veya daha yüksek seviye tanklarla en az {0} kadar savaş yap",
+        unrankedTank: "Sıralamaya girmek için en az {0} kadar savaş yap",
+    },
+    zh: {
+        hof: "名人堂",
+        subTitle: "60 天 | 最少 {0} 場 | 車輛階級 6+",
+        tankRankings: "車輛評價",
+        betterThan: "高過 {0}% 玩家",
+        moreThan: "高過 {0}% 玩家",
+        unranked: "駕駛最低六階車參與 {0} 場戰鬥以進入名人堂",
+        unrankedTank: "再 {0} 場戰鬥以進入排名",
     },
 });
 
@@ -266,11 +289,10 @@ const titles = {
     dpg: Capital(commonStrings.longDPG),
     wn8: commonStrings.wn8,
     battles: Capital(commonStrings.battles),
-    dr: "Damage Ratio",
-    winrate: "Winrate",
-    kd: "K/D Ratio",
-    frags: "Frags Per game",
-    unranked: "Play {0} more battles in tanks of tier 6 or higher to enter the Hall of Fame",
+    dr: Capital(commonStrings.longDmgRatio),
+    winrate: Capital(commonStrings.longWR),
+    kd: Capital(commonStrings.longKD),
+    frags: strings.longFrags,
 };
 
 const percentile = (ranking, total) => (100 - (ranking * 100) / total).toFixed(2);
@@ -283,11 +305,11 @@ const StatCard = ({ slot, value, ranking, total, moreThan }) => (
             {formatString(moreThan ? strings.moreThan : strings.betterThan, percentile(ranking, total))}
         </BigPercentile>
         {ranking}
-        <BigLabel>Rank</BigLabel>
+        <BigLabel>{Capital(commonStrings.rank)}</BigLabel>
     </OverallItem>
 );
 
-export default function HallOfFame({ hofData, hofmainData, server, id, setHofData, setHofmainData }) {
+export default function HallOfFame({ hofData, hofmainData, id }) {
     let topTanks = <Loader color={null} bottom={20} top={20} />;
 
     if (hofData && hofmainData) {
@@ -301,8 +323,8 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
                             <OverallTop>
                                 <StatCard slot="dpg" {...top.dpg} total={top.total} />
                                 <TopGridItem slot="title">
-                                    <nobr className="title">HALL OF FAME</nobr>
-                                    <nobr className="subtitle">60 DAYS | MINIMUM 75 BATTLES | VEHICLES TIER 6+</nobr>
+                                    <nobr className="title">{strings.hof}</nobr>
+                                    <nobr className="subtitle">{formatString(strings.subTitle, 75)}</nobr>
                                     <div
                                         style={{
                                             marginTop: ".75rem",
@@ -334,94 +356,64 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
     return topTanks;
 }
 
+const TankCard = ({ userID, tank }) => (
+    <ConditionalLink
+        makeLink={tank.rank && tank.rank <= 500}
+        to={`/tank/${tank.tank_id}?rank=${tank.rank}&userID=${userID}`}
+    >
+        <Box background={"rgba(60, 60, 80, 0.5)"} backgroundHover={"rgba(201, 26, 61, 0.5)"}>
+            <Image>
+                <img src={tank.image} alt={tank.short_name} />
+            </Image>
+            <Name>
+                {tierConv[tank.tier]} - {tank.short_name}
+            </Name>
+            <DPG>{tank.dpg}</DPG>
+            <Label>{Capital(commonStrings.longDPG)}</Label>
+            {tank.rank ? (
+                <Percentile rank={tank.rank} total={tank.total}>
+                    {formatString(strings.betterThan, (100 - (tank.rank * 100) / tank.total).toFixed(2))}%
+                </Percentile>
+            ) : (
+                <Unrank>{formatString(strings.unrankedTank, 25 - tank.battles)}</Unrank>
+            )}
+            <Grid>
+                <GridItem>
+                    <Val>{tank.rank || "-"}</Val>
+                    <Label>{Capital(commonStrings.rank)}</Label>
+                </GridItem>
+                <GridItem>
+                    <Val>{tank.battles}</Val>
+                    <Label>{Capital(commonStrings.battles)}</Label>
+                </GridItem>
+                <GridItem>
+                    <Val>{tank.wn8}</Val>
+                    <Label>{commonStrings.wn8}</Label>
+                </GridItem>
+                <GridItem>
+                    <Val>{tank.winrate}%</Val>
+                    <Label>{Capital(commonStrings.longWR)}</Label>
+                </GridItem>
+            </Grid>
+        </Box>
+    </ConditionalLink>
+);
+
 const TankRankings = ({ userID, hofData }) => (
     <>
         <TanksTitle>
-            <span style={{ fontSize: "2rem" }}>Tank Rankings</span>
+            <span style={{ fontSize: "2rem" }}>{strings.tankRankings}</span>
             <br />
-            <span style={{ fontSize: "1rem" }}>60 DAYS | MINIMUM 25 BATTLES | VEHICLES TIER 6+</span>
+            <span style={{ fontSize: "1rem" }}>{formatString(strings.subTitle, 25)}</span>
         </TanksTitle>
         <TanksContainer>
-            <Scrollbar
-                noScrollY
-                trackXProps={{
-                    renderer: (props) => {
-                        props.style.background = "rgba(100, 100, 120, 0.5)";
-                        const { elementRef, ...restProps } = props;
-                        return <span {...restProps} ref={elementRef} className="TrackX" />;
-                    },
-                }}
-            >
+            <Scrollbar noScrollY>
                 <Tanks>
                     {hofData.above.map((tank, i) => (
-                        <ConditionalLink
-                            key={i}
-                            makeLink={tank.rank && tank.rank <= 500}
-                            to={`/tank/${tank.tank_id}?rank=${tank.rank}&userID=${userID}`}
-                        >
-                            <Box background={"rgba(60, 60, 80, 0.5)"} backgroundHover={"rgba(201, 26, 61, 0.5)"}>
-                                <Image>
-                                    <img src={tank.image} alt={tank.short_name} />
-                                </Image>
-                                <Name>
-                                    {tierConv[tank.tier]} - {tank.short_name}
-                                </Name>
-                                <DPG>{tank.dpg}</DPG>
-                                <Label>Damage Per Game</Label>
-                                <Percentile rank={tank.rank} total={tank.total}>
-                                    Better than {(100 - (tank.rank * 100) / tank.total).toFixed(2)}%
-                                </Percentile>
-                                <Grid>
-                                    <GridItem>
-                                        <Val>{tank.rank}</Val>
-                                        <Label>Rank</Label>
-                                    </GridItem>
-                                    <GridItem>
-                                        <Val>{tank.battles}</Val>
-                                        <Label>Battles</Label>
-                                    </GridItem>
-                                    <GridItem>
-                                        <Val>{tank.wn8}</Val>
-                                        <Label>WN8</Label>
-                                    </GridItem>
-                                    <GridItem>
-                                        <Val>{tank.winrate}%</Val>
-                                        <Label>Winrate</Label>
-                                    </GridItem>
-                                </Grid>
-                            </Box>
-                        </ConditionalLink>
+                        <TankCard key={i} tank={tank} userID={userID} ranked />
                     ))}
                     {hofData.below.map((tank, i) => (
-                        <Box background={"rgba(20, 20, 40, 0.4)"} backgroundHover={"rgba(80, 80, 80, 0.5)"} key={i}>
-                            <Image>
-                                <img src={tank.image} alt={tank.short_name} />
-                            </Image>
-                            <Name>
-                                {tierConv[tank.tier]} - {tank.short_name}
-                            </Name>
-                            <DPG>{tank.dpg}</DPG>
-                            <Label>Damage Per Game</Label>
-                            <Unrank>Play {25 - tank.battles} more battles to enter rankings</Unrank>
-                            <Grid>
-                                <GridItem>
-                                    <Val>-</Val>
-                                    <Label>Rank</Label>
-                                </GridItem>
-                                <GridItem>
-                                    <Val>{tank.battles}</Val>
-                                    <Label>Battles</Label>
-                                </GridItem>
-                                <GridItem>
-                                    <Val>{tank.wn8}</Val>
-                                    <Label>WN8</Label>
-                                </GridItem>
-                                <GridItem>
-                                    <Val>{tank.winrate}%</Val>
-                                    <Label>Winrate</Label>
-                                </GridItem>
-                            </Grid>
-                        </Box>
+                        <TankCard key={i} tank={tank} userID={userID} />
                     ))}
                 </Tanks>
             </Scrollbar>

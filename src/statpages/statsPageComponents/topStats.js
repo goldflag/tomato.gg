@@ -106,7 +106,7 @@ const { formatString, ...strings } = new LocalizedStrings({
         wgRating: "WG hodnocení",
     },
     es: {
-        created: "Cuenta creada {0}",
+        created: "Cuenta creada el {0}",
         overallWN8: "WN8 Total",
         overallWR: "Ratio de Victorias Total",
         recentWN8: "WN8 Reciente",

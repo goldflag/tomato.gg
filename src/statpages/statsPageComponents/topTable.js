@@ -2,11 +2,11 @@
 import React from "react";
 import { useTable } from "react-table";
 import styled, { css } from "styled-components";
-import LocalizedStrings from "react-localization";
 
 // LOCAL
 import { TableContainer } from "Components/tableComponents";
 import { WN8color } from "Functions/colors";
+import { commonStrings, formatString, UPPER } from "Data/localizations";
 
 const StyledTable = styled.table`
     white-space: nowrap;
@@ -52,79 +52,6 @@ const StyledTable = styled.table`
     }
 `;
 
-const strings = new LocalizedStrings({
-    en: {
-        overall: "OVERALL",
-        hrs24: "24 HOURS",
-        days3: "3 DAYS",
-        days7: "7 DAYS",
-        days30: "30 DAYS",
-        days60: "60 DAYS",
-        games100: "100 GAMES",
-        games1000: "1000 GAMES",
-    },
-    cs: {
-        overall: "CELKOVĚ",
-        hrs24: "24 HODIN",
-        days3: "3 DNÍ",
-        days7: "7 DNÍ",
-        days30: "30 DNÍ",
-        days60: "60 DNÍ",
-        games100: "100 BITEV",
-        games1000: "1000 BITEV",
-    },
-    es: {
-        overall: "TOTAL",
-        hrs24: "24 HORAS",
-        days3: "3 DÍAS",
-        days7: "7 DÍAS",
-        days30: "30 DÍAS",
-        days60: "60 DÍAS",
-        games100: "100 JUEGOS",
-        games1000: "1000 JUEGOS",
-    },
-    fr: {
-        overall: "GLOBAM",
-        hrs24: "24 HEURES",
-        days3: "3 JOURS",
-        days7: "7 JOURS",
-        days30: "30 JOURS",
-        days60: "60 JOURS",
-        games100: "100 PARTIES",
-        games1000: "1000 PARTIES",
-    },
-    pl: {
-        overall: "OGÓLNE",
-        hrs24: "24 GODZINY",
-        days3: "3 DNI",
-        days7: "7 DNI",
-        days30: "30 DNI",
-        days60: "60 DNI",
-        games100: "100 BITEW",
-        games1000: "1000 BITEW",
-    },
-    tr: {
-        overall: "GENEL",
-        hrs24: "24 SAATTE",
-        days3: "3 GÜNDE",
-        days7: "7 GÜNDE",
-        days30: "30 GÜNDE",
-        days60: "60 GÜNDE",
-        games100: "100 SAVAŞTA",
-        games1000: "1000 SAVAŞTA",
-    },
-    zh: {
-        overall: "整體",
-        hrs24: "24 小時",
-        days3: "3 天",
-        days7: "7 天",
-        days30: "30 天",
-        days60: "60 天",
-        games100: "100 場",
-        games1000: "1000 場",
-    },
-});
-
 export default function TopTable({ data }) {
     function setColor(cell, column, value) {
         if (column === "name")
@@ -149,35 +76,35 @@ export default function TopTable({ data }) {
                 accessor: "name",
             },
             {
-                Header: strings.overall,
+                Header: UPPER(commonStrings.overall),
                 accessor: "Overall",
             },
             {
-                Header: strings.hrs24,
+                Header: UPPER(formatString(commonStrings.hours, 24)),
                 accessor: "24 Hours",
             },
             {
-                Header: strings.days3,
+                Header: UPPER(formatString(commonStrings.days, 3)),
                 accessor: "3 Days",
             },
             {
-                Header: strings.days7,
+                Header: UPPER(formatString(commonStrings.days, 7)),
                 accessor: "7 Days",
             },
             {
-                Header: strings.days30,
+                Header: UPPER(formatString(commonStrings.days, 30)),
                 accessor: "30 Days",
             },
             {
-                Header: strings.days60,
+                Header: UPPER(formatString(commonStrings.days, 60)),
                 accessor: "60 Days",
             },
             {
-                Header: strings.games100,
+                Header: UPPER(formatString(commonStrings.nBattles, 100)),
                 accessor: "100 Games",
             },
             {
-                Header: strings.games1000,
+                Header: UPPER(formatString(commonStrings.nBattles, 1000)),
                 accessor: "1000 Games",
             },
         ],

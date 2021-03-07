@@ -81,7 +81,7 @@ function MoETracker({ data, moe }) {
                 filter: arrayFilterFn,
             },
             {
-                Header: tableHeaders.formatString(tableHeaders.moeRew, MoEConv[moe]),
+                Header: tableHeaders.formatString(tableHeaders.moeReqs, MoEConv[moe]),
                 accessor: moe,
                 disableFilters: true,
             },

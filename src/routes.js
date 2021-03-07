@@ -53,7 +53,7 @@ const strings = new LocalizedStrings({
         tankStats: "Datos de tanques",
         leaderboards: "Clasificación",
         moeReqs: "Requisitos de MoE",
-        masteryReqs: "Requisitos de dominio",
+        masteryReqs: "Requisitos de maestría",
         WN8Expected: "Esperados de WN8",
         statsReference: "Referencia de datos",
         about: "Acerca de",
@@ -225,6 +225,18 @@ const serverStats = {
     isNew: false,
 };
 
-export const routes = [playerStats, clanStats, tankStats, tank, leaderboards, moe, mastery, wn8, statsReference, about, home];
+export const routes = [
+    playerStats,
+    clanStats,
+    tankStats,
+    tank,
+    leaderboards,
+    moe,
+    mastery,
+    wn8,
+    statsReference,
+    about,
+    home,
+];
 export const menuRoutes = [home, tankStats, leaderboards, moe, mastery, wn8, statsReference, about];
 export const mobileMenuRoutes = [home, tankStats, leaderboards, moe, mastery, wn8, about];

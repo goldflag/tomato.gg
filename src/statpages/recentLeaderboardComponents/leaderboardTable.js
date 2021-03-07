@@ -53,7 +53,7 @@ export default function LeaderboardTable({ type, data }) {
                 accessor: "frags",
             },
             {
-                Header: commonStrings.dmgRatio,
+                Header: Capital(commonStrings.dmgRatio),
                 accessor: "dmg_ratio",
             },
             {
