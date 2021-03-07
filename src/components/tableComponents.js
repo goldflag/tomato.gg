@@ -15,7 +15,7 @@ export const FiltersContainer = styled.div`
     width: 100%;
     backdrop-filter: blur(7px);
     @media screen and (max-width: 1000px) {
-        overflow-x: scroll;
+        backdrop-filter: brightness(1.2);
     }
 `;
 

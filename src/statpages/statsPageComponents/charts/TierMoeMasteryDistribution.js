@@ -10,7 +10,7 @@ export default function TierMasteryDistribution({data, keys, colors}) {
                     textColor: "rgb(210, 210, 210)",
                     grid: {
                         line: {
-                            stroke: "rgb(100, 100, 100)",
+                            stroke: "rgba(200, 200, 200, 0.5)",
                             strokeWidth: 1,
                         },
                     },

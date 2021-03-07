@@ -21,23 +21,34 @@ const TopGrid = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     margin: 0rem -0.5rem 0.5rem;
+    @media screen and (max-width: 1000px) {
+        grid-template-columns: 1fr 1fr;
+    }
 `;
 const BottomGrid = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     margin: -0.5rem 0rem;
+    @media screen and (max-width: 1000px) {
+        display: none;
+    }
 `;
 
 const SplitSection = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 0rem -0.5rem 1rem -0.5rem;
+    @media screen and (max-width: 1000px) {
+        display: block;
+    }
 `;
+
 const Description = styled.div`
     font-size: 0.5rem;
     background-color: rgba(40, 40, 70, 0.5);
     margin: 0rem 0.5rem;
 `;
+
 const StatBox = styled.div`
     display: flex;
     flex-direction: column;
@@ -49,6 +60,9 @@ const StatBox = styled.div`
     font-size: 1.5rem;
     font-weight: 500;
     text-align: center;
+    :hover {
+        backdrop-filter: brightness(0.8);
+    }
 `;
 const StatBoxLabel = styled.div`
     font-size: 0.9rem;
@@ -66,6 +80,13 @@ const ClanName = styled.div`
 const ClanIcon = styled.img`
     margin: 1rem;
     max-width: 100px;
+`;
+
+const Bubble = styled.div`
+    height: 510px;
+    background-color: rgba(40, 40, 70, 0.4);
+    backdrop-filter: blur( 7px );
+    color: rgb(30, 30, 30);
 `;
 
 const Delta = styled(({ delta, ...props }) =>
@@ -284,7 +305,11 @@ export default function ClanTopStats({
                 <CustomTab label={strings.overallTab} />
                 <CustomTab label={strings.recentTab} />
             </CustomTabs>
-            <BubblePlot mode={bubbleTab} data={bubbleTab === 0 ? bubbleOverall : bubbleRecent} />
+            <Bubble>
+                {/* <Scrollbar noScrollY> */}
+                <BubblePlot mode={bubbleTab} data={bubbleTab === 0 ? bubbleOverall : bubbleRecent} />
+                {/* </Scrollbar> */}
+            </Bubble>
         </div>
     );
 }

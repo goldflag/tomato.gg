@@ -46,8 +46,13 @@ const TooltipValue = styled.div`
     margin-top: 0rem;
 `;
 
-const TreeMapTooltip = ({ battles, x, y, winrate, username, serieId }) => {
-    
+const Bubble = styled.div`
+    height: 500px;
+`;
+
+
+const TreeMapTooltip = ({ node, data }) => {
+        const { battles, x, y, winrate, username, serieId } = data;
     let headerContent = `${username}`;
     let gridItems = [
         { label: "Winrate", value: winrate + "%" },
@@ -90,34 +95,64 @@ const RoleConv = {
     }
 }
 
+const CustomNode = ({
+    node,
+    x,
+    y,
+    size,
+    color,
+    blendMode,
+    onMouseEnter,
+    onMouseMove,
+    onMouseLeave,
+    onClick,
+}) => {
+    return (
+        <g transform={`translate(${x},${y})`}>
+            <circle
+                r={size}
+                fill={WN8color(node.data.x)}
+                style={{ mixBlendMode: blendMode }}
+                onMouseEnter={onMouseEnter}
+                onMouseMove={onMouseMove}
+                onMouseLeave={onMouseLeave}
+                onClick={onClick}
+            />
+        </g>
+    )
+}
+
+const theme = {
+    fontFamily: "Roboto Mono",
+    textColor: "rgb(255, 255, 255)",
+    grid: {
+        line: {
+            stroke: "rgba(200, 200, 200, 0.5)",
+            strokeWidth: 1,
+        },
+    },
+    tooltip: {
+        fontFamily: "Roboto Mono",
+        container: {
+            backdropFilter: "blur( 7px )",
+            background: "rgb(40, 40, 70, 0.8)",
+            color: "rgb(255, 255, 255)",
+        },
+    },
+}
+
 export default function BubblePlot({ mode, data }) {
     return (
-        <div style={{ 
-            height: "500px", 
-            backgroundColor: "rgba(40, 40, 70, 0.4)",
-            backdropFilter: "blur( 7px )",
-            color: "rgb(30, 30, 30)",
-        }}>
+        <Bubble>
             <ResponsiveScatterPlot
                 data={data}
-                theme={{
-                    fontFamily: "Roboto Mono",
-                    textColor: "rgb(255, 255, 255)",
-                    tooltip: {
-                        fontFamily: "Roboto Mono",
-                        container: {
-                            backdropFilter: "blur( 7px )",
-                            background: "rgb(40, 40, 70, 0.8)",
-                            color: "rgb(255, 255, 255)",
-                        },
-                    },
-                }}
+                theme={theme}
                 colors={{ scheme: 'purpleRed_green' }}
-                margin={{ top: 30, right: 200, bottom: 70, left: 90 }}
+                margin={{ top: 30, right: 30, bottom: 70, left: 90 }}
                 xScale={{ type: 'linear', min: 'auto', max: 'auto' }}
                 yScale={{ type: 'linear', min: 'auto', max: 'auto' }}
                 blendMode="multiply"
-                nodeSize={node => Math.sqrt(node.battles/Math.PI)*(mode === 0 ? 0.3 : 2)}
+                nodeSize={node => Math.sqrt(node.battles/Math.PI)*(mode === 0 ? 0.2 : 1.2)}
                 axisTop={null}
                 axisRight={null}
                 axisBottom={{
@@ -138,36 +173,13 @@ export default function BubblePlot({ mode, data }) {
                     legendPosition: 'middle',
                     legendOffset: -60
                 }}
-                tooltip={({ node: { data } }) => {
-                    return <TreeMapTooltip {...data}/>
+                tooltip={(node) => {
+                    return <TreeMapTooltip node={node} data={node.node.data}/>
                 }}
-                useMesh={false}
 
-                legends={[
-                    {
-                        data: data,
-                        anchor: 'bottom-right',
-                        direction: 'column',
-                        justify: false,
-                        translateX: 130,
-                        translateY: 0,
-                        itemWidth: 100,
-                        itemHeight: 12,
-                        itemsSpacing: 5,
-                        itemDirection: 'left-to-right',
-                        symbolSize: 12,
-                        symbolShape: 'circle',
-                        effects: [
-                            {
-                                on: 'hover',
-                                style: {
-                                    itemOpacity: 1
-                                }
-                            }
-                        ]
-                    }
-                ]}
+                renderNode={CustomNode}
+
             />
-        </div>
+        </Bubble>
     );
 }
