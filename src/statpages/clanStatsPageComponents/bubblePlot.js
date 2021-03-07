@@ -54,8 +54,8 @@ const Bubble = styled.div`
     height: 500px;
 `;
 
-const TreeMapTooltip = ({ node, data }) => {
-    const { battles, x, y, winrate, username, serieId } = data;
+const BubblePlotTooltip = ({ node, data }) => {
+    const { battles, x, y, winrate, username, role } = data;
     let headerContent = `${username}`;
     let gridItems = [
         { label: "Winrate", value: winrate + "%" },
@@ -68,7 +68,7 @@ const TreeMapTooltip = ({ node, data }) => {
         <CustomToolTip>
             <CustomColor color={WN8color(x)}>
                 {headerContent}
-                <TooltipLabel size={0.8}>{clanPositions[serieId]}</TooltipLabel>
+                <TooltipLabel size={0.8}>{clanPositions[role]}</TooltipLabel>
             </CustomColor>
             <Grid>
                 {gridItems.map(({ label, labelProps, value }, i) => (
@@ -151,9 +151,7 @@ export default function BubblePlot({ mode, data }) {
                     legendPosition: "middle",
                     legendOffset: -60,
                 }}
-                tooltip={(node) => {
-                    return <TreeMapTooltip node={node} data={node.node.data} />;
-                }}
+                tooltip={(node) => <BubblePlotTooltip node={node} data={node.node.data} />}
                 renderNode={CustomNode}
             />
         </Bubble>
