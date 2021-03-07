@@ -69,7 +69,7 @@ const SearchItem = styled(Chip)`
     color: white !important;
     background-color: #252e69 !important;
     border-width: 2px !important;
-    border-color: #606ebb !important;
+    border-color: ${({ isClan }) => isClan === true ? "rgb(141, 86, 232)" : "#4e80c2" } !important;
     &:hover {
         border-color: rgb(140, 150, 210) !important;
     }
@@ -116,6 +116,7 @@ const SearchHistory = () => {
                             }
                             onClick={() => redirectToStatsPage(name, id, server, isClan)}
                             onDelete={() => removeFromHistory(id)}
+                            isClan={isClan}
                             label={isClan ? name.toUpperCase() : name}
                         />
                     ))}

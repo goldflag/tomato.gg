@@ -20,7 +20,7 @@ const SelectButton = styled(Button)`
     font-weight: 500 !important;
     color: rgb(210, 210, 210) !important;
     background-color: rgb(37, 46, 105) !important;
-    border: 2px solid ${({ selected }) => (selected ? "rgb(165, 31, 242)" : "rgba(0, 0, 0, 0)")}  !important;
+    border: 2px solid ${({ selected }) => (selected ? "rgb(207, 31, 242)" : "rgba(0, 0, 0, 0)")}  !important;
     border-radius: ${({ radius }) => radius} !important;
     border-right: 0;
     padding: 1px 0.5rem !important;

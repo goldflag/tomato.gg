@@ -14,7 +14,7 @@ import Discord from "./discord";
 const StyledTopbar = styled.div`
     width: 100%;
     height: 4rem;
-    background-color: #4d5895;
+    background-color: rgba(77, 88, 149);
     border-bottom: 1px solid rgb(100, 95, 129);
     font-family: "Roboto";
     color: white;
