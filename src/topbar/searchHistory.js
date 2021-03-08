@@ -28,10 +28,6 @@ const strings = new LocalizedStrings({
         clearHistory: "Effacer l'historique",
         server: "Sélectionnez un serveur par défaut",
     },
-    tr: {
-        clearHistory: "Geçmişi temizle",
-        server: "Varsayılan sunucuyu seç",
-    },
     pl: {
         clearHistory: "Wyczyść historię",
         server: "Wybierz domyślny serwer",
@@ -39,6 +35,10 @@ const strings = new LocalizedStrings({
     ru: {
         clearHistory: "Очистить историю",
         server: "Выберите свой сервер",
+    },
+    tr: {
+        clearHistory: "Geçmişi temizle",
+        server: "Varsayılan sunucuyu seç",
     },
 });
 

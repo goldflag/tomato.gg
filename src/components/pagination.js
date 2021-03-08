@@ -60,11 +60,6 @@ const { formatString, ...strings } = new LocalizedStrings({
         gotoPage: "Aller à la page:",
         show: "Montrer",
     },
-    tr: {
-        pageOf: "Sayfa {0} / {1}",
-        gotoPage: "Git:",
-        show: "Gösterilen",
-    },
     pl: {
         pageOf: "Strona {0} z {1}",
         gotoPage: "Idź na stronę:",
@@ -74,6 +69,11 @@ const { formatString, ...strings } = new LocalizedStrings({
         pageOf: "Страница {0} из {1}",
         gotoPage: "Перейти на страницу:",
         show: "Показать",
+    },
+    tr: {
+        pageOf: "Sayfa {0} / {1}",
+        gotoPage: "Git:",
+        show: "Gösterilen",
     },
 });
 

@@ -36,6 +36,11 @@ const { formatString, ...strings } = new LocalizedStrings({
         maintained: "Zarządzane przez {0}",
         xvm: "XVM team",
     },
+    ru: {
+        expected: "WN8 Ожидаемая статистика",
+        maintained: "Поддерживается {0}",
+        xvm: "командой XVM",
+    },
     tr: {
         expected: "WN8 Beklenen Değer",
         maintained: "Sağlayan: {0}",

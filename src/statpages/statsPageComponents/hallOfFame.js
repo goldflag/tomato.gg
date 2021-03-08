@@ -301,6 +301,15 @@ const { formatString, ...strings } = new LocalizedStrings({
         unranked: "Zagraj jeszcze {0} bitew w czołgach poziomu 6 lub wyżej aby wejść do Alei Sław",
         unrankedTank: "Zagraj jeszcze {0} bitew aby wejść do rankingów",
     },
+    ru: {
+        hof: "ЗАЛ СЛАВЫ",
+        subTitle: "60 ДНЕЙ | МИНИМУМ {0} СРАЖЕНИЙ | ТАНК УРОВНЯ 6+",
+        tankRankings: "Рейтинг танков",
+        betterThan: "Лучше чем {0}%",
+        moreThan: "Больше, чем {0}%",
+        unranked: "Сыграйте еще {0} боёв на танках 6 уровня и выше, чтобы попасть в Зал славы.",
+        unrankedTank: "Сыграйте еще {0} боёв, чтобы войти в рейтинг",
+    },
     tr: {
         hof: "ŞÖHRET SALONU",
         subTitle: "60 GÜN | MİNİMUM {0} SAVAŞ | 6+ SEVİYE TANKLARDA",

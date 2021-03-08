@@ -79,6 +79,8 @@ const strings = new LocalizedStrings({
         notAffiliated: "i nie jest powiązana z Wargaming.net.",
     },
     ru: {
+        boomer: "Переключить темный фон",
+        boomerAria: "переключить цвет фона",
         support: "Поддерживать Tomato.gg",
         donations: `Tomato.gg полностью работает на пожертвования пользователей. Если вы находите 
         ценность в веб-сайте, подумайте о пожертвовании для серверов.`,

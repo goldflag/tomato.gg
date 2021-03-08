@@ -50,6 +50,8 @@ const strings = new LocalizedStrings({
     ru: {
         placeholder: "Введите имя пользователя (например, Goldflag)",
         ariaLabel: "искать игрока",
+        clanPlaceholder: "Введите название клана",
+        clanAriaLabel: "поиск клана",
         searchAriaLabel: "поиск",
     },
     tr: {
