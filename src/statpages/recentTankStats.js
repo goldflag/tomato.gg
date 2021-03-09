@@ -41,6 +41,12 @@ const { formatString, ...strings } = new LocalizedStrings({
         clickRow: "Kliknij na rząd żeby wyświetlić szczegółowe wskaźniki serwerowej efektywności czołgu oraz rankingi",
         error: "Przepraszamy, wystąpił błąd przy ładowaniu bieżących statystyk czołgu.",
     },
+    ru: {
+        title: "{0} Недавняя статистика танков",
+        clickRow: `Щелкните строку, чтобы просмотреть подробные сведения о 
+        производительности танков на сервере и списки лидеров.`,
+        error: "К сожалению, недавнюю статистику танка загрузить не удалось.",
+    },
     tr: {
         title: "{0} Son Tank İstatistikleri",
         clickRow: `Ayrıntılı sunucu çapında tank performansını ve 

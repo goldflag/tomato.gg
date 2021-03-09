@@ -83,6 +83,13 @@ const strings = new LocalizedStrings({
         infographics: "INFOGRAFIKI",
         treemap: "MAPA DRZEWEK", // tbd
     },
+    ru: {
+        main: "ОСНОВНАЯ СТАТИСТИКА",
+        hof: "ЗАЛ СЛАВЫ",
+        sessions: "СЕССИИ",
+        infographics: "ИНФОГРАФИКА",
+        treemap: "ДИАГРАММЫ",
+    },
     tr: {
         main: "ANA İSTATİSTİKLER",
         hof: "ŞÖHRET SALONU",

@@ -132,6 +132,14 @@ const { formatString, ...strings } = new LocalizedStrings({
         recentWR: "Bieżący % Zwycięstw",
         wgRating: "Klasyfikacja WG",
     },
+    ru: {
+        created: "Аккаунт создан {0}",
+        overallWN8: "Общий WN8",
+        overallWR: "Общий WR",
+        recentWN8: "Недавний WN8",
+        recentWR: "Недавний WR",
+        wgRating: "Рейтинг WG",
+    },
     tr: {
         created: "Hesap {0} tarihinde oluşturuldu",
         overallWN8: "Genel WN8",
@@ -161,7 +169,10 @@ export default function TopStats(props) {
         const { role, clan } = props.clanStats;
         clanInfo = (
             <>
-                {clanPositions[role]} at <Link to={`/clan-stats/${serverConv[server]}/${clan.clan_id}`}><ClanTag {...clan}>[{clan.tag}]</ClanTag></Link>
+                {clanPositions[role]} at{" "}
+                <Link to={`/clan-stats/${serverConv[server]}/${clan.clan_id}`}>
+                    <ClanTag {...clan}>[{clan.tag}]</ClanTag>
+                </Link>
             </>
         );
     }

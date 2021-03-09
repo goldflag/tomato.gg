@@ -88,7 +88,7 @@ const { formatString, ...strings } = new LocalizedStrings({
         moeMod: "Информация от создателей",
         expand: "Разверните, чтобы увидеть историю MG за 30 дней",
         avg: "*Изменение MG рассчитывается с использованием средних значений за 3 дня для минимизации шума.",
-        expected: "EXPECTED VALUES",
+        expected: "ОЖИДАЕМЫЕ ЗНАЧЕНИЯ",
         exp95change: "95% EXP. VAL CHANGE",
         exp85change: "85% EXP. VAL CHANGE",
         exp65change: "65% EXP. VAL CHANGE",
