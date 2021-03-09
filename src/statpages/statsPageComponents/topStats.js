@@ -182,7 +182,9 @@ export default function TopStats(props) {
             <Username>{props.username}</Username>
             {clanInfo}
             <br />
-            <AccountCreated>{formatString(strings.created, date.toLocaleDateString(dateOptions))}</AccountCreated>
+            <AccountCreated>
+                {formatString(strings.created, date.toLocaleDateString(navigator.languages[0], dateOptions))}
+            </AccountCreated>
         </>
     );
 

@@ -352,6 +352,9 @@ export default function ClanTopStats({
         },
     ];
 
+    const date_created = new Date(created_at * 1000);
+    const dateOptions = { year: "numeric", month: "long", day: "numeric" };
+
     return (
         <div style={{ marginBottom: "1rem" }}>
             <Name>
@@ -365,7 +368,10 @@ export default function ClanTopStats({
                         {name}
                     </span>
                     <span style={{ fontSize: "0.8rem", color: "rgb(200, 200, 200)", padding: "0.4rem" }}>
-                        {formatString(strings.created, created_at)}
+                        {formatString(
+                            strings.created,
+                            date_created.toLocaleDateString(navigator.languages[0], dateOptions)
+                        )}
                     </span>
                     <span style={{ fontSize: "0.9rem" }}>{motto}</span>
                 </ClanName>

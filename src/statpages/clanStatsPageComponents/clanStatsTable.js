@@ -83,6 +83,12 @@ const { formatString, ...strings } = new LocalizedStrings({
     },
 });
 
+const DateCell = ({ value }) => {
+    const date = new Date(value * 1000);
+    const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
+    return date.toLocaleDateString(navigator.languages[0], dateOptions);
+};
+
 export default function ClanStatsTable({ data }) {
     // const { server } = useContext(ServerContext);
 
@@ -103,6 +109,7 @@ export default function ClanStatsTable({ data }) {
                         accessor: "role",
                     },
                     {
+                        Cell: DateCell,
                         Header: strings.joined,
                         accessor: "joined_at",
                     },
@@ -159,7 +166,7 @@ export default function ClanStatsTable({ data }) {
                         ? strings.today
                         : value === 1
                         ? strings.yesterday
-                        : formatString(strings.daysAgo, value),
+                        : Capital(formatString(strings.daysAgo, value)),
                 Header: strings.lastGame,
                 accessor: "last_played",
             },
