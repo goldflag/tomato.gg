@@ -9,7 +9,7 @@ export default function setColor(isSorted, column, value) {
         };
     else if (column === "winrate" || column === "overallWinrate" || column === "recentWinrate")
         return {
-            backgroundColor: WRcolor(value.slice(0, -1)),
+            backgroundColor: WRcolor(value === "-" ? value : value.slice(0, -1)),
             color: "white",
             padding: "10px",
         };

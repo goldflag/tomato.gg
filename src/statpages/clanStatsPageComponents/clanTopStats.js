@@ -61,7 +61,7 @@ const StatBox = styled.div`
     font-weight: 500;
     text-align: center;
     :hover {
-        backdrop-filter: brightness(0.8);
+        backdrop-filter: brightness(1.5);
     }
 `;
 const StatBoxLabel = styled.div`

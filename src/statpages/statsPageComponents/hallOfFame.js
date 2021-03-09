@@ -328,7 +328,7 @@ const titles = {
     dr: Capital(commonStrings.longDmgRatio),
     winrate: Capital(commonStrings.longWR),
     kd: Capital(commonStrings.longKD),
-    frags: strings.longFrags,
+    frags: Capital(commonStrings.longFrags),
 };
 
 const percentile = (ranking, total) => (100 - (ranking * 100) / total).toFixed(2);

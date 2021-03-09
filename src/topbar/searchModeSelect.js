@@ -24,6 +24,7 @@ const SelectButton = styled(Button)`
     border-radius: ${({ radius }) => radius} !important;
     border-right: 0;
     padding: 1px 0.5rem !important;
+    width: 80px;
     &:hover {
         color: rgb(255, 255, 255) !important;
         border: 2px solid rgba(150, 150, 200, 1) !important;
