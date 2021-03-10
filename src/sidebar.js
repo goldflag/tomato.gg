@@ -7,7 +7,8 @@ import Switch from "@material-ui/core/Switch";
 
 // LOCAL
 import { menuRoutes } from "./routes";
-import TomatoLogo from "Assets/tomato.png";
+import TomatoLogo from "Assets/newlogo.png";
+// import TomatoLogo from "Assets/tomato.png";
 import background from "Assets/sidebar.jpg";
 import { NewIcon } from "Components";
 import { BackgroundContext } from "Context";
