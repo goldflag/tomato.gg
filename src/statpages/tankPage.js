@@ -83,6 +83,10 @@ const { formatString, ...strings } = new LocalizedStrings({
         top500: "500 nejlepších hráčů v",
         past60min25: "POSLEDNÍCH 60 DNÍ | MINIMÁLNĚ 25 BITEV",
     },
+    de: {
+        top500: "Top 500 Spieler in",
+        past60min25: "LETZTE 60 TAGE | MINIMUM 25 GEFECHTE",
+    },
     es: {
         top500: "Los 500 Mejores Jugadores de",
         past60min25: "ÚLTIMOS 60 DÍAS | MÍNIMO 25 BATALLAS",

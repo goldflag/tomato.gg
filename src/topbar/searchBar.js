@@ -30,6 +30,13 @@ const strings = new LocalizedStrings({
         clanAriaLabel: "Hledejte klan",
         searchAriaLabel: "hledat",
     },
+    de: {
+        placeholder: "Gib einen Spielernamen ein",
+        ariaLabel: "Suche nach einem Spieler",
+        clanPlaceholder: "Gib einen Clannamen ein",
+        clanAriaLabel: "suche nach einem Clan",
+        searchAriaLabel: "Suche",
+    },
     es: {
         placeholder: "Escribe un nombre de usuario",
         ariaLabel: "buscar un jugador",

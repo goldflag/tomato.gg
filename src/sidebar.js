@@ -40,6 +40,20 @@ const strings = new LocalizedStrings({
         createdBy: "Tomato.gg vytvořil",
         notAffiliated: "a není jakkoliv spojen s Wargaming.net.",
     },
+    de: {
+        boomer: "Wechsel zu dunklem Hintergrund",
+        boomerAria: "Ändere Hintergrundfarbe",
+        support: "Unterstütze Tomato.gg",
+        donations: `Tomato.gg finanziert sich ausschließlich über Spenden.
+        Wenn du diese Website nützlich findest, überlege dir ob du Tomato.gg unterstützen möchtest,
+        um die Server am laufen zu halten.`,
+        kofi: "Spende via Ko-fi",
+        paypal: "Spende via Paypal",
+        partnered: "Usere Partner",
+        herhor: "MoE Ränge und Bild Generator",
+        createdBy: "Tomato.gg ist ein Projekt von",
+        notAffiliated: "und steht nicht in Verbindung mit Wargaming.net.",
+    },
     es: {
         boomer: "Alternar Fondo Oscuro",
         boomerAria: "alternar color de fondo",

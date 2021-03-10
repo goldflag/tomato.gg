@@ -33,6 +33,13 @@ const strings = new LocalizedStrings({
         clanAriaLabel: "buscar un clan",
         searchAriaLabel: "buscar",
     },
+    de: {
+        placeholder: "Gib einen Spielernamen ein (z.B. Goldflag)",
+        ariaLabel: "Suche nach einem Spieler",
+        clanPlaceholder: "Gib einen Clannamen ein",
+        clanAriaLabel: "suche nach einem Clan",
+        searchAriaLabel: "Suche",
+    },
     fr: {
         placeholder: "Entrez le nom d'un joueur (ex: Goldflag)",
         ariaLabel: "recherchez un joueur",

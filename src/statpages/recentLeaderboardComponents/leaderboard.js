@@ -54,6 +54,20 @@ const { formatString, ...strings } = new LocalizedStrings({
         timeFilter: "vyberte období",
         error: "Omlouváme se, při načítání žebříčku se vyskytla chyba.",
     },
+    de: {
+        vehicleTier: "In Fahrzeugen Tier {0}+",
+        typeFilter: "setze Typ der Bestenliste",
+        tierFilter: "setze minimales Panzer Tier",
+        timeFilter: "setze Zeitraum",
+        error: "Entschuldigung, es ist ein Fehler beim Laden der Bestenliste aufgetreten.",
+    },
+    es: {
+        vehicleTier: "En Vehículos Tier {0}+",
+        typeFilter: "establecer el tipo de tabla de clasificación",
+        tierFilter: "establecer el tier mínimo del tanque",
+        timeFilter: "establecer periodo de tiempo",
+        error: "Lo siento, hubo un error al cargar esa tabla de clasificación",
+    },
     fr: {
         vehicleTier: "En Véhicule rang {0}+",
         typeFilter: "Choisir le type de classement",

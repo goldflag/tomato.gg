@@ -108,6 +108,15 @@ const { formatString, ...strings } = new LocalizedStrings({
         recentWR: "Nedávná míra vítězství",
         wgRating: "WG hodnocení",
     },
+    de: {
+        created: "Account erstellt {0}",
+        overallWN8: "Gesamt WN8",
+        overallWR: "Gesamt WR",
+        recentWN8: "Aktuelle WN8",
+        recentWR: "Aktuelle WR",
+        wgRating: "WG Wertung",
+        battles: "Gefechte",
+    },
     es: {
         created: "Cuenta creada el {0}",
         overallWN8: "WN8 Total",

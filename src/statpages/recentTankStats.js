@@ -24,6 +24,11 @@ const { formatString, ...strings } = new LocalizedStrings({
         clickRow: "Kliknutím na řádek zobrazíte podrobné serverové žebříčky vozidla a jeho statistiky",
         error: "Omlouváme se, nedávné statistiky vozidla nelze načíst.",
     },
+    de: {
+        title: "{0} Aktuelle Panzerstatistiken",
+        clickRow: "Klicke auf eine Zeile um detaillierte, serverweite Panzerstatistiken und Bestenlisten zu sehen",
+        error: "Entschuldigung, aktuelle Panzerstatistiken konnten nicht geladen werden.",
+    },
     es: {
         title: "{0} Estadísticas Recientes del Tanque",
         clickRow: `Haga clic en una fila para ver el rendimiento y las tablas de 

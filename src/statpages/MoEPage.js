@@ -37,6 +37,17 @@ const { formatString, ...strings } = new LocalizedStrings({
         exp85change: "ZMĚNA OČEKÁVANÝCH HODNOT PRO 85%",
         exp65change: "ZMĚNA OČEKÁVANÝCH HODNOT PRO 65%",
     },
+    de: {
+        moe: "Erfolgsmarkierungen Anforderungen",
+        dataFrom: "Werte bereitgestellt vom Ersteller des",
+        moeMod: "Marks of Excellence Mods",
+        expand: "Wähle eine Zeile aus um die Anforderungen der letzen 30 Tage zu sehen",
+        avg: "*Veränderungen werden mit dem 3-Tages Mittel berechnet um Rauschen zu minimieren",
+        expected: "ERWARTUNGSWERTE",
+        exp95change: "95% ERW. VERÄNDERUNG",
+        exp85change: "85% ERW. VERÄNDERUNG",
+        exp65change: "65% ERW. VERÄNDERUNG",
+    },
     es: {
         moe: "Requisitos de Las Marcas de Excelencia",
         dataFrom: "Datos de los creadores de",

@@ -49,6 +49,26 @@ const strings = new LocalizedStrings({
         feedback: `Pokud byste chtěli poskytnout zpětnou vazbu, návrhy na vylepšení nebo nahlásit chybu.`,
         thanks: `Děkujeme, že používáte Tomato.gg!`,
     },
+    de: {
+        h1: `Über Tomato.gg`,
+        updated: `AKTUALISIERT `,
+        about0: `Ich habe diese Seite erstellt um eine Schnittstelle zu einer riesigen Menge an Statistiken anzubieten.
+        Vieles davon kann nur hier gefunden werden doch einige Statistiken wurden von anderen Seiten inspiriert.`,
+        about1: `Tomato.gg versucht nicht Alles zu machen. Es wird weder so detaillierte Serverstatistiken wie
+        wot-news.com haben, noch individuellen Gefechte abbilden wie auf WN8lab.com.
+        Tomato.gg wird aktiv entwickelt und hat bei weitem noch nicht alle geplanten Features. In Zukunft plane
+        ich die Spieler- und Panzerstatistiken zu erweitern, Clanstatistiken zu implementieren und die Bestenlisten
+        fertig zu stellen.`,
+        about2: `Tomato.gg unterstützt Statistiken von Spielern von EU, NA, und ASIA vollständig. Die Statistiken von
+        RU Spielern können auch angesehen werden. Diese werden aber nicht täglich aktualisiert.`,
+        about3: `Sieh dir auch die mobile Version von Tomato.gg an. Diese unterstützt beinahe 100% der Funktionen und
+        ist auf User Experience optimiert.`,
+        about4: `hat sehr viel zur Entwicklung von Tomato.gg beigetragen. Vielen Dank dafür!`,
+        joinMy: `Für Anregungen, Feedback und Bug Reports tritt meinem`,
+        discord: `Discord Server`,
+        feedback: `bei.`,
+        thanks: `Vielen Dank dass du Tomato.gg nutzt!`,
+    },
     es: {
         h1: `Sobre Tomato.gg`,
         updated: `ACTUALIZADO`,

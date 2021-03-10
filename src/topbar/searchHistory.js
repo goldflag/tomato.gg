@@ -20,6 +20,10 @@ const strings = new LocalizedStrings({
         clearHistory: "vymazat historii",
         server: "vyberte výchozí server",
     },
+    de: {
+        clearHistory: "Suchverlauf löschen",
+        server: "wähle Standardserver",
+    },
     es: {
         clearHistory: "borrar historial",
         server: "seleccionar servidor predeterminado",

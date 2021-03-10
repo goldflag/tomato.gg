@@ -46,6 +46,21 @@ const strings = new LocalizedStrings({
         tankList: "Seznam vozidel",
         serverStats: "Serverové statistiky",
     },
+    de: {
+        home: "Startseite",
+        playerStats: "Spielerstatistiken",
+        clanStats: "Clan Stats",
+        tankStats: "Panzerstatistiken",
+        leaderboards: "Bestenlisten",
+        moeReqs: "MoE Anf.", // alternative "Erfolgsmarkierungen Anf."
+        masteryReqs: "Panzerass Anf.", // alternative "Überlegenheitsabzeichen Anf."
+        WN8Expected: "WN8 Erwartungswert",
+        statsReference: "Referenzdiagramme",
+        about: "Über Tomato.gg", // alternative "Über uns" (about us)
+        tankList: "Panzerliste",
+        serverStats: "Serverstatistiken",
+    },
+
     es: {
         home: "Página principal",
         playerStats: "Datos del jugador",
@@ -73,6 +88,19 @@ const strings = new LocalizedStrings({
         about: "À propos",
         tankList: "Liste Chars",
         serverStats: "Statistiques Serveur",
+    },
+    it: {
+        home: "Home",
+        playerStats: "Statistiche giocatore",
+        tankStats: "Statistiche carri",
+        leaderboards: "Leaderboards",
+        moeReqs: "Requisiti MoE",
+        masteryReqs: "Requisiti Mastery",
+        WN8Expected: "Valori WN8 previsti",
+        statsReference: "Riferimento statistiche",
+        about: "About",
+        tankList: "Lista carri",
+        serverStats: "Statistiche server",
     },
     pl: {
         home: "Strona Główna",

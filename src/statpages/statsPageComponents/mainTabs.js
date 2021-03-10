@@ -62,6 +62,13 @@ const strings = new LocalizedStrings({
         infographics: "INFOGRAFÍA",
         treemap: "TREEMAP",
     },
+    de: {
+        main: "ALLGEMEINE STATISTIKEN",
+        hof: "HALL OF FAME",
+        sessions: "SESSIONS",
+        infographics: "INFOGRAFIKEN",
+        treemap: "TREE MAP",
+    },
     cs: {
         main: "HLAVNÍ STATISTIKY",
         hof: "SÍŇ SLÁVY",

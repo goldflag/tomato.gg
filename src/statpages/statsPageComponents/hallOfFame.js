@@ -274,6 +274,15 @@ const { formatString, ...strings } = new LocalizedStrings({
         unranked: "Odehrajte ještě {0} bitev ve vozidlech úrovně 6 nebo vyšší, abyste vstoupili do Síně slávy",
         unrankedTank: "Odehrajte ještě {0} bitev, abyste vstoupili do žebříčku",
     },
+    de: {
+        hof: "HALL OF FAME",
+        subTitle: "60 TAGE | MINIMUM {0} GEFECHTE | FAHRZEUG TIER 6+",
+        tankRankings: "PANZER Rankings",
+        betterThan: "Besser als {0}%",
+        moreThan: "Mehr als {0}%",
+        unranked: "Spiel {0} mehr Gefechte in Panzern von Tier 6 oder höher um in die Hall of Fame zu kommen",
+        unrankedTank: "Spiel {0} mehr Gefechte um in die Rankings zu kommen",
+    },
     es: {
         hof: "SALÓN DE LA FAMA",
         subTitle: "60 DÍAS | MÍNIMA {0} BATALLAS | VEHÍCULOS TIER 6+",

@@ -33,6 +33,14 @@ const { formatString, ...strings } = new LocalizedStrings({
         yesterday: "Včera",
         daysAgo: "Před {0} dny",
     },
+    de: {
+        clanRole: "Rang",
+        joined: "Beigetreten",
+        lastGame: "Letztes Gefecht",
+        today: "Heute",
+        yesterday: "Gestern",
+        daysAgo: "vor {0} Tagen",
+    },
     es: {
         clanRole: "Papel",
         joined: "Ingreso",

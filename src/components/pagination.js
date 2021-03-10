@@ -50,6 +50,11 @@ const { formatString, ...strings } = new LocalizedStrings({
         gotoPage: "Jít na stránku:",
         show: "Zobrazit",
     },
+    de: {
+        pageOf: "Seite {0} von {1}",
+        gotoPage: "Springe zu Seite:",
+        show: "Zeige",
+    },
     es: {
         pageOf: "Página {0} de {1}",
         gotoPage: "Ir a la página:",
