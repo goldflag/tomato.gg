@@ -69,7 +69,7 @@ const SearchItem = styled(Chip)`
     color: white !important;
     background-color: #252e69 !important;
     border-width: 2px !important;
-    border-color: ${({ isClan }) => isClan === true ? "rgb(141, 86, 232)" : "#4e80c2" } !important;
+    border-color: ${({ isClan }) => (isClan ? "rgb(141, 86, 232)" : "#4e80c2")} !important;
     &:hover {
         border-color: rgb(140, 150, 210) !important;
     }
@@ -85,6 +85,8 @@ const ClearIcon = styled(IconButton)`
     color: white !important;
     display: inline-block;
 `;
+
+const clanPhoto = (id) => `https://na.wargaming.net/clans/media/clans/emblems/cl_${id % 1000}/${id}/emblem_32x32.png`;
 
 const SearchHistory = () => {
     const history = useHistory();
@@ -109,8 +111,8 @@ const SearchHistory = () => {
                             variant="outlined"
                             avatar={
                                 <Avatar
-                                    alt={server}
-                                    src={require(`Assets/flagIcons/${server}mini.png`)}
+                                    alt={isClan ? name : server}
+                                    src={isClan ? clanPhoto(id) : require(`Assets/flagIcons/${server}mini.png`)}
                                     style={{ maxHeight: "21px" }}
                                 />
                             }
