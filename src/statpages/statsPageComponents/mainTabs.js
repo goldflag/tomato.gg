@@ -178,6 +178,7 @@ export default function MainTabs(props) {
                 clanStats={props.clanStats}
                 accountCreationDate={props.accountCreationDate}
                 lastPlayedTime={props.lastPlayedTime}
+                server={props.server}
             />
             <CustomTabs
                 value={page}

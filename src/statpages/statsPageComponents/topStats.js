@@ -1,5 +1,5 @@
 // NPM
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import LocalizedStrings from "react-localization";
 import { Link } from "react-router-dom";
@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 // LOCAL
 import { WN8color, WRcolor, PRcolor, battlesColor } from "Functions/colors";
 import { Capital, clanPositions, commonStrings } from "Data/localizations";
-import { ServerContext } from "Context";
 import { serverConv } from "Data/conversions";
 
 const Root = styled.div`
@@ -24,12 +23,12 @@ const StatCard = styled(Square)`
     padding: 1.5rem 0rem;
     text-align: center;
     font-family: roboto;
-    width: 11%;
+    margin-left: 1rem;
     background-color: ${({ backgroundColor }) => backgroundColor};
     @media screen and (max-width: 1000px) {
-        width: 15%;
         padding: 1rem 0rem 1rem 0rem;
         font-size: 0.6rem;
+        margin: 0;
     }
 `;
 
@@ -37,9 +36,7 @@ const PlayerName = styled(Square)`
     text-align: left;
     font-family: roboto;
     line-height: 1.2em;
-    width: 350px;
-    height: 92.5px;
-    padding: 1.1rem 1rem 1.5rem 1rem;
+    padding: 1rem;
     background-color: ${({ backgroundColor }) => backgroundColor};
     @media screen and (max-width: 1000px) {
         display: none;
@@ -53,15 +50,18 @@ const MobilePlayerName = styled(Square)`
     @media screen and (max-width: 1000px) {
         display: block;
         font-size: 0.7em;
-        margin: 0rem 0rem 1rem 0rem;
+        margin: -4rem 0rem 1rem 0rem;
     }
 `;
 
 const StatsRow = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr;
     max-width: 100%;
+    @media screen and (max-width: 1000px) {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 10px;
+    }
 `;
 
 const ClanTag = styled.span`
@@ -107,15 +107,6 @@ const { formatString, ...strings } = new LocalizedStrings({
         recentWN8: "Nedávné Wn8",
         recentWR: "Nedávná míra vítězství",
         wgRating: "WG hodnocení",
-    },
-    de: {
-        created: "Account erstellt {0}",
-        overallWN8: "Gesamt WN8",
-        overallWR: "Gesamt WR",
-        recentWN8: "Aktuelle WN8",
-        recentWR: "Aktuelle WR",
-        wgRating: "WG Wertung",
-        battles: "Gefechte",
     },
     es: {
         created: "Cuenta creada el {0}",
@@ -168,7 +159,6 @@ const { formatString, ...strings } = new LocalizedStrings({
 });
 
 export default function TopStats(props) {
-    const { server } = useContext(ServerContext);
 
     const date = new Date(props.accountCreationDate * 1000);
     const dateOptions = { year: "numeric", month: "long", day: "numeric" };
@@ -179,7 +169,7 @@ export default function TopStats(props) {
         clanInfo = (
             <>
                 {clanPositions[role]} at{" "}
-                <Link to={`/clan-stats/${serverConv[server]}/${clan.clan_id}`}>
+                <Link to={`/clan-stats/${serverConv[props.server]}/${clan.tag}=${clan.clan_id}`}>
                     <ClanTag {...clan}>[{clan.tag}]</ClanTag>
                 </Link>
             </>

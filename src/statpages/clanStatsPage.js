@@ -107,8 +107,6 @@ export default function ClanStatsPage() {
         const urlParams = windowUrl.substring(12).split("/");
         const [ server, clan ] = urlParams;
         const [ clanName, id ] = clan.split("=");
-
-        console.log(urlParams);
         ReactGA.initialize(trackingId);
         ReactGA.pageview(`/clan-stats/${server}`);
         if (id !== "FAIL") {
@@ -122,7 +120,7 @@ export default function ClanStatsPage() {
 
     let clanPage;
     if (clanData === "loading")
-        clanPage = <Loader frog={true} top={20} bottom={50} />;
+        clanPage = <Loader frog={true} top={20} bottom={20} />;
     else {
         clanPage = (
             <Container>

@@ -86,6 +86,7 @@ class StatsPage extends Component {
             accountCreationDate: "",
             hofmainData: null,
             hofData: null,
+            server: ""
         };
     }
 
@@ -153,6 +154,7 @@ class StatsPage extends Component {
                     graphData,
                     hofmainData,
                     hofData,
+                    server
                 };
                 this.setState(newState);
             })
@@ -165,7 +167,7 @@ class StatsPage extends Component {
         let statTable;
 
         if (loading) {
-            statTable = <Loader frog={true} top={20} bottom={50} />;
+            statTable = <Loader frog={true} top={20} bottom={20} />;
         } else if (validID) {
             statTable = <MainTabs {...this.state} />;
         } else {
