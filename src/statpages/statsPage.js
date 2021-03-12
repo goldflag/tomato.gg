@@ -12,6 +12,7 @@ import { serverConv } from "Data/conversions";
 import GraphCalculator from "Functions/GraphCalculator";
 import MainTabs from "./statsPageComponents/mainTabs";
 import { Loader } from "Components";
+import worrydetective from "Assets/staticfrogs/worrydetective.png";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 const trackingId = process.env.REACT_APP_GA;
@@ -164,13 +165,15 @@ class StatsPage extends Component {
         let statTable;
 
         if (loading) {
-            statTable = <Loader top={20} bottom={50} />;
+            statTable = <Loader frog={true} top={20} bottom={50} />;
         } else if (validID) {
             statTable = <MainTabs {...this.state} />;
         } else {
             statTable = (
                 <>
-                    <span style={{ fontSize: "2rem" }}>{formatString(strings.notFound, username)}</span>
+                    <span style={{ fontSize: "2rem"}}>
+                        {formatString(strings.notFound, username)} <img src={worrydetective} style={{height: "2.5rem", verticalAlign: "middle"}} alt="notfound"/>
+                    </span>
                     <br />
                     <br />
                     {strings.correct}

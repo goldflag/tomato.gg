@@ -135,7 +135,7 @@ function SearchBar() {
                     if (clanID !== "FAIL") {
                         addToHistory(name, clanID, server, true);
                     }
-                    history.push(`/clan-stats/${serverConv[server]}/${clanID}`);
+                    history.push(`/clan-stats/${serverConv[server]}/${name}=${clanID}`);
                 })
                 .catch(console.error);
         }

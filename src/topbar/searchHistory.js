@@ -97,7 +97,7 @@ const SearchHistory = () => {
     const { history: searchHistory, addToHistory, removeFromHistory, clearHistory } = useContext(SearchHistoryContext);
     const redirectToStatsPage = (name, id, server, isClan) => {
         addToHistory(name, id, server, isClan);
-        if (isClan) history.push(`/clan-stats/${serverConv[server]}/${id}`);
+        if (isClan) history.push(`/clan-stats/${serverConv[server]}/${name.toUpperCase()}=${id}`);
         else history.push(`/stats/${serverConv[server]}/${name}=${id}`);
     };
     return (

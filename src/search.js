@@ -16,7 +16,7 @@ export default withRouter(function Search(props) {
     const { mode, setMode } = useContext(SearchmodeContext);
 
     const { addToHistory } = useContext(SearchHistoryContext);
-    const [name, setName] = useState("");
+    const [ name, setName ] = useState("");
 
     const searchId = async (e) => {
         e.preventDefault();
@@ -40,9 +40,9 @@ export default withRouter(function Search(props) {
                 .then((data) => (data.status === "error" || data.meta.count === 0 ? "FAIL" : data.data[0].clan_id))
                 .then((clanID) => {
                     if (clanID !== "FAIL") {
-                        addToHistory(name, clanID, server, true);
+                        addToHistory(name, clanID, server, false);
                     }
-                    props.history.push(`/clan-stats/${serverConv[server]}/${clanID}`);
+                    props.history.push(`/clan-stats/${serverConv[server]}/${name.toUpperCase()}=${clanID}`);
                 })
                 .catch(console.error);
         }
