@@ -50,7 +50,7 @@ const MobilePlayerName = styled(Square)`
     @media screen and (max-width: 1000px) {
         display: block;
         font-size: 0.7em;
-        margin: -4rem 0rem 1rem 0rem;
+        margin: 0rem 0rem 1rem 0rem;
     }
 `;
 

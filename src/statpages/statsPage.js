@@ -6,8 +6,6 @@ import ReactGA from "react-ga";
 import LocalizedStrings from "react-localization";
 
 // LOCAL
-import "CSS/style.css";
-import "CSS/innerpage.css";
 import { serverConv } from "Data/conversions";
 import GraphCalculator from "Functions/GraphCalculator";
 import MainTabs from "./statsPageComponents/mainTabs";
@@ -21,10 +19,11 @@ const backend = process.env.REACT_APP_BACKEND;
 const Container = styled.div`
     padding: 2rem;
     padding-top: 1rem;
-
+    max-width: 1800px;
+    margin: 0 auto;
     @media screen and (max-width: 1000px) {
         padding: 0.4rem;
-        padding-top: 3.4rem;
+        padding-top: 0rem;
     }
 `;
 

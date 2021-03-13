@@ -121,6 +121,7 @@ function SearchBar() {
                 .then((data) => (data.status === "error" || data.meta.count === 0 ? "FAIL" : data.data[0].account_id))
                 .then((playerID) => {
                     if (playerID !== "FAIL") {
+                        console.log("added player to history")
                         addToHistory(name, playerID, server, false);
                     }
                     history.push(`/stats/${serverConv[server]}/${name}=${playerID}`);
