@@ -94,7 +94,14 @@ class StatsPage extends Component {
         const { server, user } = match.params;
         const [username, id] = user.split("=");
         if (id !== "FAIL") {
-            this.searchStats(server, id).then(() => this.setState({ loading: false }));
+            this.searchStats(server, id).then((res) => {
+                console.log(res);
+                this.setState({ loading: res})
+            });   
+            this.searchRealTime(server, id).then((res) => {
+                console.log(res);
+                this.setState({ loading: false})
+            });
         } else {
             this.setState({ username });
         }
@@ -111,7 +118,14 @@ class StatsPage extends Component {
             const validID = id !== "FAIL";
             this.setState({ loading: validID, validID, username });
             if (validID) {
-                this.searchStats(server, id).then(() => this.setState({ loading: false }));
+                this.searchStats(server, id).then((res) => {
+                    console.log(res);
+                    this.setState({ loading: res})
+                });                
+                this.searchRealTime(server, id).then((res) => {
+                    console.log(res);
+                    this.setState({ loading: false})
+                });
             }
         }
     }
@@ -125,7 +139,7 @@ class StatsPage extends Component {
             `${domain}/wot/account/info/?${commonArgs}`, //Overall Summary Stats
             `${domain}/wot/clans/accountinfo/?${commonArgs}`, //Current Clan Data
             `${domain}/wot/clans/memberhistory/?${commonArgs}`, //Clan history
-            `${backend}/api/player/${server}/${id}`, //Recent stats from our own API
+            `${backend}/api/player/${server}/${id}?cache=true`, //Recent stats from our own API with cache
             `${backend}/api/hofmain/${server}/${id}`,
             `${backend}/api/hof/${server}/${id}`,
         ];
@@ -134,6 +148,55 @@ class StatsPage extends Component {
             .then((resps) => Promise.all(resps.map((r) => r.json())))
             .then(([overall, clanStats, clanHistory, recent, hofmainData, hofData]) => {
                 const stats = overall.data[id].statistics.all;
+                const newState = {
+                    stats,
+                    username: overall.data[id].nickname,
+                    WGRating: overall.data[id].global_rating,
+                    accountCreationDate: overall.data[id].created_at,
+                    lastPlayedTime: overall.data[id].last_battle_time,
+                    validID: stats.battles !== 0,
+                    clanStats: clanStats.data[id] || "NO CLAN",
+                    clanHistory: clanHistory.data[id].length ? clanHistory.data[id] : "NO CLAN HISTORY",
+                    hofmainData,
+                    hofData,
+                    server
+                };
+                this.setState(newState);
+                if (recent === null) {
+                    return true;
+                }
+                else {
+                    const graphData = GraphCalculator(
+                        stats,
+                        recent.overallStats.overallWN8,
+                        recent.overallStats.avgTier,
+                        recent
+                    );
+                    this.setState({
+                        recentStats: recent,
+                        graphData,
+                    });
+                    return false;
+                }
+            })
+            .catch(console.error);
+
+    };
+
+    searchRealTime = async (server, id) => {
+        this.setState({ loading: true });
+        server = serverConv[server];
+        const domain = `https://api.worldoftanks.${server}`;
+        const commonArgs = `application_id=${APIKey}&account_id=${id}`;
+        const urls = [
+            `${domain}/wot/account/info/?${commonArgs}`, //Overall Summary Stats
+            `${backend}/api/player/${server}/${id}?cache=false`, //Recent stats from our own API w/o cache
+        ];
+
+        return Promise.all(urls.map((url) => fetch(url)))
+            .then((resps) => Promise.all(resps.map((r) => r.json())))
+            .then(([overall, recent]) => {
+                const stats = overall.data[id].statistics.all;
                 const graphData = GraphCalculator(
                     stats,
                     recent.overallStats.overallWN8,
@@ -141,21 +204,13 @@ class StatsPage extends Component {
                     recent
                 );
                 const newState = {
-                    stats,
-                    username: overall.data[id].nickname,
-                    WGRating: overall.data[id].global_rating,
-                    accountCreationDate: overall.data[id].created_at,
-                    lastPlayedTime: overall.data[id].last_battle_time,
                     recentStats: recent,
                     validID: stats.battles !== 0,
-                    clanStats: clanStats.data[id] || "NO CLAN",
-                    clanHistory: clanHistory.data[id].length ? clanHistory.data[id] : "NO CLAN HISTORY",
                     graphData,
-                    hofmainData,
-                    hofData,
                     server
                 };
                 this.setState(newState);
+                return true;
             })
             .catch(console.error);
     };

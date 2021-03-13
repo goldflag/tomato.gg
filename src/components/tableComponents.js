@@ -9,6 +9,7 @@ export const TableContainer = styled.div`
     overflow-x: auto;
     overflow-y: hidden;
 `;
+
 export const FiltersContainer = styled.div`
     padding: 16px;
     background-color: rgba(40, 40, 70, 0.5);
