@@ -13,6 +13,8 @@ export const FiltersContainer = styled.div`
     padding: 16px;
     background-color: rgba(40, 40, 70, 0.5);
     width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
     backdrop-filter: blur(7px);
     @media screen and (max-width: 1000px) {
         backdrop-filter: brightness(1.2);
