@@ -51,6 +51,36 @@ const strings = new LocalizedStrings({
         left: "Left",
         position: "Position",
     },
+    cs: {
+        clanHistory: "KLANOVÁ HISTORIE",
+        noData: "Historie tohoto hráče neobsahuje žádná klanová data.",
+        left: "Odešel",
+        position: "Pozice",
+    },
+    fr: {
+        clanHistory: "HISTORIQUE DES CLANS",
+        noData: "Ce joueur n'a pas d'historique de clan.",
+        left: "Quitté",
+        position: "Grade",
+    },
+    pl: {
+        clanHistory: "HISTORIA KLANÓW",
+        noData: "Ten gracz nie ma danych związanych z klanami.",
+        left: "Opuścił",
+        position: "Pozycja",
+    },
+    tr: {
+        clanHistory: "KLAN GEÇMİŞİ",
+        noData: "Bu oyuncuya ait klan verisi yok.",
+        left: "Ayrıldı",
+        position: "Rütbe",
+    },
+    zh: {
+        clanHistory: "公會歷史",
+        noData: "無公會紀錄",
+        left: "離開",
+        position: "職位",
+    },
 });
 
 const SingleClan = ({ clan, server }) => (

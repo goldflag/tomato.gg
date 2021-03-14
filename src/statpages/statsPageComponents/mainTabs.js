@@ -81,6 +81,9 @@ const strings = new LocalizedStrings({
         sessions: "ZÁZNAM",
         infographics: "INFOGRAFIKA",
         treemap: "TREEMAP",
+        cached: "Zobrazené statistiky se ukládají do mezipaměti. Načítání aktualizovaných statistik z reálného času.",
+        blameWG: "Pokud tato zpráva nezmizí, může za to debilní API Wargamingu.",
+        realTime: "Statistiky z reálného času jsou nyní načteny!",
     },
     fr: {
         main: "STATS PRINCIPALES",
@@ -88,6 +91,9 @@ const strings = new LocalizedStrings({
         sessions: "SESSIONS",
         infographics: "INFOGRAPHIE",
         treemap: "TREEMAP", // No translation
+        cached: "Les stats affichées sont mises en cache. Mise-à-jour en temps réel des stats en cours.",
+        blameWG: "Si ce message ne part pas, blâmez la mauvaise API de WARGAMING.",
+        realTime: "Stats en temps réelles chargées!",
     },
     pl: {
         main: "GŁÓWNE STATYSTYKI",
@@ -95,6 +101,9 @@ const strings = new LocalizedStrings({
         sessions: "SEJSE",
         infographics: "INFOGRAFIKI",
         treemap: "MAPA DRZEWEK", // tbd
+        cached: "Wyświetlone dane pochodzą z pamięci podręcznej. Trwa pobieranie aktualnych statystyk.",
+        blameWG: "Jeśli ta wiadomość nie zniknie, należy winić ŚMIECIOWE API Wargamingu.",
+        realTime: "Świeże statystyki zostały załadowane!",
     },
     ru: {
         main: "ОСНОВНАЯ СТАТИСТИКА",
@@ -109,6 +118,9 @@ const strings = new LocalizedStrings({
         sessions: "OTURUMLAR",
         infographics: "BİLGİ GRAFİKLERİ",
         treemap: "YOĞUNLUK HARİTASI",
+        cached: "Görüntülenen istatistikler önbelleğe alındı. Gerçek zamanlı güncel istatistikler alınıyor. ",
+        blameWG: "Eğer bu mesaj gitmiyorsa, Wargaming'e ait çöp oğlu çöp API'yi suçlayın.",
+        realTime: "Gerçek zamanlı istatistikler yüklendi!",
     },
     zh: {
         main: "所有統計",
@@ -116,6 +128,9 @@ const strings = new LocalizedStrings({
         sessions: "每日統計",
         infographics: "綜合圖表",
         treemap: "矩陣圖",
+        cached: "顯示統計已儲存，正取得即時更新統計。",
+        blameWG: "如果此訊息尚未消失， 可以知道WG的API是個笑話。",
+        realTime: "即時統計已加載!",
     },
 });
 

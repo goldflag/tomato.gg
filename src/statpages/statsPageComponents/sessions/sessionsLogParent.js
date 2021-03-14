@@ -14,6 +14,22 @@ const strings = new LocalizedStrings({
     en: {
         sessionsLog: "DAILY SESSIONS LOG",
     },
+    cs: {
+        sessionsLog: "DENNÍ ZÁZNAM BITEV",
+    },
+    fr: {
+        sessionsLog: "RÉCAPITULATIF DES SESSIONS JOURNALIÈRES",
+    },
+    pl: {
+        sessionsLog: "ZAPIS DZIENNYCH SESJI",
+    },
+    tr: {
+        sessionsLog: "GÜNLÜK OTURUM KAYITLARI",
+    },
+    zh: {
+        sessionsLog: "每日記錄",
+    },
+
 });
 
 export default function ExpectedDist(props) {
