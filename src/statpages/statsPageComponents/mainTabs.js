@@ -3,6 +3,7 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Tab, Tabs } from "@material-ui/core";
 import LocalizedStrings from "react-localization";
+import styled from "styled-components";
 
 // LOCAL
 import { TabPanel } from "../tabs/customTabs";
@@ -15,6 +16,8 @@ import HallOfFame from "./hallOfFame";
 import Treemap from "./treemap/treemap";
 import { NewIcon } from "Components";
 import { useURLState } from "Functions/hooks";
+import { worryrun } from "Assets/loaders";
+import { worryexcited } from "Assets/staticfrogs";
 
 const CustomTabs = withStyles({
     root: {
@@ -166,10 +169,33 @@ const tabs = [
     },
 ];
 
+const LoadingStyle = styled.div`
+    display: flex;
+    height: 50px;
+    align-items: center;
+    width: 100%;
+    background-color: ${({color}) => color};
+    padding: 1rem;
+    box-shadow: 1px 1px 3px rgb(20, 20, 30);
+    border-radius: 20px;
+`
+
+const LoadingLatestStats = <LoadingStyle color={"rgba(217, 33, 109, 0.5)"} key="why do i need a key">
+    <img src={worryrun} style={{width: "30px", marginRight: "0.5rem"}} alt="worryrun"/>
+    Stats displayed are cached. Fetching real-time updated stats from Wargaming's GARBAGE API.
+</LoadingStyle>
+
+
+const Loaded = <LoadingStyle color={"rgba(29, 219, 98, 0.7)"} key="why do i need a key">
+    <img src={worryexcited} style={{width: "30px", marginRight: "0.5rem"}} alt="worryexcited"/>
+    Real-time stats now loaded!
+</LoadingStyle>
+
 export default function MainTabs(props) {
     const [page, setPage] = useURLState("page", "main");
     return (
         <>
+            {props.stage === 1 ? LoadingLatestStats : props.stage === 2 ? Loaded : null}
             <TopStats
                 username={props.username}
                 WGRating={props.WGRating}

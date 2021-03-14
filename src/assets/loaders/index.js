@@ -7,3 +7,4 @@ export const worrypetted = require('./worrypetted.gif');
 export const worrypickaxe = require('./worrypickaxe.gif');
 export const worrysword = require('./worrysword.gif');
 export const worrystick = require('./worrystick.gif');
+export const worryrun = require('./worryrun.gif');

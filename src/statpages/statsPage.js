@@ -66,6 +66,8 @@ const { formatString, ...strings } = new LocalizedStrings({
     },
 });
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 class StatsPage extends Component {
     constructor(props) {
         super(props);
@@ -85,7 +87,8 @@ class StatsPage extends Component {
             accountCreationDate: "",
             hofmainData: null,
             hofData: null,
-            server: ""
+            server: "",
+            stage: 0
         };
     }
 
@@ -95,12 +98,11 @@ class StatsPage extends Component {
         const [username, id] = user.split("=");
         if (id !== "FAIL") {
             this.searchStats(server, id).then((res) => {
-                console.log(res);
-                this.setState({ loading: res})
+                this.setState({ loading: res, stage: res ? 0 : 1})
             });   
-            this.searchRealTime(server, id).then((res) => {
-                console.log(res);
-                this.setState({ loading: false})
+            this.searchRealTime(server, id).then(() => {
+                this.setState({ loading: false, stage: 2})
+                this.setStage3();
             });
         } else {
             this.setState({ username });
@@ -109,6 +111,7 @@ class StatsPage extends Component {
         ReactGA.initialize(trackingId);
         ReactGA.pageview(`/stats/${server}`);
     }
+
 
     componentDidUpdate({ match: prevMatch }) {
         const { match } = this.props;
@@ -119,15 +122,20 @@ class StatsPage extends Component {
             this.setState({ loading: validID, validID, username });
             if (validID) {
                 this.searchStats(server, id).then((res) => {
-                    console.log(res);
-                    this.setState({ loading: res})
+                    this.setState({ loading: res, stage: res ? 0 : 1})
                 });                
-                this.searchRealTime(server, id).then((res) => {
-                    console.log(res);
-                    this.setState({ loading: false})
+                this.searchRealTime(server, id).then(() => {
+                    this.setState({ loading: false, stage: 2})
+                    this.setStage3();
                 });
             }
         }
+    }
+
+
+    async setStage3() {
+        await sleep(2000);
+        this.setState({ stage: 3});
     }
 
     searchStats = async (server, id) => {
