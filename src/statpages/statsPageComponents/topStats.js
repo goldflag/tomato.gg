@@ -193,7 +193,7 @@ export default function TopStats(props) {
         { label: strings.recentWN8, value: props.data.recentWN8, colorFn: WN8color },
         { label: strings.recentWR, value: props.data.recentWinrate + "%", colorFn: WRcolor },
         { label: strings.wgRating, value: props.WGRating, colorFn: PRcolor },
-        { label: Capital(commonStrings.battles), value: props.stats.battles, colorFn: battlesColor },
+        { label: Capital(commonStrings.battles), value: props.battles, colorFn: battlesColor },
     ];
 
     return (

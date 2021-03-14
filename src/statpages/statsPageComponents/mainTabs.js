@@ -193,6 +193,7 @@ const Loaded = <LoadingStyle color={"rgba(29, 219, 98, 0.7)"} key="why do i need
 </LoadingStyle>
 
 export default function MainTabs(props) {
+    console.log(props)
     const [page, setPage] = useURLState("page", "main");
     return (
         <>
@@ -200,8 +201,8 @@ export default function MainTabs(props) {
             <TopStats
                 username={props.username}
                 WGRating={props.WGRating}
+                battles={props.battles}
                 data={props.graphData}
-                stats={props.stats}
                 clanStats={props.clanStats}
                 accountCreationDate={props.accountCreationDate}
                 lastPlayedTime={props.lastPlayedTime}

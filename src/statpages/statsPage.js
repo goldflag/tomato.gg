@@ -12,7 +12,6 @@ import MainTabs from "./statsPageComponents/mainTabs";
 import { Loader } from "Components";
 import worrydetective from "Assets/staticfrogs/worrydetective.png";
 
-const APIKey = process.env.REACT_APP_API_KEY;
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -76,7 +75,7 @@ class StatsPage extends Component {
             loadedStats: false,
             loadedOther: false,
             validID: false,
-            stats: [],
+            battles: 0,
             username: "",
             WGRating: "",
             clanStats: "",
@@ -143,12 +142,7 @@ class StatsPage extends Component {
     searchStats = async (server, id) => {
         this.setState({ loadedStats: false });
         server = serverConv[server];
-        const domain = `https://api.worldoftanks.${server}`;
-        const commonArgs = `application_id=${APIKey}&account_id=${id}`;
         const urls = [
-            `${domain}/wot/account/info/?${commonArgs}`, //Overall Summary Stats
-            `${domain}/wot/clans/accountinfo/?${commonArgs}`, //Current Clan Data
-            `${domain}/wot/clans/memberhistory/?${commonArgs}`, //Clan history
             `${backend}/api/player/${server}/${id}?cache=true`, //Recent stats from our own API with cache
             `${backend}/api/hofmain/${server}/${id}`,
             `${backend}/api/hof/${server}/${id}`,
@@ -156,66 +150,59 @@ class StatsPage extends Component {
 
         return Promise.all(urls.map((url) => fetch(url)))
             .then((resps) => Promise.all(resps.map((r) => r.json())))
-            .then(([overall, clanStats, clanHistory, recent, hofmainData, hofData]) => {
-                const stats = overall.data[id].statistics.all;
+            .then(([ player, hofmainData, hofData ]) => {
+                const { summary, clanData, clanHistory } = player;
                 const newState = {
-                    stats,
-                    username: overall.data[id].nickname,
-                    WGRating: overall.data[id].global_rating,
-                    accountCreationDate: overall.data[id].created_at,
-                    lastPlayedTime: overall.data[id].last_battle_time,
-                    validID: stats.battles !== 0,
-                    clanStats: clanStats.data[id] || "NO CLAN",
-                    clanHistory: clanHistory.data[id].length ? clanHistory.data[id] : "NO CLAN HISTORY",
+                    summary,
+                    username: summary.nickname,
+                    WGRating: summary.global_rating,
+                    battles: summary.statistics.all.battles,
+                    accountCreationDate: summary.created_at,
+                    lastPlayedTime: summary.last_battle_time,
+                    validID: summary.statistics.all.battles !== 0,
+                    clanStats: clanData || "NO CLAN",
+                    clanHistory: clanHistory.length ? clanHistory : "NO CLAN HISTORY",
                     hofmainData,
                     hofData,
                     server
                 };
                 this.setState(newState);
-                if (recent === null) {
+                if (player === null) {
                     return true;
                 }
                 else {
                     const graphData = GraphCalculator(
-                        stats,
-                        recent.overallStats.overallWN8,
-                        recent.overallStats.avgTier,
-                        recent
+                        summary.statistics.all,
+                        player.overallStats.overallWN8,
+                        player.overallStats.avgTier,
+                        player
                     );
                     this.setState({
-                        recentStats: recent,
+                        recentStats: player,
                         graphData,
                     });
                     return false;
                 }
             })
             .catch(console.error);
-
     };
 
     searchRealTime = async (server, id) => {
         this.setState({ loadedOther: false, loadedStats: false });
         server = serverConv[server];
-        const domain = `https://api.worldoftanks.${server}`;
-        const commonArgs = `application_id=${APIKey}&account_id=${id}`;
-        const urls = [
-            `${domain}/wot/account/info/?${commonArgs}`, //Overall Summary Stats
-            `${backend}/api/player/${server}/${id}?cache=false`, //Recent stats from our own API w/o cache
-        ];
-
-        return Promise.all(urls.map((url) => fetch(url)))
-            .then((resps) => Promise.all(resps.map((r) => r.json())))
-            .then(([overall, recent]) => {
-                const stats = overall.data[id].statistics.all;
+        return fetch(`${backend}/api/player/${server}/${id}?cache=false`)
+            .then((r) => r.json())
+            .then((player) => {
+                const { summary } = player;
                 const graphData = GraphCalculator(
-                    stats,
-                    recent.overallStats.overallWN8,
-                    recent.overallStats.avgTier,
-                    recent
+                    summary.statistics.all,
+                    player.overallStats.overallWN8,
+                    player.overallStats.avgTier,
+                    player
                 );
                 const newState = {
-                    recentStats: recent,
-                    validID: stats.battles !== 0,
+                    recentStats: player,
+                    validID: summary.battles !== 0,
                     graphData,
                     server
                 };
@@ -233,7 +220,8 @@ class StatsPage extends Component {
             statTable = this.state.loader;
         } else if (validID) {
             statTable = <MainTabs {...this.state} />;
-        } else {
+        } 
+        else {
             statTable = (
                 <>
                     <span style={{ fontSize: "2rem"}}>
@@ -243,7 +231,7 @@ class StatsPage extends Component {
                     <br />
                     {strings.correct}
                 </>
-            );
+            ); 
         }
 
         return <Container>{statTable}</Container>;
