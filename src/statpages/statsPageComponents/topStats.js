@@ -159,7 +159,6 @@ const { formatString, ...strings } = new LocalizedStrings({
 });
 
 export default function TopStats(props) {
-
     const date = new Date(props.accountCreationDate * 1000);
     const dateOptions = { year: "numeric", month: "long", day: "numeric" };
 

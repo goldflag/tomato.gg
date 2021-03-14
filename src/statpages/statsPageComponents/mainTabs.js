@@ -156,7 +156,7 @@ const tabs = [
                     data={props.graphData}
                     clanData={props.clanHistory}
                     currentClan={props.clanStats}
-                    stats={props.stats}
+                    stats={props.summary}
                 />
             ),
         ],
