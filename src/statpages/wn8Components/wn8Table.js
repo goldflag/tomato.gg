@@ -147,36 +147,34 @@ function WN8Table({ data }) {
                 <StyledTable {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
-                            <>
-                                <tr {...headerGroup.getHeaderGroupProps()}>
-                                    {headerGroup.headers.map((column) =>
-                                        column.hidden ? null : (
-                                            <th
-                                                {...column.getHeaderProps(column.getSortByToggleProps())}
-                                                {...column.getHeaderProps({
-                                                    style: {
-                                                        cursor: "pointer",
-                                                        backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
-                                                    },
-                                                })}
-                                            >
-                                                {column.render("Header")}
-                                                <span>
-                                                    {column.isSorted ? (
-                                                        column.isSortedDesc ? (
-                                                            <Icon size={16} icon={arrowDown} />
-                                                        ) : (
-                                                            <Icon size={16} icon={arrowUp} />
-                                                        )
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) =>
+                                    column.hidden ? null : (
+                                        <th
+                                            {...column.getHeaderProps(column.getSortByToggleProps())}
+                                            {...column.getHeaderProps({
+                                                style: {
+                                                    cursor: "pointer",
+                                                    backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
+                                                },
+                                            })}
+                                        >
+                                            {column.render("Header")}
+                                            <span>
+                                                {column.isSorted ? (
+                                                    column.isSortedDesc ? (
+                                                        <Icon size={16} icon={arrowDown} />
                                                     ) : (
-                                                        ""
-                                                    )}
-                                                </span>
-                                            </th>
-                                        )
-                                    )}
-                                </tr>
-                            </>
+                                                        <Icon size={16} icon={arrowUp} />
+                                                    )
+                                                ) : (
+                                                    ""
+                                                )}
+                                            </span>
+                                        </th>
+                                    )
+                                )}
+                            </tr>
                         ))}
                     </thead>
                     <tbody {...getTableBodyProps()}>
