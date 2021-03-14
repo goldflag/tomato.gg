@@ -57,6 +57,9 @@ const strings = new LocalizedStrings({
         sessions: "SESSIONS",
         infographics: "INFOGRAPHICS",
         treemap: "TREEMAP",
+        cached: "Stats displayed are cached. Fetching real-time updated stats.",
+        blameWG: "If this message doesn't go away, blame Wargaming's GARBAGE API.",
+        realTime: "Real-time stats now loaded!",
     },
     es: {
         main: "ESTADÍSTICAS PRINCIPALES",
@@ -174,7 +177,7 @@ const LoadingStyle = styled.div`
     min-height: 55px;
     align-items: center;
     width: 100%;
-    background-color: ${({color}) => color};
+    background-color: ${({ color }) => color};
     padding: 1rem;
     box-shadow: 1px 1px 3px rgb(20, 20, 30);
     border-radius: 20px;
@@ -182,33 +185,43 @@ const LoadingStyle = styled.div`
     @media screen and (max-width: 1000px) {
         margin: 1rem 0rem 0rem 0rem;
     }
-`
+`;
 
 const TrashAPI = styled.span`
     font-size: 0.7rem;
     color: rgb(200, 200, 200);
-`
+`;
 
-const LoadingLatestStats = <LoadingStyle color={"rgba(217, 33, 109, 0.5)"} key="why do i need a key">
-    <img src={worryrun} style={{width: "30px", marginRight: "0.5rem"}} alt="worryrun"/>
-    <div>
-    Stats displayed are cached. Fetching real-time updated stats.
-    <br/>
-    <TrashAPI>If this message doesn't go away, blame Wargaming's GARBAGE API</TrashAPI>
-    </div>
-</LoadingStyle>
-
-
-const Loaded = <LoadingStyle color={"rgba(29, 219, 98, 0.7)"} key="why do i need a key">
-    <img src={worryexcited} style={{width: "30px", marginRight: "0.5rem"}} alt="worryexcited"/>
-    Real-time stats now loaded!
-</LoadingStyle>
+const LoadingHeader = ({ stage }) => {
+    let color, icon, content;
+    if (stage === 1) {
+        color = "rgba(217, 33, 109, 0.5)";
+        icon = { src: worryrun, alt: "worryrun" };
+        content = (
+            <div>
+                {strings.cached}
+                <br />
+                <TrashAPI>{strings.blameWG}</TrashAPI>
+            </div>
+        );
+    } else if (stage === 2) {
+        color = "rgba(29, 219, 98, 0.7)";
+        icon = { src: worryexcited, alt: "worryexcited" };
+        content = strings.realTime;
+    } else return null;
+    return (
+        <LoadingStyle color={color}>
+            <img src={icon.src} style={{ width: "30px", marginRight: "0.5rem" }} alt={icon.alt} />
+            {content}
+        </LoadingStyle>
+    );
+};
 
 export default function MainTabs(props) {
     const [page, setPage] = useURLState("page", "main");
     return (
         <>
-            {props.stage === 1 ? LoadingLatestStats : props.stage === 2 ? Loaded : null}
+            <LoadingHeader stage={props.stage} />
             <TopStats
                 username={props.username}
                 WGRating={props.WGRating}
