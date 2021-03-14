@@ -20,7 +20,7 @@ export default function NationDist(props) {
                 scrollButtons="auto"
             >
                 <CustomTab label={UPPER(commonStrings.overall)} />
-                <CustomTab label="24 HOURS" />
+                <CustomTab label={UPPER(formatString(commonStrings.hours, 24))} />
                 <CustomTab label={UPPER(formatString(commonStrings.days, 3))} />
                 <CustomTab label={UPPER(formatString(commonStrings.days, 7))} />
                 <CustomTab label={UPPER(formatString(commonStrings.days, 30))} />
