@@ -89,7 +89,7 @@ class StatsPage extends Component {
             hofmainData: null,
             hofData: null,
             server: "",
-            stage: 0
+            stage: 0,
         };
     }
 
@@ -100,10 +100,10 @@ class StatsPage extends Component {
         if (id !== "FAIL") {
             this.searchStats(server, id).then((res) => {
                 const stage = this.state.loadedStats ? 3 : res ? 0 : 1;
-                this.setState({ loadedOther: true, loadedStats: this.state.loadedStats || !res, stage: stage});
-            });   
+                this.setState({ loadedOther: true, loadedStats: this.state.loadedStats || !res, stage: stage });
+            });
             this.searchRealTime(server, id).then(() => {
-                this.setState({ loadedStats: true, stage: 2})
+                this.setState({ loadedStats: true, stage: 2 });
                 this.setStage3();
             });
         } else {
@@ -124,10 +124,10 @@ class StatsPage extends Component {
             if (validID) {
                 this.searchStats(server, id).then((res) => {
                     const stage = this.state.loadedStats ? 3 : res ? 0 : 1;
-                    this.setState({ loadedOther: true, loadedStats: this.state.loadedStats || !res, stage: stage});
-                });                
+                    this.setState({ loadedOther: true, loadedStats: this.state.loadedStats || !res, stage: stage });
+                });
                 this.searchRealTime(server, id).then(() => {
-                    this.setState({ loadedStats: true, stage: 2})
+                    this.setState({ loadedStats: true, stage: 2 });
                     this.setStage3();
                 });
             }
@@ -136,7 +136,7 @@ class StatsPage extends Component {
 
     async setStage3() {
         await sleep(2000);
-        this.setState({ stage: 3});
+        this.setState({ stage: 3 });
     }
 
     searchStats = async (server, id) => {
@@ -149,17 +149,16 @@ class StatsPage extends Component {
         ];
         return Promise.all(urls.map((url) => fetch(url)))
             .then((resps) => Promise.all(resps.map((r) => r.json())))
-            .then(([ player, hofmainData, hofData ]) => {
+            .then(([player, hofmainData, hofData]) => {
                 const newState = {
                     hofmainData,
                     hofData,
-                    server
+                    server,
                 };
                 this.setState(newState);
                 if (player === null) {
                     return true;
-                }
-                else {
+                } else {
                     const { summary, clanData, clanHistory } = player;
                     const graphData = GraphCalculator(
                         summary.statistics.all,
@@ -211,7 +210,7 @@ class StatsPage extends Component {
                     clanHistory: clanHistory.length ? clanHistory : "NO CLAN HISTORY",
                     recentStats: player,
                     graphData,
-                    server
+                    server,
                 };
                 this.setState(newState);
                 return true;
@@ -226,18 +225,22 @@ class StatsPage extends Component {
             statTable = this.state.loader;
         } else if (validID) {
             statTable = <MainTabs {...this.state} />;
-        } 
-        else {
+        } else {
             statTable = (
                 <>
-                    <span style={{ fontSize: "2rem"}}>
-                        {formatString(strings.notFound, username)} <img src={worrydetective} style={{height: "2.5rem", verticalAlign: "middle"}} alt="notfound"/>
+                    <span style={{ fontSize: "2rem" }}>
+                        {formatString(strings.notFound, username)}{" "}
+                        <img
+                            src={worrydetective}
+                            style={{ height: "2.5rem", verticalAlign: "middle" }}
+                            alt="notfound"
+                        />
                     </span>
                     <br />
                     <br />
                     {strings.correct}
                 </>
-            ); 
+            );
         }
 
         return <Container>{statTable}</Container>;

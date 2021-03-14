@@ -121,7 +121,7 @@ export default function ClanHistory({ data, currentClan }) {
                 }));
                 if (currentClan !== "NO CLAN") {
                     clanList.unshift({
-                        clan_id: currentClan.clan_id,
+                        clan_id: currentClan.clan.clan_id,
                         clan_name: currentClan.clan.tag,
                         color: currentClan.clan.color,
                         joined_at: currentClan.joined_at,
@@ -137,7 +137,7 @@ export default function ClanHistory({ data, currentClan }) {
     if (clanList) {
         clanInfo = clanList
             .filter((clan) => clan.clan_name)
-            .map((clan, i) => console.log(clan) || <SingleClan key={i} clan={clan} server={server} />);
+            .map((clan, i) => <SingleClan key={i} clan={clan} server={server} />);
     } else if (data === "NO CLAN HISTORY") {
         clanInfo = <div>{strings.noData}</div>;
     }

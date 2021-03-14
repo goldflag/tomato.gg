@@ -72,9 +72,9 @@ export default function ClanStatsPage() {
     const match = useRouteMatch();
     const { server, clan } = match.params;
 
-    const [ clanData, setClanData ] = useState("loading");
-    const [ validID, setValidID ] = useState(true);
-    const [ clanName, setClanName ] = useState("");
+    const [clanData, setClanData] = useState("loading");
+    const [validID, setValidID] = useState(true);
+    const [clanName, setClanName] = useState("");
 
     async function fetchData(server, clanID) {
         setClanData("loading");
@@ -105,22 +105,20 @@ export default function ClanStatsPage() {
     useEffect(() => {
         const windowUrl = window.location.pathname;
         const urlParams = windowUrl.substring(12).split("/");
-        const [ server, clan ] = urlParams;
-        const [ clanName, id ] = clan.split("=");
+        const [server, clan] = urlParams;
+        const [clanName, id] = clan.split("=");
         ReactGA.initialize(trackingId);
         ReactGA.pageview(`/clan-stats/${server}`);
         if (id !== "FAIL") {
             fetchData(server, id);
-        }
-        else {
+        } else {
             setValidID(false);
             setClanName(clanName);
         }
     }, [server, clan]);
 
     let clanPage;
-    if (clanData === "loading")
-        clanPage = <Loader frog={true} top={20} bottom={20} />;
+    if (clanData === "loading") clanPage = <Loader frog={true} top={20} bottom={20} />;
     else {
         clanPage = (
             <Container>
@@ -129,16 +127,17 @@ export default function ClanStatsPage() {
             </Container>
         );
     }
-    
+
     if (!validID) {
         clanPage = (
             <Container>
-                    <span style={{ fontSize: "2rem" }}>
-                        {formatString(strings.notFound, clanName.toUpperCase())} <img src={worrydetective} style={{height: "2.5rem", verticalAlign: "middle"}} alt="notfound"/>
-                    </span>
-                    <br />
-                    <br />
-                    {strings.correct}
+                <span style={{ fontSize: "2rem" }}>
+                    {formatString(strings.notFound, clanName.toUpperCase())}{" "}
+                    <img src={worrydetective} style={{ height: "2.5rem", verticalAlign: "middle" }} alt="notfound" />
+                </span>
+                <br />
+                <br />
+                {strings.correct}
             </Container>
         );
     }

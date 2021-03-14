@@ -22,7 +22,7 @@ const SelectButton = styled(Button)`
     font-weight: 500 !important;
     color: rgb(210, 210, 210) !important;
     background-color: rgb(37, 46, 105) !important;
-    border: 2px solid ${({ selected }) => (selected ? "rgb(222, 13, 93)" : "rgba(0, 0, 0, 0)")}  !important;
+    border: 2px solid ${({ selected }) => (selected ? "rgb(222, 13, 93)" : "rgba(0, 0, 0, 0)")} !important;
     border-radius: ${({ radius }) => radius} !important;
     border-right: 0;
     padding: 1px 0.5rem !important;
@@ -32,7 +32,6 @@ const SelectButton = styled(Button)`
         border: 2px solid rgba(150, 150, 200, 1) !important;
     }
 `;
-
 
 const strings = new LocalizedStrings({
     en: {
@@ -59,11 +58,7 @@ const strings = new LocalizedStrings({
 });
 
 const servers = ["com", "eu", "asia"];
-const radiuses = [
-    "20px 0 0 20px",
-    "0",
-    "0 20px 20px 0"
-]
+const radiuses = ["20px 0 0 20px", "0", "0 20px 20px 0"];
 
 const ServerSelectButtons = () => {
     const { server, setServer } = useContext(ServerContext);
