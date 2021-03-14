@@ -179,6 +179,9 @@ const LoadingStyle = styled.div`
     box-shadow: 1px 1px 3px rgb(20, 20, 30);
     border-radius: 20px;
     transition: color 2s;
+    @media screen and (max-width: 1000px) {
+        margin: 1rem 0rem 0rem 0rem;
+    }
 `
 
 const TrashAPI = styled.span`
