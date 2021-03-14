@@ -178,6 +178,7 @@ const LoadingStyle = styled.div`
     padding: 1rem;
     box-shadow: 1px 1px 3px rgb(20, 20, 30);
     border-radius: 20px;
+    transition: color 2s;
 `
 
 const LoadingLatestStats = <LoadingStyle color={"rgba(217, 33, 109, 0.5)"} key="why do i need a key">

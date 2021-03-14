@@ -72,7 +72,9 @@ class StatsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: false,
+            loader: <Loader frog={true} top={20} bottom={20} />,
+            loadedStats: false,
+            loadedOther: false,
             validID: false,
             stats: [],
             username: "",
@@ -98,10 +100,11 @@ class StatsPage extends Component {
         const [username, id] = user.split("=");
         if (id !== "FAIL") {
             this.searchStats(server, id).then((res) => {
-                this.setState({ loading: res, stage: res ? 0 : 1})
+                const stage = this.state.loadedStats ? 3 : res ? 0 : 1;
+                this.setState({ loadedOther: true, loadedStats: this.state.loadedStats || !res, stage: stage});
             });   
             this.searchRealTime(server, id).then(() => {
-                this.setState({ loading: false, stage: 2})
+                this.setState({ loadedStats: true, stage: 2})
                 this.setStage3();
             });
         } else {
@@ -112,26 +115,25 @@ class StatsPage extends Component {
         ReactGA.pageview(`/stats/${server}`);
     }
 
-
     componentDidUpdate({ match: prevMatch }) {
         const { match } = this.props;
         const { server, user } = match.params;
         if (server !== prevMatch.params.server || user !== prevMatch.params.user) {
             const [username, id] = user.split("=");
             const validID = id !== "FAIL";
-            this.setState({ loading: validID, validID, username });
+            this.setState({ validID, username });
             if (validID) {
                 this.searchStats(server, id).then((res) => {
-                    this.setState({ loading: res, stage: res ? 0 : 1})
+                    const stage = this.state.loadedStats ? 3 : res ? 0 : 1;
+                    this.setState({ loadedOther: true, loadedStats: this.state.loadedStats || !res, stage: stage});
                 });                
                 this.searchRealTime(server, id).then(() => {
-                    this.setState({ loading: false, stage: 2})
+                    this.setState({ loadedStats: true, stage: 2})
                     this.setStage3();
                 });
             }
         }
     }
-
 
     async setStage3() {
         await sleep(2000);
@@ -139,7 +141,7 @@ class StatsPage extends Component {
     }
 
     searchStats = async (server, id) => {
-        this.setState({ loading: true });
+        this.setState({ loadedStats: false });
         server = serverConv[server];
         const domain = `https://api.worldoftanks.${server}`;
         const commonArgs = `application_id=${APIKey}&account_id=${id}`;
@@ -192,7 +194,7 @@ class StatsPage extends Component {
     };
 
     searchRealTime = async (server, id) => {
-        this.setState({ loading: true });
+        this.setState({ loadedOther: false, loadedStats: false });
         server = serverConv[server];
         const domain = `https://api.worldoftanks.${server}`;
         const commonArgs = `application_id=${APIKey}&account_id=${id}`;
@@ -224,12 +226,11 @@ class StatsPage extends Component {
     };
 
     render() {
-        const { loading, validID, username } = this.state;
-
+        const { loadedOther, loadedStats, validID, username } = this.state;
         let statTable;
 
-        if (loading) {
-            statTable = <Loader frog={true} top={20} bottom={20} />;
+        if (!loadedOther || !loadedStats) {
+            statTable = this.state.loader;
         } else if (validID) {
             statTable = <MainTabs {...this.state} />;
         } else {
