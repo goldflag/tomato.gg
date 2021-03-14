@@ -91,7 +91,7 @@ const ClearIcon = styled(IconButton)`
 `;
 
 const clanPhoto = (id, server) =>
-    `https://${server}.wargaming.net/clans/media/clans/emblems/cl_${id % 1000}/${id}/emblem_32x32.png`;
+    `https://${server}.wargaming.net/clans/media/clans/emblems/cl_${`${id}`.slice(-3)}/${id}/emblem_32x32.png`;
 
 const SearchHistory = () => {
     const history = useHistory();
