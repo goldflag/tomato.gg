@@ -21,8 +21,8 @@ const SelectButton = styled(Button)`
     font-weight: 500 !important;
     color: rgb(210, 210, 210) !important;
     background-color: rgb(37, 46, 105) !important;
-    border: 2px solid ${({ selected, borderColor }) => (selected ? borderColor : "rgba(0, 0, 0, 0)")} !important;
-    border-radius: ${({ borderRadius }) => borderRadius} !important;
+    border: 2px solid ${({ $selected, $borderColor }) => ($selected ? $borderColor : "rgba(0, 0, 0, 0)")} !important;
+    border-radius: ${({ $borderRadius }) => $borderRadius} !important;
     border-right: 0;
     padding: 1px 0.5rem !important;
     width: 80px;
@@ -45,9 +45,9 @@ const ServerSelectButtons = () => {
                 {modes.map(({ value, label, borderRadius, borderColor }, i) => (
                     <SelectButton
                         key={i}
-                        borderRadius={borderRadius}
-                        borderColor={borderColor}
-                        selected={mode === value}
+                        $borderRadius={borderRadius}
+                        $borderColor={borderColor}
+                        $selected={mode === value}
                         onClick={() => setMode(value)}
                     >
                         {label}

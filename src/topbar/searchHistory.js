@@ -73,7 +73,7 @@ const SearchItem = styled(Chip)`
     color: white !important;
     background-color: #252e69 !important;
     border-width: 2px !important;
-    border-color: ${({ isClan }) => (isClan ? "rgb(141, 86, 232)" : "#4e80c2")} !important;
+    border-color: ${({ $isClan }) => ($isClan ? "rgb(141, 86, 232)" : "#4e80c2")} !important;
     &:hover {
         border-color: rgb(140, 150, 210) !important;
     }
@@ -111,7 +111,7 @@ const SearchHistory = () => {
                 <FlipMove>
                     {searchHistory.map(({ name, id, server, isClan }) => (
                         <SearchItem
-                            key={name}
+                            key={id + server}
                             variant="outlined"
                             avatar={
                                 <Avatar
@@ -122,7 +122,7 @@ const SearchHistory = () => {
                             }
                             onClick={() => redirectToStatsPage(name, id, server, isClan)}
                             onDelete={() => removeFromHistory(id)}
-                            isClan={isClan}
+                            $isClan={isClan}
                             label={isClan ? name.toUpperCase() : name}
                         />
                     ))}
