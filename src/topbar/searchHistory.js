@@ -90,7 +90,8 @@ const ClearIcon = styled(IconButton)`
     display: inline-block;
 `;
 
-const clanPhoto = (id) => `https://na.wargaming.net/clans/media/clans/emblems/cl_${id % 1000}/${id}/emblem_32x32.png`;
+const clanPhoto = (id, server) =>
+    `https://${server}.wargaming.net/clans/media/clans/emblems/cl_${id % 1000}/${id}/emblem_32x32.png`;
 
 const SearchHistory = () => {
     const history = useHistory();
@@ -116,7 +117,7 @@ const SearchHistory = () => {
                             avatar={
                                 <Avatar
                                     alt={isClan ? name : server}
-                                    src={isClan ? clanPhoto(id) : require(`Assets/flagIcons/${server}mini.png`)}
+                                    src={isClan ? clanPhoto(id, server) : require(`Assets/flagIcons/${server}mini.png`)}
                                     style={{ maxHeight: "21px" }}
                                 />
                             }
