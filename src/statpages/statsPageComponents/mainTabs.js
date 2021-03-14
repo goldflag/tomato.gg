@@ -171,7 +171,7 @@ const tabs = [
 
 const LoadingStyle = styled.div`
     display: flex;
-    height: 50px;
+    min-height: 55px;
     align-items: center;
     width: 100%;
     background-color: ${({color}) => color};
@@ -181,9 +181,18 @@ const LoadingStyle = styled.div`
     transition: color 2s;
 `
 
+const TrashAPI = styled.span`
+    font-size: 0.7rem;
+    color: rgb(200, 200, 200);
+`
+
 const LoadingLatestStats = <LoadingStyle color={"rgba(217, 33, 109, 0.5)"} key="why do i need a key">
     <img src={worryrun} style={{width: "30px", marginRight: "0.5rem"}} alt="worryrun"/>
-    Stats displayed are cached. Fetching real-time updated stats from Wargaming's GARBAGE API.
+    <div>
+    Stats displayed are cached. Fetching real-time updated stats.
+    <br/>
+    <TrashAPI>If this message doesn't go away, blame Wargaming's GARBAGE API</TrashAPI>
+    </div>
 </LoadingStyle>
 
 
@@ -193,7 +202,6 @@ const Loaded = <LoadingStyle color={"rgba(29, 219, 98, 0.7)"} key="why do i need
 </LoadingStyle>
 
 export default function MainTabs(props) {
-    console.log(props)
     const [page, setPage] = useURLState("page", "main");
     return (
         <>

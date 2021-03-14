@@ -147,21 +147,10 @@ class StatsPage extends Component {
             `${backend}/api/hofmain/${server}/${id}`,
             `${backend}/api/hof/${server}/${id}`,
         ];
-
         return Promise.all(urls.map((url) => fetch(url)))
             .then((resps) => Promise.all(resps.map((r) => r.json())))
             .then(([ player, hofmainData, hofData ]) => {
-                const { summary, clanData, clanHistory } = player;
                 const newState = {
-                    summary,
-                    username: summary.nickname,
-                    WGRating: summary.global_rating,
-                    battles: summary.statistics.all.battles,
-                    accountCreationDate: summary.created_at,
-                    lastPlayedTime: summary.last_battle_time,
-                    validID: summary.statistics.all.battles !== 0,
-                    clanStats: clanData || "NO CLAN",
-                    clanHistory: clanHistory.length ? clanHistory : "NO CLAN HISTORY",
                     hofmainData,
                     hofData,
                     server
@@ -171,6 +160,7 @@ class StatsPage extends Component {
                     return true;
                 }
                 else {
+                    const { summary, clanData, clanHistory } = player;
                     const graphData = GraphCalculator(
                         summary.statistics.all,
                         player.overallStats.overallWN8,
@@ -178,6 +168,15 @@ class StatsPage extends Component {
                         player
                     );
                     this.setState({
+                        summary,
+                        username: summary.nickname,
+                        WGRating: summary.global_rating,
+                        battles: summary.statistics.all.battles,
+                        accountCreationDate: summary.created_at,
+                        lastPlayedTime: summary.last_battle_time,
+                        validID: summary.statistics.all.battles !== 0,
+                        clanStats: clanData || "NO CLAN",
+                        clanHistory: clanHistory.length ? clanHistory : "NO CLAN HISTORY",
                         recentStats: player,
                         graphData,
                     });
@@ -193,7 +192,7 @@ class StatsPage extends Component {
         return fetch(`${backend}/api/player/${server}/${id}?cache=false`)
             .then((r) => r.json())
             .then((player) => {
-                const { summary } = player;
+                const { summary, clanData, clanHistory } = player;
                 const graphData = GraphCalculator(
                     summary.statistics.all,
                     player.overallStats.overallWN8,
@@ -201,8 +200,16 @@ class StatsPage extends Component {
                     player
                 );
                 const newState = {
+                    summary,
+                    username: summary.nickname,
+                    WGRating: summary.global_rating,
+                    battles: summary.statistics.all.battles,
+                    accountCreationDate: summary.created_at,
+                    lastPlayedTime: summary.last_battle_time,
+                    validID: summary.statistics.all.battles !== 0,
+                    clanStats: clanData || "NO CLAN",
+                    clanHistory: clanHistory.length ? clanHistory : "NO CLAN HISTORY",
                     recentStats: player,
-                    validID: summary.battles !== 0,
                     graphData,
                     server
                 };
@@ -215,7 +222,6 @@ class StatsPage extends Component {
     render() {
         const { loadedOther, loadedStats, validID, username } = this.state;
         let statTable;
-
         if (!loadedOther || !loadedStats) {
             statTable = this.state.loader;
         } else if (validID) {
