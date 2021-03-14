@@ -1,185 +1,151 @@
 // NPM
 import React, { useState, useEffect } from "react";
-import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
 import Grid from "@material-ui/core/Grid";
-import { serverConv } from "Data/conversions";
-import clonedeep from "lodash.clonedeep";
 import Scrollbar from "react-scrollbars-custom";
+import styled from "styled-components";
 
 // LOCAL
+import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
 import { clanPositions } from "Data/localizations";
+import { Link, useRouteMatch } from "react-router-dom";
+import { serverConv } from "Data/conversions";
+import { Loader } from "Components";
+import LocalizedStrings from "react-localization";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
-export default function ClanHistory(props) {
+const LeftSide = styled.div`
+    margin: auto;
+    width: 80%;
+    font-size: 16px;
+    color: lan.colo;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const ClanTag = styled.span`
+    font-weight: 600;
+    color: ${({ color }) => color};
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.75);
+`;
+
+const DataLabel = styled.span`
+    text-align: left;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgb(125, 125, 125);
+`;
+
+const formatDate = (value) => {
+    const date = new Date(value * 1000);
+    const dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
+    return date.toLocaleDateString(navigator.languages[0], dateOptions);
+};
+
+const strings = new LocalizedStrings({
+    en: {
+        clanHistory: "CLAN HISTORY",
+        noData: "This player has no clan data.",
+        joined: "Joined",
+        left: "Left",
+        position: "Position",
+    },
+});
+
+const SingleClan = ({ clan, server }) => (
+    <Grid item xs={6}>
+        <Grid container spacing={1}>
+            <Grid item xs={5}>
+                <LeftSide>
+                    <img src={clan.icon} alt={clan.clan_name} />
+                    <Link to={`/clan-stats/${serverConv[server]}/${clan.clan_name}=${clan.clan_id}`}>
+                        <ClanTag {...clan}>[{clan.clan_name}]</ClanTag>
+                    </Link>
+                </LeftSide>
+            </Grid>
+            <Grid item xs={7}>
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "left",
+                        fontWeight: "500",
+                    }}
+                >
+                    <span
+                        style={{
+                            textAlign: "left",
+                            fontSize: "14px",
+                            color: "rgb(220, 220, 220)",
+                        }}
+                    >
+                        <DataLabel>{strings.joined}:</DataLabel>
+                        <br />
+                        {formatDate(clan.joined_at)}
+                        <br />
+                        <DataLabel>{strings.left}:</DataLabel>
+                        <br />
+                        {clan.left_at ? formatDate(clan.left_at) : "Current"}
+                        <br />
+                        <DataLabel>{strings.position}:</DataLabel>
+                        <br />
+                        {clanPositions[clan.role]}
+                    </span>
+                </div>
+            </Grid>
+        </Grid>
+    </Grid>
+);
+
+export default function ClanHistory({ data, currentClan }) {
+    const server = serverConv[useRouteMatch().params.server];
     const [value, setValue] = useState(0);
     const [clanList, setClanList] = useState("");
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
-    let clanInfo = <></>;
-    if (clanList) {
-        clanInfo = Unit();
-    }
-    if (props.data === "NO CLAN HISTORY") {
-        clanInfo = <div>This player has no clan data</div>;
-    }
+    const handleChange = (_, newValue) => setValue(newValue);
 
     // Runs once when component mounts
     useEffect(() => {
-        function getClanData() {
-            const windowUrl = window.location.pathname;
-            const urlParams = windowUrl.substring(7).split("/");
-            const server = serverConv[urlParams[0]];
-            let URL = `https://api.worldoftanks.${server}/wot/clans/info/?application_id=${APIKey}&clan_id=`;
-
-            const clonedData = clonedeep(props.data);
-            if (clonedData !== "NO CLAN HISTORY") {
-                clonedData.forEach((row) => {
-                    URL += `${row.clan_id}%2C+`;
-                });
-            }
-
-            URL = URL.slice(0, -4);
-
-            fetch(URL)
-                .then((data) => data.json())
-                .then((clanData) => {
-                    // let tempList = props.data;
-                    clonedData.forEach((row) => {
-                        row["clan_name"] = clanData.data[row.clan_id].tag;
-                        row["color"] = clanData.data[row.clan_id].color;
-                        if (clanData.data[row.clan_id].emblems != null) {
-                            row["icon"] = clanData.data[row.clan_id].emblems.x64.wot;
-                        }
+        if (data === "NO CLAN HISTORY") return;
+        const URL =
+            `https://api.worldoftanks.${server}/wot/clans/info/?application_id=${APIKey}&clan_id=` +
+            data.map(({ clan_id }) => clan_id).join("%2C+");
+        fetch(URL)
+            .then((res) => res.json())
+            .then(({ data: clanData }) => {
+                const clanList = data.map(({ clan_id, ...clan }) => ({
+                    ...clan,
+                    clan_id,
+                    clan_name: clanData[clan_id].tag,
+                    color: clanData[clan_id].color,
+                    icon: clanData[clan_id].emblems && clanData[clan_id].emblems.x64.wot,
+                }));
+                if (currentClan !== "NO CLAN") {
+                    clanList.unshift({
+                        clan_id: currentClan.clan_id,
+                        clan_name: currentClan.clan.tag,
+                        color: currentClan.clan.color,
+                        joined_at: currentClan.joined_at,
+                        icon: currentClan.clan.emblems.x64.wot,
+                        role: currentClan.role,
                     });
-                    if (props.currentClan !== "NO CLAN") {
-                        let currentClan = {
-                            clan_name: props.currentClan.clan.tag,
-                            color: props.currentClan.clan.color,
-                            joined_at: props.currentClan.joined_at,
-                            icon: props.currentClan.clan.emblems.x64.wot,
-                            left_at: props.currentClan.clan.color,
-                            role: props.currentClan.role,
-                        };
-                        clonedData.unshift(currentClan);
-                    }
-                    setClanList(clonedData);
-                });
-        }
-        if (props.data !== "NO CLAN HISTORY") {
-            getClanData();
-        }
-    }, [props.currentClan, props.data]);
+                }
+                setClanList(clanList);
+            });
+    }, [server, currentClan, data]);
 
-    function Unit() {
-        return clanList.map((row, i) => {
-            if (row.clan_name) {
-                let date = new Date(row.joined_at * 1000);
-                const joinDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-                date = new Date(row.left_at * 1000);
-                let leftDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-                if (isNaN(date.getMonth())) leftDate = `Current`;
-                return (
-                    <Grid item xs={6} key={i}>
-                        <Grid container spacing={1}>
-                            <Grid item xs={5}>
-                                <div
-                                    style={{
-                                        margin: "auto",
-                                        width: "80%",
-                                        fontSize: "16px",
-                                        color: row.color,
-                                    }}
-                                >
-                                    <span
-                                        style={{
-                                            display: "flex",
-                                            justifyContent: "center",
-                                        }}
-                                    >
-                                        <img src={row.icon} alt={row.clan_name} />
-                                    </span>
-                                    <span
-                                        style={{
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            fontWeight: "500",
-                                        }}
-                                    >
-                                        {`[${row.clan_name}]`}
-                                    </span>
-                                </div>
-                            </Grid>
-                            <Grid item xs={7}>
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        justifyContent: "left",
-                                        fontWeight: "500",
-                                    }}
-                                >
-                                    <span
-                                        style={{
-                                            textAlign: "left",
-                                            fontSize: "14px",
-                                            color: "rgb(220, 220, 220)",
-                                        }}
-                                    >
-                                        <span
-                                            style={{
-                                                textAlign: "left",
-                                                fontSize: "13px",
-                                                fontWeight: "400",
-                                                color: "rgb(125, 125, 125)",
-                                            }}
-                                        >
-                                            Joined:
-                                        </span>
-                                        <br />
-                                        {joinDate}
-                                        <br />
-                                        <span
-                                            style={{
-                                                textAlign: "left",
-                                                fontSize: "13px",
-                                                fontWeight: "400",
-                                                color: "rgb(125, 125, 125)",
-                                            }}
-                                        >
-                                            Left:
-                                        </span>
-                                        <br />
-                                        {leftDate}
-                                        <br />
-                                        <span
-                                            style={{
-                                                textAlign: "left",
-                                                fontSize: "13px",
-                                                fontWeight: "400",
-                                                color: "rgb(125, 125, 125)",
-                                            }}
-                                        >
-                                            Position:
-                                        </span>
-                                        <br />
-                                        {clanPositions[row.role]}
-                                    </span>
-                                </div>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                );
-            }
-            return undefined;
-        });
+    let clanInfo = <Loader frog />;
+    if (clanList) {
+        clanInfo = clanList
+            .filter((clan) => clan.clan_name)
+            .map((clan, i) => console.log(clan) || <SingleClan key={i} clan={clan} server={server} />);
+    } else if (data === "NO CLAN HISTORY") {
+        clanInfo = <div>{strings.noData}</div>;
     }
 
     return (
         <Scrollbar noScrollX>
-            <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
-                <CustomTab label="CLAN HISTORY" />
+            <CustomTabs value={value} onChange={handleChange} aria-label="clan history">
+                <CustomTab label={strings.clanHistory} />
             </CustomTabs>
             <TabPanel value={value} index={0}>
                 <div
