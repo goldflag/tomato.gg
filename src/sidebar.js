@@ -80,6 +80,19 @@ const strings = LocalizedStrings({
         createdBy: "Tomato.gg est un site web créé par",
         notAffiliated: "et n'est pas affilié avec Wargaming.net.",
     },
+    ko: {
+        boomer: "어두운 배경",
+        boomerAria: " 어두운 배경",
+        support: "토마토 지원하기",
+        donations: ` 토마토는 유저 도네이션으로 운영됩니다. 저희 사이트가 유용하셨다면 도네이션으로 
+        계속 서버운영을 할 수 있겠끔 지원해주세요.`,
+        kofi: "Ko-fi로 지원",
+        paypal: "Paypal로 지원",
+        partnered: "파트너 사이트",
+        herhor: "화력의 증표와 이미지 생성",
+        createdBy: "토마토 계발자는",
+        notAffiliated: "Wargaming.net와 제휴하지 않습니다.",
+    },
     pl: {
         boomer: "Przełącz Boomerowe Tło",
         boomerAria: "Przełącz kolor tła",

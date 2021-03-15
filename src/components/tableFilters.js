@@ -82,15 +82,15 @@ const { formatString, ...strings } = LocalizedStrings({
         to: "à",
         max: "Max",
     },
-    tr: {
-        all: "HEPSİ",
-        prem: "PREM",
-        regular: "NORMAL",
-        searchTanks: "{0} tank arasında ara",
-        searchPlayers: "{0} oyuncu arasında ara",
-        min: "En Az",
-        to: "->",
-        max: "En Çok",
+    ko: {
+        all: "ALL",
+        prem: "프리미엄",
+        regular: "일반",
+        searchTanks: "{0} 전차 찾기",
+        battles: "전투",
+        min: "최소",
+        to: "부터",
+        max: "최대",
     },
     pl: {
         all: "Wszystkie",
@@ -111,6 +111,16 @@ const { formatString, ...strings } = LocalizedStrings({
         min: "Минимум",
         to: "до",
         max: "Максимум",
+    },
+    tr: {
+        all: "HEPSİ",
+        prem: "PREM",
+        regular: "NORMAL",
+        searchTanks: "{0} tank arasında ara",
+        searchPlayers: "{0} oyuncu arasında ara",
+        min: "En Az",
+        to: "->",
+        max: "En Çok",
     },
 });
 

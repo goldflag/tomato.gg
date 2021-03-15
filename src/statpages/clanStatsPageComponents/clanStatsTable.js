@@ -57,6 +57,14 @@ const { formatString, ...strings } = LocalizedStrings({
         yesterday: "Hier",
         daysAgo: "Il y a {0} Jours",
     },
+    ko: {
+        clanRole: "직책",
+        joined: "가입일",
+        lastGame: "마지막 전투",
+        today: "오늘",
+        yesterday: "어제",
+        daysAgo: "{0}일 전",
+    },
     pl: {
         clanRole: "Rola",
         joined: "Dołączył",

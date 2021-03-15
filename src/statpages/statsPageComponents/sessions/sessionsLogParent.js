@@ -11,27 +11,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const strings = LocalizedStrings({
-    en: {
-        sessionsLog: "DAILY SESSIONS LOG",
-    },
-    cs: {
-        sessionsLog: "DENNÍ ZÁZNAM BITEV",
-    },
-    de: {
-        sessionsLog: "TÄGLICHE SITZUNGSSTATISTIKEN",
-    },
-    fr: {
-        sessionsLog: "RÉCAPITULATIF DES SESSIONS JOURNALIÈRES",
-    },
-    pl: {
-        sessionsLog: "ZAPIS DZIENNYCH SESJI",
-    },
-    tr: {
-        sessionsLog: "GÜNLÜK OTURUM KAYITLARI",
-    },
-    zh: {
-        sessionsLog: "每日記錄",
-    },
+    en: { sessionsLog: "DAILY SESSIONS LOG" },
+    cs: { sessionsLog: "DENNÍ ZÁZNAM BITEV" },
+    de: { sessionsLog: "TÄGLICHE SITZUNGSSTATISTIKEN" },
+    fr: { sessionsLog: "RÉCAPITULATIF DES SESSIONS JOURNALIÈRES" },
+    ko: { sessionsLog: "매일 세션 로그" },
+    pl: { sessionsLog: "ZAPIS DZIENNYCH SESJI" },
+    ru: { sessionsLog: "ЕЖЕДНЕВНЫЕ СЕССИИ" },
+    tr: { sessionsLog: "GÜNLÜK OTURUM KAYITLARI" },
+    zh: { sessionsLog: "每日記錄" },
 });
 
 export default function ExpectedDist(props) {

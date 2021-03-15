@@ -12,38 +12,15 @@ import { serverConv } from "Data/conversions";
 import { SearchHistoryContext } from "Context";
 
 const strings = LocalizedStrings({
-    en: {
-        clearHistory: "clear history",
-        server: "select default server",
-    },
-    cs: {
-        clearHistory: "vymazat historii",
-        server: "vyberte výchozí server",
-    },
-    de: {
-        clearHistory: "Suchverlauf löschen",
-        server: "wähle Standardserver",
-    },
-    es: {
-        clearHistory: "borrar historial",
-        server: "seleccionar servidor predeterminado",
-    },
-    fr: {
-        clearHistory: "Effacer l'historique",
-        server: "Sélectionnez un serveur par défaut",
-    },
-    pl: {
-        clearHistory: "Wyczyść historię",
-        server: "Wybierz domyślny serwer",
-    },
-    ru: {
-        clearHistory: "Очистить историю",
-        server: "Выберите свой сервер",
-    },
-    tr: {
-        clearHistory: "Geçmişi temizle",
-        server: "Varsayılan sunucuyu seç",
-    },
+    en: { clearHistory: "clear history", server: "select default server" },
+    cs: { clearHistory: "vymazat historii", server: "vyberte výchozí server" },
+    de: { clearHistory: "Suchverlauf löschen", server: "wähle Standardserver" },
+    es: { clearHistory: "borrar historial", server: "seleccionar servidor predeterminado" },
+    fr: { clearHistory: "Effacer l'historique", server: "Sélectionnez un serveur par défaut" },
+    ko: { clearHistory: "히스토리 지우기", server: "기본 서버 고르기" },
+    pl: { clearHistory: "Wyczyść historię", server: "Wybierz domyślny serwer" },
+    ru: { clearHistory: "Очистить историю", server: "Выберите свой сервер" },
+    tr: { clearHistory: "Geçmişi temizle", server: "Varsayılan sunucuyu seç" },
 });
 
 const HistoryWrapper = styled.div`

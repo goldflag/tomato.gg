@@ -98,6 +98,16 @@ const strings = LocalizedStrings({
         blameWG: "Si ce message ne part pas, blâmez la mauvaise API de WARGAMING.",
         realTime: "Stats en temps réelles chargées!",
     },
+    ko: {
+        main: "메인 통계",
+        hof: "명예의 전당",
+        sessions: "세션",
+        infographics: "인포그래픽",
+        treemap: "트리맵",
+        cached: "보여지는 통계는 캐쉬되어있습니다. 실시간 업데이트 된 통계를 가져오는 중입니다.",
+        blameWG: "혹시 이 메시지가 사라지지 않는다면 쓰레기같은 워게이밍의 API를 탓 하십시오.",
+        realTime: "실시산 통계가 반영되였습니다.",
+    },
     pl: {
         main: "GŁÓWNE STATYSTYKI",
         hof: "ALEJA SŁAW",
@@ -114,6 +124,9 @@ const strings = LocalizedStrings({
         sessions: "СЕССИИ",
         infographics: "ИНФОГРАФИКА",
         treemap: "ДИАГРАММЫ",
+        cached: "Отображаемая статистика кэшируется. Получение обновленной статистики в реальном времени.",
+        blameWG: "Если это сообщение не исчезает, вините плохой API от Wargaming..",
+        realTime: "Статистика в реальном времени загружена!",
     },
     tr: {
         main: "ANA İSTATİSTİKLER",

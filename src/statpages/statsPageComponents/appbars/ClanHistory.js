@@ -69,24 +69,26 @@ const strings = LocalizedStrings({
         left: "Quitté",
         position: "Grade",
     },
+    ko: {
+        clanHistory: "클랜 기록",
+        noData: "이 플레이어는 클랜에 가압한 적이 없습니다.",
+        left: "탈퇴",
+        position: "직책",
+    },
     pl: {
         clanHistory: "HISTORIA KLANÓW",
         noData: "Ten gracz nie ma danych związanych z klanami.",
         left: "Opuścił",
         position: "Pozycja",
     },
-    tr: {
-        clanHistory: "KLAN GEÇMİŞİ",
-        noData: "Bu oyuncuya ait klan verisi yok.",
-        left: "Ayrıldı",
-        position: "Rütbe",
+    ru: {
+        clanHistory: "ИСТОРИЯ КЛАНОВ",
+        noData: "У этого игрока нет данных клана.",
+        left: "Ушли",
+        position: "Позиция",
     },
-    zh: {
-        clanHistory: "公會歷史",
-        noData: "無公會紀錄",
-        left: "離開",
-        position: "職位",
-    },
+    tr: { clanHistory: "KLAN GEÇMİŞİ", noData: "Bu oyuncuya ait klan verisi yok.", left: "Ayrıldı", position: "Rütbe" },
+    zh: { clanHistory: "公會歷史", noData: "無公會紀錄", left: "離開", position: "職位" },
 });
 
 const SingleClan = ({ clan, server }) => (

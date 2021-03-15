@@ -43,11 +43,11 @@ const { formatString, ...strings } = LocalizedStrings({
         moeMod: "mod des Marques d'Excellence",
         expand: "Cliquez sur les lignes pour voir l'historique des maîtrises des 30 derniers jours",
     },
-    tr: {
-        mastery: "Mükemmellik İşaretleri Gereksinimleri",
-        dataFrom: "{0} tarafından oluşturulan veriler.",
-        moeMod: "Mükemmellik İşaretleri modu",
-        expand: "30 günlük Tank Asları geçmişini görmek için satırları aç",
+    ko: {
+        mastery: "에이스 전차 요구사양",
+        dataFrom: "데이터 출처는 ",
+        moeMod: "화력의 증표 모드",
+        expand: "펼처서 30일 에이스 전차 요구사양 보기",
     },
     pl: {
         mastery: "Wymagania na odznakę mistrzowską",
@@ -60,6 +60,12 @@ const { formatString, ...strings } = LocalizedStrings({
         dataFrom: "Информация от создателей",
         moeMod: "Информация от создателей",
         expand: "Разверните, чтобы увидеть историю мастерства за 30 дней",
+    },
+    tr: {
+        mastery: "Mükemmellik İşaretleri Gereksinimleri",
+        dataFrom: "{0} tarafından oluşturulan veriler.",
+        moeMod: "Mükemmellik İşaretleri modu",
+        expand: "30 günlük Tank Asları geçmişini görmek için satırları aç",
     },
     zh: {
         mastery: "戰車王牌",

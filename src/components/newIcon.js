@@ -12,21 +12,12 @@ const GreenIcon = styled.span`
 `;
 
 const strings = LocalizedStrings({
-    en: {
-        new: "NEW!",
-    },
-    de: {
-        new: "NEU!",
-    },
-    pl: {
-        new: "NOWE!",
-    },
-    ru: {
-        new: "НОВЫЙ!",
-    },
-    tr: {
-        new: "YENİ!",
-    },
+    en: { new: "NEW!" },
+    de: { new: "NEU!" },
+    ko: { new: "NEW!" },
+    pl: { new: "NOWE!" },
+    ru: { new: "НОВЫЙ!" },
+    tr: { new: "YENİ!" },
 });
 
 export const NewIcon = () => <GreenIcon>{strings.new}</GreenIcon>;

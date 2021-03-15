@@ -9,20 +9,8 @@ export const classConv = {
 };
 
 export const classDescConv = LocalizedStrings({
-    en: {
-        HT: "Heavy Tank",
-        MT: "Medium Tank",
-        LT: "Light Tank",
-        SPG: "Self Propelled Gun",
-        TD: "Tank Destroyer",
-    },
-    cs: {
-        HT: "Těžký tank",
-        MT: "Střední tank",
-        LT: "Lehký tank",
-        SPG: "Dělostřelectvo",
-        TD: "Stíhač tanků",
-    },
+    en: { HT: "Heavy Tank", MT: "Medium Tank", LT: "Light Tank", SPG: "Self Propelled Gun", TD: "Tank Destroyer" },
+    cs: { HT: "Těžký tank", MT: "Střední tank", LT: "Lehký tank", SPG: "Dělostřelectvo", TD: "Stíhač tanků" },
     de: {
         HT: "schwerer Panzer",
         MT: "mittlerer Panzer",
@@ -30,20 +18,9 @@ export const classDescConv = LocalizedStrings({
         SPG: "Selbstfahrlafetten",
         TD: "Jagdpanzer",
     },
-    es: {
-        HT: "Tanque Pesado",
-        MT: "Tanque Mediano",
-        LT: "Tanque Ligero",
-        SPG: "Artillería",
-        TD: "Tanque Destructor",
-    },
-    fr: {
-        HT: "Char Lourd",
-        MT: "Char Moyen",
-        LT: "Char Léger",
-        SPG: "Artillerie",
-        TD: "Chasseur de Char",
-    },
+    es: { HT: "Tanque Pesado", MT: "Tanque Mediano", LT: "Tanque Ligero", SPG: "Artillería", TD: "Tanque Destructor" },
+    fr: { HT: "Char Lourd", MT: "Char Moyen", LT: "Char Léger", SPG: "Artillerie", TD: "Chasseur de Char" },
+    ko: { HT: "중전차", MT: "중형전차", LT: "경전차", SPG: "자주포", TD: "구축전차" },
     pl: {
         HT: "Czołg ciężki",
         MT: "Czołg średni",
@@ -51,25 +28,7 @@ export const classDescConv = LocalizedStrings({
         SPG: "Działo samobieżne",
         TD: "Niszczyciel czołgów",
     },
-    ru: {
-        HT: "Тяжёлые Танки",
-        MT: "Средние Танки",
-        LT: "Лёгкие Танки",
-        SPG: "САУ",
-        TD: "ПТ-САУ",
-    },
-    tr: {
-        HT: "Ağır Tank",
-        MT: "Orta Tank",
-        LT: "Hafif Tank",
-        SPG: "Kundağı Motorlu Topçu",
-        TD: "Tank Avcısı",
-    },
-    zh: {
-        HT: "重坦",
-        MT: "中坦",
-        LT: "輕坦",
-        SPG: "火炮",
-        TD: "驅逐",
-    },
+    ru: { HT: "Тяжёлые Танки", MT: "Средние Танки", LT: "Лёгкие Танки", SPG: "САУ", TD: "ПТ-САУ" },
+    tr: { HT: "Ağır Tank", MT: "Orta Tank", LT: "Hafif Tank", SPG: "Kundağı Motorlu Topçu", TD: "Tank Avcısı" },
+    zh: { HT: "重坦", MT: "中坦", LT: "輕坦", SPG: "火炮", TD: "驅逐" },
 });

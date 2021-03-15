@@ -51,6 +51,13 @@ const strings = LocalizedStrings({
         clanAriaLabel: "recherche pour un clan",
         searchAriaLabel: "recherche",
     },
+    ko: {
+        placeholder: "유저네임을 입력하세요.",
+        ariaLabel: "유저검색",
+        searchAriaLabel: "검색",
+        clanPlaceholder: "클랜이름을 입력해주세요",
+        clanAriaLabel: "클랜 검색",
+    },
     pl: {
         placeholder: "Wpisz nick",
         ariaLabel: "Wyszukaj gracza",

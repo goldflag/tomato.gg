@@ -43,42 +43,47 @@ const { formatString, ...strings } = LocalizedStrings({
     en: {
         pageOf: "Page {0} of {1}",
         gotoPage: "Go to page:",
-        show: "Show",
+        show: "Show {0}",
     },
     cs: {
         pageOf: "Stránka {0} z {1}",
         gotoPage: "Jít na stránku:",
-        show: "Zobrazit",
+        show: "Zobrazit {0}",
     },
     de: {
         pageOf: "Seite {0} von {1}",
         gotoPage: "Springe zu Seite:",
-        show: "Zeige",
+        show: "Zeige {0}",
     },
     es: {
         pageOf: "Página {0} de {1}",
         gotoPage: "Ir a la página:",
-        show: "Mostrar",
+        show: "Mostrar {0}",
     },
     fr: {
         pageOf: "Page {0} sur {1}",
         gotoPage: "Aller à la page:",
-        show: "Montrer",
+        show: "Montrer {0}",
+    },
+    ko: {
+        pageOf: " {0} of {1}장",
+        gotoPage: "페이지 찾기:",
+        show: "한 페이지에서 {0}줄 보기",
     },
     pl: {
         pageOf: "Strona {0} z {1}",
         gotoPage: "Idź na stronę:",
-        show: "Pokaż",
+        show: "Pokaż {0}",
     },
     ru: {
         pageOf: "Страница {0} из {1}",
         gotoPage: "Перейти на страницу:",
-        show: "Показать",
+        show: "Показать {0}",
     },
     tr: {
         pageOf: "Sayfa {0} / {1}",
         gotoPage: "Git:",
-        show: "Gösterilen",
+        show: "Gösterilen {0}",
     },
 });
 
@@ -141,7 +146,7 @@ export const Pagination = (props) => {
                             border: "None"
                         }}
                     >
-                        {strings.show} {pageSize}
+                        {formatString(strings.show, pageSize)}
                     </option>
                 ))}
             </select>
