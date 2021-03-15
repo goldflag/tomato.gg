@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { ServerContext } from "Context";
 import styled, { css } from "styled-components";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 import { Button, ButtonGroup } from "@material-ui/core";
 
 // LOCAL
@@ -39,7 +39,7 @@ const Filters = styled.div`
     background-color: rgba(40, 40, 70, 0.5);
 `;
 
-const { formatString, ...strings } = new LocalizedStrings({
+const { formatString, ...strings } = LocalizedStrings({
     en: {
         vehicleTier: "In Vehicles Tier {0}+",
         typeFilter: "set leaderboard type",

@@ -1,4 +1,4 @@
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 export const nationConv = {
     usa: "USA",
@@ -13,7 +13,7 @@ export const nationConv = {
     uk: "UK",
     ussr: "USSR",
 };
-export const localNationConv = new LocalizedStrings({
+export const localNationConv = LocalizedStrings({
     en: nationConv,
     cs: {
         usa: "USA",
@@ -121,7 +121,7 @@ export const localNationConv = new LocalizedStrings({
     },
 });
 
-export const nationAdjConv = new LocalizedStrings({
+export const nationAdjConv = LocalizedStrings({
     en: {
         usa: "American {0}",
         china: "Chinese {0}",

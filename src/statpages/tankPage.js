@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import ReactGA from "react-ga";
 import styled from "styled-components";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
 import { Loader, FullPageTableWrapper } from "Components";
@@ -74,7 +74,7 @@ const TankImage = styled.img`
 
 const PAGE_SIZE = 100;
 
-const { formatString, ...strings } = new LocalizedStrings({
+const { formatString, ...strings } = LocalizedStrings({
     en: {
         top500: "Top 500 Players on {0} server",
         past60min25: "PAST 60 DAYS | MINIMUM 25 BATTLES",
@@ -152,6 +152,13 @@ export default function TankPage(props) {
 
     const numPages = Math.ceil(data.count / PAGE_SIZE);
 
+    const filters = {
+        dpg: commonStrings.dpg,
+        wn8: commonStrings.wn8,
+        frags: Capital(commonStrings.frags),
+        winrate: Capital(commonStrings.longWR),
+    };
+
     let content;
     if (typeof data === "string") {
         content = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={30} top={30} />;
@@ -180,7 +187,7 @@ export default function TankPage(props) {
                     {formatString(strings.top500, serverConv[server])}
                     <BottomLabel>{strings.past60min25}</BottomLabel>
                     <FilterButtonGroup>
-                        {Object.entries(filters).map(([val, label]) => (
+                        {Object.entries(filters()).map(([val, label]) => (
                             <FilterButton
                                 key={val}
                                 selected={type === val}

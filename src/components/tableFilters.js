@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { Button, ButtonGroup } from "@material-ui/core";
 import { useAsyncDebounce } from "react-table";
 import InputBase from "@material-ui/core/InputBase";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
 import { MoEStars } from "./moeStars";
@@ -31,7 +31,7 @@ export const FilterButtonGroup = styled(ButtonGroup)`
     padding-top: 10px;
 `;
 
-const { formatString, ...strings } = new LocalizedStrings({
+const { formatString, ...strings } = LocalizedStrings({
     en: {
         all: "ALL",
         prem: "PREM",

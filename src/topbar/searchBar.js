@@ -5,7 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
 import MobileSelect from "./mobileSelect";
@@ -15,7 +15,7 @@ import { useHistory } from "react-router-dom";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
-const strings = new LocalizedStrings({
+const strings = LocalizedStrings({
     en: {
         placeholder: "Enter a Username",
         clanPlaceholder: "Enter a Clan name",

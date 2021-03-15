@@ -54,7 +54,7 @@ function MobileMenu() {
                                     <ListItemIcon>
                                         <Icon />
                                     </ListItemIcon>
-                                    <ListItemText primary={title} />
+                                    <ListItemText primary={title()} />
                                     {isNew ? <NewIcon /> : null}
                                 </ListItem>
                             </Link>

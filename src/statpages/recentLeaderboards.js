@@ -1,6 +1,6 @@
 // NPM
 import React, { useContext } from "react";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
 import Leaderboard from "./recentLeaderboardComponents/leaderboard";
@@ -8,7 +8,7 @@ import { FullPageTableWrapper, Info } from "Components";
 import { ServerContext } from "Context";
 import { serverConv } from "Data/conversions";
 
-const { formatString, ...strings } = new LocalizedStrings({
+const { formatString, ...strings } = LocalizedStrings({
     en: {
         recentStats: "{server} Recent Stats Leaderboard",
         minGames: "Mininum 75 games in period",

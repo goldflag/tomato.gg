@@ -10,6 +10,7 @@ import SearchmodeSelectButtons from "./searchModeSelect";
 import ServerSelectButtons from "./serverSelect";
 import SearchBar from "./searchBar";
 import Discord from "./discord";
+import LanguageSelect from "./languageSelect";
 
 const StyledTopbar = styled.div`
     width: 100%;
@@ -32,6 +33,7 @@ export default withRouter(function Topbar(props) {
         <StyledTopbar>
             <MobileMenu />
             <SearchHistory />
+            <LanguageSelect />
             <ServerSelectButtons />
             <SearchmodeSelectButtons />
             <SearchBar />

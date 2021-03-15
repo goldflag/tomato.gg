@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 import Switch from "@material-ui/core/Switch";
 
 // LOCAL
@@ -13,7 +13,7 @@ import background from "Assets/sidebar.jpg";
 import { NewIcon } from "Components";
 import { BackgroundContext } from "Context";
 
-const strings = new LocalizedStrings({
+const strings = LocalizedStrings({
     en: {
         boomer: "Toggle Boomer Background",
         boomerAria: "toggle background color",
@@ -298,10 +298,10 @@ const Sidebar = withRouter((props) => {
                 <Line />
                 <Menu>
                     {menuRoutes.map(({ path, title, Icon, isNew }) => (
-                        <MenuLink to={path} key={path} style={title.length > 20 ? { fontSize: "12px" } : {}}>
+                        <MenuLink to={path} key={path} style={title().length > 20 ? { fontSize: "12px" } : {}}>
                             <nobr>
                                 <Icon />
-                                &nbsp;&nbsp;{title} {isNew ? <NewIcon /> : null}
+                                &nbsp;&nbsp;{title()} {isNew ? <NewIcon /> : null}
                             </nobr>
                         </MenuLink>
                     ))}

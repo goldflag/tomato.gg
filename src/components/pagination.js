@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Icon } from "react-icons-kit";
 import { chevronRight, chevronLeft, chevronsRight, chevronsLeft } from "react-icons-kit/feather";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 const PaginationContainer = styled.div`
     font-family: Roboto Mono;
@@ -39,7 +39,7 @@ const PaginationButton = styled.button`
     }
 `;
 
-const { formatString, ...strings } = new LocalizedStrings({
+const { formatString, ...strings } = LocalizedStrings({
     en: {
         pageOf: "Page {0} of {1}",
         gotoPage: "Go to page:",

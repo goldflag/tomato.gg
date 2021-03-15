@@ -2,7 +2,7 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Tab, Tabs } from "@material-ui/core";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 import styled from "styled-components";
 
 // LOCAL
@@ -50,7 +50,7 @@ const CustomTab = withStyles((t) => ({
     selected: {},
 }))((props) => <Tab disableRipple {...props} />);
 
-const strings = new LocalizedStrings({
+const strings = LocalizedStrings({
     en: {
         main: "MAIN STATS",
         hof: "HALL OF FAME",
@@ -74,6 +74,9 @@ const strings = new LocalizedStrings({
         sessions: "SESSIONS",
         infographics: "INFOGRAFIKEN",
         treemap: "TREE MAP",
+        cached: "Dargestellte Statistiken sind gecached. Frage aktuelle Daten an.",
+        blameWG: "Wenn diese Nachricht nicht nicht verschwindet gibt es ein Problem mit der WG-API.",
+        realTime: "Daten wurden aktualisiert!",
     },
     cs: {
         main: "HLAVNÍ STATISTIKY",

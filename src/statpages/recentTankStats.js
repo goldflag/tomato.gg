@@ -1,6 +1,6 @@
 // NPM
 import React, { useEffect, useState, useContext } from "react";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
 import { serverConv } from "Data/conversions";
@@ -13,7 +13,7 @@ import { commonStrings } from "Data/localizations";
 
 const backend = process.env.REACT_APP_BACKEND;
 
-const { formatString, ...strings } = new LocalizedStrings({
+const { formatString, ...strings } = LocalizedStrings({
     en: {
         title: "{0} Recent Tank Stats",
         clickRow: "Click on a row to view detailed server-wide tank performance and leaderboards",

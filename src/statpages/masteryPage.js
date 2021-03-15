@@ -1,7 +1,7 @@
 // NPM
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
 import { ServerContext } from "Context";
@@ -12,7 +12,7 @@ import { Loader, FullPageTableWrapper, Info } from "Components";
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
-const { formatString, ...strings } = new LocalizedStrings({
+const { formatString, ...strings } = LocalizedStrings({
     en: {
         mastery: "Mastery Badge Requirements",
         dataFrom: "Data from the creators of the {0}",

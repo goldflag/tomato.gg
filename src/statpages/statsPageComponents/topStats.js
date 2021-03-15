@@ -1,7 +1,7 @@
 // NPM
 import React from "react";
 import styled from "styled-components";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 import { Link } from "react-router-dom";
 
 // LOCAL
@@ -91,7 +91,7 @@ const StatCardValue = styled.span`
     font-weight: 500;
 `;
 
-const { formatString, ...strings } = new LocalizedStrings({
+const { formatString, ...strings } = LocalizedStrings({
     en: {
         created: "Account created {0}",
         overallWN8: "Overall WN8",

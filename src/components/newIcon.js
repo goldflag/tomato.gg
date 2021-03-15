@@ -1,7 +1,7 @@
 // NPM
 import React from "react";
 import styled from "styled-components";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 const GreenIcon = styled.span`
     font-size: 0.8rem;
@@ -11,7 +11,7 @@ const GreenIcon = styled.span`
     background-color: rgb(0, 184, 104);
 `;
 
-const strings = new LocalizedStrings({
+const strings = LocalizedStrings({
     en: {
         new: "NEW!",
     },

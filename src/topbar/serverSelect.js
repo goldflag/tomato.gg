@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
 import { ServerContext } from "Context";
@@ -33,7 +33,7 @@ const SelectButton = styled(Button)`
     }
 `;
 
-const strings = new LocalizedStrings({
+const strings = LocalizedStrings({
     en: {
         server: "select default server",
     },

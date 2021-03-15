@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import parse from "html-react-parser";
 import Scrollbar from "react-scrollbars-custom";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
 import { WN8color, WRcolor } from "Functions/colors";
@@ -129,7 +129,7 @@ const StatCard = ({ stat, label, value, rankKey, total, rankings }, i) => (
     </StatBox>
 );
 
-const { formatString, ...strings } = new LocalizedStrings({
+const { formatString, ...strings } = LocalizedStrings({
     en: {
         created: "Created: {0}",
         recentTab: "RECENT",

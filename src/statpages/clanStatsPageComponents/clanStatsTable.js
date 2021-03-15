@@ -11,12 +11,12 @@ import { Link } from "react-router-dom";
 import { GlobalFilter } from "Components/tableFilters";
 import { FiltersContainer, SubRow, TableContainer, StyledTable, tableHeaders } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 import { Capital, clanPositions, commonStrings } from "Data/localizations";
 
 // const backend = process.env.REACT_APP_BACKEND;
 
-const { formatString, ...strings } = new LocalizedStrings({
+const { formatString, ...strings } = LocalizedStrings({
     en: {
         clanRole: "Role",
         joined: "Joined",

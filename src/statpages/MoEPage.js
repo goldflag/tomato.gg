@@ -1,7 +1,7 @@
 // NPM
 import React, { useEffect, useState, useContext } from "react";
 import ReactGA from "react-ga";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
 import { ServerContext } from "Context";
@@ -14,7 +14,7 @@ import { serverConv } from "Data/conversions";
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
-const { formatString, ...strings } = new LocalizedStrings({
+const { formatString, ...strings } = LocalizedStrings({
     en: {
         moe: "Marks of Excellence Requirements",
         dataFrom: "Data from the creators of the {0}",

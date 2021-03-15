@@ -10,7 +10,7 @@ import { clanPositions } from "Data/localizations";
 import { Link, useRouteMatch } from "react-router-dom";
 import { serverConv } from "Data/conversions";
 import { Loader } from "Components";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
@@ -43,7 +43,7 @@ const formatDate = (value) => {
     return date.toLocaleDateString(navigator.languages[0], dateOptions);
 };
 
-const strings = new LocalizedStrings({
+const strings = LocalizedStrings({
     en: {
         clanHistory: "CLAN HISTORY",
         noData: "This player has no clan data.",
@@ -56,6 +56,12 @@ const strings = new LocalizedStrings({
         noData: "Historie tohoto hráče neobsahuje žádná klanová data.",
         left: "Odešel",
         position: "Pozice",
+    },
+    de: {
+        clanHistory: "CLAN HISTORIE",
+        noData: "Dieser Spieler hat keine Clanhistorie.",
+        left: "Ausgetreten",
+        position: "Rang",
     },
     fr: {
         clanHistory: "HISTORIQUE DES CLANS",

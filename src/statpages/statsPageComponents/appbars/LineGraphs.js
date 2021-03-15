@@ -1,10 +1,10 @@
 import { commonStrings } from "Data/localizations";
 import React, { useState } from "react";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 import { CustomTabs, CustomTab } from "../../tabs/customTabs";
 import LineGraphWN8 from "../charts/LineGraph.js";
 
-const { formatString, ...strings } = new LocalizedStrings({ en: { progress: "{0} PROGRESS" } });
+const { formatString, ...strings } = LocalizedStrings({ en: { progress: "{0} PROGRESS" } });
 export default function LineGraphs({ WN8, DPG, WR }) {
     const [value, setValue] = useState(0);
 

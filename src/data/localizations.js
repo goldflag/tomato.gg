@@ -1,6 +1,6 @@
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
-export const { formatString, ...commonStrings } = new LocalizedStrings({
+export const { formatString, ...commonStrings } = LocalizedStrings({
     en: {
         player: "player",
         clan: "clan",
@@ -179,8 +179,8 @@ export const { formatString, ...commonStrings } = new LocalizedStrings({
         hours: "{0} 小時",
     },
 });
-
-export const clanPositions = new LocalizedStrings({
+console.log(formatString, commonStrings);
+export const clanPositions = LocalizedStrings({
     en: {
         commander: "Commander",
         executive_officer: "Executive Officer",
@@ -299,6 +299,18 @@ export const clanPositions = new LocalizedStrings({
         reservist: "後備軍人",
     },
 });
+
+export const languages = {
+    en: { name: "English" },
+    cs: { name: "Čeština" },
+    de: { name: "Deutsche" },
+    es: { name: "Español" },
+    fr: { name: "Français" },
+    pl: { name: "Polski" },
+    ru: { name: "Pусский" },
+    tr: { name: "Türkçe" },
+    zh: { name: "立早" },
+};
 
 export const UPPER = (s) => s.toUpperCase();
 export const Capital = (s) =>

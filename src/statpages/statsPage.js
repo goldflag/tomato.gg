@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import ReactGA from "react-ga";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
 import { serverConv } from "Data/conversions";
@@ -26,7 +26,7 @@ const Container = styled.div`
     }
 `;
 
-const { formatString, ...strings } = new LocalizedStrings({
+const { formatString, ...strings } = LocalizedStrings({
     en: {
         notFound: "Player {0} not found",
         correct: "Make sure the username and region are correct.",

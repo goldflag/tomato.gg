@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
 import SessionsLog from "./sessionsLog";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -10,12 +10,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const strings = new LocalizedStrings({
+const strings = LocalizedStrings({
     en: {
         sessionsLog: "DAILY SESSIONS LOG",
     },
     cs: {
         sessionsLog: "DENNÍ ZÁZNAM BITEV",
+    },
+    de: {
+        sessionsLog: "TÄGLICHE SITZUNGSSTATISTIKEN",
     },
     fr: {
         sessionsLog: "RÉCAPITULATIF DES SESSIONS JOURNALIÈRES",
@@ -29,7 +32,6 @@ const strings = new LocalizedStrings({
     zh: {
         sessionsLog: "每日記錄",
     },
-
 });
 
 export default function ExpectedDist(props) {

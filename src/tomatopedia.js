@@ -3,6 +3,7 @@ import React, { useEffect, useContext } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import ReactGA from "react-ga";
 import styled from "styled-components";
+import Scrollbar from "react-scrollbars-custom";
 
 // LOCAL
 import { routes } from "./routes";
@@ -12,7 +13,6 @@ import Sidebar from "./sidebar";
 import { BackgroundContext } from "Context";
 import Ocean from "./assets/Ocean.svg";
 import "CSS/body.css";
-import Scrollbar from "react-scrollbars-custom";
 
 const trackingId = process.env.REACT_APP_GA;
 

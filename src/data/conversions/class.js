@@ -1,4 +1,4 @@
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 export const classConv = {
     lightTank: "LT",
@@ -8,7 +8,7 @@ export const classConv = {
     SPG: "SPG",
 };
 
-export const classDescConv = new LocalizedStrings({
+export const classDescConv = LocalizedStrings({
     en: {
         HT: "Heavy Tank",
         MT: "Medium Tank",

@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 
 // LOCAL
 import { tierConv, nationConv, classConv } from "Data/conversions";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 export const TableContainer = styled.div`
     overflow-x: auto;
     overflow-y: hidden;
@@ -112,7 +112,7 @@ export const ClassCell = ({ value, maxWidth, row }) => (
 
 export const TierCell = ({ value, row }) => <PremField isPrem={isPrem(row)}>{tierConv[value] || value}</PremField>;
 
-export const tableHeaders = new LocalizedStrings({
+export const tableHeaders = LocalizedStrings({
     en: {
         username: "Username",
         avgTier: "Avg Tier",

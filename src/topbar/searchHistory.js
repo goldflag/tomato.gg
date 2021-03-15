@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { IconButton, Chip, Avatar } from "@material-ui/core";
 import { DeleteOutline } from "@material-ui/icons";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 import styled from "styled-components";
 import FlipMove from "react-flip-move";
 
@@ -11,7 +11,7 @@ import FlipMove from "react-flip-move";
 import { serverConv } from "Data/conversions";
 import { SearchHistoryContext } from "Context";
 
-const strings = new LocalizedStrings({
+const strings = LocalizedStrings({
     en: {
         clearHistory: "clear history",
         server: "select default server",

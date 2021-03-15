@@ -1,6 +1,6 @@
 // NPM
 import React from "react";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
@@ -11,7 +11,7 @@ import SearchIcon from "@material-ui/icons/Search";
 // LOCAL
 import SelectQuery from "./select";
 
-const strings = new LocalizedStrings({
+const strings = LocalizedStrings({
     en: {
         placeholder: "Enter a Username (e.g. Goldflag)",
         ariaLabel: "search for a player",

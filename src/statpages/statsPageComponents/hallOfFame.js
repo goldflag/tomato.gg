@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Scrollbar from "react-scrollbars-custom";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
 import { Loader } from "Components";
@@ -255,7 +255,7 @@ const ConditionalLink = ({ makeLink, ...props }) => {
     return <span {...props} />;
 };
 
-const { formatString, ...strings } = new LocalizedStrings({
+const { formatString, ...strings } = LocalizedStrings({
     en: {
         hof: "HALL OF FAME",
         subTitle: "60 DAYS | MINIMUM {0} BATTLES | VEHICLES TIER 6+",

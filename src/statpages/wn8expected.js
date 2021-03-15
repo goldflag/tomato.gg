@@ -1,7 +1,7 @@
 // NPM
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
-import LocalizedStrings from "react-localization";
+import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
 import WN8Table from "./wn8Components/wn8Table";
@@ -10,7 +10,7 @@ import { Loader, FullPageTableWrapper, Info } from "Components";
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
-const { formatString, ...strings } = new LocalizedStrings({
+const { formatString, ...strings } = LocalizedStrings({
     en: {
         expected: "WN8 Expected Values",
         maintained: "Maintained by the {0}",
