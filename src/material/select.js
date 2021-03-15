@@ -1,58 +1,45 @@
 // NPM
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-
 // LOCAL
 import { commonStrings, UPPER } from "Data/localizations";
+import { SelectComponent } from "Components/customSelect";
+import { serverConv } from "Data/conversions";
 
-const useStyles = makeStyles((t) => ({
-    formControl: {
-        marginLeft: t.spacing(0),
-        marginRight: t.spacing(1),
-        minWidth: 30,
-        color: "white",
-    },
-    selectEmpty: {
-        paddingTop: t.spacing(1.1),
-        paddingBottom: t.spacing(1.1),
-        color: "white",
-    },
-}));
+
+const servers = [
+    ["com", "NA"],
+    ["eu", "EU"],
+    ["asia", "ASIA"]
+]
+
+const modes = [
+    ["player", UPPER(commonStrings.player)],
+    ["clan", UPPER(commonStrings.clan)]
+]
 
 export default function SelectQuery({ server, setServer, mode, setMode }) {
-    const classes = useStyles();
-
     return (
         <>
-            <FormControl className={classes.formControl}>
-                <Select
-                    value={server}
-                    onChange={(e) => setServer(e.target.value)}
-                    displayEmpty
-                    className={classes.selectEmpty}
-                >
-                    <MenuItem value="com">NA</MenuItem>
-                    <MenuItem value="eu">EU</MenuItem>
-                    <MenuItem value="asia">ASIA</MenuItem>
-                </Select>
-            </FormControl>
-            <FormControl className={classes.formControl}>
-                <Select
-                    MenuProps={{
-                        disableScrollLock: true,
-                    }}
-                    value={mode}
-                    onChange={(e) => setMode(e.target.value)}
-                    displayEmpty
-                    className={classes.selectEmpty}
-                >
-                    <MenuItem value="player">{UPPER(commonStrings.player)}</MenuItem>
-                    <MenuItem value="clan">{UPPER(commonStrings.clan)}</MenuItem>
-                </Select>
-            </FormControl>
+            <SelectComponent 
+                value={server} 
+                name={serverConv[server]} 
+                setValue={setServer} 
+                options={servers} 
+                width={40} 
+                background={"rgba(100, 100, 200, 0.3)"} 
+                border={"rgba(255, 255, 255, 1)"}
+                dropdownSelectColor={"rgb(222, 13, 93)"}
+            />
+            <div style={{width: "10px"}}/>
+            <SelectComponent 
+                value={mode} 
+                name={ UPPER(commonStrings[mode])} 
+                setValue={setMode} 
+                options={modes} 
+                width={80} 
+                background={"rgba(100, 100, 200, 0.3)"} 
+                border={"rgba(255, 255, 255, 1)"}
+            />
         </>
     );
 }

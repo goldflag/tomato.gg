@@ -25,27 +25,39 @@ const Flag = styled.img`
 `
 
 export default function LanguageSelect() {
-    const [ displayed, setDisplayed ] = useState("None");
+    const [ open, setOpen ] = useState("None");
     const [language, setLanguage] = useCurrentLanguage();
     const handleChange = async (e) => setLanguage(e, true);
 
     return (
         <Dropdown>
             <CustomSelect>
-                <DropdownSelector width={"125"} onClick={() => setDisplayed(displayed === "Block" ? "None" : "Block")}>
-                    <Flag src={require(`Assets/modernFlags/${language}.svg`)}/> <div style={{textAlign: "left", width: "100%"}}> {" "} {languages[language].name}</div>
+                <DropdownSelector 
+                    width={"125"} 
+                    open={open}
+                    border={"rgba(120, 120, 200, 0.8)"} 
+                    onClick={() => setOpen(open === "Block" ? "None" : "Block")}
+                >
+                    <Flag src={require(`Assets/modernFlags/${language}.svg`)}/>
+                    <div style={{textAlign: "left", width: "100%"}}>{languages[language].name}</div>
                 </DropdownSelector>
-                <OutsideClickHandler onOutsideClick={() => setDisplayed("None")}>
-                    <DropdownOptions displayed={displayed}>
+                <OutsideClickHandler onOutsideClick={() => setOpen("None")}>
+                    <DropdownOptions open={open}>
                         {Object.entries(languages).map(([code, { name }], i) => (
-                            <DropdownOptionsChildren value={code} key={i} width={"125"} onClick={() => handleChange(code)}>
-                                <Flag src={require(`Assets/modernFlags/${code}.svg`)}/><div style={{textAlign: "left", width: "100%"}}>{name}</div>
+                            <DropdownOptionsChildren 
+                                value={code} 
+                                key={i} 
+                                width={"125"}
+                                onClick={() => handleChange(code)}
+                                background={"rgba(50, 60, 110, 0.9)"} 
+                            >
+                                <Flag src={require(`Assets/modernFlags/${code}.svg`)}/>
+                                <div style={{textAlign: "left", width: "100%"}}>{name}</div>
                             </DropdownOptionsChildren>
                         ))}
                     </DropdownOptions>
                 </OutsideClickHandler>
             </CustomSelect>
-
         </Dropdown>
     );
 }
