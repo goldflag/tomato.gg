@@ -138,6 +138,7 @@ export const Pagination = (props) => {
                             color: "rgb(255, 255, 255)",
                             backgroundColor: "rgba(40, 40, 70, 0.5)",
                             fontFamily: "Roboto Mono",
+                            border: "None"
                         }}
                     >
                         {strings.show} {pageSize}
