@@ -20,8 +20,7 @@ const { formatString, ...strings } = LocalizedStrings({
         WN8lab.com. Tomato.gg is being actively developed and is nowhere near feature complete. In
         the future, I plan to expand the player stats page, expand the tank stats page, implement
         clan stats, and finish the leaderboards.`,
-        about2: `Tomato.gg fully supports EU, NA, and ASIA player stats. You can still view stats for RU 
-        gamers, but there are no automatic daily stat updates.`,
+        about2: `Tomato.gg fully supports EU, NA, and ASIA player stats. Support for RU player stats is planned and coming Soon™.`,
         about3: `Check out Tomato.gg on mobile as well. I have optimized the mobile site for the best user
         experience while still being nearly 100% feature complete.`,
         about4: `has helped extensively with the development of Tomato.gg. Thanks so much!`,
@@ -109,6 +108,21 @@ const { formatString, ...strings } = LocalizedStrings({
         discord: `Serveur Discord`,
         thanks: `Merci d'utiliser Tomato.gg!`,
     },
+    ko: {
+        h1: `Tomato.gg의 소개`,
+        updated: `UPDATED `,
+        about0: ` 이 사이트는 창의적인 통계들을 많은 유저분들이 쉽게 볼 수 있도록 만들어졌습니다. 몇몇통계들은 다른 사이트에서 영감을 받았습니다.`,
+        about1: ` 토마토는 모든 것을 할려고 하진 않을겁니다. wot-news.com,처럼 디테일한 서버통계, WN8lab.com의 정확한 개인 전투수같은 
+        통계들은 절대 나오진 않을겁니다. 토마토는 현재 활발하게 개발되고 있으나 모든 기능들이 완벽하진 않습니다. 저는 유저, 전차, 클랜 통계를 
+        주력으로 최종적인 리더보드를 개발하는 계획을 가지고 있습니다.`,
+        about2: ` 토마토는 유럽, 북아메리카와 아시아 지역의 유저 통계들은 지원합니다. 러시안 유저들 통계도 볼 수는 있으나, 자동 통계업데이트는 없을겁니다.`,
+        about3: `모바일기기에서 토마토를 확인 해보세요. 이 사이트는 모바일 환경을 지원하며 거의 100%의 기능들을 모바일에서 즐길 수 있습니다 `,
+        about4: `___들의 큰 지원으로 개발했습니다. 매우 감사합니다!`,
+        translators: `토마토의 글로벌라이션은 이 대단한 협력자들의 도움들로 이루어져있습니다:`,
+        feedback: `만약 피드백, 제의와 버그 리포트를 하고 싶으시면 {0} 들어 오십시오.`,
+        discord: `디스코드 서버에`,
+        thanks: `토마토를 애용해주셔서 감사합니다!`,
+    },
     pl: {
         h1: `O Tomato.gg`,
         updated: `ZAKTUALIZOWANE {0}`,
@@ -144,6 +158,7 @@ const { formatString, ...strings } = LocalizedStrings({
         about3: `Проверьте Tomato.gg также на мобильном телефоне. МЫ оптимизировали мобильный сайт для лучшего просмотра
         пока все еще в разработке.`,
         about4: `внес большой вклад в развитие Tomato.gg. Спасибо большое!`,
+        translators: `Tomato.gg's интернационализация была достигнута с помощью этих замечательных добровольцев:`,
         feedback: `Присоединяйтесь к моему {0} eсли вы хотите оставить отзыв, предложения и отчеты об ошибках.`,
         discord: `Discord Сервер`,
         thanks: `Спасибо, что посетили Tomato.gg!`,
@@ -195,8 +210,9 @@ const translators = {
         { name: "candymonster1953", url: "/stats/NA/candymonster1953=1038153624" },
         { name: "ForgottenShots", url: "/stats/EU/ForgottenShots=529569765" },
     ],
+    ko: [{ name: "Roika", url: "/stats/ASIA/Crawling_Ghost=2005611731" }],
     pl: [{ name: "herhor67", url: "https://herhor.net/" }, { name: "wasyfko" }],
-    ru: [{ name: "AllMyHomiesHateArty", url: "" }],
+    ru: [{ name: "AllMyHomiesHateArty", url: "/stats/NA/onlyidiotaint_=1013512767" }],
     tr: [{ name: "ProFighte", url: "/stats/EU/profighte=516922883" }],
     zh: [{ name: "pujols1107", url: "/stats/ASIA/pujols1107=2002339441" }],
 };

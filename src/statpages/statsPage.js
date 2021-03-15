@@ -27,14 +27,8 @@ const Container = styled.div`
 `;
 
 const { formatString, ...strings } = LocalizedStrings({
-    en: {
-        notFound: "Player {0} not found",
-        correct: "Make sure the username and region are correct.",
-    },
-    cs: {
-        notFound: "Hráč {0} nebyl nalezen",
-        correct: "Ujistěte se, že přezdívka i region serveru jsou správně.",
-    },
+    en: { notFound: "Player {0} not found", correct: "Make sure the username and region are correct." },
+    cs: { notFound: "Hráč {0} nebyl nalezen", correct: "Ujistěte se, že přezdívka i region serveru jsou správně." },
     de: {
         notFound: "Spieler {0} nicht gefunden",
         correct: "Stelle sicher, dass der Name und die Region korrekt sind.",
@@ -43,26 +37,12 @@ const { formatString, ...strings } = LocalizedStrings({
         notFound: "Jugador {0} no encontrado",
         correct: "Por favor asegúrese de que el nombre de usuario y la región sean correctos",
     },
-    fr: {
-        notFound: "Joueur {0} introuvable",
-        correct: "Vérifiez que le pseudo et la région sont corrects.",
-    },
-    tr: {
-        notFound: "{0} oyuncusu bulunamadı",
-        correct: "Oyuncu adı ve bölgenin doğru olduğuna emin olunuz.",
-    },
-    pl: {
-        notFound: "Nie znaleziono gracza {0}",
-        correct: "Sprawdź, czy nick i region są poprawne",
-    },
-    ru: {
-        notFound: "Игрок {0} не найден",
-        correct: "Убедитесь, что имя игрока и регион указаны правильно.",
-    },
-    zh: {
-        notFound: "查無玩家 {0}",
-        correct: "確認為正確的使用者及地區。",
-    },
+    fr: { notFound: "Joueur {0} introuvable", correct: "Vérifiez que le pseudo et la région sont corrects." },
+    ko: { notFound: "유저 {0} 못 찾음", correct: "유저네임과 지역이 바른지 확인해주세요" },
+    pl: { notFound: "Nie znaleziono gracza {0}", correct: "Sprawdź, czy nick i region są poprawne" },
+    ru: { notFound: "Игрок {0} не найден", correct: "Убедитесь, что имя игрока и регион указаны правильно." },
+    tr: { notFound: "{0} oyuncusu bulunamadı", correct: "Oyuncu adı ve bölgenin doğru olduğuna emin olunuz." },
+    zh: { notFound: "查無玩家 {0}", correct: "確認為正確的使用者及地區。" },
 });
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

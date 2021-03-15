@@ -11,51 +11,16 @@ const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
 const { formatString, ...strings } = LocalizedStrings({
-    en: {
-        expected: "WN8 Expected Values",
-        maintained: "Maintained by the {0}",
-        xvm: "XVM team",
-    },
-    cs: {
-        expected: "Očekávané hodnoty Wn8",
-        maintained: "Udržuje {0}",
-        xvm: "XVM týmem",
-    },
-    de: {
-        expected: "WN8 Erwartungswerte",
-        maintained: "Gepflegt vom {0}",
-        xvm: "XVM Team",
-    },
-    es: {
-        expected: "Valores Esperados de WN8",
-        maintained: "Mantenido por {0}",
-        xvm: "Equipo de XVM",
-    },
-    fr: {
-        expected: "Valeurs Attendues pour le WN8",
-        maintained: "Maintenu par {0}",
-        xvm: "l'équipe XVM",
-    },
-    pl: {
-        expected: "Oczekiwane wartości dla WN8",
-        maintained: "Zarządzane przez {0}",
-        xvm: "XVM team",
-    },
-    ru: {
-        expected: "WN8 Ожидаемая статистика",
-        maintained: "Поддерживается {0}",
-        xvm: "командой XVM",
-    },
-    tr: {
-        expected: "WN8 Beklenen Değer",
-        maintained: "Sağlayan: {0}",
-        xvm: "XVM team",
-    },
-    zh: {
-        expected: "WN8 期望值",
-        maintained: "由 {0} 維護",
-        xvm: "XVM team",
-    },
+    en: { expected: "WN8 Expected Values", maintained: "Maintained by the {0}", xvm: "XVM team" },
+    cs: { expected: "Očekávané hodnoty Wn8", maintained: "Udržuje {0}", xvm: "XVM týmem" },
+    de: { expected: "WN8 Erwartungswerte", maintained: "Gepflegt vom {0}", xvm: "XVM Team" },
+    es: { expected: "Valores Esperados de WN8", maintained: "Mantenido por {0}", xvm: "Equipo de XVM" },
+    fr: { expected: "Valeurs Attendues pour le WN8", maintained: "Maintenu par {0}", xvm: "l'équipe XVM" },
+    ko: { expected: "WN8 기댓값", maintained: "관리자 {0}", xvm: "XVM 팀" },
+    pl: { expected: "Oczekiwane wartości dla WN8", maintained: "Zarządzane przez {0}", xvm: "XVM team" },
+    ru: { expected: "WN8 Ожидаемая статистика", maintained: "Поддерживается {0}", xvm: "командой XVM" },
+    tr: { expected: "WN8 Beklenen Değer", maintained: "Sağlayan: {0}", xvm: "XVM team" },
+    zh: { expected: "WN8 期望值", maintained: "由 {0} 維護", xvm: "XVM team" },
 });
 
 export default function Leaderboards(props) {

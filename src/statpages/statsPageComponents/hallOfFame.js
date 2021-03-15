@@ -301,6 +301,15 @@ const { formatString, ...strings } = LocalizedStrings({
         unranked: "Jouez {0} batailles de plus dans des chars rang 6 ou plus pour entrer dans le Panthéon",
         unrankedTank: "Jouez {0} batailles de plus pour entrer dans le classement",
     },
+    ko: {
+        hof: "명예의 전당",
+        subTitle: "60일 | 최소 {0} 전투 | 전차 6티어+",
+        tankRankings: "전차 랭킹",
+        betterThan: "상위{0}%",
+        moreThan: "상위 {0}%",
+        unranked: "명예의 전당에 들기위해 6티어 이상 전차로 {0}번 전투 더 치르세요.",
+        unrankedTank: " 랭킹에 들기 위해{0}번 전투 더 치르세요.",
+    },
     pl: {
         hof: "ALEJA SŁAW",
         subTitle: "60 DNI | MINIMUM {0} BITEW | POJAZDY POZIOMU 6+",

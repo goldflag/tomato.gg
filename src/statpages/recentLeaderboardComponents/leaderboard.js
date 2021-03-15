@@ -75,6 +75,13 @@ const { formatString, ...strings } = LocalizedStrings({
         timeFilter: "Choisir la période",
         error: "Désolé, une erreur s'est produite lors du chargement du classement.",
     },
+    ko: {
+        vehicleTier: "{0}티어 이상",
+        typeFilter: "리더보드 타입",
+        tierFilter: "최소 전차 티어",
+        timeFilter: "기간",
+        error: "리더보드를 불러오는 중 에러가 발생했습니다. 죄송합니다.",
+    },
     pl: {
         vehicleTier: "W pojazdach poziomu {0}+",
         typeFilter: "ustaw typ rankingu",

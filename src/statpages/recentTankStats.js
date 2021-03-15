@@ -41,6 +41,11 @@ const { formatString, ...strings } = LocalizedStrings({
         le serveur et les classements pour un char`,
         error: "Désolé, les statistiques récentes du char n'ont pas pu être chargées.",
     },
+    ko: {
+        title: "{0} 최근 전차 통계",
+        clickRow: "더 디테일한 서버의 전차통계와 리더보드를 보고 싶으면 줄을 확장하세요.",
+        error: "죄송합니다. 최근 전차 통계를 불러오지 못 했습니다.",
+    },
     pl: {
         title: "Bieżące Statystyki Czołgów na {0}",
         clickRow: "Kliknij na rząd żeby wyświetlić szczegółowe wskaźniki serwerowej efektywności czołgu oraz rankingi",

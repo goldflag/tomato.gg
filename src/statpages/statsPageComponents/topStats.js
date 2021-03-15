@@ -124,6 +124,15 @@ const { formatString, ...strings } = LocalizedStrings({
         recentWR: "Taux de Victoire Récent",
         wgRating: "Côte WG",
     },
+    ko: {
+        created: "계정 생성일 {0}",
+        overallWN8: "전체 WN8",
+        overallWR: "Overall 승률",
+        recentWN8: "최근 WN8",
+        recentWR: "최근 승률",
+        wgRating: "개인 순위",
+        battles: "전투 수",
+    },
     pl: {
         created: "Konto stworzone {0}",
         overallWN8: "Ogólne WN8",

@@ -71,6 +71,18 @@ const { formatString, ...strings } = LocalizedStrings({
         exp85change: "CHANGEMENT ATTENDU 85%",
         exp65change: "CHANGEMENT ATTENDU 65%",
     },
+    ko: {
+        moe: "화력의 증표 요구사양",
+        dataFrom: " 데이터 출처는 ",
+        moeMod: " 화력의 증표 모드",
+        expand: " 펼처서 30일 화력의 증표 요구사양 보기 ",
+        avg: "*화력의 증표는 노이즈를 줄이기 위해 3일 평균값으로 계산됩니다",
+        expected: "기댓값",
+        exp95change: "95% 경험치 기댓값",
+        exp85change: "85% 경험치 기댓값",
+        exp65change: "65% 경험치 기댓값 ",
+    },
+
     tr: {
         moe: "Mükemmellik İşaretleri Gereksinimleri",
         dataFrom: "{0} tarafından oluşturulan veriler.",
