@@ -154,7 +154,7 @@ export default function TankPage(props) {
                     {formatString(strings.top500, serverConv[server])}
                     <BottomLabel>{strings.past60min25}</BottomLabel>
                     <FilterButtonGroup>
-                        {Object.entries(filters()).map(([val, label]) => (
+                        {Object.entries(filters).map(([val, label]) => (
                             <FilterButton
                                 key={val}
                                 selected={type === val}
