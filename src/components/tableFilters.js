@@ -164,10 +164,10 @@ const classFilterOptions = [
 
 const nationFilterOptions = [
     { label: strings.all, value: undefined },
-    ...Object.keys(nationConv).map((nation) => ({
+    ...Object.entries(nationConv).map(([nation, converted]) => ({
         label: nation,
         value: nation,
-        image: require(`Assets/flagIcons/${nationConv[nation]}.png`),
+        image: require(`Assets/flagIcons/${converted}.png`),
     })),
 ];
 

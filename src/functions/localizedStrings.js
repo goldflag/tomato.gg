@@ -9,7 +9,7 @@ Wrapper around LocalizedStrings that allows app-wide changes to the current lang
 const { LocalizedStrings, setLanguage, getLanguage, useCurrentLanguage } = (() => {
     const setLanguageFns = [];
     const watcherFns = {};
-    let currentLanguage = localStorage.getItem("lang") || navigator.languages[0];
+    let currentLanguage = localStorage.getItem("lang") || navigator.languages[0].split("-")[0];
 
     const setLanguageForAll = (lang, reload = false) => {
         console.log(`Setting language to ${lang} for ${setLanguageFns.length} string blocks`);

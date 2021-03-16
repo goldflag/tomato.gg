@@ -87,6 +87,33 @@ export const Name = styled(PremField)`
 
 const isPrem = ({ original }) => original.isPrem || original.is_premium;
 
+const nationImages = {
+    China: require("Assets/flagIcons/China.png"),
+    Czech: require("Assets/flagIcons/Czech.png"),
+    France: require("Assets/flagIcons/France.png"),
+    Germany: require("Assets/flagIcons/Germany.png"),
+    Italy: require("Assets/flagIcons/Italy.png"),
+    Japan: require("Assets/flagIcons/Japan.png"),
+    Poland: require("Assets/flagIcons/Poland.png"),
+    Sweden: require("Assets/flagIcons/Sweden.png"),
+    UK: require("Assets/flagIcons/UK.png"),
+    USA: require("Assets/flagIcons/USA.png"),
+    USSR: require("Assets/flagIcons/USSR.png"),
+};
+
+const classImages = {
+    HT: require("Assets/classIcons/HT.png"),
+    LT: require("Assets/classIcons/LT.png"),
+    MT: require("Assets/classIcons/MT.png"),
+    SPG: require("Assets/classIcons/SPG.png"),
+    TD: require("Assets/classIcons/TD.png"),
+    premHT: require("Assets/classIcons/premHT.png"),
+    premLT: require("Assets/classIcons/premLT.png"),
+    premMT: require("Assets/classIcons/premMT.png"),
+    premSPG: require("Assets/classIcons/premSPG.png"),
+    premTD: require("Assets/classIcons/premTD.png"),
+};
+
 export const TankNameCell = ({ row: { original } }) => (
     <Name isPrem={isPrem({ original })}>
         <img src={original.image} alt={original.short_name || original.name} />
@@ -96,18 +123,14 @@ export const TankNameCell = ({ row: { original } }) => (
 
 export const NationCell = ({ value, maxWidth, row }) => (
     <img
-        src={require(`Assets/flagIcons/${nationConv[value] || value}.png`)}
+        src={nationImages[value] || nationImages[nationConv[value]]}
         style={{ maxWidth: maxWidth || "40px" }}
         alt={value}
     />
 );
 
 export const ClassCell = ({ value, maxWidth, row }) => (
-    <img
-        src={require(`Assets/classIcons/${isPrem(row) ? "prem" : ""}${classConv[value] || value}.png`)}
-        style={{ maxWidth: maxWidth || "20px" }}
-        alt={value}
-    />
+    <img src={classImages[(isPrem(row) ? "prem" : "") + value]} style={{ maxWidth: maxWidth || "20px" }} alt={value} />
 );
 
 export const TierCell = ({ value, row }) => <PremField isPrem={isPrem(row)}>{tierConv[value] || value}</PremField>;
