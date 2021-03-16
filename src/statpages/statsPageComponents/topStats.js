@@ -176,19 +176,6 @@ export default function TopStats(props) {
         const { role, clan } = props.clanStats;
         clanInfo = (
             <>
-<<<<<<< HEAD
-                <Username>{props.username}</Username>
-                {props.clanStats.role_i18n} at <ClanTag {...props.clanStats.clan}>[{props.clanStats.clan.tag}]</ClanTag>
-                <br />
-                <AccountCreated>Account created {creationDate}</AccountCreated>
-            </>
-        ) : (
-            <>
-                <Username>{props.username}</Username>
-                <AccountCreated>Account created {creationDate}</AccountCreated>
-            </>
-        );
-=======
                 {clanPositions[role]} at{" "}
                 <Link to={`/clan-stats/${serverConv[props.server]}/${clan.tag}=${clan.clan_id}`}>
                     <ClanTag {...clan}>[{clan.tag}]</ClanTag>
@@ -207,7 +194,6 @@ export default function TopStats(props) {
             </AccountCreated>
         </>
     );
->>>>>>> working
 
     const statCards = [
         { label: strings.overallWN8, value: props.data.overallWN8, colorFn: WN8color },

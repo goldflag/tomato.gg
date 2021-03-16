@@ -129,11 +129,6 @@ class StatsPage extends Component {
         ];
         return Promise.all(urls.map((url) => fetch(url)))
             .then((resps) => Promise.all(resps.map((r) => r.json())))
-<<<<<<< HEAD
-            .then(([overall, clanStats, clanHistory, recent, hofmainData, hofData]) => {
-                console.log(overall);
-                const stats = overall.data[id].statistics.all;
-=======
             .then(([player, hofmainData, hofData]) => {
                 const newState = {
                     hofmainData,
@@ -177,7 +172,6 @@ class StatsPage extends Component {
             .then((r) => r.json())
             .then((player) => {
                 const { summary, clanData, clanHistory } = player;
->>>>>>> working
                 const graphData = GraphCalculator(
                     summary.statistics.all,
                     player.overallStats.overallWN8,
@@ -205,17 +199,10 @@ class StatsPage extends Component {
     };
 
     render() {
-<<<<<<< HEAD
-        const { loading, validID, username } = this.state;
-        let statTable;
-        if (loading) {
-            statTable = <Loader top={20} bottom={50} />;
-=======
         const { loadedOther, loadedStats, validID, username } = this.state;
         let statTable;
         if (!loadedOther || !loadedStats) {
             statTable = this.state.loader;
->>>>>>> working
         } else if (validID) {
             statTable = <MainTabs {...this.state} />;
         } else {
