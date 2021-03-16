@@ -200,7 +200,6 @@ export const { formatString, ...commonStrings } = LocalizedStrings({
         hours: "{0} 小時",
     },
 });
-console.log(formatString, commonStrings);
 export const clanPositions = LocalizedStrings({
     en: {
         commander: "Commander",
@@ -344,7 +343,7 @@ export const languages = {
     pl: { name: "Polski" },
     ru: { name: "Pусский" },
     tr: { name: "Türkçe" },
-    zh: { name: "立早" },
+    zh: { name: "繁體中文" },
 };
 
 export const UPPER = (s) => s.toUpperCase();

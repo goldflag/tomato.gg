@@ -205,7 +205,7 @@ const translators = {
         { name: "Red40x", url: "/stats/EU/red4ox=559710437" },
         { name: "Simon", url: "/stats/EU/sim51=505731151" },
     ],
-    es: [{ name: "tootsieroll174" }],
+    es: [{ name: "ChiforimpulaMacaca", url: "/stats/NA/doogsday=1008311439" }, { name: "tootsieroll174" }],
     fr: [
         { name: "candymonster1953", url: "/stats/NA/candymonster1953=1038153624" },
         { name: "ForgottenShots", url: "/stats/EU/ForgottenShots=529569765" },
@@ -214,7 +214,7 @@ const translators = {
     pl: [{ name: "herhor67", url: "https://herhor.net/" }, { name: "wasyfko" }],
     ru: [{ name: "AllMyHomiesHateArty", url: "/stats/NA/onlyidiotaint_=1013512767" }],
     tr: [{ name: "ProFighte", url: "/stats/EU/profighte=516922883" }],
-    zh: [{ name: "pujols1107", url: "/stats/ASIA/pujols1107=2002339441" }],
+    zh: [{ name: "立早", url: "/stats/ASIA/pujols1107=2002339441" }],
 };
 
 const trackingId = process.env.REACT_APP_GA;
