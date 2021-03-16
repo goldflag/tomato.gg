@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Icon } from "react-icons-kit";
 import { chevronRight, chevronLeft, chevronsRight, chevronsLeft } from "react-icons-kit/feather";
+import LocalizedStrings from "Functions/localizedStrings";
 
 const PaginationContainer = styled.div`
     font-family: Roboto Mono;
@@ -38,6 +39,54 @@ const PaginationButton = styled.button`
     }
 `;
 
+const { formatString, ...strings } = LocalizedStrings({
+    en: {
+        pageOf: "Page {0} of {1}",
+        gotoPage: "Go to page:",
+        show: "Show {0}",
+    },
+    cs: {
+        pageOf: "Stránka {0} z {1}",
+        gotoPage: "Jít na stránku:",
+        show: "Zobrazit {0}",
+    },
+    de: {
+        pageOf: "Seite {0} von {1}",
+        gotoPage: "Springe zu Seite:",
+        show: "Zeige {0}",
+    },
+    es: {
+        pageOf: "Página {0} de {1}",
+        gotoPage: "Ir a la página:",
+        show: "Mostrar {0}",
+    },
+    fr: {
+        pageOf: "Page {0} sur {1}",
+        gotoPage: "Aller à la page:",
+        show: "Montrer {0}",
+    },
+    ko: {
+        pageOf: " {0} of {1}장",
+        gotoPage: "페이지 찾기:",
+        show: "한 페이지에서 {0}줄 보기",
+    },
+    pl: {
+        pageOf: "Strona {0} z {1}",
+        gotoPage: "Idź na stronę:",
+        show: "Pokaż {0}",
+    },
+    ru: {
+        pageOf: "Страница {0} из {1}",
+        gotoPage: "Перейти на страницу:",
+        show: "Показать {0}",
+    },
+    tr: {
+        pageOf: "Sayfa {0} / {1}",
+        gotoPage: "Git:",
+        show: "Gösterilen {0}",
+    },
+});
+
 export const Pagination = (props) => {
     if (props.pageSizes[0] >= props.pageSize * props.pageOptions.length)
         // hide component when there's no pagination to be done
@@ -57,10 +106,10 @@ export const Pagination = (props) => {
             <PaginationButton onClick={() => props.gotoPage(props.pageCount - 1)} disabled={!props.canNextPage}>
                 <Icon size={24} icon={chevronsRight} />
             </PaginationButton>{" "}
-            Page {props.pageIndex + 1} of {props.pageOptions.length}{" "}
+            {formatString(strings.pageOf, props.pageIndex + 1, props.pageOptions.length)}
             {props.showGoTo ? (
                 <span>
-                    | Go to page:{" "}
+                    | {strings.gotoPage}{" "}
                     <input
                         type="number"
                         defaultValue={props.pageIndex + 1}
@@ -94,9 +143,10 @@ export const Pagination = (props) => {
                             color: "rgb(255, 255, 255)",
                             backgroundColor: "rgba(40, 40, 70, 0.5)",
                             fontFamily: "Roboto Mono",
+                            border: "None"
                         }}
                     >
-                        Show {pageSize}
+                        {formatString(strings.show, pageSize)}
                     </option>
                 ))}
             </select>
@@ -129,7 +179,7 @@ export const ServerPagination = ({ page, numPages, setPage }) => {
             >
                 <Icon size={24} icon={chevronsRight} />
             </PaginationButton>{" "}
-            Page {page + 1} of {numPages}{" "}
+            {formatString(strings.pageOf, page + 1, numPages)}{" "}
         </PaginationContainer>
     );
 };

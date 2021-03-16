@@ -2,240 +2,138 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import RSC from "react-scrollbars-custom";
+import Scrollbar from "react-scrollbars-custom";
+import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
 import { Loader } from "Components";
 import { tierConv } from "Data/conversions";
 import { rankColor } from "Functions/colors";
+import { Capital, commonStrings } from "Data/localizations";
 
 const Styles = styled.div`
     font-family: Roboto Mono;
     font-size: 0.8rem;
+`;
 
-    .overall {
-        max-width: 1700px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
+const TanksTitle = styled.div`
+    text-align: center;
+`;
+
+const Overall = styled.div`
+    max-width: 1700px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+`;
+
+const OverallTop = styled.div`
+    display: grid;
+    grid-template-areas: "dpg title wn8";
+    grid-template-columns: 0.9fr 1.2fr 0.9fr;
+    grid-template-rows: 240px;
+
+    @media screen and (max-width: 1000px) {
+        grid-template-areas:
+            "title"
+            "dpg" 
+            "wn8";
+        grid-template-columns: 1fr;
+        grid-template-rows: 200px;
+                            150px;
+    }
+`;
+
+const OverallBottom = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 230px;
+    grid-template-areas: "battles dr winrate kd frags";
+
+    @media screen and (max-width: 1000px) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 150px;
+    }
+`;
+
+const TopGridItem = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.5rem;
+    grid-area: ${({ slot }) => slot};
+
+    .title {
+        font-size 3rem;
+        font-weight: 800;
     }
 
-    .overallTop {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 240px;
+    .subtitle {
+        font-size 1rem;
     }
-
-    .overallBottom {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 230px;
+    
+    @media screen and (max-width: 1000px) {
+        .title {
+            font-size 2.5rem;
+        }
+        .subtitle {
+            font-size: .75rem;
+        }
     }
+`;
 
-    .overallItem {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0.5rem;
-        color: rgb(240, 240, 240);
-        padding: 1rem;
-        transition: 0.4s ease;
-        box-shadow: 0px 2px 3px rgb(30, 30, 30);
-        background-color: rgb(40, 40, 40, 0.4);
-        font-size: 1.5rem;
-        backdrop-filter: blur(7px);
-    }
+const OverallItem = styled(TopGridItem)`
+    color: rgb(240, 240, 240);
+    padding: 1rem 0.5rem;
+    transition: 0.4s ease;
+    box-shadow: 0px 2px 3px rgb(30, 30, 30);
+    background-color: rgb(60, 60, 80, 0.5);
+    font-size: 1.5rem;
+    backdrop-filter: blur(7px);
 
-    .value {
-        font-size: 3rem;
-        font-weight: 500;
-    }
-
-    .bigPercentile {
-        color: rgb(255, 255, 255);
-        font-weight: 400;
-        padding: 5px;
-        text-align: center;
-        width: 170px;
-        border-radius: 15px;
-        font-size: 0.8rem;
-        margin: 0.5rem;
-    }
-
-    .bigLabel {
-        color: rgb(180, 180, 180);
-        font-size: 1rem;
-        margin-top: -2px;
-        margin-bottom: 5px;
-    }
-
-    .overallItem:hover {
+    :hover {
         background-color: rgba(201, 26, 61, 0.5);
-    }
-
-    .tanksContainer {
-        height: 320px;
-        margin-top: 1rem;
-    }
-
-    .tanksTitle {
-        text-align: center;
-    }
-
-    .tanks {
-        display: flex;
-        flex-direction: row;
-        min-width: 100%;
-    }
-
-    .box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0.4rem;
-        color: rgb(240, 240, 240);
-        padding: 0.4rem;
-        min-width: 200px;
-        max-width: 200px;
-        height: 290px;
-        transition: 0.4s ease;
-        box-shadow: 0px 2px 3px rgb(30, 30, 30);
-        backdrop-filter: blur(7px);
-    }
-
-    .abovebox {
-        background-color: rgba(40, 40, 40, 0.4);
-    }
-
-    .underbox {
-        background-color: rgba(20, 20, 20, 0.4);
-    }
-
-    .abovebox:hover {
-        background-color: rgba(201, 26, 61, 0.5);
-    }
-
-    .underbox:hover {
-        background-color: rgba(80, 80, 80, 0.5);
-    }
-
-    .box:hover .image {
-        height: 100px;
-        width: 160px;
-    }
-
-    .image {
-        height: 90px;
-        width: 144px;
-        transition: 0.4s ease;
-    }
-
-    .name {
-        margin-top: 0.3rem;
-        color: rgb(255, 255, 255);
-    }
-
-    .dpg {
-        color: rgb(255, 255, 255);
-        font-size: 1.5rem;
-        font-weight: 500;
-        margin-top: 0.4rem;
-    }
-
-    .val {
-        color: rgb(255, 255, 255);
-        font-size: 0.8rem;
-        font-weight: 500;
-        margin-top: 0rem;
-    }
-
-    .label {
-        color: rgb(180, 180, 180);
-        font-size: 0.6rem;
-        margin-bottom: 0rem;
-    }
-
-    .percentile {
-        color: rgb(255, 255, 255);
-        font-weight: 400;
-        background-color: rgb(245, 191, 66);
-        padding: 5px;
-        text-align: center;
-        width: 150px;
-        height: 25px;
-        border-radius: 15px;
-        font-size: 0.7rem;
-        margin: 0.5rem;
-    }
-
-    .unrank {
-        color: rgb(180, 180, 180);
-        font-weight: 400;
-        text-align: center;
-        font-size: 0.7rem;
-        margin: 0.4rem;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: 50% 50%;
-        grid-template-rows: 50% 50%;
-    }
-
-    .gridItem {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0.1rem 1rem;
     }
 
     @media screen and (max-width: 1000px) {
-        .overallTop {
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: 150px;
-        }
+        margin: 0.5rem;
+        padding: 0.5rem;
+        font-size: 1rem;
+    }
+`;
 
-        .overallBottom {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 150px;
-        }
+const Value = styled.div`
+    font-size: 3rem;
+    font-weight: 500;
+    @media screen and (max-width: 1000px) {
+        font-size: 1.5rem;
+    }
+`;
 
-        .overallItem {
-            margin: 0.5rem;
-            padding: 0.5rem;
-            font-size: 1rem;
-        }
+const BigLabel = styled.div`
+    color: rgb(180, 180, 180);
+    font-size: 1rem;
+    margin-top: -2px;
+    margin-bottom: 5px;
+    @media screen and (max-width: 1000px) {
+        font-size: 0.7rem;
+    }
+`;
 
-        .value {
-            font-size: 1.5rem;
-            font-weight: 500;
-        }
-
-        .bigPercentile {
-            color: rgb(255, 255, 255);
-            font-weight: 400;
-            padding: 4px;
-            text-align: center;
-            width: 120px;
-            border-radius: 10px;
-            font-size: 0.6rem;
-            margin: 0.3rem;
-        }
-
-        .bigLabel {
-            color: rgb(180, 180, 180);
-            font-size: 0.7rem;
-            margin-top: -2px;
-            margin-bottom: 5px;
-        }
-
-        .box {
-            min-width: 180px;
-        }
+const BigPercentile = styled.div`
+    color: rgb(255, 255, 255);
+    background-color: ${({ rank, total }) => rankColor(100 - (rank * 100) / total)};
+    font-weight: 400;
+    padding: 4px;
+    text-align: center;
+    width: 150px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    margin: 0.3rem;
+    @media screen and (max-width: 1000px) {
+        width: 140px;
     }
 `;
 
@@ -253,134 +151,266 @@ const UnrankedNotice = styled.div`
     backdrop-filter: blur(7px);
 `;
 
+const TanksContainer = styled.div`
+    height: 320px;
+    margin-top: 1rem;
+`;
+
+const Tanks = styled.div`
+    display: flex;
+    flex-direction: row;
+    min-width: 100%;
+`;
+
+const Box = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.4rem;
+    color: rgb(240, 240, 240);
+    padding: 0.4rem;
+    min-width: 200px;
+    max-width: 200px;
+    height: 290px;
+    transition: 0.4s ease;
+    box-shadow: 0px 2px 3px rgb(30, 30, 30);
+    backdrop-filter: blur(7px);
+
+    background-color: ${({ background }) => background};
+    :hover {
+        background-color: ${({ backgroundHover }) => backgroundHover};
+    }
+    @media screen and (max-width: 1000px) {
+        min-width: 180px;
+    }
+`;
+
+const Val = styled.div`
+    color: rgb(255, 255, 255);
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 0rem;
+`;
+
+const Label = styled.div`
+    color: rgb(180, 180, 180);
+    font-size: 0.6rem;
+    margin-bottom: 0rem;
+`;
+
+const Grid = styled.div`
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+`;
+
+const GridItem = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.1rem 1rem;
+`;
+
+const DPG = styled.div`
+    color: rgb(255, 255, 255);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-top: 0.4rem;
+`;
+
+const Percentile = styled.div`
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    background-color: ${({ rank, total }) => rankColor(100 - (rank * 100) / total)};
+    padding: 5px;
+    text-align: center;
+    width: 150px;
+    height: 25px;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    margin: 0.5rem;
+`;
+
+const Unrank = styled.div`
+    color: rgb(180, 180, 180);
+    font-weight: 400;
+    text-align: center;
+    font-size: 0.7rem;
+    margin: 0.4rem;
+`;
+
+const Image = styled.div`
+    height: 90px;
+    width: 144px;
+    transition: 0.4s ease;
+`;
+
+const Name = styled.div`
+    margin-top: 0.3rem;
+    color: rgb(255, 255, 255);
+`;
+
 const ConditionalLink = ({ makeLink, ...props }) => {
     if (makeLink) return <Link {...props} />;
     return <span {...props} />;
 };
 
-export default function HallOfFame({ hofData, hofmainData, server, id, setHofData, setHofmainData }) {
+const { formatString, ...strings } = LocalizedStrings({
+    en: {
+        hof: "HALL OF FAME",
+        subTitle: "60 DAYS | MINIMUM {0} BATTLES | VEHICLES TIER 6+",
+        tankRankings: "Tank Rankings",
+        betterThan: "Better than {0}%",
+        moreThan: "More than {0}%",
+        unranked: "Play {0} more battles in tanks of tier 6 or higher to enter the Hall of Fame",
+        unrankedTank: "Play {0} more battles to enter rankings",
+    },
+    cs: {
+        hof: "SÍŇ SLÁVY",
+        subTitle: "60 DNÍ | MINIMÁLNĚ {0} BITEV | ÚROVEŇ VOZDILA 6+",
+        tankRankings: "Hodnocení vozidel",
+        betterThan: "Lepší než {0}%",
+        moreThan: "Více než {0}%",
+        unranked: "Odehrajte ještě {0} bitev ve vozidlech úrovně 6 nebo vyšší, abyste vstoupili do Síně slávy",
+        unrankedTank: "Odehrajte ještě {0} bitev, abyste vstoupili do žebříčku",
+    },
+    de: {
+        hof: "HALL OF FAME",
+        subTitle: "60 TAGE | MINIMUM {0} GEFECHTE | FAHRZEUG TIER 6+",
+        tankRankings: "PANZER Rankings",
+        betterThan: "Besser als {0}%",
+        moreThan: "Mehr als {0}%",
+        unranked: "Spiel {0} mehr Gefechte in Panzern von Tier 6 oder höher um in die Hall of Fame zu kommen",
+        unrankedTank: "Spiel {0} mehr Gefechte um in die Rankings zu kommen",
+    },
+    es: {
+        hof: "SALÓN DE LA FAMA",
+        subTitle: "60 DÍAS | MÍNIMA {0} BATALLAS | VEHÍCULOS TIER 6+",
+        tankRankings: "Clasificaciones del Tanque",
+        betterThan: "Mejor que el {0}%",
+        moreThan: "Más del {0}%",
+        unranked: "Juega {0} batallas más en tanques de tier 6 o superior para ingresar la Salón de la Fama",
+        unrankedTank: "Juega {0} batallas más para ingresar las clasificaciones",
+    },
+    fr: {
+        hof: "PANTHÉON",
+        subTitle: "60 JOURS | MINIMUM {0} BATAILLES | VEHICULES RANG 6+",
+        tankRankings: "Classement Chars",
+        betterThan: "Meilleur que {0}%",
+        moreThan: "Plus que {0}%",
+        unranked: "Jouez {0} batailles de plus dans des chars rang 6 ou plus pour entrer dans le Panthéon",
+        unrankedTank: "Jouez {0} batailles de plus pour entrer dans le classement",
+    },
+    ko: {
+        hof: "명예의 전당",
+        subTitle: "60일 | 최소 {0} 전투 | 전차 6티어+",
+        tankRankings: "전차 랭킹",
+        betterThan: "상위{0}%",
+        moreThan: "상위 {0}%",
+        unranked: "명예의 전당에 들기위해 6티어 이상 전차로 {0}번 전투 더 치르세요.",
+        unrankedTank: " 랭킹에 들기 위해{0}번 전투 더 치르세요.",
+    },
+    pl: {
+        hof: "ALEJA SŁAW",
+        subTitle: "60 DNI | MINIMUM {0} BITEW | POJAZDY POZIOMU 6+",
+        tankRankings: "Rankingi Czołgów",
+        betterThan: "Lepiej niż {0}%",
+        moreThan: "Więcej niż {0}%",
+        unranked: "Zagraj jeszcze {0} bitew w czołgach poziomu 6 lub wyżej aby wejść do Alei Sław",
+        unrankedTank: "Zagraj jeszcze {0} bitew aby wejść do rankingów",
+    },
+    ru: {
+        hof: "ЗАЛ СЛАВЫ",
+        subTitle: "60 ДНЕЙ | МИНИМУМ {0} СРАЖЕНИЙ | ТАНК УРОВНЯ 6+",
+        tankRankings: "Рейтинг танков",
+        betterThan: "Лучше чем {0}%",
+        moreThan: "Больше, чем {0}%",
+        unranked: "Сыграйте еще {0} боёв на танках 6 уровня и выше, чтобы попасть в Зал славы.",
+        unrankedTank: "Сыграйте еще {0} боёв, чтобы войти в рейтинг",
+    },
+    tr: {
+        hof: "ŞÖHRET SALONU",
+        subTitle: "60 GÜN | MİNİMUM {0} SAVAŞ | 6+ SEVİYE TANKLARDA",
+        tankRankings: "Tank Sıralamaları",
+        betterThan: "{0}%'den daha iyi",
+        moreThan: "{0}%'den daha fazla",
+        unranked: "Şöhret Salonuna girmek için 6 veya daha yüksek seviye tanklarla en az {0} kadar savaş yap",
+        unrankedTank: "Sıralamaya girmek için en az {0} kadar savaş yap",
+    },
+    zh: {
+        hof: "名人堂",
+        subTitle: "60 天 | 最少 {0} 場 | 車輛階級 6+",
+        tankRankings: "車輛評價",
+        betterThan: "高過 {0}% 玩家",
+        moreThan: "高過 {0}% 玩家",
+        unranked: "駕駛最低六階車參與 {0} 場戰鬥以進入名人堂",
+        unrankedTank: "再 {0} 場戰鬥以進入排名",
+    },
+});
+
+const titles = {
+    dpg: Capital(commonStrings.longDPG),
+    wn8: commonStrings.wn8,
+    battles: Capital(commonStrings.battles),
+    dr: Capital(commonStrings.longDmgRatio),
+    winrate: Capital(commonStrings.longWR),
+    kd: Capital(commonStrings.longKD),
+    frags: Capital(commonStrings.longFrags),
+};
+
+const percentile = (ranking, total) => (100 - (ranking * 100) / total).toFixed(2);
+
+const StatCard = ({ slot, value, ranking, total, moreThan }) => (
+    <OverallItem slot={slot}>
+        <Value>{value}</Value>
+        <BigLabel>{titles[slot]}</BigLabel>
+        <BigPercentile rank={ranking} total={total}>
+            {formatString(moreThan ? strings.moreThan : strings.betterThan, percentile(ranking, total))}
+        </BigPercentile>
+        {ranking}
+        <BigLabel>{Capital(commonStrings.rank)}</BigLabel>
+    </OverallItem>
+);
+
+export default function HallOfFame({ hofData, hofmainData, id }) {
     let topTanks = <Loader color={null} bottom={20} top={20} />;
 
     if (hofData && hofmainData) {
         const { top } = hofmainData;
         topTanks = (
             <Styles>
-                <div className="tanksTitle">
-                    <span style={{ fontSize: "2rem" }}>Hall of Fame</span>
-                    <br />
-                    <span style={{ fontSize: "1rem" }}>60 DAYS | MINIMUM 75 BATTLES | VEHICLES TIER 6+</span>
-                </div>
-                <div className="overall">
+                <TanksTitle></TanksTitle>
+                <Overall>
                     {top.battles.value >= 75 ? (
                         <>
-                            <div className="overallTop">
-                                <div className="overallItem">
-                                    <span className="value">{top.winrate.value}%</span>
-                                    <span className="bigLabel"> Winrate </span>
+                            <OverallTop>
+                                <StatCard slot="dpg" {...top.dpg} total={top.total} />
+                                <TopGridItem slot="title">
+                                    <nobr className="title">{strings.hof}</nobr>
+                                    <nobr className="subtitle">{formatString(strings.subTitle, 75)}</nobr>
                                     <div
-                                        className="bigPercentile"
                                         style={{
-                                            backgroundColor: rankColor(100 - (top.winrate.ranking * 100) / top.total),
+                                            marginTop: ".75rem",
+                                            flex: "1",
+                                            width: "100%",
+                                            background: `url(${require("Assets/hof.png")}) no-repeat center / contain`,
                                         }}
-                                    >
-                                        Better than {(100 - (top.winrate.ranking * 100) / top.total).toFixed(2)}%
-                                    </div>
-                                    {top.winrate.ranking}
-                                    <span className="bigLabel">Rank</span>
-                                </div>
-                                <div className="overallItem">
-                                    <span className="value">{top.wn8.value}</span>
-                                    <span className="bigLabel"> WN8 </span>
-                                    <div
-                                        className="bigPercentile"
-                                        style={{
-                                            backgroundColor: rankColor(100 - (top.wn8.ranking * 100) / top.total),
-                                        }}
-                                    >
-                                        Better than {(100 - (top.wn8.ranking * 100) / top.total).toFixed(2)}%
-                                    </div>
-                                    {top.wn8.ranking}
-                                    <span className="bigLabel">Rank</span>
-                                </div>
-                                <div className="overallItem">
-                                    <span className="value">{top.kd.value}</span>
-                                    <span className="bigLabel"> K/D Ratio </span>
-                                    <div
-                                        className="bigPercentile"
-                                        style={{
-                                            backgroundColor: rankColor(100 - (top.kd.ranking * 100) / top.total),
-                                        }}
-                                    >
-                                        Better than {(100 - (top.kd.ranking * 100) / top.total).toFixed(2)}%
-                                    </div>
-                                    {top.kd.ranking}
-                                    <span className="bigLabel">Rank</span>
-                                </div>
-                            </div>
-                            <div className="overallBottom">
-                                <div className="overallItem">
-                                    <span className="value">{top.battles.value}</span>
-                                    <span className="bigLabel"> Battles </span>
-                                    <div
-                                        className="bigPercentile"
-                                        style={{ backgroundColor: "white", color: "rgb(50, 50, 50)" }}
-                                    >
-                                        More than {(100 - (top.battles.ranking * 100) / top.total).toFixed(2)}%
-                                    </div>
-                                    {top.battles.ranking}
-                                    <span className="bigLabel">Rank</span>
-                                </div>
-                                <div className="overallItem">
-                                    <span className="value">{top.dpg.value}</span>
-                                    <span className="bigLabel"> Damage Per Game </span>
-                                    <div
-                                        className="bigPercentile"
-                                        style={{
-                                            backgroundColor: rankColor(100 - (top.dpg.ranking * 100) / top.total),
-                                        }}
-                                    >
-                                        Better than {(100 - (top.dpg.ranking * 100) / top.total).toFixed(2)}%
-                                    </div>
-                                    {top.dpg.ranking}
-                                    <span className="bigLabel">Rank</span>
-                                </div>
-                                <div className="overallItem">
-                                    <span className="value">{top.dmg_ratio.value}</span>
-                                    <span className="bigLabel"> Damage Ratio </span>
-                                    <div
-                                        className="bigPercentile"
-                                        style={{
-                                            backgroundColor: rankColor(100 - (top.dmg_ratio.ranking * 100) / top.total),
-                                        }}
-                                    >
-                                        Better than {(100 - (top.dmg_ratio.ranking * 100) / top.total).toFixed(2)}%
-                                    </div>
-                                    {top.dmg_ratio.ranking}
-                                    <span className="bigLabel">Rank</span>
-                                </div>
-                                <div className="overallItem">
-                                    <span className="value">{top.frags.value}</span>
-                                    <span className="bigLabel"> Frags Per Game </span>
-                                    <div
-                                        className="bigPercentile"
-                                        style={{
-                                            backgroundColor: rankColor(100 - (top.frags.ranking * 100) / top.total),
-                                        }}
-                                    >
-                                        Better than {(100 - (top.frags.ranking * 100) / top.total).toFixed(2)}%
-                                    </div>
-                                    {top.frags.ranking}
-                                    <span className="bigLabel">Rank</span>
-                                </div>
-                            </div>
+                                    ></div>
+                                </TopGridItem>
+                                <StatCard slot="wn8" {...top.wn8} total={top.total} />
+                            </OverallTop>
+                            <OverallBottom>
+                                <StatCard slot="battles" {...top.battles} total={top.total} moreThan />
+                                <StatCard slot="dr" {...top.dmg_ratio} total={top.total} />
+                                <StatCard slot="winrate" {...top.winrate} total={top.total} />
+                                <StatCard slot="kd" {...top.kd} total={top.total} />
+                                <StatCard slot="frags" {...top.frags} total={top.total} />
+                            </OverallBottom>
                         </>
                     ) : (
-                        <UnrankedNotice>
-                            Play {75 - top.battles.value} more battles in tanks of tier 6 or higher to enter the Hall of
-                            Fame
-                        </UnrankedNotice>
+                        <UnrankedNotice>{formatString(strings.unranked, 75 - top.battles.value)}</UnrankedNotice>
                     )}
-                </div>
+                </Overall>
                 <TankRankings userID={id} hofData={hofData} />
             </Styles>
         );
@@ -389,88 +419,67 @@ export default function HallOfFame({ hofData, hofmainData, server, id, setHofDat
     return topTanks;
 }
 
+const TankCard = ({ userID, tank }) => (
+    <ConditionalLink
+        makeLink={tank.rank && tank.rank <= 500}
+        to={`/tank/${tank.tank_id}?rank=${tank.rank}&userID=${userID}`}
+    >
+        <Box background={"rgba(60, 60, 80, 0.5)"} backgroundHover={"rgba(201, 26, 61, 0.5)"}>
+            <Image>
+                <img src={tank.image} alt={tank.short_name} />
+            </Image>
+            <Name>
+                {tierConv[tank.tier]} - {tank.short_name}
+            </Name>
+            <DPG>{tank.dpg}</DPG>
+            <Label>{Capital(commonStrings.longDPG)}</Label>
+            {tank.rank ? (
+                <Percentile rank={tank.rank} total={tank.total}>
+                    {formatString(strings.betterThan, (100 - (tank.rank * 100) / tank.total).toFixed(2))}%
+                </Percentile>
+            ) : (
+                <Unrank>{formatString(strings.unrankedTank, 25 - tank.battles)}</Unrank>
+            )}
+            <Grid>
+                <GridItem>
+                    <Val>{tank.rank || "-"}</Val>
+                    <Label>{Capital(commonStrings.rank)}</Label>
+                </GridItem>
+                <GridItem>
+                    <Val>{tank.battles}</Val>
+                    <Label>{Capital(commonStrings.battles)}</Label>
+                </GridItem>
+                <GridItem>
+                    <Val>{tank.wn8}</Val>
+                    <Label>{commonStrings.wn8}</Label>
+                </GridItem>
+                <GridItem>
+                    <Val>{tank.winrate}%</Val>
+                    <Label>{Capital(commonStrings.longWR)}</Label>
+                </GridItem>
+            </Grid>
+        </Box>
+    </ConditionalLink>
+);
+
 const TankRankings = ({ userID, hofData }) => (
     <>
-        <div className="tanksTitle">
-            <span style={{ fontSize: "2rem" }}>Tank Rankings</span>
+        <TanksTitle>
+            <span style={{ fontSize: "2rem" }}>{strings.tankRankings}</span>
             <br />
-            <span style={{ fontSize: "1rem" }}>60 DAYS | MINIMUM 25 BATTLES | VEHICLES TIER 6+</span>
-        </div>
-        <div className="tanksContainer">
-            <RSC id="RSC-Example" noScrollY={true}>
-                <div className="tanks">
+            <span style={{ fontSize: "1rem" }}>{formatString(strings.subTitle, 25)}</span>
+        </TanksTitle>
+        <TanksContainer>
+            <Scrollbar noScrollY>
+                <Tanks>
                     {hofData.above.map((tank, i) => (
-                        <ConditionalLink
-                            key={i}
-                            makeLink={tank.rank && tank.rank <= 500}
-                            className="box abovebox"
-                            to={`/tank/${tank.tank_id}?rank=${tank.rank}&userID=${userID}`}
-                        >
-                            <img src={tank.image} className="image" alt={tank.short_name} />
-                            <div className="name">
-                                {tierConv[tank.tier]} - {tank.short_name}
-                            </div>
-                            <div className="dpg">{tank.dpg}</div>
-                            <div className="label">Damage Per Game</div>
-                            <div
-                                className="percentile"
-                                style={{
-                                    backgroundColor: rankColor((100 - (tank.rank * 100) / tank.total).toFixed(2)),
-                                }}
-                            >
-                                Better than {(100 - (tank.rank * 100) / tank.total).toFixed(2)}%
-                            </div>
-                            <div className="grid">
-                                <div className="gridItem">
-                                    <div className="val">{tank.rank}</div>
-                                    <div className="label">Rank</div>
-                                </div>
-                                <div className="gridItem">
-                                    <div className="val">{tank.battles}</div>
-                                    <div className="label">Battles</div>
-                                </div>
-                                <div className="gridItem">
-                                    <div className="val">{tank.wn8}</div>
-                                    <div className="label">WN8</div>
-                                </div>
-                                <div className="gridItem">
-                                    <div className="val">{tank.winrate}%</div>
-                                    <div className="label">Winrate</div>
-                                </div>
-                            </div>
-                        </ConditionalLink>
+                        <TankCard key={i} tank={tank} userID={userID} ranked />
                     ))}
                     {hofData.below.map((tank, i) => (
-                        <div className="box underbox" key={i}>
-                            <img src={tank.image} className="image" alt={tank.short_name} />
-                            <div className="name">
-                                {tierConv[tank.tier]} - {tank.short_name}
-                            </div>
-                            <div className="dpg">{tank.dpg}</div>
-                            <div className="label">Damage Per Game</div>
-                            <div className="unrank">Play {25 - tank.battles} more battles to enter rankings</div>
-                            <div className="grid">
-                                <div className="gridItem">
-                                    <div className="val">-</div>
-                                    <div className="label">Rank</div>
-                                </div>
-                                <div className="gridItem">
-                                    <div className="val">{tank.battles}</div>
-                                    <div className="label">Battles</div>
-                                </div>
-                                <div className="gridItem">
-                                    <div className="val">{tank.wn8}</div>
-                                    <div className="label">WN8</div>
-                                </div>
-                                <div className="gridItem">
-                                    <div className="val">{tank.winrate}%</div>
-                                    <div className="label">Winrate</div>
-                                </div>
-                            </div>
-                        </div>
+                        <TankCard key={i} tank={tank} userID={userID} />
                     ))}
-                </div>
-            </RSC>
-        </div>
+                </Tanks>
+            </Scrollbar>
+        </TanksContainer>
     </>
 );

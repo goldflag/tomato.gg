@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { useTable } from "react-table";
 
 // LOCAL
-import { StyledTable, TableContainer } from "Components/tableComponents";
+import { StyledTable, TableContainer, tableHeaders } from "Components/tableComponents";
 import setColor from "Functions/cellStyle";
+import { Capital, commonStrings } from "Data/localizations";
 
 export default function LeaderboardTable({ type, data }) {
     const headerStyle = (header) =>
@@ -18,56 +19,58 @@ export default function LeaderboardTable({ type, data }) {
     const columns = React.useMemo(
         () => [
             {
-                Header: "Rank",
+                Header: Capital(commonStrings.rank),
                 accessor: "rank",
             },
             {
-                Header: "Username",
+                Header: tableHeaders.username,
                 accessor: "username",
                 Cell: ({ row: { original, values } }) => <Link to={original.url}> {values.username}</Link>,
             },
             {
-                Header: "Battles",
+                Header: Capital(commonStrings.battles),
                 accessor: "battles",
             },
             {
-                Header: "Avg Tier",
+                Header: tableHeaders.avgTier,
                 accessor: "avgtier",
             },
             {
-                Header: "WN8",
+                Header: commonStrings.wn8,
                 accessor: "wn8",
             },
             {
-                Header: "Winrate",
+                Header: Capital(commonStrings.longWR),
                 accessor: "winrate",
+                Cell: ({ value }) => `${value}%`,
             },
             {
-                Header: "DPG",
+                Header: commonStrings.dpg,
                 accessor: "dpg",
             },
             {
-                Header: "Frags",
+                Header: Capital(commonStrings.frags),
                 accessor: "frags",
             },
             {
-                Header: "DMG Ratio",
+                Header: Capital(commonStrings.dmgRatio),
                 accessor: "dmg_ratio",
             },
             {
-                Header: "K/D",
+                Header: tableHeaders.kd,
                 accessor: "kd",
             },
             {
-                Header: "Spots",
+                Header: tableHeaders.spots,
                 accessor: "spots",
             },
             {
-                Header: "Survival",
+                Header: tableHeaders.survival,
                 accessor: "survival",
+                Cell: ({ value }) => `${value}%`,
             },
             {
-                Header: "Decap",
+                Header: tableHeaders.decap,
                 accessor: "decap",
             },
         ],

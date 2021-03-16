@@ -4,8 +4,9 @@ import { useTable, usePagination } from "react-table";
 import { Link } from "react-router-dom";
 
 // Local
-import { StyledTable, TableContainer } from "Components/tableComponents";
+import { StyledTable, TableContainer, tableHeaders } from "Components/tableComponents";
 import setColor from "Functions/cellStyle";
+import { Capital, commonStrings } from "Data/localizations";
 export default function RecentsLeaderboard({ data, type, highlightUserID }) {
     function headerStyle(header) {
         if (header.id === type) {
@@ -18,54 +19,54 @@ export default function RecentsLeaderboard({ data, type, highlightUserID }) {
     const columns = React.useMemo(
         () => [
             {
-                Header: "Rank",
+                Header: Capital(commonStrings.rank),
                 accessor: "rank",
                 disableFilters: true,
             },
             {
-                Header: "Username",
+                Header: tableHeaders.username,
                 accessor: "username",
                 disableFilters: true,
                 Cell: ({ row: { original, values } }) => <Link to={original.url}> {values.username}</Link>,
             },
             {
-                Header: "Battles",
+                Header: Capital(commonStrings.battles),
                 accessor: "battles",
                 disableFilters: true,
             },
             {
-                Header: "WN8",
+                Header: commonStrings.wn8,
                 accessor: "wn8",
                 disableFilters: true,
             },
             {
-                Header: "Winrate",
+                Header: Capital(commonStrings.longWR),
                 accessor: "winrate",
                 disableFilters: true,
                 Cell: ({ value }) => `${value}%`,
             },
             {
-                Header: "DPG",
+                Header: commonStrings.dpg,
                 accessor: "dpg",
                 disableFilters: true,
             },
             {
-                Header: "Frags",
+                Header: Capital(commonStrings.frags),
                 accessor: "frags",
                 disableFilters: true,
             },
             {
-                Header: "K/D",
+                Header: tableHeaders.kd,
                 accessor: "kd",
                 disableFilters: true,
             },
             {
-                Header: "Spots",
+                Header: tableHeaders.spots,
                 accessor: "spots",
                 disableFilters: true,
             },
             {
-                Header: "Survival",
+                Header: tableHeaders.survival,
                 accessor: "survived",
                 disableFilters: true,
                 Cell: ({ value }) => `${value}%`,

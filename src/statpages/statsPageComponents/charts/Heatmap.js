@@ -3,7 +3,7 @@ import { ResponsiveHeatMap } from "@nivo/heatmap";
 import { WN8color, WRcolor } from "Functions/colors";
 export default function WN8Heatmap({ data, type }) {
     return (
-        <div style={{ height: "calc(310px)" }}>
+        <div style={{ height: "310px" }}>
             <ResponsiveHeatMap
                 theme={{
                     textColor: "rgb(210, 210, 210)",

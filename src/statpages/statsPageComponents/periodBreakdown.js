@@ -1,6 +1,8 @@
+// NPM
 import React from "react";
 import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
 
+// LOCAL
 import {
     ClassFilter,
     GlobalFilter,
@@ -15,89 +17,84 @@ import {
     FiltersContainer,
     StyledTable,
     TableContainer,
-    Name,
+    NationCell,
+    TankNameCell,
+    ClassCell,
+    TierCell,
+    tableHeaders,
 } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
-import { tierConv } from "Data/conversions";
+import { Capital, commonStrings } from "Data/localizations";
 
 function PeriodBreakdown({ data }) {
-    const columns = React.useMemo(() => {
-        return [
+    const columns = React.useMemo(
+        () => [
             {
-                Cell: ({ row: { original } }) => (
-                    <Name val={original.isPrem}>
-                        <img src={original.image} alt={original.name} />
-                        {original.name}
-                    </Name>
-                ),
-                Header: "Name",
+                Cell: TankNameCell,
+                Header: tableHeaders.name,
                 accessor: "name",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
-                ),
-                Header: "Nation",
+                Cell: NationCell,
+                Header: tableHeaders.nation,
                 accessor: "nation",
                 Filter: NationFilter,
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => <div style={{ margin: "8px" }}>{tierConv[value]}</div>,
-                Header: "Tier",
+                Cell: TierCell,
+                Header: Capital(commonStrings.tier),
                 accessor: "tier",
                 Filter: NumericTierFilter,
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
-                ),
-                Header: "Class",
+                Cell: ClassCell,
+                Header: tableHeaders.class,
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
             },
             {
-                Header: "Games",
+                Header: Capital(commonStrings.battles),
                 accessor: "battles",
                 disableFilters: true,
             },
             {
-                Header: "WN8",
+                Header: commonStrings.wn8,
                 accessor: "wn8",
                 disableFilters: true,
             },
             {
                 Cell: ({ value }) => `${value}%`,
-                Header: "Winrate",
+                Header: Capital(commonStrings.longWR),
                 accessor: "winrate",
                 disableFilters: true,
             },
             {
-                Header: "DPG",
+                Header: commonStrings.dpg,
                 accessor: "dpg",
                 disableFilters: true,
             },
-            { Header: "KPG", accessor: "kpg", disableFilters: true },
+            { Header: Capital(commonStrings.frags), accessor: "kpg", disableFilters: true },
             {
-                Header: "DR",
+                Header: commonStrings.dmgRatio,
                 accessor: "dmgRatio",
                 disableFilters: true,
             },
             {
-                Header: "KDR",
+                Header: tableHeaders.kd,
                 accessor: "kd",
                 disableFilters: true,
             },
             {
-                Header: "Survival%",
+                Header: tableHeaders.survival,
                 accessor: "survived",
                 disableFilters: true,
             },
             {
-                Header: "Spots",
+                Header: tableHeaders.spots,
                 accessor: "spots",
                 disableFilters: true,
             },
@@ -106,20 +103,19 @@ function PeriodBreakdown({ data }) {
                 accessor: "isPrem",
                 Filter: PremFilter,
                 filter: arrayFilterFn,
+                hidden: true,
             },
-        ];
-    }, []);
+        ],
+        []
+    );
 
-    // Use the state and functions returned from useTable to build your UI
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
         prepareRow,
         state,
-        page, // Instead of using 'rows', we'll use page,
-        // which has only the rows for the active page
-        // The rest of these things are super handy, too ;)
+        page,
         canPreviousPage,
         canNextPage,
         pageOptions,
@@ -138,7 +134,6 @@ function PeriodBreakdown({ data }) {
             initialState: {
                 pageIndex: 0,
                 pageSize: 25,
-                hiddenColumns: ["isPrem"],
                 sortBy: [
                     {
                         id: "battles",
@@ -177,9 +172,9 @@ function PeriodBreakdown({ data }) {
                 <StyledTable {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
-                            <>
-                                <tr {...headerGroup.getHeaderGroupProps()}>
-                                    {headerGroup.headers.map((column) => (
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) =>
+                                    column.hidden ? null : (
                                         <th
                                             {...column.getHeaderProps(column.getSortByToggleProps())}
                                             {...column.getHeaderProps({
@@ -191,9 +186,9 @@ function PeriodBreakdown({ data }) {
                                         >
                                             {column.render("Header")}
                                         </th>
-                                    ))}
-                                </tr>
-                            </>
+                                    )
+                                )}
+                            </tr>
                         ))}
                     </thead>
                     <tbody {...getTableBodyProps()}>
@@ -201,15 +196,17 @@ function PeriodBreakdown({ data }) {
                             prepareRow(row);
                             return (
                                 <tr {...row.getRowProps()}>
-                                    {row.cells.map((cell) => (
-                                        <td
-                                            {...cell.getCellProps({
-                                                style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
-                                            })}
-                                        >
-                                            {cell.render("Cell")}
-                                        </td>
-                                    ))}
+                                    {row.cells.map((cell) =>
+                                        cell.column.hidden ? null : (
+                                            <td
+                                                {...cell.getCellProps({
+                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
+                                                })}
+                                            >
+                                                {cell.render("Cell")}
+                                            </td>
+                                        )
+                                    )}
                                 </tr>
                             );
                         })}

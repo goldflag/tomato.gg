@@ -4,82 +4,80 @@ import { arrowDown } from "react-icons-kit/feather/arrowDown";
 import { arrowUp } from "react-icons-kit/feather/arrowUp";
 import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
 
-import { ClassFilter, GlobalFilter, NationFilter, Pagination, PremFilter, TierFilter, arrayFilterFn } from "Components";
+import { ClassFilter, GlobalFilter, NationFilter, Pagination, PremFilter, arrayFilterFn } from "Components";
 import {
     ButtonFiltersContainer,
+    ClassCell,
     FiltersContainer,
+    NationCell,
     StyledTable,
     TableContainer,
-    Name,
+    tableHeaders,
+    TankNameCell,
+    TierCell,
 } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
+import { NumericTierFilter } from "Components/";
+import { Capital, commonStrings } from "Data/localizations";
 
 function WN8Table({ data }) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ({ row: { original } }) => (
-                    <Name val={original.isPrem}>
-                        <img src={original.image} alt={original.name} />
-                        {original.name}
-                    </Name>
-                ),
-                Header: "Name",
-                accessor: "name",
+                Cell: TankNameCell,
+                Header: tableHeaders.name,
+                accessor: "short_name",
                 disableFilters: true,
             },
             {
-                Header: "Nation",
+                Header: tableHeaders.nation,
                 accessor: "nation",
                 Filter: NationFilter,
                 filter: arrayFilterFn,
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
-                ),
+                Cell: NationCell,
             },
             {
-                Header: "Tier",
+                Header: Capital(commonStrings.tier),
                 accessor: "tier",
-                Filter: TierFilter,
+                Filter: NumericTierFilter,
                 filter: arrayFilterFn,
+                Cell: TierCell,
             },
             {
-                Header: "Class",
+                Header: tableHeaders.class,
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
-                ),
+                Cell: ClassCell,
             },
             {
-                Header: "expDef",
+                Header: tableHeaders.expDef,
                 accessor: "expDef",
                 disableFilters: true,
             },
             {
-                Header: "expFrag",
+                Header: tableHeaders.expFrag,
                 accessor: "expFrag",
                 disableFilters: true,
             },
             {
-                Header: "expSpot",
+                Header: tableHeaders.expSpot,
                 accessor: "expSpot",
                 disableFilters: true,
             },
             {
-                Header: "expDamage",
+                Header: tableHeaders.expDamage,
                 accessor: "expDamage",
                 disableFilters: true,
             },
             {
-                Header: "expWinRate",
+                Header: tableHeaders.expWinRate,
                 accessor: "expWinRate",
                 disableFilters: true,
             },
             {
                 Header: "",
-                accessor: "isPrem",
+                accessor: "is_premium",
                 Filter: PremFilter,
                 filter: arrayFilterFn,
                 hidden: true,
@@ -149,61 +147,53 @@ function WN8Table({ data }) {
                 <StyledTable {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
-                            <>
-                                <tr {...headerGroup.getHeaderGroupProps()}>
-                                    {headerGroup.headers.map((column) =>
-                                        column.hidden ? null : (
-                                            <th
-                                                {...column.getHeaderProps(column.getSortByToggleProps())}
-                                                {...column.getHeaderProps({
-                                                    style: {
-                                                        cursor: "pointer",
-                                                        backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
-                                                    },
-                                                })}
-                                            >
-                                                {column.render("Header")}
-                                                <span>
-                                                    {column.isSorted ? (
-                                                        column.isSortedDesc ? (
-                                                            <Icon size={16} icon={arrowDown} />
-                                                        ) : (
-                                                            <Icon size={16} icon={arrowUp} />
-                                                        )
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) =>
+                                    column.hidden ? null : (
+                                        <th
+                                            {...column.getHeaderProps(column.getSortByToggleProps())}
+                                            {...column.getHeaderProps({
+                                                style: {
+                                                    cursor: "pointer",
+                                                    backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
+                                                },
+                                            })}
+                                        >
+                                            {column.render("Header")}
+                                            <span>
+                                                {column.isSorted ? (
+                                                    column.isSortedDesc ? (
+                                                        <Icon size={16} icon={arrowDown} />
                                                     ) : (
-                                                        ""
-                                                    )}
-                                                </span>
-                                            </th>
-                                        )
-                                    )}
-                                </tr>
-                            </>
+                                                        <Icon size={16} icon={arrowUp} />
+                                                    )
+                                                ) : (
+                                                    ""
+                                                )}
+                                            </span>
+                                        </th>
+                                    )
+                                )}
+                            </tr>
                         ))}
                     </thead>
                     <tbody {...getTableBodyProps()}>
                         {page.map((row, i) => {
                             prepareRow(row);
                             return (
-                                <React.Fragment key={i} {...row.getRowProps()}>
-                                    <tr>
-                                        {row.cells.map((cell) =>
-                                            cell.column.hidden ? null : (
-                                                <td
-                                                    {...cell.getCellProps({
-                                                        style: cellStyle(
-                                                            cell.column.isSorted,
-                                                            cell.column.id,
-                                                            cell.value
-                                                        ),
-                                                    })}
-                                                >
-                                                    {cell.render("Cell")}
-                                                </td>
-                                            )
-                                        )}
-                                    </tr>
-                                </React.Fragment>
+                                <tr {...row.getRowProps()}>
+                                    {row.cells.map((cell) =>
+                                        cell.column.hidden ? null : (
+                                            <td
+                                                {...cell.getCellProps({
+                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
+                                                })}
+                                            >
+                                                {cell.render("Cell")}
+                                            </td>
+                                        )
+                                    )}
+                                </tr>
                             );
                         })}
                     </tbody>

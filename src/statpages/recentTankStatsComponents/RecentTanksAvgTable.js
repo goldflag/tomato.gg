@@ -2,130 +2,105 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
-import styled from "styled-components";
 
 // LOCAL
-
+import cellStyle from "Functions/cellStyle";
+import { Pagination } from "Components";
 import {
-    ClassFilter,
-    GlobalFilter,
-    NationFilter,
-    Pagination,
-    PremFilter,
-    NumericTierFilter,
-    arrayFilterFn,
     ButtonFiltersContainer,
     FiltersContainer,
     StyledTable,
     TableContainer,
-} from "Components";
-import cellStyle from "Functions/cellStyle";
-import { tierConv } from "Data/conversions";
-
-const TankCell = styled.div`
-    display: grid;
-    grid-template-columns: 90px 50%;
-    align-items: center;
-    color: ${({ val }) => (val ? `#ffe455` : null)};
-`;
+    NationCell,
+    TankNameCell,
+    TierCell,
+    ClassCell,
+    tableHeaders,
+} from "Components/tableComponents";
+import {
+    ConvertedNationFilter,
+    ClassFilter,
+    GlobalFilter,
+    PremFilter,
+    NumericTierFilter,
+    arrayFilterFn,
+} from "Components/tableFilters";
+import { Capital, commonStrings } from "Data/localizations";
 
 function RecentTanksAvgTable({ data }) {
     const columns = React.useMemo(() => {
         return [
             {
-                Cell: (data) => {
-                    const value = data.row.original;
-                    return (
-                        <TankCell val={value.is_premium}>
-                            <img src={value.image} style={{ maxWidth: "100px" }} alt={"test"} />
-                            {value.short_name}
-                        </TankCell>
-                    );
-                },
-                Header: "Tank",
+                Cell: TankNameCell,
+                Header: tableHeaders.name,
                 accessor: "short_name",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
-                    );
-                },
-                Header: "Nation",
+                Cell: NationCell,
+                Header: tableHeaders.nation,
                 accessor: "nation",
-                Filter: NationFilter,
+                Filter: ConvertedNationFilter,
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => {
-                    return <div style={{ margin: "8px" }}>{tierConv[value]}</div>;
-                },
-                Header: "Tier",
+                Cell: TierCell,
+                Header: Capital(commonStrings.tier),
                 accessor: "tier",
                 Filter: NumericTierFilter,
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
-                    );
-                },
-                Header: "Class",
+                Cell: ClassCell,
+                Header: tableHeaders.class,
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
             },
             {
-                Header: "Games",
+                Header: Capital(commonStrings.battles),
                 accessor: "battles",
                 disableFilters: true,
             },
             {
-                Header: "WN8",
+                Header: commonStrings.wn8,
                 accessor: "wn8",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => {
-                    return <div>{value + "%"}</div>;
-                },
-                Header: "Winrate",
+                Cell: ({ value }) => `${value}%`,
+                Header: Capital(commonStrings.longWR),
                 accessor: "winrate",
                 disableFilters: true,
             },
             {
-                Header: "DPG",
+                Header: commonStrings.dpg,
                 accessor: "dpg",
                 disableFilters: true,
             },
-            { Header: "KPG", accessor: "frags", disableFilters: true },
+            { Header: Capital(commonStrings.frags), accessor: "frags", disableFilters: true },
             {
-                Header: "DR",
+                Header: Capital(commonStrings.dmgRatio),
                 accessor: "dmg_ratio",
                 disableFilters: true,
             },
             {
-                Header: "KDR",
+                Header: tableHeaders.kd,
                 accessor: "kd",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => {
-                    return <div>{value + "%"}</div>;
-                },
-                Header: "Survival%",
+                Cell: ({ value }) => `${value}%`,
+                Header: tableHeaders.survival,
                 accessor: "survival",
                 disableFilters: true,
             },
             {
-                Header: "Spots",
+                Header: tableHeaders.spots,
                 accessor: "spots",
                 disableFilters: true,
             },
             {
-                Header: "",
                 accessor: "is_premium",
                 Filter: PremFilter,
                 filter: arrayFilterFn,
@@ -159,7 +134,6 @@ function RecentTanksAvgTable({ data }) {
             initialState: {
                 pageIndex: 0,
                 pageSize: 100,
-                hiddenColumns: ["prem"],
                 sortBy: [
                     {
                         id: "battles",

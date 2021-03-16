@@ -3,40 +3,30 @@ import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
 
 // LOCAL
-import { Pagination, StyledTable, Name } from "Components";
+import { Pagination, StyledTable, NationCell, ClassCell, TankNameCell, TierCell } from "Components";
 import cellStyle from "Functions/cellStyle";
-import { tierConv } from "Data/conversions";
 
 export default function SessionBreakdown({ data }) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ({ row: { original } }) => (
-                    <Name val={original.isPrem}>
-                        <img src={original.image} alt={original.name} />
-                        {original.name}
-                    </Name>
-                ),
+                Cell: TankNameCell,
                 Header: "Name",
                 accessor: "name",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
-                ),
+                Cell: NationCell,
                 Header: "Nation",
                 accessor: "nation",
             },
             {
-                Cell: ({ value }) => tierConv[value],
+                Cell: TierCell,
                 Header: "Tier",
                 accessor: "tier",
             },
             {
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
-                ),
+                Cell: ClassCell,
                 Header: "Class",
                 accessor: "class",
             },

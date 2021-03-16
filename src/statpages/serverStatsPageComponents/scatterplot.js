@@ -8,13 +8,9 @@ export default function Scatterplot(props) {
                 data={props.data}
                 margin={{ top: 40, right: 120, bottom: 70, left: 70 }}
                 xScale={{ type: "linear", min: 40, max: "auto" }}
-                xFormat={function (e) {
-                    return e.toFixed(2) + "%";
-                }}
+                xFormat={(e) => e.toFixed(2) + "%"}
                 yScale={{ type: "linear", min: 0, max: "auto" }}
-                yFormat={function (e) {
-                    return e + " WN8";
-                }}
+                yFormat={(e) => e + " WN8"}
                 blendMode="multiply"
                 axisTop={null}
                 axisRight={null}

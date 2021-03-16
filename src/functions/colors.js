@@ -1,4 +1,8 @@
 export function WRcolor(winrate) {
+    if (isNaN(winrate)) {
+        // TODO: make this unecessary
+        if (winrate.charAt(winrate.length - 1) === "%") winrate = winrate.slice(0, -1);
+    }
     if (winrate < 46) return "#930D0D";
     else if (winrate < 47) return "#CD3333";
     else if (winrate < 48) return "#CC7A00";
@@ -11,8 +15,8 @@ export function WRcolor(winrate) {
     else if (winrate < 64) return "#522b99";
     else if (winrate < 67) return "#411d73";
     else if (winrate < 70) return "#310d59";
-    else if (winrate === "-") {
-        return "rgba(120, 120 ,120, 0.4)";
+    else if (winrate === "-" || winrate === "") {
+        return "rgba(120, 120 , 120, 0.4)";
     } else {
         return "#24073d";
     }

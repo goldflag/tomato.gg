@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import ReactGA from "react-ga";
 import styled from "styled-components";
+import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
 import { Loader, FullPageTableWrapper } from "Components";
@@ -10,8 +11,8 @@ import RecentLeaderboard from "./tankPageComponents/recentLeaderboard";
 import { ServerPagination } from "Components";
 import { useURLState } from "Functions/hooks";
 import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
-import { nationAdjConv, classDescConv, serverConv } from "Data/conversions";
-
+import { nationAdjConv, classDescConv, serverConv, tierConv, classConv } from "Data/conversions";
+import { Capital, commonStrings } from "Data/localizations";
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -73,11 +74,24 @@ const TankImage = styled.img`
 
 const PAGE_SIZE = 100;
 
+const { formatString, ...strings } = LocalizedStrings({
+    en: { top500: "Top 500 Players on {0} server", past60min25: "PAST 60 DAYS | MINIMUM 25 BATTLES" },
+    cs: { top500: "500 nejlepších hráčů v", past60min25: "POSLEDNÍCH 60 DNÍ | MINIMÁLNĚ 25 BITEV" },
+    de: { top500: "Top 500 Spieler in", past60min25: "LETZTE 60 TAGE | MINIMUM 25 GEFECHTE" },
+    es: { top500: "Los 500 Mejores Jugadores de", past60min25: "ÚLTIMOS 60 DÍAS | MÍNIMO 25 BATALLAS" },
+    fr: { top500: "Top 500 sur le serveur {0}", past60min25: "60 DERNIERS JOURS | MINIMUM 25 BATAILLES" },
+    ko: { top500: "상위 500명", past60min25: "60일| 최소 25 전투" },
+    pl: { top500: "500 najlepszych graczy na serwerze {0}", past60min25: "OSTATNICH 60 DNIACH | MINIMUM 25 BITEW" },
+    ru: { top500: "500 лучших игроков в", past60min25: "ПОСЛЕДНИЕ 60 ДНЕЙ | МИНИМУМ 25 СРАЖЕНИЙ" },
+    tr: { top500: "En iyi 500 Oyuncu içinde {0}", past60min25: "SON 60 GÜN | MİNİMUM 25 SAVAŞ" },
+    zh: { top500: "前500名", past60min25: "過去60天 | 最少25場戰鬥" },
+});
+
 const filters = {
-    dpg: "DPG",
-    wn8: "WN8",
-    frags: "FRAGS",
-    winrate: "WINRATE",
+    dpg: commonStrings.dpg,
+    wn8: commonStrings.wn8,
+    frags: Capital(commonStrings.frags),
+    winrate: Capital(commonStrings.longWR),
 };
 
 export default function TankPage(props) {
@@ -120,8 +134,8 @@ export default function TankPage(props) {
             <>
                 <Top>
                     <div>
-                        <div style={{ textAlign: "center" }}>TIER</div>
-                        <Tier>{data.meta.tier}</Tier>
+                        <div style={{ textAlign: "center" }}>{Capital(commonStrings.tier)}</div>
+                        <Tier>{tierConv[data.meta.tier]}</Tier>
                     </div>
                     <div>
                         <TankImage src={data.meta.image} alt={data.meta.tank_id} />
@@ -129,13 +143,16 @@ export default function TankPage(props) {
                     <Name>
                         <ShortName>{data.meta.short_name}</ShortName>
                         <div>
-                            {nationAdjConv[data.meta.nation]} {classDescConv[data.meta.class]}
+                            {nationAdjConv.formatString(
+                                nationAdjConv[data.meta.nation],
+                                classDescConv[classConv[data.meta.type]]
+                            )}
                         </div>
                     </Name>
                 </Top>
                 <TableLabel>
-                    Top 500 Players in {serverConv[server]}
-                    <BottomLabel>PAST 60 DAYS | MINIMUM 25 BATTLES</BottomLabel>
+                    {formatString(strings.top500, serverConv[server])}
+                    <BottomLabel>{strings.past60min25}</BottomLabel>
                     <FilterButtonGroup>
                         {Object.entries(filters).map(([val, label]) => (
                             <FilterButton

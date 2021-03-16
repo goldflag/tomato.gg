@@ -1,7 +1,10 @@
+import { commonStrings } from "Data/localizations";
 import React, { useState } from "react";
+import LocalizedStrings from "Functions/localizedStrings";
 import { CustomTabs, CustomTab } from "../../tabs/customTabs";
 import LineGraphWN8 from "../charts/LineGraph.js";
 
+const { formatString, ...strings } = LocalizedStrings({ en: { progress: "{0} PROGRESS" } });
 export default function LineGraphs({ WN8, DPG, WR }) {
     const [value, setValue] = useState(0);
 
@@ -18,13 +21,13 @@ export default function LineGraphs({ WN8, DPG, WR }) {
                 variant="scrollable"
                 scrollButtons="auto"
             >
-                <CustomTab label="WN8 PROGRESS" />
-                <CustomTab label="DPG PROGRESS" />
-                <CustomTab label="WR PROGRESS" />
+                <CustomTab label={formatString(strings.progress, commonStrings.wn8)} />
+                <CustomTab label={formatString(strings.progress, commonStrings.dpg)} />
+                <CustomTab label={formatString(strings.progress, commonStrings.wr)} />
             </CustomTabs>
-            <LineGraphWN8 
-                data={value === 0 ? WN8 : value === 1 ? DPG : WR} 
-                type={value === 0 ? "WN8" : value === 1 ? "DPG" : "WR"} 
+            <LineGraphWN8
+                data={value === 0 ? WN8 : value === 1 ? DPG : WR}
+                type={value === 0 ? "WN8" : value === 1 ? "DPG" : "WR"}
             />
         </div>
     );

@@ -11,8 +11,8 @@ import {
     GlobalFilter,
     NationFilter,
     PremFilter,
-    TierFilter,
     arrayFilterFn,
+    NumericTierFilter,
 } from "Components/tableFilters";
 import {
     ButtonFiltersContainer,
@@ -20,9 +20,14 @@ import {
     StyledTable,
     SubRow,
     TableContainer,
-    Name,
+    NationCell,
+    TankNameCell,
+    ClassCell,
+    TierCell,
+    tableHeaders,
 } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
+import { Capital, commonStrings } from "Data/localizations";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -32,65 +37,58 @@ function MasteryTable({ data }) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ({ row: { original } }) => (
-                    <Name val={original.isPrem}>
-                        <img src={original.image} alt={original.name} />
-                        {original.name}
-                    </Name>
-                ),
-                Header: "Name",
-                accessor: "name",
+                Cell: TankNameCell,
+                Header: tableHeaders.name,
+                accessor: "short_name",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
-                ),
-                Header: "Nation",
+                Cell: NationCell,
+                Header: tableHeaders.nation,
                 accessor: "nation",
                 Filter: NationFilter,
                 filter: arrayFilterFn,
             },
             {
-                Header: "Tier",
+                Cell: TierCell,
+                Header: Capital(commonStrings.tier),
                 accessor: "tier",
-                Filter: TierFilter,
+                Filter: NumericTierFilter,
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
-                ),
-                Header: "Class",
+                Cell: ClassCell,
+                Header: tableHeaders.class,
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
             },
             {
-                Header: "3rd Class",
+                Header: tableHeaders.thirdClass,
                 accessor: "3rd",
                 disableFilters: true,
             },
             {
-                Header: "2nd Class",
+                Header: tableHeaders.secondClass,
                 accessor: "2nd",
                 disableFilters: true,
             },
             {
-                Header: "1st Class",
+                Header: tableHeaders.firstClass,
                 accessor: "1st",
                 disableFilters: true,
             },
             {
-                Header: "Ace Wanker",
+                Header: tableHeaders.ace,
                 accessor: "ace",
                 disableFilters: true,
             },
             {
                 Header: "",
-                accessor: "isPrem",
+                accessor: "is_premium",
                 Filter: PremFilter,
                 filter: arrayFilterFn,
+                hidden: true,
             },
         ],
         []
@@ -127,7 +125,6 @@ function MasteryTable({ data }) {
                         desc: true,
                     },
                 ],
-                hiddenColumns: ["isPrem"],
             },
         },
         useFilters,
@@ -158,7 +155,7 @@ function MasteryTable({ data }) {
         const [data, setData] = useState();
         useEffect(() => {
             async function get() {
-                fetch(`${backend}/api/abcd/masterytank/${row.original.id}/${server}`)
+                fetch(`${backend}/api/masterytank/${server}/${row.original.id}`)
                     .then((res) => res.json())
                     .then((res) => setData(res));
             }
@@ -200,30 +197,32 @@ function MasteryTable({ data }) {
                     <thead>
                         {headerGroups.map((headerGroup) => (
                             <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map((column) => (
-                                    <th
-                                        {...column.getHeaderProps(column.getSortByToggleProps())}
-                                        {...column.getHeaderProps({
-                                            style: {
-                                                cursor: "pointer",
-                                                backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
-                                            },
-                                        })}
-                                    >
-                                        {column.render("Header")}
-                                        <span>
-                                            {column.isSorted ? (
-                                                column.isSortedDesc ? (
-                                                    <Icon size={16} icon={arrowDown} />
+                                {headerGroup.headers.map((column) =>
+                                    column.hidden ? null : (
+                                        <th
+                                            {...column.getHeaderProps(column.getSortByToggleProps())}
+                                            {...column.getHeaderProps({
+                                                style: {
+                                                    cursor: "pointer",
+                                                    backgroundColor: column.isSorted ? "rgb(207, 0, 76)" : null,
+                                                },
+                                            })}
+                                        >
+                                            {column.render("Header")}
+                                            <span>
+                                                {column.isSorted ? (
+                                                    column.isSortedDesc ? (
+                                                        <Icon size={16} icon={arrowDown} />
+                                                    ) : (
+                                                        <Icon size={16} icon={arrowUp} />
+                                                    )
                                                 ) : (
-                                                    <Icon size={16} icon={arrowUp} />
-                                                )
-                                            ) : (
-                                                ""
-                                            )}
-                                        </span>
-                                    </th>
-                                ))}
+                                                    ""
+                                                )}
+                                            </span>
+                                        </th>
+                                    )
+                                )}
                             </tr>
                         ))}
                     </thead>
@@ -233,15 +232,21 @@ function MasteryTable({ data }) {
                             return (
                                 <React.Fragment key={i}>
                                     <tr {...row.getToggleRowExpandedProps({})}>
-                                        {row.cells.map((cell) => (
-                                            <td
-                                                {...cell.getCellProps({
-                                                    style: cellStyle(cell.column.isSorted, cell.column.id, cell.value),
-                                                })}
-                                            >
-                                                {cell.render("Cell")}
-                                            </td>
-                                        ))}
+                                        {row.cells.map((cell) =>
+                                            cell.column.hidden ? null : (
+                                                <td
+                                                    {...cell.getCellProps({
+                                                        style: cellStyle(
+                                                            cell.column.isSorted,
+                                                            cell.column.id,
+                                                            cell.value
+                                                        ),
+                                                    })}
+                                                >
+                                                    {cell.render("Cell")}
+                                                </td>
+                                            )
+                                        )}
                                     </tr>
                                     {row.isExpanded ? (
                                         <SubRow>

@@ -20,9 +20,14 @@ import {
     SubRow,
     TableContainer,
     StyledTable,
-    Name,
+    TankNameCell,
+    NationCell,
+    ClassCell,
+    TierCell,
+    tableHeaders,
 } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
+import { Capital, commonStrings } from "Data/localizations";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -32,40 +37,28 @@ function MoETable({ data }) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ({ row: { original } }) => (
-                    <Name val={original.isPrem}>
-                        <img src={original.image} alt={original.name} />
-                        {original.name}
-                    </Name>
-                ),
-                Header: "Name",
-                accessor: "name",
+                Cell: TankNameCell,
+                Header: tableHeaders.name,
+                accessor: "short_name",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
-                    );
-                },
-                Header: "Nation",
+                Cell: NationCell,
+                Header: tableHeaders.nation,
                 accessor: "nation",
                 Filter: NationFilter,
                 filter: arrayFilterFn,
             },
             {
-                Header: "Tier",
+                Cell: TierCell,
+                Header: Capital(commonStrings.tier),
                 accessor: "tier",
                 Filter: MoETierFilter,
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => {
-                    return (
-                        <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
-                    );
-                },
-                Header: "Class",
+                Cell: ClassCell,
+                Header: tableHeaders.class,
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
@@ -97,7 +90,7 @@ function MoETable({ data }) {
             },
             {
                 Header: "",
-                accessor: "isPrem",
+                accessor: "is_premium",
                 Filter: PremFilter,
                 filter: arrayFilterFn,
             },
@@ -170,7 +163,7 @@ function MoETable({ data }) {
         const [data, setData] = useState();
         useEffect(() => {
             async function get() {
-                fetch(`${backend}/api/abcd/moetank/${row.original.id}/${server}`)
+                fetch(`${backend}/api/moetank/${server}/${row.original.id}`)
                     .then((res) => res.json())
                     .then((res) => setData(res));
             }

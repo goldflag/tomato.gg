@@ -4,9 +4,9 @@ import { useTable } from "react-table";
 import styled, { css } from "styled-components";
 
 // LOCAL
-
 import { TableContainer } from "Components/tableComponents";
 import { WN8color } from "Functions/colors";
+import { commonStrings, formatString, UPPER } from "Data/localizations";
 
 const StyledTable = styled.table`
     white-space: nowrap;
@@ -77,35 +77,35 @@ export default function TopTable({ data }) {
                 accessor: "name",
             },
             {
-                Header: "OVERALL",
+                Header: UPPER(commonStrings.overall),
                 accessor: "Overall",
             },
             {
-                Header: "24 HOURS",
+                Header: UPPER(formatString(commonStrings.hours, 24)),
                 accessor: "24 Hours",
             },
             {
-                Header: "3 DAYS",
+                Header: UPPER(formatString(commonStrings.days, 3)),
                 accessor: "3 Days",
             },
             {
-                Header: "7 DAYS",
+                Header: UPPER(formatString(commonStrings.days, 7)),
                 accessor: "7 Days",
             },
             {
-                Header: "30 DAYS",
+                Header: UPPER(formatString(commonStrings.days, 30)),
                 accessor: "30 Days",
             },
             {
-                Header: "60 DAYS",
+                Header: UPPER(formatString(commonStrings.days, 60)),
                 accessor: "60 Days",
             },
             {
-                Header: "100 GAMES",
+                Header: UPPER(formatString(commonStrings.nBattles, 100)),
                 accessor: "100 Games",
             },
             {
-                Header: "1000 GAMES",
+                Header: UPPER(formatString(commonStrings.nBattles, 1000)),
                 accessor: "1000 Games",
             },
         ],

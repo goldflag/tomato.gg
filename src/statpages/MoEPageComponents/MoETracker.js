@@ -10,17 +10,24 @@ import {
     Pagination,
     ClassFilter,
     GlobalFilter,
-    MoETierFilter,
-    NationFilter,
+    MoETrackerTierFilter,
+    ConvertedNationFilter,
     PremFilter,
     arrayFilterFn,
+} from "Components";
+import {
     ButtonFiltersContainer,
     FiltersContainer,
     StyledTable,
     SubRow,
     TableContainer,
-    Name,
-} from "Components";
+    NationCell,
+    TankNameCell,
+    ClassCell,
+    TierCell,
+    tableHeaders,
+} from "Components/tableComponents";
+import { Capital, commonStrings } from "Data/localizations";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -30,121 +37,92 @@ const MoEConv = {
     65: "1",
 };
 
+function colorScale(val, multiplier) {
+    const green = (val) => `rgb(${255 + val * multiplier},255,${255 + val * multiplier})`;
+    const red = (val) => `rgb(255,${255 - val * multiplier},${255 - val * multiplier})`;
+    return val > 0 ? red(val) : green(val);
+}
+const colorCell = (percent, colMult) => ({ value }) => (
+    <span style={{ color: colMult ? colorScale(value, colMult) : undefined }}>
+        {percent ? `${value > 0 ? "+" : ""}${value}%` : value}
+    </span>
+);
+
 function MoETracker({ data, moe }) {
     const { server } = useContext(ServerContext);
-
-    function setColor(column, value) {
-        let backgroundColor = "";
-        let color = "black";
-        if (column === `7 Day %Δ`) backgroundColor = colorScale(value, 50);
-        else if (column === `14 Day %Δ`) backgroundColor = colorScale(value, 30);
-        else if (column === `30 Day %Δ`) backgroundColor = colorScale(value, 20);
-        else color = undefined;
-        return {
-            color: color,
-            backgroundColor: backgroundColor,
-        };
-    }
-
-    function colorScale(val, multiplier) {
-        function green(val) {
-            val *= -1;
-            return `rgb(${255 - val * multiplier}, 255, ${255 - val * multiplier})`;
-        }
-
-        function red(val) {
-            return `rgb(255,${255 - val * multiplier}, ${255 - val * multiplier})`;
-        }
-
-        return val > 0 ? red(val) : green(val);
-    }
-
-    function percentStyle(val) {
-        return (
-            <div>
-                {val > 0 ? "+" : ""}
-                {val}%
-            </div>
-        );
-    }
 
     const columns = React.useMemo(
         () => [
             {
-                Cell: ({ row: { original } }) => (
-                    <Name val={original.isPrem}>
-                        <img src={original.image} alt={original.name} />
-                        {original.name}
-                    </Name>
-                ),
-                Header: "Name",
+                Cell: TankNameCell,
+                Header: tableHeaders.name,
                 accessor: "name",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
-                ),
-                Header: "Nation",
+                Cell: NationCell,
+                Header: tableHeaders.nation,
                 accessor: "nation",
-                Filter: NationFilter,
+                Filter: ConvertedNationFilter,
                 filter: arrayFilterFn,
             },
             {
-                Header: "Tier",
+                Cell: TierCell,
+                Header: Capital(commonStrings.tier),
                 accessor: "tier",
-                Filter: MoETierFilter,
+                Filter: MoETrackerTierFilter,
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
-                ),
-                Header: "Class",
+                Cell: ClassCell,
+                Header: tableHeaders.class,
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
             },
             {
-                Header: `${MoEConv[moe]} MoE Reqs`,
-                accessor: `${moe}`,
+                Header: tableHeaders.formatString(tableHeaders.moeReqs, MoEConv[moe]),
+                accessor: moe,
                 disableFilters: true,
             },
             {
-                Header: "7 Day Δ",
+                Cell: colorCell(false, 50),
+                Header: tableHeaders.formatString(tableHeaders.dayChange, 7, "Δ"),
                 accessor: `7diff${moe}`,
                 disableFilters: true,
                 sortType: "basic",
             },
             {
-                Cell: ({ value }) => percentStyle(value),
-                Header: "7 Day %Δ",
+                Cell: colorCell(true, 50),
+                Header: tableHeaders.formatString(tableHeaders.dayChange, 7, "%Δ"),
                 accessor: `7percent${moe}`,
                 disableFilters: true,
                 sortType: "basic",
             },
             {
-                Header: "14 Day Δ",
+                Cell: colorCell(false, 30),
+                Header: tableHeaders.formatString(tableHeaders.dayChange, 14, "Δ"),
                 accessor: `14diff${moe}`,
                 disableFilters: true,
                 sortType: "basic",
             },
             {
-                Cell: ({ value }) => percentStyle(value),
-                Header: "14 Day %Δ",
+                Cell: colorCell(true, 30),
+                Header: tableHeaders.formatString(tableHeaders.dayChange, 14, "%Δ"),
                 accessor: `14percent${moe}`,
                 disableFilters: true,
                 sortType: "basic",
             },
             {
-                Header: "30 Day Δ",
+                Cell: colorCell(false, 20),
+                Header: tableHeaders.formatString(tableHeaders.dayChange, 30, "Δ"),
                 accessor: `30diff${moe}`,
                 disableFilters: true,
                 sortType: "basic",
             },
             {
-                Cell: ({ value }) => percentStyle(value),
-                Header: "30 Day %Δ",
+                Cell: colorCell(true, 20),
+                Header: tableHeaders.formatString(tableHeaders.dayChange, 30, "%Δ"),
                 accessor: `30percent${moe}`,
                 disableFilters: true,
                 sortType: "basic",
@@ -222,7 +200,7 @@ function MoETracker({ data, moe }) {
         const [data, setData] = useState();
         useEffect(() => {
             async function get() {
-                fetch(`${backend}/api/abcd/moetank/${row.original.id}/${server}`)
+                fetch(`${backend}/api/moetank/${server}/${row.original.id}`)
                     .then((res) => res.json())
                     .then((res) => setData(res));
             }
@@ -301,13 +279,7 @@ function MoETracker({ data, moe }) {
                                     <tr {...row.getToggleRowExpandedProps({})}>
                                         {row.cells.map((cell) =>
                                             cell.column.hidden ? null : (
-                                                <td
-                                                    {...cell.getCellProps({
-                                                        style: setColor(cell.column.Header, cell.value),
-                                                    })}
-                                                >
-                                                    {cell.render("Cell")}
-                                                </td>
+                                                <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                                             )
                                         )}
                                     </tr>

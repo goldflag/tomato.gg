@@ -3,6 +3,7 @@ import TreemapOverall from "./treemapOverall";
 import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
 import styled from "styled-components";
 import { useURLState } from "Functions/hooks";
+import { formatString, commonStrings } from "Data/localizations";
 
 const MaxHeight = styled.div`
     height: "900px";
@@ -13,9 +14,9 @@ const Filters = styled(FilterButtonGroup)`
 `;
 
 const filters = {
-    overall: "Overall",
-    recent30: "30 Days",
-    recent60: "60 Days",
+    overall: commonStrings.overall,
+    recent30: formatString(commonStrings.days, 30),
+    recent60: formatString(commonStrings.days, 60),
 };
 
 export default function Treemap({ data }) {

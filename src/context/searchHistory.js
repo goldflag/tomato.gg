@@ -13,10 +13,9 @@ const NAME = "searchHistory";
 function SearchHistoryProvider({ children }) {
     const [history, setHistory] = useState(JSON.parse(localStorage.getItem(NAME)) || []);
 
-    // To toggle between servers
-    const addToHistory = (name, id, server) => {
+    const addToHistory = (name, id, server, isClan) => {
         let searchHistory = JSON.parse(localStorage.getItem(NAME)) || [];
-        searchHistory = [{ name, id, server }, ...searchHistory.filter((value) => value.id !== id)];
+        searchHistory = [{ name, id, server, isClan: !!isClan }, ...searchHistory.filter((value) => value.id !== id)];
         localStorage.setItem(NAME, JSON.stringify(searchHistory));
         setHistory(searchHistory);
     };

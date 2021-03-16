@@ -2,6 +2,8 @@ import React from "react";
 import tankNames from "Data/tankNames.json";
 
 export default function Records(props) {
+
+    console.log(props);
     const demo = {
         padding: 5,
         fontSize: "1rem",

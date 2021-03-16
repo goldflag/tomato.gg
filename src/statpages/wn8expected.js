@@ -1,11 +1,27 @@
+// NPM
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
+import LocalizedStrings from "Functions/localizedStrings";
 
+// LOCAL
 import WN8Table from "./wn8Components/wn8Table";
 import { Loader, FullPageTableWrapper, Info } from "Components";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
+
+const { formatString, ...strings } = LocalizedStrings({
+    en: { expected: "WN8 Expected Values", maintained: "Maintained by the {0}", xvm: "XVM team" },
+    cs: { expected: "Očekávané hodnoty Wn8", maintained: "Udržuje {0}", xvm: "XVM týmem" },
+    de: { expected: "WN8 Erwartungswerte", maintained: "Gepflegt vom {0}", xvm: "XVM Team" },
+    es: { expected: "Valores Esperados de WN8", maintained: "Mantenido por {0}", xvm: "Equipo de XVM" },
+    fr: { expected: "Valeurs Attendues pour le WN8", maintained: "Maintenu par {0}", xvm: "l'équipe XVM" },
+    ko: { expected: "WN8 기댓값", maintained: "관리자 {0}", xvm: "XVM 팀" },
+    pl: { expected: "Oczekiwane wartości dla WN8", maintained: "Zarządzane przez {0}", xvm: "XVM team" },
+    ru: { expected: "WN8 Ожидаемая статистика", maintained: "Поддерживается {0}", xvm: "командой XVM" },
+    tr: { expected: "WN8 Beklenen Değer", maintained: "Sağlayan: {0}", xvm: "XVM team" },
+    zh: { expected: "WN8 期望值", maintained: "由 {0} 維護", xvm: "XVM team" },
+});
 
 export default function Leaderboards(props) {
     const [data, setData] = useState();
@@ -16,7 +32,7 @@ export default function Leaderboards(props) {
     }, []);
 
     useEffect(() => {
-        fetch(`${backend}/api/abcd/wn8`)
+        fetch(`${backend}/api/wn8`)
             .then((res) => res.json())
             .then((data) => setData(data));
     }, []);
@@ -24,7 +40,7 @@ export default function Leaderboards(props) {
     return (
         <FullPageTableWrapper>
             <Info>
-                <span style={{ fontSize: "2rem", fontWeight: "500" }}>WN8 Expected Values</span>
+                <span style={{ fontSize: "2rem", fontWeight: "500" }}>{strings.expected}</span>
                 <br />
                 <br />
                 <span
@@ -34,11 +50,13 @@ export default function Leaderboards(props) {
                         color: "rgb(100,100,100)",
                     }}
                 >
-                    Maintained by the{" "}
-                    <a target="blank" href="https://modxvm.com/en/wn8-expected-values/">
-                        XVM team
-                    </a>
-                </span>{" "}
+                    {formatString(
+                        strings.maintained,
+                        <a target="blank" href="https://modxvm.com/en/wn8-expected-values/">
+                            {strings.xvm}
+                        </a>
+                    )}
+                </span>
                 <br />
             </Info>
             {data ? <WN8Table data={data} /> : <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />}

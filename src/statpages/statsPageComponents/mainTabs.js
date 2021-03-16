@@ -1,8 +1,9 @@
 // NPM
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import { Tab, Tabs } from "@material-ui/core";
+import LocalizedStrings from "Functions/localizedStrings";
+import styled from "styled-components";
 
 // LOCAL
 import { TabPanel } from "../tabs/customTabs";
@@ -15,6 +16,8 @@ import HallOfFame from "./hallOfFame";
 import Treemap from "./treemap/treemap";
 import { NewIcon } from "Components";
 import { useURLState } from "Functions/hooks";
+import { worryrun } from "Assets/loaders";
+import { worryexcited } from "Assets/staticfrogs";
 
 const CustomTabs = withStyles({
     root: {
@@ -47,9 +50,109 @@ const CustomTab = withStyles((t) => ({
     selected: {},
 }))((props) => <Tab disableRipple {...props} />);
 
+const strings = LocalizedStrings({
+    en: {
+        main: "MAIN STATS",
+        hof: "HALL OF FAME",
+        sessions: "SESSIONS",
+        infographics: "INFOGRAPHICS",
+        treemap: "TREEMAP",
+        cached: "Stats displayed are cached. Fetching real-time updated stats.",
+        blameWG: "If this message doesn't go away, blame Wargaming's GARBAGE API.",
+        realTime: "Real-time stats now loaded!",
+    },
+    es: {
+        main: "ESTADÍSTICAS PRINCIPALES",
+        hof: "SALÓN DE LA FAMA",
+        sessions: "SESIONES",
+        infographics: "INFOGRAFÍA",
+        treemap: "TREEMAP",
+    },
+    de: {
+        main: "ALLGEMEINE STATISTIKEN",
+        hof: "HALL OF FAME",
+        sessions: "SESSIONS",
+        infographics: "INFOGRAFIKEN",
+        treemap: "TREE MAP",
+        cached: "Dargestellte Statistiken sind gecached. Frage aktuelle Daten an.",
+        blameWG: "Wenn diese Nachricht nicht nicht verschwindet gibt es ein Problem mit der WG-API.",
+        realTime: "Daten wurden aktualisiert!",
+    },
+    cs: {
+        main: "HLAVNÍ STATISTIKY",
+        hof: "SÍŇ SLÁVY",
+        sessions: "ZÁZNAM",
+        infographics: "INFOGRAFIKA",
+        treemap: "TREEMAP",
+        cached: "Zobrazené statistiky se ukládají do mezipaměti. Načítání aktualizovaných statistik z reálného času.",
+        blameWG: "Pokud tato zpráva nezmizí, může za to debilní API Wargamingu.",
+        realTime: "Statistiky z reálného času jsou nyní načteny!",
+    },
+    fr: {
+        main: "STATS PRINCIPALES",
+        hof: "PANTHÉON",
+        sessions: "SESSIONS",
+        infographics: "INFOGRAPHIE",
+        treemap: "TREEMAP", // No translation
+        cached: "Les stats affichées sont mises en cache. Mise-à-jour en temps réel des stats en cours.",
+        blameWG: "Si ce message ne part pas, blâmez la mauvaise API de WARGAMING.",
+        realTime: "Stats en temps réelles chargées!",
+    },
+    ko: {
+        main: "메인 통계",
+        hof: "명예의 전당",
+        sessions: "세션",
+        infographics: "인포그래픽",
+        treemap: "트리맵",
+        cached: "보여지는 통계는 캐쉬되어있습니다. 실시간 업데이트 된 통계를 가져오는 중입니다.",
+        blameWG: "혹시 이 메시지가 사라지지 않는다면 쓰레기같은 워게이밍의 API를 탓 하십시오.",
+        realTime: "실시산 통계가 반영되였습니다.",
+    },
+    pl: {
+        main: "GŁÓWNE STATYSTYKI",
+        hof: "ALEJA SŁAW",
+        sessions: "SEJSE",
+        infographics: "INFOGRAFIKI",
+        treemap: "MAPA DRZEWEK", // tbd
+        cached: "Wyświetlone dane pochodzą z pamięci podręcznej. Trwa pobieranie aktualnych statystyk.",
+        blameWG: "Jeśli ta wiadomość nie zniknie, należy winić ŚMIECIOWE API Wargamingu.",
+        realTime: "Świeże statystyki zostały załadowane!",
+    },
+    ru: {
+        main: "ОСНОВНАЯ СТАТИСТИКА",
+        hof: "ЗАЛ СЛАВЫ",
+        sessions: "СЕССИИ",
+        infographics: "ИНФОГРАФИКА",
+        treemap: "ДИАГРАММЫ",
+        cached: "Отображаемая статистика кэшируется. Получение обновленной статистики в реальном времени.",
+        blameWG: "Если это сообщение не исчезает, вините плохой API от Wargaming..",
+        realTime: "Статистика в реальном времени загружена!",
+    },
+    tr: {
+        main: "ANA İSTATİSTİKLER",
+        hof: "ŞÖHRET SALONU",
+        sessions: "OTURUMLAR",
+        infographics: "BİLGİ GRAFİKLERİ",
+        treemap: "YOĞUNLUK HARİTASI",
+        cached: "Görüntülenen istatistikler önbelleğe alındı. Gerçek zamanlı güncel istatistikler alınıyor. ",
+        blameWG: "Eğer bu mesaj gitmiyorsa, Wargaming'e ait çöp oğlu çöp API'yi suçlayın.",
+        realTime: "Gerçek zamanlı istatistikler yüklendi!",
+    },
+    zh: {
+        main: "所有統計",
+        hof: "名人堂",
+        sessions: "每日統計",
+        infographics: "綜合圖表",
+        treemap: "矩陣圖",
+        cached: "顯示統計已儲存，正取得即時更新統計。",
+        blameWG: "如果此訊息尚未消失， 可以知道WG的API是個笑話。",
+        realTime: "即時統計已加載!",
+    },
+});
+
 const tabs = [
     {
-        label: "MAIN STATS",
+        label: strings.main,
         value: "main",
         body: [
             (props) => <TopTable data={props.graphData.overallStats} />,
@@ -59,7 +162,7 @@ const tabs = [
         ],
     },
     {
-        label: "HALL OF FAME",
+        label: strings.hof,
         icon: <NewIcon />,
         value: "hall-of-fame",
         body: [
@@ -74,12 +177,12 @@ const tabs = [
         ],
     },
     {
-        label: "SESSIONS",
+        label: strings.sessions,
         value: "sessions",
         body: [(props) => <SessionsLogParent data={props.recentStats.sessions} />],
     },
     {
-        label: "INFOGRAPHICS",
+        label: strings.infographics,
         value: "infographics",
         body: [
             (props) => (
@@ -87,31 +190,78 @@ const tabs = [
                     data={props.graphData}
                     clanData={props.clanHistory}
                     currentClan={props.clanStats}
-                    stats={props.stats}
+                    stats={props.summary}
                 />
             ),
         ],
     },
     {
-        label: "TREEMAP",
+        label: strings.treemap,
         icon: <NewIcon />,
         value: "treemap",
         body: [(props) => <Treemap data={props.recentStats.tree} />],
     },
 ];
 
+const LoadingStyle = styled.div`
+    display: flex;
+    min-height: 55px;
+    align-items: center;
+    width: 100%;
+    background-color: ${({ color }) => color};
+    padding: 1rem;
+    box-shadow: 1px 1px 3px rgb(20, 20, 30);
+    border-radius: 20px;
+    transition: color 2s;
+    @media screen and (max-width: 1000px) {
+        margin: 1rem 0rem 0rem 0rem;
+    }
+`;
+
+const TrashAPI = styled.span`
+    font-size: 0.7rem;
+    color: rgb(200, 200, 200);
+`;
+
+const LoadingHeader = ({ stage }) => {
+    let color, icon, content;
+    if (stage === 1) {
+        color = "rgba(217, 33, 109, 0.5)";
+        icon = { src: worryrun, alt: "worryrun" };
+        content = (
+            <div>
+                {strings.cached}
+                <br />
+                <TrashAPI>{strings.blameWG}</TrashAPI>
+            </div>
+        );
+    } else if (stage === 2) {
+        color = "rgba(29, 219, 98, 0.7)";
+        icon = { src: worryexcited, alt: "worryexcited" };
+        content = strings.realTime;
+    } else return null;
+    return (
+        <LoadingStyle color={color}>
+            <img src={icon.src} style={{ width: "30px", marginRight: "0.5rem" }} alt={icon.alt} />
+            {content}
+        </LoadingStyle>
+    );
+};
+
 export default function MainTabs(props) {
     const [page, setPage] = useURLState("page", "main");
     return (
         <>
+            <LoadingHeader stage={props.stage} />
             <TopStats
                 username={props.username}
                 WGRating={props.WGRating}
+                battles={props.battles}
                 data={props.graphData}
-                stats={props.stats}
                 clanStats={props.clanStats}
                 accountCreationDate={props.accountCreationDate}
                 lastPlayedTime={props.lastPlayedTime}
+                server={props.server}
             />
             <CustomTabs
                 value={page}
@@ -127,10 +277,10 @@ export default function MainTabs(props) {
                     <CustomTab label={<div>{label} {icon}</div>} value={value} key={i} />
                 )}
             </CustomTabs>
-            {tabs.map(({ body, value }) => (
-                <TabPanel value={page} index={value}>
-                    {body.map((Section) => (
-                        <div style={{ marginTop: "1rem", minHeight: "300px" }}>
+            {tabs.map(({ body, value }, i) => (
+                <TabPanel value={page} index={value} key={i}>
+                    {body.map((Section, i) => (
+                        <div style={{ marginTop: "1rem", minHeight: "300px" }} key={i}>
                             <Section {...props} />
                         </div>
                     ))}

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import loader from "Assets/loading.svg";
+import { worryLoaders, loader } from "Assets/loaders";
 
 const LoaderWrapper = styled.div`
     display: flex;
@@ -14,8 +14,10 @@ const LoadingCircle = styled.img`
     max-width: 75px;
 `;
 
+const randLoader = () => worryLoaders[Math.floor(Math.random() * worryLoaders.length)];
+
 export const Loader = (props) => (
     <LoaderWrapper {...props}>
-        <LoadingCircle src={loader} alt="loader" />
+        <LoadingCircle src={props.frog ? randLoader() : loader} alt="loader" />
     </LoaderWrapper>
 );

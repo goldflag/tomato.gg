@@ -1,25 +1,61 @@
-import React, { useEffect } from "react";
+// NPM
+import React, { useEffect, useContext } from "react";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import ReactGA from "react-ga";
+import styled from "styled-components";
+import Scrollbar from "react-scrollbars-custom";
+
+// LOCAL
+import { routes } from "./routes";
+import { ScrollToTop } from "./components";
 import Topbar from "./topbar";
 import Sidebar from "./sidebar";
-import Search from "./search";
-import About from "./about";
-import TankStatsPage from "./statpages/recentTankStats";
-import StatsPage from "./statpages/statsPage";
-import ServerStatsPage from "./statpages/serverStatsPage";
-import TankPage from "./statpages/tankPage";
-import StatsReference from "./statpages/statsReference";
-import Leaderboards from "./statpages/recentLeaderboards";
-import WN8Expected from "./statpages/wn8expected";
-import MoEExpected from "./statpages/MoEPage";
-import MasteryExpected from "./statpages/masteryPage";
-
+import { BackgroundContext } from "Context";
+import Ocean from "./assets/Ocean.svg";
 import "CSS/body.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { ScrollToTop } from "./components";
+
 const trackingId = process.env.REACT_APP_GA;
 
+const Wrapper = styled.div`
+    height: calc(100vh - 4rem);
+    /* unvisited link */
+    a {
+        color: rgb(161, 177, 230);
+    }
+
+    /* mouse over link */
+    a:hover {
+        color: rgb(180, 70, 129);
+    }
+
+    /* selected link */
+    a:active {
+        color: rgb(120, 60, 131);
+    }
+`;
+
+const backgrounds = {
+    black: "rgb(30, 30, 50)",
+    blue: `url(${Ocean}) no-repeat center center fixed`,
+};
+
+const Blue = styled.div`
+    color: rgb(234, 238, 248);
+    background: ${({ background }) => backgrounds[background]};
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: ${({ color }) => color};
+
+    a {
+        text-decoration: none;
+    }
+`;
+
 export default function Tomatopedia() {
+    const { background } = useContext(BackgroundContext);
+
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/");
@@ -28,47 +64,22 @@ export default function Tomatopedia() {
     return (
         <Router>
             <ScrollToTop />
-            <div className="dark-mode">
+            <Blue background={background}>
                 <Sidebar />
                 <Topbar />
-                <main className="wrapper">
-                    <Switch>
-                        <Route path="/stats/:server/:user">
-                            <StatsPage />
-                        </Route>
-                        <Route path="/about">
-                            <About />
-                        </Route>
-                        <Route path="/server-stats">
-                            <ServerStatsPage />
-                        </Route>
-                        <Route path="/tank-stats">
-                            <TankStatsPage />
-                        </Route>
-                        <Route path="/stats-reference">
-                            <StatsReference />
-                        </Route>
-                        <Route path="/leaderboards">
-                            <Leaderboards />
-                        </Route>
-                        <Route path="/tank">
-                            <TankPage />
-                        </Route>
-                        <Route path="/wn8">
-                            <WN8Expected />
-                        </Route>
-                        <Route path="/moe">
-                            <MoEExpected />
-                        </Route>
-                        <Route path="/mastery">
-                            <MasteryExpected />
-                        </Route>
-                        <Route exact path="/">
-                            <Search />
-                        </Route>
-                    </Switch>
-                </main>
-            </div>
+                <Wrapper>
+                    <Scrollbar>
+                        <Switch>
+                            {routes.map(({ path, Component }, i) => (
+                                <Route path={path} key={i}>
+                                    {Component}
+                                </Route>
+                            ))}
+                            <Redirect to="/" />
+                        </Switch>
+                    </Scrollbar>
+                </Wrapper>
+            </Blue>
         </Router>
     );
 }

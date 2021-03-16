@@ -13,6 +13,7 @@ import RecordsBar from "./appbars/RecordsBar";
 import LineGraphs from "./appbars/LineGraphs";
 
 export default function Charts(props) {
+
     const size = useWindowSize();
 
     const useStyles = makeStyles((t) => ({
@@ -20,7 +21,6 @@ export default function Charts(props) {
             flexGrow: 1,
         },
         paper: {
-            //padding: theme.spacing(2),
             textAlign: "left",
             fontFamily: "Roboto Mono",
             fontSize: "1.2em",
@@ -106,7 +106,7 @@ export default function Charts(props) {
                     </Grid>
                     <Grid item xs={3}>
                         <Paper className={classes.paper} square elevation={2} style={{ height: 348 }}>
-                            <RecordsBar data={props.stats} />
+                            <RecordsBar data={props.stats.statistics.all} />
                         </Paper>
                     </Grid>
                     <Grid item xs={4}>
@@ -192,7 +192,7 @@ export default function Charts(props) {
                         height: 348,
                     }}
                 >
-                    <RecordsBar data={props.stats} />
+                    <RecordsBar data={props.stats.statistics.all} />
                 </Paper>
             </div>
         );

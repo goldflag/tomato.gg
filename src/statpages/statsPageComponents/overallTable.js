@@ -14,12 +14,20 @@ import {
     arrayFilterFn,
     NumberRangeColumnFilter,
 } from "Components/tableFilters";
-import { ButtonFiltersContainer, FiltersContainer, Name } from "Components/tableComponents";
+import {
+    ButtonFiltersContainer,
+    ClassCell,
+    FiltersContainer,
+    NationCell,
+    tableHeaders,
+    TankNameCell,
+    TierCell,
+} from "Components/tableComponents";
 import styled from "styled-components";
 import Tooltip from "react-tooltip-lite";
 import awardsData from "Data/awardsinfo.json";
 import cellStyle from "Functions/cellStyle";
-import { tierConv } from "Data/conversions";
+import { Capital, commonStrings } from "Data/localizations";
 
 const AwardContainer = styled.div`
     padding: 0.5rem;
@@ -130,6 +138,7 @@ const Table = styled.table`
 `;
 
 const Tr = styled.tr`
+    white-space: nowrap;
     color: rgb(220, 220, 220);
     background-color: rgba(40, 40, 70, 0.5);
     :nth-child(4n + 1) {
@@ -156,6 +165,7 @@ const Td = styled.td`
 const TableContainer = styled.div`
     font-family: Roboto Mono;
     overflow-x: auto;
+    overflow-y: hidden;
     background-color: rgba(0, 0, 0, 0);
     backdrop-filter: blur(7px);
 `;
@@ -173,49 +183,40 @@ function OverallTable({ data }) {
     const columns = React.useMemo(
         () => [
             {
-                Cell: ({ row: { original } }) => (
-                    <Name val={original.isPrem}>
-                        <img src={original.image} alt={original.name} />
-                        {original.name}
-                    </Name>
-                ),
-                Header: "Name",
+                Cell: TankNameCell,
+                Header: tableHeaders.name,
                 accessor: "name",
                 disableFilters: true,
             },
             {
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/flagIcons/${value}.png`)} style={{ maxWidth: "40px" }} alt={value} />
-                ),
-                Header: "Nation",
+                Cell: NationCell,
+                Header: tableHeaders.nation,
                 accessor: "nation",
                 Filter: NationFilter,
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => tierConv[value],
-                Header: "Tier",
+                Cell: TierCell,
+                Header: Capital(commonStrings.tier),
                 accessor: "tier",
                 Filter: NumericTierFilter,
                 filter: arrayFilterFn,
             },
             {
-                Cell: ({ value }) => (
-                    <img src={require(`Assets/classIcons/${value}.png`)} style={{ maxWidth: "20px" }} alt={value} />
-                ),
-                Header: "Class",
+                Cell: ClassCell,
+                Header: tableHeaders.class,
                 accessor: "class",
                 Filter: ClassFilter,
                 filter: arrayFilterFn,
             },
             {
-                Header: "Games",
+                Header: Capital(commonStrings.battles),
                 accessor: "battles",
                 filter: "between",
                 Filter: NumberRangeColumnFilter,
             },
             {
-                Header: "WN8",
+                Header: commonStrings.wn8,
                 accessor: "wn8",
                 Filter: NumberRangeColumnFilter,
                 filter: "between",
@@ -223,20 +224,20 @@ function OverallTable({ data }) {
             },
             {
                 Cell: ({ value }) => `${value}%`,
-                Header: "Winrate",
+                Header: Capital(commonStrings.longWR),
                 accessor: "winrate",
                 Filter: NumberRangeColumnFilter,
                 filter: "between",
                 disableFilters: true,
             },
             {
-                Header: "DPG",
+                Header: commonStrings.dpg,
                 accessor: "dpg",
                 Filter: NumberRangeColumnFilter,
                 filter: "between",
                 disableFilters: true,
             },
-            { Header: "KPG", accessor: "kpg", disableFilters: true },
+            { Header: Capital(commonStrings.frags), accessor: "kpg", disableFilters: true },
             {
                 Header: "WN8%tile",
                 accessor: "wn8percent",
@@ -247,13 +248,13 @@ function OverallTable({ data }) {
                 accessor: "dpgpercent",
                 disableFilters: true,
             },
-            { Header: "DR", accessor: "dmgratio", disableFilters: true },
-            { Header: "KDR", accessor: "kd", disableFilters: true },
-            { Header: "Survival%", accessor: "survival", disableFilters: true },
+            { Header: commonStrings.dmgRatio, accessor: "dmgratio", disableFilters: true },
+            { Header: tableHeaders.kd, accessor: "kd", disableFilters: true },
+            { Header: tableHeaders.survival, accessor: "survival", disableFilters: true },
             { Header: "XP", accessor: "xp", disableFilters: true },
             { Header: "Hit%", accessor: "hitratio", disableFilters: true },
             { Header: "Armor", accessor: "armoreff", disableFilters: true },
-            { Header: "Spots", accessor: "spots", disableFilters: true },
+            { Header: tableHeaders.spots, accessor: "spots", disableFilters: true },
             {
                 Cell: ({ value }) => <MoEStars marks={value} />,
                 Header: "MOE",
@@ -265,7 +266,7 @@ function OverallTable({ data }) {
                 Cell: ({ value }) => (
                     <img src={require(`Assets/masteryIcons/${value}.png`)} style={{ maxHeight: "23px" }} alt={value} />
                 ),
-                Header: "Mast",
+                Header: "Mast", // TODO: iconize this
                 accessor: "mastery",
                 Filter: MasteryFilter,
                 filter: arrayFilterFn,
@@ -309,7 +310,6 @@ function OverallTable({ data }) {
             initialState: {
                 pageIndex: 0,
                 pageSize: 25,
-                // hiddenColumns: ["isPrem"],
                 sortBy: [
                     {
                         id: "battles",

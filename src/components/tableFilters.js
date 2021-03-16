@@ -1,9 +1,15 @@
+// NPM
 import React from "react";
 import styled, { css } from "styled-components";
 import { Button, ButtonGroup } from "@material-ui/core";
-import { MoEStars } from "./moeStars";
 import { useAsyncDebounce } from "react-table";
 import InputBase from "@material-ui/core/InputBase";
+import LocalizedStrings from "Functions/localizedStrings";
+
+// LOCAL
+import { MoEStars } from "./moeStars";
+import { classConv, nationConv } from "Data/conversions";
+import { Capital, commonStrings } from "Data/localizations";
 
 export const FilterButton = styled(Button)`
     background-color: ${({ selected }) => (selected ? css`rgb(222, 13, 93)` : css`rgb(66, 84, 143)`)} !important;
@@ -25,14 +31,107 @@ export const FilterButtonGroup = styled(ButtonGroup)`
     padding-top: 10px;
 `;
 
+const { formatString, ...strings } = LocalizedStrings({
+    en: {
+        all: "ALL",
+        prem: "PREM",
+        regular: "REGULAR",
+        searchTanks: "Search {0} tanks",
+        searchPlayers: "Search {0} players",
+        min: "Min",
+        to: "to",
+        max: "Max",
+    },
+    cs: {
+        all: "VŠECHNY",
+        prem: "PRÉMIOVÉ",
+        regular: "STROMOVÉ",
+        searchTanks: "Vyhledávat {0} tanky",
+        searchPlayers: "Vyhledávat {0} hráči",
+        min: "Min",
+        to: "do",
+        max: "Max",
+    },
+    de: {
+        all: "ALLE",
+        prem: "PREM",
+        regular: "NORMAL",
+        searchTanks: "Suche {0} Panzer",
+        battles: "Gefechte",
+        min: "Min",
+        to: "bis",
+        max: "Max",
+    },
+    es: {
+        all: "TODO",
+        prem: "PREM",
+        regular: "REGULAR",
+        searchTanks: "Buscar {0} tanques",
+        searchPlayers: "Buscar {0} jugadores",
+        min: "Mínimo",
+        to: "a",
+        max: "Máximo",
+    },
+    fr: {
+        all: "TOUT",
+        prem: "PREM",
+        regular: "NORMAL",
+        searchTanks: "Chercher {0} chars",
+        searchPlayers: "Chercher {0} joueurs",
+        min: "Min",
+        to: "à",
+        max: "Max",
+    },
+    ko: {
+        all: "ALL",
+        prem: "프리미엄",
+        regular: "일반",
+        searchTanks: "{0} 전차 찾기",
+        battles: "전투",
+        min: "최소",
+        to: "부터",
+        max: "최대",
+    },
+    pl: {
+        all: "Wszystkie",
+        prem: "Premium",
+        regular: "Zwykłe",
+        searchTanks: "Przeszukaj {0} czołgów",
+        searchPlayers: "Przeszukaj {0} gracze",
+        min: "Min",
+        to: "do",
+        max: "Maks",
+    },
+    ru: {
+        all: "ВСЕ",
+        prem: "ПРЕМ",
+        regular: "ОБЫЧНЫЕ",
+        searchTanks: "Поиск {0} танков",
+        searchPlayers: "Поиск {0} игроки",
+        min: "Минимум",
+        to: "до",
+        max: "Максимум",
+    },
+    tr: {
+        all: "HEPSİ",
+        prem: "PREM",
+        regular: "NORMAL",
+        searchTanks: "{0} tank arasında ara",
+        searchPlayers: "{0} oyuncu arasında ara",
+        min: "En Az",
+        to: "->",
+        max: "En Çok",
+    },
+});
+
 const premFilterOptions = [
-    { label: "ALL", value: undefined },
-    { label: "PREM", value: true },
-    { label: "REGULAR", value: false },
+    { label: strings.all, value: undefined },
+    { label: strings.prem, value: true },
+    { label: strings.regular, value: false },
 ];
 
 const tierFilterOptions = [
-    { label: "ALL", value: undefined },
+    { label: strings.all, value: undefined },
     { value: "X" },
     { value: "IX" },
     { value: "VIII" },
@@ -46,7 +145,7 @@ const tierFilterOptions = [
 ];
 
 const numericTierFilterOptions = tierFilterOptions.map(({ label, value }, i) =>
-    label === "ALL"
+    label === strings.all
         ? { label, value }
         : {
               label: value,
@@ -55,18 +154,26 @@ const numericTierFilterOptions = tierFilterOptions.map(({ label, value }, i) =>
 );
 
 const classFilterOptions = [
-    { label: "ALL", value: undefined },
-    { value: "HT" },
-    { value: "MT" },
-    { value: "LT" },
-    { value: "TD" },
-    { value: "SPG" },
+    { label: strings.all, value: undefined },
+    ...Object.values(classConv).map((val) => ({
+        value: val,
+        label: val,
+        image: require(`Assets/classIcons/${val}.png`),
+    })),
 ];
 
-const nations = ["China", "France", "Germany", "Japan", "Sweden", "UK", "USA", "USSR", "Czech", "Italy", "Poland"];
 const nationFilterOptions = [
-    { label: "ALL", value: undefined },
-    ...nations.map((nation) => ({
+    { label: strings.all, value: undefined },
+    ...Object.keys(nationConv).map((nation) => ({
+        label: nation,
+        value: nation,
+        image: require(`Assets/flagIcons/${nationConv[nation]}.png`),
+    })),
+];
+
+const convertedNationFilterOptions = [
+    { label: strings.all, value: undefined },
+    ...Object.values(nationConv).map((nation) => ({
         label: nation,
         value: nation,
         image: require(`Assets/flagIcons/${nation}.png`),
@@ -74,7 +181,7 @@ const nationFilterOptions = [
 ];
 
 const masteryFilterOptions = [
-    { label: "ALL", value: undefined },
+    { label: strings.all, value: undefined },
     ...[0, 1, 2, 3, 4].map((n) => ({
         label: `${n}`,
         value: n,
@@ -83,7 +190,7 @@ const masteryFilterOptions = [
 ];
 
 const MoEFilterOptions = [
-    { label: "ALL", value: undefined },
+    { label: strings.all, value: undefined },
     ...[0, 1, 2, 3].map((n) => ({
         label: n,
         value: n,
@@ -121,14 +228,29 @@ const makeButtonFilter = (ariaLabel, options, Label) => ({ column: { filterValue
 export const PremFilter = makeButtonFilter("premium tank filter", premFilterOptions);
 export const TierFilter = makeButtonFilter("tank tier filter", tierFilterOptions);
 export const NumericTierFilter = makeButtonFilter("tank tier filter", numericTierFilterOptions);
-export const MoETierFilter = makeButtonFilter("tank tier filter", tierFilterOptions.slice(0, 7));
+export const MoETierFilter = makeButtonFilter("tank tier filter", numericTierFilterOptions.slice(0, 7));
 
-export const ClassFilter = makeButtonFilter("tank class filter", classFilterOptions);
+export const MoETrackerTierFilter = makeButtonFilter("tank tier filter", tierFilterOptions.slice(0, 7));
+
+export const ClassFilter = makeButtonFilter("tank class filter", classFilterOptions, ({ label, image }) =>
+    label === strings.all ? (
+        label
+    ) : (
+        <img src={image} style={{ maxHeight: "20px", filter: "brightness(1.5)" }} alt={label} />
+    )
+);
+
 export const NationFilter = makeButtonFilter("tank nation filter", nationFilterOptions, ({ label, image }) =>
-    label === "ALL" ? label : <img src={image} style={{ maxHeight: "25px" }} alt={label} />
+    label === strings.all ? label : <img src={image} style={{ maxHeight: "25px" }} alt={label} />
+);
+export const ConvertedNationFilter = makeButtonFilter(
+    "tank nation filter",
+    convertedNationFilterOptions,
+    ({ label, image }) =>
+        label === strings.all ? label : <img src={image} style={{ maxHeight: "25px" }} alt={label} />
 );
 export const MasteryFilter = makeButtonFilter("tank mastery filter", masteryFilterOptions, ({ label, image }) =>
-    label === "ALL" ? label : <img src={image} style={{ maxHeight: "23px" }} alt={label} />
+    label === strings.all ? label : <img src={image} style={{ maxHeight: "23px" }} alt={label} />
 );
 export const MoEFilter = makeButtonFilter("tank marks of excellence filter", MoEFilterOptions, ({ label, value }) => (
     <div
@@ -138,11 +260,11 @@ export const MoEFilter = makeButtonFilter("tank marks of excellence filter", MoE
             justifyContent: "space-evenly",
         }}
     >
-        {label === "ALL" ? label : <MoEStars marks={value} />}
+        {label === strings.all ? label : <MoEStars marks={value} />}
     </div>
 ));
 
-export const GlobalFilter = ({ preGlobalFilteredRows, globalFilter, setGlobalFilter }) => {
+export const GlobalFilter = ({ defaultType, preGlobalFilteredRows, globalFilter, setGlobalFilter }) => {
     const count = preGlobalFilteredRows.length;
     const [value, setValue] = React.useState(globalFilter);
     const onChange = useAsyncDebounce((value) => {
@@ -157,7 +279,10 @@ export const GlobalFilter = ({ preGlobalFilteredRows, globalFilter, setGlobalFil
                     setValue(e.target.value);
                     onChange(e.target.value);
                 }}
-                placeholder={`Search ${count} tanks...`}
+                placeholder={formatString(
+                    defaultType === "players" ? strings.searchPlayers : strings.searchTanks,
+                    count
+                )}
                 style={{
                     fontSize: "1rem",
                     padding: "0px 15px",
@@ -183,7 +308,7 @@ export const NumberRangeColumnFilter = ({ column: { filterValue = [], preFiltere
 
     return (
         <div style={{ marginTop: "8px", display: "flex", alignItems: "center" }}>
-            Battles
+            {Capital(commonStrings.battles)}
             <InputBase
                 value={filterValue[0] || ""}
                 type="number"
@@ -191,7 +316,7 @@ export const NumberRangeColumnFilter = ({ column: { filterValue = [], preFiltere
                     const val = e.target.value;
                     setFilter((old = []) => [val ? parseInt(val, 10) : undefined, old[1]]);
                 }}
-                placeholder={`Min (${min})`}
+                placeholder={strings.min + `(${min})`}
                 style={{
                     width: "110px",
                     margin: "0 0.5rem",
@@ -202,7 +327,7 @@ export const NumberRangeColumnFilter = ({ column: { filterValue = [], preFiltere
                     color: "white",
                 }}
             />
-            to
+            {strings.to}
             <InputBase
                 value={filterValue[1] || ""}
                 type="number"
@@ -210,7 +335,7 @@ export const NumberRangeColumnFilter = ({ column: { filterValue = [], preFiltere
                     const val = e.target.value;
                     setFilter((old = []) => [old[0], val ? parseInt(val, 10) : undefined]);
                 }}
-                placeholder={`Max (${max})`}
+                placeholder={strings.max + `(${max})`}
                 style={{
                     width: "130px",
                     margin: "0 0.5rem",

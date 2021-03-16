@@ -74,7 +74,7 @@ export default function SmallLeaderboard(props) {
 
     useEffect(() => {
         async function fetchData() {
-            const url = `${backend}/api/abcd/leaderboards/${props.type}/10`;
+            const url = `${backend}/api/leaderboards/${props.type}/10`;
             const raw = await fetch(url);
             let res = await raw.json();
 

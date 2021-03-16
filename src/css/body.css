@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap");
 
+
 body {
     font-family: "Roboto";
     margin-left: 14rem;
@@ -9,6 +10,7 @@ body {
     color: #333; */
 }
 
+<<<<<<< HEAD
 .dark-mode {
     background-color: rgb(50, 50, 54);
     color: rgb(234, 238, 248);
@@ -67,6 +69,10 @@ body {
 
 .wrapper {
     min-height: 100vh;
+=======
+p {
+    font-size: 1rem;
+>>>>>>> working
 }
 
 @media screen and (max-width: 1000px) {
