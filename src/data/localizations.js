@@ -36,10 +36,10 @@ export const { formatString, ...commonStrings } = LocalizedStrings({
         longWR: "% vítězství",
         kd: "Z/S",
         longKD: "koeficient zabití/smrti",
-        rank: "hodnost",
+        rank: "pořadí",
         tier: "úroveň",
         wn8: "WN8",
-        dmgRatio: "ø poškození",
+        dmgRatio: "poměr poškození",
         longDmgRatio: "koeficient poškození",
         overall: "celkově",
         days: "{0} dní",
@@ -83,7 +83,7 @@ export const { formatString, ...commonStrings } = LocalizedStrings({
     fr: {
         player: "joueur",
         battles: "batailles",
-        nBattles: "{0} batailles",
+        nBattles: "{0} parties",
         longDPG: "dégâts par partie",
         frags: "tués",
         longFrags: "tués par partie",
@@ -96,7 +96,7 @@ export const { formatString, ...commonStrings } = LocalizedStrings({
         wn8: "WN8",
         dmgRatio: "ratio de dégâts",
         longDmgRatio: "ratio de dégâts",
-        overall: "globam",
+        overall: "global",
         days: "{0} jours",
         hours: "{0} heures",
     },
@@ -332,19 +332,6 @@ export const clanPositions = LocalizedStrings({
         reservist: "後備軍人",
     },
 });
-
-export const languages = {
-    en: { name: "English" },
-    cs: { name: "Čeština" },
-    de: { name: "Deutsche" },
-    es: { name: "Español" },
-    fr: { name: "Français" },
-    ko: { name: "한국어" },
-    pl: { name: "Polski" },
-    ru: { name: "Pусский" },
-    tr: { name: "Türkçe" },
-    zh: { name: "繁體中文" },
-};
 
 export const UPPER = (s) => s.toUpperCase();
 export const Capital = (s) =>

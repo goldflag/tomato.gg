@@ -3,7 +3,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 // LOCAL
-import { tierConv, nationConv, classConv } from "Data/conversions";
+import { tierConv, nationConv } from "Data/conversions";
 import LocalizedStrings from "Functions/localizedStrings";
 export const TableContainer = styled.div`
     overflow-x: auto;

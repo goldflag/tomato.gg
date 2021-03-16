@@ -62,7 +62,7 @@ const { formatString, ...strings } = LocalizedStrings({
         expand: "Разверните, чтобы увидеть историю мастерства за 30 дней",
     },
     tr: {
-        mastery: "Mükemmellik İşaretleri Gereksinimleri",
+        mastery: "Tank Ası Gereksinimleri",
         dataFrom: "{0} tarafından oluşturulan veriler.",
         moeMod: "Mükemmellik İşaretleri modu",
         expand: "30 günlük Tank Asları geçmişini görmek için satırları aç",

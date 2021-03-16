@@ -5,7 +5,7 @@ import OutsideClickHandler from "react-outside-click-handler";
 
 // LOCAL
 import { useCurrentLanguage } from "Functions/localizedStrings";
-import { languages } from "Data/localizations";
+import { languages } from "Data/languages";
 import { CustomSelect, DropdownSelector, DropdownOptions, DropdownOptionsChildren } from "Components/customSelect";
 
 const Dropdown = styled.div`
