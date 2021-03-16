@@ -32,8 +32,6 @@ const HistoryWrapper = styled.div`
     margin-top: 1rem;
     display: flex;
     align-items: flex-start;
-
-    background-color: #4d5895;
     @media screen and (max-width: 1000px) {
         display: none;
     }

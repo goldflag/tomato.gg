@@ -208,7 +208,7 @@ const LoadingStyle = styled.div`
     min-height: 55px;
     align-items: center;
     width: 100%;
-    background-color: ${({ color }) => color};
+    background: ${({ color }) => color};
     padding: 1rem;
     box-shadow: 1px 1px 3px rgb(20, 20, 30);
     border-radius: 20px;
@@ -226,7 +226,7 @@ const TrashAPI = styled.span`
 const LoadingHeader = ({ stage }) => {
     let color, icon, content;
     if (stage === 1) {
-        color = "rgba(217, 33, 109, 0.5)";
+        color = "linear-gradient(90deg, rgba(135,47,152,1) 0%, rgba(84,37,199,1) 53%, rgba(25,101,223,1) 100%)";
         icon = { src: worryrun, alt: "worryrun" };
         content = (
             <div>
@@ -236,7 +236,7 @@ const LoadingHeader = ({ stage }) => {
             </div>
         );
     } else if (stage === 2) {
-        color = "rgba(29, 219, 98, 0.7)";
+        color = "linear-gradient(90deg, rgba(72,152,47,1) 0%, rgba(37,199,168,1) 53%, rgba(0,255,245,1) 100%)";
         icon = { src: worryexcited, alt: "worryexcited" };
         content = strings.realTime;
     } else return null;
