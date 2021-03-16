@@ -1,5 +1,9 @@
+// NPM
 import { useState, useEffect } from "react";
 import _LocalizedStrings from "react-localization";
+
+// LOCAL
+import { languages } from "Data/languages";
 
 const randID = () => Math.random().toString(16).substr(2, 16);
 
@@ -10,6 +14,7 @@ const { LocalizedStrings, setLanguage, getLanguage, useCurrentLanguage } = (() =
     const setLanguageFns = [];
     const watcherFns = {};
     let currentLanguage = localStorage.getItem("lang") || navigator.languages[0].split("-")[0];
+    if (!(currentLanguage in languages)) currentLanguage = "en";
 
     const setLanguageForAll = (lang, reload = false) => {
         console.log(`Setting language to ${lang} for ${setLanguageFns.length} string blocks`);
