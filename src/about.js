@@ -47,7 +47,7 @@ const { formatString, ...strings } = LocalizedStrings({
         translators: `Internacionalizace Tomato.gg byla dosažena díky těmto úžasným pomocníkům:`,
         feedback: `Přidejte se na můj {0} pokud byste chtěli poskytnout zpětnou vazbu, návrhy na vylepšení nebo nahlásit chybu.`,
         discord: `Discord server`,
-        thanks: `Děkujeme, že používáte Tomato.gg!`,
+        thanks: `Děkuji, že požíváte Tomato.gg!`,
     },
     de: {
         h1: `Über Tomato.gg`,
@@ -70,21 +70,21 @@ const { formatString, ...strings } = LocalizedStrings({
         thanks: `Vielen Dank dass du Tomato.gg nutzt!`,
     },
     es: {
-        h1: `Sobre Tomato.gg`,
+        h1: `Acerca de Tomato.gg`,
         updated: `ACTUALIZADO {0}`,
-        about0: `Creé este sitio para proporcionar una interfaz accesible para ver un gran variedad de estadísticas, 
-        muchas de las cuales solo se encuentran aquí. Algunas estadísticas han inspirado en otros sitios.`,
-        about1: `Tomato.gg no aspira hacer todo. Nunca tendrá estadísticas del servidor tan detalladas como 
-        las en wot-news.com, ni tendrá las batallas individuales precisas que son accesible en WN8lab.com. 
-        Tomato.gg está desarrollando activamente y no está cerca de la función completa, En el futuro, planeo 
-        expandir la página de estadísticas del jugador, expandir la página de estadísticas de los tanques, 
-        implementar estadísticas del clan, y terminar la tabla de clasificación.`,
+        about0: `Creé este sitio web para proporcionar una interfaz accesible para ver una gran variedad de estadísticas, 
+        muchas de las cuales solo se encuentran aquí. Algunas estadísticas se han inspirado en otros sitios.`,
+        about1: `Tomato.gg no aspira a hacer todo. Nunca tendrá estadísticas del servidor tan detalladas como las de 
+        wot-news.com, ni tendrá las estadísticas precisas de las batallas individuales que son accesible en WN8lab.com. 
+        Tomato.gg está siendo desarrollando activamente y no está cerca de su completa funcionalidad. En el futuro planeo 
+        expandir la página de estadísticas del jugador, la página de estadísticas de los tanques, implementar 
+        estadísticas del clan y terminar la tabla de clasificación.`,
         about2: `Tomato.gg es totalmente compatible con las estadísticas de jugadores de EU, América del norte, y Asia. 
-        Ya puedes ver las estadísticas para los jugadores de Rusia, pero no hay actualizaciones de estadísticas diarias automáticas.`,
-        about3: `Mira Tomato.gg en móvil también. He optimizado el sitio para la mejor experiencia de usuario mientras 
-        teniendo casi 100% de las funciones completas`,
+        Aunque ya puedes ver las estadísticas para los jugadores de Rusia, no se actualizan automáticamente a diario.`,
+        about3: `Puedes ingresar a Tomato.gg con tu móvil también. He optimizado el sitio web para la mejor experiencia 
+        de usuario y funcionan casi el 100% de las funciones.`,
         about4: `ha ayudado mucho con el desarrollo de Tomato.gg. ¡Muchas gracias!.`,
-        feedback: `Únete a mi {0} si quieres proveer comentarios, sugerencias, y informes de errores.`,
+        feedback: `Únete a mi {0} si quieres realizar comentarios, sugerencias e informar errores.`,
         discord: `Servidor de Discord`,
         thanks: `¡Gracias por usar Tomato.gg!`,
     },

@@ -83,7 +83,7 @@ export const { formatString, ...commonStrings } = LocalizedStrings({
     fr: {
         player: "joueur",
         battles: "batailles",
-        nBattles: "{0} batailles",
+        nBattles: "{0} parties",
         longDPG: "dégâts par partie",
         frags: "tués",
         longFrags: "tués par partie",
@@ -96,7 +96,7 @@ export const { formatString, ...commonStrings } = LocalizedStrings({
         wn8: "WN8",
         dmgRatio: "ratio de dégâts",
         longDmgRatio: "ratio de dégâts",
-        overall: "globam",
+        overall: "global",
         days: "{0} jours",
         hours: "{0} heures",
     },

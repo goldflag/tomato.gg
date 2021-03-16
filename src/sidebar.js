@@ -58,13 +58,13 @@ const strings = LocalizedStrings({
         boomer: "Alternar Fondo Oscuro",
         boomerAria: "alternar color de fondo",
         support: "Apoya a Tomato.gg",
-        donations: `Tomato.gg funciona completamente con donaciones. Si encuentras valor en el sitio, 
-        considere hacer una donación para ayudar a mantener los servidores.`,
+        donations: `Tomato.gg funciona completamente con donaciones. Si encuentras valioso este 
+        sitio web, considera hacer una donación para ayudar a mantener los servidores.`,
         kofi: "Apoya en Ko-fi",
         paypal: "Apoya en Paypal",
         partnered: "Sitios asociados",
-        herhor: "Generador de imágenes y rankings de MoE",
-        createdBy: "Tomato.gg es un sitio creado por",
+        herhor: "Generador de imágenes y rankings de las marcas de excelencia",
+        createdBy: "Tomato.gg es un sitio web creado por",
         notAffiliated: "y no está afiliado a Wargaming.net.",
     },
     fr: {
