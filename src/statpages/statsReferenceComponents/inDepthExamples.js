@@ -5,8 +5,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
-import WRCurves from "Data/WRCurves.json";
-import WN8Curves from "Data/WN8Curves.json";
 import CurveGraph from "../tankStatsPageComponents/curveGraph";
 
 import "CSS/tankstats.css";
@@ -82,7 +80,7 @@ export default function InDepthExamples() {
                 </AppBar>
                 <TabPanel value={value} index={1} dir={t.direction}>
                     <div className="grid">
-                        <CurveGraph
+                        {/* <CurveGraph
                             data={WRCurves["Progetto 46"]}
                             type="Winrate"
                             smallType="WR"
@@ -93,7 +91,7 @@ export default function InDepthExamples() {
                             type="WN8"
                             smallType="WN8"
                             color="rgb(212, 38, 186)"
-                        />
+                        /> */}
                     </div>
                     As you can see, most of the tank curve is above the overall curve, which means Progetto 46 players
                     have higher winrates and WN8s in the Progetto than their overall stats. This confirms the community
@@ -107,8 +105,8 @@ export default function InDepthExamples() {
                 </TabPanel>
                 <TabPanel value={value} index={0} dir={t.direction}>
                     <div className="grid">
-                        <CurveGraph data={WRCurves["AT 8"]} type="Winrate" smallType="WR" color="rgb(230, 57, 103)" />
-                        <CurveGraph data={WN8Curves["AT 8"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
+                        {/* <CurveGraph data={WRCurves["AT 8"]} type="Winrate" smallType="WR" color="rgb(230, 57, 103)" />
+                        <CurveGraph data={WN8Curves["AT 8"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" /> */}
                     </div>
                     The AT 8 is considered to be a noob tank. It's a casemate TD, has good armor, and the terrible
                     mobility prevents the most important skill elite players have: relocation. The winrate curve for the

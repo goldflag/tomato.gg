@@ -6,8 +6,6 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import WRCurves from "Data/WRCurves.json";
-import WN8Curves from "Data/WN8Curves.json";
 import CurveGraph from "../tankStatsPageComponents/curveGraph";
 
 import "CSS/tankstats.css";
@@ -61,109 +59,110 @@ export default function CurveExamples() {
         setValue(newValue);
     };
 
-    return (
-        <div className={classes.root}>
-            <div
-                style={{
-                    backgroundColor: "rgb(45, 45, 45)",
-                }}
-            >
-                <AppBar position="static" color="default">
-                    <Tabs
-                        value={value}
-                        onChange={handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        variant="fullWidth"
-                        aria-label="full width tabs example"
-                    >
-                        <Tab label="Balanced" {...a11yProps(0)} />
-                        <Tab label="Overpowered" {...a11yProps(1)} />
-                        <Tab label="Underpowered" {...a11yProps(2)} />
-                        <Tab label="High Skill Ceiling" {...a11yProps(3)} />
-                        <Tab label="Low Skill Ceiling" {...a11yProps(4)} />
-                        <Tab label="High Skill Floor" {...a11yProps(5)} />
-                        <Tab label="Low Skill Floor" {...a11yProps(6)} />
-                    </Tabs>
-                </AppBar>
-                <TabPanel value={value} index={0} dir={t.direction}>
-                    <div className="grid">
-                        <CurveGraph data={WRCurves["T32"]} type="Winrate" smallType="WR" color="rgb(230, 57, 103)" />
-                        <CurveGraph data={WN8Curves["T32"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
-                    </div>
-                </TabPanel>
-                <TabPanel value={value} index={1} dir={t.direction}>
-                    <div className="grid">
-                        <CurveGraph
-                            data={WRCurves["Defender"]}
-                            type="Winrate"
-                            smallType="WR"
-                            color="rgb(230, 57, 103)"
-                        />
-                        <CurveGraph data={WN8Curves["Defender"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
-                    </div>
-                </TabPanel>
-                <TabPanel value={value} index={2} dir={t.direction}>
-                    <div className="grid">
-                        <CurveGraph
-                            data={WRCurves["Churchill GC"]}
-                            type="Winrate"
-                            smallType="WR"
-                            color="rgb(230, 57, 103)"
-                        />
-                        <CurveGraph
-                            data={WN8Curves["Churchill GC"]}
-                            type="WN8"
-                            smallType="WN8"
-                            color="rgb(212, 38, 186)"
-                        />
-                    </div>
-                </TabPanel>
-                <TabPanel value={value} index={3} dir={t.direction}>
-                    <div className="grid">
-                        <CurveGraph
-                            data={WRCurves["Bourrasque"]}
-                            type="Winrate"
-                            smallType="WR"
-                            color="rgb(230, 57, 103)"
-                        />
-                        <CurveGraph
-                            data={WN8Curves["Bourrasque"]}
-                            type="WN8"
-                            smallType="WN8"
-                            color="rgb(212, 38, 186)"
-                        />
-                    </div>
-                </TabPanel>
-                <TabPanel value={value} index={4} dir={t.direction}>
-                    <div className="grid">
-                        <CurveGraph data={WRCurves["O-I"]} type="Winrate" smallType="WR" color="rgb(230, 57, 103)" />
-                        <CurveGraph data={WN8Curves["O-I"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
-                    </div>
-                </TabPanel>
-                <TabPanel value={value} index={5} dir={t.direction}>
-                    <div className="grid">
-                        <CurveGraph
-                            data={WRCurves["T92 HMC"]}
-                            type="Winrate"
-                            smallType="WR"
-                            color="rgb(230, 57, 103)"
-                        />
-                        <CurveGraph data={WN8Curves["T92 HMC"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
-                    </div>
-                </TabPanel>
-                <TabPanel value={value} index={6} dir={t.direction}>
-                    <div className="grid">
-                        <CurveGraph
-                            data={WRCurves["Obj. 140"]}
-                            type="Winrate"
-                            smallType="WR"
-                            color="rgb(230, 57, 103)"
-                        />
-                        <CurveGraph data={WN8Curves["Obj. 140"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
-                    </div>
-                </TabPanel>
-            </div>
-        </div>
-    );
+    return (<> hi </>)
+    // return (
+    //     <div className={classes.root}>
+    //         <div
+    //             style={{
+    //                 backgroundColor: "rgb(45, 45, 45)",
+    //             }}
+    //         >
+    //             <AppBar position="static" color="default">
+    //                 <Tabs
+    //                     value={value}
+    //                     onChange={handleChange}
+    //                     indicatorColor="primary"
+    //                     textColor="primary"
+    //                     variant="fullWidth"
+    //                     aria-label="full width tabs example"
+    //                 >
+    //                     <Tab label="Balanced" {...a11yProps(0)} />
+    //                     <Tab label="Overpowered" {...a11yProps(1)} />
+    //                     <Tab label="Underpowered" {...a11yProps(2)} />
+    //                     <Tab label="High Skill Ceiling" {...a11yProps(3)} />
+    //                     <Tab label="Low Skill Ceiling" {...a11yProps(4)} />
+    //                     <Tab label="High Skill Floor" {...a11yProps(5)} />
+    //                     <Tab label="Low Skill Floor" {...a11yProps(6)} />
+    //                 </Tabs>
+    //             </AppBar>
+    //             <TabPanel value={value} index={0} dir={t.direction}>
+    //                 <div className="grid">
+    //                     <CurveGraph data={WRCurves["T32"]} type="Winrate" smallType="WR" color="rgb(230, 57, 103)" />
+    //                     <CurveGraph data={WN8Curves["T32"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
+    //                 </div>
+    //             </TabPanel>
+    //             <TabPanel value={value} index={1} dir={t.direction}>
+    //                 <div className="grid">
+    //                     <CurveGraph
+    //                         data={WRCurves["Defender"]}
+    //                         type="Winrate"
+    //                         smallType="WR"
+    //                         color="rgb(230, 57, 103)"
+    //                     />
+    //                     <CurveGraph data={WN8Curves["Defender"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
+    //                 </div>
+    //             </TabPanel>
+    //             <TabPanel value={value} index={2} dir={t.direction}>
+    //                 <div className="grid">
+    //                     <CurveGraph
+    //                         data={WRCurves["Churchill GC"]}
+    //                         type="Winrate"
+    //                         smallType="WR"
+    //                         color="rgb(230, 57, 103)"
+    //                     />
+    //                     <CurveGraph
+    //                         data={WN8Curves["Churchill GC"]}
+    //                         type="WN8"
+    //                         smallType="WN8"
+    //                         color="rgb(212, 38, 186)"
+    //                     />
+    //                 </div>
+    //             </TabPanel>
+    //             <TabPanel value={value} index={3} dir={t.direction}>
+    //                 <div className="grid">
+    //                     <CurveGraph
+    //                         data={WRCurves["Bourrasque"]}
+    //                         type="Winrate"
+    //                         smallType="WR"
+    //                         color="rgb(230, 57, 103)"
+    //                     />
+    //                     <CurveGraph
+    //                         data={WN8Curves["Bourrasque"]}
+    //                         type="WN8"
+    //                         smallType="WN8"
+    //                         color="rgb(212, 38, 186)"
+    //                     />
+    //                 </div>
+    //             </TabPanel>
+    //             <TabPanel value={value} index={4} dir={t.direction}>
+    //                 <div className="grid">
+    //                     <CurveGraph data={WRCurves["O-I"]} type="Winrate" smallType="WR" color="rgb(230, 57, 103)" />
+    //                     <CurveGraph data={WN8Curves["O-I"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
+    //                 </div>
+    //             </TabPanel>
+    //             <TabPanel value={value} index={5} dir={t.direction}>
+    //                 <div className="grid">
+    //                     <CurveGraph
+    //                         data={WRCurves["T92 HMC"]}
+    //                         type="Winrate"
+    //                         smallType="WR"
+    //                         color="rgb(230, 57, 103)"
+    //                     />
+    //                     <CurveGraph data={WN8Curves["T92 HMC"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
+    //                 </div>
+    //             </TabPanel>
+    //             <TabPanel value={value} index={6} dir={t.direction}>
+    //                 <div className="grid">
+    //                     <CurveGraph
+    //                         data={WRCurves["Obj. 140"]}
+    //                         type="Winrate"
+    //                         smallType="WR"
+    //                         color="rgb(230, 57, 103)"
+    //                     />
+    //                     <CurveGraph data={WN8Curves["Obj. 140"]} type="WN8" smallType="WN8" color="rgb(212, 38, 186)" />
+    //                 </div>
+    //             </TabPanel>
+    //         </div>
+    //     </div>
+    // );
 }

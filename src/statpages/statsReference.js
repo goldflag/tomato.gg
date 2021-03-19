@@ -7,8 +7,8 @@ import "CSS/innerpage.css";
 import PercentileGraph from "./tankStatsPageComponents/percentileGraph";
 import CurveExamples from "./statsReferenceComponents/curveExamples";
 import InDepthExamples from "./statsReferenceComponents/inDepthExamples";
-import DPGPercentiles from "Data/DPGPercentiles.json";
-import WN8Percentiles from "Data/WN8Percentiles.json";
+// import DPGPercentiles from "Data/DPGPercentiles.json";
+// import WN8Percentiles from "Data/WN8Percentiles.json";
 
 const trackingId = process.env.REACT_APP_GA;
 
@@ -94,7 +94,7 @@ export default function StatsReference(props) {
                             </h2>
                             <div style={{ margin: "1rem 0 1rem 1rem" }}>
                                 <div className="grid">
-                                    <PercentileGraph
+                                    {/* <PercentileGraph
                                         data={DPGPercentiles["Bourrasque"]}
                                         type="Average Damage"
                                         smallType="DPG"
@@ -105,7 +105,7 @@ export default function StatsReference(props) {
                                         type="WN8"
                                         smallType="WN8"
                                         color="rgb(212, 38, 186)"
-                                    />
+                                    /> */}
                                 </div>
                                 Percentile graphs have significantly less variation than tank curves, and the majority
                                 of percentile graphs have the same shape. <br />
