@@ -6,7 +6,7 @@ export default function Sidebar1({ slot }) {
         <AdSense.Google
             client="ca-pub-1358649580645755"
             slot={slot}
-            style={{ display: "block "}}
+            style={{ display: "block"}}
             format="auto"
             responsive="true"
         />

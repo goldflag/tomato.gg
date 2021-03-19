@@ -19,10 +19,11 @@ const backend = process.env.REACT_APP_BACKEND;
 const Container = styled.div`
     padding: 2rem;
     padding-top: 1rem;
-    max-width: 2000px;
+    max-width: 2200px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 200px auto 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     @media screen and (max-width: 1000px) {
         padding: 0.4rem;
         padding-top: 0rem;
@@ -228,9 +229,9 @@ class StatsPage extends Component {
 
         return (
         <Container>
-            <div><SidebarAd slot={4142533563}/> <SidebarAd slot={6120640271}/></div>
-            <div>{statTable}</div>
-            <div><SidebarAd slot={2309387775}/> <SidebarAd slot={7625293631}/></div>
+            <div style={{width: "200px"}}><SidebarAd slot={4142533563}/> <SidebarAd slot={6120640271}/></div>
+            <div style={{minWidth: 0, padding: "0 1rem"}} >{statTable}</div>
+            <div style={{width: "200px"}}><SidebarAd slot={2309387775}/> <SidebarAd slot={7625293631}/></div>
 
         </Container>);
     }
