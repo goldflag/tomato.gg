@@ -11,6 +11,7 @@ import GraphCalculator from "Functions/GraphCalculator";
 import MainTabs from "./statsPageComponents/mainTabs";
 import { Loader } from "Components";
 import worrydetective from "Assets/staticfrogs/worrydetective.png";
+import Sidebar1 from "./statsPageComponents/ads/sidebar1";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -18,8 +19,10 @@ const backend = process.env.REACT_APP_BACKEND;
 const Container = styled.div`
     padding: 2rem;
     padding-top: 1rem;
-    max-width: 1800px;
+    max-width: 2000px;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: 200px auto 200px;
     @media screen and (max-width: 1000px) {
         padding: 0.4rem;
         padding-top: 0rem;
@@ -223,7 +226,13 @@ class StatsPage extends Component {
             );
         }
 
-        return <Container>{statTable}</Container>;
+        return (
+        <Container>
+            <div><Sidebar1/></div>
+            <div>{statTable}</div>
+            <div></div>
+
+        </Container>);
     }
 }
 
