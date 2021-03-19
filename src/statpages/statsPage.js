@@ -11,7 +11,7 @@ import GraphCalculator from "Functions/GraphCalculator";
 import MainTabs from "./statsPageComponents/mainTabs";
 import { Loader } from "Components";
 import worrydetective from "Assets/staticfrogs/worrydetective.png";
-import Sidebar1 from "./statsPageComponents/ads/sidebar1";
+import SidebarAd from "./statsPageComponents/ads/sidebar1";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -228,9 +228,9 @@ class StatsPage extends Component {
 
         return (
         <Container>
-            <div><Sidebar1/></div>
+            <div><SidebarAd slot={4142533563}/> <SidebarAd slot={6120640271}/></div>
             <div>{statTable}</div>
-            <div></div>
+            <div><SidebarAd slot={2309387775}/> <SidebarAd slot={7625293631}/></div>
 
         </Container>);
     }
