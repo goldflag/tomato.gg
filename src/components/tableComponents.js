@@ -3,7 +3,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 // LOCAL
-import { tierConv, nationConv } from "Data/conversions";
+import { tierConv, nationConv, classConv } from "Data/conversions";
 import LocalizedStrings from "Functions/localizedStrings";
 export const TableContainer = styled.div`
     overflow-x: auto;
@@ -130,7 +130,14 @@ export const NationCell = ({ value, maxWidth, row }) => (
 );
 
 export const ClassCell = ({ value, maxWidth, row }) => (
-    <img src={classImages[(isPrem(row) ? "prem" : "") + value]} style={{ maxWidth: maxWidth || "20px" }} alt={value} />
+    <img
+        src={
+            classImages[(isPrem(row) ? "prem" : "") + value] ||
+            classImages[(isPrem(row) ? "prem" : "") + classConv[value]]
+        }
+        style={{ maxWidth: maxWidth || "20px" }}
+        alt={value}
+    />
 );
 
 export const TierCell = ({ value, row }) => <PremField isPrem={isPrem(row)}>{tierConv[value] || value}</PremField>;
