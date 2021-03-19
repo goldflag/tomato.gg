@@ -11,13 +11,15 @@ export default function GraphCalculator(OS, overallWN8, avgTier, recentStats) {
         else return "rgb(34, 199, 66)";
     }
 
-    const recent24hr = recentStats.recents.recent24hr;
-    const recent3days = recentStats.recents.recent3days;
-    const recent1week = recentStats.recents.recent7days;
-    const recent30days = recentStats.recents.recent30days;
-    const recent60days = recentStats.recents.recent60days;
-    const recent500 = recentStats.recents.recent100;
-    const recent1000 = recentStats.recents.recent1000;
+    const {
+        recent24hr,
+        recent3days,
+        recent1week,
+        recent30days,
+        recent60days,
+        recent500,
+        recent1000
+    } = recentStats.recents;
 
     const data = {
         overallWinrate: ((OS.wins * 100) / OS.battles).toFixed(2),
