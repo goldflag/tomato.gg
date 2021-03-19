@@ -16,6 +16,7 @@ import Leaderboards from "./statpages/recentLeaderboards";
 import WN8Expected from "./statpages/wn8expected";
 import MoEExpected from "./statpages/MoEPage";
 import MasteryExpected from "./statpages/masteryPage";
+import Ads from "./ads"
 
 const strings = LocalizedStrings({
     en: {
@@ -262,6 +263,14 @@ const about = {
     Disabled routes
 */
 
+const ads = {
+    title: () => "Ads Test",
+    path: "/ads",
+    Icon: <></>,
+    Component: <Ads />,
+    isNew: false,
+}
+
 // eslint-disable-next-line no-unused-vars
 const tankList = {
     title: () => strings.WN8Expected,
@@ -291,6 +300,7 @@ export const routes = [
     wn8,
     statsReference,
     about,
+    ads,
     home,
 ];
 export const menuRoutes = [home, tankStats, leaderboards, moe, mastery, wn8, statsReference, about];
