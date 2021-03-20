@@ -229,10 +229,9 @@ class StatsPage extends Component {
         }
 
         return (
-        <Container>
-            <div style={{minWidth: 0, padding: "0 1rem 0 0"}} >{statTable}</div>
-            <div><SidebarAd slot={4142533563}/> <SidebarAd slot={6120640271}/></div>
-        </Container>);
+        <>
+            <div>{statTable}</div>
+        </>);
     }
 }
 

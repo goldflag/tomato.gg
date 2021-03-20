@@ -18,6 +18,8 @@ import { NewIcon } from "Components";
 import { useURLState } from "Functions/hooks";
 import { worryrun } from "Assets/loaders";
 import { worryexcited } from "Assets/staticfrogs";
+import SidebarAd from "../../ads";
+import { useWindowSize } from "Functions/hooks";
 
 const CustomTabs = withStyles({
     root: {
@@ -203,6 +205,18 @@ const tabs = [
     },
 ];
 
+const Container = styled.div`
+    padding: 1rem;
+    max-width: 2200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto 300px;
+    @media screen and (max-width: 1000px) {
+        padding: 0.4rem;
+        padding-top: 0rem;
+    }
+`;
+
 const LoadingStyle = styled.div`
     display: flex;
     min-height: 55px;
@@ -251,42 +265,47 @@ const LoadingHeader = ({ stage }) => {
 
 export default function MainTabs(props) {
     const [page, setPage] = useURLState("page", "main");
+    const windowSize = useWindowSize();
+    console.log(windowSize);
     return (
-        <>
-            <LoadingHeader stage={props.stage} />
-            <TopStats
-                username={props.username}
-                WGRating={props.WGRating}
-                battles={props.battles}
-                data={props.graphData}
-                clanStats={props.clanStats}
-                accountCreationDate={props.accountCreationDate}
-                lastPlayedTime={props.lastPlayedTime}
-                server={props.server}
-            />
-            <CustomTabs
-                value={page}
-                indicatorColor="primary"
-                styles={{ backgroundColor: "rgb(76, 90, 166)" }}
-                onChange={(e, val) => setPage(val)}
-                aria-label="tabs"
-                variant="scrollable"
-                scrollButtons="auto"
-            >
-                {tabs.map(({ label, icon, value }, i) =>
-                    // prettier-ignore
-                    <CustomTab label={<div>{label} {icon}</div>} value={value} key={i} />
-                )}
-            </CustomTabs>
-            {tabs.map(({ body, value }, i) => (
-                <TabPanel value={page} index={value} key={i}>
-                    {body.map((Section, i) => (
-                        <div style={{ marginTop: "1rem", minHeight: "300px" }} key={i}>
-                            <Section {...props} />
-                        </div>
-                    ))}
-                </TabPanel>
-            ))}
-        </>
+        <Container>
+            <div style={{minWidth: 0, padding: "0 0.5rem 0 0"}}>
+                <LoadingHeader stage={props.stage} />
+                <TopStats
+                    username={props.username}
+                    WGRating={props.WGRating}
+                    battles={props.battles}
+                    data={props.graphData}
+                    clanStats={props.clanStats}
+                    accountCreationDate={props.accountCreationDate}
+                    lastPlayedTime={props.lastPlayedTime}
+                    server={props.server}
+                />
+                <CustomTabs
+                    value={page}
+                    indicatorColor="primary"
+                    styles={{ backgroundColor: "rgb(76, 90, 166)" }}
+                    onChange={(e, val) => setPage(val)}
+                    aria-label="tabs"
+                    variant="scrollable"
+                    scrollButtons="auto"
+                >
+                    {tabs.map(({ label, icon, value }, i) =>
+                        // prettier-ignore
+                        <CustomTab label={<div>{label} {icon}</div>} value={value} key={i} />
+                    )}
+                </CustomTabs>
+                {tabs.map(({ body, value }, i) => (
+                    <TabPanel value={page} index={value} key={i}>
+                        {body.map((Section, i) => (
+                            <div style={{ marginTop: "1rem", minHeight: "300px" }} key={i}>
+                                <Section {...props} />
+                            </div>
+                        ))}
+                    </TabPanel>
+                ))}
+            </div>
+            <div><SidebarAd slot={4142533563}/> <SidebarAd slot={6120640271}/></div>
+        </Container>
     );
 }
