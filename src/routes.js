@@ -119,7 +119,7 @@ const strings = LocalizedStrings({
         home: "Strona Główna",
         playerStats: "Staty Graczy",
         clanStats: "Clan Stats",
-        tankStats: "Staty Czołów",
+        tankStats: "Staty Czołgów",
         leaderboards: "Rankingi",
         moeReqs: "Wymagania o. biegłości",
         masteryReqs: "Wymagania o. mistrzowskich",

@@ -115,7 +115,7 @@ const strings = LocalizedStrings({
     pl: {
         main: "GŁÓWNE STATYSTYKI",
         hof: "ALEJA SŁAW",
-        sessions: "SEJSE",
+        sessions: "SESJE",
         infographics: "INFOGRAFIKI",
         treemap: "MAPA DRZEWEK", // tbd
         cached: "Wyświetlone dane pochodzą z pamięci podręcznej. Trwa pobieranie aktualnych statystyk.",
