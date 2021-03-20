@@ -13,6 +13,7 @@ import { Loader } from "Components";
 import ClanTopStats from "./clanStatsPageComponents/clanTopStats";
 import ClanStatsTable from "./clanStatsPageComponents/clanStatsTable";
 import worrydetective from "Assets/staticfrogs/worrydetective.png";
+import SidebarAd from "../ads";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -21,8 +22,11 @@ const APIKey = process.env.REACT_APP_API_KEY;
 const Container = styled.div`
     padding: 2rem;
     padding-top: 1rem;
-    max-width: 1500px;
+    max-width: 2200px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     @media screen and (max-width: 1000px) {
         padding: 0.4rem;
         padding-top: 3.4rem;
@@ -121,26 +125,30 @@ export default function ClanStatsPage() {
     if (clanData === "loading") clanPage = <Loader frog={true} top={20} bottom={20} />;
     else {
         clanPage = (
-            <Container>
+            <>
                 <ClanTopStats {...clanData} />
                 <ClanStatsTable data={clanData.members} />
-            </Container>
+            </>
         );
     }
 
     if (!validID) {
         clanPage = (
-            <Container>
+            <>
                 <span style={{ fontSize: "2rem" }}>
                     {formatString(strings.notFound, clanName.toUpperCase())}{" "}
                     <img src={worrydetective} style={{ height: "2.5rem", verticalAlign: "middle" }} alt="notfound" />
+                    
                 </span>
                 <br />
                 <br />
                 {strings.correct}
-            </Container>
+            </>
         );
     }
 
-    return clanPage;
+    return (<Container>
+                <div style={{minWidth: 0, padding: "0 1rem"}}> {clanPage}</div>
+                <div style={{width: "250px"}}><SidebarAd slot={2309387775}/> <SidebarAd slot={7625293631}/></div>
+            </Container>);
 }

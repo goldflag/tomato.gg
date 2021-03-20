@@ -1,15 +1,15 @@
 import React from "react";
 import AdSense from "react-adsense"
+const Adsense_Client = process.env.REACT_APP_ADSENSE;
 
-export default function Ads() {
+export default function Ads({ slot }) {
     return <>
         <AdSense.Google
-            client="ca-pub-1358649580645755"
-            slot="7721492010"
+            client={Adsense_Client}
+            slot={slot}
             style={{ display: "block "}}
             format="auto"
             responsive="true"
         />
-        <h1>SANITY CHECK TEXT</h1>
     </>
 };
