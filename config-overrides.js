@@ -11,6 +11,7 @@ module.exports = {
                 Data: path.resolve(__dirname, "src/data/"),
                 Functions: path.resolve(__dirname, "src/functions/"),
                 Material: path.resolve(__dirname, "src/material/"),
+                Ads: path.resolve(__dirname, "src/ads/"),
             },
         };
 

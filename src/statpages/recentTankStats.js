@@ -10,6 +10,8 @@ import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
 import RecentTanksAvgTable from "./recentTankStatsComponents/RecentTanksAvgTable";
 import { useURLState } from "Functions/hooks";
 import { commonStrings } from "Data/localizations";
+import Ad from "Ads/ads";
+import { useWindowSize } from "Functions/hooks";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -74,6 +76,7 @@ export default function RecentLeaderboards() {
     const { server } = useContext(ServerContext);
     const [data, setData] = useState("loading");
     const [time, setTime] = useURLState("time", 60);
+    const windowSize = useWindowSize();
 
     useEffect(() => {
         setData("loading");
@@ -83,40 +86,49 @@ export default function RecentLeaderboards() {
     }, [server, time]);
 
     return (
-        <FullPageTableWrapper>
-            <Info>
-                <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                    {formatString(strings.title, serverConv[server])}
-                </span>
-                <br />
-                <br />
-                <span
-                    style={{
-                        fontSize: "0.9rem",
-                        lineHeight: "1rem",
-                        color: "rgb(150,150,150)",
-                    }}
-                >
-                    {strings.clickRow}
-                </span>
-                <br />
-                <FilterButtonGroup>
-                    {/* <FilterButton key={30} selected={time === 30} onClick={() => setTime(30)}>
-                        {formatString(commonStrings.days, 30)}
-                    </FilterButton> */}
-                    <FilterButton key={60} selected={time === 60} onClick={() => setTime(60)}>
-                        {formatString(commonStrings.days, 60)}
-                    </FilterButton>
-                </FilterButtonGroup>
-            </Info>
+        <FullPageTableWrapper             
+            columns={windowSize.width > 1000 ? "auto 300px" : "auto"}
+        >            
+            <div>
+                <Info>
+                    <span style={{ fontSize: "2rem", fontWeight: "500" }}>
+                        {formatString(strings.title, serverConv[server])}
+                    </span>
+                    <br />
+                    <br />
+                    <span
+                        style={{
+                            fontSize: "0.9rem",
+                            lineHeight: "1rem",
+                            color: "rgb(150,150,150)",
+                        }}
+                    >
+                        {strings.clickRow}
+                    </span>
+                    <br />
+                    <FilterButtonGroup>
+                        {/* <FilterButton key={30} selected={time === 30} onClick={() => setTime(30)}>
+                            {formatString(commonStrings.days, 30)}
+                        </FilterButton> */}
+                        <FilterButton key={60} selected={time === 60} onClick={() => setTime(60)}>
+                            {formatString(commonStrings.days, 60)}
+                        </FilterButton>
+                    </FilterButtonGroup>
+                </Info>
 
-            {typeof data !== "string" ? (
-                <RecentTanksAvgTable data={data} />
-            ) : data === "loading" ? (
-                <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />
-            ) : (
-                <h2>{strings.error}</h2>
-            )}
+                {typeof data !== "string" ? (
+                    <RecentTanksAvgTable data={data} />
+                ) : data === "loading" ? (
+                    <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />
+                ) : (
+                    <h2>{strings.error}</h2>
+                )}
+            </div>
+            {windowSize.width > 1000 ? 
+                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"tank_stats_sidebar_1"}/> <Ad slot={"tank_stats_sidebar_2"}/></div>
+                : 
+                null
+            }
         </FullPageTableWrapper>
     );
 }

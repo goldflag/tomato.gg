@@ -18,7 +18,7 @@ import { NewIcon } from "Components";
 import { useURLState } from "Functions/hooks";
 import { worryrun } from "Assets/loaders";
 import { worryexcited } from "Assets/staticfrogs";
-import SidebarAd from "../../ads";
+import Ad from "Ads/ads";
 import { useWindowSize } from "Functions/hooks";
 
 const CustomTabs = withStyles({
@@ -162,7 +162,7 @@ const tabs = [
         value: "main",
         body: [
             (props) => <TopTable data={props.graphData.overallStats} />,
-            (props) => <div style={{margin: "0 auto"}}><SidebarAd slot={7667965161}/></div>,
+            (props) => <div style={{margin: "0 auto"}}><Ad slot={"main_stats_banner"}/></div>,
             (props) => (
                 <AllTankStats overall={props.recentStats.overallStats.tankWN8} recents={props.recentStats.recents} />
             ),
@@ -216,10 +216,6 @@ const Container = styled.div`
     margin: 0 auto;
     display: grid;
     grid-template-columns: ${({columns}) => columns};
-    // @media screen and (max-width: 1000px) {
-    //     padding: 0.4rem;
-    //     padding-top: 0rem;
-    // }
 `;
 
 const LoadingStyle = styled.div`
@@ -271,7 +267,6 @@ const LoadingHeader = ({ stage }) => {
 export default function MainTabs(props) {
     const [page, setPage] = useURLState("page", "main");
     const windowSize = useWindowSize();
-    console.log(windowSize);
     return (
         <Container 
             columns={windowSize.width > 1000 ? "auto 300px" : "auto"}
@@ -314,7 +309,7 @@ export default function MainTabs(props) {
                 ))}
             </div>
             {windowSize.width > 1000 ? 
-                <div style={{padding: "0 0 0 1rem"}}><SidebarAd slot={4142533563}/> <SidebarAd slot={6120640271}/></div>
+                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"player_sidebar_1"}/> <Ad slot={"player_sidebar_2"}/></div>
                 : 
                 null
             }

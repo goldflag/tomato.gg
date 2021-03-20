@@ -13,24 +13,21 @@ import { Loader } from "Components";
 import ClanTopStats from "./clanStatsPageComponents/clanTopStats";
 import ClanStatsTable from "./clanStatsPageComponents/clanStatsTable";
 import worrydetective from "Assets/staticfrogs/worrydetective.png";
-import SidebarAd from "../ads";
+import { useWindowSize } from "Functions/hooks";
+import Ad from "Ads/ads";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 const APIKey = process.env.REACT_APP_API_KEY;
 
 const Container = styled.div`
-    padding: 2rem;
+    padding: ${({padding}) => padding};
     padding-top: 1rem;
     max-width: 2200px;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    @media screen and (max-width: 1000px) {
-        padding: 0.4rem;
-        padding-top: 3.4rem;
-    }
 `;
 
 const { formatString, ...strings } = LocalizedStrings({
@@ -79,6 +76,7 @@ export default function ClanStatsPage() {
     const [clanData, setClanData] = useState("loading");
     const [validID, setValidID] = useState(true);
     const [clanName, setClanName] = useState("");
+    const windowSize = useWindowSize();
 
     async function fetchData(server, clanID) {
         setClanData("loading");
@@ -147,11 +145,15 @@ export default function ClanStatsPage() {
     }
 
     return (
-        <Container>
-            <div style={{ minWidth: 0, padding: "0 1rem" }}> {clanPage}</div>
-            <div style={{ width: "250px" }}>
-                <SidebarAd slot={2309387775} /> <SidebarAd slot={7625293631} />
-            </div>
+        <Container padding={windowSize.width > 1000 ? "1rem" : "0.5rem"}>
+            <div style={{ minWidth: 0 }}>{clanPage}</div>
+            {windowSize.width > 1000 ? 
+                <div style={{ width: "250px", padding: "0 0 0 1rem"}}>
+                    <Ad slot={"clan_sidebar_1"} /> <Ad slot={"clan_sidebar_2"} />
+                </div>                
+                : 
+                null
+            }
         </Container>
     );
 }

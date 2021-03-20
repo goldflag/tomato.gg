@@ -8,6 +8,8 @@ import { ServerContext } from "Context";
 import MasteryTable from "./masteryPageComponents/masteryTable";
 import { serverConv } from "Data/conversions";
 import { Loader, FullPageTableWrapper, Info } from "Components";
+import Ad from "Ads/ads";
+import { useWindowSize } from "Functions/hooks";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -79,6 +81,7 @@ export default function MasteryPage(props) {
     const { server } = React.useContext(ServerContext);
 
     const [data, setData] = useState();
+    const windowSize = useWindowSize();
 
     useEffect(() => {
         ReactGA.initialize(trackingId);
@@ -102,7 +105,10 @@ export default function MasteryPage(props) {
     }
 
     return (
-        <FullPageTableWrapper>
+        <FullPageTableWrapper             
+            columns={windowSize.width > 1000 ? "auto 300px" : "auto"}
+        >
+            <div>
             <Info>
                 <span style={{ fontSize: "2rem", fontWeight: "500" }}>
                     {serverConv[server]} {strings.mastery}
@@ -128,6 +134,12 @@ export default function MasteryPage(props) {
                 <br />
             </Info>
             {table}
+            </div>
+            {windowSize.width > 1000 ? 
+                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"mastery_sidebar_1"}/> <Ad slot={"mastery_sidebar_1"}/></div>
+                : 
+                null
+            }
         </FullPageTableWrapper>
     );
 }
