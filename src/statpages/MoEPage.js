@@ -52,8 +52,9 @@ const { formatString, ...strings } = LocalizedStrings({
         moe: "Requisitos de Las Marcas de Excelencia",
         dataFrom: "Datos de los creadores de",
         moeMod: "Mod de marcas de excelencia",
-        expand: "Expanda las filas para ver 30 días de historial de marcas de excelencia",
-        avg: "*El cambio de las marcas de excelencia se calcula utilizando promedios de 3 días para minimizar el ruido",
+        expand: "Expanda las filas para ver los 30 días de historial de las marcas de excelencia",
+        avg: `*El cambio de las marcas de excelencia se calcula utilizando el promedio de 3 días 
+        para minimizar el ruido`,
         expected: "VALORES ESPERADOS",
         exp95change: "95% DE CAMBIO DE VALOR ESPERADO",
         exp85change: "85% DE CAMBIO DE VALOR ESPERADO",
@@ -64,8 +65,8 @@ const { formatString, ...strings } = LocalizedStrings({
         dataFrom: "Données venant des créateurs du {0}",
         moeMod: "mod des Marques d'Excellence",
         expand: "Cliquez sur les lignes pour voir l'historique des marques des 30 derniers jours",
-        avg:
-            "*Le changement des marques est calculé en utilisant les moyennes des 3 derniers jours pour réduire les erreurs",
+        avg: `*Le changement des marques est calculé en utilisant les moyennes des 3 derniers jours
+         pour réduire les erreurs`,
         expected: "VALEURS ATTENDUES",
         exp95change: "CHANGEMENT ATTENDU 95%",
         exp85change: "CHANGEMENT ATTENDU 85%",

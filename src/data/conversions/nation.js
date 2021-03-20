@@ -38,7 +38,7 @@ export const localNationConv = LocalizedStrings({
         japan: "Japón",
         poland: "Polonia",
         sweden: "Suecia",
-        uk: "RU",
+        uk: "R.U.",
         ussr: "URSS",
     },
     de: {

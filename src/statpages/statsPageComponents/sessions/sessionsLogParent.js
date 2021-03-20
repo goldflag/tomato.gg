@@ -14,6 +14,7 @@ const strings = LocalizedStrings({
     en: { sessionsLog: "DAILY SESSIONS LOG" },
     cs: { sessionsLog: "DENNÍ ZÁZNAM BITEV" },
     de: { sessionsLog: "TÄGLICHE SITZUNGSSTATISTIKEN" },
+    es: { sessionsLog: "REGISTRO DE SESIONES DIARIAS" },
     fr: { sessionsLog: "RÉCAPITULATIF DES SESSIONS JOURNALIÈRES" },
     ko: { sessionsLog: "매일 세션 로그" },
     pl: { sessionsLog: "ZAPIS DZIENNYCH SESJI" },
