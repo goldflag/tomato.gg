@@ -13,6 +13,8 @@ import { useURLState } from "Functions/hooks";
 import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
 import { nationAdjConv, classDescConv, serverConv, tierConv, classConv } from "Data/conversions";
 import { Capital, commonStrings } from "Data/localizations";
+import Ad from "Ads/ads";
+import { useWindowSize } from "Functions/hooks";
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -95,6 +97,8 @@ const filters = {
 };
 
 export default function TankPage(props) {
+    const windowSize = useWindowSize();
+
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/tank-page");
@@ -180,5 +184,16 @@ export default function TankPage(props) {
         );
     }
 
-    return <FullPageTableWrapper>{content}</FullPageTableWrapper>;
+    return (
+        <FullPageTableWrapper             
+            columns={windowSize.width > 1000 ? "auto 300px" : "auto"}
+        >    
+            <div>{content}</div>
+            {windowSize.width > 1000 ? 
+                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"tank_stats_sidebar_1"}/> <Ad slot={"tank_stats_sidebar_2"}/></div>
+                : 
+                null
+            }
+        </FullPageTableWrapper>
+    );
 }

@@ -22,12 +22,10 @@ const APIKey = process.env.REACT_APP_API_KEY;
 
 const Container = styled.div`
     padding: ${({padding}) => padding};
-    padding-top: 1rem;
     max-width: 2200px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: ${({columns}) => columns};
 `;
 
 const { formatString, ...strings } = LocalizedStrings({
@@ -145,7 +143,10 @@ export default function ClanStatsPage() {
     }
 
     return (
-        <Container padding={windowSize.width > 1000 ? "1rem" : "0.5rem"}>
+        <Container 
+            columns={windowSize.width > 1000 ? "auto 300px" : "auto"}
+            padding={windowSize.width > 1000 ? "1rem" : "0.5rem"}
+        >
             <div style={{ minWidth: 0 }}>{clanPage}</div>
             {windowSize.width > 1000 ? 
                 <div style={{ width: "250px", padding: "0 0 0 1rem"}}>
