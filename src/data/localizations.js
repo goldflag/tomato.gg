@@ -68,17 +68,25 @@ export const { formatString, ...commonStrings } = LocalizedStrings({
     },
     es: {
         player: "jugador",
+        clan: "clan",
         battles: "batallas",
-        nBattles: "{0} batallas",
-        frags: "muertos", // or frags
+        nBattles: "{0} partidas",
+        dpg: "DPB",
+        longDPG: "daño por batalla",
+        frags: "destruidos",
+        longFrags: "destruidos por batalla",
         winrate: "WR",
-        longWR: "ratio de victorias", // or winrate
+        longWR: "porcentaje de victorias",
+        kd: "D/S", // K/D
+        longKD: "índice destruidos por muertes", // "Coeficiente de destrucción"
+        rank: "rango",
         tier: "tier",
         wn8: "WN8",
+        dmgRatio: "Coef. de daño",
+        longDmgRatio: "índice de daño", // "Coeficiente de Daño"
         overall: "total",
         days: "{0} días",
         hours: "{0} horas",
-        kd: "M/M",
     },
     fr: {
         player: "joueur",
@@ -246,7 +254,7 @@ export const clanPositions = LocalizedStrings({
         personnel_officer: "Oficial de Personal",
         combat_officer: "Oficial de Combate",
         intelligence_officer: "Oficial de Inteligencia",
-        quartermaster: "Cuartel General",
+        quartermaster: "Intendente",
         recruitment_officer: "Oficial de Reclutamiento",
         junior_officer: "Suboficial",
         private: "Soldado",

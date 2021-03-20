@@ -207,6 +207,27 @@ export const tableHeaders = LocalizedStrings({
         expDamage: "erwSchaden",
         expWinRate: "erwSiegrate",
     },
+    es: {
+        username: "Jugador",
+        avgTier: "Tier Promedio", // "Tier prom"
+        spots: "Detectados",
+        survival: "Sobrevivido",
+        decap: "Reseteo", // "Defensa de base"
+        name: "Nombre",
+        nation: "Nación",
+        class: "Tipo",
+        ace: "Maestría",
+        firstClass: "Clase 1",
+        secondClass: "Clase 2",
+        thirdClass: "Clase 3",
+        moeReqs: "{0} MoE Reqs",
+        dayChange: "{0} Día {1}",
+        expDef: "expDef",
+        expFrag: "expFrag",
+        expSpot: "expSpot",
+        expDamage: "expDamage",
+        expWinRate: "expWinrate",
+    },
     fr: {
         username: "Pseudo",
         avgTier: "Rang Moyen",

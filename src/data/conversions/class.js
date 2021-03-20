@@ -18,7 +18,7 @@ export const classDescConv = LocalizedStrings({
         SPG: "Selbstfahrlafetten",
         TD: "Jagdpanzer",
     },
-    es: { HT: "Tanque Pesado", MT: "Tanque Mediano", LT: "Tanque Ligero", SPG: "Artillería", TD: "Tanque Destructor" },
+    es: { HT: "Tanque Pesado", MT: "Tanque Mediano", LT: "Tanque Ligero", SPG: "Artillería", TD: "Cazatanque" },
     fr: { HT: "Char Lourd", MT: "Char Moyen", LT: "Char Léger", SPG: "Artillerie", TD: "Chasseur de Char" },
     ko: { HT: "중전차", MT: "중형전차", LT: "경전차", SPG: "자주포", TD: "구축전차" },
     pl: {

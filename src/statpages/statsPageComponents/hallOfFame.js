@@ -285,7 +285,7 @@ const { formatString, ...strings } = LocalizedStrings({
     },
     es: {
         hof: "SALÓN DE LA FAMA",
-        subTitle: "60 DÍAS | MÍNIMA {0} BATALLAS | VEHÍCULOS TIER 6+",
+        subTitle: "60 DÍAS | {0} BATALLAS MÍNIMAS | VEHÍCULOS TIER 6+",
         tankRankings: "Clasificaciones del Tanque",
         betterThan: "Mejor que el {0}%",
         moreThan: "Más del {0}%",

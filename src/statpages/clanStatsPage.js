@@ -138,7 +138,6 @@ export default function ClanStatsPage() {
                 <span style={{ fontSize: "2rem" }}>
                     {formatString(strings.notFound, clanName.toUpperCase())}{" "}
                     <img src={worrydetective} style={{ height: "2.5rem", verticalAlign: "middle" }} alt="notfound" />
-                    
                 </span>
                 <br />
                 <br />
@@ -147,8 +146,12 @@ export default function ClanStatsPage() {
         );
     }
 
-    return (<Container>
-                <div style={{minWidth: 0, padding: "0 1rem"}}> {clanPage}</div>
-                <div style={{width: "250px"}}><SidebarAd slot={2309387775}/> <SidebarAd slot={7625293631}/></div>
-            </Container>);
+    return (
+        <Container>
+            <div style={{ minWidth: 0, padding: "0 1rem" }}> {clanPage}</div>
+            <div style={{ width: "250px" }}>
+                <SidebarAd slot={2309387775} /> <SidebarAd slot={7625293631} />
+            </div>
+        </Container>
+    );
 }

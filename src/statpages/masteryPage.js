@@ -32,10 +32,10 @@ const { formatString, ...strings } = LocalizedStrings({
         expand: "Wähle eine Zeile aus um die Anforderungen der letzen 30 Tage zu sehen",
     },
     es: {
-        mastery: "Requisitos de Las Placas de Maestría",
+        mastery: "Requisitos de las medallas de Maestría",
         dataFrom: "Datos de los creadores de",
         moeMod: "Mod de marcas de excelencia",
-        expand: "Expanda las filas para ver 30 días de historial de maestría",
+        expand: "Expanda las filas para ver 30 días del historial de maestría",
     },
     fr: {
         mastery: "Obtention Maîtrises de Char",

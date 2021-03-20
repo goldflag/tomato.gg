@@ -33,7 +33,7 @@ const { formatString, ...strings } = LocalizedStrings({
         title: "{0} Estadísticas Recientes del Tanque",
         clickRow: `Haga clic en una fila para ver el rendimiento y las tablas de 
         clasificación detallados de los tanques en todo el servidor.`,
-        error: "Lo siento, las estadísticas recientes del tanque no pudieron cargar.",
+        error: "Lo siento, las estadísticas recientes del tanque no se pudieron cargar.",
     },
     fr: {
         title: "Stats Récentes Chars {0}",

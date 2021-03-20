@@ -63,6 +63,12 @@ const strings = LocalizedStrings({
         left: "Ausgetreten",
         position: "Rang",
     },
+    es: {
+        clanHistory: "HISTORIA DEL CLAN",
+        noData: "Este jugador no tiene datos de clan.",
+        left: "Salió",
+        position: "Posición",
+    },
     fr: {
         clanHistory: "HISTORIQUE DES CLANS",
         noData: "Ce joueur n'a pas d'historique de clan.",

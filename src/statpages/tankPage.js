@@ -78,7 +78,7 @@ const { formatString, ...strings } = LocalizedStrings({
     en: { top500: "Top 500 Players on {0} server", past60min25: "PAST 60 DAYS | MINIMUM 25 BATTLES" },
     cs: { top500: "500 nejlepších hráčů v", past60min25: "POSLEDNÍCH 60 DNÍ | MINIMÁLNĚ 25 BITEV" },
     de: { top500: "Top 500 Spieler in", past60min25: "LETZTE 60 TAGE | MINIMUM 25 GEFECHTE" },
-    es: { top500: "Los 500 Mejores Jugadores de", past60min25: "ÚLTIMOS 60 DÍAS | MÍNIMO 25 BATALLAS" },
+    es: { top500: "Los 500 Mejores Jugadores en", past60min25: "ÚLTIMOS 60 DÍAS | MÍNIMO 25 BATALLAS" },
     fr: { top500: "Top 500 sur le serveur {0}", past60min25: "60 DERNIERS JOURS | MINIMUM 25 BATAILLES" },
     ko: { top500: "상위 500명", past60min25: "60일| 최소 25 전투" },
     pl: { top500: "500 najlepszych graczy na serwerze {0}", past60min25: "OSTATNICH 60 DNIACH | MINIMUM 25 BITEW" },

@@ -111,9 +111,9 @@ const { formatString, ...strings } = LocalizedStrings({
     es: {
         created: "Cuenta creada el {0}",
         overallWN8: "WN8 Total",
-        overallWR: "Ratio de Victorias Total",
+        overallWR: "%Victorias Total",
         recentWN8: "WN8 Reciente",
-        recentWR: "Ratio de Victorias Reciente",
+        recentWR: "%Victorias Reciente",
         wgRating: "Clasificación WG",
     },
     fr: {
@@ -131,7 +131,6 @@ const { formatString, ...strings } = LocalizedStrings({
         recentWN8: "최근 WN8",
         recentWR: "최근 승률",
         wgRating: "개인 순위",
-        battles: "전투 수",
     },
     pl: {
         created: "Konto stworzone {0}",

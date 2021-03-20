@@ -84,6 +84,7 @@ const { formatString, ...strings } = LocalizedStrings({
         about3: `Puedes ingresar a Tomato.gg con tu móvil también. He optimizado el sitio web para la mejor experiencia 
         de usuario y funcionan casi el 100% de las funciones.`,
         about4: `ha ayudado mucho con el desarrollo de Tomato.gg. ¡Muchas gracias!.`,
+        translators: `La internacionalización de Tomato.gg se logró con la ayuda de estos voluntarios increíbles:`,
         feedback: `Únete a mi {0} si quieres realizar comentarios, sugerencias e informar errores.`,
         discord: `Servidor de Discord`,
         thanks: `¡Gracias por usar Tomato.gg!`,

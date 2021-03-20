@@ -14,7 +14,7 @@ const { formatString, ...strings } = LocalizedStrings({
     de: { recentStats: "{server} Aktuelle Bestenliste", minGames: "Mindestens 75 Spiele im Zeitraum" },
     es: {
         recentStats: "{server} Tabla de Clasificación de Estadísticas Recientes",
-        minGames: "Mínima 75 partidas en periodo",
+        minGames: "Periodo mínimo de 75 partidas",
     },
     fr: { recentStats: "Classement Stats Récentes {server}", minGames: "Mininum 75 parties sur la période" },
     ko: { recentStats: "{server} 최근 통계 리더보드", minGames: "기간 내 최소 75 전투" },

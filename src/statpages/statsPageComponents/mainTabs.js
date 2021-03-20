@@ -61,12 +61,26 @@ const strings = LocalizedStrings({
         blameWG: "If this message doesn't go away, blame Wargaming's GARBAGE API.",
         realTime: "Real-time stats now loaded!",
     },
+    cs: {
+        main: "HLAVNÍ STATISTIKY",
+        hof: "SÍŇ SLÁVY",
+        sessions: "ZÁZNAM",
+        infographics: "INFOGRAFIKA",
+        treemap: "TREEMAP",
+        cached: "Zobrazené statistiky se ukládají do mezipaměti. Načítání aktualizovaných statistik z reálného času.",
+        blameWG: "Pokud tato zpráva nezmizí, může za to debilní API Wargamingu.",
+        realTime: "Statistiky z reálného času jsou nyní načteny!",
+    },
     es: {
         main: "ESTADÍSTICAS PRINCIPALES",
         hof: "SALÓN DE LA FAMA",
         sessions: "SESIONES",
         infographics: "INFOGRAFÍA",
         treemap: "TREEMAP",
+        cached: `Las estadísticas mostradas son las que se encuentran en la cache. Obteniendo las 
+        estadísticas actualizadas en tiempo real.`,
+        blameWG: "Si este mensaje no se quita, quéjate con la API DE PORQUERÍA de Wargaming.",
+        realTime: "Se han cargado las estadísticas en tiempo real!",
     },
     de: {
         main: "ALLGEMEINE STATISTIKEN",
@@ -77,16 +91,6 @@ const strings = LocalizedStrings({
         cached: "Dargestellte Statistiken sind gecached. Frage aktuelle Daten an.",
         blameWG: "Wenn diese Nachricht nicht nicht verschwindet gibt es ein Problem mit der WG-API.",
         realTime: "Daten wurden aktualisiert!",
-    },
-    cs: {
-        main: "HLAVNÍ STATISTIKY",
-        hof: "SÍŇ SLÁVY",
-        sessions: "ZÁZNAM",
-        infographics: "INFOGRAFIKA",
-        treemap: "TREEMAP",
-        cached: "Zobrazené statistiky se ukládají do mezipaměti. Načítání aktualizovaných statistik z reálného času.",
-        blameWG: "Pokud tato zpráva nezmizí, může za to debilní API Wargamingu.",
-        realTime: "Statistiky z reálného času jsou nyní načteny!",
     },
     fr: {
         main: "STATS PRINCIPALES",
