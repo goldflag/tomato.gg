@@ -236,7 +236,7 @@ export default function MoEPage(props) {
                 </TabPanel>
             </div>
             {windowSize.width > 1000 ? 
-                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"moe_sidebar_1"}/> <Ad slot={"moe_sidebar_2"}/></div>
+                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"moe_sidebar_1"} styles={"responsive"}/> <Ad slot={"moe_sidebar_2"} styles={"responsive"}/></div>
                 : 
                 null
             }

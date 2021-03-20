@@ -136,7 +136,7 @@ export default function MasteryPage(props) {
             {table}
             </div>
             {windowSize.width > 1000 ? 
-                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"mastery_sidebar_1"}/> <Ad slot={"mastery_sidebar_1"}/></div>
+                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"mastery_sidebar_1"} styles={"responsive"}/> <Ad slot={"mastery_sidebar_1"} styles={"responsive"}/></div>
                 : 
                 null
             }

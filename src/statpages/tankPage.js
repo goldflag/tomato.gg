@@ -190,7 +190,7 @@ export default function TankPage(props) {
         >    
             <div>{content}</div>
             {windowSize.width > 1000 ? 
-                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"tank_stats_sidebar_1"}/> <Ad slot={"tank_stats_sidebar_2"}/></div>
+                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"tank_stats_sidebar_1"} styles={"responsive"}/> <Ad slot={"tank_stats_sidebar_2"} styles={"responsive"}/></div>
                 : 
                 null
             }

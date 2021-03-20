@@ -162,7 +162,7 @@ const tabs = [
         value: "main",
         body: [
             (props) => <TopTable data={props.graphData.overallStats} />,
-            (props) => <div style={{margin: "0 auto"}}><Ad slot={"main_stats_banner"}/></div>,
+            (props) => <div style={{margin: "0 auto"}}><Ad slot={"main_stats_banner"} styles={"fixed"}/></div>,
             (props) => (
                 <AllTankStats overall={props.recentStats.overallStats.tankWN8} recents={props.recentStats.recents} />
             ),
@@ -309,7 +309,7 @@ export default function MainTabs(props) {
                 ))}
             </div>
             {windowSize.width > 1000 ? 
-                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"player_sidebar_1"}/> <Ad slot={"player_sidebar_2"}/></div>
+                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"player_sidebar_1"} styles={"responsive"}/> <Ad slot={"player_sidebar_2"} styles={"responsive"}/></div>
                 : 
                 null
             }

@@ -18,14 +18,23 @@ const adslots = {
     leaderboards_sidebar_2 : 7004145403
 }
 
-export default function Ads({ slot }) {
+const Styles = {
+    responsive: { display: "block" },
+    fixed: {
+        display: "inline-block",
+        width: "728px",
+        height: "90px"
+    }
+}
+
+export default function Ads({ slot, styles }) {
     return <>
         <AdSense.Google
             client={Adsense_Client}
             slot={adslots[slot]}
-            style={{ display: "block "}}
+            style={styles ? Styles[styles] : Styles.responsive}
             format="auto"
-            responsive="true"
+            responsive={styles === "responsive" ? "true" : "false"}
         />
     </>
 };

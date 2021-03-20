@@ -150,7 +150,7 @@ export default function ClanStatsPage() {
             <div style={{ minWidth: 0 }}>{clanPage}</div>
             {windowSize.width > 1000 ? 
                 <div style={{ width: "250px", padding: "0 0 0 1rem"}}>
-                    <Ad slot={"clan_sidebar_1"} /> <Ad slot={"clan_sidebar_2"} />
+                    <Ad slot={"clan_sidebar_1"} styles={"responsive"}/> <Ad slot={"clan_sidebar_2"} styles={"responsive"}/>
                 </div>                
                 : 
                 null
