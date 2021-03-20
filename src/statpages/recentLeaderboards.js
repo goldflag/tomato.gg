@@ -20,7 +20,7 @@ const { formatString, ...strings } = LocalizedStrings({
     ko: { recentStats: "{server} 최근 통계 리더보드", minGames: "기간 내 최소 75 전투" },
     pl: { recentStats: "Ranking Bieżących Statystyk na {server}", minGames: "Minimum 75 bitew w okresie" },
     tr: { recentStats: "{server} Son İstatistikler Tablosu", minGames: "Dönem içi Mininum 75 oyun" },
-    zh: { recentStats: "{伺服器} 近期表現榜", minGames: "期間內需最少75場戰鬥" },
+    zh: { recentStats: "{server} 近期表現榜", minGames: "期間內需最少75場戰鬥" },
 });
 
 export default function RecentLeaderboards(props) {
