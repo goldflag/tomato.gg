@@ -20,9 +20,11 @@ const Container = styled.div`
     padding: 1rem;
     max-width: 2200px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: center;
+    display: grid;
+    grid-template-columns: auto 300px;
     @media screen and (max-width: 1000px) {
         padding: 0.4rem;
         padding-top: 0rem;
@@ -228,8 +230,8 @@ class StatsPage extends Component {
 
         return (
         <Container>
-            <div style={{minWidth: 0, padding: "0 1rem"}} >{statTable}</div>
-            <div style={{width: "250px"}}><SidebarAd slot={4142533563}/> <SidebarAd slot={6120640271}/><SidebarAd slot={2309387775}/> <SidebarAd slot={7625293631}/></div>
+            <div style={{minWidth: 0, padding: "0 1rem 0 0"}} >{statTable}</div>
+            <div><SidebarAd slot={4142533563}/> <SidebarAd slot={6120640271}/></div>
         </Container>);
     }
 }

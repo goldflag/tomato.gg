@@ -210,6 +210,7 @@ const LoadingStyle = styled.div`
     width: 100%;
     background: ${({ color }) => color};
     padding: 1rem;
+    margin-bottom: 1rem;
     box-shadow: 1px 1px 3px rgb(20, 20, 30);
     border-radius: 20px;
     transition: color 2s;
