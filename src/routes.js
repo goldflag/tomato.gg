@@ -16,7 +16,6 @@ import Leaderboards from "./statpages/recentLeaderboards";
 import WN8Expected from "./statpages/wn8expected";
 import MoEExpected from "./statpages/MoEPage";
 import MasteryExpected from "./statpages/masteryPage";
-import Ads from "./ads"
 
 const strings = LocalizedStrings({
     en: {
@@ -243,14 +242,6 @@ const wn8 = {
     isNew: false,
 };
 
-const statsReference = {
-    title: () => strings.statsReference,
-    path: "/stats-reference",
-    Icon: LibraryBooks,
-    Component: <StatsReference />,
-    isNew: false,
-};
-
 const about = {
     title: () => strings.about,
     path: "/about",
@@ -263,13 +254,14 @@ const about = {
     Disabled routes
 */
 
-const ads = {
-    title: () => "Ads Test",
-    path: "/ads",
-    Icon: <></>,
-    Component: <Ads />,
+// eslint-disable-next-line no-unused-vars
+const statsReference = {
+    title: () => strings.statsReference,
+    path: "/stats-reference",
+    Icon: LibraryBooks,
+    Component: <StatsReference />,
     isNew: false,
-}
+};
 
 // eslint-disable-next-line no-unused-vars
 const tankList = {
@@ -289,19 +281,6 @@ const serverStats = {
     isNew: false,
 };
 
-export const routes = [
-    playerStats,
-    clanStats,
-    tankStats,
-    tank,
-    leaderboards,
-    moe,
-    mastery,
-    wn8,
-    statsReference,
-    about,
-    ads,
-    home,
-];
-export const menuRoutes = [home, tankStats, leaderboards, moe, mastery, wn8, statsReference, about];
+export const routes = [playerStats, clanStats, tankStats, tank, leaderboards, moe, mastery, wn8, about, home];
+export const menuRoutes = [home, tankStats, leaderboards, moe, mastery, wn8, about];
 export const mobileMenuRoutes = [home, tankStats, leaderboards, moe, mastery, wn8, about];
