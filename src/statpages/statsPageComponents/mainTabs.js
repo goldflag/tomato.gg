@@ -162,6 +162,7 @@ const tabs = [
         value: "main",
         body: [
             (props) => <TopTable data={props.graphData.overallStats} />,
+            (props) => <div style={{margin: "0 auto"}}><SidebarAd slot={7667965161}/></div>,
             (props) => (
                 <AllTankStats overall={props.recentStats.overallStats.tankWN8} recents={props.recentStats.recents} />
             ),
@@ -210,15 +211,15 @@ const tabs = [
 ];
 
 const Container = styled.div`
-    padding: 1rem;
+    padding: ${({padding}) => padding};
     max-width: 2200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: auto 300px;
-    @media screen and (max-width: 1000px) {
-        padding: 0.4rem;
-        padding-top: 0rem;
-    }
+    grid-template-columns: ${({columns}) => columns};
+    // @media screen and (max-width: 1000px) {
+    //     padding: 0.4rem;
+    //     padding-top: 0rem;
+    // }
 `;
 
 const LoadingStyle = styled.div`
@@ -272,8 +273,11 @@ export default function MainTabs(props) {
     const windowSize = useWindowSize();
     console.log(windowSize);
     return (
-        <Container>
-            <div style={{minWidth: 0, padding: "0 0.5rem 0 0"}}>
+        <Container 
+            columns={windowSize.width > 1000 ? "auto 300px" : "auto"}
+            padding={windowSize.width > 1000 ? "1rem" : "0.5rem"}
+        >
+            <div style={{minWidth: 0}}>
                 <LoadingHeader stage={props.stage} />
                 <TopStats
                     username={props.username}
@@ -309,7 +313,11 @@ export default function MainTabs(props) {
                     </TabPanel>
                 ))}
             </div>
-            <div><SidebarAd slot={4142533563}/> <SidebarAd slot={6120640271}/></div>
+            {windowSize.width > 1000 ? 
+                <div style={{padding: "0 0 0 1rem"}}><SidebarAd slot={4142533563}/> <SidebarAd slot={6120640271}/></div>
+                : 
+                null
+            }
         </Container>
     );
 }

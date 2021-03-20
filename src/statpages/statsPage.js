@@ -228,10 +228,7 @@ class StatsPage extends Component {
             );
         }
 
-        return (
-        <>
-            <div>{statTable}</div>
-        </>);
+        return statTable;
     }
 }
 
