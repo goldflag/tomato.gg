@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CustomTabs, CustomTab } from "../../tabs/customTabs";
+import { CustomTabs, CustomTab } from "../../../components/customTabs";
 import WN8Radar from "../charts/WN8Radar";
 
 export default function ExpectedDist({ data }) {

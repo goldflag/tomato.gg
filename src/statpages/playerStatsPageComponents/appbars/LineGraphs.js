@@ -1,7 +1,7 @@
 import { commonStrings } from "Data/localizations";
 import React, { useState } from "react";
 import LocalizedStrings from "Functions/localizedStrings";
-import { CustomTabs, CustomTab } from "../../tabs/customTabs";
+import { CustomTabs, CustomTab } from "../../../components/customTabs";
 import LineGraphWN8 from "../charts/LineGraph.js";
 
 const { formatString, ...strings } = LocalizedStrings({ en: { progress: "{0} PROGRESS" } });

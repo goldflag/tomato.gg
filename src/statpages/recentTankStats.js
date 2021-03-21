@@ -48,6 +48,11 @@ const { formatString, ...strings } = LocalizedStrings({
         clickRow: "더 디테일한 서버의 전차통계와 리더보드를 보고 싶으면 줄을 확장하세요.",
         error: "죄송합니다. 최근 전차 통계를 불러오지 못 했습니다.",
     },
+    hr: {
+        title: "{0} Nedavne Statistike Tenkova",
+        clickRow: "Kliknite red da biste pogledali detaljne performanse tenkova na cijelom poslužitelju i ljestvici",
+        error: "Žao nam je, nedavna statistika tenkova nije se mogla učitati.",
+    },
     pl: {
         title: "Bieżące Statystyki Czołgów na {0}",
         clickRow: "Kliknij na rząd żeby wyświetlić szczegółowe wskaźniki serwerowej efektywności czołgu oraz rankingi",
@@ -86,9 +91,7 @@ export default function RecentLeaderboards() {
     }, [server, time]);
 
     return (
-        <FullPageTableWrapper             
-            columns={windowSize.width > 1000 ? "auto 300px" : "auto"}
-        >            
+        <FullPageTableWrapper columns={windowSize.width > 1000 ? "auto 300px" : "auto"}>
             <div>
                 <Info>
                     <span style={{ fontSize: "2rem", fontWeight: "500" }}>
@@ -124,11 +127,12 @@ export default function RecentLeaderboards() {
                     <h2>{strings.error}</h2>
                 )}
             </div>
-            {windowSize.width > 1000 ? 
-                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"tank_stats_sidebar_1"} styles={"responsive"}/> <Ad slot={"tank_stats_sidebar_2"} styles={"responsive"}/></div>
-                : 
-                null
-            }
+            {windowSize.width > 1000 ? (
+                <div style={{ padding: "0 0 0 1rem" }}>
+                    <Ad slot={"tank_stats_sidebar_1"} styles={"responsive"} />{" "}
+                    <Ad slot={"tank_stats_sidebar_2"} styles={"responsive"} />
+                </div>
+            ) : null}
         </FullPageTableWrapper>
     );
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {  CustomTabs, CustomTab } from "../../tabs/customTabs";
+import {  CustomTabs, CustomTab } from "../../../components/customTabs";
 import NationDistribution from "../charts/NationDistribution.js";
 
 const useStyles = makeStyles((theme) => ({

@@ -2,6 +2,7 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
+            "Ads/*": ["src/ads/*"],
             "Assets/*": ["src/assets/*"],
             "Components": ["src/components"],
             "Components/*": ["src/components/*"],

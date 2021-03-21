@@ -7,7 +7,7 @@ import LocalizedStrings from "Functions/localizedStrings";
 import { ServerContext } from "Context";
 import MoETable from "./MoEPageComponents/MoETable";
 import MoETracker from "./MoEPageComponents/MoETracker";
-import { TabPanel, CustomTabs, CustomTab } from "./tabs/customTabs";
+import { TabPanel, CustomTabs, CustomTab } from "../components/customTabs";
 import { Loader, FullPageTableWrapper, Info } from "Components";
 import { serverConv } from "Data/conversions";
 import Ad from "Ads/ads";
@@ -85,7 +85,17 @@ const { formatString, ...strings } = LocalizedStrings({
         exp85change: "85% 경험치 기댓값",
         exp65change: "65% 경험치 기댓값 ",
     },
-
+    hr: {
+        moe: "Zahtjevi Znakovi Izvrsnosti",
+        dataFrom: "Podaci kreatora",
+        moeMod: "Znakovi Izvrsnosti mod",
+        expand: "Proširite redove da biste vidjeli 30 dana povijesti Znakova Izvrsnosti",
+        avg: "*Znakovi Izvrsnosti promjena se izračunava pomoću trodnevnih prosjeka kako bi se smanjila buka",
+        expected: "OČEKIVANE VRIJEDNOSTI",
+        exp95change: "95% EXP. VRIJEDNOST PROMJENA",
+        exp85change: "85% EXP. VRIJEDNOST PROMJENA",
+        exp65change: "65% EXP. VRIJEDNOST PROMJENA",
+    },
     tr: {
         moe: "Mükemmellik İşaretleri Gereksinimleri",
         dataFrom: "{0} tarafından oluşturulan veriler.",
@@ -185,9 +195,7 @@ export default function MoEPage(props) {
     }
 
     return (
-        <FullPageTableWrapper             
-            columns={windowSize.width > 1000 ? "auto 300px" : "auto"}
-        >
+        <FullPageTableWrapper columns={windowSize.width > 1000 ? "auto 300px" : "auto"}>
             <div>
                 <Info>
                     <span style={{ fontSize: "2rem", fontWeight: "500" }}>
@@ -235,11 +243,12 @@ export default function MoEPage(props) {
                     {changeTable65}
                 </TabPanel>
             </div>
-            {windowSize.width > 1000 ? 
-                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"moe_sidebar_1"} styles={"responsive"}/> <Ad slot={"moe_sidebar_2"} styles={"responsive"}/></div>
-                : 
-                null
-            }
+            {windowSize.width > 1000 ? (
+                <div style={{ padding: "0 0 0 1rem" }}>
+                    <Ad slot={"moe_sidebar_1"} styles={"responsive"} />{" "}
+                    <Ad slot={"moe_sidebar_2"} styles={"responsive"} />
+                </div>
+            ) : null}
         </FullPageTableWrapper>
     );
 }

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import {CustomTabs, CustomTab } from "../../tabs/customTabs";
-import TierDistribution from "../charts/TierDistribution.js";
+import { CustomTabs, CustomTab } from "../../../components/customTabs";
+import ClassDistribution from "../charts/ClassDistribution.js";
 
-export default function TierDist({ data, recentData }) {
+export default function NationDist({ data, recentData }) {
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -12,10 +12,10 @@ export default function TierDist({ data, recentData }) {
     return (
         <div>
             <CustomTabs value={value} onChange={handleChange} aria-label="ant example">
-                <CustomTab label="TIER DISTRIBUTION" />
+                <CustomTab label="CLASS" />
                 <CustomTab label="RECENT" />
             </CustomTabs>
-            <TierDistribution data={value === 0 ? data : recentData} />
+            <ClassDistribution data={value === 0 ? data : recentData} />
         </div>
     );
 }

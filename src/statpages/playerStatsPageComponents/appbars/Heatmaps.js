@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CustomTabs, CustomTab } from "../../tabs/customTabs";
+import { CustomTabs, CustomTab } from "../../../components/customTabs";
 import Heatmap from "../charts/Heatmap.js";
 
 export default function Heatmaps({ data, recentData, type }) {

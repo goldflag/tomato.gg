@@ -17,6 +17,7 @@ const { formatString, ...strings } = LocalizedStrings({
     es: { expected: "Valores Esperados de WN8", maintained: "Mantenido por {0}", xvm: "Equipo de XVM" },
     fr: { expected: "Valeurs Attendues pour le WN8", maintained: "Maintenu par {0}", xvm: "l'équipe XVM" },
     ko: { expected: "WN8 기댓값", maintained: "관리자 {0}", xvm: "XVM 팀" },
+    hr: { expected: "WN8 Očekivane Vrijednosti", maintained: "Održava {0}", xvm: "XVM tim" },
     pl: { expected: "Oczekiwane wartości dla WN8", maintained: "Zarządzane przez {0}", xvm: "XVM team" },
     ru: { expected: "WN8 Ожидаемая статистика", maintained: "Поддерживается {0}", xvm: "командой XVM" },
     tr: { expected: "WN8 Beklenen Değer", maintained: "Sağlayan: {0}", xvm: "XVM team" },

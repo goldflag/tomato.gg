@@ -17,6 +17,7 @@ const strings = LocalizedStrings({
     de: { clearHistory: "Suchverlauf löschen", server: "wähle Standardserver" },
     es: { clearHistory: "borrar historial", server: "seleccionar servidor predeterminado" },
     fr: { clearHistory: "Effacer l'historique", server: "Sélectionnez un serveur par défaut" },
+    hr: { clearHistory: "očisti povijest", server: "odaberi standarni server" },
     ko: { clearHistory: "히스토리 지우기", server: "기본 서버 고르기" },
     pl: { clearHistory: "Wyczyść historię", server: "Wybierz domyślny serwer" },
     ru: { clearHistory: "Очистить историю", server: "Выберите свой сервер" },
