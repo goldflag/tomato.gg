@@ -132,6 +132,14 @@ const { formatString, ...strings } = LocalizedStrings({
         recentWR: "최근 승률",
         wgRating: "개인 순위",
     },
+    hr: {
+        created: "Račun kreiran {0}",
+        overallWN8: "Ukupno WN8",
+        overallWR: "Ukupno WR",
+        recentWN8: "Nedavno WN8",
+        recentWR: "Nedavno WR",
+        wgRating: "WG Ocjena",
+    },
     pl: {
         created: "Konto stworzone {0}",
         overallWN8: "Ogólne WN8",

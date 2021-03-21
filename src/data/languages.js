@@ -4,6 +4,7 @@ export const languages = {
     de: { name: "Deutsch" },
     es: { name: "Español" },
     fr: { name: "Français" },
+    hr: { name: "Hrvatski" },
     ko: { name: "한국어" },
     pl: { name: "Polski" },
     ru: { name: "Pусский" },

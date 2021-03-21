@@ -29,14 +29,8 @@ const Container = styled.div`
 `;
 
 const { formatString, ...strings } = LocalizedStrings({
-    en: {
-        notFound: "Clan {0} not found",
-        correct: "Make sure the clan tage and region are correct.",
-    },
-    cs: {
-        notFound: "Hráč {0} nebyl nalezen",
-        correct: "Ujistěte se, že přezdívka i region serveru jsou správně.",
-    },
+    en: { notFound: "Clan {0} not found", correct: "Make sure the clan tag and region are correct." },
+    cs: { notFound: "Klan {0} nebyl nalezen", correct: "Ujistěte se, že přezdívka i region serveru jsou správně." },
     de: {
         notFound: "Spieler {0} nicht gefunden",
         correct: "Stelle sicher, dass der Name und die Region korrekt sind.",
@@ -45,26 +39,12 @@ const { formatString, ...strings } = LocalizedStrings({
         notFound: "Jugador {0} no encontrado",
         correct: "Por favor asegúrese de que el nombre de usuario y la región sean correctos",
     },
-    fr: {
-        notFound: "Joueur {0} introuvable",
-        correct: "Vérifiez que le pseudo et la région sont corrects.",
-    },
-    tr: {
-        notFound: "{0} oyuncusu bulunamadı",
-        correct: "Oyuncu adı ve bölgenin doğru olduğuna emin olunuz.",
-    },
-    pl: {
-        notFound: "Nie znaleziono gracza {0}",
-        correct: "Sprawdź, czy nick i region są poprawne",
-    },
-    ru: {
-        notFound: "Игрок {0} не найден",
-        correct: "Убедитесь, что имя игрока и регион указаны правильно.",
-    },
-    zh: {
-        notFound: "查無玩家 {0}",
-        correct: "確認為正確的使用者及地區。",
-    },
+    fr: { notFound: "Joueur {0} introuvable", correct: "Vérifiez que le pseudo et la région sont corrects." },
+    hr: { notFound: "Igrač {0} nije pronađen", correct: "Provjerite jesu li korisničko ime i regija točni." },
+    tr: { notFound: "{0} oyuncusu bulunamadı", correct: "Oyuncu adı ve bölgenin doğru olduğuna emin olunuz." },
+    pl: { notFound: "Nie znaleziono gracza {0}", correct: "Sprawdź, czy nick i region są poprawne" },
+    ru: { notFound: "Игрок {0} не найден", correct: "Убедитесь, что имя игрока и регион указаны правильно." },
+    zh: { notFound: "查無玩家 {0}", correct: "確認為正確的使用者及地區。" },
 });
 
 export default function ClanStatsPage() {

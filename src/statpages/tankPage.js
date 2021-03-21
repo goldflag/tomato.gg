@@ -78,15 +78,16 @@ const PAGE_SIZE = 100;
 
 const { formatString, ...strings } = LocalizedStrings({
     en: { top500: "Top 500 Players on {0} server", past60min25: "PAST 60 DAYS | MINIMUM 25 BATTLES" },
-    cs: { top500: "500 nejlepších hráčů v", past60min25: "POSLEDNÍCH 60 DNÍ | MINIMÁLNĚ 25 BITEV" },
-    de: { top500: "Top 500 Spieler in", past60min25: "LETZTE 60 TAGE | MINIMUM 25 GEFECHTE" },
-    es: { top500: "Los 500 Mejores Jugadores en", past60min25: "ÚLTIMOS 60 DÍAS | MÍNIMO 25 BATALLAS" },
+    cs: { top500: "500 nejlepších hráčů v {0}", past60min25: "POSLEDNÍCH 60 DNÍ | MINIMÁLNĚ 25 BITEV" },
+    de: { top500: "Top 500 Spieler in {0}", past60min25: "LETZTE 60 TAGE | MINIMUM 25 GEFECHTE" },
+    es: { top500: "Los 500 Mejores Jugadores en {0}", past60min25: "ÚLTIMOS 60 DÍAS | MÍNIMO 25 BATALLAS" },
     fr: { top500: "Top 500 sur le serveur {0}", past60min25: "60 DERNIERS JOURS | MINIMUM 25 BATAILLES" },
-    ko: { top500: "상위 500명", past60min25: "60일| 최소 25 전투" },
+    hr: { top500: "Top 500 Igrača u {0}", past60min25: "ZADNJIH 60 DANA | MINIMALNO 25 BITAKA" },
+    ko: { top500: "상위 500명 {0}", past60min25: "60일| 최소 25 전투" },
     pl: { top500: "500 najlepszych graczy na serwerze {0}", past60min25: "OSTATNICH 60 DNIACH | MINIMUM 25 BITEW" },
-    ru: { top500: "500 лучших игроков в", past60min25: "ПОСЛЕДНИЕ 60 ДНЕЙ | МИНИМУМ 25 СРАЖЕНИЙ" },
+    ru: { top500: "500 лучших игроков в {0}", past60min25: "ПОСЛЕДНИЕ 60 ДНЕЙ | МИНИМУМ 25 СРАЖЕНИЙ" },
     tr: { top500: "En iyi 500 Oyuncu içinde {0}", past60min25: "SON 60 GÜN | MİNİMUM 25 SAVAŞ" },
-    zh: { top500: "前500名", past60min25: "過去60天 | 最少25場戰鬥" },
+    zh: { top500: "前500名 {0}", past60min25: "過去60天 | 最少25場戰鬥" },
 });
 
 const filters = {

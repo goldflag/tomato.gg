@@ -7,7 +7,7 @@ import LocalizedStrings from "Functions/localizedStrings";
 import Search from "./search";
 import About from "./about";
 import TankStatsPage from "./statpages/recentTankStats";
-import StatsPage from "./statpages/statsPage";
+import PlayerStatsPage from "./statpages/playerStatsPage";
 import ClanStatsPage from "./statpages/clanStatsPage";
 import ServerStatsPage from "./statpages/serverStatsPage";
 import TankPage from "./statpages/tankPage";
@@ -88,9 +88,24 @@ const strings = LocalizedStrings({
         tankList: "Liste Chars",
         serverStats: "Statistiques Serveur",
     },
+    hr: {
+        home: "Početna",
+        playerStats: "Statistika Igrača",
+        clanStats: "Clan Stats",
+        tankStats: "Statistika Tenkova",
+        leaderboards: "Leaderboards",
+        moeReqs: "Zahtjev za Znakove Izvrsnosti",
+        masteryReqs: "Zahtjev za Majstorstvo",
+        WN8Expected: "Očekivani WN8",
+        statsReference: "Referenca Statistike",
+        about: "O Nama",
+        tankList: "Lista Tenkova",
+        serverStats: "Statistika Servera",
+    },
     it: {
         home: "Home",
         playerStats: "Statistiche giocatore",
+        clanStats: "Clan Stats",
         tankStats: "Statistiche carri",
         leaderboards: "Leaderboards",
         moeReqs: "Requisiti MoE",
@@ -185,7 +200,7 @@ const playerStats = {
     title: () => strings.playerStats,
     path: "/stats/:server/:user",
     Icon: <></>,
-    Component: <StatsPage />,
+    Component: <PlayerStatsPage />,
     isNew: false,
 };
 

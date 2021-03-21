@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 // LOCAL
-import { TabPanel, CustomTabs, CustomTab } from "../tabs/customTabs";
+import { TabPanel, CustomTabs, CustomTab } from "../../components/customTabs";
 import OverallTable from "./overallTable";
 import PeriodBreakdown from "./periodBreakdown";
 import { commonStrings, formatString, UPPER } from "Data/localizations";

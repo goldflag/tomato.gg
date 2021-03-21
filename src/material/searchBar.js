@@ -47,6 +47,13 @@ const strings = LocalizedStrings({
         clanAriaLabel: "recherche pour un clan",
         searchAriaLabel: "recherche",
     },
+    hr: {
+        placeholder: "Unesite korisničko ime (e.g. Goldflag)",
+        ariaLabel: "pretraži igrača",
+        clanPlaceholder: "Unesite ime Klana",
+        clanAriaLabel: "pretraži klan",
+        searchAriaLabel: "traži",
+    },
     ko: {
         placeholder: "유저네임을 입력하세요. (예: Goldflag)",
         ariaLabel: "유저검색",

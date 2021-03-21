@@ -6,7 +6,7 @@ import LocalizedStrings from "Functions/localizedStrings";
 import styled from "styled-components";
 
 // LOCAL
-import { TabPanel } from "../tabs/customTabs";
+import { TabPanel } from "../../components/customTabs";
 import TopStats from "./topStats";
 import TopTable from "./topTable.js";
 import AllTankStats from "./allTankStats";
@@ -115,6 +115,17 @@ const strings = LocalizedStrings({
         blameWG: "혹시 이 메시지가 사라지지 않는다면 쓰레기같은 워게이밍의 API를 탓 하십시오.",
         realTime: "실시산 통계가 반영되였습니다.",
     },
+    hr: {
+        main: "GLAVNA STATISTIKA",
+        hof: "KUĆA SLAVNIH",
+        sessions: "SEZONA",
+        infographics: "INFOGRAFIKA",
+        treemap: "KARTA",
+        cached: `Prikazane statistike se pohranjuju u predmemoriju. Dohvaćanje ažuriranih statistika u 
+        stvarnom vremenu.`,
+        blameWG: "Ako ova poruka ne nestane, okrivite Wargaming SMEĆE API.",
+        realTime: "Statistike u stvarnom vremenu učitane!",
+    },
     pl: {
         main: "GŁÓWNE STATYSTYKI",
         hof: "ALEJA SŁAW",
@@ -163,6 +174,7 @@ const tabs = [
         value: "main",
         body: [
             (props) => <TopTable data={props.graphData.overallStats} />,
+<<<<<<< HEAD:src/statpages/statsPageComponents/mainTabs.js
             // (props) => <div style={{margin: "0 auto"}}><Ad slot={"main_stats_banner"} styles={"fixed"}/></div>,
 
             (props) => <div style={{margin: "0 auto"}}>            
@@ -178,6 +190,13 @@ const tabs = [
                 />
             </div>,
 
+=======
+            (props) => (
+                <div style={{ margin: "0 auto" }}>
+                    <Ad slot={"main_stats_banner"} styles={"fixed"} />
+                </div>
+            ),
+>>>>>>> 9b52134f22377e3dc71ce9a695459f420f528a83:src/statpages/playerStatsPageComponents/mainTabs.js
             (props) => (
                 <AllTankStats overall={props.recentStats.overallStats.tankWN8} recents={props.recentStats.recents} />
             ),
@@ -226,11 +245,11 @@ const tabs = [
 ];
 
 const Container = styled.div`
-    padding: ${({padding}) => padding};
+    padding: ${({ padding }) => padding};
     max-width: 2200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: ${({columns}) => columns};
+    grid-template-columns: ${({ columns }) => columns};
 `;
 
 const LoadingStyle = styled.div`
@@ -283,11 +302,11 @@ export default function MainTabs(props) {
     const [page, setPage] = useURLState("page", "main");
     const windowSize = useWindowSize();
     return (
-        <Container 
+        <Container
             columns={windowSize.width > 1000 ? "auto 300px" : "auto"}
             padding={windowSize.width > 1000 ? "1rem" : "0.5rem"}
         >
-            <div style={{minWidth: 0}}>
+            <div style={{ minWidth: 0 }}>
                 <LoadingHeader stage={props.stage} />
                 <TopStats
                     username={props.username}
@@ -323,11 +342,12 @@ export default function MainTabs(props) {
                     </TabPanel>
                 ))}
             </div>
-            {windowSize.width > 1000 ? 
-                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"player_sidebar_1"} styles={"responsive"}/> <Ad slot={"player_sidebar_2"} styles={"responsive"}/></div>
-                : 
-                null
-            }
+            {windowSize.width > 1000 ? (
+                <div style={{ padding: "0 0 0 1rem" }}>
+                    <Ad slot={"player_sidebar_1"} styles={"responsive"} />{" "}
+                    <Ad slot={"player_sidebar_2"} styles={"responsive"} />
+                </div>
+            ) : null}
         </Container>
     );
 }

@@ -40,51 +40,16 @@ const PaginationButton = styled.button`
 `;
 
 const { formatString, ...strings } = LocalizedStrings({
-    en: {
-        pageOf: "Page {0} of {1}",
-        gotoPage: "Go to page:",
-        show: "Show {0}",
-    },
-    cs: {
-        pageOf: "Stránka {0} z {1}",
-        gotoPage: "Jít na stránku:",
-        show: "Zobrazit {0}",
-    },
-    de: {
-        pageOf: "Seite {0} von {1}",
-        gotoPage: "Springe zu Seite:",
-        show: "Zeige {0}",
-    },
-    es: {
-        pageOf: "Página {0} de {1}",
-        gotoPage: "Ir a la página:",
-        show: "Mostrar {0}",
-    },
-    fr: {
-        pageOf: "Page {0} sur {1}",
-        gotoPage: "Aller à la page:",
-        show: "Montrer {0}",
-    },
-    ko: {
-        pageOf: " {0} of {1}장",
-        gotoPage: "페이지 찾기:",
-        show: "한 페이지에서 {0}줄 보기",
-    },
-    pl: {
-        pageOf: "Strona {0} z {1}",
-        gotoPage: "Idź na stronę:",
-        show: "Pokaż {0}",
-    },
-    ru: {
-        pageOf: "Страница {0} из {1}",
-        gotoPage: "Перейти на страницу:",
-        show: "Показать {0}",
-    },
-    tr: {
-        pageOf: "Sayfa {0} / {1}",
-        gotoPage: "Git:",
-        show: "Gösterilen {0}",
-    },
+    en: { pageOf: "Page {0} of {1}", gotoPage: "Go to page:", show: "Show {0}" },
+    cs: { pageOf: "Stránka {0} z {1}", gotoPage: "Jít na stránku:", show: "Zobrazit {0}" },
+    de: { pageOf: "Seite {0} von {1}", gotoPage: "Springe zu Seite:", show: "Zeige {0}" },
+    es: { pageOf: "Página {0} de {1}", gotoPage: "Ir a la página:", show: "Mostrar {0}" },
+    fr: { pageOf: "Page {0} sur {1}", gotoPage: "Aller à la page:", show: "Montrer {0}" },
+    hr: { pageOf: "Stranica {0} od {1}", gotoPage: "Idi na stranicu:", show: "Pokaži {0}" },
+    ko: { pageOf: " {0} of {1}장", gotoPage: "페이지 찾기:", show: "한 페이지에서 {0}줄 보기" },
+    pl: { pageOf: "Strona {0} z {1}", gotoPage: "Idź na stronę:", show: "Pokaż {0}" },
+    ru: { pageOf: "Страница {0} из {1}", gotoPage: "Перейти на страницу:", show: "Показать {0}" },
+    tr: { pageOf: "Sayfa {0} / {1}", gotoPage: "Git:", show: "Gösterilen {0}" },
 });
 
 export const Pagination = (props) => {

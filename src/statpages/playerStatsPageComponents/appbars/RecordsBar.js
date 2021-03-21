@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
+import { TabPanel, CustomTabs, CustomTab } from "../../../components/customTabs";
 import Records from "../charts/Records";
 
 export default function RecordsBar({ data }) {

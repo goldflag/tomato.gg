@@ -1,34 +1,34 @@
 // NPM
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import styled from "styled-components";
+// import styled from "styled-components";
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
 import { serverConv } from "Data/conversions";
 import GraphCalculator from "Functions/GraphCalculator";
-import MainTabs from "./statsPageComponents/mainTabs";
+import MainTabs from "./playerStatsPageComponents/mainTabs";
 import { Loader } from "Components";
 import worrydetective from "Assets/staticfrogs/worrydetective.png";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
-const Container = styled.div`
-    padding: 1rem;
-    max-width: 2200px;
-    margin: 0 auto;
-    // display: flex;
-    // flex-direction: row;
-    // justify-content: center;
-    display: grid;
-    grid-template-columns: auto 300px;
-    @media screen and (max-width: 1000px) {
-        padding: 0.4rem;
-        padding-top: 0rem;
-    }
-`;
+// const Container = styled.div`
+//     padding: 1rem;
+//     max-width: 2200px;
+//     margin: 0 auto;
+//     // display: flex;
+//     // flex-direction: row;
+//     // justify-content: center;
+//     display: grid;
+//     grid-template-columns: auto 300px;
+//     @media screen and (max-width: 1000px) {
+//         padding: 0.4rem;
+//         padding-top: 0rem;
+//     }
+// `;
 
 const { formatString, ...strings } = LocalizedStrings({
     en: { notFound: "Player {0} not found", correct: "Make sure the username and region are correct." },
@@ -42,6 +42,7 @@ const { formatString, ...strings } = LocalizedStrings({
         correct: "Por favor asegúrese de que el nombre de usuario y la región sean correctos",
     },
     fr: { notFound: "Joueur {0} introuvable", correct: "Vérifiez que le pseudo et la région sont corrects." },
+    hr: { notFound: "Igrač {0} nije pronađen", correct: "Provjerite jesu li korisničko ime i regija točni." },
     ko: { notFound: "유저 {0} 못 찾음", correct: "유저네임과 지역이 바른지 확인해주세요" },
     pl: { notFound: "Nie znaleziono gracza {0}", correct: "Sprawdź, czy nick i region są poprawne" },
     ru: { notFound: "Игрок {0} не найден", correct: "Убедитесь, что имя игрока и регион указаны правильно." },

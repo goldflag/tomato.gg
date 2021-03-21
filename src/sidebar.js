@@ -80,6 +80,19 @@ const strings = LocalizedStrings({
         createdBy: "Tomato.gg est un site web créé par",
         notAffiliated: "et n'est pas affilié avec Wargaming.net.",
     },
+    hr: {
+        boomer: "Uključi / Isključi pozadinu Boomer",
+        boomerAria: "uključi / isključi boju pozadine",
+        support: "Podrška Tomato.gg",
+        donations: `Tomato.gg u potpunosti radi na donacijama korisnika. Ako na stranici pronađete vrijednosti,
+        razmislite o podršci kako bi poslužitelji ostali aktivni.`,
+        kofi: "Podrška na Ko-fi",
+        paypal: "Podrška na Paypal",
+        partnered: "Stranice u partnerstvu",
+        herhor: "Poredak Znakova Izvrsnosti i generator slika",
+        createdBy: "Tomato.gg je web stranica koju je izradio",
+        notAffiliated: "i nije povezana s Wargaming.net.",
+    },
     ko: {
         boomer: "어두운 배경",
         boomerAria: " 어두운 배경",
@@ -311,7 +324,11 @@ const Sidebar = withRouter((props) => {
                 <Line />
                 <Menu>
                     {menuRoutes.map(({ path, title, Icon, isNew }) => (
-                        <MenuLink to={path} key={path} style={title().length > 20 ? { fontSize: "12px" } : {}}>
+                        <MenuLink
+                            to={path}
+                            key={path}
+                            style={title().length + isNew * 5 > 20 ? { fontSize: "12px" } : {}}
+                        >
                             <nobr>
                                 <Icon />
                                 &nbsp;&nbsp;{title()} {isNew ? <NewIcon /> : null}

@@ -310,6 +310,15 @@ const { formatString, ...strings } = LocalizedStrings({
         unranked: "명예의 전당에 들기위해 6티어 이상 전차로 {0}번 전투 더 치르세요.",
         unrankedTank: " 랭킹에 들기 위해{0}번 전투 더 치르세요.",
     },
+    hr: {
+        hof: "KUĆA SLAVNIH",
+        subTitle: "60 DANA | MINIMUM {0} BITAKA | VOZILA RAZINE 6+",
+        tankRankings: "Poredak Tenkova",
+        betterThan: "Bolji od {0}%",
+        moreThan: "Više od {0}%",
+        unranked: "Odigrajte još {0} borbi u tenkovima razine 6 ili više da biste ušli u Kuću slavnih",
+        unrankedTank: "Odigrajte još {0} borbi za ulazak na ljestvicu",
+    },
     pl: {
         hof: "ALEJA SŁAW",
         subTitle: "60 DNI | MINIMUM {0} BITEW | POJAZDY POZIOMU 6+",

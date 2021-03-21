@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
+import { TabPanel, CustomTabs, CustomTab } from "../../../components/customTabs";
 import SessionsLog from "./sessionsLog";
 import LocalizedStrings from "Functions/localizedStrings";
 
@@ -17,6 +17,7 @@ const strings = LocalizedStrings({
     es: { sessionsLog: "REGISTRO DE SESIONES DIARIAS" },
     fr: { sessionsLog: "RÉCAPITULATIF DES SESSIONS JOURNALIÈRES" },
     ko: { sessionsLog: "매일 세션 로그" },
+    hr: { sessionsLog: "DNEVNA SEZONA" },
     pl: { sessionsLog: "ZAPIS DZIENNYCH SESJI" },
     ru: { sessionsLog: "ЕЖЕДНЕВНЫЕ СЕССИИ" },
     tr: { sessionsLog: "GÜNLÜK OTURUM KAYITLARI" },

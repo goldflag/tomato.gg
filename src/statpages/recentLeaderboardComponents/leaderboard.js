@@ -82,6 +82,13 @@ const { formatString, ...strings } = LocalizedStrings({
         timeFilter: "기간",
         error: "리더보드를 불러오는 중 에러가 발생했습니다. 죄송합니다.",
     },
+    hr: {
+        vehicleTier: "U Vozilu Razine {0}+",
+        typeFilter: "postavi vrstu ljestvice",
+        tierFilter: "postavi minimalnu razinu tenka",
+        timeFilter: "postavi vremensko razdoblje",
+        error: "Nažalost, došlo je do pogreške prilikom učitavanja te ljestvice.",
+    },
     pl: {
         vehicleTier: "W pojazdach poziomu {0}+",
         typeFilter: "ustaw typ rankingu",

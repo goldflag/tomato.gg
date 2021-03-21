@@ -5,7 +5,7 @@ import Scrollbar from "react-scrollbars-custom";
 import styled from "styled-components";
 
 // LOCAL
-import { TabPanel, CustomTabs, CustomTab } from "../../tabs/customTabs";
+import { TabPanel, CustomTabs, CustomTab } from "../../../components/customTabs";
 import { clanPositions } from "Data/localizations";
 import { Link, useRouteMatch } from "react-router-dom";
 import { serverConv } from "Data/conversions";
@@ -80,6 +80,12 @@ const strings = LocalizedStrings({
         noData: "이 플레이어는 클랜에 가압한 적이 없습니다.",
         left: "탈퇴",
         position: "직책",
+    },
+    hr: {
+        clanHistory: "KLAN POVIJEST",
+        noData: "Ovaj igrač nema podatke o klanu.",
+        left: "Lijevo",
+        position: "Pozicija",
     },
     pl: {
         clanHistory: "HISTORIA KLANÓW",

@@ -109,6 +109,26 @@ const { formatString, ...strings } = LocalizedStrings({
         discord: `Serveur Discord`,
         thanks: `Merci d'utiliser Tomato.gg!`,
     },
+    hr: {
+        h1: `O Tomato.gg`,
+        updated: `UŽURIRANO `,
+        about0: `Napravio sam ovu stranicu kako bi pružio pristupačno sučelje za pregled različitih statistika,
+        od kojih se mnogi od njih mogu naći samo ovdje. Neke statistike su potaknute sa drugih web lokacija.`,
+        about1: `Tomato.gg ne cilja napraviti sve. Nikada neće imati detaljnu server statistiku kao šta ima wot-news.com, 
+        niti će imati precizne pojedinačne bitke na kojima se može pristupiti na
+        WN8lab.com. Tomato.gg se aktivno razvija te nije ni blizu završnog rada. U 
+        budućnosti planiram proširiti stranicu statistike igrača,
+        proširiti stranicu statistike tenkova, implementirati klanske statistike i završiti ljestvicu.`,
+        about2: `Tomato.gg u potpunosti podržava EU, NA, i ASIA statistiku igrača. Još uvijek možete vidjeti statistiku za RU
+        igrača, ali nema automatskih dnevnih ažuriranja statistike.`,
+        about3: `Pogledajte Tomato.gg i na mobitelu. Optimizirao sam mobilno mjesto za najbolje korisničko 
+        iskustvo, dok je još uvijek skoro 100% kompletan.`,
+        about4: `je pomogao u razvoju programa Tomato.gg. Hvala puno!`,
+        translators: `Tomato.gg's internacionalizacija je postignuta uz pomoć ovih nevjerojatnih dobrovoljaca:`,
+        feedback: `Pridružite se {0} ako želite dati povratne informacije, sugestije, i prijave bugova.`,
+        discord: `Discord server`,
+        thanks: `Hvala na korištenju Tomato.gg!`,
+    },
     ko: {
         h1: `Tomato.gg의 소개`,
         updated: `UPDATED `,
@@ -212,6 +232,7 @@ const translators = {
         { name: "ForgottenShots", url: "/stats/EU/ForgottenShots=529569765" },
     ],
     ko: [{ name: "Roika", url: "/stats/ASIA/Crawling_Ghost=2005611731" }],
+    hr: [{ name: "Sačo", url: "https://www.instagram.com/sacobrt/" }],
     pl: [{ name: "herhor67", url: "https://herhor.net/" }, { name: "wasyfko" }],
     ru: [{ name: "AllMyHomiesHateArty", url: "/stats/NA/onlyidiotaint_=1013512767" }],
     tr: [{ name: "ProFighte", url: "/stats/EU/profighte=516922883" }],

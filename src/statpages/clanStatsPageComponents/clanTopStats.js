@@ -9,7 +9,7 @@ import LocalizedStrings from "Functions/localizedStrings";
 import { WN8color, WRcolor } from "Functions/colors";
 import { Capital, commonStrings } from "Data/localizations";
 import BubblePlot from "./bubblePlot";
-import { CustomTabs, CustomTab } from "../tabs/customTabs";
+import { CustomTabs, CustomTab } from "../../components/customTabs";
 
 const Name = styled.div`
     display: flex;
@@ -215,6 +215,20 @@ const { formatString, ...strings } = LocalizedStrings({
         globalMap: "세계지도 {0}",
         provinces: "영토",
         strongholds: "원정 {0} {1}",
+    },
+    hr: {
+        created: "Kreirano: {0}",
+        recentTab: "NEDAVNO",
+        recent: "Nedavno {0}",
+        overallTab: "UKUPNO",
+        overall: "Ukupno {0}",
+        clanRating: "Klanska Ocjena",
+        avgDaily: "Prosječno Dnevnih Bitaka",
+        avgPR: "Prosječni Osobna Ocjena",
+        playerCount: "Igrači",
+        globalMap: "Globalna Karta {0}",
+        provinces: "Provincija",
+        strongholds: "SH {0} {1}",
     },
     pl: {
         created: "Stworzone: {0}",
