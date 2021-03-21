@@ -174,7 +174,6 @@ const tabs = [
         value: "main",
         body: [
             (props) => <TopTable data={props.graphData.overallStats} />,
-<<<<<<< HEAD:src/statpages/statsPageComponents/mainTabs.js
             // (props) => <div style={{margin: "0 auto"}}><Ad slot={"main_stats_banner"} styles={"fixed"}/></div>,
 
             (props) => <div style={{margin: "0 auto"}}>            
@@ -190,13 +189,6 @@ const tabs = [
                 />
             </div>,
 
-=======
-            (props) => (
-                <div style={{ margin: "0 auto" }}>
-                    <Ad slot={"main_stats_banner"} styles={"fixed"} />
-                </div>
-            ),
->>>>>>> 9b52134f22377e3dc71ce9a695459f420f528a83:src/statpages/playerStatsPageComponents/mainTabs.js
             (props) => (
                 <AllTankStats overall={props.recentStats.overallStats.tankWN8} recents={props.recentStats.recents} />
             ),
