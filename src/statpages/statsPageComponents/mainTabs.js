@@ -20,6 +20,7 @@ import { worryrun } from "Assets/loaders";
 import { worryexcited } from "Assets/staticfrogs";
 import Ad from "Ads/ads";
 import { useWindowSize } from "Functions/hooks";
+import AdSense from "react-adsense"
 
 const CustomTabs = withStyles({
     root: {
@@ -162,7 +163,21 @@ const tabs = [
         value: "main",
         body: [
             (props) => <TopTable data={props.graphData.overallStats} />,
-            (props) => <div style={{margin: "0 auto"}}><Ad slot={"main_stats_banner"} styles={"fixed"}/></div>,
+            // (props) => <div style={{margin: "0 auto"}}><Ad slot={"main_stats_banner"} styles={"fixed"}/></div>,
+
+            (props) => <div style={{margin: "0 auto"}}>            
+                <AdSense.Google
+                    client="ca-pub-1358649580645755"
+                    slot="7667965161"
+                    style={{
+                        display: "inline-block",
+                        width: "728px",
+                        height: "90px"
+                    }}
+                    format="auto"
+                />
+            </div>,
+
             (props) => (
                 <AllTankStats overall={props.recentStats.overallStats.tankWN8} recents={props.recentStats.recents} />
             ),
