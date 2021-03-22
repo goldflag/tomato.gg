@@ -179,7 +179,7 @@ const tabs = [
             (props) => <div style={{
                 margin: "0 auto",                         
                 width: "1000px",
-                height: "100px"
+                maxHeight: "100px"
             }}>            
                 <Ad slot={"main_stats_banner"} styles={"responsive"} />
                 {/* <AdSense.Google
@@ -300,7 +300,7 @@ export default function MainTabs(props) {
     const windowSize = useWindowSize();
     return (
         <Container
-            columns={windowSize.width > 1000 ? "auto 300px" : "auto"}
+            columns={windowSize.width > 1000 ? "auto 150px" : "auto"}
             padding={windowSize.width > 1000 ? "1rem" : "0.5rem"}
         >
             <div style={{ minWidth: 0 }}>
