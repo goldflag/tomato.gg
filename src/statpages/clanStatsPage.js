@@ -124,12 +124,12 @@ export default function ClanStatsPage() {
 
     return (
         <Container 
-            columns={windowSize.width > 1000 ? "auto 300px" : "auto"}
+            columns={windowSize.width > 1000 ? "auto 150px" : "auto"}
             padding={windowSize.width > 1000 ? "1rem" : "0.5rem"}
         >
             <div style={{ minWidth: 0 }}>{clanPage}</div>
             {windowSize.width > 1000 ? 
-                <div style={{ width: "250px", padding: "0 0 0 1rem"}}>
+                <div style={{ padding: "0 0 0 1rem"}}>
                     <Ad slot={"clan_sidebar_1"} styles={"responsive"}/> <Ad slot={"clan_sidebar_2"} styles={"responsive"}/>
                 </div>                
                 : 

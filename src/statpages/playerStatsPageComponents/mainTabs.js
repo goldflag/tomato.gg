@@ -181,17 +181,17 @@ const tabs = [
                 width: "1000px",
                 maxHeight: "100px"
             }}>            
-                <Ad slot={"main_stats_banner"} styles={"responsive"} />
-                {/* <AdSense.Google
-                    client="ca-pub-1358649580645755"
-                    slot="7667965161"
-                    style={{
-                        display: "inline-block",
-                        width: "728px",
-                        height: "90px"
-                    }}
-                    format="auto"
-                /> */}
+                {/* <Ad slot={"main_stats_banner"} styles={"responsive"} /> */}
+            <AdSense.Google
+                client="ca-pub-1358649580645755"
+                slot="7667965161"
+                style={{
+                    display: "inline-block",
+                    width: "728px",
+                    height: "90px"
+                }}
+                format=""
+            />
             </div>,
 
             (props) => (
@@ -332,7 +332,7 @@ export default function MainTabs(props) {
                 {tabs.map(({ body, value }, i) => (
                     <TabPanel value={page} index={value} key={i}>
                         {body.map((Section, i) => (
-                            <div style={{ marginTop: "1rem", minHeight: "300px" }} key={i}>
+                            <div style={{ marginTop: "1rem" }} key={i}>
                                 <Section {...props} />
                             </div>
                         ))}
