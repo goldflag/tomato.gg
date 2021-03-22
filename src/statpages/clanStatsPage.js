@@ -4,6 +4,7 @@ import { useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
+import MediaQuery from 'react-responsive'
 
 // LOCAL
 import { serverConv } from "Data/conversions";
@@ -26,6 +27,12 @@ const Container = styled.div`
     margin: 0 auto;
     display: grid;
     grid-template-columns: ${({columns}) => columns};
+`;
+
+const AdsContainer = styled.div`
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
 `;
 
 const { formatString, ...strings } = LocalizedStrings({
@@ -103,6 +110,14 @@ export default function ClanStatsPage() {
         clanPage = (
             <>
                 <ClanTopStats {...clanData} />
+                <AdsContainer>            
+                    <MediaQuery maxWidth={999}>
+                        <Ad slot={"main_stats_banner"} styles={"300x50"} />
+                    </MediaQuery>
+                    <MediaQuery minWidth={1000}>
+                        <Ad slot={"main_stats_banner"} styles={"728x90"} />
+                    </MediaQuery>
+                </AdsContainer>
                 <ClanStatsTable data={clanData.members} />
             </>
         );
@@ -124,13 +139,13 @@ export default function ClanStatsPage() {
 
     return (
         <Container 
-            columns={windowSize.width > 1000 ? "auto 150px" : "auto"}
+            columns={windowSize.width > 1000 ? "auto 190px" : "auto"}
             padding={windowSize.width > 1000 ? "1rem" : "0.5rem"}
         >
             <div style={{ minWidth: 0 }}>{clanPage}</div>
             {windowSize.width > 1000 ? 
                 <div style={{ padding: "0 0 0 1rem"}}>
-                    <Ad slot={"clan_sidebar_1"} styles={"responsive"}/> <Ad slot={"clan_sidebar_2"} styles={"responsive"}/>
+                    <Ad slot={"clan_sidebar_1"} styles={"160x600"}/> <Ad slot={"clan_sidebar_2"} styles={"160x600"}/>
                 </div>                
                 : 
                 null

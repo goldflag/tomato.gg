@@ -5,6 +5,7 @@ import { Tab, Tabs } from "@material-ui/core";
 import LocalizedStrings from "Functions/localizedStrings";
 import styled from "styled-components";
 import MediaQuery from 'react-responsive'
+import AdSense from "react-adsense";
 
 // LOCAL
 import { TabPanel } from "../../components/customTabs";
@@ -335,7 +336,7 @@ export default function MainTabs(props) {
     const windowSize = useWindowSize();
     return (
         <Container
-            columns={windowSize.width > 1000 ? "auto 150px" : "auto"}
+            columns={windowSize.width > 1000 ? "auto 180px" : "auto"}
             padding={windowSize.width > 1000 ? "1rem" : "0.5rem"}
         >
             <div style={{ minWidth: 0 }}>
@@ -376,8 +377,14 @@ export default function MainTabs(props) {
             </div>
             {windowSize.width > 1000 ? (
                 <div style={{ padding: "0 0 0 1rem" }}>
-                    <Ad slot={"player_sidebar_1"} styles={"responsive"} />{" "}
-                    <Ad slot={"player_sidebar_2"} styles={"responsive"} />
+                    {/* <AdSense.Google
+                        client={"ca-pub-1358649580645755"}
+                        slot={`4142533563`}
+                        
+                        format="responsive"
+                    /> */}
+                    <Ad slot={"player_sidebar_1"} styles={"160x600"} />{" "}
+                    <Ad slot={"player_sidebar_2"} styles={"160x600"} />
                 </div>
             ) : null}
         </Container>

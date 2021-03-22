@@ -32,6 +32,16 @@ const Styles = {
         width: "300px",
         height: "50px",
     },
+    "160x600": {
+        display: "inline-block",
+        width: "160px",
+        height: "600px",
+    },
+    "160x600": {
+        display: "inline-block",
+        width: "160px",
+        height: "600px",
+    },
 };
 
 export default ({ slot, styles }) => (

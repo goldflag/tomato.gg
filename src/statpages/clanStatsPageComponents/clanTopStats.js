@@ -4,12 +4,14 @@ import styled from "styled-components";
 import parse from "html-react-parser";
 import Scrollbar from "react-scrollbars-custom";
 import LocalizedStrings from "Functions/localizedStrings";
+import MediaQuery from 'react-responsive'
 
 // LOCAL
 import { WN8color, WRcolor } from "Functions/colors";
 import { Capital, commonStrings } from "Data/localizations";
 import BubblePlot from "./bubblePlot";
 import { CustomTabs, CustomTab } from "../../components/customTabs";
+import Ad from "Ads/ads";
 
 const Name = styled.div`
     display: flex;
@@ -87,6 +89,12 @@ const Bubble = styled.div`
     background-color: rgba(40, 40, 70, 0.4);
     backdrop-filter: blur(7px);
     color: rgb(30, 30, 30);
+`;
+
+const AdsContainer = styled.div`
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
 `;
 
 const Delta = styled(({ delta, ...props }) =>
@@ -449,6 +457,14 @@ export default function ClanTopStats({
                     ))}
                 </BottomGrid>
             </SplitSection>
+            <AdsContainer>            
+                <MediaQuery maxWidth={999}>
+                    <Ad slot={"main_stats_banner"} styles={"300x50"} />
+                </MediaQuery>
+                <MediaQuery minWidth={1000}>
+                    <Ad slot={"main_stats_banner"} styles={"728x90"} />
+                </MediaQuery>
+            </AdsContainer>
             <CustomTabs value={bubbleTab} onChange={handleChange} aria-label="ant example">
                 <CustomTab label={strings.overallTab} />
                 <CustomTab label={strings.recentTab} />
