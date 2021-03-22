@@ -22,10 +22,15 @@ const adslots = {
 
 const Styles = {
     responsive: { display: "block" },
-    fixed: {
+    "728x90": {
         display: "inline-block",
         width: "728px",
         height: "90px",
+    },
+    "300x50": {
+        display: "inline-block",
+        width: "300px",
+        height: "50px",
     },
 };
 
@@ -34,7 +39,6 @@ export default ({ slot, styles }) => (
         client={Adsense_Client}
         slot={`${adslots[slot]}`}
         style={styles ? Styles[styles] : Styles.responsive}
-        format="auto"
-        responsive={styles === "responsive" ? "true" : "false"}
+        format=""
     />
 );

@@ -349,7 +349,7 @@ const Sidebar = withRouter((props) => {
                     </Background>
                     <Support>
                         <h2>{strings.support}</h2>
-                        {strings.donations}
+                        {/* {strings.donations} */}
                         <a target="blank" href="https://ko-fi.com/goldflag">
                             <Kofi>{strings.kofi}</Kofi>
                         </a>

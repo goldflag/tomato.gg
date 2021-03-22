@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Tab, Tabs } from "@material-ui/core";
 import LocalizedStrings from "Functions/localizedStrings";
 import styled from "styled-components";
+import MediaQuery from 'react-responsive'
 
 // LOCAL
 import { TabPanel } from "../../components/customTabs";
@@ -20,7 +21,6 @@ import { worryrun } from "Assets/loaders";
 import { worryexcited } from "Assets/staticfrogs";
 import Ad from "Ads/ads";
 import { useWindowSize } from "Functions/hooks";
-import AdSense from "react-adsense"
 
 const CustomTabs = withStyles({
     root: {
@@ -168,32 +168,26 @@ const strings = LocalizedStrings({
     },
 });
 
+const AdsContainer = styled.div`
+    display: flex;
+    justify-content: center;
+`;
+
 const tabs = [
     {
         label: strings.main,
         value: "main",
         body: [
             (props) => <TopTable data={props.graphData.overallStats} />,
-            // (props) => <div style={{margin: "0 auto"}}><Ad slot={"main_stats_banner"} styles={"fixed"}/></div>,
-
-            (props) => <div style={{
-                margin: "0 auto",                         
-                width: "1000px",
-                maxHeight: "100px"
-            }}>            
-                {/* <Ad slot={"main_stats_banner"} styles={"responsive"} /> */}
-            <AdSense.Google
-                client="ca-pub-1358649580645755"
-                slot="7667965161"
-                style={{
-                    display: "inline-block",
-                    width: "728px",
-                    height: "90px"
-                }}
-                format=""
-            />
-            </div>,
-
+            (props) => 
+                <AdsContainer>            
+                    <MediaQuery maxWidth={999}>
+                        <Ad slot={"main_stats_banner"} styles={"300x50"} />
+                    </MediaQuery>
+                    <MediaQuery minWidth={1000}>
+                        <Ad slot={"main_stats_banner"} styles={"728x90"} />
+                    </MediaQuery>
+                </AdsContainer>,
             (props) => (
                 <AllTankStats overall={props.recentStats.overallStats.tankWN8} recents={props.recentStats.recents} />
             ),
@@ -204,6 +198,15 @@ const tabs = [
         icon: <NewIcon />,
         value: "hall-of-fame",
         body: [
+            (props) => 
+                <AdsContainer>            
+                    <MediaQuery maxWidth={999}>
+                        <Ad slot={"main_stats_banner"} styles={"300x50"} />
+                    </MediaQuery>
+                    <MediaQuery minWidth={1000}>
+                        <Ad slot={"main_stats_banner"} styles={"728x90"} />
+                    </MediaQuery>
+                </AdsContainer>,
             (props) => (
                 <HallOfFame
                     id={props.recentStats.id}
@@ -217,12 +220,32 @@ const tabs = [
     {
         label: strings.sessions,
         value: "sessions",
-        body: [(props) => <SessionsLogParent data={props.recentStats.sessions} />],
+        body: [
+            (props) => 
+            <AdsContainer>            
+                <MediaQuery maxWidth={999}>
+                    <Ad slot={"main_stats_banner"} styles={"300x50"} />
+                </MediaQuery>
+                <MediaQuery minWidth={1000}>
+                    <Ad slot={"main_stats_banner"} styles={"728x90"} />
+                </MediaQuery>
+            </AdsContainer>,
+            (props) => <SessionsLogParent data={props.recentStats.sessions} />
+        ],
     },
     {
         label: strings.infographics,
         value: "infographics",
         body: [
+            (props) => 
+            <AdsContainer>            
+                <MediaQuery maxWidth={999}>
+                    <Ad slot={"main_stats_banner"} styles={"300x50"} />
+                </MediaQuery>
+                <MediaQuery minWidth={1000}>
+                    <Ad slot={"main_stats_banner"} styles={"728x90"} />
+                </MediaQuery>
+            </AdsContainer>,
             (props) => (
                 <Charts
                     data={props.graphData}
@@ -237,7 +260,18 @@ const tabs = [
         label: strings.treemap,
         icon: <NewIcon />,
         value: "treemap",
-        body: [(props) => <Treemap data={props.recentStats.tree} />],
+        body: [
+            (props) => 
+            <AdsContainer>            
+                <MediaQuery maxWidth={999}>
+                    <Ad slot={"main_stats_banner"} styles={"300x50"} />
+                </MediaQuery>
+                <MediaQuery minWidth={1000}>
+                    <Ad slot={"main_stats_banner"} styles={"728x90"} />
+                </MediaQuery>
+            </AdsContainer>,
+            (props) => <Treemap data={props.recentStats.tree} />
+        ],
     },
 ];
 
@@ -269,6 +303,7 @@ const TrashAPI = styled.span`
     font-size: 0.7rem;
     color: rgb(200, 200, 200);
 `;
+
 
 const LoadingHeader = ({ stage }) => {
     let color, icon, content;
@@ -333,7 +368,7 @@ export default function MainTabs(props) {
                     <TabPanel value={page} index={value} key={i}>
                         {body.map((Section, i) => (
                             <div style={{ marginTop: "1rem" }} key={i}>
-                                <Section {...props} />
+                                <Section {...props}/>
                             </div>
                         ))}
                     </TabPanel>
