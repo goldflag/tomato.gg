@@ -1,5 +1,6 @@
 // NPM
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet"
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
 
@@ -102,32 +103,37 @@ export default function MasteryPage(props) {
     }
 
     return (
-        <FullPageTableWrapper>
-            <Info>
-                <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                    {serverConv[server]} {strings.mastery}
-                </span>
-                <br />
-                <br />
-                <span
-                    style={{
-                        fontSize: "0.9rem",
-                        lineHeight: "1rem",
-                        color: "rgb(130,130,130)",
-                    }}
-                >
-                    {formatString(
-                        strings.dataFrom,
-                        <a target="blank" href="https://mastery.poliroid.ru/">
-                            {" "}
-                            {strings.moeMod}{" "}
-                        </a>
-                    )}{" "}
-                    &#47;&#47;&#47; {strings.expand}
-                </span>{" "}
-                <br />
-            </Info>
-            {table}
-        </FullPageTableWrapper>
+        <>
+            <Helmet>
+                <title>{strings.mastery} - Tomato.gg</title>
+            </Helmet>
+            <FullPageTableWrapper>
+                <Info>
+                    <span style={{ fontSize: "2rem", fontWeight: "500" }}>
+                        {serverConv[server]} {strings.mastery}
+                    </span>
+                    <br />
+                    <br />
+                    <span
+                        style={{
+                            fontSize: "0.9rem",
+                            lineHeight: "1rem",
+                            color: "rgb(130,130,130)",
+                        }}
+                    >
+                        {formatString(
+                            strings.dataFrom,
+                            <a target="blank" href="https://mastery.poliroid.ru/">
+                                {" "}
+                                {strings.moeMod}{" "}
+                            </a>
+                        )}{" "}
+                        &#47;&#47;&#47; {strings.expand}
+                    </span>{" "}
+                    <br />
+                </Info>
+                {table}
+            </FullPageTableWrapper>
+        </>
     );
 }
