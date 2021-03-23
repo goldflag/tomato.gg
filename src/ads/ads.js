@@ -37,11 +37,6 @@ const Styles = {
         width: "160px",
         height: "600px",
     },
-    "160x600": {
-        display: "inline-block",
-        width: "160px",
-        height: "600px",
-    },
     "300x250": {
         display: "inline-block",
         width: "300px",

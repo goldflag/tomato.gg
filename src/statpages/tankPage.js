@@ -16,7 +16,6 @@ import { nationAdjConv, classDescConv, serverConv, tierConv, classConv } from "D
 import { Capital, commonStrings } from "Data/localizations";
 import Ad from "Ads/ads";
 import { AdsContainer } from "Ads/adsContainer"
-import { useWindowSize } from "Functions/hooks";
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -100,8 +99,6 @@ const filters = {
 };
 
 export default function TankPage(props) {
-    const windowSize = useWindowSize();
-
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/tank-page");

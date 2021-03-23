@@ -76,7 +76,7 @@ const { formatString, ...strings } = LocalizedStrings({
         muchas de las cuales solo se encuentran aquí. Algunas estadísticas se han inspirado en otros sitios.`,
         about1: `Tomato.gg no aspira a hacer todo. Nunca tendrá estadísticas del servidor tan detalladas como las de 
         wot-news.com, ni tendrá las estadísticas precisas de las batallas individuales que son accesible en WN8lab.com. 
-        Tomato.gg está siendo desarrollando activamente y no está cerca de su completa funcionalidad. En el futuro planeo 
+        Tomato.gg está siendo desarrollando activamente y no está cerca de su completa funcionalidad. En el futuro, planeo 
         expandir la página de estadísticas del jugador, la página de estadísticas de los tanques, implementar 
         estadísticas del clan y terminar la tabla de clasificación.`,
         about2: `Tomato.gg es totalmente compatible con las estadísticas de jugadores de EU, América del norte, y Asia. 

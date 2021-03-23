@@ -10,7 +10,6 @@ import { ServerContext } from "Context";
 import { serverConv } from "Data/conversions";
 import Ad from "Ads/ads";
 import { AdsContainer } from "Ads/adsContainer"
-import { useWindowSize } from "Functions/hooks";
 
 const { formatString, ...strings } = LocalizedStrings({
     en: { recentStats: "{server} Recent Stats Leaderboard", minGames: "Mininum 75 games in period" },
@@ -30,8 +29,6 @@ const { formatString, ...strings } = LocalizedStrings({
 
 export default function RecentLeaderboards(props) {
     const { server } = useContext(ServerContext);
-    const windowSize = useWindowSize();
-
 
     const content = (
         <div>

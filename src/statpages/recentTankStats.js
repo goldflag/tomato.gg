@@ -13,7 +13,6 @@ import { useURLState } from "Functions/hooks";
 import { commonStrings } from "Data/localizations";
 import Ad from "Ads/ads";
 import { AdsContainer } from "Ads/adsContainer"
-import { useWindowSize } from "Functions/hooks";
 const backend = process.env.REACT_APP_BACKEND;
 
 const { formatString, ...strings } = LocalizedStrings({
@@ -82,7 +81,6 @@ export default function RecentLeaderboards() {
     const { server } = useContext(ServerContext);
     const [data, setData] = useState("loading");
     const [time, setTime] = useURLState("time", 60);
-    const windowSize = useWindowSize();
 
     useEffect(() => {
         setData("loading");

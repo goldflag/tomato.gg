@@ -5,7 +5,6 @@ import { Tab, Tabs } from "@material-ui/core";
 import LocalizedStrings from "Functions/localizedStrings";
 import styled from "styled-components";
 import MediaQuery from 'react-responsive'
-import AdSense from "react-adsense";
 
 // LOCAL
 import { TabPanel } from "../../components/customTabs";

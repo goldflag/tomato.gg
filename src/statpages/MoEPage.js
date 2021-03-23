@@ -13,7 +13,6 @@ import { Loader, FullPageTableWrapper, Info } from "Components";
 import { serverConv } from "Data/conversions";
 import Ad from "Ads/ads";
 import { AdsContainer } from "Ads/adsContainer"
-import { useWindowSize } from "Functions/hooks";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -150,7 +149,6 @@ export default function MoEPage(props) {
     const [data, setData] = useState();
     const [changeData, setChangeData] = useState();
     const [value, setValue] = useState(0);
-    const windowSize = useWindowSize();
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
