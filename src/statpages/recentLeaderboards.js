@@ -1,6 +1,7 @@
 // NPM
 import React, { useContext } from "react";
 import LocalizedStrings from "Functions/localizedStrings";
+import MediaQuery from 'react-responsive'
 
 // LOCAL
 import Leaderboard from "./recentLeaderboardComponents/leaderboard";
@@ -8,6 +9,7 @@ import { FullPageTableWrapper, Info } from "Components";
 import { ServerContext } from "Context";
 import { serverConv } from "Data/conversions";
 import Ad from "Ads/ads";
+import { AdsContainer } from "Ads/adsContainer"
 import { useWindowSize } from "Functions/hooks";
 
 const { formatString, ...strings } = LocalizedStrings({
@@ -30,34 +32,48 @@ export default function RecentLeaderboards(props) {
     const { server } = useContext(ServerContext);
     const windowSize = useWindowSize();
 
+
+    const content = (
+        <div>
+            <Info>
+                <span style={{ fontSize: "2rem", fontWeight: "500" }}>
+                    {formatString(strings.recentStats, { server: serverConv[server] })}
+                </span>
+                <br />
+                <br />
+                <span
+                    style={{
+                        fontSize: "0.9rem",
+                        lineHeight: "1.3rem",
+                        color: "rgb(150,150,150)",
+                    }}
+                >
+                    {strings.minGames}
+                </span>{" "}
+                <br />
+            </Info>
+            <Leaderboard />
+        </div>
+    )
+
     return (
-        <FullPageTableWrapper columns={windowSize.width > 1000 ? "auto 300px" : "auto"}>
-            <div>
-                <Info>
-                    <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                        {formatString(strings.recentStats, { server: serverConv[server] })}
-                    </span>
-                    <br />
-                    <br />
-                    <span
-                        style={{
-                            fontSize: "0.9rem",
-                            lineHeight: "1.3rem",
-                            color: "rgb(150,150,150)",
-                        }}
-                    >
-                        {strings.minGames}
-                    </span>{" "}
-                    <br />
-                </Info>
-                <Leaderboard />
-            </div>
-            {windowSize.width > 1000 ? (
-                <div style={{ padding: "0 0 0 1rem" }}>
-                    <Ad slot={"leaderboards_sidebar_1"} styles={"responsive"} />{" "}
-                    <Ad slot={"leaderboards_sidebar_2"} styles={"responsive"} />
-                </div>
-            ) : null}
-        </FullPageTableWrapper>
+        <>
+            <MediaQuery maxWidth={1000}>
+                <FullPageTableWrapper columns={"auto"}>
+                    <div>{content}</div>
+                </FullPageTableWrapper>
+            </MediaQuery>
+            <MediaQuery minWidth={1001}>
+                <FullPageTableWrapper columns={"auto 320px"}>
+                    <div style={{minWidth: 0}}>{content}</div>
+                    <div>
+                        <AdsContainer flexDir={"column"}>
+                            <Ad slot={"leaderboards_sidebar_1"} styles={"300x250"} />
+                            <Ad slot={"leaderboards_sidebar_2"} styles={"300x600"} />
+                        </AdsContainer>  
+                    </div>               
+                </FullPageTableWrapper>
+            </MediaQuery>
+        </>
     );
 }

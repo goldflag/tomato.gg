@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import ReactGA from "react-ga";
 import styled from "styled-components";
 import LocalizedStrings from "Functions/localizedStrings";
+import MediaQuery from 'react-responsive'
 
 // LOCAL
 import { Loader, FullPageTableWrapper } from "Components";
@@ -14,6 +15,7 @@ import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
 import { nationAdjConv, classDescConv, serverConv, tierConv, classConv } from "Data/conversions";
 import { Capital, commonStrings } from "Data/localizations";
 import Ad from "Ads/ads";
+import { AdsContainer } from "Ads/adsContainer"
 import { useWindowSize } from "Functions/hooks";
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -186,15 +188,23 @@ export default function TankPage(props) {
     }
 
     return (
-        <FullPageTableWrapper             
-            columns={windowSize.width > 1000 ? "auto 300px" : "auto"}
-        >    
-            <div>{content}</div>
-            {windowSize.width > 1000 ? 
-                <div style={{padding: "0 0 0 1rem"}}><Ad slot={"tank_stats_sidebar_1"} styles={"responsive"}/> <Ad slot={"tank_stats_sidebar_2"} styles={"responsive"}/></div>
-                : 
-                null
-            }
-        </FullPageTableWrapper>
+        <>
+            <MediaQuery maxWidth={1000}>
+                <FullPageTableWrapper columns={"auto"}>
+                    <div>{content}</div>
+                </FullPageTableWrapper>
+            </MediaQuery>
+            <MediaQuery minWidth={1001}>
+                <FullPageTableWrapper columns={"auto 320px"}>
+                    <div style={{minWidth: 0}}>{content}</div>
+                    <div>
+                        <AdsContainer flexDir={"column"}>
+                            <Ad slot={"tank_stats_sidebar_1"} styles={"300x250"} />
+                            <Ad slot={"tank_stats_sidebar_2"} styles={"300x600"} />
+                        </AdsContainer>  
+                    </div>               
+                </FullPageTableWrapper>
+            </MediaQuery>
+        </>
     );
 }

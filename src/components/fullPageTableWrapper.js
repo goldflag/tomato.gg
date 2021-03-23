@@ -10,10 +10,6 @@ export const FullPageTableWrapper = styled.div`
     margin: 0 auto;
     display: grid;
     grid-template-columns: ${({columns}) => columns};
-    @media screen and (max-width: 1616px) {
-        margin: 0rem 5%;
-    }
-
     @media screen and (max-width: 1000px) {
         padding: 0rem;
         margin: 0.5rem;
