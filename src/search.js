@@ -1,5 +1,6 @@
 // NPM
 import React, { useState, useContext } from "react";
+import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
 
 // LOCAL
@@ -50,6 +51,9 @@ export default withRouter(function Search(props) {
 
     return (
         <div>
+            <Helmet>
+                <title>Tomato.gg</title>
+            </Helmet>
             <div className="center">
                 <div>
                     <img
