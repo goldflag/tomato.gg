@@ -62,7 +62,7 @@ const strings = LocalizedStrings({
         sitio web, considera hacer una donación para ayudar a mantener los servidores.`,
         kofi: "Apoya en Ko-fi",
         paypal: "Apoya en Paypal",
-        partnered: "Sitios asociados",
+        partnered: "Sitios Asociados",
         herhor: "Generador de imágenes y rankings de las marcas de excelencia",
         createdBy: "Tomato.gg es un sitio web creado por",
         notAffiliated: "y no está afiliado a Wargaming.net.",

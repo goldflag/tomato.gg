@@ -63,7 +63,7 @@ const strings = LocalizedStrings({
     es: {
         home: "Página Principal",
         playerStats: "Datos del Jugador",
-        tankStats: "Datos de los Tanques",
+        tankStats: "Datos de Tanques",
         clanStats: "Clan Stats",
         leaderboards: "Clasificación",
         moeReqs: "Reqs. MdE",
