@@ -1,6 +1,7 @@
 // NPM
 import React, { useEffect, useState, useContext } from "react";
 import LocalizedStrings from "Functions/localizedStrings";
+import MediaQuery from 'react-responsive'
 
 // LOCAL
 import { serverConv } from "Data/conversions";
@@ -11,8 +12,8 @@ import RecentTanksAvgTable from "./recentTankStatsComponents/RecentTanksAvgTable
 import { useURLState } from "Functions/hooks";
 import { commonStrings } from "Data/localizations";
 import Ad from "Ads/ads";
+import { AdsContainer } from "Ads/adsContainer"
 import { useWindowSize } from "Functions/hooks";
-
 const backend = process.env.REACT_APP_BACKEND;
 
 const { formatString, ...strings } = LocalizedStrings({
@@ -90,49 +91,80 @@ export default function RecentLeaderboards() {
             .then((res) => setData(res));
     }, [server, time]);
 
-    return (
-        <FullPageTableWrapper columns={windowSize.width > 1000 ? "auto 300px" : "auto"}>
-            <div>
-                <Info>
-                    <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                        {formatString(strings.title, serverConv[server])}
-                    </span>
-                    <br />
-                    <br />
-                    <span
-                        style={{
-                            fontSize: "0.9rem",
-                            lineHeight: "1rem",
-                            color: "rgb(150,150,150)",
-                        }}
-                    >
-                        {strings.clickRow}
-                    </span>
-                    <br />
-                    <FilterButtonGroup>
-                        {/* <FilterButton key={30} selected={time === 30} onClick={() => setTime(30)}>
-                            {formatString(commonStrings.days, 30)}
-                        </FilterButton> */}
-                        <FilterButton key={60} selected={time === 60} onClick={() => setTime(60)}>
-                            {formatString(commonStrings.days, 60)}
-                        </FilterButton>
-                    </FilterButtonGroup>
-                </Info>
 
-                {typeof data !== "string" ? (
-                    <RecentTanksAvgTable data={data} />
-                ) : data === "loading" ? (
-                    <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />
-                ) : (
-                    <h2>{strings.error}</h2>
-                )}
-            </div>
-            {windowSize.width > 1000 ? (
-                <div style={{ padding: "0 0 0 1rem" }}>
-                    <Ad slot={"tank_stats_sidebar_1"} styles={"responsive"} />{" "}
-                    <Ad slot={"tank_stats_sidebar_2"} styles={"responsive"} />
-                </div>
-            ) : null}
-        </FullPageTableWrapper>
+    const content = (
+        <div style={{minWidth: "0"}}>
+            <Info>
+                <span style={{ fontSize: "2rem", fontWeight: "500" }}>
+                    {formatString(strings.title, serverConv[server])}
+                </span>
+                <br />
+                <br />
+                <span
+                    style={{
+                        fontSize: "0.9rem",
+                        lineHeight: "1rem",
+                        color: "rgb(150,150,150)",
+                    }}
+                >
+                    {strings.clickRow}
+                </span>
+                <br />
+                <FilterButtonGroup>
+                    {/* <FilterButton key={30} selected={time === 30} onClick={() => setTime(30)}>
+                        {formatString(commonStrings.days, 30)}
+                    </FilterButton> */}
+                    <FilterButton key={60} selected={time === 60} onClick={() => setTime(60)}>
+                        {formatString(commonStrings.days, 60)}
+                    </FilterButton>
+                </FilterButtonGroup>
+            </Info>
+
+            {typeof data !== "string" ? (
+                <RecentTanksAvgTable data={data} />
+            ) : data === "loading" ? (
+                <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />
+            ) : (
+                <h2>{strings.error}</h2>
+            )}
+        </div>
+    )
+
+    return (
+        <>
+            <MediaQuery maxWidth={1000}>
+                <FullPageTableWrapper columns={"auto"}>
+                    <div>{content}</div>
+                </FullPageTableWrapper>
+            </MediaQuery>
+            <MediaQuery minWidth={1001} maxWidth={1799}>
+                <FullPageTableWrapper columns={"auto 180px"}>
+                    <div>{content}</div>
+                    <div>
+                        <AdsContainer flexDir={"column"}>
+                            <Ad slot={"tank_stats_sidebar_1"} styles={"160x600"} />
+                            <Ad slot={"tank_stats_sidebar_2"} styles={"160x600"} />
+                        </AdsContainer>  
+                    </div>               
+                </FullPageTableWrapper>
+            </MediaQuery>
+            <MediaQuery minWidth={1800}>
+                <FullPageTableWrapper columns={"180px auto 180px"}>
+                    <div>
+                        <AdsContainer flexDir={"column"}>
+                            <Ad slot={"tank_stats_sidebar_1"} styles={"160x600"} />
+                            <Ad slot={"tank_stats_sidebar_2"} styles={"160x600"} />
+                        </AdsContainer>  
+                    </div>                    
+                    <div>{content}</div>
+                    <div>
+                        <AdsContainer flexDir={"column"}>
+                            <Ad slot={"tank_stats_sidebar_1"} styles={"160x600"} />
+                            <Ad slot={"tank_stats_sidebar_2"} styles={"160x600"} />
+                        </AdsContainer>  
+                    </div>      
+                </FullPageTableWrapper>
+            </MediaQuery>
+        </>
     );
 }
