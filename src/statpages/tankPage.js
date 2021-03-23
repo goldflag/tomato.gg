@@ -1,5 +1,6 @@
 // NPM
 import React, { useContext, useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
 import styled from "styled-components";
 import LocalizedStrings from "Functions/localizedStrings";
@@ -180,5 +181,19 @@ export default function TankPage(props) {
         );
     }
 
-    return <FullPageTableWrapper>{content}</FullPageTableWrapper>;
+    return <>
+        <Helmet>
+            <title>
+                {
+                    typeof data === "string"
+                        ? ""
+                        : `${data.meta.short_name} - `
+                }
+                Tomato.gg
+            </title>
+        </Helmet>
+        <FullPageTableWrapper>
+            {content}
+        </FullPageTableWrapper>
+    </>;
 }
