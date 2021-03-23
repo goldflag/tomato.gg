@@ -1,5 +1,6 @@
 // NPM
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet"
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
 
@@ -38,28 +39,33 @@ export default function Leaderboards(props) {
     }, []);
 
     return (
-        <FullPageTableWrapper>
-            <Info>
-                <span style={{ fontSize: "2rem", fontWeight: "500" }}>{strings.expected}</span>
-                <br />
-                <br />
-                <span
-                    style={{
-                        fontSize: "0.9rem",
-                        lineHeight: "1.3rem",
-                        color: "rgb(100,100,100)",
-                    }}
-                >
-                    {formatString(
-                        strings.maintained,
-                        <a target="blank" href="https://modxvm.com/en/wn8-expected-values/">
-                            {strings.xvm}
-                        </a>
-                    )}
-                </span>
-                <br />
-            </Info>
-            {data ? <WN8Table data={data} /> : <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />}
-        </FullPageTableWrapper>
+        <>
+            <Helmet>
+                <title>{strings.expected} - Tomato.gg</title>
+            </Helmet>
+            <FullPageTableWrapper>
+                <Info>
+                    <span style={{ fontSize: "2rem", fontWeight: "500" }}>{strings.expected}</span>
+                    <br />
+                    <br />
+                    <span
+                        style={{
+                            fontSize: "0.9rem",
+                            lineHeight: "1.3rem",
+                            color: "rgb(100,100,100)",
+                        }}
+                    >
+                        {formatString(
+                            strings.maintained,
+                            <a target="blank" href="https://modxvm.com/en/wn8-expected-values/">
+                                {strings.xvm}
+                            </a>
+                        )}
+                    </span>
+                    <br />
+                </Info>
+                {data ? <WN8Table data={data} /> : <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />}
+            </FullPageTableWrapper>
+        </>
     );
 }
