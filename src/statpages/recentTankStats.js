@@ -1,5 +1,6 @@
 // NPM
 import React, { useEffect, useState, useContext } from "react";
+import { Helmet } from "react-helmet";
 import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
@@ -83,40 +84,45 @@ export default function RecentLeaderboards() {
     }, [server, time]);
 
     return (
-        <FullPageTableWrapper>
-            <Info>
-                <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                    {formatString(strings.title, serverConv[server])}
-                </span>
-                <br />
-                <br />
-                <span
-                    style={{
-                        fontSize: "0.9rem",
-                        lineHeight: "1rem",
-                        color: "rgb(150,150,150)",
-                    }}
-                >
-                    {strings.clickRow}
-                </span>
-                <br />
-                <FilterButtonGroup>
-                    {/* <FilterButton key={30} selected={time === 30} onClick={() => setTime(30)}>
-                        {formatString(commonStrings.days, 30)}
-                    </FilterButton> */}
-                    <FilterButton key={60} selected={time === 60} onClick={() => setTime(60)}>
-                        {formatString(commonStrings.days, 60)}
-                    </FilterButton>
-                </FilterButtonGroup>
-            </Info>
+        <>
+            <Helmet>
+                <title>{formatString(strings.title, serverConv[server])} - Tomato.gg</title>
+            </Helmet>
+            <FullPageTableWrapper>
+                <Info>
+                    <span style={{ fontSize: "2rem", fontWeight: "500" }}>
+                        {formatString(strings.title, serverConv[server])}
+                    </span>
+                    <br />
+                    <br />
+                    <span
+                        style={{
+                            fontSize: "0.9rem",
+                            lineHeight: "1rem",
+                            color: "rgb(150,150,150)",
+                        }}
+                    >
+                        {strings.clickRow}
+                    </span>
+                    <br />
+                    <FilterButtonGroup>
+                        {/* <FilterButton key={30} selected={time === 30} onClick={() => setTime(30)}>
+                            {formatString(commonStrings.days, 30)}
+                        </FilterButton> */}
+                        <FilterButton key={60} selected={time === 60} onClick={() => setTime(60)}>
+                            {formatString(commonStrings.days, 60)}
+                        </FilterButton>
+                    </FilterButtonGroup>
+                </Info>
 
-            {typeof data !== "string" ? (
-                <RecentTanksAvgTable data={data} />
-            ) : data === "loading" ? (
-                <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />
-            ) : (
-                <h2>{strings.error}</h2>
-            )}
-        </FullPageTableWrapper>
+                {typeof data !== "string" ? (
+                    <RecentTanksAvgTable data={data} />
+                ) : data === "loading" ? (
+                    <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />
+                ) : (
+                    <h2>{strings.error}</h2>
+                )}
+            </FullPageTableWrapper>
+        </>
     );
 }
