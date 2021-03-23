@@ -5,6 +5,7 @@ import AdSense from "react-adsense";
 const Adsense_Client = process.env.REACT_APP_ADSENSE;
 
 const adslots = {
+    front_page: 9868453218,
     player_sidebar_1: 4142533563,
     player_sidebar_2: 6120640271,
     main_stats_banner: 7667965161,
@@ -46,6 +47,11 @@ const Styles = {
         display: "inline-block",
         width: "300px",
         height: "600px",
+    },
+    "970x250": {
+        display: "inline-block",
+        width: "970px",
+        height: "250px",
     },
 };
 
