@@ -1,5 +1,6 @@
 // NPM
 import React, { useEffect, useState, useContext } from "react";
+import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
 
@@ -181,52 +182,57 @@ export default function MoEPage(props) {
     }
 
     return (
-        <FullPageTableWrapper>
-            <Info>
-                <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                    {serverConv[server]} {strings.moe}
-                </span>
-                <br />
-
-                <br />
-                <span
-                    style={{
-                        fontSize: "0.9rem",
-                        lineHeight: "1rem",
-                        color: "rgb(130,130,130)",
-                    }}
-                >
-                    {formatString(
-                        strings.dataFrom,
-                        <a target="blank" href="https://gunmarks.poliroid.ru/">
-                            {" "}
-                            {strings.moeMod}{" "}
-                        </a>
-                    )}{" "}
-                    &#47;&#47;&#47; {strings.expand}
+        <>
+            <Helmet>
+                <title>{strings.moe} - Tomato.gg</title>
+            </Helmet>
+            <FullPageTableWrapper>
+                <Info>
+                    <span style={{ fontSize: "2rem", fontWeight: "500" }}>
+                        {serverConv[server]} {strings.moe}
+                    </span>
                     <br />
-                    {strings.avg}
-                </span>
-                <br />
-            </Info>
-            <CustomTabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto">
-                <CustomTab label={strings.expected} />
-                <CustomTab label={strings.exp95change} />
-                <CustomTab label={strings.exp85change} />
-                <CustomTab label={strings.exp65change} />
-            </CustomTabs>
-            <TabPanel value={value} index={0}>
-                {table}
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                {changeTable95}
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                {changeTable85}
-            </TabPanel>
-            <TabPanel value={value} index={3}>
-                {changeTable65}
-            </TabPanel>
-        </FullPageTableWrapper>
+
+                    <br />
+                    <span
+                        style={{
+                            fontSize: "0.9rem",
+                            lineHeight: "1rem",
+                            color: "rgb(130,130,130)",
+                        }}
+                    >
+                        {formatString(
+                            strings.dataFrom,
+                            <a target="blank" href="https://gunmarks.poliroid.ru/">
+                                {" "}
+                                {strings.moeMod}{" "}
+                            </a>
+                        )}{" "}
+                        &#47;&#47;&#47; {strings.expand}
+                        <br />
+                        {strings.avg}
+                    </span>
+                    <br />
+                </Info>
+                <CustomTabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto">
+                    <CustomTab label={strings.expected} />
+                    <CustomTab label={strings.exp95change} />
+                    <CustomTab label={strings.exp85change} />
+                    <CustomTab label={strings.exp65change} />
+                </CustomTabs>
+                <TabPanel value={value} index={0}>
+                    {table}
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    {changeTable95}
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                    {changeTable85}
+                </TabPanel>
+                <TabPanel value={value} index={3}>
+                    {changeTable65}
+                </TabPanel>
+            </FullPageTableWrapper>
+        </>
     );
 }
