@@ -1,5 +1,6 @@
 // NPM
 import React, { useContext } from "react";
+import { Helmet } from "react-helmet";
 import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
@@ -25,27 +26,33 @@ const { formatString, ...strings } = LocalizedStrings({
 
 export default function RecentLeaderboards(props) {
     const { server } = useContext(ServerContext);
+    const titleString = formatString(strings.recentStats, { server: serverConv[server] });
 
     return (
-        <FullPageTableWrapper>
-            <Info>
-                <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                    {formatString(strings.recentStats, { server: serverConv[server] })}
-                </span>
-                <br />
-                <br />
-                <span
-                    style={{
-                        fontSize: "0.9rem",
-                        lineHeight: "1.3rem",
-                        color: "rgb(150,150,150)",
-                    }}
-                >
-                    {strings.minGames}
-                </span>{" "}
-                <br />
-            </Info>
-            <Leaderboard />
-        </FullPageTableWrapper>
+        <>
+            <Helmet>
+                <title>{titleString} - Tomato.gg</title>
+            </Helmet>
+            <FullPageTableWrapper>
+                <Info>
+                    <span style={{ fontSize: "2rem", fontWeight: "500" }}>
+                        {titleString}
+                    </span>
+                    <br />
+                    <br />
+                    <span
+                        style={{
+                            fontSize: "0.9rem",
+                            lineHeight: "1.3rem",
+                            color: "rgb(150,150,150)",
+                        }}
+                    >
+                        {strings.minGames}
+                    </span>{" "}
+                    <br />
+                </Info>
+                <Leaderboard />
+            </FullPageTableWrapper>
+        </>
     );
 }
