@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
+import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
 
@@ -223,7 +224,12 @@ class StatsPage extends Component {
             );
         }
 
-        return <Container>{statTable}</Container>;
+        return <>
+            <Helmet>
+                <title>{username && `${username} - `}Tomato.gg</title>
+            </Helmet>
+            <Container>{statTable}</Container>
+        </>;
     }
 }
 
