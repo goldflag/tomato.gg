@@ -1,5 +1,6 @@
 // NPM
 import React, { useEffect } from "react";
+import { Helmet } from "react-helmet"
 import ReactGA from "react-ga";
 import Paper from "@material-ui/core/Paper";
 import LocalizedStrings from "Functions/localizedStrings";
@@ -11,6 +12,7 @@ import { languages } from "Data/languages";
 
 const { formatString, ...strings } = LocalizedStrings({
     en: {
+        title: `About`,
         h1: `About Tomato.gg`,
         updated: `UPDATED {0}`,
         about0: `I created this site to provide an accessible interface to view a huge variety of stats, 
@@ -30,6 +32,7 @@ const { formatString, ...strings } = LocalizedStrings({
         thanks: `Thanks for using Tomato.gg!`,
     },
     cs: {
+        title: "O nás",
         h1: `O Tomato.gg`,
         updated: `AKTUALIZOVÁNO {0}`,
         about0: `Tento web jsem vytvořil, abych poskytl široce dostupné uživatelské rozhraní pro prohlížení 
@@ -50,6 +53,7 @@ const { formatString, ...strings } = LocalizedStrings({
         thanks: `Děkuji, že požíváte Tomato.gg!`,
     },
     de: {
+        title: "Über uns",
         h1: `Über Tomato.gg`,
         updated: `AKTUALISIERT {0}`,
         about0: `Ich habe diese Seite erstellt um eine Schnittstelle zu einer riesigen Menge an Statistiken anzubieten.
@@ -70,6 +74,7 @@ const { formatString, ...strings } = LocalizedStrings({
         thanks: `Vielen Dank dass du Tomato.gg nutzt!`,
     },
     es: {
+        title: "Acerca de",
         h1: `Acerca de Tomato.gg`,
         updated: `ACTUALIZADO {0}`,
         about0: `Creé este sitio web para proporcionar una interfaz accesible para ver una gran variedad de estadísticas, 
@@ -89,6 +94,7 @@ const { formatString, ...strings } = LocalizedStrings({
         thanks: `¡Gracias por usar Tomato.gg!`,
     },
     fr: {
+        title: "À propos",
         h1: `À propos de Tomato.gg`,
         updated: `MIS À JOUR {0}`,
         about0: `J'ai créé ce site pour fournir une interface accessible pour voir une grande variété de statistiques, 
@@ -109,6 +115,7 @@ const { formatString, ...strings } = LocalizedStrings({
         thanks: `Merci d'utiliser Tomato.gg!`,
     },
     ko: {
+        title: "소개",
         h1: `Tomato.gg의 소개`,
         updated: `UPDATED `,
         about0: ` 이 사이트는 창의적인 통계들을 많은 유저분들이 쉽게 볼 수 있도록 만들어졌습니다. 몇몇통계들은 다른 사이트에서 영감을 받았습니다.`,
@@ -124,6 +131,7 @@ const { formatString, ...strings } = LocalizedStrings({
         thanks: `토마토를 애용해주셔서 감사합니다!`,
     },
     pl: {
+        title: "O Stronie",
         h1: `O Tomato.gg`,
         updated: `ZAKTUALIZOWANE {0}`,
         about0: `Stworzyłem tę witrynę, aby zapewnić przystępny interfejs do przeglądania różnych statystyk.
@@ -144,6 +152,7 @@ const { formatString, ...strings } = LocalizedStrings({
         thanks: `Dziękujemy za używanie Tomato.gg!`,
     },
     ru: {
+        title: "About",
         h1: `О Tomato.gg`,
         updated: `ОБНОВЛЕНО {0}`,
         about0: `Я создал этот сайт, чтобы предоставить доступный интерфейс для просмотра огромной разнообразной статистики,
@@ -164,6 +173,7 @@ const { formatString, ...strings } = LocalizedStrings({
         thanks: `Спасибо, что посетили Tomato.gg!`,
     },
     tr: {
+        title: "Hakkında",
         h1: `Tomato.gg Hakkında`,
         updated: `GÜNCELLENDİ {0}`,
         about0: `Çok çeşitli istatistikleri görüntülemek için erişilebilir bir arayüz sağlamak adına bu siteyi 
@@ -184,6 +194,7 @@ const { formatString, ...strings } = LocalizedStrings({
         thanks: `Tomato.gg'yi kullandığınız için teşekkürler!`,
     },
     zh: {
+        title: "關於",
         h1: `關於 Tomato.gg`,
         updated: `更新 {0}`,
         about0: `我創立了Tomato.gg 是想提供一個能搜尋各類統計數據、且只能在這邊查找的介面，並從其他網站提供的統計資料中獲得了一些靈感。`,
@@ -231,84 +242,89 @@ export default function About() {
     const localUpdatedDate = UPDATED_DATE.toLocaleDateString(navigator.languages[0], dateOptions);
 
     return (
-        <div style={{ padding: "2em", paddingTop: "5em" }}>
-            <div className="narrowpage">
-                <Paper
-                    style={{
-                        backgroundColor: "rgba(40, 40, 70, 0.5)",
-                        padding: "1rem",
-                        color: "rgb(230, 230, 230)",
-                    }}
-                >
-                    <div>
-                        <h1 style={{ fontSize: "1.5rem", fontWeight: "500" }}>{strings.h1}</h1>
-                        <span
-                            style={{
-                                fontSize: "0.8rem",
-                                lineHeight: "1.3rem",
-                                color: "rgb(150,150,150)",
-                            }}
-                        >
-                            {formatString(strings.updated, localUpdatedDate)}
-                        </span>
-                        <br />
-                        <br />
-                        <span style={{ fontSize: "0.9rem", lineHeight: "1.4rem" }}>
-                            {strings.about0}
-                            <br />
-                            {strings.about1}
+        <>
+            <Helmet>
+                <title>{strings.title} - Tomato.gg</title>
+            </Helmet>
+            <div style={{ padding: "2em", paddingTop: "5em" }}>
+                <div className="narrowpage">
+                    <Paper
+                        style={{
+                            backgroundColor: "rgba(40, 40, 70, 0.5)",
+                            padding: "1rem",
+                            color: "rgb(230, 230, 230)",
+                        }}
+                    >
+                        <div>
+                            <h1 style={{ fontSize: "1.5rem", fontWeight: "500" }}>{strings.h1}</h1>
+                            <span
+                                style={{
+                                    fontSize: "0.8rem",
+                                    lineHeight: "1.3rem",
+                                    color: "rgb(150,150,150)",
+                                }}
+                            >
+                                {formatString(strings.updated, localUpdatedDate)}
+                            </span>
                             <br />
                             <br />
-                            {strings.about2}
-                            <br />
-                            <br />
-                            {strings.about3}
-                            <br />
-                            <br />
-                            <a target="blank" href="/stats/NA/Superdude3800=1007264827">
-                                Superdude3800
-                            </a>{" "}
-                            {strings.about4}
-                            <br />
-                            <br />
-                            {strings.translators}
-                            <ul>
-                                {Object.entries(translators).map(([code, forLanguage], i) => (
-                                    <li key={i}>
-                                        {languages[code].name} -{" "}
-                                        {forLanguage.map(({ name, url }, i) => (
-                                            <React.Fragment key={i}>
-                                                {i !== 0 ? ", " : ""}
-                                                {url ? (
-                                                    <a target="blank" href={url} key={i}>
-                                                        {name}
-                                                    </a>
-                                                ) : (
-                                                    name
-                                                )}
-                                            </React.Fragment>
-                                        ))}
-                                    </li>
-                                ))}
-                            </ul>
-                            <br />
-                            <br />
-                            {formatString(
-                                strings.feedback,
-                                <a target="blank" href="https://discord.gg/qA2bV7K">
-                                    {strings.discord}
+                            <span style={{ fontSize: "0.9rem", lineHeight: "1.4rem" }}>
+                                {strings.about0}
+                                <br />
+                                {strings.about1}
+                                <br />
+                                <br />
+                                {strings.about2}
+                                <br />
+                                <br />
+                                {strings.about3}
+                                <br />
+                                <br />
+                                <a target="blank" href="/stats/NA/Superdude3800=1007264827">
+                                    Superdude3800
+                                </a>{" "}
+                                {strings.about4}
+                                <br />
+                                <br />
+                                {strings.translators}
+                                <ul>
+                                    {Object.entries(translators).map(([code, forLanguage], i) => (
+                                        <li key={i}>
+                                            {languages[code].name} -{" "}
+                                            {forLanguage.map(({ name, url }, i) => (
+                                                <React.Fragment key={i}>
+                                                    {i !== 0 ? ", " : ""}
+                                                    {url ? (
+                                                        <a target="blank" href={url} key={i}>
+                                                            {name}
+                                                        </a>
+                                                    ) : (
+                                                        name
+                                                    )}
+                                                </React.Fragment>
+                                            ))}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <br />
+                                <br />
+                                {formatString(
+                                    strings.feedback,
+                                    <a target="blank" href="https://discord.gg/qA2bV7K">
+                                        {strings.discord}
+                                    </a>
+                                )}
+                                <br />
+                                <br />
+                                {strings.thanks} <br />-{" "}
+                                <a target="blank" href="/stats/NA/goldflag=1011694618">
+                                    Goldflag
                                 </a>
-                            )}
-                            <br />
-                            <br />
-                            {strings.thanks} <br />-{" "}
-                            <a target="blank" href="/stats/NA/goldflag=1011694618">
-                                Goldflag
-                            </a>
-                        </span>
-                    </div>
-                </Paper>
+                            </span>
+                        </div>
+                    </Paper>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
