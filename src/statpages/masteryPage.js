@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
+import MediaQuery from 'react-responsive'
 
 // LOCAL
 import { ServerContext } from "Context";
@@ -10,6 +11,7 @@ import { serverConv } from "Data/conversions";
 import { Loader, FullPageTableWrapper, Info } from "Components";
 import Ad from "Ads/ads";
 import { useWindowSize } from "Functions/hooks";
+import { AdsContainer } from "Ads/adsContainer"
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -110,41 +112,79 @@ export default function MasteryPage(props) {
         table = <MasteryTable data={data} />;
     }
 
-    return (
-        <FullPageTableWrapper columns={windowSize.width > 1000 ? "auto 300px" : "auto"}>
+    const content = (
+        <>
             <div>
-                <Info>
-                    <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                        {serverConv[server]} {strings.mastery}
-                    </span>
-                    <br />
-                    <br />
-                    <span
-                        style={{
-                            fontSize: "0.9rem",
-                            lineHeight: "1rem",
-                            color: "rgb(130,130,130)",
-                        }}
-                    >
-                        {formatString(
-                            strings.dataFrom,
-                            <a target="blank" href="https://mastery.poliroid.ru/">
-                                {" "}
-                                {strings.moeMod}{" "}
-                            </a>
-                        )}{" "}
-                        &#47;&#47;&#47; {strings.expand}
-                    </span>{" "}
-                    <br />
-                </Info>
-                {table}
+            <Info>
+                <span style={{ fontSize: "2rem", fontWeight: "500" }}>
+                    {serverConv[server]} {strings.mastery}
+                </span>
+                <br />
+                <br />
+                <span
+                    style={{
+                        fontSize: "0.9rem",
+                        lineHeight: "1rem",
+                        color: "rgb(130,130,130)",
+                    }}
+                >
+                    {formatString(
+                        strings.dataFrom,
+                        <a target="blank" href="https://mastery.poliroid.ru/">
+                            {" "}
+                            {strings.moeMod}{" "}
+                        </a>
+                    )}{" "}
+                    &#47;&#47;&#47; {strings.expand}
+                </span>{" "}
+                <br />
+            </Info>
+            {table}
+        </div>
+        {windowSize.width > 1000 ? (
+            <div style={{ padding: "0 0 0 1rem" }}>
+                <Ad slot={"mastery_sidebar_1"} styles={"responsive"} />{" "}
+                <Ad slot={"mastery_sidebar_1"} styles={"responsive"} />
             </div>
-            {windowSize.width > 1000 ? (
-                <div style={{ padding: "0 0 0 1rem" }}>
-                    <Ad slot={"mastery_sidebar_1"} styles={"responsive"} />{" "}
-                    <Ad slot={"mastery_sidebar_1"} styles={"responsive"} />
-                </div>
-            ) : null}
-        </FullPageTableWrapper>
+        ) : null}
+        </>
+    )
+
+    return (
+        <>
+            <MediaQuery maxWidth={1000}>
+                <FullPageTableWrapper columns={"auto"}>
+                    <div>{content}</div>
+                </FullPageTableWrapper>
+            </MediaQuery>
+            <MediaQuery minWidth={1001} maxWidth={1799}>
+                <FullPageTableWrapper columns={"auto 180px"}>
+                    <div>{content}</div>
+                    <div>
+                        <AdsContainer flexDir={"column"}>
+                            <Ad slot={"mastery_sidebar_1"} styles={"160x600"} />
+                            <Ad slot={"mastery_sidebar_2"} styles={"160x600"} />
+                        </AdsContainer>  
+                    </div>               
+                </FullPageTableWrapper>
+            </MediaQuery>
+            <MediaQuery minWidth={1800}>
+                <FullPageTableWrapper columns={"180px auto 180px"}>
+                    <div>
+                        <AdsContainer flexDir={"column"}>
+                            <Ad slot={"mastery_sidebar_1"} styles={"160x600"} />
+                            <Ad slot={"mastery_sidebar_2"} styles={"160x600"} />
+                        </AdsContainer>  
+                    </div>                    
+                    <div>{content}</div>
+                    <div>
+                        <AdsContainer flexDir={"column"}>
+                            <Ad slot={"mastery_sidebar_1"} styles={"160x600"} />
+                            <Ad slot={"mastery_sidebar_2"} styles={"160x600"} />
+                        </AdsContainer>  
+                    </div>      
+                </FullPageTableWrapper>
+            </MediaQuery>
+        </>
     );
 }

@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
+import MediaQuery from 'react-responsive'
 
 // LOCAL
 import { ServerContext } from "Context";
@@ -11,6 +12,7 @@ import { TabPanel, CustomTabs, CustomTab } from "../components/customTabs";
 import { Loader, FullPageTableWrapper, Info } from "Components";
 import { serverConv } from "Data/conversions";
 import Ad from "Ads/ads";
+import { AdsContainer } from "Ads/adsContainer"
 import { useWindowSize } from "Functions/hooks";
 
 const trackingId = process.env.REACT_APP_GA;
@@ -194,61 +196,91 @@ export default function MoEPage(props) {
         changeTable65 = <MoETracker data={changeData} moe={"65"} />;
     }
 
-    return (
-        <FullPageTableWrapper columns={windowSize.width > 1000 ? "auto 300px" : "auto"}>
-            <div>
-                <Info>
-                    <span style={{ fontSize: "2rem", fontWeight: "500" }}>
-                        {serverConv[server]} {strings.moe}
-                    </span>
-                    <br />
+    const content = (
+        <div>
+            <Info>
+                <span style={{ fontSize: "2rem", fontWeight: "500" }}>
+                    {serverConv[server]} {strings.moe}
+                </span>
+                <br />
 
+                <br />
+                <span
+                    style={{
+                        fontSize: "0.9rem",
+                        lineHeight: "1rem",
+                        color: "rgb(130,130,130)",
+                    }}
+                >
+                    {formatString(
+                        strings.dataFrom,
+                        <a target="blank" href="https://gunmarks.poliroid.ru/">
+                            {" "}
+                            {strings.moeMod}{" "}
+                        </a>
+                    )}{" "}
+                    &#47;&#47;&#47; {strings.expand}
                     <br />
-                    <span
-                        style={{
-                            fontSize: "0.9rem",
-                            lineHeight: "1rem",
-                            color: "rgb(130,130,130)",
-                        }}
-                    >
-                        {formatString(
-                            strings.dataFrom,
-                            <a target="blank" href="https://gunmarks.poliroid.ru/">
-                                {" "}
-                                {strings.moeMod}{" "}
-                            </a>
-                        )}{" "}
-                        &#47;&#47;&#47; {strings.expand}
-                        <br />
-                        {strings.avg}
-                    </span>
-                    <br />
-                </Info>
-                <CustomTabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto">
-                    <CustomTab label={strings.expected} />
-                    <CustomTab label={strings.exp95change} />
-                    <CustomTab label={strings.exp85change} />
-                    <CustomTab label={strings.exp65change} />
-                </CustomTabs>
-                <TabPanel value={value} index={0}>
-                    {table}
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    {changeTable95}
-                </TabPanel>
-                <TabPanel value={value} index={2}>
-                    {changeTable85}
-                </TabPanel>
-                <TabPanel value={value} index={3}>
-                    {changeTable65}
-                </TabPanel>
-            </div>
-            {windowSize.width > 1000 ? (
-                <div style={{ padding: "0 0 0 1rem" }}>
-                    <Ad slot={"moe_sidebar_1"} styles={"responsive"} />{" "}
-                    <Ad slot={"moe_sidebar_2"} styles={"responsive"} />
-                </div>
-            ) : null}
-        </FullPageTableWrapper>
+                    {strings.avg}
+                </span>
+                <br />
+            </Info>
+            <CustomTabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto">
+                <CustomTab label={strings.expected} />
+                <CustomTab label={strings.exp95change} />
+                <CustomTab label={strings.exp85change} />
+                <CustomTab label={strings.exp65change} />
+            </CustomTabs>
+            <TabPanel value={value} index={0}>
+                {table}
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                {changeTable95}
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                {changeTable85}
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+                {changeTable65}
+            </TabPanel>
+        </div>
+    )
+
+    return (
+        <>
+            <MediaQuery maxWidth={1000}>
+                <FullPageTableWrapper columns={"auto"}>
+                    <div>{content}</div>
+                </FullPageTableWrapper>
+            </MediaQuery>
+            <MediaQuery minWidth={1001} maxWidth={1799}>
+                <FullPageTableWrapper columns={"auto 180px"}>
+                    <div>{content}</div>
+                    <div>
+                        <AdsContainer flexDir={"column"}>
+                            <Ad slot={"moe_sidebar_1"} styles={"160x600"} />
+                            <Ad slot={"moe_sidebar_2"} styles={"160x600"} />
+                        </AdsContainer>  
+                    </div>               
+                </FullPageTableWrapper>
+            </MediaQuery>
+            <MediaQuery minWidth={1800}>
+                <FullPageTableWrapper columns={"180px auto 180px"}>
+                    <div>
+                        <AdsContainer flexDir={"column"}>
+                            <Ad slot={"moe_sidebar_1"} styles={"160x600"} />
+                            <Ad slot={"moe_sidebar_2"} styles={"160x600"} />
+                        </AdsContainer>  
+                    </div>                    
+                    <div>{content}</div>
+                    <div>
+                        <AdsContainer flexDir={"column"}>
+                            <Ad slot={"moe_sidebar_1"} styles={"160x600"} />
+                            <Ad slot={"moe_sidebar_2"} styles={"160x600"} />
+                        </AdsContainer>  
+                    </div>      
+                </FullPageTableWrapper>
+            </MediaQuery>
+        </>
     );
 }

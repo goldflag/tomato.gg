@@ -2,10 +2,13 @@
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
+import MediaQuery from 'react-responsive'
 
 // LOCAL
 import WN8Table from "./wn8Components/wn8Table";
 import { Loader, FullPageTableWrapper, Info } from "Components";
+import { AdsContainer } from "Ads/adsContainer"
+import Ad from "Ads/ads";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -38,8 +41,9 @@ export default function Leaderboards(props) {
             .then((data) => setData(data));
     }, []);
 
-    return (
-        <FullPageTableWrapper>
+
+    const content = (
+        <>
             <Info>
                 <span style={{ fontSize: "2rem", fontWeight: "500" }}>{strings.expected}</span>
                 <br />
@@ -61,6 +65,44 @@ export default function Leaderboards(props) {
                 <br />
             </Info>
             {data ? <WN8Table data={data} /> : <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />}
-        </FullPageTableWrapper>
+        </>
+    )
+
+    return (
+        <>
+            <MediaQuery maxWidth={1000}>
+                <FullPageTableWrapper columns={"auto"}>
+                    <div>{content}</div>
+                </FullPageTableWrapper>
+            </MediaQuery>
+            <MediaQuery minWidth={1001} maxWidth={1799}>
+                <FullPageTableWrapper columns={"auto 180px"}>
+                    <div>{content}</div>
+                    <div>
+                        <AdsContainer flexDir={"column"}>
+                            <Ad slot={"mastery_sidebar_1"} styles={"160x600"} />
+                            <Ad slot={"mastery_sidebar_2"} styles={"160x600"} />
+                        </AdsContainer>  
+                    </div>               
+                </FullPageTableWrapper>
+            </MediaQuery>
+            <MediaQuery minWidth={1800}>
+                <FullPageTableWrapper columns={"180px auto 180px"}>
+                    <div>
+                        <AdsContainer flexDir={"column"}>
+                            <Ad slot={"mastery_sidebar_1"} styles={"160x600"} />
+                            <Ad slot={"mastery_sidebar_2"} styles={"160x600"} />
+                        </AdsContainer>  
+                    </div>                    
+                    <div>{content}</div>
+                    <div>
+                        <AdsContainer flexDir={"column"}>
+                            <Ad slot={"mastery_sidebar_1"} styles={"160x600"} />
+                            <Ad slot={"mastery_sidebar_2"} styles={"160x600"} />
+                        </AdsContainer>  
+                    </div>      
+                </FullPageTableWrapper>
+            </MediaQuery>
+        </>
     );
 }
