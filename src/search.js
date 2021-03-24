@@ -59,6 +59,38 @@ const GetBot = styled(Button)`
     }
 `
 
+const WN8Colors = styled.div`
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+`
+const Row = styled.div`
+    display: flex;
+    background-color: ${({color}) => color};
+    padding: 0.5rem;
+`
+
+const Cell = styled.div`
+    padding: 0.5rem;
+    width: ${({width}) => width}px;
+`
+
+const WN8scale = [
+    { icon: "🦍", wn8: "4700", winrate: "70%", color: "#24073d"},
+    { icon: "🦧", wn8: "4000", winrate: "67%", color: "#310d59"},
+    { icon: "🐒", wn8: "3400", winrate: "64%", color: "#411d73"},
+    { icon: "🍇", wn8: "2900", winrate: "61%", color: "#522b99"},
+    { icon: "🍆", wn8: "2450", winrate: "58%", color: "#6844d4"},    
+    { icon: "🧊", wn8: "2000", winrate: "56%", color: "#3972C6"},
+    { icon: "🥥", wn8: "1600", winrate: "54%", color: "#4099BF"},
+    { icon: "🥒", wn8: "1200", winrate: "52%", color: "#4D7326"},
+    { icon: "🍈", wn8: "900", winrate: "50%", color: "#849B24"},
+    { icon: "🍋", wn8: "650", winrate: "48%", color: "#CCB800"},    
+    { icon: "🍊", wn8: "450", winrate: "47%", color: "#CC7A00"},
+    { icon: "🥕", wn8: "300", winrate: "46%", color: "#CD3333"},
+    { icon: "🍅", wn8: "0", winrate: "0%", color: "#930D0D"}
+]
+
 export default withRouter(function Search(props) {
     const { server, setServer } = useContext(ServerContext);
     const { mode, setMode } = useContext(SearchmodeContext);
@@ -149,6 +181,28 @@ export default withRouter(function Search(props) {
                     <Ad slot={"front_page"} styles={"300x250"} />
                 </AdsContainer>
             </MediaQuery>
+            <WN8Colors>
+                <div style={{
+                    display: "flex",
+                    padding: "1rem",
+                    backgroundColor: "rgba(40, 40, 70, 0.8)"    
+                }}>
+                    Color Scale
+                </div>
+                {WN8scale.map(({icon, wn8, winrate, color}) => 
+                    <Row color={color}>
+                        <Cell width={50}>
+                            {icon}
+                        </Cell>
+                        <Cell width={60}>
+                            {wn8}+
+                        </Cell>
+                        <Cell width={60}>
+                            {winrate}+
+                        </Cell>
+                    </Row>
+                )}
+            </WN8Colors>
         </Center>
     );
 });
