@@ -1,5 +1,6 @@
 // NPM
 import React, { useContext } from "react";
+import { Helmet } from "react-helmet";
 import LocalizedStrings from "Functions/localizedStrings";
 import MediaQuery from 'react-responsive'
 
@@ -29,6 +30,7 @@ const { formatString, ...strings } = LocalizedStrings({
 
 export default function RecentLeaderboards(props) {
     const { server } = useContext(ServerContext);
+    const titleString = formatString(strings.recentStats, { server: serverConv[server] });
 
     const content = (
         <div>
@@ -55,6 +57,9 @@ export default function RecentLeaderboards(props) {
 
     return (
         <>
+            <Helmet>
+                <title>{titleString} - Tomato.gg</title>
+            </Helmet>
             <MediaQuery maxWidth={1000}>
                 <FullPageTableWrapper columns={"auto"}>
                     <div>{content}</div>

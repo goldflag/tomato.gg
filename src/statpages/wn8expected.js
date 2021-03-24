@@ -1,5 +1,6 @@
 // NPM
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet"
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
 import MediaQuery from 'react-responsive'
@@ -70,6 +71,9 @@ export default function Leaderboards(props) {
 
     return (
         <>
+            <Helmet>
+                <title>{strings.expected} - Tomato.gg</title>
+            </Helmet>
             <MediaQuery maxWidth={1000}>
                 <FullPageTableWrapper columns={"auto"}>
                     <div>{content}</div>

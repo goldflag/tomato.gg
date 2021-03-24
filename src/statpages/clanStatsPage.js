@@ -1,5 +1,6 @@
 // NPM
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet"
 import { useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
 import ReactGA from "react-ga";
@@ -60,9 +61,9 @@ export default function ClanStatsPage() {
 
     const [clanData, setClanData] = useState("loading");
     const [validID, setValidID] = useState(true);
-    const [clanName, setClanName] = useState("");
-    const windowSize = useWindowSize();
+    const [clanName, setClanName] = useState(clan.split("=")[0] || "");
 
+    const windowSize = useWindowSize();
     async function fetchData(server, clanID) {
         setClanData("loading");
         const base = `https://api.worldoftanks.${serverConv[server]}/wot`;
@@ -87,6 +88,7 @@ export default function ClanStatsPage() {
             player.url = `/stats/${server}/${player.account_name}=${player.account_id}`;
         });
         setClanData(clanData);
+        setClanName(clanData?.tag);
     }
 
     useEffect(() => {
@@ -138,6 +140,10 @@ export default function ClanStatsPage() {
     }
 
     return (
+        <>
+        <Helmet>
+            <title>{clanName && `${clanName.toUpperCase()} - `}Tomato.gg</title>
+        </Helmet>
         <Container 
             columns={windowSize.width > 1000 ? "auto 190px" : "auto"}
             padding={windowSize.width > 1000 ? "1rem" : "0.5rem"}
@@ -151,5 +157,6 @@ export default function ClanStatsPage() {
                 null
             }
         </Container>
+        </>
     );
 }
