@@ -3,6 +3,7 @@ import React, { useState, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import MediaQuery from 'react-responsive'
+import { Button } from "@material-ui/core";
 
 // LOCAL
 import "CSS/search.css";
@@ -40,8 +41,21 @@ const AboutSection = styled.div`
     }
 `
 
-const ColoredText = styled.span`
-    color: ${Colors.red};
+const CT = styled.span`
+    color: ${({color}) => color};
+`
+
+const GetBot = styled(Button)`
+    color: rgb(220, 220, 220) !important;
+    font-size: 1rem !important;
+    font-style: "Roboto Mono" !important;
+    padding: 0.5rem 0.8rem !important;
+    border: 2px solid rgba(50, 60, 110, 0.9) !important;
+    border-radius: 100px !important;
+    background-color: rgba(50, 60, 110, 0.9) !important;
+    :hover {
+        border: 2px solid ${Colors.purple} !important;
+    }
 `
 
 export default withRouter(function Search(props) {
@@ -105,19 +119,28 @@ export default withRouter(function Search(props) {
                     />
                 </form>
             </TopSection>
-
             <MediaQuery minWidth={1000}>
                 <AboutSection>
-                    <h1>THE MOST ADVANCED WORLD OF TANKS <ColoredText>PLAYER STATS</ColoredText>, LEADERBOARDS, TANK STATS, AND CLAN STATS - ALL IN ONE PLACE</h1>
+                    <h1>THE MOST <CT color={Colors.red}>ADVANCED</CT> WORLD OF TANKS <CT color={Colors.purple}>PLAYER STATS</CT>, <CT color={Colors.purple}>LEADERBOARDS</CT>, <CT color={Colors.purple}>AND CLAN STATS</CT> - ALL IN ONE PLACE</h1>
                 </AboutSection>
+                {/* <a target="blank" href="https://discord.gg/qA2bV7K">
+                    <GetBot formAction={"www.google.com"}>
+                        <img src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"} style={{width: "30px"}} alt="discordlogo"/> &nbsp; Get the offical Tomato.gg bot
+                    </GetBot>
+                </a> */}
                 <AdsContainer flexDir={"row"}>
                     <Ad slot={"front_page"} styles={"970x250"} />
                 </AdsContainer>  
             </MediaQuery>
             <MediaQuery maxWidth={999}>
                 <AboutSection>
-                    <h1>THE MOST ADVANCED WORLD OF TANKS <ColoredText>PLAYER STATS</ColoredText>, LEADERBOARDS, TANK STATS, AND CLAN STATS - ALL IN ONE PLACE</h1>
+                    <h1 style={{fontSize: "1rem"}}>THE MOST <CT color={Colors.red}>ADVANCED</CT> WORLD OF TANKS <CT color={Colors.purple}>PLAYER STATS</CT>, <CT color={Colors.purple}>LEADERBOARDS</CT>, <CT color={Colors.purple}>AND CLAN STATS</CT> - ALL IN ONE PLACE</h1>
                 </AboutSection>
+                {/* <a target="blank" href="https://discord.gg/qA2bV7K">
+                    <GetBot formAction={"www.google.com"}>
+                        <img src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"} style={{width: "30px"}} alt="discordlogo"/> &nbsp; Get the offical Tomato.gg bot
+                    </GetBot>
+                </a> */}
                 <AdsContainer flexDir={"row"}>
                     <Ad slot={"front_page"} styles={"300x250"} />
                 </AdsContainer>

@@ -15,7 +15,7 @@ import LanguageSelect from "./languageSelect";
 const StyledTopbar = styled.div`
     width: 100%;
     height: 4rem;
-    background: rgba(77, 88, 149);
+    background: rgb(77, 88, 149);
     border-bottom: 1px solid rgb(100, 95, 129);
     font-family: "Roboto";
     color: white;
