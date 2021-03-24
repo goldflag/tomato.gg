@@ -1,7 +1,8 @@
 // NPM
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-// import styled from "styled-components";
+import styled from "styled-components";
+import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
 
@@ -15,20 +16,20 @@ import worrydetective from "Assets/staticfrogs/worrydetective.png";
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
-// const Container = styled.div`
-//     padding: 1rem;
-//     max-width: 2200px;
-//     margin: 0 auto;
-//     // display: flex;
-//     // flex-direction: row;
-//     // justify-content: center;
-//     display: grid;
-//     grid-template-columns: auto 300px;
-//     @media screen and (max-width: 1000px) {
-//         padding: 0.4rem;
-//         padding-top: 0rem;
-//     }
-// `;
+const Container = styled.div`
+    padding: 1rem;
+    max-width: 2200px;
+    margin: 0 auto;
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: center;
+    display: grid;
+    grid-template-columns: auto 300px;
+    @media screen and (max-width: 1000px) {
+        padding: 0.4rem;
+        padding-top: 0rem;
+    }
+`;
 
 const { formatString, ...strings } = LocalizedStrings({
     en: { notFound: "Player {0} not found", correct: "Make sure the username and region are correct." },
@@ -228,7 +229,12 @@ class StatsPage extends Component {
             );
         }
 
-        return statTable;
+        return <>
+            <Helmet>
+                <title>{username && `${username} - `}Tomato.gg</title>
+            </Helmet>
+            {statTable}
+        </>;
     }
 }
 

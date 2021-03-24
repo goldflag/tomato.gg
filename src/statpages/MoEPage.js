@@ -1,5 +1,6 @@
 // NPM
 import React, { useEffect, useState, useContext } from "react";
+import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
 import MediaQuery from 'react-responsive'
@@ -246,6 +247,9 @@ export default function MoEPage(props) {
 
     return (
         <>
+            <Helmet>
+                <title>{strings.moe} - Tomato.gg</title>
+            </Helmet>
             <MediaQuery maxWidth={1000}>
                 <FullPageTableWrapper columns={"auto"}>
                     <div>{content}</div>

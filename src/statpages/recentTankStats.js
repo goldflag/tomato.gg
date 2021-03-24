@@ -1,5 +1,6 @@
 // NPM
 import React, { useEffect, useState, useContext } from "react";
+import { Helmet } from "react-helmet";
 import LocalizedStrings from "Functions/localizedStrings";
 import MediaQuery from 'react-responsive'
 
@@ -130,6 +131,9 @@ export default function RecentLeaderboards() {
 
     return (
         <>
+            <Helmet>
+                <title>{formatString(strings.title, serverConv[server])} - Tomato.gg</title>
+            </Helmet>
             <MediaQuery maxWidth={1000}>
                 <FullPageTableWrapper columns={"auto"}>
                     <div>{content}</div>

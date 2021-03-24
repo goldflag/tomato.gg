@@ -1,5 +1,6 @@
 // NPM
 import React, { useState, useContext } from "react";
+import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import MediaQuery from 'react-responsive'
@@ -97,6 +98,9 @@ export default withRouter(function Search(props) {
 
     return (
         <Center>
+            <Helmet>
+                <title>Tomato.gg</title>
+            </Helmet>
             <TopSection>
                 <img
                     src={TomatoLogo}
