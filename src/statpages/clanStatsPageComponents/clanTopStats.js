@@ -182,19 +182,19 @@ const { formatString, ...strings } = LocalizedStrings({
         provinces: "Provinzen",
         strongholds: "BW {0} {1}",
     },
-    es: {
+    es: {   
         created: "Creado: {0}",
         recentTab: "RECIENTE",
-        recent: "Reciente {0}",
+        recent: "{0} Reciente", // WR, WN8
         overallTab: "TOTAL",
-        overall: "Total {0}",
+        overall: "{0} Total", // WR, WN8
         clanRating: "Clasificación de Clan",
-        avgDaily: "Batallas Diarias Promedio",
-        avgPR: "Clasificación Personal Promedio",
+        avgDaily: "Promedio de Batallas Diarias",
+        avgPR: "Promedio de Clasificación Personal",
         playerCount: "Jugadores",
-        globalMap: "Mapa Global {0}",
+        globalMap: "{0} en Mapa Global", // WR, ELO
         provinces: "Provincias",
-        strongholds: "Fortaleza {0} {1}",
+        strongholds: "{1} de Fortaleza {0}", // {0} = Tier, {1} = WR, ELO
     },
     fr: {
         created: "Créé: {0}",

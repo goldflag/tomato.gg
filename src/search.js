@@ -37,7 +37,7 @@ const AboutSection = styled.div`
     max-width: 800px;
     text-align: center;
     h1 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         font-weight: 500;
     }
 `
@@ -144,6 +144,16 @@ export default withRouter(function Search(props) {
                         display: "flex",
                     }}
                 />
+                <MediaQuery minWidth={1000}>
+                    <AboutSection>
+                        <h1>THE MOST <CT color={Colors.red}>ADVANCED</CT> WORLD OF TANKS <CT color={Colors.purple}>PLAYER STATS</CT>, <CT color={Colors.purple}>LEADERBOARDS</CT>, <CT color={Colors.purple}>AND CLAN STATS</CT> - ALL IN ONE PLACE</h1>
+                    </AboutSection>
+                </MediaQuery>
+                <MediaQuery maxWidth={999}>
+                    <AboutSection>
+                        <h1 style={{fontSize: "1rem"}}>THE MOST <CT color={Colors.red}>ADVANCED</CT> WORLD OF TANKS <CT color={Colors.purple}>PLAYER STATS</CT>, <CT color={Colors.purple}>LEADERBOARDS</CT>, <CT color={Colors.purple}>AND CLAN STATS</CT> - ALL IN ONE PLACE</h1>
+                    </AboutSection>
+                </MediaQuery>
                 <form onSubmit={searchId}>
                     <SearchBar
                         name={name}
@@ -156,9 +166,6 @@ export default withRouter(function Search(props) {
                 </form>
             </TopSection>
             <MediaQuery minWidth={1000}>
-                <AboutSection>
-                    <h1>THE MOST <CT color={Colors.red}>ADVANCED</CT> WORLD OF TANKS <CT color={Colors.purple}>PLAYER STATS</CT>, <CT color={Colors.purple}>LEADERBOARDS</CT>, <CT color={Colors.purple}>AND CLAN STATS</CT> - ALL IN ONE PLACE</h1>
-                </AboutSection>
                 {/* <a target="blank" href="https://discord.gg/qA2bV7K">
                     <GetBot formAction={"www.google.com"}>
                         <img src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"} style={{width: "30px"}} alt="discordlogo"/> &nbsp; Get the offical Tomato.gg bot
@@ -169,9 +176,6 @@ export default withRouter(function Search(props) {
                 </AdsContainer>  
             </MediaQuery>
             <MediaQuery maxWidth={999}>
-                <AboutSection>
-                    <h1 style={{fontSize: "1rem"}}>THE MOST <CT color={Colors.red}>ADVANCED</CT> WORLD OF TANKS <CT color={Colors.purple}>PLAYER STATS</CT>, <CT color={Colors.purple}>LEADERBOARDS</CT>, <CT color={Colors.purple}>AND CLAN STATS</CT> - ALL IN ONE PLACE</h1>
-                </AboutSection>
                 {/* <a target="blank" href="https://discord.gg/qA2bV7K">
                     <GetBot formAction={"www.google.com"}>
                         <img src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"} style={{width: "30px"}} alt="discordlogo"/> &nbsp; Get the offical Tomato.gg bot
