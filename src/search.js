@@ -185,7 +185,7 @@ export default withRouter(function Search(props) {
                     <Ad slot={"front_page"} styles={"300x250"} />
                 </AdsContainer>
             </MediaQuery>
-            <WN8Colors>
+            {/* <WN8Colors>
                 <div style={{
                     display: "flex",
                     padding: "1rem",
@@ -206,7 +206,7 @@ export default withRouter(function Search(props) {
                         </Cell>
                     </Row>
                 )}
-            </WN8Colors>
+            </WN8Colors> */}
         </Center>
     );
 });
