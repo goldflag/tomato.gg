@@ -30,6 +30,7 @@ const Center = styled.div`
 
 const TopSection = styled.div`
     max-width: 800px;
+    margin-bottom: 2rem;
 `
 
 const AboutSection = styled.div`
