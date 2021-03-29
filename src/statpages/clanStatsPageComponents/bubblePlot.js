@@ -4,7 +4,7 @@ import { ResponsiveScatterPlot } from "@nivo/scatterplot";
 import styled from "styled-components";
 
 // LOCAL
-import { WN8color } from "Functions/colors";
+import { WN8Color } from "Styling/colors";
 import { clanPositions, commonStrings } from "Data/localizations";
 
 const CustomToolTip = styled.div`
@@ -66,7 +66,7 @@ const BubblePlotTooltip = ({ node, data }) => {
 
     return (
         <CustomToolTip>
-            <CustomColor color={WN8color(x)}>
+            <CustomColor color={WN8Color(x)}>
                 {headerContent}
                 <TooltipLabel size={0.8}>{clanPositions[role]}</TooltipLabel>
             </CustomColor>
@@ -89,7 +89,7 @@ const CustomNode = ({ node, x, y, size, color, blendMode, onMouseEnter, onMouseM
         <g transform={`translate(${x},${y})`}>
             <circle
                 r={size}
-                fill={WN8color(node.data.x)}
+                fill={WN8Color(node.data.x)}
                 style={{ mixBlendMode: blendMode }}
                 onMouseEnter={onMouseEnter}
                 onMouseMove={onMouseMove}

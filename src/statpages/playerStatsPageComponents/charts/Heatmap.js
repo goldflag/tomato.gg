@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsiveHeatMap } from "@nivo/heatmap";
-import { WN8color, WRcolor } from "Functions/colors";
+import { WN8Color, WRColor } from "Styling/colors";
 export default function WN8Heatmap({ data, type }) {
     return (
         <div style={{ height: "310px" }}>
@@ -49,7 +49,7 @@ export default function WN8Heatmap({ data, type }) {
                         style={{ cursor: "pointer" }}
                     >
                         <path
-                            fill={type === "wn8" ? WN8color(value) : WRcolor(value)}
+                            fill={type === "wn8" ? WN8Color(value) : WRColor(value)}
                             fillOpacity={opacity}
                             strokeWidth={1}
                             stroke={"rgba(0, 0, 0, 0)"}

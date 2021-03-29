@@ -8,7 +8,7 @@ import LocalizedStrings from "Functions/localizedStrings";
 // LOCAL
 import { Loader } from "Components";
 import { tierConv } from "Data/conversions";
-import { rankColor } from "Functions/colors";
+import { rankColor } from "Styling/colors";
 import { Capital, commonStrings } from "Data/localizations";
 
 const Styles = styled.div`

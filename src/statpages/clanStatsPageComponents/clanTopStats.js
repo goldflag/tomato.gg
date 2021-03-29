@@ -4,10 +4,10 @@ import styled from "styled-components";
 import parse from "html-react-parser";
 import Scrollbar from "react-scrollbars-custom";
 import LocalizedStrings from "Functions/localizedStrings";
-import MediaQuery from 'react-responsive'
+import MediaQuery from "react-responsive";
 
 // LOCAL
-import { WN8color, WRcolor } from "Functions/colors";
+import { WN8Color, WRColor } from "Styling/colors";
 import { Capital, commonStrings } from "Data/localizations";
 import BubblePlot from "./bubblePlot";
 import { CustomTabs, CustomTab } from "../../components/customTabs";
@@ -56,7 +56,7 @@ const StatBox = styled.div`
     flex-direction: column;
     justify-content: center;
     background-color: ${({ val, stat }) =>
-        stat === "WN8" ? WN8color(val) : stat === "winrate" ? WRcolor(val) : "rgba(70, 70, 110, 0.5)"};
+        stat === "WN8" ? WN8Color(val) : stat === "winrate" ? WRColor(val) : "rgba(70, 70, 110, 0.5)"};
     padding: 1rem;
     margin: 0.5rem 0.5rem;
     font-size: 1.5rem;
@@ -182,7 +182,7 @@ const { formatString, ...strings } = LocalizedStrings({
         provinces: "Provinzen",
         strongholds: "BW {0} {1}",
     },
-    es: {   
+    es: {
         created: "Creado: {0}",
         recentTab: "RECIENTE",
         recent: "{0} Reciente", // WR, WN8
@@ -457,7 +457,7 @@ export default function ClanTopStats({
                     ))}
                 </BottomGrid>
             </SplitSection>
-            <AdsContainer>            
+            <AdsContainer>
                 <MediaQuery maxWidth={999}>
                     <Ad slot={"main_stats_banner"} styles={"300x50"} />
                 </MediaQuery>

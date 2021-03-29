@@ -10,7 +10,8 @@
             "CSS/*": ["src/css/*"],
             "Data/*": ["src/data/*"],
             "Functions/*": ["src/functions/*"],
-            "Material/*": ["src/material/*"]
+            "Material/*": ["src/material/*"],
+            "Styling/*": ["src/styling/*"]
         }
     }
 }

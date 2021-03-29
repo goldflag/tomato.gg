@@ -5,7 +5,7 @@ import { useTable } from "react-table";
 import styled from "styled-components";
 
 // LOCAL
-import { WN8color, WRcolor } from "Functions/colors";
+import { WN8Color, WRColor } from "Styling/colors";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -100,7 +100,7 @@ export default function SmallLeaderboard(props) {
                                 padding: "8px",
                                 margin: "-8px -8px",
                                 color: "white",
-                                backgroundColor: WN8color(res[i][props.type]),
+                                backgroundColor: WN8Color(res[i][props.type]),
                             }}
                         >
                             {res[i][props.type]}
@@ -113,7 +113,7 @@ export default function SmallLeaderboard(props) {
                                 padding: "8px",
                                 margin: "-8px -8px",
                                 color: "white",
-                                backgroundColor: WRcolor(res[i][props.type]),
+                                backgroundColor: WRColor(res[i][props.type]),
                             }}
                         >
                             {res[i][props.type]}

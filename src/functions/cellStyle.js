@@ -1,15 +1,15 @@
-import { WN8color, WRcolor } from "./colors";
+import { WN8Color, WRColor } from "Styling/colors";
 
 export default function setColor(isSorted, column, value) {
     if (column === "wn8" || column === "overallWN8" || column === "recentWN8")
         return {
-            backgroundColor: WN8color(value),
+            backgroundColor: WN8Color(value),
             color: "white",
             padding: "10px",
         };
     else if (column === "winrate" || column === "overallWinrate" || column === "recentWinrate")
         return {
-            backgroundColor: WRcolor(value === "-" ? value : value.slice(0, -1)),
+            backgroundColor: WRColor(value === "-" ? value : value.slice(0, -1)),
             color: "white",
             padding: "10px",
         };

@@ -5,9 +5,9 @@ import LocalizedStrings from "Functions/localizedStrings";
 import { Link } from "react-router-dom";
 
 // LOCAL
-import { WN8color, WRcolor, PRcolor, battlesColor } from "Functions/colors";
 import { Capital, clanPositions, commonStrings } from "Data/localizations";
 import { serverConv } from "Data/conversions";
+import Colors, { WN8Color, WRColor, PRColor } from "Styling/colors";
 
 const Root = styled.div`
     flex-grow: 1;
@@ -203,19 +203,19 @@ export default function TopStats(props) {
     );
 
     const statCards = [
-        { label: strings.overallWN8, value: props.data.overallWN8, colorFn: WN8color },
-        { label: strings.overallWR, value: props.data.overallWinrate + "%", colorFn: WRcolor },
-        { label: strings.recentWN8, value: props.data.recentWN8, colorFn: WN8color },
-        { label: strings.recentWR, value: props.data.recentWinrate + "%", colorFn: WRcolor },
-        { label: strings.wgRating, value: props.WGRating, colorFn: PRcolor },
-        { label: Capital(commonStrings.battles), value: props.battles, colorFn: battlesColor },
+        { label: strings.overallWN8, value: props.data.overallWN8, colorFn: WN8Color },
+        { label: strings.overallWR, value: props.data.overallWinrate + "%", colorFn: WRColor },
+        { label: strings.recentWN8, value: props.data.recentWN8, colorFn: WN8Color },
+        { label: strings.recentWR, value: props.data.recentWinrate + "%", colorFn: WRColor },
+        { label: strings.wgRating, value: props.WGRating, colorFn: PRColor },
+        { label: Capital(commonStrings.battles), value: props.battles, colorFn: () => Colors.battles },
     ];
 
     return (
         <Root>
-            <MobilePlayerName backgroundColor={WN8color(props.data.recentWN8)}>{playerInfo}</MobilePlayerName>
+            <MobilePlayerName backgroundColor={WN8Color(props.data.recentWN8)}>{playerInfo}</MobilePlayerName>
             <StatsRow>
-                <PlayerName backgroundColor={WN8color(props.data.recentWN8)}>{playerInfo}</PlayerName>
+                <PlayerName backgroundColor={WN8Color(props.data.recentWN8)}>{playerInfo}</PlayerName>
                 {statCards.map(({ label, value, colorFn }, i) => (
                     <StatCard backgroundColor={colorFn(value)} key={i}>
                         <StatCardLabel>{label}</StatCardLabel>
