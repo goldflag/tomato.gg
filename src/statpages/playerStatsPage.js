@@ -18,17 +18,6 @@ const backend = process.env.REACT_APP_BACKEND;
 
 const Container = styled.div`
     padding: 1rem;
-    max-width: 2200px;
-    margin: 0 auto;
-    // display: flex;
-    // flex-direction: row;
-    // justify-content: center;
-    display: grid;
-    grid-template-columns: auto 300px;
-    @media screen and (max-width: 1000px) {
-        padding: 0.4rem;
-        padding-top: 0rem;
-    }
 `;
 
 const { formatString, ...strings } = LocalizedStrings({
@@ -213,7 +202,7 @@ class StatsPage extends Component {
             statTable = <MainTabs {...this.state} />;
         } else {
             statTable = (
-                <>
+                <Container>
                     <span style={{ fontSize: "2rem" }}>
                         {formatString(strings.notFound, username)}{" "}
                         <img
@@ -225,7 +214,7 @@ class StatsPage extends Component {
                     <br />
                     <br />
                     {strings.correct}
-                </>
+                </Container>
             );
         }
 

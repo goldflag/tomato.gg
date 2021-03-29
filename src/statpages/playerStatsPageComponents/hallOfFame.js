@@ -41,8 +41,7 @@ const OverallTop = styled.div`
             "dpg" 
             "wn8";
         grid-template-columns: 1fr;
-        grid-template-rows: 200px;
-                            150px;
+        grid-template-rows: 200px 150px;
     }
 `;
 
@@ -53,8 +52,15 @@ const OverallBottom = styled.div`
     grid-template-areas: "battles dr winrate kd frags";
 
     @media screen and (max-width: 1000px) {
-        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "winrate"
+            "frags" 
+            "kd"
+            "dr"
+            "battles";
+        grid-template-columns: 1fr;
         grid-template-rows: 150px;
+
     }
 `;
 

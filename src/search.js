@@ -198,26 +198,26 @@ export default withRouter(function Search(props) {
                     />
                 </form>
             </TopSection>
-            <MediaQuery minWidth={1000}>
-                {/* <a target="blank" href="https://discord.gg/qA2bV7K">
+            {/* <MediaQuery minWidth={1000}>
+                <a target="blank" href="https://discord.gg/qA2bV7K">
                     <GetBot formAction={"www.google.com"}>
                         <img src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"} style={{width: "30px"}} alt="discordlogo"/> &nbsp; Get the offical Tomato.gg bot
                     </GetBot>
-                </a> */}
+                </a>
                 <AdsContainer flexDir={"row"}>
                     <Ad slot={"front_page"} styles={"970x250"} />
                 </AdsContainer>
             </MediaQuery>
             <MediaQuery maxWidth={999}>
-                {/* <a target="blank" href="https://discord.gg/qA2bV7K">
+                <a target="blank" href="https://discord.gg/qA2bV7K">
                     <GetBot formAction={"www.google.com"}>
                         <img src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"} style={{width: "30px"}} alt="discordlogo"/> &nbsp; Get the offical Tomato.gg bot
                     </GetBot>
-                </a> */}
+                </a>
                 <AdsContainer flexDir={"row"}>
                     <Ad slot={"front_page"} styles={"300x250"} />
                 </AdsContainer>
-            </MediaQuery>
+            </MediaQuery> */}
             {/* <WN8Colors>
                 <div
                     style={{
