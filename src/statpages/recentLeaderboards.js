@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 import { Helmet } from "react-helmet";
 import LocalizedStrings from "Functions/localizedStrings";
-import MediaQuery from 'react-responsive'
+import MediaQuery from "react-responsive";
 
 // LOCAL
 import Leaderboard from "./recentLeaderboardComponents/leaderboard";
@@ -10,7 +10,7 @@ import { FullPageTableWrapper, Info } from "Components";
 import { ServerContext } from "Context";
 import { serverConv } from "Data/conversions";
 import Ad from "Ads/ads";
-import { AdsContainer } from "Ads/adsContainer"
+import { AdsContainer } from "Ads/adsContainer";
 
 const { formatString, ...strings } = LocalizedStrings({
     en: { recentStats: "{server} Recent Stats Leaderboard", minGames: "Mininum 75 games in period" },
@@ -53,7 +53,7 @@ export default function RecentLeaderboards(props) {
             </Info>
             <Leaderboard />
         </div>
-    )
+    );
 
     return (
         <>
@@ -67,13 +67,13 @@ export default function RecentLeaderboards(props) {
             </MediaQuery>
             <MediaQuery minWidth={1001}>
                 <FullPageTableWrapper columns={"auto 320px"}>
-                    <div style={{minWidth: 0}}>{content}</div>
+                    <div style={{ minWidth: 0 }}>{content}</div>
                     <div>
                         <AdsContainer flexDir={"column"}>
                             <Ad slot={"leaderboards_sidebar_1"} styles={"300x250"} />
                             <Ad slot={"leaderboards_sidebar_2"} styles={"300x600"} />
-                        </AdsContainer>  
-                    </div>               
+                        </AdsContainer>
+                    </div>
                 </FullPageTableWrapper>
             </MediaQuery>
         </>

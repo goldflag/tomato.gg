@@ -1,4 +1,3 @@
-
 import styled from "styled-components";
 
 export const AdsContainer = styled.div`
@@ -9,5 +8,5 @@ export const AdsContainer = styled.div`
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-    // flex-direction: ${({flexDir}) => flexDir || "column"};
+    // flex-direction: ${({ flexDir }) => flexDir || "column"};
 `;

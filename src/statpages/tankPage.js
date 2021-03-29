@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
 import styled from "styled-components";
 import LocalizedStrings from "Functions/localizedStrings";
-import MediaQuery from 'react-responsive'
+import MediaQuery from "react-responsive";
 
 // LOCAL
 import { Loader, FullPageTableWrapper } from "Components";
@@ -16,7 +16,7 @@ import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
 import { nationAdjConv, classDescConv, serverConv, tierConv, classConv } from "Data/conversions";
 import { Capital, commonStrings } from "Data/localizations";
 import Ad from "Ads/ads";
-import { AdsContainer } from "Ads/adsContainer"
+import { AdsContainer } from "Ads/adsContainer";
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -189,11 +189,7 @@ export default function TankPage(props) {
         <>
             <Helmet>
                 <title>
-                    {
-                        typeof data === "string"
-                            ? ""
-                            : `${data.meta.short_name} - `
-                    }
+                    {typeof data === "string" ? "" : `${data.meta.short_name} - `}
                     Tomato.gg
                 </title>
             </Helmet>
@@ -204,13 +200,13 @@ export default function TankPage(props) {
             </MediaQuery>
             <MediaQuery minWidth={1001}>
                 <FullPageTableWrapper columns={"auto 320px"}>
-                    <div style={{minWidth: 0}}>{content}</div>
+                    <div style={{ minWidth: 0 }}>{content}</div>
                     <div>
                         <AdsContainer flexDir={"column"}>
                             <Ad slot={"tank_stats_sidebar_1"} styles={"300x250"} />
                             <Ad slot={"tank_stats_sidebar_2"} styles={"300x600"} />
-                        </AdsContainer>  
-                    </div>               
+                        </AdsContainer>
+                    </div>
                 </FullPageTableWrapper>
             </MediaQuery>
         </>

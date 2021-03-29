@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
 import { Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
@@ -57,8 +57,8 @@ export default function StatsReference(props) {
                                 >
                                     Understanding Tank Curves
                                 </h2>
-                                You can find accessible and easy to use tank curves in <Link to="/tanks">Tank Stats</Link>{" "}
-                                and more detailed tank curves at{" "}
+                                You can find accessible and easy to use tank curves in{" "}
+                                <Link to="/tanks">Tank Stats</Link> and more detailed tank curves at{" "}
                                 <a target="blank" href="https://https://wot-news.com/stat/server/us/norm/en">
                                     Wot-news.com
                                 </a>
@@ -70,11 +70,11 @@ export default function StatsReference(props) {
                                 </strong>
                                 .<br />
                                 <br />
-                                Tank curves are the most accurate in the range of the typical player's stats, generally from
-                                45% to 55%. Less than 10% of the playerbase has a winrate of over 54% no matter how you
-                                measure it. <br />
-                                Curves above 60% or 2700 WN8 have very few datapoints and are should not be taken seriously
-                                as they are extremely volatile. <br />
+                                Tank curves are the most accurate in the range of the typical player's stats, generally
+                                from 45% to 55%. Less than 10% of the playerbase has a winrate of over 54% no matter how
+                                you measure it. <br />
+                                Curves above 60% or 2700 WN8 have very few datapoints and are should not be taken
+                                seriously as they are extremely volatile. <br />
                                 <br />
                                 Here are some example tank curves that display various attributes:
                                 <div style={{ margin: "1rem 0 1rem 0" }}>
@@ -112,18 +112,18 @@ export default function StatsReference(props) {
                                             color="rgb(212, 38, 186)"
                                         /> */}
                                     </div>
-                                    Percentile graphs have significantly less variation than tank curves, and the majority
-                                    of percentile graphs have the same shape. <br />
-                                    For the Bourrasque, we can see the 50th percentile (median) Bourrasque owner has about
-                                    1500 DPG. 50% of Bourrasque drivers do better and 50% do worse.
+                                    Percentile graphs have significantly less variation than tank curves, and the
+                                    majority of percentile graphs have the same shape. <br />
+                                    For the Bourrasque, we can see the 50th percentile (median) Bourrasque owner has
+                                    about 1500 DPG. 50% of Bourrasque drivers do better and 50% do worse.
                                     <br />
                                     <br />
-                                    Percentile graphs are great for seeing how well you perform in a vehicle comapred to the
-                                    WoT playerbase.
+                                    Percentile graphs are great for seeing how well you perform in a vehicle comapred to
+                                    the WoT playerbase.
                                     <br />
                                     <br />
-                                    Players are only added into the database that the percentile graphs are calculated from
-                                    if they reach a minimum game count in the vehicle (75 games for tier 8s in this
+                                    Players are only added into the database that the percentile graphs are calculated
+                                    from if they reach a minimum game count in the vehicle (75 games for tier 8s in this
                                     example).
                                 </div>
                             </span>

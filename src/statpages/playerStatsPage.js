@@ -229,12 +229,14 @@ class StatsPage extends Component {
             );
         }
 
-        return <>
-            <Helmet>
-                <title>{username && `${username} - `}Tomato.gg</title>
-            </Helmet>
-            {statTable}
-        </>;
+        return (
+            <>
+                <Helmet>
+                    <title>{username && `${username} - `}Tomato.gg</title>
+                </Helmet>
+                {statTable}
+            </>
+        );
     }
 }
 

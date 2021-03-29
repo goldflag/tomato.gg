@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Helmet } from "react-helmet";
 import LocalizedStrings from "Functions/localizedStrings";
-import MediaQuery from 'react-responsive'
+import MediaQuery from "react-responsive";
 
 // LOCAL
 import { serverConv } from "Data/conversions";
@@ -13,7 +13,7 @@ import RecentTanksAvgTable from "./recentTankStatsComponents/RecentTanksAvgTable
 import { useURLState } from "Functions/hooks";
 import { commonStrings } from "Data/localizations";
 import Ad from "Ads/ads";
-import { AdsContainer } from "Ads/adsContainer"
+import { AdsContainer } from "Ads/adsContainer";
 const backend = process.env.REACT_APP_BACKEND;
 
 const { formatString, ...strings } = LocalizedStrings({
@@ -90,9 +90,8 @@ export default function RecentLeaderboards() {
             .then((res) => setData(res));
     }, [server, time]);
 
-
     const content = (
-        <div style={{minWidth: "0"}}>
+        <div style={{ minWidth: "0" }}>
             <Info>
                 <span style={{ fontSize: "2rem", fontWeight: "500" }}>
                     {formatString(strings.title, serverConv[server])}
@@ -127,7 +126,7 @@ export default function RecentLeaderboards() {
                 <h2>{strings.error}</h2>
             )}
         </div>
-    )
+    );
 
     return (
         <>
@@ -146,8 +145,8 @@ export default function RecentLeaderboards() {
                         <AdsContainer flexDir={"column"}>
                             <Ad slot={"tank_stats_sidebar_1"} styles={"160x600"} />
                             <Ad slot={"tank_stats_sidebar_2"} styles={"160x600"} />
-                        </AdsContainer>  
-                    </div>               
+                        </AdsContainer>
+                    </div>
                 </FullPageTableWrapper>
             </MediaQuery>
             <MediaQuery minWidth={1800}>
@@ -156,15 +155,15 @@ export default function RecentLeaderboards() {
                         <AdsContainer flexDir={"column"}>
                             <Ad slot={"tank_stats_sidebar_1"} styles={"160x600"} />
                             <Ad slot={"tank_stats_sidebar_2"} styles={"160x600"} />
-                        </AdsContainer>  
-                    </div>                    
+                        </AdsContainer>
+                    </div>
                     <div>{content}</div>
                     <div>
                         <AdsContainer flexDir={"column"}>
                             <Ad slot={"tank_stats_sidebar_1"} styles={"160x600"} />
                             <Ad slot={"tank_stats_sidebar_2"} styles={"160x600"} />
-                        </AdsContainer>  
-                    </div>      
+                        </AdsContainer>
+                    </div>
                 </FullPageTableWrapper>
             </MediaQuery>
         </>

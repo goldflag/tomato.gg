@@ -10,8 +10,5 @@ export default function ServerStatsPage(props) {
         ReactGA.pageview("/server-stats");
     }, []);
 
-    return (
-        <div>
-        </div>
-    );
+    return <div></div>;
 }

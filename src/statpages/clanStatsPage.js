@@ -1,11 +1,11 @@
 // NPM
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet";
 import { useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
-import MediaQuery from 'react-responsive'
+import MediaQuery from "react-responsive";
 
 // LOCAL
 import { serverConv } from "Data/conversions";
@@ -23,11 +23,11 @@ const backend = process.env.REACT_APP_BACKEND;
 const APIKey = process.env.REACT_APP_API_KEY;
 
 const Container = styled.div`
-    padding: ${({padding}) => padding};
+    padding: ${({ padding }) => padding};
     max-width: 2200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: ${({columns}) => columns};
+    grid-template-columns: ${({ columns }) => columns};
 `;
 
 const AdsContainer = styled.div`
@@ -112,7 +112,7 @@ export default function ClanStatsPage() {
         clanPage = (
             <>
                 <ClanTopStats {...clanData} />
-                <AdsContainer>            
+                <AdsContainer>
                     <MediaQuery maxWidth={999}>
                         <Ad slot={"main_stats_banner"} styles={"300x50"} />
                     </MediaQuery>
@@ -141,22 +141,21 @@ export default function ClanStatsPage() {
 
     return (
         <>
-        <Helmet>
-            <title>{clanName && `${clanName.toUpperCase()} - `}Tomato.gg</title>
-        </Helmet>
-        <Container 
-            columns={windowSize.width > 1000 ? "auto 190px" : "auto"}
-            padding={windowSize.width > 1000 ? "1rem" : "0.5rem"}
-        >
-            <div style={{ minWidth: 0 }}>{clanPage}</div>
-            {windowSize.width > 1000 ? 
-                <div style={{ padding: "0 0 0 1rem"}}>
-                    <Ad slot={"clan_sidebar_1"} styles={"160x600"}/> <Ad slot={"clan_sidebar_2"} styles={"160x600"}/>
-                </div>                
-                : 
-                null
-            }
-        </Container>
+            <Helmet>
+                <title>{clanName && `${clanName.toUpperCase()} - `}Tomato.gg</title>
+            </Helmet>
+            <Container
+                columns={windowSize.width > 1000 ? "auto 190px" : "auto"}
+                padding={windowSize.width > 1000 ? "1rem" : "0.5rem"}
+            >
+                <div style={{ minWidth: 0 }}>{clanPage}</div>
+                {windowSize.width > 1000 ? (
+                    <div style={{ padding: "0 0 0 1rem" }}>
+                        <Ad slot={"clan_sidebar_1"} styles={"160x600"} />{" "}
+                        <Ad slot={"clan_sidebar_2"} styles={"160x600"} />
+                    </div>
+                ) : null}
+            </Container>
         </>
     );
 }

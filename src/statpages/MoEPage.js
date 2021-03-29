@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
-import MediaQuery from 'react-responsive'
+import MediaQuery from "react-responsive";
 
 // LOCAL
 import { ServerContext } from "Context";
@@ -13,7 +13,7 @@ import { TabPanel, CustomTabs, CustomTab } from "../components/customTabs";
 import { Loader, FullPageTableWrapper, Info } from "Components";
 import { serverConv } from "Data/conversions";
 import Ad from "Ads/ads";
-import { AdsContainer } from "Ads/adsContainer"
+import { AdsContainer } from "Ads/adsContainer";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -243,7 +243,7 @@ export default function MoEPage(props) {
                 {changeTable65}
             </TabPanel>
         </div>
-    )
+    );
 
     return (
         <>
@@ -262,8 +262,8 @@ export default function MoEPage(props) {
                         <AdsContainer flexDir={"column"}>
                             <Ad slot={"moe_sidebar_1"} styles={"160x600"} />
                             <Ad slot={"moe_sidebar_2"} styles={"160x600"} />
-                        </AdsContainer>  
-                    </div>               
+                        </AdsContainer>
+                    </div>
                 </FullPageTableWrapper>
             </MediaQuery>
             <MediaQuery minWidth={1800}>
@@ -272,15 +272,15 @@ export default function MoEPage(props) {
                         <AdsContainer flexDir={"column"}>
                             <Ad slot={"moe_sidebar_1"} styles={"160x600"} />
                             <Ad slot={"moe_sidebar_2"} styles={"160x600"} />
-                        </AdsContainer>  
-                    </div>                    
+                        </AdsContainer>
+                    </div>
                     <div>{content}</div>
                     <div>
                         <AdsContainer flexDir={"column"}>
                             <Ad slot={"moe_sidebar_1"} styles={"160x600"} />
                             <Ad slot={"moe_sidebar_2"} styles={"160x600"} />
-                        </AdsContainer>  
-                    </div>      
+                        </AdsContainer>
+                    </div>
                 </FullPageTableWrapper>
             </MediaQuery>
         </>
