@@ -57,7 +57,7 @@ export default function LeaderboardTable({ type, data }) {
                 accessor: "dmg_ratio",
             },
             {
-                Header: tableHeaders.kd,
+                Header: commonStrings.kd,
                 accessor: "kd",
             },
             {

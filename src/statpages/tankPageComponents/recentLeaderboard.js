@@ -56,7 +56,7 @@ export default function RecentsLeaderboard({ data, type, highlightUserID }) {
                 disableFilters: true,
             },
             {
-                Header: tableHeaders.kd,
+                Header: commonStrings.kd,
                 accessor: "kd",
                 disableFilters: true,
             },

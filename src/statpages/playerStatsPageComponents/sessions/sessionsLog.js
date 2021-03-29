@@ -4,8 +4,9 @@ import styled from "styled-components";
 import { Collapse } from "@material-ui/core";
 
 import SessionBreakdown from "./sessionBreakdown";
-import { Pagination } from "Components";
+import { Pagination, tableHeaders } from "Components";
 import cellStyle from "Functions/cellStyle";
+import { Capital, commonStrings } from "Data/localizations";
 
 const Table = styled.table`
     border-spacing: 0;
@@ -61,11 +62,11 @@ export default function SessionsLog({ data }) {
                 accessor: "date",
             },
             {
-                Header: "Battles",
+                Header: Capital(commonStrings.battles),
                 accessor: "battles",
             },
             {
-                Header: "Avg Tier",
+                Header: Capital(tableHeaders.avgTier),
                 accessor: "tier",
             },
             {
@@ -73,28 +74,28 @@ export default function SessionsLog({ data }) {
                 accessor: "tankcount",
             },
             {
-                Header: "WN8",
+                Header: commonStrings.wn8,
                 accessor: "overallWN8",
             },
             {
                 Cell: ({ value }) => `${value}%`,
-                Header: "Winrate",
+                Header: Capital(commonStrings.wr),
                 accessor: "winrate",
             },
             {
-                Header: "DPG",
+                Header: commonStrings.dpg,
                 accessor: "damagerate",
             },
             {
-                Header: "KPG",
+                Header: Capital(commonStrings.frags),
                 accessor: "fragsrate",
             },
             {
-                Header: "DMG Ratio",
+                Header: Capital(commonStrings.dmgRatio),
                 accessor: "DMGratio",
             },
             {
-                Header: "KD",
+                Header: commonStrings.kd,
                 accessor: "KD",
             },
             {
@@ -102,7 +103,7 @@ export default function SessionsLog({ data }) {
                 accessor: "xprate",
             },
             {
-                Header: "Spots",
+                Header: tableHeaders.spots,
                 accessor: "spottedrate",
             },
         ],

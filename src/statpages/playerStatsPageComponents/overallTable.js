@@ -249,7 +249,7 @@ function OverallTable({ data }) {
                 disableFilters: true,
             },
             { Header: commonStrings.dmgRatio, accessor: "dmgratio", disableFilters: true },
-            { Header: tableHeaders.kd, accessor: "kd", disableFilters: true },
+            { Header: commonStrings.kd, accessor: "kd", disableFilters: true },
             { Header: tableHeaders.survival, accessor: "survival", disableFilters: true },
             { Header: "XP", accessor: "xp", disableFilters: true },
             { Header: "Hit%", accessor: "hitratio", disableFilters: true },

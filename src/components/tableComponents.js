@@ -146,7 +146,6 @@ export const tableHeaders = LocalizedStrings({
     en: {
         username: "Username",
         avgTier: "Avg Tier",
-        kd: "K/D",
         spots: "Spots",
         survival: "Survival",
         decap: "Decap",

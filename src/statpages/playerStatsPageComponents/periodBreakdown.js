@@ -84,7 +84,7 @@ function PeriodBreakdown({ data }) {
                 disableFilters: true,
             },
             {
-                Header: tableHeaders.kd,
+                Header: commonStrings.kd,
                 accessor: "kd",
                 disableFilters: true,
             },
