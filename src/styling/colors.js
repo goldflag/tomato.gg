@@ -30,10 +30,10 @@ const scaleColors = [
  */
 const makeColorStops = (arr) => arr.map((val, i) => ({ val, hsl: scaleColors[i] }));
 
-const wn8Stops = makeColorStops([300, 450, 650, 900, 1200, 1600, 2000, 2450, 2900, 3400, 4000, 4700, 4700]);
-const wrStops = makeColorStops([46, 47, 48, 50, 52, 54, 56, 58, 61, 64, 67, 70]);
-const prStops = makeColorStops([1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000]);
-const rankStops = makeColorStops([8, 15, 30, 45, 65, 80, 90, 95, 98, 99, 99.5, 99.9]);
+const wn8Stops = makeColorStops([0, 300, 450, 650, 900, 1200, 1600, 2000, 2450, 2900, 3400, 4000, 4700]);
+const wrStops = makeColorStops([0, 46, 47, 48, 50, 52, 54, 56, 58, 61, 64, 67, 70]);
+const prStops = makeColorStops([0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000]);
+const rankStops = makeColorStops([0, 8, 15, 30, 45, 65, 80, 90, 95, 98, 99, 99.5, 99.9]);
 
 const interpolateHSL = (value, stops) => {
     if (value <= stops[0].val) return stops[0].hsl;

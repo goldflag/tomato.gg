@@ -93,6 +93,7 @@ const StatCardValue = styled.span`
 
 const { formatString, ...strings } = LocalizedStrings({
     en: {
+        at: "{0} at {1}",
         created: "Account created {0}",
         overallWN8: "Overall WN8",
         overallWR: "Overall WR",
@@ -101,6 +102,7 @@ const { formatString, ...strings } = LocalizedStrings({
         wgRating: "WG Rating",
     },
     cs: {
+        at: "{0} v {1}",
         created: "Účet vytvořen {0}",
         overallWN8: "Celkové Wn8",
         overallWR: "Celková míra vítězství",
@@ -109,6 +111,7 @@ const { formatString, ...strings } = LocalizedStrings({
         wgRating: "WG hodnocení",
     },
     es: {
+        at: "{0} a {1}",
         created: "Cuenta creada el {0}",
         overallWN8: "WN8 Total",
         overallWR: "%Victorias Total",
@@ -117,6 +120,7 @@ const { formatString, ...strings } = LocalizedStrings({
         wgRating: "Clasificación WG",
     },
     fr: {
+        at: "{0} á {1}",
         created: "Compte créé le {0}",
         overallWN8: "WN8 Global",
         overallWR: "Taux de Victoire Global",
@@ -141,6 +145,7 @@ const { formatString, ...strings } = LocalizedStrings({
         wgRating: "WG Ocjena",
     },
     pl: {
+        at: "{0} w {1}",
         created: "Konto stworzone {0}",
         overallWN8: "Ogólne WN8",
         overallWR: "Ogólny % Zwycięstw",
@@ -149,6 +154,7 @@ const { formatString, ...strings } = LocalizedStrings({
         wgRating: "Klasyfikacja WG",
     },
     ru: {
+        at: "{0} в {1}",
         created: "Аккаунт создан {0}",
         overallWN8: "Общий WN8",
         overallWR: "Общий WR",
@@ -181,13 +187,12 @@ export default function TopStats(props) {
     let clanInfo = null;
     if (props.clanStats !== "NO CLAN") {
         const { role, clan } = props.clanStats;
-        clanInfo = (
-            <>
-                {clanPositions[role]} at{" "}
-                <Link to={`/clan-stats/${serverConv[props.server]}/${clan.tag}=${clan.clan_id}`}>
-                    <ClanTag {...clan}>[{clan.tag}]</ClanTag>
-                </Link>
-            </>
+        clanInfo = formatString(
+            strings.at,
+            clanPositions[role],
+            <Link to={`/clan-stats/${serverConv[props.server]}/${clan.tag}=${clan.clan_id}`}>
+                <ClanTag {...clan}>[{clan.tag}]</ClanTag>
+            </Link>
         );
     }
 
