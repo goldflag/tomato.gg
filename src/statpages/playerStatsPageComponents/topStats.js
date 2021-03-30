@@ -93,6 +93,7 @@ const StatCardValue = styled.span`
 
 const { formatString, ...strings } = LocalizedStrings({
     en: {
+        at: "{0} at {1}",
         created: "Account created {0}",
         overallWN8: "Overall WN8",
         overallWR: "Overall WR",
@@ -101,6 +102,7 @@ const { formatString, ...strings } = LocalizedStrings({
         wgRating: "WG Rating",
     },
     cs: {
+        at: "{0} v {1}",
         created: "Účet vytvořen {0}",
         overallWN8: "Celkové Wn8",
         overallWR: "Celková míra vítězství",
@@ -108,7 +110,11 @@ const { formatString, ...strings } = LocalizedStrings({
         recentWR: "Nedávná míra vítězství",
         wgRating: "WG hodnocení",
     },
+    de: {
+        at: "{0} bei {1}",
+    },
     es: {
+        at: "{0} a {1}",
         created: "Cuenta creada el {0}",
         overallWN8: "WN8 Total",
         overallWR: "%Victorias Total",
@@ -117,6 +123,7 @@ const { formatString, ...strings } = LocalizedStrings({
         wgRating: "Clasificación WG",
     },
     fr: {
+        at: "{0} á {1}",
         created: "Compte créé le {0}",
         overallWN8: "WN8 Global",
         overallWR: "Taux de Victoire Global",
@@ -125,6 +132,7 @@ const { formatString, ...strings } = LocalizedStrings({
         wgRating: "Côte WG",
     },
     ko: {
+        at: "{1}의 {0}",
         created: "계정 생성일 {0}",
         overallWN8: "전체 WN8",
         overallWR: "Overall 승률",
@@ -133,6 +141,7 @@ const { formatString, ...strings } = LocalizedStrings({
         wgRating: "개인 순위",
     },
     hr: {
+        at: "{0} u {1}",
         created: "Račun kreiran {0}",
         overallWN8: "Ukupno WN8",
         overallWR: "Ukupno WR",
@@ -141,6 +150,7 @@ const { formatString, ...strings } = LocalizedStrings({
         wgRating: "WG Ocjena",
     },
     pl: {
+        at: "{0} w {1}",
         created: "Konto stworzone {0}",
         overallWN8: "Ogólne WN8",
         overallWR: "Ogólny % Zwycięstw",
@@ -149,6 +159,7 @@ const { formatString, ...strings } = LocalizedStrings({
         wgRating: "Klasyfikacja WG",
     },
     ru: {
+        at: "{0} в {1}",
         created: "Аккаунт создан {0}",
         overallWN8: "Общий WN8",
         overallWR: "Общий WR",
@@ -157,6 +168,7 @@ const { formatString, ...strings } = LocalizedStrings({
         wgRating: "Рейтинг WG",
     },
     tr: {
+        at: "{1} klanında {0}",
         created: "Hesap {0} tarihinde oluşturuldu",
         overallWN8: "Genel WN8",
         overallWR: "Genel WR",
@@ -181,13 +193,12 @@ export default function TopStats(props) {
     let clanInfo = null;
     if (props.clanStats !== "NO CLAN") {
         const { role, clan } = props.clanStats;
-        clanInfo = (
-            <>
-                {clanPositions[role]} at{" "}
-                <Link to={`/clan-stats/${serverConv[props.server]}/${clan.tag}=${clan.clan_id}`}>
-                    <ClanTag {...clan}>[{clan.tag}]</ClanTag>
-                </Link>
-            </>
+        clanInfo = formatString(
+            strings.at,
+            clanPositions[role],
+            <Link to={`/clan-stats/${serverConv[props.server]}/${clan.tag}=${clan.clan_id}`}>
+                <ClanTag {...clan}>[{clan.tag}]</ClanTag>
+            </Link>
         );
     }
 
