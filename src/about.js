@@ -1,6 +1,6 @@
 // NPM
 import React, { useEffect } from "react";
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
 import Paper from "@material-ui/core/Paper";
 import LocalizedStrings from "Functions/localizedStrings";
@@ -36,7 +36,7 @@ const { formatString, ...strings } = LocalizedStrings({
         h1: `O Tomato.gg`,
         updated: `AKTUALIZOVÁNO {0}`,
         about0: `Tento web jsem vytvořil, abych poskytl široce dostupné uživatelské rozhraní pro prohlížení 
-        nejrůznějších statistik, mnoho z nich jedostupných pouze zde. Některé statistiky jsou inspirovány jinými weby.`,
+        nejrůznějších statistik, mnoho z nich je dostupných pouze zde. Některé statistiky jsou inspirovány jinými weby.`,
         about1: `Tomato.gg se nezaměřuje na úplně vše. Nikdy zde nebudou tak detailní serverové statistiky, jako na 
         na wot-news.com ani zde nebudou zobrazovány důkladně jednotlivé bitvy jako na WN8lab.com. Tomato.gg je ve 
         vývoji a zdaleka ještě není dokončené. Do budoucna plánuji rozšířit stránku s hráčovými statistikami, rozšířit 

@@ -317,7 +317,7 @@ export const clanPositions = LocalizedStrings({
         quartermaster: "Intendant",
         recruitment_officer: "Službenik za Regrutaciju",
         junior_officer: "Mlađi Oficir",
-        private: "Privatni",
+        private: "Vojnik",
         recruit: "Regrut",
         reservist: "Rezervist",
     },

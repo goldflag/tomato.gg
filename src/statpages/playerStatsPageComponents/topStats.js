@@ -110,6 +110,9 @@ const { formatString, ...strings } = LocalizedStrings({
         recentWR: "Nedávná míra vítězství",
         wgRating: "WG hodnocení",
     },
+    de: {
+        at: "{0} bei {1}",
+    },
     es: {
         at: "{0} a {1}",
         created: "Cuenta creada el {0}",
@@ -129,6 +132,7 @@ const { formatString, ...strings } = LocalizedStrings({
         wgRating: "Côte WG",
     },
     ko: {
+        at: "{1}의 {0}",
         created: "계정 생성일 {0}",
         overallWN8: "전체 WN8",
         overallWR: "Overall 승률",
@@ -137,6 +141,7 @@ const { formatString, ...strings } = LocalizedStrings({
         wgRating: "개인 순위",
     },
     hr: {
+        at: "{0} u {1}",
         created: "Račun kreiran {0}",
         overallWN8: "Ukupno WN8",
         overallWR: "Ukupno WR",
@@ -163,6 +168,7 @@ const { formatString, ...strings } = LocalizedStrings({
         wgRating: "Рейтинг WG",
     },
     tr: {
+        at: "{1} klanında {0}",
         created: "Hesap {0} tarihinde oluşturuldu",
         overallWN8: "Genel WN8",
         overallWR: "Genel WR",
