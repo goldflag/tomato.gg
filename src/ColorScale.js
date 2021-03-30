@@ -6,6 +6,7 @@ import { prBounds, PRColor, rankBounds, rankColor, wn8Bounds, WN8Color, wrBounds
 import { FullPageTableWrapper, Info, StyledTable, TableContainer } from "Components";
 import { Capital, commonStrings } from "Data/localizations";
 import { useTable } from "react-table";
+import { Helmet } from "react-helmet";
 
 const ColorScales = () => {
     const [increments, setIncrements] = useState(30);
@@ -70,6 +71,9 @@ const ColorScales = () => {
 
     return (
         <FullPageTableWrapper>
+            <Helmet>
+                <title>Color Scales - Tomato.gg</title>
+            </Helmet>
             <Info>
                 <span style={{ fontSize: "2rem", fontWeight: "500" }}>Color Scales</span>
                 <br />

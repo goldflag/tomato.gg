@@ -11,8 +11,8 @@ const scaleColors = [
     [35.88, 1.0, 0.4],
     [54.12, 1.0, 0.4],
     [71.6, 0.62, 0.37],
-    [89.61, 0.5, 0.3],
-    [197.95, 0.5, 0.5],
+    [89.61, 0.5, 0.3], // add intermediate after this
+    // [197.95, 0.5, 0.5],
     [215.74, 0.55, 0.5],
     [255.0, 0.63, 0.55],
     [261.27, 0.56, 0.38],
@@ -34,12 +34,13 @@ export const wn8Bounds = [0, 5500];
 export const wrBounds = [35, 75];
 export const prBounds = [0, 13000];
 export const rankBounds = [0, 100];
-
-const wn8Stops = makeColorStops([0, 300, 450, 650, 900, 1200, 1600, 2000, 2450, 2900, 3400, 4000, 4700]);
-const wrStops = makeColorStops([35, 46, 47, 48, 50, 52, 54, 56, 58, 61, 64, 67, 70]);
-const prStops = makeColorStops([0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000]);
-const rankStops = makeColorStops([0, 8, 15, 30, 45, 65, 80, 90, 95, 98, 99, 99.5, 99.9]);
-
+// prettier-ignore
+const [wn8Stops, wrStops, prStops, rankStops] = [
+    makeColorStops([  0,  300,    450,    650,    900,    1200,      2000,   2450,   2900,   3400,   4000,   4700]),  // 1600,
+    makeColorStops([  35, 46,     47,     48,     50,     52,        56,     58,     61,     64,     67,     70]),    // 54,
+    makeColorStops([  0,  1000,   2000,   3000,   4000,   5000,      7000,   8000,   9000,   10000,  11000,  12000]), // 6000,
+    makeColorStops([  0,  8,      15,     30,     45,     65,        90,     95,     98,     99,     99.5,   99.9]),  // 80,
+];
 const interpolateHSL = (value, stops, cosineSmooth) => {
     if (value <= stops[0].val) return stops[0].hsl;
     if (value >= stops[stops.length - 1].val) return stops[stops.length - 1].hsl;
