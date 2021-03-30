@@ -1,6 +1,16 @@
 // NPM
 import React from "react";
-import { Apps, Info, Star, Games, BarChart, LibraryBooks, FormatListNumbered, Public } from "@material-ui/icons";
+import {
+    Apps,
+    Info,
+    Star,
+    Games,
+    BarChart,
+    LibraryBooks,
+    FormatListNumbered,
+    Palette,
+    Public,
+} from "@material-ui/icons";
 import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
@@ -16,6 +26,7 @@ import Leaderboards from "./statpages/recentLeaderboards";
 import WN8Expected from "./statpages/wn8expected";
 import MoEExpected from "./statpages/MoEPage";
 import MasteryExpected from "./statpages/masteryPage";
+import ColorScales from "./ColorScale";
 
 const strings = LocalizedStrings({
     en: {
@@ -265,6 +276,14 @@ const about = {
     isNew: false,
 };
 
+const colorScale = {
+    title: () => "Color Scales",
+    path: "/color-scale",
+    Icon: Palette,
+    Component: <ColorScales />,
+    isNew: true,
+};
+
 /*
     Disabled routes
 */
@@ -296,6 +315,18 @@ const serverStats = {
     isNew: false,
 };
 
-export const routes = [playerStats, clanStats, tankStats, tank, leaderboards, moe, mastery, wn8, about, home];
-export const menuRoutes = [home, tankStats, leaderboards, moe, mastery, wn8, about];
-export const mobileMenuRoutes = [home, tankStats, leaderboards, moe, mastery, wn8, about];
+export const routes = [
+    playerStats,
+    clanStats,
+    tankStats,
+    tank,
+    leaderboards,
+    moe,
+    mastery,
+    wn8,
+    colorScale,
+    about,
+    home,
+];
+export const menuRoutes = [home, tankStats, leaderboards, moe, mastery, wn8, colorScale, about];
+export const mobileMenuRoutes = [home, tankStats, leaderboards, moe, mastery, wn8, colorScale, about];
