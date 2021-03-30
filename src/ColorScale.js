@@ -2,16 +2,7 @@
 import React, { useState } from "react";
 import { Slider, Typography } from "@material-ui/core";
 
-import {
-    prBounds,
-    PRColor,
-    rankBounds,
-    rankColor,
-    wn8Bounds,
-    WN8Color,
-    wrBounds,
-    WRColor,
-} from "Styling/colors";
+import { prBounds, PRColor, rankBounds, rankColor, wn8Bounds, WN8Color, wrBounds, WRColor } from "Styling/colors";
 import { FullPageTableWrapper, Info, StyledTable, TableContainer } from "Components";
 import { Capital, commonStrings } from "Data/localizations";
 import { useTable } from "react-table";
@@ -23,9 +14,9 @@ const ColorScales = () => {
         () =>
             [
                 ["WN8", wn8Bounds, WN8Color, Math.round],
-                ["wr", wrBounds, WRColor, (n) => n.toFixed(2)],
+                ["wr", wrBounds, WRColor, (n) => n.toFixed(1)],
                 ["PR", prBounds, PRColor, Math.round],
-                ["rank", rankBounds, rankColor, (n) => n.toFixed(2)],
+                ["rank", rankBounds, rankColor, (n) => n.toFixed(1)],
             ].map(([name, bounds, colorFn, postFn]) => [
                 name,
                 Array(increments)
@@ -90,7 +81,7 @@ const ColorScales = () => {
                     step={5}
                     marks
                     min={10}
-                    max={100}
+                    max={200}
                     valueLabelDisplay="auto"
                     onChange={(_, val) => setIncrements(val)}
                 />
