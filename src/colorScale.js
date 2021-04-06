@@ -17,6 +17,54 @@ const { ...strings } = LocalizedStrings({
         linear: "Linear",
         cosine: "Cosine",
     },
+    cs: {
+        colorScales: "Barevné stupnice",
+        increments: "Navýšení",
+        linear: "Lineární",
+        cosine: "Kosinus",
+    },
+    de: {
+        colorScales: "Farbschema",
+        increments: "Abstufungen",
+        linear: "Linear",
+        cosine: "Cosinus",
+    },
+    es: {
+        colorScales: "Escalas de Color",
+        increments: "Incrementos",
+        linear: "Lineal",
+        cosine: "Coseno",
+    },
+    hr: {
+        colorScales: "Ljestvica boja",
+        increments: "Priraštaji",
+        linear: "Linearno",
+        cosine: "Kosinus",
+    },
+    nl: {
+        colorScales: "Kleurschaal",
+        increments: "Stappen",
+        linear: "Lineair",
+        cosine: "Cosinus",
+    },
+    pl: {
+        colorScales: "Skala kolorów",
+        increments: "Ilość stopni",
+        linear: "Liniowa",
+        cosine: "Cosinus",
+    },
+    tr: {
+        colorScales: "Renk şeması",
+        increments: "Artış",
+        linear: "Doğrusal",
+        cosine: "Kosinüs",
+    },
+    zh: {
+        colorScales: "顏色分級",
+        increments: "向右增量",
+        linear: "Linear",
+        cosine: "Cosine",
+    },
 });
 
 const ColorScales = () => {

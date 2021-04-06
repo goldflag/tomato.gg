@@ -102,8 +102,8 @@ const strings = LocalizedStrings({
         infographics: "INFOGRAPHIE",
         treemap: "TREEMAP", // No translation
         cached: "Les stats affichées sont mises en cache. Mise-à-jour en temps réel des stats en cours.",
-        blameWG: "Si ce message ne part pas, blâmez la mauvaise API de WARGAMING.",
-        realTime: "Stats en temps réelles chargées!",
+        blameWG: "Si ce message ne part pas, reprochez à WARGAMING leur mauvaise API.",
+        realTime: "Stats en temps réel chargées !",
     },
     ko: {
         main: "메인 통계",
