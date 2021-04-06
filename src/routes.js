@@ -26,7 +26,7 @@ import Leaderboards from "./statpages/recentLeaderboards";
 import WN8Expected from "./statpages/wn8expected";
 import MoEExpected from "./statpages/MoEPage";
 import MasteryExpected from "./statpages/masteryPage";
-import ColorScales from "./ColorScale";
+import ColorScales from "./colorScale";
 
 const strings = LocalizedStrings({
     en: {
@@ -42,6 +42,7 @@ const strings = LocalizedStrings({
         about: "About",
         tankList: "Tank List",
         serverStats: "Server Stats",
+        colorScales: "Color Scales",
     },
     cs: {
         home: "Domů",
@@ -278,7 +279,7 @@ const about = {
 
 const colorScale = {
     title: () => "Color Scales",
-    path: "/color-scale",
+    path: "/color-scales",
     Icon: Palette,
     Component: <ColorScales />,
     isNew: true,

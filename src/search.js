@@ -15,6 +15,7 @@ import { serverConv } from "Data/conversions";
 import Ad from "Ads/ads";
 import { AdsContainer } from "Ads/adsContainer";
 import Colors from "Styling/colors";
+import LocalizedStrings from "Functions/localizedStrings";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
@@ -60,14 +61,25 @@ const GetBot = styled(Button)`
     }
 `;
 
+const { formatString, ...strings } = LocalizedStrings({
+    en: {
+        sentence: `THE MOST {advanced} WORLD OF TANKS {break} {playerStats}, {leaderboards}, 
+        AND {clanStats} {break} ALL IN ONE PLACE`,
+        advanced: "ADVANCED",
+        playerStats: "PLAYER STATS",
+        leaderboards: "LEADERBOARDS",
+        clanStats: "CLAN STATS",
+    },
+});
+
 const AboutSection = () => {
-    const h1 = (
-        <>
-            THE MOST <CT color={Colors.red}>ADVANCED</CT> WORLD OF TANKS
-            <br /> <CT color={Colors.purple}>PLAYER STATS</CT>, <CT color={Colors.purple}>LEADERBOARDS</CT>,{" "}
-            <CT color={Colors.purple}>AND CLAN STATS</CT> <br /> ALL IN ONE PLACE
-        </>
-    );
+    const h1 = formatString(strings.sentence, {
+        advanced: <CT color={Colors.red}>{strings.advanced}</CT>,
+        playerStats: <CT color={Colors.purple}>{strings.playerStats}</CT>,
+        leaderboards: <CT color={Colors.purple}>{strings.leaderboards}</CT>,
+        clanStats: <CT color={Colors.purple}>{strings.clanStats}</CT>,
+        break: <br />,
+    });
     return (
         <StyledAboutSection>
             <MediaQuery minWidth={1000}>

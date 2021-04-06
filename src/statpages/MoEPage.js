@@ -69,7 +69,7 @@ const { formatString, ...strings } = LocalizedStrings({
         dataFrom: "Données venant des créateurs du {0}",
         moeMod: "mod des Marques d'Excellence",
         expand: "Cliquez sur les lignes pour voir l'historique des marques des 30 derniers jours",
-        avg: `*Le changement des marques est calculé en utilisant les moyennes des 3 derniers jours
+        avg: `* Le changement des marques est calculé en utilisant les moyennes des 3 derniers jours
          pour réduire les erreurs`,
         expected: "VALEURS ATTENDUES",
         exp95change: "CHANGEMENT ATTENDU 95%",

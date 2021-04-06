@@ -1,12 +1,23 @@
 // NPM
 import React, { useState } from "react";
 import { Slider, Typography } from "@material-ui/core";
+import { useTable } from "react-table";
+import { Helmet } from "react-helmet";
 
+// LOCAL
 import { prBounds, PRColor, rankBounds, rankColor, wn8Bounds, WN8Color, wrBounds, WRColor } from "Styling/colors";
 import { FullPageTableWrapper, Info, StyledTable, TableContainer } from "Components";
 import { Capital, commonStrings } from "Data/localizations";
-import { useTable } from "react-table";
-import { Helmet } from "react-helmet";
+import LocalizedStrings from "Functions/localizedStrings";
+
+const { ...strings } = LocalizedStrings({
+    en: {
+        colorScales: "Color Scales",
+        increments: "Increments",
+        linear: "Linear",
+        cosine: "Cosine",
+    },
+});
 
 const ColorScales = () => {
     const [increments, setIncrements] = useState(30);
@@ -37,13 +48,13 @@ const ColorScales = () => {
                 columns: [
                     {
                         id: `${name}_linear`,
-                        Header: "Linear",
+                        Header: strings.linear,
                         accessor: name,
                         Cell: ({ value }) => <td style={{ backgroundColor: colorFn(value, false) }}>{value}</td>,
                     },
                     {
                         id: `${name}_smoothed`,
-                        Header: "Cosine",
+                        Header: strings.cosine,
                         accessor: name,
                         Cell: ({ value }) => <td style={{ backgroundColor: colorFn(value, true) }}>{value}</td>,
                     },
@@ -72,13 +83,13 @@ const ColorScales = () => {
     return (
         <FullPageTableWrapper>
             <Helmet>
-                <title>Color Scales - Tomato.gg</title>
+                <title>{strings.colorScales} - Tomato.gg</title>
             </Helmet>
             <Info>
-                <span style={{ fontSize: "2rem", fontWeight: "500" }}>Color Scales</span>
+                <span style={{ fontSize: "2rem", fontWeight: "500" }}>{strings.colorScales}</span>
                 <br />
                 <br />
-                <Typography id="increment-slider">Increments</Typography>
+                <Typography id="increment-slider">{strings.increments}</Typography>
                 <Slider
                     defaultValue={20}
                     aria-labelledby="increment-slider"
