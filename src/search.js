@@ -135,7 +135,7 @@ const { formatString, ...strings } = LocalizedStrings({
         clanStats: "KLAN İSTATİSTİKLERİ",
     },
     zh: {
-        sentence: `{最先進的} 戰車世界資料庫 {break} 集 {玩家}, {排行榜}, {公會數據} 於一身`,
+        sentence: `{advanced} 戰車世界資料庫 {break} 集 {playerStats}, {leaderboards}, {clanStats} 於一身`,
         advanced: "最新進的",
         playerStats: "玩家",
         leaderboards: "排行榜",
