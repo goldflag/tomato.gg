@@ -1,5 +1,5 @@
 // NPM
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
@@ -15,8 +15,13 @@ import { serverConv } from "Data/conversions";
 import Ad from "Ads/ads";
 import { AdsContainer } from "Ads/adsContainer";
 import Colors from "Styling/colors";
+import { TabPanel, CustomTabs, CustomTab } from "Components/customTabs";
+import { Loader } from "Components";
+import TankTable from "./searchpage/tanktable";
+import PlayerTable from "./searchpage/playertable";
 
 const APIKey = process.env.REACT_APP_API_KEY;
+const backend = process.env.REACT_APP_BACKEND;
 
 const Center = styled.div`
     display: flex;
@@ -60,6 +65,15 @@ const GetBot = styled(Button)`
     }
 `;
 
+const Minitables = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+`
+
 const AboutSection = () => {
     const h1 = (
         <>
@@ -91,6 +105,30 @@ export default withRouter(function Search(props) {
     const { addToHistory } = useContext(SearchHistoryContext);
     const [name, setName] = useState("");
 
+    const [value, setValue] = useState(0);
+    const handleChange = (_, newValue) => setValue(newValue);
+
+    const [tankdata, setTankdata] = useState('');
+    const [playerdata, setPlayerdata] = useState('');
+
+
+    function fetchStuff() {
+        const urls = [
+            `${backend}/api/recenttanks/${server}/60`,
+            `${backend}/api/leaderboard/${server}/wn8/60/8/0`
+        ];
+        Promise.all(urls.map((url) => fetch(url)))
+        .then(resps => Promise.all(resps.map(r => r.json())))
+        .then(([tank, player]) => {
+            setTankdata(tank);
+            setPlayerdata(player.body);
+        })
+    }
+
+    useEffect(() => {
+        fetchStuff()
+    }, [server]);
+
     const searchId = async (e) => {
         e.preventDefault();
         const playerUrl = `https://api.worldoftanks.${server}/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`;
@@ -121,6 +159,17 @@ export default withRouter(function Search(props) {
         }
     };
 
+
+    let tankTable = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />;
+    if (tankdata) {
+        tankTable = <TankTable data={tankdata} />;
+    }
+    let playerTable = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />;
+    if (playerdata) {
+        playerTable = <PlayerTable data={playerdata} />;
+    }
+
+    
     return (
         <Center>
             <Helmet>
@@ -169,6 +218,39 @@ export default withRouter(function Search(props) {
                     <Ad slot={"front_page"} styles={"300x250"} />
                 </AdsContainer>
             </MediaQuery> */}
+            <Minitables>
+                <div style={{ margin: "1rem" }}>
+                    <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
+                        <CustomTab label={`1 WEEK TANK STATS`} />
+                    </CustomTabs>
+                    <TabPanel value={value} index={0}>
+                        <div
+                            style={{
+                                color: "rgb(220, 220, 220)",
+                                width: "600px"
+                            }}
+                        >
+                            {tankTable}
+                        </div>
+                    </TabPanel>
+                </div>
+
+                <div style={{ margin: "1rem" }}>
+                    <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
+                        <CustomTab label={`1 WEEK PLAYER STATS`} />
+                    </CustomTabs>
+                    <TabPanel value={value} index={0}>
+                        <div
+                            style={{
+                                color: "rgb(220, 220, 220)",
+                                width: "600px"
+                            }}
+                        >
+                            {playerTable}
+                        </div>
+                    </TabPanel>
+                </div>
+            </Minitables>
         </Center>
     );
 });
