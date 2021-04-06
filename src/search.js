@@ -121,6 +121,9 @@ export default withRouter(function Search(props) {
         .then(resps => Promise.all(resps.map(r => r.json())))
         .then(([tank, player]) => {
             setTankdata(tank);
+            player.body.forEach((player) => {
+                player.url = `/stats/${serverConv[server]}/${player.username}=${player.player_id}`;
+            });
             setPlayerdata(player.body);
         })
     }
