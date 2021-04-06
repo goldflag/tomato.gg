@@ -35,6 +35,12 @@ const { ...strings } = LocalizedStrings({
         linear: "Lineal",
         cosine: "Coseno",
     },
+    fr: {
+        colorScales: "Échelles de couleurs",
+        increments: "Incréments",
+        linear: "Linéaire",
+        cosine: "Cosinus",
+    }, 
     hr: {
         colorScales: "Ljestvica boja",
         increments: "Priraštaji",

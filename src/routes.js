@@ -57,6 +57,7 @@ const strings = LocalizedStrings({
         about: "O nás",
         tankList: "Seznam vozidel",
         serverStats: "Serverové statistiky",
+        colorScales: "Barevné stupnice",
     },
     de: {
         home: "Startseite",
@@ -71,6 +72,7 @@ const strings = LocalizedStrings({
         about: "Über Tomato.gg", // alternative "Über uns" (about us)
         tankList: "Panzerliste",
         serverStats: "Serverstatistiken",
+        colorScales: "Farbschema",
     },
     es: {
         home: "Página Principal",
@@ -85,6 +87,7 @@ const strings = LocalizedStrings({
         about: "Acerca de",
         tankList: "Lista de Tanques",
         serverStats: "Datos del Servidor",
+        colorScales: "Escalas de Color",
     },
     fr: {
         home: "Accueil",
@@ -99,6 +102,7 @@ const strings = LocalizedStrings({
         about: "À propos",
         tankList: "Liste Chars",
         serverStats: "Statistiques Serveur",
+        colorScales: "Échelles de couleurs",
     },
     hr: {
         home: "Početna",
@@ -113,6 +117,10 @@ const strings = LocalizedStrings({
         about: "O Nama",
         tankList: "Lista Tenkova",
         serverStats: "Statistika Servera",
+        colorScales: "Ljestvica boja",
+    },
+    nl: {
+        colorScales: "Kleurschaal",
     },
     it: {
         home: "Home",
@@ -155,6 +163,7 @@ const strings = LocalizedStrings({
         about: "O Stronie",
         tankList: "Lista Czołgów",
         serverStats: "Staty Serwerowe",
+        colorScales: "Skala kolorów",
     },
     ru: {
         home: "Главная",
@@ -183,6 +192,7 @@ const strings = LocalizedStrings({
         about: "Hakkında",
         tankList: "Tank Listesi",
         serverStats: "Sunucu İstatistik",
+        colorScales: "Renk şeması",
     },
     zh: {
         home: "主頁",
@@ -197,6 +207,7 @@ const strings = LocalizedStrings({
         about: "關於",
         tankList: "車輛列表",
         serverStats: "伺服器數據統計",
+        colorScales: "顏色分級",
     },
 });
 
