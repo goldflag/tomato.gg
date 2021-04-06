@@ -91,7 +91,7 @@ export const { formatString, ...commonStrings } = LocalizedStrings({
     fr: {
         player: "joueur",
         battles: "batailles",
-        nBattles: "{0} parties",
+        nBattles: "{0} batailles",
         longDPG: "dégâts par partie",
         frags: "tués",
         longFrags: "tués par partie",

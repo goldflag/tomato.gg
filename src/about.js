@@ -97,27 +97,27 @@ const { formatString, ...strings } = LocalizedStrings({
     fr: {
         title: "À propos",
         h1: `À propos de Tomato.gg`,
-        updated: `MIS À JOUR {0}`,
-        about0: `J'ai créé ce site pour fournir une interface accessible pour voir une grande variété de statistiques, 
-        dont beaucoup qui se trouvent seulement ici. Quelques statistiques ont été inspiré par d'autres sites.`,
-        about1: `Tomato.gg ne vise pas à faire tout. Il n'y aura jamais les statistiques sur les serveurs si détaillés
-        sur wotnews.com, ni il n'y aura-t-il les précis combats individuels sur
-        WN8lab.com. Tomato.gg est activement développé et n'est pas du tout proche d'être terminé. Dans le futur, 
-        je prévois agrandir les pages sur les statistiques des joueurs, agrandir les pages pour les statistiques pour 
-        chars, ajouter les statistiques pour clans et finaliser les classements.`,
-        about2: `Tomato.gg soutient pleinement EU, NA, and ASIE pour les statistiques pour joeurs. Vous pouvez quand même regarder 
-        les statistiques pour les joueurs sur le serveur russe, mais il n'y aura pas de mise à jour quotidien automatique des statistiques.`,
-        about3: `Jetez un coup d'œil sur Tomato.gg pour Mobile aussi. J'ai optimisé le site Mobile 
-        pour la meilleure expérience d'utilisateur tout en étant presque 100% fonction complète.`,
-        about4: `a contribué largement au développement de Tomato.gg. Merci beaucoup!`,
-        translators: `L'internationalisation de Tomato.gg a été accomplie avec l'aide de ces incroyables volontaires :`,
-        feedback: `Rejoignez mon {0} si vous voulez dire quelque chose sur le site, faire des suggestions, ou faire un rapport de bogue.`,
-        discord: `Serveur Discord`,
-        thanks: `Merci d'utiliser Tomato.gg!`,
+        updated: `MIS À JOUR LE {0}`,
+        about0: `J'ai créé ce site pour fournir une interface accessible permettant de visualiser une grande variété de statistiques,         
+        dont beaucoup ne se trouvent qu'ici. Certaines des statistiques sont néanmoins inspirées par d'autres sites.`,
+        about1: `Tomato.gg n'a pas pour objectif de tout faire. Ce site n'aura jamais des statistiques de serveur aussi détaillées 
+        que celles disponibles sur wot-news.com, et il n'aura pas non plus les batailles individuelles précises qui sont accessibles 
+        sur WN8lab.com. Tomato.gg est en cours de développement et est encore loin d'être entièrement terminé. 
+        Dans le futur, je prévois de renforcer la page de statistiques des joueurs, de consolider la page de 
+        statistiques des chars, d'implémenter les statistiques des clans et de finaliser les classements des leaders.`,
+        about2: `Tomato.gg supporte entièrement les statistiques des joueurs des serveurs EU, NA et d'ASIE. La prise en charge 
+        des statistiques des joueurs des serveurs RU est prévue et sera bientôt disponible.`,
+        about3: `Découvrez également Tomato.gg sur vos appareils mobiles. J'ai optimisé le site mobile pour offrir la meilleure 
+        expérience utilisateur possible tout en conservant la quasi-totalité des fonctionnalités.`,
+        about4: `a largement contribué au développement de Tomato.gg. Un grand merci !`,
+        translators: `L'internationalisation de Tomato.gg a été accomplie grâce à ces extraordinaires bénévoles :`,
+        feedback: `Rejoignez mon {0} si vous souhaitez formuler des commentaires, émettre des suggestions et signaler des bogues.`,
+        discord: `serveur Discord`,
+        thanks: `Merci d'utiliser Tomato.gg !`,
     },
     hr: {
         h1: `O Tomato.gg`,
-        updated: `UŽURIRANO `,
+        updated: `UŽURIRANO {0}`,
         about0: `Napravio sam ovu stranicu kako bi pružio pristupačno sučelje za pregled različitih statistika,
         od kojih se mnogi od njih mogu naći samo ovdje. Neke statistike su potaknute sa drugih web lokacija.`,
         about1: `Tomato.gg ne cilja napraviti sve. Nikada neće imati detaljnu server statistiku kao šta ima wot-news.com, 
@@ -138,7 +138,7 @@ const { formatString, ...strings } = LocalizedStrings({
     ko: {
         title: "소개",
         h1: `Tomato.gg의 소개`,
-        updated: `UPDATED `,
+        updated: `UPDATED {0}`,
         about0: ` 이 사이트는 창의적인 통계들을 많은 유저분들이 쉽게 볼 수 있도록 만들어졌습니다. 몇몇통계들은 다른 사이트에서 영감을 받았습니다.`,
         about1: ` 토마토는 모든 것을 할려고 하진 않을겁니다. wot-news.com,처럼 디테일한 서버통계, WN8lab.com의 정확한 개인 전투수같은 
         통계들은 절대 나오진 않을겁니다. 토마토는 현재 활발하게 개발되고 있으나 모든 기능들이 완벽하진 않습니다. 저는 유저, 전차, 클랜 통계를 
@@ -241,6 +241,7 @@ const translators = {
     fr: [
         { name: "candymonster1953", url: "/stats/NA/candymonster1953=1038153624" },
         { name: "ForgottenShots", url: "/stats/EU/ForgottenShots=529569765" },
+        { name: "Matthieu R.", url: "https://www.upwork.com/freelancers/~0162d87038acacf992"}
     ],
     ko: [{ name: "Roika", url: "/stats/ASIA/Crawling_Ghost=2005611731" }],
     hr: [{ name: "Sačo", url: "https://www.instagram.com/sacobrt/" }],

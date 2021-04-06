@@ -291,12 +291,12 @@ const { formatString, ...strings } = LocalizedStrings({
     },
     es: {
         hof: "SALÓN DE LA FAMA",
-        subTitle: "60 DÍAS | {0} BATALLAS MÍNIMAS | VEHÍCULOS TIER 6+",
+        subTitle: "60 DÍAS | MÍNIMO {0} BATALLAS | VEHÍCULOS TIER 6+",
         tankRankings: "Clasificaciones del Tanque",
         betterThan: "Mejor que el {0}%",
         moreThan: "Más del {0}%",
         unranked: "Juega {0} batallas más en tanques de tier 6 o superior para ingresar la Salón de la Fama",
-        unrankedTank: "Juega {0} batallas más para ingresar las clasificaciones",
+        unrankedTank: "Juega {0} batallas más para clasificarte",
     },
     fr: {
         hof: "PANTHÉON",

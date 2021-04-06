@@ -19,6 +19,7 @@ import { TabPanel, CustomTabs, CustomTab } from "Components/customTabs";
 import { Loader } from "Components";
 import TankTable from "./searchpage/tanktable";
 import PlayerTable from "./searchpage/playertable";
+import LocalizedStrings from "Functions/localizedStrings";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 const backend = process.env.REACT_APP_BACKEND;
@@ -73,15 +74,96 @@ const Minitables = styled.div`
     justify-content: center;
 
 `
+const { formatString, ...strings } = LocalizedStrings({
+    en: {
+        sentence: `THE MOST {advanced} WORLD OF TANKS {break} {playerStats}, {leaderboards}, 
+        AND {clanStats} {break} ALL IN ONE PLACE`,
+        advanced: "ADVANCED",
+        playerStats: "PLAYER STATS",
+        leaderboards: "LEADERBOARDS",
+        clanStats: "CLAN STATS",
+    },
+    cs: {
+        sentence: `NEJVÍCE {advanced} WORLD OF TANKS {break} {playerStats}, {leaderboards}, 
+        A {clanStats} {break} VŠECHNY NA JEDNOM MÍSTĚ`,
+        advanced: "VYVINUTÉ",
+        playerStats: "HRÁČSKÉ STATISTIKY",
+        leaderboards: "ŽEBŘÍČKY",
+        clanStats: "KLANOVÉ STATISTIKY",
+    },
+    de: {
+        sentence: `DIE {advanced} WORLD OF TANKS {break} {playerStats}, {leaderboards},
+        UND {clanStats} {break} ALLES AN EINEM ORT`,
+        advanced: "FORTSCHRITTLICHSTEN",
+        playerStats: "SPIELERSTATISTIKEN",
+        leaderboards: "BESTENLISTEN",
+        clanStats: "CLANSTATISTIKEN",
+    },
+    es: {
+        sentence: `LAS MÁS {advanced} {break} {playerStats}, {leaderboards}, 
+        Y {clanStats} {break} DE WORLD OF TANKS, EN UN SOLO SITIO`,
+        advanced: "COMPLETAS",
+        playerStats: "ESTADÍSTICAS DE JUGADOR",
+        leaderboards: "CLASIFICACIONES",
+        clanStats: "ESTADÍSTICAS DE CLAN",
+    },
+    fr: {
+        sentence: `{playerStats}, {leaderboards}, ET {clanStats} DE WORLD OF TANKS {break} LES PLUS {advanced},    
+        {break} TOUS AU MÊME ENDROIT`,
+        advanced: "AVANCÉS",
+        playerStats: "LES STATS DE JOUEURS INDIVIDUELS",
+        leaderboards: "LES CLASSEMENTS DES MEILLEURS JOUEURS",
+        clanStats: "LES STATS DE CLAN",
+    },
+    hr: {
+        sentence: `{advanced} WORLD OF TANKS {break} {playerStats}, {leaderboards}, 
+        I {clanStats} {break} SVE NA JEDNOM MJESTU`,
+        advanced: "NAJNAPREDNIJI",
+        playerStats: "STATISTIKE IGRAČA",
+        leaderboards: "LJESTVICA",
+        clanStats: "STATISTIKE KLANOVA",
+    },
+    nl: {
+        sentence: `DE MEEST {advanced} WORLD OF TANKS {break} {playerStats}, {leaderboards}, 
+        en {clanStats} {break} allemaal op één plaats`,
+        advanced: "geavanceerde",
+        playerStats: "speler statistieken",
+        leaderboards: "scoreborden",
+        clanStats: "clan statistieken",
+    },
+    pl: {
+        sentence: `NAJBARDZIEJ {advanced} {break} {playerStats}, {leaderboards} 
+        I {clanStats} {break} DLA WORLD OF TANKS, WSZYSTKIE W JEDNYM MIEJSCU`, // optional {break} after 'TANKS,'
+        advanced: "ZAAWANSOWANE",
+        playerStats: "STATY GRACZY",
+        leaderboards: "RANKINGI",
+        clanStats: "STATY KLANÓW",
+    },
+    tr: {
+        sentence: `EN {advanced} WORLD OF TANKS {break} {playerStats}, {leaderboards} 
+        VE {clanStats} {break} HEPSİ BİR YERDE`,
+        advanced: "GELİŞMİŞ",
+        playerStats: "OYUNCU İSTATİSTİKLERİ",
+        leaderboards: "LİDER TABLOLARI",
+        clanStats: "KLAN İSTATİSTİKLERİ",
+    },
+    zh: {
+        sentence: `{advanced} 戰車世界資料庫 {break} 集 {playerStats}, {leaderboards}, {clanStats} 於一身`,
+        advanced: "最新進的",
+        playerStats: "玩家",
+        leaderboards: "排行榜",
+        clanStats: "公會數據",
+    },
+});
 
 const AboutSection = () => {
-    const h1 = (
-        <>
-            THE MOST <CT color={Colors.red}>ADVANCED</CT> WORLD OF TANKS
-            <br /> <CT color={Colors.purple}>PLAYER STATS</CT>, <CT color={Colors.purple}>LEADERBOARDS</CT>,{" "}
-            <CT color={Colors.purple}>AND CLAN STATS</CT> <br /> ALL IN ONE PLACE
-        </>
-    );
+    const h1 = formatString(strings.sentence, {
+        advanced: <CT color={Colors.red}>{strings.advanced}</CT>,
+        playerStats: <CT color={Colors.purple}>{strings.playerStats}</CT>,
+        leaderboards: <CT color={Colors.purple}>{strings.leaderboards}</CT>,
+        clanStats: <CT color={Colors.purple}>{strings.clanStats}</CT>,
+        break: <br />,
+    });
     return (
         <StyledAboutSection>
             <MediaQuery minWidth={1000}>
