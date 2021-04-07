@@ -196,8 +196,8 @@ export default withRouter(function Search(props) {
 
     function fetchStuff() {
         const urls = [
-            `${backend}/api/recenttanks/${server}/60`,
-            `${backend}/api/leaderboard/${server}/wn8/60/8/0`
+            `${backend}/api/recenttanks/${server}/7`,
+            `${backend}/api/leaderboard/${server}/wn8/7/8/0`
         ];
         Promise.all(urls.map((url) => fetch(url)))
         .then(resps => Promise.all(resps.map(r => r.json())))
