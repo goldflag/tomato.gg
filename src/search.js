@@ -72,7 +72,6 @@ const CT = styled.span`
     color: ${({ color }) => color};
 `;
 
-
 const GetBot = styled(Button)`
     color: rgb(220, 220, 220) !important;
     font-size: 0.9rem !important;
@@ -287,16 +286,6 @@ export default withRouter(function Search(props) {
         <Helmet>
             <title>Tomato.gg</title>
         </Helmet>
-        <MediaQuery minWidth={1000}>
-            <AdsContainer flexDir={"row"}>
-                <Ad slot={"front_page_banner_1"} styles={"728x90"} />
-            </AdsContainer>
-        </MediaQuery>
-        <MediaQuery maxWidth={999}>
-            <AdsContainer flexDir={"row"}>
-                <Ad slot={"front_page_banner_1"} styles={"300x50"} />
-            </AdsContainer>
-        </MediaQuery>
         <TopSection>
             <img
                 src={TomatoLogo}
@@ -324,9 +313,7 @@ export default withRouter(function Search(props) {
                     <img src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"} style={{width: "30px"}} alt="discordlogo"/> &nbsp; Join Our Server
                 </GetBot>
             </a>
-            <AdsContainer flexDir={"row"}>
-                <Ad slot={"front_page_banner_2"} styles={"728x90"} />
-            </AdsContainer>
+            <Ad slot={"front_page_banner_2"} styles={"728x90"} />
             <Minitables>
                 <div style={{ margin: "1rem" }}>
                     <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
@@ -366,9 +353,13 @@ export default withRouter(function Search(props) {
                     <img src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"} style={{width: "30px"}} alt="discordlogo"/> &nbsp; Join Our Server
                 </GetBot>
             </a>
-            <AdsContainer flexDir={"row"}>
-                <Ad slot={"front_page_banner_2"} styles={"300x50"} />
-            </AdsContainer>
+            <Ad slot={"front_page_banner_2"} styles={"300x50"} />
+        </MediaQuery>
+        <MediaQuery minWidth={1000}>
+            <Ad slot={"front_page_banner_1"} styles={"728x90"} />
+        </MediaQuery>
+        <MediaQuery maxWidth={999}>
+            <Ad slot={"front_page_banner_1"} styles={"300x50"} />
         </MediaQuery>
         <OutboundLinks>
             <a href="https://worldoftanks.com/">
