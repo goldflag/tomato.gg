@@ -5,7 +5,10 @@ import AdSense from "react-adsense";
 const Adsense_Client = process.env.REACT_APP_ADSENSE;
 
 const adslots = {
-    front_page: 9868453218,
+    front_page_banner_1: 9868453218,
+    front_page_banner_2: 6668203094,
+    front_page_sidebar_1: 7396150772,
+    front_page_sidebar_2: 6083069107,
     player_sidebar_1: 4142533563,
     player_sidebar_2: 6120640271,
     main_stats_banner: 7667965161,

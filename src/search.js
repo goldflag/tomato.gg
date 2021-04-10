@@ -7,9 +7,7 @@ import MediaQuery from "react-responsive";
 import { Button } from "@material-ui/core";
 
 // LOCAL
-import "CSS/search.css";
 import SearchBar from "Material/searchBar";
-import TomatoLogo from "Assets/tomato.png";
 import { ServerContext, SearchHistoryContext, SearchmodeContext } from "Context";
 import { serverConv } from "Data/conversions";
 import Ad from "Ads/ads";
@@ -21,26 +19,47 @@ import TankTable from "./searchpage/tanktable";
 import PlayerTable from "./searchpage/playertable";
 import LocalizedStrings from "Functions/localizedStrings";
 
+// ASSETS
+import TomatoLogo from "Assets/tomato.png";
+import Stratsketch from "Assets/other sites/stratsketch.jpg";
+import Tanksgg from "Assets/other sites/tanks.gg.png";
+import Wot from "Assets/other sites/wot.png";
+
 const APIKey = process.env.REACT_APP_API_KEY;
 const backend = process.env.REACT_APP_BACKEND;
+
+const Page = styled.div`
+    margin: 0 1rem;
+`
+
+const Desktop = styled.div`
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto auto;
+`
+const Adcontent = styled.div`
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+`
 
 const Center = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    padding-top: 10vh;
     max-width: 100%;
 `;
 
 const TopSection = styled.div`
-    max-width: 800px;
-    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const StyledAboutSection = styled.div`
-    margin: 1rem;
+    margin: 0rem;
     max-width: 800px;
     text-align: center;
     h1 {
@@ -53,11 +72,13 @@ const CT = styled.span`
     color: ${({ color }) => color};
 `;
 
+
 const GetBot = styled(Button)`
     color: rgb(220, 220, 220) !important;
-    font-size: 1rem !important;
-    font-style: "Roboto Mono" !important;
-    padding: 0.5rem 0.8rem !important;
+    font-size: 0.9rem !important;
+    font-family: Roboto Mono !important;
+    margin: 1.2rem 0rem !important;
+    padding: 0.4rem 0.8rem !important;
     border: 2px solid rgba(50, 60, 110, 0.9) !important;
     border-radius: 100px !important;
     background-color: rgba(50, 60, 110, 0.9) !important;
@@ -70,9 +91,16 @@ const Minitables = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
+`
+
+const OutboundLinks = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
     justify-content: center;
-
+    align-items: center;
 `
 const { formatString, ...strings } = LocalizedStrings({
     en: {
@@ -254,55 +282,51 @@ export default withRouter(function Search(props) {
         playerTable = <PlayerTable data={playerdata} />;
     }
 
-    
-    return (
+    const mainContent = (
         <Center>
-            <Helmet>
-                <title>Tomato.gg</title>
-            </Helmet>
-            <TopSection>
-                <img
-                    src={TomatoLogo}
-                    alt="logo"
-                    style={{
-                        height: "auto",
-                        width: "80%",
-                        margin: "0 auto",
-                        display: "flex",
-                    }}
+        <Helmet>
+            <title>Tomato.gg</title>
+        </Helmet>
+        <MediaQuery minWidth={1000}>
+            <AdsContainer flexDir={"row"}>
+                <Ad slot={"front_page_banner_1"} styles={"728x90"} />
+            </AdsContainer>
+        </MediaQuery>
+        <MediaQuery maxWidth={999}>
+            <AdsContainer flexDir={"row"}>
+                <Ad slot={"front_page_banner_1"} styles={"300x50"} />
+            </AdsContainer>
+        </MediaQuery>
+        <TopSection>
+            <img
+                src={TomatoLogo}
+                alt="logo"
+                style={{
+                    width: "70%",
+                    marginTop: "2rem"
+                }}
+            />
+            <AboutSection />
+            <form style={{width: "100%"}} onSubmit={searchId}>
+                <SearchBar
+                    name={name}
+                    setName={setName}
+                    setServer={setServer}
+                    server={server}
+                    setMode={setMode}
+                    mode={mode}
                 />
-                <AboutSection />
-                <form onSubmit={searchId}>
-                    <SearchBar
-                        name={name}
-                        setName={setName}
-                        setServer={setServer}
-                        server={server}
-                        setMode={setMode}
-                        mode={mode}
-                    />
-                </form>
-            </TopSection>
-            {/* <MediaQuery minWidth={1000}>
-                <a target="blank" href="https://discord.gg/qA2bV7K">
-                    <GetBot formAction={"www.google.com"}>
-                        <img src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"} style={{width: "30px"}} alt="discordlogo"/> &nbsp; Get the offical Tomato.gg bot
-                    </GetBot>
-                </a>
-                <AdsContainer flexDir={"row"}>
-                    <Ad slot={"front_page"} styles={"970x250"} />
-                </AdsContainer>
-            </MediaQuery>
-            <MediaQuery maxWidth={999}>
-                <a target="blank" href="https://discord.gg/qA2bV7K">
-                    <GetBot formAction={"www.google.com"}>
-                        <img src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"} style={{width: "30px"}} alt="discordlogo"/> &nbsp; Get the offical Tomato.gg bot
-                    </GetBot>
-                </a>
-                <AdsContainer flexDir={"row"}>
-                    <Ad slot={"front_page"} styles={"300x250"} />
-                </AdsContainer>
-            </MediaQuery> */}
+            </form>
+        </TopSection>
+        <MediaQuery minWidth={1000}>
+            <a target="blank" href="https://discord.gg/qA2bV7K">
+                <GetBot formAction={"www.google.com"}>
+                    <img src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"} style={{width: "30px"}} alt="discordlogo"/> &nbsp; Join Our Server
+                </GetBot>
+            </a>
+            <AdsContainer flexDir={"row"}>
+                <Ad slot={"front_page_banner_2"} styles={"728x90"} />
+            </AdsContainer>
             <Minitables>
                 <div style={{ margin: "1rem" }}>
                     <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
@@ -319,7 +343,6 @@ export default withRouter(function Search(props) {
                         </div>
                     </TabPanel>
                 </div>
-
                 <div style={{ margin: "1rem" }}>
                     <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
                         <CustomTab label={`1 WEEK PLAYER STATS`} />
@@ -336,6 +359,51 @@ export default withRouter(function Search(props) {
                     </TabPanel>
                 </div>
             </Minitables>
-        </Center>
+        </MediaQuery>
+        <MediaQuery maxWidth={999}>
+            <a target="blank" href="https://discord.gg/qA2bV7K">
+                <GetBot formAction={"www.google.com"}>
+                    <img src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"} style={{width: "30px"}} alt="discordlogo"/> &nbsp; Join Our Server
+                </GetBot>
+            </a>
+            <AdsContainer flexDir={"row"}>
+                <Ad slot={"front_page_banner_2"} styles={"300x50"} />
+            </AdsContainer>
+        </MediaQuery>
+        <OutboundLinks>
+            <a href="https://worldoftanks.com/">
+                <img style={{maxHeight: "70px", margin: "1rem"}} src={Wot} alt='World of Tanks'/>
+            </a>
+            <a href="https://tanks.gg/">
+                <img style={{maxHeight: "60px", margin: "1rem"}} src={Tanksgg} alt='tanks.gg'/>
+            </a>
+            <a href="https://thearmoredpatrol.com/">
+                <img style={{maxHeight: "30px", margin: "1rem"}} src={"https://i2.wp.com/thearmoredpatrol.com/wp-content/uploads/2020/01/cropped-logotap2018-1-1.png?w=768&ssl=1"} alt='thearmoredpatrol.com'/>
+            </a>
+            <a href="https://thedailybounce.net/">
+                <img style={{maxHeight: "70px", margin: "1rem"}} src={"https://i2.wp.com/thedailybounce.net/wp-content/uploads/2019/01/cropped-cropped-TDB-Logo-2019-2.png?fit=700%2C325&ssl=1"} alt='thedailybounce.net'/>
+            </a>
+            <a href="https://stratsketch.com/">
+                <img style={{maxHeight: "40px", margin: "1rem"}} src={Stratsketch} alt='Stratsketch'/>
+            </a>
+        </OutboundLinks>
+    </Center>
+    );
+    
+    return (
+        <Page>
+            <MediaQuery minWidth={1200}>
+                <Desktop>
+                    {mainContent}
+                    <Adcontent>
+                        <Ad slot={"front_page_sidebar_1"} styles={"300x250"} />
+                        <Ad slot={"front_page_sidebar_2"} styles={"300x600"} />
+                    </Adcontent>
+                </Desktop>
+            </MediaQuery>
+            <MediaQuery maxWidth={1199}>
+                {mainContent}
+            </MediaQuery>
+        </Page>
     );
 });

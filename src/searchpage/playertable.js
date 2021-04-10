@@ -71,7 +71,7 @@ function RecentTanksAvgTable({ data }) {
             data,
             initialState: {
                 pageIndex: 0,
-                pageSize: 15,
+                pageSize: 10,
                 sortBy: [
                     {
                         id: "wn8",
@@ -133,7 +133,7 @@ function RecentTanksAvgTable({ data }) {
                 </StyledTable>
             </TableContainer>
             <Pagination
-                pageSizes={[15, 25]}
+                pageSizes={[10, 20]}
                 {...{
                     canPreviousPage,
                     canNextPage,
