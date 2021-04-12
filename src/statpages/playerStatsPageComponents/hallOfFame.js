@@ -470,7 +470,7 @@ const TankCard = ({ userID, tank }) => (
                 </GridItem>
                 <GridItem>
                     <Val>{tank.winrate}%</Val>
-                    <Label>{Capital(commonStrings.longWR)}</Label>
+                    <Label>{Capital(commonStrings.wr)}</Label>
                 </GridItem>
             </Grid>
         </Box>

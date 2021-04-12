@@ -38,7 +38,7 @@ function RecentTanksAvgTable({ data }) {
                 accessor: "wn8",
             },
             {
-                Header: Capital(commonStrings.longWR),
+                Header: Capital(commonStrings.wr),
                 accessor: "winrate",
                 Cell: ({ value }) => `${value}%`,
             },

@@ -68,7 +68,7 @@ function PeriodBreakdown({ data }) {
             },
             {
                 Cell: ({ value }) => `${value}%`,
-                Header: Capital(commonStrings.longWR),
+                Header: Capital(commonStrings.wr),
                 accessor: "winrate",
                 disableFilters: true,
             },

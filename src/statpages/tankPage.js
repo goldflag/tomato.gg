@@ -96,7 +96,7 @@ const filters = {
     dpg: commonStrings.dpg,
     wn8: commonStrings.wn8,
     frags: Capital(commonStrings.frags),
-    winrate: Capital(commonStrings.longWR),
+    winrate: Capital(commonStrings.wr),
 };
 
 export default function TankPage(props) {
