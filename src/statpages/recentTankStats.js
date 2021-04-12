@@ -78,6 +78,32 @@ const { formatString, ...strings } = LocalizedStrings({
     },
 });
 
+const filters = {
+    time: [
+        { value: 3, label: formatString(commonStrings.days, 3) },
+        { value: 7, label: formatString(commonStrings.days, 7) },
+        { value: 14, label: formatString(commonStrings.days, 14) },
+        { value: 30, label: formatString(commonStrings.days, 30) },
+        { value: 60, label: formatString(commonStrings.days, 60) }
+    ]
+};
+
+const ButtonFilterBar = ({ options, filterValue, setFilterValue, ariaLabel }) => (
+    <FilterButtonGroup variant="text" aria-label={"ariaLabel"}>
+        {options.map(({ value, label }, i) => (
+            <FilterButton
+                key={i}
+                selected={value === filterValue}
+                onClick={() => {
+                    setFilterValue(value);
+                }}
+            >
+                {label}
+            </FilterButton>
+        ))}
+    </FilterButtonGroup>
+);
+
 export default function RecentLeaderboards() {
     const { server } = useContext(ServerContext);
     const [data, setData] = useState("loading");
@@ -108,14 +134,12 @@ export default function RecentLeaderboards() {
                     {strings.clickRow}
                 </span>
                 <br />
-                <FilterButtonGroup>
-                    {/* <FilterButton key={30} selected={time === 30} onClick={() => setTime(30)}>
-                        {formatString(commonStrings.days, 30)}
-                    </FilterButton> */}
-                    <FilterButton key={60} selected={time === 60} onClick={() => setTime(60)}>
-                        {formatString(commonStrings.days, 60)}
-                    </FilterButton>
-                </FilterButtonGroup>
+                <ButtonFilterBar
+                    options={filters.time}
+                    filterValue={time}
+                    setFilterValue={setTime}
+                    ariaLabel={strings.timeFilter}
+                />
             </Info>
 
             {typeof data !== "string" ? (

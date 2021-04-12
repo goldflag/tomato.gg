@@ -124,9 +124,12 @@ const filters = {
         { value: 8, label: formatString(strings.vehicleTier, 8) },
     ],
     time: [
-        // {value: 30, label: formatString(commonStrings.days, 30) },
-        { value: 60, label: formatString(commonStrings.days, 60) },
-    ],
+        { value: 3, label: formatString(commonStrings.days, 3) },
+        { value: 7, label: formatString(commonStrings.days, 7) },
+        { value: 14, label: formatString(commonStrings.days, 14) },
+        { value: 30, label: formatString(commonStrings.days, 30) },
+        { value: 60, label: formatString(commonStrings.days, 60) }
+    ]
 };
 
 const ButtonFilterBar = ({ options, filterValue, setFilterValue, ariaLabel }) => (
