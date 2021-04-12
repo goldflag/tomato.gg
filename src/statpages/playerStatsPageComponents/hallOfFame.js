@@ -450,7 +450,7 @@ const TankCard = ({ userID, tank }) => (
             <Label>{Capital(commonStrings.longDPG)}</Label>
             {tank.rank ? (
                 <Percentile rank={tank.rank} total={tank.total}>
-                    {formatString(strings.betterThan, (100 - (tank.rank * 100) / tank.total).toFixed(2))}
+                    {formatString(strings.betterThan, (100 - ((tank.rank - 1) * 100) / tank.total).toFixed(2))}
                 </Percentile>
             ) : (
                 <Unrank>{formatString(strings.unrankedTank, 25 - tank.battles)}</Unrank>

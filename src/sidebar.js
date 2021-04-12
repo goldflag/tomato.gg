@@ -186,6 +186,7 @@ const LogoImg = styled.img`
     display: flex;
     alignitems: center;
     padding: 0rem;
+    
 `;
 
 const Layer = styled.div`
@@ -201,8 +202,8 @@ const Layer = styled.div`
 
 const Line = styled.div`
     width: 100%;
-    height: 0%;
-    border-bottom: 1px solid rgb(100, 95, 129);
+    height: 1px;
+    border-top: 1px solid rgb(100, 95, 129);
     @media screen and (max-width: 1000px) {
         width: 0px;
     }
@@ -212,6 +213,7 @@ const Logo = styled.div`
     padding: 10px 10px 10px 10px;
     width: auto;
     height: 4em;
+    border-bottom: 1px solid rgb(100, 95, 129);
 `;
 
 const Menu = styled.div`
@@ -321,7 +323,6 @@ const Sidebar = withRouter((props) => {
                         <LogoImg src={TomatoLogo} alt="logo" />
                     </Logo>
                 </Link>
-                <Line />
                 <Menu>
                     {menuRoutes.map(({ path, title, Icon, isNew }) => (
                         <MenuLink
