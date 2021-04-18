@@ -21,9 +21,7 @@ import LocalizedStrings from "Functions/localizedStrings";
 
 // ASSETS
 import TomatoLogo from "Assets/tomato.png";
-import Stratsketch from "Assets/other sites/stratsketch.jpg";
 import Tanksgg from "Assets/other sites/tanks.gg.png";
-import Wot from "Assets/other sites/wot.png";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 const backend = process.env.REACT_APP_BACKEND;
@@ -362,20 +360,14 @@ export default withRouter(function Search(props) {
             <Ad slot={"front_page_banner_1"} styles={"300x50"} />
         </MediaQuery>
         <OutboundLinks>
-            <a href="https://worldoftanks.com/">
-                <img style={{maxHeight: "70px", margin: "1rem"}} src={Wot} alt='World of Tanks'/>
-            </a>
-            <a href="https://tanks.gg/">
+            <a href="https://tanks.gg/" target="_blank">
                 <img style={{maxHeight: "60px", margin: "1rem"}} src={Tanksgg} alt='tanks.gg'/>
             </a>
-            <a href="https://thearmoredpatrol.com/">
-                <img style={{maxHeight: "30px", margin: "1rem"}} src={"https://i2.wp.com/thearmoredpatrol.com/wp-content/uploads/2020/01/cropped-logotap2018-1-1.png?w=768&ssl=1"} alt='thearmoredpatrol.com'/>
-            </a>
-            <a href="https://thedailybounce.net/">
+            <a href="https://thedailybounce.net/" target="_blank">
                 <img style={{maxHeight: "70px", margin: "1rem"}} src={"https://i2.wp.com/thedailybounce.net/wp-content/uploads/2019/01/cropped-cropped-TDB-Logo-2019-2.png?fit=700%2C325&ssl=1"} alt='thedailybounce.net'/>
             </a>
-            <a href="https://stratsketch.com/">
-                <img style={{maxHeight: "40px", margin: "1rem"}} src={Stratsketch} alt='Stratsketch'/>
+            <a href="https://thearmoredpatrol.com/" target="_blank">
+                <img style={{maxHeight: "30px", margin: "1rem"}} src={"https://i2.wp.com/thearmoredpatrol.com/wp-content/uploads/2020/01/cropped-logotap2018-1-1.png?w=768&ssl=1"} alt='thearmoredpatrol.com'/>
             </a>
         </OutboundLinks>
     </Center>
