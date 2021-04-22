@@ -10,8 +10,8 @@ import {
     Pagination,
     ClassFilter,
     GlobalFilter,
-    MoETrackerTierFilter,
-    ConvertedNationFilter,
+    MoETierFilter,
+    NationFilter,
     PremFilter,
     arrayFilterFn,
 } from "Components";
@@ -51,6 +51,7 @@ const colorCell = (percent, colMult) => ({ value }) => (
 function MoETracker({ data, moe }) {
     const { server } = useContext(ServerContext);
 
+    console.log(data)
     const columns = React.useMemo(
         () => [
             {
@@ -63,14 +64,14 @@ function MoETracker({ data, moe }) {
                 Cell: NationCell,
                 Header: tableHeaders.nation,
                 accessor: "nation",
-                Filter: ConvertedNationFilter,
+                Filter: NationFilter,
                 filter: arrayFilterFn,
             },
             {
                 Cell: TierCell,
                 Header: Capital(commonStrings.tier),
                 accessor: "tier",
-                Filter: MoETrackerTierFilter,
+                Filter: MoETierFilter,
                 filter: arrayFilterFn,
             },
             {

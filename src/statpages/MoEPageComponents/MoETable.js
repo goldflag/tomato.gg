@@ -33,6 +33,7 @@ const backend = process.env.REACT_APP_BACKEND;
 
 function MoETable({ data }) {
     const { server } = useContext(ServerContext);
+    console.log(data)
 
     const columns = React.useMemo(
         () => [
