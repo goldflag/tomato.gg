@@ -2,12 +2,10 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
-import Paper from "@material-ui/core/Paper";
 import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
-import "CSS/tankstats.css";
-import "CSS/innerpage.css";
+import { InfoPage } from "Components"
 import { languages } from "Data/languages";
 
 const { formatString, ...strings } = LocalizedStrings({
@@ -269,9 +267,9 @@ export default function About() {
             <Helmet>
                 <title>{strings.title} - Tomato.gg</title>
             </Helmet>
-            <div style={{ padding: "2em", paddingTop: "5em" }}>
-                <div className="narrowpage">
-                    <Paper
+            <div style={{ padding: "2em", paddingTop: "0em" }}>
+                <InfoPage>
+                    <div
                         style={{
                             backgroundColor: "rgba(40, 40, 70, 0.5)",
                             padding: "1rem",
@@ -345,8 +343,8 @@ export default function About() {
                                 </a>
                             </span>
                         </div>
-                    </Paper>
-                </div>
+                    </div>
+                </InfoPage>
             </div>
         </>
     );

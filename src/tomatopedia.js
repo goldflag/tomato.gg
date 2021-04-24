@@ -10,6 +10,8 @@ import { routes } from "./routes";
 import { ScrollToTop } from "./components";
 import Topbar from "./topbar";
 import Sidebar from "./sidebar";
+import Privacy from "./privacy";
+
 import { BackgroundContext } from "Context";
 import Ocean from "./assets/Ocean.svg";
 import "CSS/body.css";
@@ -70,6 +72,9 @@ export default function Tomatopedia() {
                 <Wrapper>
                     <Scrollbar>
                         <Switch>
+                            <Route path={"/privacy"} key={"privacy"}>
+                                <Privacy />
+                            </Route>
                             {routes.map(({ path, Component }, i) => (
                                 <Route path={path} key={i}>
                                     {Component}

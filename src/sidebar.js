@@ -26,6 +26,7 @@ const strings = LocalizedStrings({
         herhor: "MoE rankings and image generator",
         createdBy: "Tomato.gg is a website created by",
         notAffiliated: "and is not affiliated with Wargaming.net.",
+        privacy: "Privacy Policy"
     },
     cs: {
         boomer: "Přepnout odstín pozadí",
@@ -39,6 +40,7 @@ const strings = LocalizedStrings({
         herhor: "Žebříček vítězných znaků a generátor obrázků",
         createdBy: "Tomato.gg vytvořil",
         notAffiliated: "a není jakkoliv spojen s Wargaming.net.",
+        privacy: "Privacy Policy"
     },
     de: {
         boomer: "Wechsel zu dunklem Hintergrund",
@@ -53,6 +55,7 @@ const strings = LocalizedStrings({
         herhor: "MoE Ränge und Bild Generator",
         createdBy: "Tomato.gg ist ein Projekt von",
         notAffiliated: "und steht nicht in Verbindung mit Wargaming.net.",
+        privacy: "Privacy Policy"
     },
     es: {
         boomer: "Alternar Fondo Oscuro",
@@ -66,6 +69,7 @@ const strings = LocalizedStrings({
         herhor: "Generador de imágenes y rankings de las marcas de excelencia",
         createdBy: "Tomato.gg es un sitio web creado por",
         notAffiliated: "y no está afiliado a Wargaming.net.",
+        privacy: "Privacy Policy"
     },
     fr: {
         boomer: "Changer l'arrière-plan",
@@ -79,6 +83,7 @@ const strings = LocalizedStrings({
         herhor: "Classement des marques d'excellence et générateur d'image",
         createdBy: "Tomato.gg est un site web créé par",
         notAffiliated: "et n'est pas affilié avec Wargaming.net.",
+        privacy: "Privacy Policy"
     },
     hr: {
         boomer: "Uključi / Isključi pozadinu Boomer",
@@ -92,6 +97,7 @@ const strings = LocalizedStrings({
         herhor: "Poredak Znakova Izvrsnosti i generator slika",
         createdBy: "Tomato.gg je web stranica koju je izradio",
         notAffiliated: "i nije povezana s Wargaming.net.",
+        privacy: "Privacy Policy"
     },
     ko: {
         boomer: "어두운 배경",
@@ -105,6 +111,7 @@ const strings = LocalizedStrings({
         herhor: "화력의 증표와 이미지 생성",
         createdBy: "토마토 계발자는",
         notAffiliated: "Wargaming.net와 제휴하지 않습니다.",
+        privacy: "Privacy Policy"
     },
     pl: {
         boomer: "Przełącz Boomerowe Tło",
@@ -118,6 +125,7 @@ const strings = LocalizedStrings({
         herhor: "Rankingi i generator obrazków biegłości",
         createdBy: "Tomato.gg to witryna stworzona przez",
         notAffiliated: "i nie jest powiązana z Wargaming.net.",
+        privacy: "Privacy Policy"
     },
     ru: {
         boomer: "Переключить темный фон",
@@ -131,6 +139,7 @@ const strings = LocalizedStrings({
         herhor: "Рейтинги МoE и генератор изображений",
         createdBy: "Tomato.gg - это веб-сайт, созданный",
         notAffiliated: "и не связан с Wargaming.net.",
+        privacy: "Privacy Policy"
     },
     tr: {
         boomer: "Boomer Arkaplanını Değiştir",
@@ -144,6 +153,7 @@ const strings = LocalizedStrings({
         herhor: "MoE sıralaması ve görüntü oluşturucu",
         createdBy: "Tomato.gg sitesini yapan kişi ",
         notAffiliated: "ve Wargaming.net ile bağlantılı değildir.",
+        privacy: "Privacy Policy"
     },
     zh: {
         boomer: "切換為深色模式",
@@ -156,6 +166,7 @@ const strings = LocalizedStrings({
         herhor: "M牌排行榜及圖片產生器",
         createdBy: "Tomato.gg 創自於",
         notAffiliated: "網站不隸屬於 Wargaming.net.",
+        privacy: "Privacy Policy"
     },
 });
 
@@ -359,7 +370,7 @@ const Sidebar = withRouter((props) => {
                         </a>
                     </Support>
                     <Partnered>
-                        <span style={{ fontWeight: "500" }}>{strings.partnered}</span>
+                        {/* <span style={{ fontWeight: "500" }}>{strings.partnered}</span>
                         <span>
                             <br />
                             <a target="blank" href="https://herhor.net/wot/">
@@ -367,7 +378,16 @@ const Sidebar = withRouter((props) => {
                             </a>{" "}
                         </span>
                         - {strings.herhor}
-                        <br />
+                        <br /> */}
+                        <Link to="/privacy">{strings.privacy}</Link>
+                        {" • "}
+                        <a target="blank" href="https://herhor.net/wot/">
+                            herhor.net
+                        </a>
+                        {" • "}
+                        <a target="blank" href="https://herhor.net/wot/moe/top/">
+                            MoE Leaderboards
+                        </a>
                     </Partnered>
                     <Line />
                     <CopyrightNotice>
