@@ -49,6 +49,7 @@ class StatsPage extends Component {
             loader: <Loader frog={true} top={20} bottom={20} />,
             loadedStats: false,
             loadedOther: false,
+            failed: false,
             validID: false,
             battles: 0,
             username: "",
@@ -82,7 +83,7 @@ class StatsPage extends Component {
                 this.setStage3();
             });
         } else {
-            this.setState({ username });
+            this.setState({ failed: true, username });
         }
 
         ReactGA.initialize(trackingId);
@@ -194,28 +195,31 @@ class StatsPage extends Component {
     };
 
     render() {
-        const { loadedOther, loadedStats, validID, username } = this.state;
+        const { failed, loadedOther, loadedStats, validID, username } = this.state;
         let statTable;
-        if (!loadedOther || !loadedStats) {
+        const notFound = (
+            <Container>
+                <span style={{ fontSize: "2rem" }}>
+                    {formatString(strings.notFound, username)}{" "}
+                    <img
+                        src={worrydetective}
+                        style={{ height: "2.5rem", verticalAlign: "middle" }}
+                        alt="notfound"
+                    />
+                </span>
+                <br />
+                <br />
+                {strings.correct}
+            </Container>
+        );
+        if (failed) {
+            statTable = notFound;
+        } else if (!loadedOther || !loadedStats) {
             statTable = this.state.loader;
         } else if (validID) {
             statTable = <MainTabs {...this.state} />;
         } else {
-            statTable = (
-                <Container>
-                    <span style={{ fontSize: "2rem" }}>
-                        {formatString(strings.notFound, username)}{" "}
-                        <img
-                            src={worrydetective}
-                            style={{ height: "2.5rem", verticalAlign: "middle" }}
-                            alt="notfound"
-                        />
-                    </span>
-                    <br />
-                    <br />
-                    {strings.correct}
-                </Container>
-            );
+            statTable = notFound;
         }
 
         return (
