@@ -235,7 +235,12 @@ export default withRouter(function Search(props) {
     useEffect(() => {
         fetchStuff();
         setTimeout(() => {
-            window.reloadAdSlots();
+            try {
+                window.reloadAdSlots();
+            }
+            catch {
+                console.log("no ads");
+            }
         }, 0);
     }, [server]);
 
