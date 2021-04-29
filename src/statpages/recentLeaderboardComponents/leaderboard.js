@@ -128,8 +128,8 @@ const filters = {
         { value: 7, label: formatString(commonStrings.days, 7) },
         { value: 14, label: formatString(commonStrings.days, 14) },
         { value: 30, label: formatString(commonStrings.days, 30) },
-        { value: 60, label: formatString(commonStrings.days, 60) }
-    ]
+        { value: 60, label: formatString(commonStrings.days, 60) },
+    ],
 };
 
 const ButtonFilterBar = ({ options, filterValue, setFilterValue, ariaLabel }) => (

@@ -5,7 +5,7 @@ import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
 
 // LOCAL
-import { InfoPage } from "Components"
+import { InfoPage } from "Components";
 import { languages } from "Data/languages";
 
 const { formatString, ...strings } = LocalizedStrings({
@@ -239,7 +239,7 @@ const translators = {
     fr: [
         { name: "candymonster1953", url: "/stats/NA/candymonster1953=1038153624" },
         { name: "ForgottenShots", url: "/stats/EU/ForgottenShots=529569765" },
-        { name: "Matthieu R.", url: "https://www.upwork.com/freelancers/~0162d87038acacf992"}
+        { name: "Matthieu R.", url: "https://www.upwork.com/freelancers/~0162d87038acacf992" },
     ],
     ko: [{ name: "Roika", url: "/stats/ASIA/Crawling_Ghost=2005611731" }],
     hr: [{ name: "Sačo", url: "https://www.instagram.com/sacobrt/" }],

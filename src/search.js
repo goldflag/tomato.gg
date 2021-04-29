@@ -29,19 +29,19 @@ const backend = process.env.REACT_APP_BACKEND;
 
 const Page = styled.div`
     margin: 0 1rem;
-`
+`;
 
 const Desktop = styled.div`
     margin: 0 auto;
     display: grid;
     grid-template-columns: auto auto;
-`
+`;
 const Adcontent = styled.div`
     margin: 1rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-`
+`;
 
 const Center = styled.div`
     display: flex;
@@ -90,7 +90,7 @@ const Minitables = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-`
+`;
 
 const OutboundLinks = styled.div`
     display: flex;
@@ -99,7 +99,7 @@ const OutboundLinks = styled.div`
 
     justify-content: center;
     align-items: center;
-`
+`;
 const { formatString, ...strings } = LocalizedStrings({
     en: {
         sentence: `THE MOST {advanced} WORLD OF TANKS {break} {playerStats}, {leaderboards}, 
@@ -216,28 +216,24 @@ export default withRouter(function Search(props) {
     const [value, setValue] = useState(0);
     const handleChange = (_, newValue) => setValue(newValue);
 
-    const [tankdata, setTankdata] = useState('');
-    const [playerdata, setPlayerdata] = useState('');
-
+    const [tankdata, setTankdata] = useState("");
+    const [playerdata, setPlayerdata] = useState("");
 
     function fetchStuff() {
-        const urls = [
-            `${backend}/api/recenttanks/${server}/7`,
-            `${backend}/api/leaderboard/${server}/wn8/7/8/0`
-        ];
+        const urls = [`${backend}/api/recenttanks/${server}/7`, `${backend}/api/leaderboard/${server}/wn8/7/8/0`];
         Promise.all(urls.map((url) => fetch(url)))
-        .then(resps => Promise.all(resps.map(r => r.json())))
-        .then(([tank, player]) => {
-            setTankdata(tank);
-            player.body.forEach((player) => {
-                player.url = `/stats/${serverConv[server]}/${player.username}=${player.player_id}`;
+            .then((resps) => Promise.all(resps.map((r) => r.json())))
+            .then(([tank, player]) => {
+                setTankdata(tank);
+                player.body.forEach((player) => {
+                    player.url = `/stats/${serverConv[server]}/${player.username}=${player.player_id}`;
+                });
+                setPlayerdata(player.body);
             });
-            setPlayerdata(player.body);
-        })
     }
 
     useEffect(() => {
-        fetchStuff()
+        fetchStuff();
     }, [server]);
 
     const searchId = async (e) => {
@@ -270,7 +266,6 @@ export default withRouter(function Search(props) {
         }
     };
 
-
     let tankTable = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />;
     if (tankdata) {
         tankTable = <TankTable data={tankdata} />;
@@ -282,101 +277,126 @@ export default withRouter(function Search(props) {
 
     const mainContent = (
         <Center>
-        <Helmet>
-            <title>Tomato.gg</title>
-        </Helmet>
-        <TopSection>
-            <img
-                src={TomatoLogo}
-                alt="logo"
-                style={{
-                    width: "70%",
-                    marginTop: "2rem"
-                }}
-            />
-            <AboutSection />
-            <form style={{width: "100%"}} onSubmit={searchId}>
-                <SearchBar
-                    name={name}
-                    setName={setName}
-                    setServer={setServer}
-                    server={server}
-                    setMode={setMode}
-                    mode={mode}
+            <Helmet>
+                <title>Tomato.gg</title>
+            </Helmet>
+            <TopSection>
+                <img
+                    src={TomatoLogo}
+                    alt="logo"
+                    style={{
+                        width: "70%",
+                        marginTop: "2rem",
+                    }}
                 />
-            </form>
-        </TopSection>
-        <MediaQuery minWidth={1000}>
-            <a target="blank" href="https://discord.gg/qA2bV7K">
-                <GetBot formAction={"www.google.com"}>
-                    <img src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"} style={{width: "30px"}} alt="discordlogo"/> &nbsp; Join Our Server
-                </GetBot>
-            </a>
-            <Ad slot={"front_page_banner_2"} styles={"728x90"} />
-            <Minitables>
-                <div style={{ margin: "1rem" }}>
-                    <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
-                        <CustomTab label={`1 WEEK TANK STATS`} />
-                    </CustomTabs>
-                    <TabPanel value={value} index={0}>
-                        <div
-                            style={{
-                                color: "rgb(220, 220, 220)",
-                                width: "600px"
-                            }}
-                        >
-                            {tankTable}
-                        </div>
-                    </TabPanel>
-                </div>
-                <div style={{ margin: "1rem" }}>
-                    <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
-                        <CustomTab label={`1 WEEK PLAYER STATS`} />
-                    </CustomTabs>
-                    <TabPanel value={value} index={0}>
-                        <div
-                            style={{
-                                color: "rgb(220, 220, 220)",
-                                width: "600px"
-                            }}
-                        >
-                            {playerTable}
-                        </div>
-                    </TabPanel>
-                </div>
-            </Minitables>
-        </MediaQuery>
-        <MediaQuery maxWidth={999}>
-            <a target="blank" href="https://discord.gg/qA2bV7K">
-                <GetBot formAction={"www.google.com"}>
-                    <img src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"} style={{width: "30px"}} alt="discordlogo"/> &nbsp; Join Our Server
-                </GetBot>
-            </a>
-            <Ad slot={"front_page_banner_2"} styles={"300x50"} />
-        </MediaQuery>
-        <MediaQuery minWidth={1000}>
-            <Ad slot={"front_page_banner_1"} styles={"728x90"} />
-        </MediaQuery>
-        <MediaQuery maxWidth={999}>
-            <Ad slot={"front_page_banner_1"} styles={"300x50"} />
-        </MediaQuery>
-        <OutboundLinks>
-            <a href="https://aslain.com/index.php?/topic/13-download-%E2%98%85-world-of-tanks-%E2%98%85-modpack/" target="_blank">
-                <img style={{maxHeight: "55px", margin: "1rem"}} src={Aslain} alt='aslain.com'/>
-            </a>
-            <a href="https://tanks.gg/" target="_blank">
-                <img style={{maxHeight: "50px", margin: "1rem"}} src={Tanksgg} alt='tanks.gg'/>
-            </a>
-            <a href="https://thedailybounce.net/" target="_blank">
-                <img style={{maxHeight: "60px", margin: "1rem"}} src={"https://i2.wp.com/thedailybounce.net/wp-content/uploads/2019/01/cropped-cropped-TDB-Logo-2019-2.png?fit=700%2C325&ssl=1"} alt='thedailybounce.net'/>
-            </a>
-            <a href="https://thearmoredpatrol.com/" target="_blank">
-                <img style={{maxHeight: "25px", margin: "1rem"}} src={"https://i2.wp.com/thearmoredpatrol.com/wp-content/uploads/2020/01/cropped-logotap2018-1-1.png?w=768&ssl=1"} alt='thearmoredpatrol.com'/>
-            </a>
-        </OutboundLinks>
-    </Center>
+                <AboutSection />
+                <form style={{ width: "100%" }} onSubmit={searchId}>
+                    <SearchBar
+                        name={name}
+                        setName={setName}
+                        setServer={setServer}
+                        server={server}
+                        setMode={setMode}
+                        mode={mode}
+                    />
+                </form>
+            </TopSection>
+            <MediaQuery minWidth={1000}>
+                <a target="blank" href="https://discord.gg/qA2bV7K">
+                    <GetBot formAction={"www.google.com"}>
+                        <img
+                            src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"}
+                            style={{ width: "30px" }}
+                            alt="discordlogo"
+                        />{" "}
+                        &nbsp; Join Our Server
+                    </GetBot>
+                </a>
+                <Ad slot={"front_page_banner_2"} styles={"728x90"} />
+                <Minitables>
+                    <div style={{ margin: "1rem" }}>
+                        <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
+                            <CustomTab label={`1 WEEK TANK STATS`} />
+                        </CustomTabs>
+                        <TabPanel value={value} index={0}>
+                            <div
+                                style={{
+                                    color: "rgb(220, 220, 220)",
+                                    width: "600px",
+                                }}
+                            >
+                                {tankTable}
+                            </div>
+                        </TabPanel>
+                    </div>
+                    <div style={{ margin: "1rem" }}>
+                        <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
+                            <CustomTab label={`1 WEEK PLAYER STATS`} />
+                        </CustomTabs>
+                        <TabPanel value={value} index={0}>
+                            <div
+                                style={{
+                                    color: "rgb(220, 220, 220)",
+                                    width: "600px",
+                                }}
+                            >
+                                {playerTable}
+                            </div>
+                        </TabPanel>
+                    </div>
+                </Minitables>
+            </MediaQuery>
+            <MediaQuery maxWidth={999}>
+                <a target="blank" href="https://discord.gg/qA2bV7K">
+                    <GetBot formAction={"www.google.com"}>
+                        <img
+                            src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"}
+                            style={{ width: "30px" }}
+                            alt="discordlogo"
+                        />{" "}
+                        &nbsp; Join Our Server
+                    </GetBot>
+                </a>
+                <Ad slot={"front_page_banner_2"} styles={"300x50"} />
+            </MediaQuery>
+            <MediaQuery minWidth={1000}>
+                <Ad slot={"front_page_banner_1"} styles={"728x90"} />
+            </MediaQuery>
+            <MediaQuery maxWidth={999}>
+                <Ad slot={"front_page_banner_1"} styles={"300x50"} />
+            </MediaQuery>
+            <OutboundLinks>
+                <a
+                    href="https://aslain.com/index.php?/topic/13-download-%E2%98%85-world-of-tanks-%E2%98%85-modpack/"
+                    target="_blank"
+                >
+                    <img style={{ maxHeight: "55px", margin: "1rem" }} src={Aslain} alt="aslain.com" />
+                </a>
+                <a href="https://tanks.gg/" target="_blank">
+                    <img style={{ maxHeight: "50px", margin: "1rem" }} src={Tanksgg} alt="tanks.gg" />
+                </a>
+                <a href="https://thedailybounce.net/" target="_blank">
+                    <img
+                        style={{ maxHeight: "60px", margin: "1rem" }}
+                        src={
+                            "https://i2.wp.com/thedailybounce.net/wp-content/uploads/2019/01/cropped-cropped-TDB-Logo-2019-2.png?fit=700%2C325&ssl=1"
+                        }
+                        alt="thedailybounce.net"
+                    />
+                </a>
+                <a href="https://thearmoredpatrol.com/" target="_blank">
+                    <img
+                        style={{ maxHeight: "25px", margin: "1rem" }}
+                        src={
+                            "https://i2.wp.com/thearmoredpatrol.com/wp-content/uploads/2020/01/cropped-logotap2018-1-1.png?w=768&ssl=1"
+                        }
+                        alt="thearmoredpatrol.com"
+                    />
+                </a>
+            </OutboundLinks>
+        </Center>
     );
-    
+
     return (
         <Page>
             <MediaQuery minWidth={1200}>
@@ -388,9 +408,7 @@ export default withRouter(function Search(props) {
                     </Adcontent>
                 </Desktop>
             </MediaQuery>
-            <MediaQuery maxWidth={1199}>
-                {mainContent}
-            </MediaQuery>
+            <MediaQuery maxWidth={1199}>{mainContent}</MediaQuery>
         </Page>
     );
 });

@@ -6,11 +6,7 @@ import { useTable, usePagination, useSortBy, useFilters, useExpanded } from "rea
 // LOCAL
 import cellStyle from "Functions/cellStyle";
 import { Pagination } from "Components";
-import {
-    StyledTable,
-    TableContainer,
-    tableHeaders,
-} from "Components/tableComponents";
+import { StyledTable, TableContainer, tableHeaders } from "Components/tableComponents";
 import { Capital, commonStrings } from "Data/localizations";
 
 function RecentTanksAvgTable({ data }) {
@@ -45,7 +41,7 @@ function RecentTanksAvgTable({ data }) {
             {
                 Header: commonStrings.dpg,
                 accessor: "dpg",
-            }
+            },
         ];
     }, []);
 

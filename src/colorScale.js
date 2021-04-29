@@ -40,7 +40,7 @@ const { ...strings } = LocalizedStrings({
         increments: "Incréments",
         linear: "Linéaire",
         cosine: "Cosinus",
-    }, 
+    },
     hr: {
         colorScales: "Ljestvica boja",
         increments: "Priraštaji",

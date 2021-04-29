@@ -25,23 +25,21 @@ export default function NationDist({ MOEdata, MasteryData }) {
                     </div>
                 </Grid>
                 <Grid item xs={8}>
-                    <TierMoeMasteryDistribution 
-                        data={value === 0 ? MOEdata : MasteryData} 
+                    <TierMoeMasteryDistribution
+                        data={value === 0 ? MOEdata : MasteryData}
                         keys={value === 0 ? ["0", "1", "2", "3"] : ["None", "3rd", "2nd", "1st", "Ace"]}
-                        colors={value === 0 ? 
-                        [
-                            "rgb(224, 224, 224)", 
-                            "rgb(103, 174, 224)", 
-                            "rgb(92, 108, 196)", 
-                            "rgb(138, 53, 212)"
-                        ] : [
-                            "rgb(97, 97, 97)",
-                            "rgb(115, 83, 53)",
-                            "rgb(145, 106, 44)",
-                            "rgb(194, 194, 194)",
-                            "rgb(235, 191, 47)",
-                        ]}
-                    /> 
+                        colors={
+                            value === 0
+                                ? ["rgb(224, 224, 224)", "rgb(103, 174, 224)", "rgb(92, 108, 196)", "rgb(138, 53, 212)"]
+                                : [
+                                      "rgb(97, 97, 97)",
+                                      "rgb(115, 83, 53)",
+                                      "rgb(145, 106, 44)",
+                                      "rgb(194, 194, 194)",
+                                      "rgb(235, 191, 47)",
+                                  ]
+                        }
+                    />
                 </Grid>
             </Grid>
         </div>

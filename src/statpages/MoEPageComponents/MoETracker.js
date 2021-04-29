@@ -51,7 +51,7 @@ const colorCell = (percent, colMult) => ({ value }) => (
 function MoETracker({ data, moe }) {
     const { server } = useContext(ServerContext);
 
-    console.log(data)
+    console.log(data);
     const columns = React.useMemo(
         () => [
             {

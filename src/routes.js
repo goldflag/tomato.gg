@@ -296,7 +296,6 @@ const colorScale = {
     isNew: true,
 };
 
-
 /*
     Disabled routes
 */

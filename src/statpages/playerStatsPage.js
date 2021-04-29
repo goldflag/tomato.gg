@@ -201,11 +201,7 @@ class StatsPage extends Component {
             <Container>
                 <span style={{ fontSize: "2rem" }}>
                     {formatString(strings.notFound, username)}{" "}
-                    <img
-                        src={worrydetective}
-                        style={{ height: "2.5rem", verticalAlign: "middle" }}
-                        alt="notfound"
-                    />
+                    <img src={worrydetective} style={{ height: "2.5rem", verticalAlign: "middle" }} alt="notfound" />
                 </span>
                 <br />
                 <br />

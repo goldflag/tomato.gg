@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 
-export default function TierMasteryDistribution({data, keys, colors}) {
+export default function TierMasteryDistribution({ data, keys, colors }) {
     return (
         <div style={{ height: "calc(292px)" }}>
             <ResponsiveBar

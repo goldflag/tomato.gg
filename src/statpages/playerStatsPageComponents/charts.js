@@ -14,7 +14,6 @@ import LineGraphs from "./appbars/LineGraphs";
 import { useWindowSize } from "Functions/hooks";
 
 export default function Charts(props) {
-
     const size = useWindowSize();
 
     const useStyles = makeStyles((t) => ({

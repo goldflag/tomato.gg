@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {CustomTabs, CustomTab } from "../../../components/customTabs";
+import { CustomTabs, CustomTab } from "../../../components/customTabs";
 import TierDistribution from "../charts/TierDistribution.js";
 
 export default function TierDist({ data, recentData }) {

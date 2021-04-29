@@ -38,7 +38,7 @@ const OverallTop = styled.div`
     @media screen and (max-width: 1000px) {
         grid-template-areas:
             "title"
-            "dpg" 
+            "dpg"
             "wn8";
         grid-template-columns: 1fr;
         grid-template-rows: 200px 150px;
@@ -54,13 +54,12 @@ const OverallBottom = styled.div`
     @media screen and (max-width: 1000px) {
         grid-template-areas:
             "winrate"
-            "frags" 
+            "frags"
             "kd"
             "dr"
             "battles";
         grid-template-columns: 1fr;
         grid-template-rows: 150px;
-
     }
 `;
 

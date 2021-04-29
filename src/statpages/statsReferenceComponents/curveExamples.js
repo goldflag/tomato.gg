@@ -59,7 +59,7 @@ export default function CurveExamples() {
         setValue(newValue);
     };
 
-    return (<> hi </>)
+    return <> hi </>;
     // return (
     //     <div className={classes.root}>
     //         <div
