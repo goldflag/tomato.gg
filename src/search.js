@@ -312,6 +312,9 @@ export default withRouter(function Search(props) {
                         &nbsp; Join Our Server
                     </GetBot>
                 </a>
+
+                <div id="nn_lb1"></div>
+
                 <Ad slot={"front_page_banner_2"} styles={"728x90"} />
                 <Minitables>
                     <div style={{ margin: "1rem" }}>

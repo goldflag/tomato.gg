@@ -267,6 +267,7 @@ const DonationButton = styled.div`
     text-align: center;
     font-size: 0.9rem;
 `;
+
 const Kofi = styled(DonationButton)`
     background-color: rgb(232, 37, 79);
     &hover {
