@@ -234,6 +234,9 @@ export default withRouter(function Search(props) {
 
     useEffect(() => {
         fetchStuff();
+        setTimeout(() => {
+            window.reloadAdSlots();
+        }, 0);
     }, [server]);
 
     const searchId = async (e) => {
