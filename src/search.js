@@ -109,11 +109,9 @@ const BottomIndicator = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: color 0.3s;
+    transition: filter 0.3s;
     :hover {
-        color: hsl(195, 10%, 89%);
         cursor: pointer;
-        text-shadow: 0px 0px 7px hsl(195, 10%, %) !important;
         filter: drop-shadow(0 0 0.3rem hsl(195, 10%, 89%));
     }
 `;
