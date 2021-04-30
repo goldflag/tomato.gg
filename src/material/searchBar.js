@@ -1,15 +1,40 @@
 // NPM
 import React from "react";
 import LocalizedStrings from "Functions/localizedStrings";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
-import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
+import styled from "styled-components";
 
 // LOCAL
 import SelectQuery from "./select";
+
+const Root = styled.div`
+    padding: 2px 4px !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 50px !important;
+    background-color: rgba(40, 40, 60, 0.8) !important;
+    box-shadow: 0px 1px 3px rgba(30, 30, 50, 1) !important;
+    transition: background-color 0.3s;
+    :hover {
+        background-color: rgba(50, 50, 80, 0.8) !important;
+        box-shadow: 0px 1px 3px rgba(40, 40, 60, 1) !important;
+    }
+`
+
+const Input = styled(InputBase)`
+    flex: 1 !important;
+    font-size: 16 !important;
+    color: white !important;
+    margin-left: 10px !important;
+` 
+
+const Icon = styled(IconButton)`
+    padding: 10 !important;
+    color: white !important;
+`
 
 const strings = LocalizedStrings({
     en: {
@@ -91,50 +116,19 @@ const strings = LocalizedStrings({
     },
 });
 
-const useStyles = makeStyles((t) => ({
-    root: {
-        padding: "2px 4px",
-        display: "flex",
-        alignItems: "center",
-        width: "100%",
-        height: "50px",
-        borderRadius: 0,
-        backgroundColor: "rgba(40, 40, 60, 0.8)",
-    },
-    input: {
-        marginLeft: t.spacing(1),
-        flex: 1,
-        fontSize: 16,
-        color: "white",
-    },
-    iconButton: {
-        padding: 10,
-        color: "white",
-    },
-    divider: {
-        height: 40,
-        margin: 10,
-        color: "white",
-    },
-}));
-
 export default function SearchBar({ name, setName, server, setServer, mode, setMode }) {
-    const classes = useStyles();
-
     return (
-        <Paper className={classes.root}>
-            <InputBase
-                className={classes.input}
+        <Root>
+            <Input
                 placeholder={mode === "player" ? strings.placeholder : strings.clanPlaceholder}
                 inputProps={{ "aria-label": mode === "player" ? strings.ariaLabel : strings.clanAriaLabel }}
                 value={mode === "player" ? name : name.toUpperCase()}
                 onChange={(e) => setName(e.target.value)}
             />
-            <Divider className={classes.divider} orientation="vertical" />
             <SelectQuery setServer={setServer} server={server} setMode={setMode} mode={mode} />
-            <IconButton type="submit" className={classes.iconButton} aria-label={strings.searchAriaLabel}>
+            <Icon type="submit" aria-label={strings.searchAriaLabel}>
                 <SearchIcon />
-            </IconButton>
-        </Paper>
+            </Icon>
+        </Root>
     );
 }

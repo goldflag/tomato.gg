@@ -1,11 +1,11 @@
 // NPM
 import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import LocalizedStrings from "Functions/localizedStrings";
+import styled from "styled-components";
 
 // LOCAL
 import MobileSelect from "./mobileSelect";
@@ -95,6 +95,36 @@ const strings = LocalizedStrings({
     },
 });
 
+const Root = styled.div`
+
+    margin-left: 0.5rem !important;
+    padding: 2px 4px !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 250px !important;
+    height: 30px !important;
+    border-radius: 15px !important;
+    background-color: rgba(40, 40, 60, 0.8) !important;
+    box-shadow: 0px 1px 3px rgba(30, 30, 50, 1) !important;
+    transition: background-color 0.2s;
+    :hover {
+        background-color: rgba(50, 50, 80, 0.8) !important;
+        box-shadow: 0px 1px 3px rgba(40, 40, 60, 1) !important;
+    }
+`
+
+const Input = styled(InputBase)`
+    flex: 1 !important;
+    font-size: 0.9rem !important;
+    color: rgb(255, 255, 255) !important;
+    margin-left: 10px !important;
+` 
+
+const Icon = styled(IconButton)`
+    padding: 10 !important;
+    color: white !important;
+`
+
 const useStyles = makeStyles((t) => ({
     root: {
         marginLeft: "0.5rem",
@@ -157,19 +187,18 @@ function SearchBar() {
 
     return (
         <form onSubmit={onSubmit}>
-            <Paper elevation={0} className={classes.root}>
-                <InputBase
-                    className={classes.input}
+            <Root>
+                <Input
                     placeholder={mode === "player" ? strings.placeholder : strings.clanPlaceholder}
                     inputProps={{ "aria-label": strings.ariaLabel }}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
                 <MobileSelect setServer={setServer} server={server} setMode={setMode} mode={mode} />
-                <IconButton type="submit" className={classes.iconButton} aria-label={strings.searchAriaLabel}>
+                <Icon type="submit" className={classes.iconButton} aria-label={strings.searchAriaLabel}>
                     <SearchIcon />
-                </IconButton>
-            </Paper>
+                </Icon>
+            </Root>
         </form>
     );
 }
