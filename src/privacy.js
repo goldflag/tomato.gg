@@ -47,8 +47,7 @@ export default function Privacy() {
                         and history in order to better serve the user and/or present the user with customized content.
                         <h2>Advertisement and Other Third Parties</h2>
                         We use third party advertisements to support our site. Some of these advertisers may be served
-                        from our third party advertiser. You can view their privacy policy and cookie policy here. You
-                        can manage your cookies <a href={"javascript:window.__cmp('showConsentModal')"}>here</a>.
+                        from our third party advertiser. You can view their privacy policy and cookie policy here.
                         <br />
                         We use Google Analytics and Comscore to analyse the use of our website. Google Analytics and
                         Comscore gather information about website use by means of cookies. The information gathered

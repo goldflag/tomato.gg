@@ -11,7 +11,7 @@ import { chevronDown } from 'react-icons-kit/fa/chevronDown'
 
 // LOCAL
 import SearchBar from "Material/searchBar";
-import Accordion from "Material/frontpageAccordtion";
+import Accordion from "./searchpage/frontpageAccordtion";
 import { ServerContext, SearchHistoryContext, SearchmodeContext } from "Context";
 import { serverConv } from "Data/conversions";
 import Ad from "Ads/ads";
@@ -269,14 +269,14 @@ export default withRouter(function Search(props) {
 
     useEffect(() => {
         fetchStuff();
-        setTimeout(() => {
-            try {
-                window.reloadAdSlots();
-            }
-            catch {
-                console.log("no ads");
-            }
-        }, 0);
+        // setTimeout(() => {
+        //     try {
+        //         window.reloadAdSlots();
+        //     }
+        //     catch {
+        //         console.log("no ads");
+        //     }
+        // }, 0);
     }, [server]);
 
     const searchId = async (e) => {
@@ -409,7 +409,7 @@ export default withRouter(function Search(props) {
                     </GetBot>
                 </a>
 
-                <div id="nn_lb1"></div>
+                {/* <div id="nn_lb1"></div> */}
 
                 <Ad slot={"front_page_banner_2"} styles={"728x90"} />
 
@@ -436,14 +436,14 @@ export default withRouter(function Search(props) {
             <OutboundLinks>
                 <a
                     href="https://aslain.com/index.php?/topic/13-download-%E2%98%85-world-of-tanks-%E2%98%85-modpack/"
-                    target="_blank"
+                    target="blank"
                 >
                     <img style={{ maxHeight: "55px", margin: "1rem" }} src={Aslain} alt="aslain.com" />
                 </a>
-                <a href="https://tanks.gg/" target="_blank">
+                <a href="https://tanks.gg/" target="blank">
                     <img style={{ maxHeight: "50px", margin: "1rem" }} src={Tanksgg} alt="tanks.gg" />
                 </a>
-                <a href="https://thedailybounce.net/" target="_blank">
+                <a href="https://thedailybounce.net/" target="blank">
                     <img
                         style={{ maxHeight: "60px", margin: "1rem" }}
                         src={
@@ -452,7 +452,7 @@ export default withRouter(function Search(props) {
                         alt="thedailybounce.net"
                     />
                 </a>
-                <a href="https://thearmoredpatrol.com/" target="_blank">
+                <a href="https://thearmoredpatrol.com/" target="blank">
                     <img
                         style={{ maxHeight: "25px", margin: "1rem" }}
                         src={

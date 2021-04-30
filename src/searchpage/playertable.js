@@ -1,6 +1,6 @@
 // NPM
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTable, usePagination, useSortBy, useFilters, useExpanded } from "react-table";
 
 // LOCAL
@@ -50,7 +50,6 @@ function RecentTanksAvgTable({ data }) {
         getTableBodyProps,
         headerGroups,
         prepareRow,
-        state,
         page,
         canPreviousPage,
         canNextPage,

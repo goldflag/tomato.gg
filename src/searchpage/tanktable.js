@@ -9,10 +9,8 @@ import { Pagination } from "Components";
 import {
     StyledTable,
     TableContainer,
-    NationCell,
     TankNameCell,
     TierCell,
-    ClassCell,
     tableHeaders,
 } from "Components/tableComponents";
 import { Capital, commonStrings } from "Data/localizations";
@@ -56,7 +54,6 @@ function RecentTanksAvgTable({ data }) {
         getTableBodyProps,
         headerGroups,
         prepareRow,
-        state,
         page,
         canPreviousPage,
         canNextPage,
