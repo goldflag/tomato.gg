@@ -11,6 +11,7 @@ import { chevronDown } from 'react-icons-kit/fa/chevronDown'
 
 // LOCAL
 import SearchBar from "Material/searchBar";
+import Accordion from "Material/frontpageAccordtion";
 import { ServerContext, SearchHistoryContext, SearchmodeContext } from "Context";
 import { serverConv } from "Data/conversions";
 import Ad from "Ads/ads";
@@ -115,6 +116,17 @@ const BottomIndicator = styled.div`
 const FullPage = styled.div`
     min-height: calc(100vh - 4rem);
     padding-top: calc(10vh);
+`;
+
+const Text = styled.div`
+    margin: 1rem;
+    min-width: 400px;
+    max-width: 80%;
+    color: rgb(230, 230, 230);
+    h1,
+    h2 {
+        color: rgb(255, 255, 255);
+    }
 `;
 
 
@@ -310,38 +322,43 @@ export default withRouter(function Search(props) {
     );
 
     const bottom = (
-        <Minitables>
-            <div style={{ margin: "1rem" }}>
-                <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
-                    <CustomTab label={`1 WEEK TANK STATS`} />
-                </CustomTabs>
-                <TabPanel value={value} index={0}>
-                    <div
-                        style={{
-                            color: "rgb(220, 220, 220)",
-                            width: "600px",
-                        }}
-                    >
-                        {tankTable}
-                    </div>
-                </TabPanel>
-            </div>
-            <div style={{ margin: "1rem" }}>
-                <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
-                    <CustomTab label={`1 WEEK PLAYER STATS`} />
-                </CustomTabs>
-                <TabPanel value={value} index={0}>
-                    <div
-                        style={{
-                            color: "rgb(220, 220, 220)",
-                            width: "600px",
-                        }}
-                    >
-                        {playerTable}
-                    </div>
-                </TabPanel>
-            </div>
-        </Minitables>
+        <>
+            {/* <Minitables>
+                <div style={{ margin: "1rem" }}>
+                    <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
+                        <CustomTab label={`1 WEEK TANK STATS`} />
+                    </CustomTabs>
+                    <TabPanel value={value} index={0}>
+                        <div
+                            style={{
+                                color: "rgb(220, 220, 220)",
+                                width: "600px",
+                            }}
+                        >
+                            {tankTable}
+                        </div>
+                    </TabPanel>
+                </div>
+                <div style={{ margin: "1rem" }}>
+                    <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
+                        <CustomTab label={`1 WEEK PLAYER STATS`} />
+                    </CustomTabs>
+                    <TabPanel value={value} index={0}>
+                        <div
+                            style={{
+                                color: "rgb(220, 220, 220)",
+                                width: "600px",
+                            }}
+                        >
+                            {playerTable}
+                        </div>
+                    </TabPanel>
+                </div>
+            </Minitables> */}
+            <Text>
+                <Accordion/>
+            </Text>
+        </>
     );
 
     const mainContent = (
