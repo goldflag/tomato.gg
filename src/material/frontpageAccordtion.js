@@ -54,10 +54,9 @@ function calculateWN8(id, avgDamage, avgDef, avgFrag, avgSpots, winrate) {
 }`;
 
 export default function FrontpageAccordion() {
-
   return (
     <div>
-      <Accordion defaultExpanded={true}>
+      <Accordion defaultExpanded={true} id="bbbb">
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1-content"
@@ -68,7 +67,7 @@ export default function FrontpageAccordion() {
         <AccordionDetails>
             <span>
             Tomato.gg is a statistics database and tracker for World of Tanks PC. It tracks the stats of over a million active active players on the European, American, and Asian servers. 
-            We will add tracking for the CIS (Russian) cluster once enough Russians beg for it. 
+            We may add tracking for the CIS (Russian) cluster eventually, but so far not enough people have asked. 
             <br/>
             <br/>
             I'm a 20 year old computer science student in the United States, and I began work on Tomato.gg in July of 2020. 

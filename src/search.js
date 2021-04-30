@@ -1,5 +1,5 @@
 // NPM
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
@@ -111,6 +111,12 @@ const BottomIndicator = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: color 0.3s;
+    :hover {
+        color: hsl(290, 91%, 49%);
+        cursor: pointer;
+        text-shadow: 0px 0px hsl(342, 91%, 49%);
+    }
 `;
 
 const FullPage = styled.div`
@@ -249,6 +255,8 @@ export default withRouter(function Search(props) {
     const [tankdata, setTankdata] = useState("");
     const [playerdata, setPlayerdata] = useState("");
 
+    const El = useRef(null);
+
     function fetchStuff() {
         const urls = [`${backend}/api/recenttanks/${server}/7`, `${backend}/api/leaderboard/${server}/wn8/7/8/0`];
         Promise.all(urls.map((url) => fetch(url)))
@@ -314,7 +322,12 @@ export default withRouter(function Search(props) {
     }
 
     const bottomContent = (
-        <BottomIndicator>
+        <BottomIndicator 
+            onClick={() => {
+                El.current.scrollIntoView({ block: 'start',  behavior: 'smooth' });
+            }}
+            
+        >
             More Info
             <Icon size={32} icon={chevronDown} />
         </BottomIndicator>
@@ -465,6 +478,8 @@ export default withRouter(function Search(props) {
                     </FullPage>
                     <Center>
                         {bottomContent}
+                    </Center>
+                    <Center ref={El}>
                         {bottom}
                     </Center>
                     </div>
