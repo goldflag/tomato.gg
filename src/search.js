@@ -6,6 +6,9 @@ import styled from "styled-components";
 import MediaQuery from "react-responsive";
 import { Button } from "@material-ui/core";
 
+import { Icon } from 'react-icons-kit'
+import { chevronDown } from 'react-icons-kit/fa/chevronDown'
+
 // LOCAL
 import SearchBar from "Material/searchBar";
 import { ServerContext, SearchHistoryContext, SearchmodeContext } from "Context";
@@ -96,10 +99,25 @@ const OutboundLinks = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
     justify-content: center;
     align-items: center;
 `;
+
+const BottomIndicator = styled.div`
+    display: flex;
+    position: absolute;
+    bottom: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`;
+
+const FullPage = styled.div`
+    min-height: calc(100vh - 4rem);
+    padding-top: calc(10vh);
+`;
+
+
 const { formatString, ...strings } = LocalizedStrings({
     en: {
         sentence: `THE MOST {advanced} WORLD OF TANKS {break} {playerStats}, {leaderboards}, 
@@ -283,6 +301,49 @@ export default withRouter(function Search(props) {
         playerTable = <PlayerTable data={playerdata} />;
     }
 
+    const bottomContent = (
+        <BottomIndicator>
+            More Info
+            <Icon size={32} icon={chevronDown} />
+        </BottomIndicator>
+        
+    );
+
+    const bottom = (
+        <Minitables>
+            <div style={{ margin: "1rem" }}>
+                <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
+                    <CustomTab label={`1 WEEK TANK STATS`} />
+                </CustomTabs>
+                <TabPanel value={value} index={0}>
+                    <div
+                        style={{
+                            color: "rgb(220, 220, 220)",
+                            width: "600px",
+                        }}
+                    >
+                        {tankTable}
+                    </div>
+                </TabPanel>
+            </div>
+            <div style={{ margin: "1rem" }}>
+                <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
+                    <CustomTab label={`1 WEEK PLAYER STATS`} />
+                </CustomTabs>
+                <TabPanel value={value} index={0}>
+                    <div
+                        style={{
+                            color: "rgb(220, 220, 220)",
+                            width: "600px",
+                        }}
+                    >
+                        {playerTable}
+                    </div>
+                </TabPanel>
+            </div>
+        </Minitables>
+    );
+
     const mainContent = (
         <Center>
             <Helmet>
@@ -324,38 +385,7 @@ export default withRouter(function Search(props) {
                 <div id="nn_lb1"></div>
 
                 <Ad slot={"front_page_banner_2"} styles={"728x90"} />
-                <Minitables>
-                    <div style={{ margin: "1rem" }}>
-                        <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
-                            <CustomTab label={`1 WEEK TANK STATS`} />
-                        </CustomTabs>
-                        <TabPanel value={value} index={0}>
-                            <div
-                                style={{
-                                    color: "rgb(220, 220, 220)",
-                                    width: "600px",
-                                }}
-                            >
-                                {tankTable}
-                            </div>
-                        </TabPanel>
-                    </div>
-                    <div style={{ margin: "1rem" }}>
-                        <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
-                            <CustomTab label={`1 WEEK PLAYER STATS`} />
-                        </CustomTabs>
-                        <TabPanel value={value} index={0}>
-                            <div
-                                style={{
-                                    color: "rgb(220, 220, 220)",
-                                    width: "600px",
-                                }}
-                            >
-                                {playerTable}
-                            </div>
-                        </TabPanel>
-                    </div>
-                </Minitables>
+
             </MediaQuery>
             <MediaQuery maxWidth={999}>
                 <a target="blank" href="https://discord.gg/qA2bV7K">
@@ -412,14 +442,22 @@ export default withRouter(function Search(props) {
         <Page>
             <MediaQuery minWidth={1200}>
                 <Desktop>
-                    {mainContent}
+                    <div>
+                    <FullPage>
+                        {mainContent}
+                    </FullPage>
+                    <Center>
+                        {bottomContent}
+                        {bottom}
+                    </Center>
+                    </div>
                     <Adcontent>
                         <Ad slot={"front_page_sidebar_1"} styles={"300x250"} />
                         <Ad slot={"front_page_sidebar_2"} styles={"300x600"} />
                     </Adcontent>
                 </Desktop>
             </MediaQuery>
-            <MediaQuery maxWidth={1199}>{mainContent}</MediaQuery>
+            <MediaQuery maxWidth={1199}>{mainContent}</MediaQuery>  
         </Page>
     );
 });

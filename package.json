@@ -27,6 +27,7 @@
     "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
+    "react-scroll": "^1.8.2",
     "react-scrollbars-custom": "^4.0.25",
     "react-table": "^7.5.2",
     "react-tooltip-lite": "^1.12.0",

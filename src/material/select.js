@@ -27,7 +27,7 @@ export default function SelectQuery({ server, setServer, mode, setMode }) {
                 width={40}
                 background={"rgba(100, 100, 200, 0.3)"}
                 border={"rgba(255, 255, 255, 1)"}
-                dropdownSelectColor={"rgb(222, 13, 93)"}
+                dropdownselectcolor={"rgb(222, 13, 93)"}
             />
             <div style={{ width: "10px" }} />
             <SelectComponent

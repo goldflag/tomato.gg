@@ -36,14 +36,14 @@ export const DropdownOptionsChildren = styled(Button)`
     border-radius: 0px !important;
     width: ${({ width }) => width}px !important;
     :hover {
-        border: 2px solid ${({ dropdownSelectColor }) => dropdownSelectColor || "rgb(141, 86, 232)"} !important;
+        border: 2px solid ${({ dropdownselectcolor }) => dropdownselectcolor || "rgb(141, 86, 232)"} !important;
     }
     :last-child {
         border-radius: 0px 0px 15px 15px !important;
     }
 `;
 
-export const SelectComponent = ({ value, name, setValue, options, width, background, border, dropdownSelectColor }) => {
+export const SelectComponent = ({ value, name, setValue, options, width, background, border, dropdownselectcolor }) => {
     const [open, setOpen] = useState("None");
     return (
         <CustomSelect>
@@ -64,7 +64,7 @@ export const SelectComponent = ({ value, name, setValue, options, width, backgro
                             key={i}
                             width={width}
                             background={background}
-                            dropdownSelectColor={dropdownSelectColor}
+                            dropdownselectcolor={dropdownselectcolor}
                             onClick={() => {
                                 setValue(code);
                                 setOpen("None");
