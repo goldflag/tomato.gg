@@ -15,9 +15,7 @@ import Accordion from "Material/frontpageAccordtion";
 import { ServerContext, SearchHistoryContext, SearchmodeContext } from "Context";
 import { serverConv } from "Data/conversions";
 import Ad from "Ads/ads";
-import { AdsContainer } from "Ads/adsContainer";
 import Colors from "Styling/colors";
-import { TabPanel, CustomTabs, CustomTab } from "Components/customTabs";
 import { Loader } from "Components";
 import TankTable from "./searchpage/tanktable";
 import PlayerTable from "./searchpage/playertable";
@@ -113,9 +111,10 @@ const BottomIndicator = styled.div`
     justify-content: center;
     transition: color 0.3s;
     :hover {
-        color: hsl(290, 91%, 49%);
+        color: hsl(195, 10%, 89%);
         cursor: pointer;
-        text-shadow: 0px 0px hsl(342, 91%, 49%);
+        text-shadow: 0px 0px 7px hsl(195, 10%, %) !important;
+        filter: drop-shadow(0 0 0.3rem hsl(195, 10%, 89%));
     }
 `;
 
@@ -329,7 +328,7 @@ export default withRouter(function Search(props) {
             
         >
             More Info
-            <Icon size={32} icon={chevronDown} />
+            <Icon size={32} icon={chevronDown} style={{textShadow: "10px 10px 10px blue"}}/>
         </BottomIndicator>
         
     );
