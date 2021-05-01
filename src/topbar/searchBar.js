@@ -96,7 +96,6 @@ const strings = LocalizedStrings({
 });
 
 const Root = styled.div`
-
     margin-left: 0.5rem !important;
     padding: 2px 4px !important;
     display: flex !important;
@@ -104,11 +103,11 @@ const Root = styled.div`
     width: 250px !important;
     height: 30px !important;
     border-radius: 15px !important;
-    background-color: rgba(40, 40, 60, 0.8) !important;
+    background-color: rgb(40, 40, 70) !important;
     box-shadow: 0px 1px 3px rgba(30, 30, 50, 1) !important;
     transition: background-color 0.2s;
     :hover {
-        background-color: rgba(50, 50, 80, 0.8) !important;
+        background-color: rgb(50, 50, 80) !important;
         box-shadow: 0px 1px 3px rgba(40, 40, 60, 1) !important;
     }
 `
