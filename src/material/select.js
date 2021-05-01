@@ -25,7 +25,7 @@ export default function SelectQuery({ server, setServer, mode, setMode }) {
                 setValue={setServer}
                 options={servers}
                 width={40}
-                background={"rgba(100, 100, 200, 0.3)"}
+                background={"rgb(50, 50, 80)"}
                 border={"rgba(255, 255, 255, 1)"}
                 dropdownselectcolor={"rgb(222, 13, 93)"}
             />
@@ -36,7 +36,7 @@ export default function SelectQuery({ server, setServer, mode, setMode }) {
                 setValue={setMode}
                 options={modes}
                 width={80}
-                background={"rgba(100, 100, 200, 0.3)"}
+                background={"rgb(50, 50, 80)"}
                 border={"rgba(255, 255, 255, 1)"}
             />
         </>

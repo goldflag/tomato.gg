@@ -29,8 +29,9 @@ export const DropdownOptions = styled.div`
 `;
 
 export const DropdownOptionsChildren = styled(Button)`
+    z-index: 5;
     color: rgb(210, 210, 210) !important;
-    background-color: ${({ background }) => (background ? background : "rgba(37, 46, 105, 0.85)")} !important;
+    background-color: ${({ background }) => (background ? background : "rgb(37, 46, 105)")} !important;
     padding: 1px 4px !important;
     border: 2px solid rgba(0, 0, 0, 0) !important;
     border-radius: 0px !important;

@@ -74,6 +74,7 @@ const CT = styled.span`
 `;
 
 const GetBot = styled(Button)`
+    z-index: 4;
     color: rgb(220, 220, 220) !important;
     font-size: 0.9rem !important;
     font-family: Roboto Mono !important;
