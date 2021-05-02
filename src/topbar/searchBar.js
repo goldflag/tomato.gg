@@ -8,7 +8,6 @@ import styled from "styled-components";
 import OutsideClickHandler from "react-outside-click-handler";
 
 // LOCAL
-import MobileSelect from "./mobileSelect";
 import { serverConv } from "Data/conversions";
 import { ServerContext, SearchHistoryContext, SearchmodeContext } from "Context";
 import { useHistory } from "react-router-dom";
@@ -115,6 +114,10 @@ const Root = styled.div`
         background-color: rgb(50, 50, 80);
         box-shadow: 0px 1px 3px rgba(40, 40, 60, 1) ;
     }
+
+    @media screen and (max-width: 1000px) {
+        width: calc(100vw - 90px);
+    }
 `
 
 const Input = styled(InputBase)`
@@ -141,13 +144,13 @@ const Options = styled.div`
 function SearchBar() {
     const history = useHistory();
     const { addToHistory } = useContext(SearchHistoryContext);
-    const { mode, setMode } = useContext(SearchmodeContext);
-    const { server, setServer } = useContext(ServerContext);
-    const [ name, setName ] = useState();
-    const [ data, setData ] = useState();
+    const { mode } = useContext(SearchmodeContext);
+    const { server } = useContext(ServerContext);
+    const [ name, setName ] = useState("");
+    const [ data, setData ] = useState("");
     const time = useRef();
 
-    const nameOptions = useMemo(() => options(name, setName, data), [data]);
+    const nameOptions = useMemo(() => options(name, setName, data), [data, name]);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -192,7 +195,7 @@ function SearchBar() {
                             else setData(null);
                         }
                     }}                />
-                <MobileSelect setServer={setServer} server={server} setMode={setMode} mode={mode} />
+                {/* <MobileSelect setServer={setServer} server={server} setMode={setMode} mode={mode} /> */}
                 <Icon type="submit" aria-label={strings.searchAriaLabel}>
                     <SearchIcon />
                 </Icon>

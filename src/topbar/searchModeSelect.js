@@ -10,9 +10,6 @@ import { commonStrings } from "Data/localizations";
 
 const ButtonWrapper = styled.div`
     margin-left: 0.5rem;
-    @media screen and (max-width: 1000px) {
-        display: none;
-    }
 `;
 
 const SelectButton = styled(Button)`
@@ -24,8 +21,7 @@ const SelectButton = styled(Button)`
     border: 2px solid ${({ $selected, $borderColor }) => ($selected ? $borderColor : "rgba(0, 0, 0, 0)")} !important;
     border-radius: ${({ $borderRadius }) => $borderRadius} !important;
     border-right: 0;
-    padding: 1px 0.5rem !important;
-    width: 80px;
+    padding: 1px 10px !important;
     &:hover {
         color: rgb(255, 255, 255) !important;
         border-color: rgba(150, 150, 200, 1) !important;

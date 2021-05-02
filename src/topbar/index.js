@@ -2,6 +2,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
+import MediaQuery from "react-responsive";
 
 // LOCAL
 import MobileMenu from "./mobileMenu";
@@ -31,13 +32,18 @@ const StyledTopbar = styled.div`
 export default withRouter(function Topbar(props) {
     return (
         <StyledTopbar>
-            <MobileMenu />
-            <SearchHistory />
-            <LanguageSelect />
-            <ServerSelectButtons />
-            <SearchmodeSelectButtons />
-            <SearchBar />
-            <Discord />
+            <MediaQuery minWidth={1000}>
+                <SearchHistory />
+                <LanguageSelect />
+                <ServerSelectButtons />
+                <SearchmodeSelectButtons />
+                <SearchBar />
+                <Discord />
+            </MediaQuery>
+            <MediaQuery maxWidth={999}>
+                <MobileMenu />
+                <SearchBar />
+            </MediaQuery>
         </StyledTopbar>
     );
 });

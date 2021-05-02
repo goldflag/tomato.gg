@@ -27,15 +27,11 @@ const strings = LocalizedStrings({
 const HistoryWrapper = styled.div`
     flex: 1;
     align-self: flex-start;
-
     overflow: hidden;
     max-height: 32px;
     margin-top: 1rem;
     display: flex;
     align-items: flex-start;
-    @media screen and (max-width: 1000px) {
-        display: none;
-    }
 `;
 
 const ItemContainer = styled.div`

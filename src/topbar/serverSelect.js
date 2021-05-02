@@ -11,9 +11,6 @@ import { serverConv } from "Data/conversions";
 
 const ButtonWrapper = styled.div`
     margin-left: 0.5rem;
-    @media screen and (max-width: 1000px) {
-        display: none;
-    }
 `;
 
 const SelectButton = styled(Button)`
@@ -25,7 +22,7 @@ const SelectButton = styled(Button)`
     border: 2px solid ${({ selected }) => (selected ? "rgb(222, 13, 93)" : "rgba(0, 0, 0, 0)")} !important;
     border-radius: ${({ radius }) => radius} !important;
     border-right: 0;
-    padding: 1px 0.5rem !important;
+    padding: 1px 5px !important;
     width: 55px;
     &:hover {
         color: rgb(255, 255, 255) !important;

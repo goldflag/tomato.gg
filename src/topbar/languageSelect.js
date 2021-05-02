@@ -9,14 +9,13 @@ import { languages } from "Data/languages";
 import { CustomSelect, DropdownSelector, DropdownOptions, DropdownOptionsChildren } from "Components/customSelect";
 
 const Dropdown = styled.div`
+    margin-left: 0.5rem;
+
     margin-top: 0rem;
-    z-index: 1;
+    z-index: 10;
     font-family: Roboto Mono;
     font-size: 0.9rem;
     width: 125px;
-    @media screen and (max-width: 1000px) {
-        display: None;
-    }
 `;
 
 const Flag = styled.img`
