@@ -9,20 +9,18 @@ import OutsideClickHandler from "react-outside-click-handler";
 
 // LOCAL
 import SelectQuery from "./select";
-
-const APIKey = process.env.REACT_APP_API_KEY2;
+import { options, searchNames } from "Functions/searchFunctions";
 
 const Root = styled.div`
     padding: 2px 4px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    width: 700px !important;
+    width: min(700px, 80vw + 30px) !important;
     height: 50px !important;
     background-color: rgb(40, 40, 70) !important;
     box-shadow: 0px 1px 3px rgba(30, 30, 50, 1) !important;
-    border-bottom: ${({ radius }) => radius ? "2px solid rgb(70, 70, 100)" : "None"};
-
+    border-bottom: 2px solid ${({ radius }) => radius ? "rgb(70, 70, 100)" : "rgba(0, 0, 0, 0)"};
     transition: background-color 0.3s;
     :hover {
         background-color: rgb(50, 50, 80) !important;
@@ -42,21 +40,8 @@ const Icon = styled(IconButton)`
     color: white !important;
 `
 
-const Button = styled.button`
-    max-width: 700px;
-    padding: 10px 14px;
-    font-size: 1rem;
-    color: white;
-    text-align: left;
-    background-color: rgb(40, 40, 70);
-    transition: background-color 0.3s;
-    border-width: 0px;
-    :hover {
-        background-color: rgb(50, 50, 80);
-    }
-`
 const Options = styled.div`
-    width: 700px;
+    width: min(700px, 80vw + 30px) !important;
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -148,26 +133,18 @@ export default function SearchBar({ name, setName, server, setServer, mode, setM
 
     const [ data, setData ] = useState();
     const time = useRef();
+    
+    const nameOptions = useMemo(() => options(name, setName, data), [data, name, setName])
 
-    const nameOptions = useMemo(() => {
-        if (data) {
-            const truncatedData = data.slice(0, 10);
-            return truncatedData.map(({ nickname, account_id }) => 
-            <Button key={account_id} onClick={() => setName(nickname)} type="submit">
-                {nickname}
-            </Button>)
-        }
-    }, [data, setName])
-
-    async function searchNames(name) {
-        const currenttime = Date.now();
-        time.current = currenttime;
-        let nameData = await fetch(`https://api.worldoftanks.com/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`);
-        nameData = await nameData.json();
-        if (currenttime === time.current) {
-            setData(nameData.data);
-        }
-    }
+    // async function searchNames(name) {
+    //     const currenttime = Date.now();
+    //     time.current = currenttime;
+    //     let nameData = await fetch(`https://api.worldoftanks.com/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`);
+    //     nameData = await nameData.json();
+    //     if (currenttime === time.current) {
+    //         setData(nameData.data);
+    //     }
+    // }
 
     return (
         <>
@@ -179,7 +156,7 @@ export default function SearchBar({ name, setName, server, setServer, mode, setM
                     onChange={(e) => { 
                         setName(e.target.value); 
                         if (mode === "player") {
-                            if (e.target.value.length >= 3) searchNames(e.target.value);
+                            if (e.target.value.length >= 3) searchNames(e.target.value, time, setData);
                             else setData(null);
                         }
                     }}

@@ -14,6 +14,7 @@
     "@nivo/scatterplot": "^0.67.0",
     "@nivo/treemap": "^0.67.0",
     "@nivo/waffle": "^0.67.0",
+    "fuzzyset": "^1.0.6",
     "html-react-parser": "^1.2.4",
     "react": "^16.13.1",
     "react-adsense": "^0.1.0",

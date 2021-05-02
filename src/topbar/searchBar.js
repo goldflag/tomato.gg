@@ -12,6 +12,7 @@ import MobileSelect from "./mobileSelect";
 import { serverConv } from "Data/conversions";
 import { ServerContext, SearchHistoryContext, SearchmodeContext } from "Context";
 import { useHistory } from "react-router-dom";
+import { options, searchNames } from "Functions/searchFunctions";
 
 const APIKey = process.env.REACT_APP_API_KEY;
 
@@ -106,7 +107,7 @@ const Root = styled.div`
     width: 250px;
     height: 30px;
     border-radius: ${({ radius }) => radius ? "15px 15px 0px 0px" : "15px"};
-    border-bottom: ${({ radius }) => radius ? "2px solid rgb(70, 70, 100)" : "None"};
+    border-bottom: 2px solid ${({ radius }) => radius ? "rgb(70, 70, 100)" : "rgba(0, 0, 0, 0)"};
     background-color: rgb(40, 40, 70);
     box-shadow: 0px 1px 3px rgba(30, 30, 50, 1);
     transition: background-color 0.2s;
@@ -128,20 +129,6 @@ const Icon = styled(IconButton)`
     color: white !important;
 `
 
-const Button = styled.button`
-    max-width: 700px;
-    padding: 10px 14px;
-    font-size: 0.9rem;
-    color: white;
-    text-align: left;
-    background-color: rgb(40, 40, 70);
-    transition: background-color 0.3s;
-    border-width: 0px;
-    :hover {
-        background-color: rgb(50, 50, 80);
-    }
-`
-
 const Options = styled.div`
     width: 250px;
     display: flex;
@@ -160,25 +147,7 @@ function SearchBar() {
     const [ data, setData ] = useState();
     const time = useRef();
 
-    const nameOptions = useMemo(() => {
-        if (data) {
-            const truncatedData = data.slice(0, 10);
-            return truncatedData.map(({ nickname, account_id }) => 
-            <Button key={account_id} onClick={() => setName(nickname)} type="submit">
-                {nickname}
-            </Button>)
-        }
-    }, [data])
-
-    async function searchNames(name) {
-        const currenttime = Date.now();
-        time.current = currenttime;
-        let nameData = await fetch(`https://api.worldoftanks.com/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`);
-        nameData = await nameData.json();
-        if (currenttime === time.current) {
-            setData(nameData.data);
-        }
-    }
+    const nameOptions = useMemo(() => options(name, setName, data), [data]);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -219,7 +188,7 @@ function SearchBar() {
                     onChange={(e) => { 
                         setName(e.target.value); 
                         if (mode === "player") {
-                            if (e.target.value.length >= 3) searchNames(e.target.value);
+                            if (e.target.value.length >= 3) searchNames(e.target.value, time, setData);
                             else setData(null);
                         }
                     }}                />
