@@ -252,8 +252,7 @@ export default withRouter(function Search(props) {
 
     const { addToHistory } = useContext(SearchHistoryContext);
     const [name, setName] = useState("");
-    // const name = useRef("");
-
+    
     const [value, setValue] = useState(0);
     const handleChange = (_, newValue) => setValue(newValue);
 

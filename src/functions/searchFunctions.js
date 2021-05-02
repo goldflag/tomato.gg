@@ -50,7 +50,7 @@ export function options(name, setName, data) {
         const history = searchSuggestions.map(([_, name]) => ({ nickname: name }));
         const all = data.slice(0, 8);
 
-        let fromHistory = history.map(({ nickname }, i) => {
+        const fromHistory = history.map(({ nickname }, i) => {
                 if (i < 5) {
                     return (
                         <Button key={nickname} onClick={() => setName(nickname)} type="submit">
@@ -61,7 +61,7 @@ export function options(name, setName, data) {
             }            
         );
 
-        let fromAll = all.map(({ nickname }) => {
+        const fromAll = all.map(({ nickname }) => {
                 return (
                     <Button key={nickname} onClick={() => setName(nickname)} type="submit">
                         {nickname}
