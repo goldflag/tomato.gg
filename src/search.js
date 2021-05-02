@@ -59,6 +59,7 @@ const TopSection = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 100%;
 `;
 
 const StyledAboutSection = styled.div`
@@ -136,6 +137,7 @@ const Text = styled.div`
 `;
 
 const Form = styled.form`
+    margin: 2rem 0;
     display: flex;
     flex-direction: column;
 `;
@@ -245,6 +247,54 @@ const AboutSection = () => {
         </StyledAboutSection>
     );
 };
+
+const discordLink = (
+    <a target="blank" href="https://discord.gg/qA2bV7K">
+        <GetBot formAction={"www.google.com"}>
+            <img
+                src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"}
+                style={{ width: "30px" }}
+                alt="discordlogo"
+            />{" "}
+            &nbsp; Join Our Server
+        </GetBot>
+    </a>
+);
+                
+
+const outbound = (
+    <OutboundLinks>
+        <a
+            href="https://aslain.com/index.php?/topic/13-download-%E2%98%85-world-of-tanks-%E2%98%85-modpack/"
+            target="blank"
+        >
+            <img style={{ maxHeight: "55px", margin: "1rem" }} src={Aslain} alt="aslain.com" />
+        </a>
+        <a href="https://tanks.gg/" target="blank">
+            <img style={{ maxHeight: "50px", margin: "1rem" }} src={Tanksgg} alt="tanks.gg" />
+        </a>
+        <a href="https://thedailybounce.net/" target="blank">
+            <img
+                style={{ maxHeight: "60px", margin: "1rem" }}
+                src={
+                    "https://i2.wp.com/thedailybounce.net/wp-content/uploads/2019/01/cropped-cropped-TDB-Logo-2019-2.png?fit=700%2C325&ssl=1"
+                }
+                alt="thedailybounce.net"
+            />
+        </a>
+        <a href="https://thearmoredpatrol.com/" target="blank">
+            <img
+                style={{ maxHeight: "25px", margin: "1rem" }}
+                src={
+                    "https://i2.wp.com/thearmoredpatrol.com/wp-content/uploads/2020/01/cropped-logotap2018-1-1.png?w=768&ssl=1"
+                }
+                alt="thearmoredpatrol.com"
+            />
+        </a>
+    </OutboundLinks>
+);
+
+
 
 export default withRouter(function Search(props) {
     const { server, setServer } = useContext(ServerContext);
@@ -388,11 +438,10 @@ export default withRouter(function Search(props) {
                     src={TomatoLogo}
                     alt="logo"
                     style={{
-                        width: "70%",
+                        width: "100%",
                         marginTop: "2rem",
                     }}
                 />
-                <AboutSection />
                 <Form onSubmit={searchId}>
                     <SearchBar
                         name={name}
@@ -403,72 +452,23 @@ export default withRouter(function Search(props) {
                         mode={mode}
                     />
                 </Form>
+                <AboutSection />
             </TopSection>
+            {discordLink}
             <MediaQuery minWidth={1000}>
-                <a target="blank" href="https://discord.gg/qA2bV7K">
-                    <GetBot formAction={"www.google.com"}>
-                        <img
-                            src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"}
-                            style={{ width: "30px" }}
-                            alt="discordlogo"
-                        />{" "}
-                        &nbsp; Join Our Server
-                    </GetBot>
-                </a>
-
                 {/* <div id="nn_lb1"></div> */}
-
                 <Ad slot={"front_page_banner_2"} styles={"728x90"} />
-
             </MediaQuery>
             <MediaQuery maxWidth={999}>
-                <a target="blank" href="https://discord.gg/qA2bV7K">
-                    <GetBot formAction={"www.google.com"}>
-                        <img
-                            src={"https://discord.com/assets/1c8a54f25d101bdc607cec7228247a9a.svg"}
-                            style={{ width: "30px" }}
-                            alt="discordlogo"
-                        />{" "}
-                        &nbsp; Join Our Server
-                    </GetBot>
-                </a>
                 <Ad slot={"front_page_banner_2"} styles={"300x50"} />
             </MediaQuery>
             <MediaQuery minWidth={1000}>
                 <Ad slot={"front_page_banner_1"} styles={"728x90"} />
+                {outbound}
             </MediaQuery>
             <MediaQuery maxWidth={999}>
                 <Ad slot={"front_page_banner_1"} styles={"300x50"} />
             </MediaQuery>
-            <OutboundLinks>
-                <a
-                    href="https://aslain.com/index.php?/topic/13-download-%E2%98%85-world-of-tanks-%E2%98%85-modpack/"
-                    target="blank"
-                >
-                    <img style={{ maxHeight: "55px", margin: "1rem" }} src={Aslain} alt="aslain.com" />
-                </a>
-                <a href="https://tanks.gg/" target="blank">
-                    <img style={{ maxHeight: "50px", margin: "1rem" }} src={Tanksgg} alt="tanks.gg" />
-                </a>
-                <a href="https://thedailybounce.net/" target="blank">
-                    <img
-                        style={{ maxHeight: "60px", margin: "1rem" }}
-                        src={
-                            "https://i2.wp.com/thedailybounce.net/wp-content/uploads/2019/01/cropped-cropped-TDB-Logo-2019-2.png?fit=700%2C325&ssl=1"
-                        }
-                        alt="thedailybounce.net"
-                    />
-                </a>
-                <a href="https://thearmoredpatrol.com/" target="blank">
-                    <img
-                        style={{ maxHeight: "25px", margin: "1rem" }}
-                        src={
-                            "https://i2.wp.com/thearmoredpatrol.com/wp-content/uploads/2020/01/cropped-logotap2018-1-1.png?w=768&ssl=1"
-                        }
-                        alt="thearmoredpatrol.com"
-                    />
-                </a>
-            </OutboundLinks>
         </Center>
     );
 
