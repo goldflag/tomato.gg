@@ -402,7 +402,6 @@ export default withRouter(function Search(props) {
                         server={server}
                         setMode={setMode}
                         mode={mode}
-                        searchId={searchId}   
                     />
                 </Form>
             </TopSection>

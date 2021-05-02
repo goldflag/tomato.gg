@@ -144,7 +144,7 @@ const strings = LocalizedStrings({
     },
 });
 
-export default function SearchBar({ name, setName, server, setServer, mode, setMode, searchId }) {
+export default function SearchBar({ name, setName, server, setServer, mode, setMode }) {
 
     const [ data, setData ] = useState();
     const time = useRef();
@@ -153,11 +153,11 @@ export default function SearchBar({ name, setName, server, setServer, mode, setM
         if (data) {
             const truncatedData = data.slice(0, 10);
             return truncatedData.map(({ nickname, account_id }) => 
-            <Button id={account_id} onClick={() => setName(nickname)} type="submit">
+            <Button key={account_id} onClick={() => setName(nickname)} type="submit">
                 {nickname}
             </Button>)
         }
-    }, [data])
+    }, [data, setName])
 
     async function searchNames(name) {
         const currenttime = Date.now();

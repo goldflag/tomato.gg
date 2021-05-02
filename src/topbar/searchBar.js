@@ -164,7 +164,7 @@ function SearchBar() {
         if (data) {
             const truncatedData = data.slice(0, 10);
             return truncatedData.map(({ nickname, account_id }) => 
-            <Button id={account_id} onClick={() => setName(nickname)} type="submit">
+            <Button key={account_id} onClick={() => setName(nickname)} type="submit">
                 {nickname}
             </Button>)
         }
