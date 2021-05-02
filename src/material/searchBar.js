@@ -1,22 +1,28 @@
 // NPM
-import React from "react";
+import React, { useState, useMemo, useRef } from "react";
 import LocalizedStrings from "Functions/localizedStrings";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import styled from "styled-components";
+import OutsideClickHandler from "react-outside-click-handler";
 
 // LOCAL
 import SelectQuery from "./select";
+
+const APIKey = process.env.REACT_APP_API_KEY2;
 
 const Root = styled.div`
     padding: 2px 4px !important;
     display: flex !important;
     align-items: center !important;
-    width: 100% !important;
+    justify-content: center !important;
+    width: 700px !important;
     height: 50px !important;
     background-color: rgb(40, 40, 70) !important;
     box-shadow: 0px 1px 3px rgba(30, 30, 50, 1) !important;
+    border-bottom: ${({ radius }) => radius ? "2px solid rgb(70, 70, 100)" : "None"};
+
     transition: background-color 0.3s;
     :hover {
         background-color: rgb(50, 50, 80) !important;
@@ -26,7 +32,7 @@ const Root = styled.div`
 
 const Input = styled(InputBase)`
     flex: 1 !important;
-    font-size: 16 !important;
+    font-size: 1rem !important;
     color: white !important;
     margin-left: 10px !important;
 ` 
@@ -35,6 +41,28 @@ const Icon = styled(IconButton)`
     padding: 10 !important;
     color: white !important;
 `
+
+const Button = styled.button`
+    max-width: 700px;
+    padding: 10px 14px;
+    font-size: 1rem;
+    color: white;
+    text-align: left;
+    background-color: rgb(40, 40, 70);
+    transition: background-color 0.3s;
+    border-width: 0px;
+    :hover {
+        background-color: rgb(50, 50, 80);
+    }
+`
+const Options = styled.div`
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    box-shadow: 0px 1px 3px rgba(30, 30, 50, 1);
+    z-index: 6;
+`;
 
 const strings = LocalizedStrings({
     en: {
@@ -116,19 +144,56 @@ const strings = LocalizedStrings({
     },
 });
 
-export default function SearchBar({ name, setName, server, setServer, mode, setMode }) {
+export default function SearchBar({ name, setName, server, setServer, mode, setMode, searchId }) {
+
+    const [ data, setData ] = useState();
+    const time = useRef();
+
+    const nameOptions = useMemo(() => {
+        if (data) {
+            const truncatedData = data.slice(0, 10);
+            return truncatedData.map(({ nickname, account_id }) => 
+            <Button id={account_id} onClick={() => setName(nickname)} type="submit">
+                {nickname}
+            </Button>)
+        }
+    }, [data])
+
+    async function searchNames(name) {
+        const currenttime = Date.now();
+        time.current = currenttime;
+        let nameData = await fetch(`https://api.worldoftanks.com/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`);
+        nameData = await nameData.json();
+        if (currenttime === time.current) {
+            setData(nameData.data);
+        }
+    }
+
     return (
-        <Root>
-            <Input
-                placeholder={mode === "player" ? strings.placeholder : strings.clanPlaceholder}
-                inputProps={{ "aria-label": mode === "player" ? strings.ariaLabel : strings.clanAriaLabel }}
-                value={mode === "player" ? name : name.toUpperCase()}
-                onChange={(e) => setName(e.target.value)}
-            />
-            <SelectQuery setServer={setServer} server={server} setMode={setMode} mode={mode} />
-            <Icon type="submit" aria-label={strings.searchAriaLabel}>
-                <SearchIcon />
-            </Icon>
-        </Root>
+        <>
+            <Root radius={data}>
+                <Input
+                    placeholder={mode === "player" ? strings.placeholder : strings.clanPlaceholder}
+                    inputProps={{ "aria-label": mode === "player" ? strings.ariaLabel : strings.clanAriaLabel }}
+                    value={mode === "player" ? name : name.toUpperCase()}
+                    onChange={(e) => { 
+                        setName(e.target.value); 
+                        if (mode === "player") {
+                            if (e.target.value.length >= 3) searchNames(e.target.value);
+                            else setData(null);
+                        }
+                    }}
+                />
+                <SelectQuery setServer={setServer} server={server} setMode={setMode} mode={mode} />
+                <Icon type="submit" aria-label={strings.searchAriaLabel}>
+                    <SearchIcon />
+                </Icon>
+            </Root>
+            <OutsideClickHandler onOutsideClick={() => setData()}>
+                <Options> 
+                    {nameOptions}
+                </Options>
+            </OutsideClickHandler>
+        </>
     );
 }

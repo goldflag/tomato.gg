@@ -31,6 +31,8 @@ const backend = process.env.REACT_APP_BACKEND;
 
 const Page = styled.div`
     margin: 0 1rem;
+    max-width: 100%;
+    overflow-x: None;
 `;
 
 const Desktop = styled.div`
@@ -133,6 +135,10 @@ const Text = styled.div`
     }
 `;
 
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+`;
 
 const { formatString, ...strings } = LocalizedStrings({
     en: {
@@ -246,6 +252,7 @@ export default withRouter(function Search(props) {
 
     const { addToHistory } = useContext(SearchHistoryContext);
     const [name, setName] = useState("");
+    // const name = useRef("");
 
     const [value, setValue] = useState(0);
     const handleChange = (_, newValue) => setValue(newValue);
@@ -387,7 +394,7 @@ export default withRouter(function Search(props) {
                     }}
                 />
                 <AboutSection />
-                <form style={{ width: "100%" }} onSubmit={searchId}>
+                <Form onSubmit={searchId}>
                     <SearchBar
                         name={name}
                         setName={setName}
@@ -395,8 +402,9 @@ export default withRouter(function Search(props) {
                         server={server}
                         setMode={setMode}
                         mode={mode}
+                        searchId={searchId}   
                     />
-                </form>
+                </Form>
             </TopSection>
             <MediaQuery minWidth={1000}>
                 <a target="blank" href="https://discord.gg/qA2bV7K">

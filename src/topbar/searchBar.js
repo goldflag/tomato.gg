@@ -1,11 +1,11 @@
 // NPM
-import React, { useState, useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState, useContext, useRef, useMemo } from "react";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import LocalizedStrings from "Functions/localizedStrings";
 import styled from "styled-components";
+import OutsideClickHandler from "react-outside-click-handler";
 
 // LOCAL
 import MobileSelect from "./mobileSelect";
@@ -95,20 +95,24 @@ const strings = LocalizedStrings({
     },
 });
 
+const Form = styled.form`
+    margin-left: 0.5rem;
+`
+
 const Root = styled.div`
-    margin-left: 0.5rem !important;
-    padding: 2px 4px !important;
-    display: flex !important;
-    align-items: center !important;
-    width: 250px !important;
-    height: 30px !important;
-    border-radius: 15px !important;
-    background-color: rgb(40, 40, 70) !important;
-    box-shadow: 0px 1px 3px rgba(30, 30, 50, 1) !important;
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    width: 250px;
+    height: 30px;
+    border-radius: ${({ radius }) => radius ? "15px 15px 0px 0px" : "15px"};
+    border-bottom: ${({ radius }) => radius ? "2px solid rgb(70, 70, 100)" : "None"};
+    background-color: rgb(40, 40, 70);
+    box-shadow: 0px 1px 3px rgba(30, 30, 50, 1);
     transition: background-color 0.2s;
     :hover {
-        background-color: rgb(50, 50, 80) !important;
-        box-shadow: 0px 1px 3px rgba(40, 40, 60, 1) !important;
+        background-color: rgb(50, 50, 80);
+        box-shadow: 0px 1px 3px rgba(40, 40, 60, 1) ;
     }
 `
 
@@ -116,7 +120,7 @@ const Input = styled(InputBase)`
     flex: 1 !important;
     font-size: 0.9rem !important;
     color: rgb(255, 255, 255) !important;
-    margin-left: 10px !important;
+    padding-left: 10px !important;
 ` 
 
 const Icon = styled(IconButton)`
@@ -124,39 +128,62 @@ const Icon = styled(IconButton)`
     color: white !important;
 `
 
-const useStyles = makeStyles((t) => ({
-    root: {
-        marginLeft: "0.5rem",
-        padding: "2px 4px",
-        display: "flex",
-        alignItems: "center",
-        width: "250px",
-        height: "30px",
-        borderRadius: 15,
-        backgroundColor: "rgba(40, 40, 60, 0.8)",
-    },
-    input: {
-        marginLeft: t.spacing(1),
-        flex: 1,
-        fontSize: 12,
-        color: "white",
-    },
-    iconButton: {
-        padding: 10,
-        color: "white",
-    },
-}));
+const Button = styled.button`
+    max-width: 700px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    color: white;
+    text-align: left;
+    background-color: rgb(40, 40, 70);
+    transition: background-color 0.3s;
+    border-width: 0px;
+    :hover {
+        background-color: rgb(50, 50, 80);
+    }
+`
+
+const Options = styled.div`
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    box-shadow: 0px 1px 3px rgba(30, 30, 50, 1);
+    z-index: 6;
+`;
 
 function SearchBar() {
     const history = useHistory();
     const { addToHistory } = useContext(SearchHistoryContext);
     const { mode, setMode } = useContext(SearchmodeContext);
     const { server, setServer } = useContext(ServerContext);
-    const [name, setName] = useState("");
+    const [ name, setName ] = useState();
+    const [ data, setData ] = useState();
+    const time = useRef();
+
+    const nameOptions = useMemo(() => {
+        if (data) {
+            const truncatedData = data.slice(0, 10);
+            return truncatedData.map(({ nickname, account_id }) => 
+            <Button id={account_id} onClick={() => setName(nickname)} type="submit">
+                {nickname}
+            </Button>)
+        }
+    }, [data])
+
+    async function searchNames(name) {
+        const currenttime = Date.now();
+        time.current = currenttime;
+        let nameData = await fetch(`https://api.worldoftanks.com/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`);
+        nameData = await nameData.json();
+        if (currenttime === time.current) {
+            setData(nameData.data);
+        }
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
+        setData(null);
         if (!name) return;
-
         if (mode === "player") {
             const playerUrl = `https://api.worldoftanks.${server}/wot/account/list/?language=en&application_id=${APIKey}&search=${name}`;
             fetch(playerUrl)
@@ -182,23 +209,31 @@ function SearchBar() {
         }
     };
 
-    const classes = useStyles();
-
     return (
-        <form onSubmit={onSubmit}>
-            <Root>
+        <Form onSubmit={onSubmit}>
+            <Root radius={data}>
                 <Input
                     placeholder={mode === "player" ? strings.placeholder : strings.clanPlaceholder}
                     inputProps={{ "aria-label": strings.ariaLabel }}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
+                    value={mode === "player" ? name : name.toUpperCase()}
+                    onChange={(e) => { 
+                        setName(e.target.value); 
+                        if (mode === "player") {
+                            if (e.target.value.length >= 3) searchNames(e.target.value);
+                            else setData(null);
+                        }
+                    }}                />
                 <MobileSelect setServer={setServer} server={server} setMode={setMode} mode={mode} />
-                <Icon type="submit" className={classes.iconButton} aria-label={strings.searchAriaLabel}>
+                <Icon type="submit" aria-label={strings.searchAriaLabel}>
                     <SearchIcon />
                 </Icon>
             </Root>
-        </form>
+            <OutsideClickHandler onOutsideClick={() => setData(null)}>
+                <Options> 
+                    {nameOptions}
+                </Options>
+            </OutsideClickHandler>
+        </Form>
     );
 }
 
