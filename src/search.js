@@ -271,10 +271,11 @@ export default withRouter(function Search(props) {
         fetchStuff();
         setTimeout(() => {
             try {
-                window.reloadAdSlots();
+                console.log("trying to reload ad slots");
+                window.reloadAdSlots().then(() => console.log("reload success"));
             }
             catch {
-                console.log("no ads");
+                console.log("reload failed");
             }
         }, 0);
     }, [server]);
@@ -408,11 +409,8 @@ export default withRouter(function Search(props) {
                         &nbsp; Join Our Server
                     </GetBot>
                 </a>
-
                 <div id="nn_lb2"></div>
-
                 <Ad slot={"front_page_banner_2"} styles={"728x90"} />
-
             </MediaQuery>
             <MediaQuery maxWidth={999}>
                 <a target="blank" href="https://discord.gg/qA2bV7K">
