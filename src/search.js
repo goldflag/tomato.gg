@@ -410,7 +410,10 @@ export default withRouter(function Search(props) {
                     </GetBot>
                 </a>
                 <div id="nn_lb2"></div>
-                <Ad slot={"front_page_banner_2"} styles={"728x90"} />
+                <div id="nn_mobile_lb1"></div>
+                <div id="nn_lb2"></div>
+
+                {/* <Ad slot={"front_page_banner_2"} styles={"728x90"} /> */}
             </MediaQuery>
             <MediaQuery maxWidth={999}>
                 <a target="blank" href="https://discord.gg/qA2bV7K">
@@ -479,8 +482,12 @@ export default withRouter(function Search(props) {
                     </Center>
                     </div>
                     <Adcontent>
-                        <Ad slot={"front_page_sidebar_1"} styles={"300x250"} />
-                        <Ad slot={"front_page_sidebar_2"} styles={"300x600"} />
+                        <div id="nn_sky1"></div>
+                        <div id="nn_sky2"></div>
+                        <div id="nn_mobile_mpu1"></div>
+                        <div id="nn_mobile_mpu2"></div>
+                        {/* <Ad slot={"front_page_sidebar_1"} styles={"300x250"} />
+                        <Ad slot={"front_page_sidebar_2"} styles={"300x600"} /> */}
                     </Adcontent>
                 </Desktop>
             </MediaQuery>
