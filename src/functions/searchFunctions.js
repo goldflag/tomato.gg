@@ -13,9 +13,10 @@ const Button = styled.button`
     text-align: left;
     background-color: rgb(40, 40, 70);
     transition: background-color 0.3s;
-    border: None;
+    border: 2px solid rgba(0, 0, 0, 0);
     :hover {
         background-color: rgb(50, 50, 80);
+        border-left: 2px solid red;
     }
 `
 
@@ -81,7 +82,7 @@ export function options(name, setName, data) {
                 {data.length > 0 ? <OptionsMeta>All players</OptionsMeta> : null}
                 <All>
                     <Scrollbar>
-                            {fromAll}
+                        {fromAll}
                     </Scrollbar>
                 </All>
 
