@@ -409,7 +409,7 @@ export default withRouter(function Search(props) {
                     </GetBot>
                 </a>
 
-                <div id="nn_lb1"></div>
+                <div id="nn_lb2"></div>
 
                 <Ad slot={"front_page_banner_2"} styles={"728x90"} />
 
