@@ -16,7 +16,7 @@ import ClanTopStats from "./clanStatsPageComponents/clanTopStats";
 import ClanStatsTable from "./clanStatsPageComponents/clanStatsTable";
 import worrydetective from "Assets/staticfrogs/worrydetective.png";
 import { useWindowSize } from "Functions/hooks";
-import Ad from "Ads/ads";
+import Reload from "Ads/reload";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -96,8 +96,6 @@ export default function ClanStatsPage() {
         const urlParams = windowUrl.substring(12).split("/");
         const [server, clan] = urlParams;
         const [clanName, id] = clan.split("=");
-        ReactGA.initialize(trackingId);
-        ReactGA.pageview(`/clan-stats/${server}`);
         if (id !== "FAIL") {
             fetchData(server, id);
         } else {
@@ -105,6 +103,12 @@ export default function ClanStatsPage() {
             setClanName(clanName);
         }
     }, [server, clan]);
+
+    useEffect(() => {
+        ReactGA.initialize(trackingId);
+        ReactGA.pageview(`/clan-stats/${server}`);
+        Reload();
+    }, [])
 
     let clanPage;
     if (clanData === "loading") clanPage = <Loader frog={true} top={20} bottom={20} />;
@@ -114,10 +118,10 @@ export default function ClanStatsPage() {
                 <ClanTopStats {...clanData} />
                 <AdsContainer>
                     <MediaQuery maxWidth={999}>
-                        <Ad slot={"main_stats_banner"} styles={"300x50"} />
+                        <div id="nn_mobile_lb1"></div>
                     </MediaQuery>
                     <MediaQuery minWidth={1000}>
-                        <Ad slot={"main_stats_banner"} styles={"728x90"} />
+                        <div id="nn_lb2"></div>
                     </MediaQuery>
                 </AdsContainer>
                 <ClanStatsTable data={clanData.members} />
@@ -151,8 +155,8 @@ export default function ClanStatsPage() {
                 <div style={{ minWidth: 0 }}>{clanPage}</div>
                 {windowSize.width > 1000 ? (
                     <div style={{ padding: "0 0 0 1rem" }}>
-                        <Ad slot={"clan_sidebar_1"} styles={"160x600"} />{" "}
-                        <Ad slot={"clan_sidebar_2"} styles={"160x600"} />
+                        <div id="nn_sky2"></div>{" "}
+                        <div id="nn_sky1"></div>
                     </div>
                 ) : null}
             </Container>

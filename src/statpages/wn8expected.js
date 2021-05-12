@@ -9,7 +9,7 @@ import MediaQuery from "react-responsive";
 import WN8Table from "./wn8Components/wn8Table";
 import { Loader, FullPageTableWrapper, Info } from "Components";
 import { AdsContainer } from "Ads/adsContainer";
-import Ad from "Ads/ads";
+import Reload from "Ads/reload";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -34,13 +34,12 @@ export default function Leaderboards(props) {
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/wn8");
-    }, []);
-
-    useEffect(() => {
+        Reload();
         fetch(`${backend}/api/wn8`)
             .then((res) => res.json())
             .then((data) => setData(data));
     }, []);
+
 
     const content = (
         <>
@@ -83,8 +82,8 @@ export default function Leaderboards(props) {
                     <div>{content}</div>
                     <div>
                         <AdsContainer flexDir={"column"}>
-                            <Ad slot={"mastery_sidebar_1"} styles={"160x600"} />
-                            <Ad slot={"mastery_sidebar_2"} styles={"160x600"} />
+                        <div id="nn_sky2"></div>
+<div id="nn_sky1"></div>
                         </AdsContainer>
                     </div>
                 </FullPageTableWrapper>
@@ -93,15 +92,15 @@ export default function Leaderboards(props) {
                 <FullPageTableWrapper columns={"180px auto 180px"}>
                     <div>
                         <AdsContainer flexDir={"column"}>
-                            <Ad slot={"mastery_sidebar_1"} styles={"160x600"} />
-                            <Ad slot={"mastery_sidebar_2"} styles={"160x600"} />
+                        <div id="nn_sky1"></div>
+
                         </AdsContainer>
                     </div>
                     <div>{content}</div>
                     <div>
                         <AdsContainer flexDir={"column"}>
-                            <Ad slot={"mastery_sidebar_1"} styles={"160x600"} />
-                            <Ad slot={"mastery_sidebar_2"} styles={"160x600"} />
+                        <div id="nn_sky2"></div>
+
                         </AdsContainer>
                     </div>
                 </FullPageTableWrapper>

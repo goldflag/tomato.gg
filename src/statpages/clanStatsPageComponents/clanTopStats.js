@@ -11,7 +11,7 @@ import { WN8Color, WRColor } from "Styling/colors";
 import { Capital, commonStrings } from "Data/localizations";
 import BubblePlot from "./bubblePlot";
 import { CustomTabs, CustomTab } from "../../components/customTabs";
-import Ad from "Ads/ads";
+import Reload from "Ads/reload";
 
 const Name = styled.div`
     display: flex;
@@ -459,10 +459,10 @@ export default function ClanTopStats({
             </SplitSection>
             <AdsContainer>
                 <MediaQuery maxWidth={999}>
-                    <Ad slot={"main_stats_banner"} styles={"300x50"} />
+                    <div id="nn_mobile_lb1"></div>
                 </MediaQuery>
                 <MediaQuery minWidth={1000}>
-                    <Ad slot={"main_stats_banner"} styles={"728x90"} />
+                    <div id="nn_lb3"></div>
                 </MediaQuery>
             </AdsContainer>
             <CustomTabs value={bubbleTab} onChange={handleChange} aria-label="ant example">

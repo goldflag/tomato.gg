@@ -4,13 +4,14 @@ import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
 import MediaQuery from "react-responsive";
+import Reload from "Ads/reload";
 
 // LOCAL
 import { ServerContext } from "Context";
 import MasteryTable from "./masteryPageComponents/masteryTable";
 import { serverConv } from "Data/conversions";
 import { Loader, FullPageTableWrapper, Info } from "Components";
-import Ad from "Ads/ads";
+
 import { useWindowSize } from "Functions/hooks";
 import { AdsContainer } from "Ads/adsContainer";
 
@@ -105,6 +106,7 @@ export default function MasteryPage(props) {
             setData(res);
         }
         getData();
+        Reload();
     }, [server]);
 
     let table = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />;
@@ -142,12 +144,6 @@ export default function MasteryPage(props) {
                 </Info>
                 {table}
             </div>
-            {windowSize.width > 1000 ? (
-                <div style={{ padding: "0 0 0 1rem" }}>
-                    <Ad slot={"mastery_sidebar_1"} styles={"responsive"} />{" "}
-                    <Ad slot={"mastery_sidebar_1"} styles={"responsive"} />
-                </div>
-            ) : null}
         </>
     );
 
@@ -166,8 +162,8 @@ export default function MasteryPage(props) {
                     <div>{content}</div>
                     <div>
                         <AdsContainer flexDir={"column"}>
-                            <Ad slot={"mastery_sidebar_1"} styles={"160x600"} />
-                            <Ad slot={"mastery_sidebar_2"} styles={"160x600"} />
+                            <div id="nn_sky2"></div>
+                            <div id="nn_sky1"></div>
                         </AdsContainer>
                     </div>
                 </FullPageTableWrapper>
@@ -176,15 +172,13 @@ export default function MasteryPage(props) {
                 <FullPageTableWrapper columns={"180px auto 180px"}>
                     <div>
                         <AdsContainer flexDir={"column"}>
-                            <Ad slot={"mastery_sidebar_1"} styles={"160x600"} />
-                            <Ad slot={"mastery_sidebar_2"} styles={"160x600"} />
+                            <div id="nn_sky1"></div>
                         </AdsContainer>
                     </div>
                     <div>{content}</div>
                     <div>
                         <AdsContainer flexDir={"column"}>
-                            <Ad slot={"mastery_sidebar_1"} styles={"160x600"} />
-                            <Ad slot={"mastery_sidebar_2"} styles={"160x600"} />
+                            <div id="nn_sky2"></div>
                         </AdsContainer>
                     </div>
                 </FullPageTableWrapper>

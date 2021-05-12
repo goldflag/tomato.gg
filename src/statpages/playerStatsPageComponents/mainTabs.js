@@ -1,5 +1,5 @@
 // NPM
-import React from "react";
+import React, { useEffect } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Tab, Tabs } from "@material-ui/core";
 import LocalizedStrings from "Functions/localizedStrings";
@@ -19,7 +19,7 @@ import { NewIcon } from "Components";
 import { useURLState } from "Functions/hooks";
 import { worryrun } from "Assets/loaders";
 import { worryexcited } from "Assets/staticfrogs";
-import Ad from "Ads/ads";
+import Reload from "Ads/reload";
 import { useWindowSize } from "Functions/hooks";
 
 const CustomTabs = withStyles({
@@ -182,10 +182,10 @@ const tabs = [
             (props) => (
                 <AdsContainer>
                     <MediaQuery maxWidth={999}>
-                        <Ad slot={"main_stats_banner"} styles={"300x50"} />
+                        <div id="nn_mobile_lb1"></div>
                     </MediaQuery>
                     <MediaQuery minWidth={1000}>
-                        <Ad slot={"main_stats_banner"} styles={"728x90"} />
+                        <div id="nn_lb2"></div>
                     </MediaQuery>
                 </AdsContainer>
             ),
@@ -202,10 +202,10 @@ const tabs = [
             (props) => (
                 <AdsContainer>
                     <MediaQuery maxWidth={999}>
-                        <Ad slot={"main_stats_banner"} styles={"300x50"} />
+                        <div id="nn_mobile_lb1"></div>
                     </MediaQuery>
                     <MediaQuery minWidth={1000}>
-                        <Ad slot={"main_stats_banner"} styles={"728x90"} />
+                        <div id="nn_lb2"></div>
                     </MediaQuery>
                 </AdsContainer>
             ),
@@ -226,10 +226,10 @@ const tabs = [
             (props) => (
                 <AdsContainer>
                     <MediaQuery maxWidth={999}>
-                        <Ad slot={"main_stats_banner"} styles={"300x50"} />
+                        <div id="nn_mobile_lb1"></div>
                     </MediaQuery>
                     <MediaQuery minWidth={1000}>
-                        <Ad slot={"main_stats_banner"} styles={"728x90"} />
+                        <div id="nn_lb2"></div>
                     </MediaQuery>
                 </AdsContainer>
             ),
@@ -243,10 +243,10 @@ const tabs = [
             (props) => (
                 <AdsContainer>
                     <MediaQuery maxWidth={999}>
-                        <Ad slot={"main_stats_banner"} styles={"300x50"} />
+                        <div id="nn_mobile_lb1"></div>
                     </MediaQuery>
                     <MediaQuery minWidth={1000}>
-                        <Ad slot={"main_stats_banner"} styles={"728x90"} />
+                        <div id="nn_lb2"></div>
                     </MediaQuery>
                 </AdsContainer>
             ),
@@ -268,10 +268,10 @@ const tabs = [
             (props) => (
                 <AdsContainer>
                     <MediaQuery maxWidth={999}>
-                        <Ad slot={"main_stats_banner"} styles={"300x50"} />
+                        <div id="nn_mobile_lb1"></div>
                     </MediaQuery>
                     <MediaQuery minWidth={1000}>
-                        <Ad slot={"main_stats_banner"} styles={"728x90"} />
+                        <div id="nn_lb2"></div>
                     </MediaQuery>
                 </AdsContainer>
             ),
@@ -337,6 +337,11 @@ const LoadingHeader = ({ stage }) => {
 export default function MainTabs(props) {
     const [page, setPage] = useURLState("page", "main");
     const windowSize = useWindowSize();
+
+    useEffect(() => {
+        Reload();
+    }, []);
+
     return (
         <Container
             columns={windowSize.width > 1000 ? "auto 180px" : "auto"}
@@ -380,14 +385,8 @@ export default function MainTabs(props) {
             </div>
             {windowSize.width > 1000 ? (
                 <div style={{ padding: "0 0 0 1rem" }}>
-                    {/* <AdSense.Google
-                        client={"ca-pub-1358649580645755"}
-                        slot={`4142533563`}
-                        
-                        format="responsive"
-                    /> */}
-                    <Ad slot={"player_sidebar_1"} styles={"160x600"} />{" "}
-                    <Ad slot={"player_sidebar_2"} styles={"160x600"} />
+                    <div id="nn_sky2"></div>{" "}
+                    <div id="nn_sky1"></div>
                 </div>
             ) : null}
         </Container>

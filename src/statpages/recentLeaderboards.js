@@ -1,5 +1,5 @@
 // NPM
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import LocalizedStrings from "Functions/localizedStrings";
 import MediaQuery from "react-responsive";
@@ -9,7 +9,7 @@ import Leaderboard from "./recentLeaderboardComponents/leaderboard";
 import { FullPageTableWrapper, Info } from "Components";
 import { ServerContext } from "Context";
 import { serverConv } from "Data/conversions";
-import Ad from "Ads/ads";
+import Reload from "Ads/reload";
 import { AdsContainer } from "Ads/adsContainer";
 
 const { formatString, ...strings } = LocalizedStrings({
@@ -28,7 +28,12 @@ const { formatString, ...strings } = LocalizedStrings({
     zh: { recentStats: "{server} 近期表現榜", minGames: "期間內需最少75場戰鬥" },
 });
 
-export default function RecentLeaderboards(props) {
+export default function RecentLeaderboards() {
+
+    useEffect(() => {
+        Reload();
+    }, []);
+
     const { server } = useContext(ServerContext);
     const titleString = formatString(strings.recentStats, { server: serverConv[server] });
 
@@ -70,8 +75,8 @@ export default function RecentLeaderboards(props) {
                     <div style={{ minWidth: 0 }}>{content}</div>
                     <div>
                         <AdsContainer flexDir={"column"}>
-                            <Ad slot={"leaderboards_sidebar_1"} styles={"300x250"} />
-                            <Ad slot={"leaderboards_sidebar_2"} styles={"300x600"} />
+                            <div id="nn_sky2"></div>
+                            <div id="nn_sky1"></div>
                         </AdsContainer>
                     </div>
                 </FullPageTableWrapper>

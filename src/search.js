@@ -15,6 +15,7 @@ import Accordion from "./searchpage/frontpageAccordtion";
 import { ServerContext, SearchHistoryContext, SearchmodeContext } from "Context";
 import { serverConv } from "Data/conversions";
 import Ad from "Ads/ads";
+import Reload from "Ads/reload";
 import Colors from "Styling/colors";
 import { Loader } from "Components";
 import TankTable from "./searchpage/tanktable";
@@ -326,14 +327,7 @@ export default withRouter(function Search(props) {
 
     useEffect(() => {
         fetchStuff();
-        // setTimeout(() => {
-        //     try {
-        //         window.reloadAdSlots();
-        //     }
-        //     catch {
-        //         console.log("no ads");
-        //     }
-        // }, 0);
+        Reload();
     }, [server]);
 
     const searchId = async (e) => {
@@ -456,18 +450,17 @@ export default withRouter(function Search(props) {
             </TopSection>
             {discordLink}
             <MediaQuery minWidth={1000}>
-                {/* <div id="nn_lb1"></div> */}
-                <Ad slot={"front_page_banner_2"} styles={"728x90"} />
+                <div id="nn_lb2"></div>
             </MediaQuery>
             <MediaQuery maxWidth={999}>
-                <Ad slot={"front_page_banner_2"} styles={"300x50"} />
+                <div id="nn_mobile_mpu1"></div>
             </MediaQuery>
             <MediaQuery minWidth={1000}>
-                <Ad slot={"front_page_banner_1"} styles={"728x90"} />
+                <div id="nn_lb3"></div>
                 {outbound}
             </MediaQuery>
             <MediaQuery maxWidth={999}>
-                <Ad slot={"front_page_banner_1"} styles={"300x50"} />
+                <div id="nn_mobile_mpu2"></div>
             </MediaQuery>
         </Center>
     );
@@ -488,8 +481,8 @@ export default withRouter(function Search(props) {
                     </Center>
                     </div>
                     <Adcontent>
-                        <Ad slot={"front_page_sidebar_1"} styles={"300x250"} />
-                        <Ad slot={"front_page_sidebar_2"} styles={"300x600"} />
+                        <div id="nn_sky2"></div>
+                        <div id="nn_sky1"></div>
                     </Adcontent>
                 </Desktop>
             </MediaQuery>

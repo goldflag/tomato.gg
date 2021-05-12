@@ -12,7 +12,7 @@ import MoETracker from "./MoEPageComponents/MoETracker";
 import { TabPanel, CustomTabs, CustomTab } from "../components/customTabs";
 import { Loader, FullPageTableWrapper, Info } from "Components";
 import { serverConv } from "Data/conversions";
-import Ad from "Ads/ads";
+import Reload from "Ads/reload";
 import { AdsContainer } from "Ads/adsContainer";
 
 const trackingId = process.env.REACT_APP_GA;
@@ -158,6 +158,7 @@ export default function MoEPage(props) {
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/moe");
+        Reload();
     }, []);
 
     useEffect(() => {
@@ -260,8 +261,8 @@ export default function MoEPage(props) {
                     <div>{content}</div>
                     <div>
                         <AdsContainer flexDir={"column"}>
-                            <Ad slot={"moe_sidebar_1"} styles={"160x600"} />
-                            <Ad slot={"moe_sidebar_2"} styles={"160x600"} />
+                            <div id="nn_sky2"></div>
+                            <div id="nn_sky1"></div>
                         </AdsContainer>
                     </div>
                 </FullPageTableWrapper>
@@ -270,15 +271,13 @@ export default function MoEPage(props) {
                 <FullPageTableWrapper columns={"180px auto 180px"}>
                     <div>
                         <AdsContainer flexDir={"column"}>
-                            <Ad slot={"moe_sidebar_1"} styles={"160x600"} />
-                            <Ad slot={"moe_sidebar_2"} styles={"160x600"} />
+                            <div id="nn_sky1"></div>
                         </AdsContainer>
                     </div>
                     <div>{content}</div>
                     <div>
                         <AdsContainer flexDir={"column"}>
-                            <Ad slot={"moe_sidebar_1"} styles={"160x600"} />
-                            <Ad slot={"moe_sidebar_2"} styles={"160x600"} />
+                            <div id="nn_sky2"></div>
                         </AdsContainer>
                     </div>
                 </FullPageTableWrapper>

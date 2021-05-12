@@ -15,7 +15,7 @@ import { useURLState } from "Functions/hooks";
 import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
 import { nationAdjConv, classDescConv, serverConv, tierConv, classConv } from "Data/conversions";
 import { Capital, commonStrings } from "Data/localizations";
-import Ad from "Ads/ads";
+import Reload from "Ads/reload";
 import { AdsContainer } from "Ads/adsContainer";
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -103,7 +103,9 @@ export default function TankPage(props) {
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/tank-page");
+        Reload();
     }, []);
+
     const { server } = useContext(ServerContext);
 
     const [data, setData] = useState("loading");
@@ -203,8 +205,8 @@ export default function TankPage(props) {
                     <div style={{ minWidth: 0 }}>{content}</div>
                     <div>
                         <AdsContainer flexDir={"column"}>
-                            <Ad slot={"tank_stats_sidebar_1"} styles={"300x250"} />
-                            <Ad slot={"tank_stats_sidebar_2"} styles={"300x600"} />
+                            <div id="nn_sky2"></div>
+                            <div id="nn_sky1"></div>
                         </AdsContainer>
                     </div>
                 </FullPageTableWrapper>

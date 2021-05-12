@@ -12,7 +12,7 @@ import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
 import RecentTanksAvgTable from "./recentTankStatsComponents/RecentTanksAvgTable";
 import { useURLState } from "Functions/hooks";
 import { commonStrings } from "Data/localizations";
-import Ad from "Ads/ads";
+import Reload from "Ads/reload";
 import { AdsContainer } from "Ads/adsContainer";
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -116,6 +116,10 @@ export default function RecentLeaderboards() {
             .then((res) => setData(res));
     }, [server, time]);
 
+    useEffect(() => {
+        Reload();
+    }, []);
+
     const content = (
         <div style={{ minWidth: "0" }}>
             <Info>
@@ -167,8 +171,8 @@ export default function RecentLeaderboards() {
                     <div>{content}</div>
                     <div>
                         <AdsContainer flexDir={"column"}>
-                            <Ad slot={"tank_stats_sidebar_1"} styles={"160x600"} />
-                            <Ad slot={"tank_stats_sidebar_2"} styles={"160x600"} />
+                            <div id="nn_sky2"></div>
+                            <div id="nn_sky1"></div>
                         </AdsContainer>
                     </div>
                 </FullPageTableWrapper>
@@ -177,15 +181,13 @@ export default function RecentLeaderboards() {
                 <FullPageTableWrapper columns={"180px auto 180px"}>
                     <div>
                         <AdsContainer flexDir={"column"}>
-                            <Ad slot={"tank_stats_sidebar_1"} styles={"160x600"} />
-                            <Ad slot={"tank_stats_sidebar_2"} styles={"160x600"} />
+                            <div id="nn_sky1"></div>
                         </AdsContainer>
                     </div>
                     <div>{content}</div>
                     <div>
                         <AdsContainer flexDir={"column"}>
-                            <Ad slot={"tank_stats_sidebar_1"} styles={"160x600"} />
-                            <Ad slot={"tank_stats_sidebar_2"} styles={"160x600"} />
+                            <div id="nn_sky2"></div>
                         </AdsContainer>
                     </div>
                 </FullPageTableWrapper>
