@@ -96,6 +96,7 @@ export default function MasteryPage(props) {
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/mastery");
+        Reload();
     }, []);
 
     useEffect(() => {
@@ -106,7 +107,6 @@ export default function MasteryPage(props) {
             setData(res);
         }
         getData();
-        Reload();
     }, [server]);
 
     let table = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />;

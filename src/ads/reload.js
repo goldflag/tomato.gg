@@ -1,5 +1,6 @@
 const Reload = () => (setTimeout(() => {
     try {
+        console.log("Test ads");
         window.reloadAdSlots();
     }
     catch {

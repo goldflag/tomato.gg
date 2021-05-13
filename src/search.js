@@ -14,7 +14,6 @@ import SearchBar from "Material/searchBar";
 import Accordion from "./searchpage/frontpageAccordtion";
 import { ServerContext, SearchHistoryContext, SearchmodeContext } from "Context";
 import { serverConv } from "Data/conversions";
-import Ad from "Ads/ads";
 import Reload from "Ads/reload";
 import Colors from "Styling/colors";
 import { Loader } from "Components";
@@ -326,8 +325,11 @@ export default withRouter(function Search(props) {
     }
 
     useEffect(() => {
-        fetchStuff();
         Reload();
+    }, []);
+
+    useEffect(() => {
+        fetchStuff();
     }, [server]);
 
     const searchId = async (e) => {
