@@ -54,7 +54,7 @@ const SubTd = styled.td`
     padding: 0;
 `;
 
-export default function SessionsLog({ data }) {
+export default function SessionsLog({ rows, data }) {
     const columns = React.useMemo(
         () => [
             {
@@ -99,10 +99,6 @@ export default function SessionsLog({ data }) {
                 accessor: "KD",
             },
             {
-                Header: "XP",
-                accessor: "xprate",
-            },
-            {
                 Header: tableHeaders.spots,
                 accessor: "spottedrate",
             },
@@ -130,7 +126,7 @@ export default function SessionsLog({ data }) {
         {
             columns,
             data,
-            initialState: { pageIndex: 0, pageSize: 30 },
+            initialState: { pageIndex: 0, pageSize: rows },
         },
         useSortBy,
         useExpanded,
@@ -188,7 +184,7 @@ export default function SessionsLog({ data }) {
                 </Table>
             </TableContainer>
             <Pagination
-                pageSizes={[7, 14, 30, 90, 180]}
+                pageSizes={[5, 10, 15, 25, 50, 100]}
                 {...{
                     canPreviousPage,
                     canNextPage,
