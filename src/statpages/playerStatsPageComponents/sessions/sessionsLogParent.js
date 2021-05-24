@@ -5,29 +5,29 @@ import LocalizedStrings from "Functions/localizedStrings";
 
 const strings = LocalizedStrings({
     en: { 
-        daily: "DAILY SESSIONS LOG",
+        daily: "DAILY STATS",
         weekly: "WEEKLY STATS",
         monthly: "MONTHLY STATS"
     },
     cs: { 
-        daily: "DENNÍ ZÁZNAM BITEV",
-        weekly: "WEEKLY STATS",
-        monthly: "MONTHLY STATS"
+        daily: "DENNÍ STATISTIKY",
+        weekly: "TÝDENNÍ STATISTIKY",
+        monthly: "MĚSÍČNÍ STATISTIKY"
     },
     de: { 
-        daily: "TÄGLICHE SITZUNGSSTATISTIKEN",
-        weekly: "WEEKLY STATS",
-        monthly: "MONTHLY STATS"
+        daily: "TÄGLICHE STATISTIKEN",
+        weekly: "WÖCHENTLICHE STATISTIKEN",
+        monthly: "MONATLICHE STATISTIKEN"
     },
     es: { 
-        daily: "REGISTRO DE SESIONES DIARIAS", 
-        weekly: "WEEKLY STATS",
-        monthly: "MONTHLY STATS"
+        daily: "ESTADÍSTICAS DIARIAS",
+        weekly: "ESTADÍSTICAS SEMANALES",
+        monthly: "ESTADÍSTICAS MENSUALES"
     },
     fr: { 
-        daily: "RÉCAPITULATIF DES SESSIONS JOURNALIÈRES", 
-        weekly: "WEEKLY STATS",
-        monthly: "MONTHLY STATS"
+        daily: "STATS QUOTIDIENNES",
+        weekly: "STATS HEBDOMADAIRES",
+        monthly: "STATS MENSUELLES"
     },
     ko: { 
         daily: "매일 세션 로그", 
@@ -35,29 +35,29 @@ const strings = LocalizedStrings({
         monthly: "MONTHLY STATS"
     },
     hr: { 
-        daily: "DNEVNA SEZONA", 
-        weekly: "WEEKLY STATS",
-        monthly: "MONTHLY STATS"
+        daily: "DNEVNI STATS",
+        weekly: "TJEDNI STATS",
+        monthly: "MJESEČNI STATS"
     },
     pl: { 
-        daily: "ZAPIS DZIENNYCH SESJI", 
-        weekly: "WEEKLY STATS",
-        monthly: "MONTHLY STATS"
+        daily: "DZIENNE STATYSTYKI",
+        weekly: "TYGODNIOWE STATYSTYKI",
+        monthly: "MIESIĘCZNE STATYSTYKI"
     },
     ru: { 
-        daily: "ЕЖЕДНЕВНЫЕ СЕССИИ", 
-        weekly: "WEEKLY STATS",
-        monthly: "MONTHLY STATS"
+        daily: "ЕЖЕДНЕВНАЯ СТАТИСТИКА",
+        weekly: "ЕЖЕНЕДЕЛЬНАЯ СТАТИСТИКА",
+        monthly: "ЕЖЕМЕСЯЧНАЯ СТАТИСТИКА"
     },
     tr: { 
-        daily: "GÜNLÜK OTURUM KAYITLARI", 
-        weekly: "WEEKLY STATS",
-        monthly: "MONTHLY STATS"
+        daily: "GÜNLÜK İSTATİSTİKLER",
+        weekly: "HAFTALIK İSTATİSTİKLER",
+        monthly: "AYLIK İSTATİSTİKLER"
     },
     zh: { 
-        daily: "每日記錄",
-        weekly: "WEEKLY STATS",
-        monthly: "MONTHLY STATS"
+        daily: "每日統計",
+        weekly: "每週統計",
+        monthly: "每月統計"
     },
 });
 
