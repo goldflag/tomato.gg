@@ -1,5 +1,5 @@
 // NPM
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Tab, Tabs } from "@material-ui/core";
 import LocalizedStrings from "Functions/localizedStrings";
@@ -7,6 +7,7 @@ import styled from "styled-components";
 import MediaQuery from "react-responsive";
 
 // LOCAL
+import { LoadContext } from "Context";
 import { TabPanel } from "../../components/customTabs";
 import TopStats from "./topStats";
 import TopTable from "./topTable.js";
@@ -340,8 +341,11 @@ export default function MainTabs(props) {
     const [page, setPage] = useURLState("page", "main");
     const windowSize = useWindowSize();
 
+    const { load, setLoad } = useContext(LoadContext);
+
     useEffect(() => {
-        Reload();
+        console.log(load);
+        load ? Reload() : setLoad(true);
     }, []);
 
     return (

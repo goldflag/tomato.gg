@@ -4,6 +4,7 @@ const initialState = {
     server: "com",
     setServer: () => {},
 };
+
 const ServerContext = React.createContext(initialState);
 
 function ServerProvider({ children }) {

@@ -1,11 +1,12 @@
 // NPM
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
 import MediaQuery from "react-responsive";
 
 // LOCAL
+import { LoadContext } from "Context";
 import WN8Table from "./wn8Components/wn8Table";
 import { Loader, FullPageTableWrapper, Info } from "Components";
 import { AdsContainer } from "Ads/adsContainer";
@@ -28,13 +29,15 @@ const { formatString, ...strings } = LocalizedStrings({
     zh: { expected: "WN8 期望值", maintained: "由 {0} 維護", xvm: "XVM team" },
 });
 
-export default function Leaderboards(props) {
+export default function Leaderboards() {
     const [data, setData] = useState();
+    const { load, setLoad } = useContext(LoadContext);
 
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/wn8");
-        Reload();
+        console.log(load);
+        load ? Reload() : setLoad(true);
         fetch(`${backend}/api/wn8`)
             .then((res) => res.json())
             .then((data) => setData(data));

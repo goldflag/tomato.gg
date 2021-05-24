@@ -1,5 +1,5 @@
 // NPM
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Helmet } from "react-helmet";
 import { useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
@@ -8,6 +8,7 @@ import LocalizedStrings from "Functions/localizedStrings";
 import MediaQuery from "react-responsive";
 
 // LOCAL
+import { LoadContext } from "Context";
 import { serverConv } from "Data/conversions";
 import "CSS/style.css";
 import "CSS/innerpage.css";
@@ -59,6 +60,8 @@ export default function ClanStatsPage() {
     const match = useRouteMatch();
     const { server, clan } = match.params;
 
+    const { load, setLoad } = useContext(LoadContext);
+
     const [clanData, setClanData] = useState("loading");
     const [validID, setValidID] = useState(true);
     const [clanName, setClanName] = useState(clan.split("=")[0] || "");
@@ -107,7 +110,8 @@ export default function ClanStatsPage() {
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview(`/clan-stats/${server}`);
-        Reload();
+        console.log(load);
+        load ? Reload() : setLoad(true);
     }, [])
 
     let clanPage;

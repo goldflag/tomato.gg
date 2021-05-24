@@ -1,5 +1,5 @@
 // NPM
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
 import LocalizedStrings from "Functions/localizedStrings";
@@ -7,7 +7,7 @@ import MediaQuery from "react-responsive";
 import Reload from "Ads/reload";
 
 // LOCAL
-import { ServerContext } from "Context";
+import { ServerContext, LoadContext } from "Context";
 import MasteryTable from "./masteryPageComponents/masteryTable";
 import { serverConv } from "Data/conversions";
 import { Loader, FullPageTableWrapper, Info } from "Components";
@@ -88,7 +88,8 @@ const { formatString, ...strings } = LocalizedStrings({
 });
 
 export default function MasteryPage(props) {
-    const { server } = React.useContext(ServerContext);
+    const { server } = useContext(ServerContext);
+    const { load, setLoad } = useContext(LoadContext);
 
     const [data, setData] = useState();
     const windowSize = useWindowSize();
@@ -96,7 +97,8 @@ export default function MasteryPage(props) {
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/mastery");
-        Reload();
+        console.log(load);
+        load ? Reload() : setLoad(true);
     }, []);
 
     useEffect(() => {

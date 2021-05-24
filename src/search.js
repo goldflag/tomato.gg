@@ -12,7 +12,7 @@ import { chevronDown } from 'react-icons-kit/fa/chevronDown'
 // LOCAL
 import SearchBar from "Material/searchBar";
 import Accordion from "./searchpage/frontpageAccordtion";
-import { ServerContext, SearchHistoryContext, SearchmodeContext } from "Context";
+import { ServerContext, SearchHistoryContext, SearchmodeContext, LoadContext } from "Context";
 import { serverConv } from "Data/conversions";
 import Reload from "Ads/reload";
 import Colors from "Styling/colors";
@@ -299,8 +299,9 @@ const outbound = (
 export default withRouter(function Search(props) {
     const { server, setServer } = useContext(ServerContext);
     const { mode, setMode } = useContext(SearchmodeContext);
-
     const { addToHistory } = useContext(SearchHistoryContext);
+    const { load, setLoad } = useContext(LoadContext);
+
     const [name, setName] = useState("");
     
     const [value, setValue] = useState(0);
@@ -325,8 +326,9 @@ export default withRouter(function Search(props) {
     }
 
     useEffect(() => {
-        Reload();
-    }, []);
+        console.log(load);
+        load ? Reload() : setLoad(true);
+    }, [])
 
     useEffect(() => {
         fetchStuff();

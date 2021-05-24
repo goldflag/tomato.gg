@@ -6,7 +6,7 @@ import MediaQuery from "react-responsive";
 
 // LOCAL
 import { serverConv } from "Data/conversions";
-import { ServerContext } from "Context";
+import { ServerContext, LoadContext } from "Context";
 import { Loader, FullPageTableWrapper, Info } from "Components";
 import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
 import RecentTanksAvgTable from "./recentTankStatsComponents/RecentTanksAvgTable";
@@ -106,8 +106,10 @@ const ButtonFilterBar = ({ options, filterValue, setFilterValue, ariaLabel }) =>
 
 export default function RecentLeaderboards() {
     const { server } = useContext(ServerContext);
-    const [data, setData] = useState("loading");
-    const [time, setTime] = useURLState("time", 60);
+    const { load, setLoad } = useContext(LoadContext);
+
+    const [ data, setData ] = useState("loading");
+    const [ time, setTime ] = useURLState("time", 60);
 
     useEffect(() => {
         setData("loading");
@@ -117,7 +119,8 @@ export default function RecentLeaderboards() {
     }, [server, time]);
 
     useEffect(() => {
-        Reload();
+        console.log(load);
+        load ? Reload() : setLoad(true);
     }, []);
 
     const content = (

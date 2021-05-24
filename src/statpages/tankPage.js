@@ -8,7 +8,7 @@ import MediaQuery from "react-responsive";
 
 // LOCAL
 import { Loader, FullPageTableWrapper } from "Components";
-import { ServerContext } from "Context";
+import { ServerContext, LoadContext } from "Context";
 import RecentLeaderboard from "./tankPageComponents/recentLeaderboard";
 import { ServerPagination } from "Components";
 import { useURLState } from "Functions/hooks";
@@ -100,13 +100,16 @@ const filters = {
 };
 
 export default function TankPage(props) {
+
+    const { server } = useContext(ServerContext);
+    const { load, setLoad } = useContext(LoadContext);
+
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/tank-page");
-        Reload();
+        console.log(load);
+        load ? Reload() : setLoad(true);
     }, []);
-
-    const { server } = useContext(ServerContext);
 
     const [data, setData] = useState("loading");
 

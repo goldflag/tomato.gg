@@ -6,7 +6,7 @@ import LocalizedStrings from "Functions/localizedStrings";
 import MediaQuery from "react-responsive";
 
 // LOCAL
-import { ServerContext } from "Context";
+import { ServerContext, LoadContext } from "Context";
 import MoETable from "./MoEPageComponents/MoETable";
 import MoETracker from "./MoEPageComponents/MoETracker";
 import { TabPanel, CustomTabs, CustomTab } from "../components/customTabs";
@@ -146,6 +146,7 @@ const { formatString, ...strings } = LocalizedStrings({
 
 export default function MoEPage(props) {
     const { server } = useContext(ServerContext);
+    const { load, setLoad } = useContext(LoadContext);
 
     const [data, setData] = useState();
     const [changeData, setChangeData] = useState();
@@ -158,7 +159,8 @@ export default function MoEPage(props) {
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/moe");
-        Reload();
+        console.log(load);
+        load ? Reload() : setLoad(true);
     }, []);
 
     useEffect(() => {

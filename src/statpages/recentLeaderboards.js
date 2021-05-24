@@ -7,7 +7,7 @@ import MediaQuery from "react-responsive";
 // LOCAL
 import Leaderboard from "./recentLeaderboardComponents/leaderboard";
 import { FullPageTableWrapper, Info } from "Components";
-import { ServerContext } from "Context";
+import { ServerContext, LoadContext } from "Context";
 import { serverConv } from "Data/conversions";
 import Reload from "Ads/reload";
 import { AdsContainer } from "Ads/adsContainer";
@@ -30,12 +30,15 @@ const { formatString, ...strings } = LocalizedStrings({
 
 export default function RecentLeaderboards() {
 
-    useEffect(() => {
-        Reload();
-    }, []);
-
     const { server } = useContext(ServerContext);
+    const { load, setLoad } = useContext(LoadContext);
+
     const titleString = formatString(strings.recentStats, { server: serverConv[server] });
+
+    useEffect(() => {
+        console.log(load);
+        load ? Reload() : setLoad(true);
+    }, []);
 
     const content = (
         <div>
