@@ -181,8 +181,7 @@ const StyledSidebar = styled.div`
     margin-right: 14rem;
     position: fixed;
     left: 0;
-    background: url(${background}) no-repeat fixed;
-    background-size: cover;
+    background: rgb(28, 41, 79);
     overflow-x: hidden;
 
     @media screen and (max-width: 1000px) {
@@ -200,8 +199,6 @@ const LogoImg = styled.img`
 `;
 
 const Layer = styled.div`
-    backdrop-filter: blur(2px);
-    background-color: rgba(24, 25, 92, 0.7);
     top: 0;
     left: 0;
     width: 100%;
@@ -323,6 +320,7 @@ const CopyrightNotice = styled.div`
         color: white;
     }
 `;
+
 
 const Sidebar = withRouter((props) => {
     const { background, toggleBackground } = useContext(BackgroundContext);

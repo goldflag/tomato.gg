@@ -13,7 +13,8 @@ import Sidebar from "./sidebar";
 import Privacy from "./privacy";
 
 import { BackgroundContext } from "Context";
-import Ocean from "./assets/Ocean.svg";
+import Glacier from "./assets/blurred.jpg";
+
 import "CSS/body.css";
 
 const trackingId = process.env.REACT_APP_GA;
@@ -38,22 +39,25 @@ const Wrapper = styled.div`
 
 const backgrounds = {
     black: "rgb(30, 30, 50)",
-    blue: `url(${Ocean}) no-repeat center center fixed`,
+    blue: `url(${Glacier}) no-repeat center center fixed`,
 };
 
 const Blue = styled.div`
     color: rgb(234, 238, 248);
-    background: ${({ background }) => backgrounds[background]};
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-color: ${({ color }) => color};
-
+    background-color: rgba(20, 20, 40, 0.8);
     a {
         text-decoration: none;
     }
 `;
+
+const Test = styled.div`
+    background: ${({ background }) => backgrounds[background]};
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+
+`;
+
 
 export default function Tomatopedia() {
     const { background } = useContext(BackgroundContext);
@@ -66,25 +70,27 @@ export default function Tomatopedia() {
     return (
         <Router>
             <ScrollToTop />
-            <Blue background={background}>
-                <Sidebar />
-                <Topbar />
-                <Wrapper>
-                    <Scrollbar>
-                        <Switch>
-                            <Route path={"/privacy"} key={"privacy"}>
-                                <Privacy />
-                            </Route>
-                            {routes.map(({ path, Component }, i) => (
-                                <Route path={path} key={i}>
-                                    {Component}
+            <Test background={background}>
+                <Blue>
+                    <Sidebar />
+                    <Topbar />
+                    <Wrapper>
+                        <Scrollbar>
+                            <Switch>
+                                <Route path={"/privacy"} key={"privacy"}>
+                                    <Privacy />
                                 </Route>
-                            ))}
-                            <Redirect to="/" />
-                        </Switch>
-                    </Scrollbar>
-                </Wrapper>
-            </Blue>
+                                {routes.map(({ path, Component }, i) => (
+                                    <Route path={path} key={i}>
+                                        {Component}
+                                    </Route>
+                                ))}
+                                <Redirect to="/" />
+                            </Switch>
+                        </Scrollbar>
+                    </Wrapper>
+                </Blue>
+            </Test>
         </Router>
     );
 }
