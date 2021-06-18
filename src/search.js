@@ -273,15 +273,6 @@ const outbound = (
         <a href="https://tanks.gg/" target="blank">
             <img style={{ maxHeight: "50px", margin: "1rem" }} src={Tanksgg} alt="tanks.gg" />
         </a>
-        <a href="https://thedailybounce.net/" target="blank">
-            <img
-                style={{ maxHeight: "60px", margin: "1rem" }}
-                src={
-                    "https://i2.wp.com/thedailybounce.net/wp-content/uploads/2019/01/cropped-cropped-TDB-Logo-2019-2.png?fit=700%2C325&ssl=1"
-                }
-                alt="thedailybounce.net"
-            />
-        </a>
         <a href="https://thearmoredpatrol.com/" target="blank">
             <img
                 style={{ maxHeight: "25px", margin: "1rem" }}
