@@ -86,6 +86,8 @@ function WN8Table({ data }) {
         []
     );
 
+    columns.forEach((column) => column.sortDescFirst = true)
+
     const {
         getTableProps,
         getTableBodyProps,

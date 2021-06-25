@@ -139,6 +139,8 @@ function MoETracker({ data, moe }) {
         [moe]
     );
 
+    columns.forEach((column) => column.sortDescFirst = true)
+
     const {
         getTableProps,
         getTableBodyProps,

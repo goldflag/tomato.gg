@@ -45,6 +45,9 @@ function RecentTanksAvgTable({ data }) {
         ];
     }, []);
 
+    columns.forEach((column) => column.sortDescFirst = true)
+    columns.forEach((column) => column.toggleSortBy.multi = true)
+
     const {
         getTableProps,
         getTableBodyProps,

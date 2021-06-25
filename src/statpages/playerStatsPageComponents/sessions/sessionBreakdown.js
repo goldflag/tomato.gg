@@ -50,6 +50,8 @@ export default function SessionBreakdown({ data }) {
         []
     );
 
+    columns.forEach((column) => column.sortDescFirst = true)
+
     const {
         getTableProps,
         getTableBodyProps,

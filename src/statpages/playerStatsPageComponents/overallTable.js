@@ -238,16 +238,6 @@ function OverallTable({ data }) {
                 disableFilters: true,
             },
             { Header: Capital(commonStrings.frags), accessor: "kpg", disableFilters: true },
-            {
-                Header: "WN8%tile",
-                accessor: "wn8percent",
-                disableFilters: true,
-            },
-            {
-                Header: "DPG%tile",
-                accessor: "dpgpercent",
-                disableFilters: true,
-            },
             { Header: commonStrings.dmgRatio, accessor: "dmgratio", disableFilters: true },
             { Header: commonStrings.kd, accessor: "kd", disableFilters: true },
             { Header: tableHeaders.survival, accessor: "survival", disableFilters: true },
@@ -265,25 +255,26 @@ function OverallTable({ data }) {
             {
                 Cell: ({ value }) => (
                     <img src={require(`Assets/masteryIcons/${value}.png`)} style={{ maxHeight: "23px" }} alt={value} />
-                ),
-                Header: "Mast", // TODO: iconize this
-                accessor: "mastery",
-                Filter: MasteryFilter,
-                filter: arrayFilterFn,
-            },
-            {
-                Header: "",
-                accessor: "isPrem",
-                Filter: PremFilter,
-                filter: arrayFilterFn,
-                hidden: true,
-            },
-        ],
-        []
-    );
-
-    const filterOrder = [3, 2, 1, 18, 19, 20];
-
+                    ),
+                    Header: "Mast", // TODO: iconize this
+                    accessor: "mastery",
+                    Filter: MasteryFilter,
+                    filter: arrayFilterFn,
+                },
+                {
+                    Header: "",
+                    accessor: "isPrem",
+                    Filter: PremFilter,
+                    filter: arrayFilterFn,
+                    hidden: true,
+                },
+            ],
+            []
+        );
+        
+    const filterOrder = [3, 2, 1, 16, 17, 18];
+    columns.forEach((column) => column.sortDescFirst = true)
+            
     const {
         getTableProps,
         getTableBodyProps,
@@ -314,6 +305,7 @@ function OverallTable({ data }) {
                     {
                         id: "battles",
                         desc: true,
+                        
                     },
                 ],
             },

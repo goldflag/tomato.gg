@@ -198,6 +198,8 @@ export default function ClanStatsTable({ data }) {
         []
     );
 
+    columns.forEach((column) => column.sortDescFirst = true)
+
     const {
         getTableProps,
         getTableBodyProps,

@@ -106,6 +106,8 @@ export default function SessionsLog({ rows, data }) {
         []
     );
 
+    columns.forEach((column) => column.sortDescFirst = true)
+
     const {
         getTableProps,
         getTableBodyProps,

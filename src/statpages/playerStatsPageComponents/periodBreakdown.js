@@ -108,6 +108,8 @@ function PeriodBreakdown({ data }) {
         ],
         []
     );
+    
+    columns.forEach((column) => column.sortDescFirst = true)
 
     const {
         getTableProps,
