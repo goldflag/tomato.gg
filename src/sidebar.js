@@ -130,11 +130,11 @@ const strings = LocalizedStrings({
     ru: {
         boomer: "Переключить темный фон",
         boomerAria: "переключить цвет фона",
-        support: "Поддерживать Tomato.gg",
+        support: "Помочь tomato.gg",
         donations: `Tomato.gg полностью работает на пожертвования пользователей. Если вы находите 
         ценность в веб-сайте, подумайте о пожертвовании для серверов.`,
-        kofi: "Поддержка по Ko-fi",
-        paypal: "Поддержка по Paypal",
+        kofi: "Поддержать через по Ko-fi",
+        paypal: "Поддержать через по Paypal",
         partnered: "Сайты-партнеры",
         herhor: "Рейтинги МoE и генератор изображений",
         createdBy: "Tomato.gg - это веб-сайт, созданный",

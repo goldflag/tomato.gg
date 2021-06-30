@@ -196,7 +196,6 @@ const tabs = [
     },
     {
         label: strings.hof,
-        icon: <NewIcon />,
         value: "hall-of-fame",
         body: [
             (props) => (
@@ -264,7 +263,6 @@ const tabs = [
     },
     {
         label: strings.treemap,
-        icon: <NewIcon />,
         value: "treemap",
         body: [
             (props) => (

@@ -169,15 +169,16 @@ const strings = LocalizedStrings({
         home: "Главная",
         playerStats: "Статистика игрока",
         clanStats: "Clan Stats",
-        tankStats: "Статистика танков",
+        tankStats: "Статистика по танкам",
         leaderboards: "Таблица лидеров",
-        moeReqs: "Требования MoE",
-        masteryReqs: "Требования мастерства",
-        WN8Expected: "WN8 Ожидаемая статистика",
+        moeReqs: "Отметки на стволах",
+        masteryReqs: "Знаки классности",
+        WN8Expected: "WN8 Ожидаемые значения",
         statsReference: "Справка по статистике",
-        about: "About",
+        about: "О нас",
         tankList: "Список танков",
         serverStats: "Статистика сервера",
+        colorScales: "Цветовая шкала ",
     },
     tr: {
         home: "Anasayfa",
@@ -240,7 +241,7 @@ const tankStats = {
     path: "/tank-stats",
     Icon: BarChart,
     Component: <TankStatsPage />,
-    isNew: true,
+    isNew: false,
 };
 
 const tank = {
@@ -253,7 +254,7 @@ const leaderboards = {
     path: "/leaderboards",
     Icon: FormatListNumbered,
     Component: <Leaderboards />,
-    isNew: true,
+    isNew: false,
 };
 
 const moe = {
@@ -293,7 +294,7 @@ const colorScale = {
     path: "/color-scales",
     Icon: Palette,
     Component: <ColorScales />,
-    isNew: true,
+    isNew: false,
 };
 
 /*
