@@ -53,18 +53,19 @@ class StatsPage extends Component {
             validID: false,
             battles: 0,
             username: "",
-            WGRating: "",
-            clanStats: "",
+            WGRating: null,
+            clanStats: null,
             graphData: {},
-            MOERating: "",
-            tankstats: "",
-            clanHistory: "",
-            recentStats: "",
-            lastPlayedTime: "",
-            accountCreationDate: "",
+            MOERating: null,
+            tankstats: null,
+            clanHistory: null,
+            recentStats: null,
+            sessions: null,
+            lastPlayedTime: null,
+            accountCreationDate: null,
             hofmainData: null,
             hofData: null,
-            server: "",
+            server: null,
             stage: 0,
         };
     }
@@ -122,14 +123,16 @@ class StatsPage extends Component {
             `${backend}/api/player/${server}/${id}?cache=true`, //Recent stats from our own API with cache
             `${backend}/api/hofmain/${server}/${id}`,
             `${backend}/api/hof/${server}/${id}`,
+            `${backend}/api/sessions/${server}/${id}`
         ];
         return Promise.all(urls.map((url) => fetch(url)))
             .then((resps) => Promise.all(resps.map((r) => r.json())))
-            .then(([player, hofmainData, hofData]) => {
+            .then(([player, hofmainData, hofData, sessions]) => {
                 const newState = {
                     hofmainData,
                     hofData,
-                    server,
+                    sessions,
+                    server
                 };
                 this.setState(newState);
                 if (player === null) {

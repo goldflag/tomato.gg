@@ -232,9 +232,9 @@ const tabs = [
                     </MediaQuery>
                 </AdsContainer>
             ),
-            (props) => <SessionsLogParent rows={10} type={"monthly"} data={props.recentStats.sessions.sesmonth} />,
-            (props) => <SessionsLogParent rows={10} type={"weekly"} data={props.recentStats.sessions.sesweek} />,
-            (props) => <SessionsLogParent rows={15} type={"daily"} data={props.recentStats.sessions.sesday} />
+            (props) => <SessionsLogParent rows={10} type={"monthly"} data={props.sessions.sesmonth} />,
+            (props) => <SessionsLogParent rows={10} type={"weekly"} data={props.sessions.sesweek} />,
+            (props) => <SessionsLogParent rows={15} type={"daily"} data={props.sessions.sesday} />
         ],
     },
     {
