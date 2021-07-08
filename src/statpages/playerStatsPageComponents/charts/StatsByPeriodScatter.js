@@ -1,11 +1,17 @@
 // NPM
 import React from "react";
-import { ResponsiveScatterPlot } from "@nivo/scatterplot";
+import { ResponsiveScatterPlot, ScatterPlot } from "@nivo/scatterplot";
 import styled from "styled-components";
 
 // LOCAL
 import { WN8Color } from "Styling/colors";
 import { clanPositions, commonStrings } from "Data/localizations";
+
+const Grid = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+`;
 
 const CustomToolTip = styled.div`
     min-width: 200px;
@@ -14,12 +20,6 @@ const CustomToolTip = styled.div`
     color: rgb(255, 255, 255);
     border-radius: 5px;
     padding: 5px;
-`;
-
-const Grid = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
 `;
 
 const CustomColor = styled.div`
@@ -51,24 +51,28 @@ const TooltipValue = styled.div`
 `;
 
 const Bubble = styled.div`
-    height: 500px;
+    height: 340px;
 `;
 
-const BubblePlotTooltip = ({ node, data }) => {
-    const { battles, x, y, winrate, username, role } = data;
-    let headerContent = `${username}`;
+const Tooltip = ({
+    data
+}) => {
+    const { longDate, y, winrate, battles, frags, dpg, tier } = data;
+
+    let headerContent = `${longDate}`;
     let gridItems = [
         { label: "Winrate", value: winrate + "%" },
-        { label: "WN8", value: x },
+        { label: "WN8", value: y },
+        { label: "Frags", value: frags },
+        { label: "DPG", value: dpg },
         { label: "Battles", value: battles },
-        { label: "Avg. Tier", value: y },
+        { label: "Avg. Tier", value: tier },
     ];
 
     return (
         <CustomToolTip>
-            <CustomColor color={WN8Color(x)}>
+            <CustomColor color={WN8Color(y)}>
                 {headerContent}
-                <TooltipLabel size={0.8}>{clanPositions[role]}</TooltipLabel>
             </CustomColor>
             <Grid>
                 {gridItems.map(({ label, labelProps, value }, i) => (
@@ -89,7 +93,7 @@ const CustomNode = ({ node, x, y, size, color, blendMode, onMouseEnter, onMouseM
         <g transform={`translate(${x},${y})`}>
             <circle
                 r={size}
-                fill={WN8Color(node.data.x)}
+                fill={WN8Color(node.data.y)}
                 style={{ mixBlendMode: blendMode }}
                 onMouseEnter={onMouseEnter}
                 onMouseMove={onMouseMove}
@@ -119,39 +123,44 @@ const theme = {
     },
 };
 
-export default function BubblePlot({ mode, data }) {
+
+export default function StatsByPeriodScatter({ data, mode }) {
+  console.log(data)
     return (
         <Bubble>
-            <ResponsiveScatterPlot
-                data={data}
+              <ResponsiveScatterPlot
                 theme={theme}
                 margin={{ top: 30, right: 30, bottom: 70, left: 90 }}
-                xScale={{ type: "linear", min: "auto", max: "auto" }}
-                yScale={{ type: "linear", min: "auto", max: "auto" }}
                 blendMode="multiply"
-                axisTop={null}
-                axisRight={null}
-                axisBottom={{
-                    orient: "bottom",
-                    tickSize: 5,
-                    tickPadding: 5,
-                    tickRotation: 0,
-                    legend: commonStrings.wn8,
-                    legendPosition: "middle",
-                    legendOffset: 46,
+                data={[
+                    {
+                        id: "StatsByPeriodScatter",
+                        data,
+                    },
+                ]}
+                xScale={{
+                    type: 'time',
+                    format: '%Y-%m-%d',
+                    precision: 'day',
                 }}
+                xFormat="time:%Y-%m-%d"
                 axisLeft={{
-                    orient: "left",
-                    tickSize: 5,
-                    tickPadding: 5,
-                    tickRotation: 0,
-                    legend: "Avg. Tier",
-                    legendPosition: "middle",
-                    legendOffset: -60,
+                  tickValues: 6,
+                  legend: "WN8",
+                  legendOffset: -55,
+                  legendPosition: "middle",
                 }}
-                tooltip={(node) => <BubblePlotTooltip node={node} data={node.node.data} />}
+                axisBottom={{
+                    format: '%b %d',
+                    tickValues: 15,
+                    tickRotation: -45,
+                    legend: "Date",
+                    legendOffset: 55,
+                    legendPosition: "middle",
+                }}
+                tooltip={(node) => <Tooltip data={node.node.data} />}
                 renderNode={CustomNode}
-                nodeSize={(node) => Math.sqrt(node.battles / Math.PI) * (mode === 0 ? 0.2 : 1.2)}
+                nodeSize={(node) => Math.sqrt(node.battles / Math.PI) * (mode === 0 ? 3 : 2.5)}
 
             />
         </Bubble>

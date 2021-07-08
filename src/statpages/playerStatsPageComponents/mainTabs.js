@@ -9,13 +9,14 @@ import MediaQuery from "react-responsive";
 // LOCAL
 import { TabPanel } from "../../components/customTabs";
 import TopStats from "./topStats";
-import TopTable from "./topTable.js";
+import TopTable from "./topTable";
+import StatsByPeriod from "./appbars/StatsByPeriod";
 import AllTankStats from "./allTankStats";
 import Charts from "./charts";
 import SessionsLogParent from "./sessions/sessionsLogParent";
 import HallOfFame from "./hallOfFame";
 import Treemap from "./treemap/treemap";
-import { NewIcon } from "Components";
+//import { NewIcon } from "Components";
 import { useURLState } from "Functions/hooks";
 import { worryrun } from "Assets/loaders";
 import { worryexcited } from "Assets/staticfrogs";
@@ -179,6 +180,7 @@ const tabs = [
         value: "main",
         body: [
             (props) => <TopTable data={props.graphData.overallStats} />,
+            (props) => <StatsByPeriod sessions={props.sessions} />,
             (props) => (
                 <AdsContainer>
                     <MediaQuery maxWidth={999}>
