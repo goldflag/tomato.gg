@@ -7,7 +7,6 @@ import { commonStrings } from "Data/localizations";
 import LocalizedStrings from "Functions/localizedStrings";
 import { CustomTabs, CustomTab } from "Components/customTabs";
 import Linegraph from "../charts/StatsByPeriodLine";
-import Scatterplot from "../charts/StatsByPeriodScatter";
 import { FilterButton, FilterButtonGroup } from "Components/tableFilters";
 
 const { formatString, ...strings } = LocalizedStrings({ en: { progress: "{0} PROGRESS" } });
@@ -34,20 +33,18 @@ const processData = (data) =>
         }))
         .reverse();
 
-const filters = {
-    Line: "Line",
-    Scatter: "Scatter",
-};
+
 
 export default function StatsByPeriod({ sessions: { sesweek, sesmonth } }) {
     const [data, setData] = useState(null);
     const [tab, setValue] = useState(0);
-    const [filterValue, setFilterValue] = useState("Line");
+    const [filterValue, setFilterValue] = useState(true);
 
     useEffect(() => {
-        const sesweekProcessed = processData(sesweek);
-        const sesmonthProcessed = processData(sesmonth);
-        setData({ sesweekProcessed, sesmonthProcessed });
+        const sesweekProcessed = processData(sesweek).slice(-52);
+        const sesmonthProcessed = processData(sesmonth).slice(-12);
+        const avgBattles = sesweekProcessed.reduce((acc, { battles }) => Number(acc) + Number(battles), 0) / sesweekProcessed.length;
+        setData({ sesweekProcessed, sesmonthProcessed, avgBattles });
     }, []);
 
     const handleChange = (event, newValue) => {
@@ -68,17 +65,11 @@ export default function StatsByPeriod({ sessions: { sesweek, sesmonth } }) {
             </CustomTabs>
             <div>
                 <FilterButtonGroup style={{ marginLeft: "10px" }}>
-                    {Object.entries(filters).map(([key, label]) => (
-                        <FilterButton key={key} selected={filterValue === key} onClick={() => setFilterValue(key)}>
-                            {label}
-                        </FilterButton>
-                    ))}
+                    <FilterButton key={"show battles"} selected={filterValue === true} onClick={() => setFilterValue(!filterValue)}>
+                        {"More Info"}
+                    </FilterButton>
                 </FilterButtonGroup>
-                {filterValue === "Line" ? (
-                    <Linegraph data={tab === 0 ? data.sesweekProcessed : data.sesmonthProcessed} />
-                ) : (
-                    <Scatterplot data={tab === 0 ? data.sesweekProcessed : data.sesmonthProcessed} mode={tab}/>
-                )}
+                <Linegraph data={tab === 0 ? data.sesweekProcessed : data.sesmonthProcessed} avgBattles={data.avgBattles} info={filterValue} />
             </div>
         </Container>
     ) : null;

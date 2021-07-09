@@ -2,12 +2,7 @@ import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 import styled from "styled-components";
 import { WN8Color } from "Styling/colors";
-
-const color = {
-    WR: "rgb(58, 124, 199)",
-    WN8: "rgb(92, 58, 199)",
-    DPG: "rgb(148, 36, 173)",
-};
+import { theme } from "Styling/nivoThemeLine";
 
 const Grid = styled.div`
     display: grid;
@@ -71,9 +66,7 @@ const Tooltip = ({
 
     return (
         <CustomToolTip>
-            <CustomColor color={WN8Color(y)}>
-                {headerContent}
-            </CustomColor>
+            <CustomColor color={WN8Color(y)}>{headerContent}</CustomColor>
             <Grid>
                 {gridItems.map(({ label, labelProps, value }, i) => (
                     <GridItem key={i}>
@@ -88,48 +81,47 @@ const Tooltip = ({
     );
 };
 
-export default function StatsByPeriodLine({ data }) {
+const CustomSymbol = ({ size, color, borderWidth, datum: { y, battles } }, info, avgBattles) => {
     return (
-        <div style={{ height: "340px" }}>
+        <g>
+            <circle
+                r={info ? Math.sqrt(battles / Math.PI) * (1 + (50 / avgBattles)) : size }
+                strokeWidth={borderWidth}
+                stroke={info ? "rgb(200, 200, 200)" : color}
+                fill={WN8Color(y)}
+                fillOpacity={info ? 1 : 0}
+            />
+        </g>
+    );
+};
+
+export default function StatsByPeriodLine({ data, info, avgBattles }) {
+    return (
+        <div style={{ height: "400px" }}>
             <ResponsiveLine
-                theme={{
-                    fontFamily: "Roboto Mono",
-                    textColor: "rgb(210, 210, 210)",
-                    grid: {
-                        line: {
-                            stroke: "rgba(200, 200, 200, 0.5)",
-                            strokeWidth: 1,
-                        },
+                theme={theme}
+                data={[
+                    {
+                        id: "StatsByPeriodLine",
+                        data,
                     },
-                    tooltip: {
-                        container: {
-                            backdropFilter: "blur( 7px )",
-                            background: "rgb(40, 40, 70, 0.8)",
-                            color: "rgb(255, 255, 255)",
-                        },
-                    },
+                ]}
+                curve="linear"
+                margin={{ top: 30, right: 30, bottom: 90, left: 80 }}
+                xScale={{
+                    type: "time",
+                    format: "%Y-%m-%d",
+                    useUTC: false,
+                    precision: "day",
                 }}
-                data={[{ 
-                    id: "StatsByPeriodLine",
-                    data 
-                }]}
-                curve="cardinal"
-                margin={{ top: 23, right: 30, bottom: 80, left: 75 }}
-                xScale={{ type: "point" }}
-                yScale={{ type: "linear", min: "auto", max: "auto", stacked: true, reverse: false }}
-                yFormat=" >-.0f"
-                axisTop={null}
-                axisRight={null}
-                axisBottom={{
-                    orient: "bottom",
-                    tickSize: 5,
-                    tickPadding: 10,
-                    legend: "Date",
-                    legendOffset: 60,
-                    legendPosition: "middle",
-                    tickRotation: -45,
-                    tickValues: 15,
+                yScale={{
+                    type: "linear",
+                    min: "auto",
+                    max: "auto",
+                    stacked: true,
+                    reverse: false,
                 }}
+                xFormat="time:%Y-%m-%d"
                 axisLeft={{
                     orient: "left",
                     tickSize: 5,
@@ -140,12 +132,25 @@ export default function StatsByPeriodLine({ data }) {
                     legendPosition: "middle",
                     tickValues: 6,
                 }}
-                colors={["rgb(58, 124, 199)"]}
-                pointSize={10}
-                pointBorderWidth={2}
-                pointLabelYOffset={-12}
+                axisBottom={{
+                    format: "%b %d",
+                    tickValues: 10,
+                    legend: "Date",
+                    legendOffset: 65,
+                    tickRotation: -45,
+                    legendPosition: "middle",
+                }}
+                enablePointLabel={info ? true : false}
+                pointSymbol={(props) => CustomSymbol(props, info, avgBattles)}
+                pointSize={5}
+                pointBorderWidth={1}
+                pointBorderColor={{
+                    from: "color",
+                    modifiers: [["darker", 0.3]],
+                }}
                 useMesh={true}
-                enableCrosshair={false}
+                enableSlices={false}
+                colors={["rgb(58, 124, 199)"]}
                 tooltip={(node) => <Tooltip node={node} />}
             />
         </div>
