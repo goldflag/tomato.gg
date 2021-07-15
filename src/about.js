@@ -235,7 +235,7 @@ const translators = {
         { name: "Red40x", url: "/stats/EU/red4ox=559710437" },
         { name: "Simon", url: "/stats/EU/sim51=505731151" },
     ],
-    es: [{ name: "ChiforimpulaMacaca", url: "/stats/NA/doogsday=1008311439" }, { name: "tootsieroll174" }],
+    es: [{ name: "DoogsDay", url: "/stats/NA/doogsday=1008311439" }, { name: "tootsieroll174" }],
     fr: [
         { name: "candymonster1953", url: "/stats/NA/candymonster1953=1038153624" },
         { name: "ForgottenShots", url: "/stats/EU/ForgottenShots=529569765" },
