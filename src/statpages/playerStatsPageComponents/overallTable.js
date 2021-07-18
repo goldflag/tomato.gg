@@ -65,7 +65,7 @@ const TableContainer = styled.div`
     backdrop-filter: blur(7px);
 `;
 
-function OverallTable({ data, setSelectedTank }) {
+function OverallTable({ data, setSelectedTank, setModalOpen }) {
     const columns = React.useMemo(
         () => [
             {
@@ -126,9 +126,19 @@ function OverallTable({ data, setSelectedTank }) {
             { Header: Capital(commonStrings.frags), accessor: "kpg", disableFilters: true },
             { Header: commonStrings.dmgRatio, accessor: "dmgratio", disableFilters: true },
             { Header: commonStrings.kd, accessor: "kd", disableFilters: true },
-            { Header: tableHeaders.survival, accessor: "survival", disableFilters: true },
+            { 
+                Cell: ({ value }) => `${value}%`,
+                Header: tableHeaders.survival, 
+                accessor: "survival", 
+                disableFilters: true 
+            },
             { Header: "XP", accessor: "xp", disableFilters: true },
-            { Header: "Hit%", accessor: "hitratio", disableFilters: true },
+            { 
+                Cell: ({ value }) => `${value}%`,
+                Header: "Hit%", 
+                accessor: "hitratio", 
+                disableFilters: true 
+            },
             { Header: "Armor", accessor: "armoreff", disableFilters: true },
             { Header: tableHeaders.spots, accessor: "spots", disableFilters: true },
             {
@@ -167,7 +177,6 @@ function OverallTable({ data, setSelectedTank }) {
         headerGroups,
         prepareRow,
         state,
-        visibleColumns,
         page,
         canPreviousPage,
         canNextPage,
@@ -255,7 +264,8 @@ function OverallTable({ data, setSelectedTank }) {
                             prepareRow(row);
                             return (
                                 <Tr {...row.getRowProps()} onClick={() => {
-                                    setSelectedTank(row.original)
+                                    setSelectedTank(row.original);
+                                    setModalOpen(true);
                                 }} >
                                     {row.cells.map((cell) =>
                                         cell.column.hidden ? null : (

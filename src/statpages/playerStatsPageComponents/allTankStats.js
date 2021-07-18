@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 // LOCAL
-import { TabPanel, CustomTabs, CustomTab } from "../../components/customTabs";
+import { TabPanel, CustomTabs, CustomTab } from "Components/customTabs";
 import OverallTable from "./overallTable";
 import PeriodBreakdown from "./periodBreakdown";
 import { commonStrings, formatString, UPPER } from "Data/localizations";
@@ -29,7 +29,7 @@ export default function AllTankStats(props) {
                 <CustomTab label={UPPER(formatString(commonStrings.nBattles, 1000))} />
             </CustomTabs>
             <TabPanel value={tab} index={0}>
-                <OverallTable data={props.overall} setSelectedTank={props.setSelectedTank}/>
+                <OverallTable data={props.overall} setSelectedTank={props.setSelectedTank} setModalOpen={props.setModalOpen}/>
             </TabPanel>
             {/* TODO: make these all render as one table with different data */}
             <TabPanel value={tab} index={1}>

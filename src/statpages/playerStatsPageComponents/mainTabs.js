@@ -193,9 +193,9 @@ const tabs = [
                 </AdsContainer>
             ),
             (props) => (
-                <AllTankStats overall={props.recentStats.overallStats.tankWN8} recents={props.recentStats.recents} setSelectedTank={props.setSelectedTank}/>
+                <AllTankStats overall={props.recentStats.overallStats.tankWN8} recents={props.recentStats.recents} setSelectedTank={props.setSelectedTank} setModalOpen={props.setModalOpen}/>
             ),
-            (props) => <TankModal props={props} setSelectedTank={props.setSelectedTank} selectedTank={props.selectedTank}/>,
+            (props) => <TankModal props={props} setSelectedTank={props.setSelectedTank} selectedTank={props.selectedTank} modalOpen={props.modalOpen} setModalOpen={props.setModalOpen}/>,
         ],
     },
     {
@@ -341,6 +341,7 @@ const LoadingHeader = ({ stage }) => {
 export default function MainTabs(props) {
     const [page, setPage] = useURLState("page", "main");
     const [selectedTank, setSelectedTank] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
     const windowSize = useWindowSize();
     return (
         <Container
@@ -377,7 +378,12 @@ export default function MainTabs(props) {
                     <TabPanel value={page} index={value} key={i}>
                         {body.map((Section, i) => (
                             <div style={{ marginTop: "1rem" }} key={i}>
-                                <Section {...props} selectedTank={selectedTank} setSelectedTank={setSelectedTank} />
+                                <Section {...props} 
+                                    selectedTank={selectedTank} 
+                                    setSelectedTank={setSelectedTank}
+                                    modalOpen={modalOpen}
+                                    setModalOpen={setModalOpen} 
+                                />
                             </div>
                         ))}
                     </TabPanel>

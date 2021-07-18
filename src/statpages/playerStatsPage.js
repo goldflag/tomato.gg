@@ -12,6 +12,7 @@ import GraphCalculator from "Functions/GraphCalculator";
 import MainTabs from "./playerStatsPageComponents/mainTabs";
 import { Loader } from "Components";
 import worrydetective from "Assets/staticfrogs/worrydetective.png";
+import { sleep } from "Src/utils";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -39,8 +40,6 @@ const { formatString, ...strings } = LocalizedStrings({
     tr: { notFound: "{0} oyuncusu bulunamadı", correct: "Oyuncu adı ve bölgenin doğru olduğuna emin olunuz." },
     zh: { notFound: "查無玩家 {0}", correct: "確認為正確的使用者及地區。" },
 });
-
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 class StatsPage extends Component {
     constructor(props) {

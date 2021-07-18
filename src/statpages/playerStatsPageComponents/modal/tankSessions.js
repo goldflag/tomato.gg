@@ -102,7 +102,7 @@ function TankSessions({ data }) {
 
     return (
         <>
-            <TableContainer>
+            <TableContainer style={{overflow: "None"}}>
                 <StyledTable pointer={true} {...getTableProps()}>
                     <thead>
                         {headerGroups.map((headerGroup) => (
