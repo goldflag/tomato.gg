@@ -66,6 +66,7 @@ class StatsPage extends Component {
             hofmainData: null,
             hofData: null,
             server: null,
+            id: null,
             stage: 0,
         };
     }
@@ -77,7 +78,7 @@ class StatsPage extends Component {
         if (id !== "FAIL") {
             this.searchStats(server, id).then((res) => {
                 const stage = this.state.loadedStats ? 3 : res ? 0 : 1;
-                this.setState({ loadedOther: true, loadedStats: this.state.loadedStats || !res, stage: stage });
+                this.setState({ id: id, loadedOther: true, loadedStats: this.state.loadedStats || !res, stage: stage });
             });
             this.searchRealTime(server, id).then(() => {
                 this.setState({ loadedStats: true, stage: 2 });
@@ -101,7 +102,7 @@ class StatsPage extends Component {
             if (validID) {
                 this.searchStats(server, id).then((res) => {
                     const stage = this.state.loadedStats ? 3 : res ? 0 : 1;
-                    this.setState({ loadedOther: true, loadedStats: this.state.loadedStats || !res, stage: stage });
+                    this.setState({ id: id, loadedOther: true, loadedStats: this.state.loadedStats || !res, stage: stage });
                 });
                 this.searchRealTime(server, id).then(() => {
                     this.setState({ loadedStats: true, stage: 2 });

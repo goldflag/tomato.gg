@@ -7,7 +7,7 @@ import OverallTable from "./overallTable";
 import PeriodBreakdown from "./periodBreakdown";
 import { commonStrings, formatString, UPPER } from "Data/localizations";
 
-export default function NationDist(props) {
+export default function AllTankStats(props) {
     const [tab, setTab] = useState(0);
 
     return (
@@ -29,7 +29,7 @@ export default function NationDist(props) {
                 <CustomTab label={UPPER(formatString(commonStrings.nBattles, 1000))} />
             </CustomTabs>
             <TabPanel value={tab} index={0}>
-                <OverallTable data={props.overall} />
+                <OverallTable data={props.overall} setSelectedTank={props.setSelectedTank}/>
             </TabPanel>
             {/* TODO: make these all render as one table with different data */}
             <TabPanel value={tab} index={1}>

@@ -1,5 +1,5 @@
 // NPM
-import React from "react";
+import React, { useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Tab, Tabs } from "@material-ui/core";
 import LocalizedStrings from "Functions/localizedStrings";
@@ -12,6 +12,7 @@ import TopStats from "./topStats";
 import TopTable from "./topTable";
 import StatsByPeriod from "./appbars/StatsByPeriod";
 import AllTankStats from "./allTankStats";
+import TankModal from "./tankModal";
 import Charts from "./charts";
 import SessionsLogParent from "./sessions/sessionsLogParent";
 import HallOfFame from "./hallOfFame";
@@ -192,8 +193,9 @@ const tabs = [
                 </AdsContainer>
             ),
             (props) => (
-                <AllTankStats overall={props.recentStats.overallStats.tankWN8} recents={props.recentStats.recents} />
+                <AllTankStats overall={props.recentStats.overallStats.tankWN8} recents={props.recentStats.recents} setSelectedTank={props.setSelectedTank}/>
             ),
+            (props) => <TankModal props={props} setSelectedTank={props.setSelectedTank} selectedTank={props.selectedTank}/>,
         ],
     },
     {
@@ -338,6 +340,7 @@ const LoadingHeader = ({ stage }) => {
 
 export default function MainTabs(props) {
     const [page, setPage] = useURLState("page", "main");
+    const [selectedTank, setSelectedTank] = useState(null);
     const windowSize = useWindowSize();
     return (
         <Container
@@ -374,7 +377,7 @@ export default function MainTabs(props) {
                     <TabPanel value={page} index={value} key={i}>
                         {body.map((Section, i) => (
                             <div style={{ marginTop: "1rem" }} key={i}>
-                                <Section {...props} />
+                                <Section {...props} selectedTank={selectedTank} setSelectedTank={setSelectedTank} />
                             </div>
                         ))}
                     </TabPanel>
@@ -382,12 +385,6 @@ export default function MainTabs(props) {
             </div>
             {windowSize.width > 1000 ? (
                 <div style={{ padding: "0 0 0 1rem" }}>
-                    {/* <AdSense.Google
-                        client={"ca-pub-1358649580645755"}
-                        slot={`4142533563`}
-                        
-                        format="responsive"
-                    /> */}
                     <Ad slot={"player_sidebar_1"} styles={"160x600"} />{" "}
                     <Ad slot={"player_sidebar_2"} styles={"160x600"} />
                 </div>
