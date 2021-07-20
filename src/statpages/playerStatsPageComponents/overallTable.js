@@ -36,7 +36,7 @@ const Tr = styled.tr`
     color: rgb(220, 220, 220);
     background-color: rgba(40, 40, 70, 0.5);
     cursor: pointer;
-    :nth-child(4n + 1) {
+    :nth-child(2n + 1) {
         background-color: rgba(50, 50, 80, 0.5);
     }
     :hover {

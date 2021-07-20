@@ -3,12 +3,14 @@ import styled from "styled-components";
 import { Icon } from "react-icons-kit";
 import { ic_close } from "react-icons-kit/md/ic_close";
 import { nationAdjConv, classDescConv, tierConv } from "Data/conversions";
-import TankSessions from "./modal/tankSessions";
-import Awards from "./modal/awards";
-import { Loader } from "Components";
-import { TabPanel, CustomTabs, CustomTab } from "Components/customTabs";
 import Scrollbar from "react-scrollbars-custom";
 import { WN8Color, WRColor } from "Styling/colors";
+import { SelectButton } from "Components/buttons";
+
+import TankSessions from "./modal/tankSessions";
+import Awards from "./modal/awards";
+import TankSessionsGraph from "./modal/tankSessionsGraph";
+import TankLeaderboards from "./modal/tankLeaderboards";
 
 const backend = process.env.REACT_APP_BACKEND;
 
@@ -16,9 +18,9 @@ const Modal = styled.div`
     position: fixed;
     top: 5rem;
     bottom: 1rem;
-    right: 1rem;
+    right: 12.8rem;
     transition-duration: 1s;
-    width: ${({ modalOpen }) => (modalOpen ? 720 : 0)}px;
+    width: ${({ modalOpen }) => (modalOpen ? 730 : 0)}px;
     overflow: ${({ modalOpen }) => (modalOpen ? "auto" : "hidden")};
     background: rgba(40, 40, 50, 0.8);
     backdrop-filter: blur(5px);
@@ -29,6 +31,7 @@ const ModalInner = styled.div`
     position: absolute;
     top: 0;
     padding: 1rem;
+    width: 100%;
 `;
 
 const TankInfoGrid = styled.div`
@@ -171,21 +174,20 @@ function TankOverallStats({ data }) {
   );
 }
 
+const states = ["Daily", "Weekly", "Monthly"];
+const radiuses = ["20px 0 0 20px", "0", "0 20px 20px 0"];
+
 function TankSessionsTabbar({ sessionStats: { day, week, month } }) {
-
-  const [value, setValue] = useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
+  const [value, setValue] = useState("Weekly");
   return (
     <>
-      <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
-        <CustomTab label={`DAILY`} />
-        <CustomTab label={`WEEKLY`} />
-        <CustomTab label={`MONTHLY`} />
-      </CustomTabs>
-      <TankSessions data={value === 0 ? day : value === 1 ? week : month} />
+      {states.map((state, i) => (
+        <SelectButton key={i} radius={radiuses[i]} selected={value === state} onClick={() => setValue(state)}>
+          {state}
+        </SelectButton>
+      ))}
+      <div style={{height: "1rem"}} />
+      <TankSessions data={value === "Daily" ? day : value === "Weekly" ? week : month} />
     </>
   );
 }
@@ -228,7 +230,13 @@ export default function TankModal({ props, selectedTank, modalOpen, setModalOpen
             </TankInfoGrid>
             <TankOverallStats data={selectedTank} />
             <Awards awards={selectedTank.awards} />
-            {sessionStats ? <TankSessionsTabbar sessionStats={sessionStats} /> : <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />}
+            {sessionStats?.day.length > 0 && sessionStats?.week.length > 0 && sessionStats?.month.length > 0 ? (
+              <>
+                <TankSessionsGraph sessionStats={sessionStats}/>
+                <TankSessionsTabbar sessionStats={sessionStats} />
+              </>
+              ) : null}
+              <TankLeaderboards id={selectedTank.id} server={props.server} />
           </ModalInner>
           <Close onClick={() => setModalOpen(false)} size={40} icon={ic_close} />
         </Scrollbar>

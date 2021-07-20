@@ -8,3 +8,4 @@ export * from "./tableFilters";
 export * from "./tableComponents";
 export * from "./fullPageTableWrapper";
 export * from "./infoPage";
+export * from "./tableTemplate";

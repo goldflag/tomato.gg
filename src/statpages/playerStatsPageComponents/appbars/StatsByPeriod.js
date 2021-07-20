@@ -33,8 +33,6 @@ const processData = (data) =>
         }))
         .reverse();
 
-
-
 export default function StatsByPeriod({ sessions: { sesweek, sesmonth } }) {
     const [data, setData] = useState(null);
     const [tab, setValue] = useState(0);
