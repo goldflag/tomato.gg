@@ -6,7 +6,6 @@ import Tooltip from "react-tooltip-lite";
 const AwardContainer = styled.div`
     font-family: Roboto Mono;
     font-size: 0.8rem;
-    padding: 0.5rem;
 `;
 
 const AwardBreakdown = styled.div`

@@ -81,23 +81,23 @@ const Tooltip = ({
     );
 };
 
-const CustomSymbol = ({ size, color, borderWidth, datum: { y, battles } }, info, avgBattles) => {
+const CustomSymbol = ({ borderWidth, datum: { y, battles } }, avgBattles) => {
     return (
         <g>
             <circle
-                r={info ? size : Math.sqrt(battles / Math.PI) * (0.5 + (25 / avgBattles)) }
+                r={Math.sqrt(battles / Math.PI) * (0.5 + (25 / avgBattles)) }
                 strokeWidth={borderWidth}
                 stroke={"rgb(200, 200, 200)"}
                 fill={WN8Color(y)}
-                fillOpacity={info ? 0 : 1}
+                fillOpacity={1}
             />
         </g>
     );
 };
 
-export default function StatsByPeriodLine({ data, info, avgBattles }) {
+export default function StatsByPeriodLine({ data, avgBattles }) {
     return (
-        <div style={{ height: "350px" }}>
+        <div style={{ height: "300px" }}>
             <ResponsiveLine
                 theme={theme}
                 data={[
@@ -107,7 +107,7 @@ export default function StatsByPeriodLine({ data, info, avgBattles }) {
                     },
                 ]}
                 curve="linear"
-                margin={{ top: 30, right: 30, bottom: 90, left: 80 }}
+                margin={{ top: 20, right: 20, bottom: 50, left: 60 }}
                 xScale={{
                     type: "time",
                     format: "%Y-%m-%d",
@@ -140,8 +140,7 @@ export default function StatsByPeriodLine({ data, info, avgBattles }) {
                     tickRotation: -45,
                     legendPosition: "middle",
                 }}
-                // enablePointLabel={info ? false : true}
-                pointSymbol={(props) => CustomSymbol(props, info, avgBattles)}
+                pointSymbol={(props) => CustomSymbol(props, avgBattles)}
                 pointSize={5}
                 pointBorderWidth={1}
                 pointBorderColor={{

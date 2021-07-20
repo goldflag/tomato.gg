@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { SelectButton } from "Components/buttons";
+import { SelectButton, SelectButtonContainer } from "Components/buttons";
 import TankGraph from "./tankGraph";
 
 const Container = styled.div`
@@ -39,12 +39,13 @@ export default function TankSessionsGraph({ sessionStats: { day, week, month } }
 
   return data ? (
     <Container>
+      <SelectButtonContainer>
       {states.map((state, i) => (
         <SelectButton key={i} radius={radiuses[i]} selected={value === state} onClick={() => setValue(state)}>
           {state}
         </SelectButton>
       ))}
-
+      </SelectButtonContainer>
       <TankGraph data={value === "Weekly" ? data.sesweekProcessed : data.sesmonthProcessed} avgBattles={data.avgBattles} />
     </Container>
   ) : null;

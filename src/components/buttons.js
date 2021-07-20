@@ -1,6 +1,10 @@
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 
+export const SelectButtonContainer = styled.div`
+    margin: 1rem 0rem;
+`;
+
 export const SelectButton = styled(Button)`
     font-family: "Roboto Mono" !important;
     font-size: 0.9rem !important;

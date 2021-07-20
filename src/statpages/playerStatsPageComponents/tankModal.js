@@ -2,10 +2,11 @@ import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { Icon } from "react-icons-kit";
 import { ic_close } from "react-icons-kit/md/ic_close";
-import { nationAdjConv, classDescConv, tierConv } from "Data/conversions";
+import { nationAdjConv, classDescConv, tierConv, serverConv } from "Data/conversions";
 import Scrollbar from "react-scrollbars-custom";
 import { WN8Color, WRColor } from "Styling/colors";
-import { SelectButton } from "Components/buttons";
+import { SelectButton, SelectButtonContainer } from "Components/buttons";
+import { MoEStars } from "Components";
 
 import TankSessions from "./modal/tankSessions";
 import Awards from "./modal/awards";
@@ -36,7 +37,8 @@ const ModalInner = styled.div`
 
 const TankInfoGrid = styled.div`
     display: grid;
-    grid-template-columns: 4fr 6fr;
+    grid-template-columns: repeat(3, 5fr);
+    margin-bottom: 1rem;
 `;
 
 const TankInfo = styled.div`
@@ -81,14 +83,14 @@ const Card = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1rem 0rem;
-    background-color: ${({color}) => color ?? 'rgba(100, 100, 150, 0.5)'};
+    padding: 0.8rem 0rem;
+    background-color: ${({ color }) => color ?? 'rgba(100, 100, 150, 0.5)'};
     border-radius: 5px;
     .label {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
     }
     .value {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
     }
 `;
 
@@ -99,6 +101,45 @@ const CardGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(${({ cols }) => cols}, 1fr);
 `;
+
+const SectionHeader = styled.div`
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-top: 1rem;
+`;
+
+const RingedSection = styled.div`
+    padding: 1rem;
+    margin: 1rem 0rem;
+    border: 1px double rgb(180, 180, 180);
+    border-radius: 20px;
+`;
+
+const MoEMasteryCardDiv = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0.5rem;
+    margin: 1rem;
+    font-weight: 300;
+    border: 1px double rgb(180, 180, 180);
+    background-color: rgb(100, 100, 100, 0.3);
+    border-radius: 20px;
+`;
+
+function MoEMasteryCard({ moe, mastery, nation }) {
+  return (
+    <MoEMasteryCardDiv>
+      {moe ? <>
+        <img src={`https://dav-static.worldoftanks.com//ptlwotus/wot/current/marksOnGun/67x71/${nation}_${moe}_mark${moe === 1 ? '' : 's'}.png`} style={{ maxHeight: "71px" }} alt={mastery} />
+
+      </> : null}
+      {mastery ? <>
+        <img src={require(`Assets/masteryIcons/${mastery}.png`)} style={{ maxHeight: "70px" }} alt={mastery} />
+      </> : null}
+    </MoEMasteryCardDiv>
+  );
+}
 
 function StatsCard({ label, value, color }) {
   return (
@@ -117,11 +158,6 @@ function TankOverallStats({ data }) {
       color: WN8Color(data.wn8),
     },
     {
-      label: "Winrate",
-      value: data.winrate + '%',
-      color: WRColor(data.winrate),
-    },
-    {
       label: "DPG",
       value: data.dpg,
     },
@@ -133,9 +169,6 @@ function TankOverallStats({ data }) {
       label: "Battles",
       value: data.battles,
     },
-  ];
-
-  const bottomStats = [
     {
       label: "Hit Ratio",
       value: data.hitratio + '%',
@@ -145,12 +178,17 @@ function TankOverallStats({ data }) {
       value: data.survival + '%',
     },
     {
-      label: "K/D Ratio",
-      value: data.kd,
+      label: "Winrate",
+      value: data.winrate + '%',
+      color: WRColor(data.winrate),
     },
     {
       label: "Damage Ratio",
       value: data.dmgratio,
+    },
+    {
+      label: "K/D Ratio",
+      value: data.kd,
     },
     {
       label: "Spots",
@@ -160,17 +198,18 @@ function TankOverallStats({ data }) {
       label: "Armor",
       value: data.armoreff,
     },
+    {
+      label: "XP",
+      value: data.xp,
+    },
   ];
 
   return (
-    <>
-      <CardGrid cols={5}>
+    <div style={{ marginBottom: "1rem" }}>
+      <CardGrid cols={6}>
         {topStats.map((props) => <StatsCard key={props.label} {...props} />)}
       </CardGrid>
-      <CardGrid cols={6}>
-        {bottomStats.map((props) => <StatsCard key={props.label} {...props} />)}
-      </CardGrid>
-    </>
+    </div>
   );
 }
 
@@ -180,15 +219,16 @@ const radiuses = ["20px 0 0 20px", "0", "0 20px 20px 0"];
 function TankSessionsTabbar({ sessionStats: { day, week, month } }) {
   const [value, setValue] = useState("Weekly");
   return (
-    <>
-      {states.map((state, i) => (
-        <SelectButton key={i} radius={radiuses[i]} selected={value === state} onClick={() => setValue(state)}>
-          {state}
-        </SelectButton>
-      ))}
-      <div style={{height: "1rem"}} />
+    <div style={{ marginBottom: '1rem' }}>
+      <SelectButtonContainer>
+        {states.map((state, i) => (
+          <SelectButton key={i} radius={radiuses[i]} selected={value === state} onClick={() => setValue(state)}>
+            {state}
+          </SelectButton>
+        ))}
+      </SelectButtonContainer>
       <TankSessions data={value === "Daily" ? day : value === "Weekly" ? week : month} />
-    </>
+    </div>
   );
 }
 
@@ -226,17 +266,26 @@ export default function TankModal({ props, selectedTank, modalOpen, setModalOpen
                   )}
                 </div>
               </TankInfo>
-              <img style={{ width: "200px" }} src={selectedTank.bigImage} alt={selectedTank.name} />
+              <img style={{ width: "220px" }} src={selectedTank.bigImage} alt={selectedTank.name} />
+              <MoEMasteryCard moe={selectedTank.moe} mastery={selectedTank.mastery} nation={selectedTank.nation} />
             </TankInfoGrid>
             <TankOverallStats data={selectedTank} />
-            <Awards awards={selectedTank.awards} />
+            <SectionHeader>Awards</SectionHeader>
+            {/* <RingedSection> */}
+              <Awards awards={selectedTank.awards} />
+            {/* </RingedSection> */}
             {sessionStats?.day.length > 0 && sessionStats?.week.length > 0 && sessionStats?.month.length > 0 ? (
               <>
-                <TankSessionsGraph sessionStats={sessionStats}/>
+                <SectionHeader>Stats Graph</SectionHeader>
+                {/* <RingedSection> */}
+                  <TankSessionsGraph sessionStats={sessionStats} />
+                {/* </RingedSection> */}
+                <SectionHeader>Period Stats</SectionHeader>
                 <TankSessionsTabbar sessionStats={sessionStats} />
               </>
-              ) : null}
-              <TankLeaderboards id={selectedTank.id} server={props.server} />
+            ) : null}
+            <SectionHeader>{serverConv[props.server]} Top Players | 60 Days | Min 25 Battles </SectionHeader>
+            <TankLeaderboards id={selectedTank.id} server={props.server} />
           </ModalInner>
           <Close onClick={() => setModalOpen(false)} size={40} icon={ic_close} />
         </Scrollbar>

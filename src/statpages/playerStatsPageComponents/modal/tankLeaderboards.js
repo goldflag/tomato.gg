@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { TableTemplate } from "Components";
 import { tableHeaders } from "Components/tableComponents";
 import { Capital, commonStrings } from "Data/localizations";
-import { SelectButton } from "Components/buttons";
+import { SelectButton, SelectButtonContainer } from "Components/buttons";
 import { serverConv } from "Data/conversions";
 
 const backend = process.env.REACT_APP_BACKEND;
@@ -79,7 +79,6 @@ export default function TankLeaderboards({ id, server }) {
     fetch(`${backend}/api/tankpage/${id}/${server}/${type}/0`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.leaderboard)
         data.leaderboard.forEach((player) => {
           player.url = `/stats/${serverConv[server]}/${player.username}=${player.player_id}`;
         });
@@ -91,12 +90,13 @@ export default function TankLeaderboards({ id, server }) {
     <>
       {data ?
         <>
-          {states.map((state, i) => (
-            <SelectButton key={i} radius={radiuses[i]} selected={type === state} onClick={() => setType(state)}>
-              {state}
-            </SelectButton>
-          ))}
-          <div style={{ height: "1rem" }} />
+          <SelectButtonContainer>
+            {states.map((state, i) => (
+              <SelectButton key={i} radius={radiuses[i]} selected={type === state} onClick={() => setType(state)}>
+                {state}
+              </SelectButton>
+            ))}
+          </SelectButtonContainer>
           <TableTemplate data={data.leaderboard} initialSortCol={type} cols={cols} type={type} numRows={10} />
         </> : null}
     </>

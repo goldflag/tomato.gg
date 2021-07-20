@@ -142,7 +142,7 @@ function OverallTable({ data, setSelectedTank, setModalOpen }) {
             { Header: "Armor", accessor: "armoreff", disableFilters: true },
             { Header: tableHeaders.spots, accessor: "spots", disableFilters: true },
             {
-                Cell: ({ value }) => <MoEStars marks={value} />,
+                Cell: ({ value }) => <MoEStars marks={value} size={"small"}/>,
                 Header: "MOE",
                 accessor: "moe",
                 Filter: MoEFilter,
