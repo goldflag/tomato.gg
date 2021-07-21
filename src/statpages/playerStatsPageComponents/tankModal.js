@@ -24,7 +24,7 @@ const Modal = styled.div`
   bottom: 1rem;
   right: 12.8rem;
   transition-duration: 0.6s;
-  width: 730px;
+  width: 740px;
   background: rgba(40, 40, 50, 0.8);
   backdrop-filter: blur(5px);
   box-shadow: 0px 0px 10px rgb(10, 10, 10);

@@ -31,7 +31,7 @@ const cols = [
     Cell: ({ value }) => (value ? value : "-"),
   },
   {
-    Header: commonStrings.frags,
+    Header: Capital(commonStrings.frags),
     accessor: "frags",
     Cell: ({ value }) => (value ? value : "-"),
   },

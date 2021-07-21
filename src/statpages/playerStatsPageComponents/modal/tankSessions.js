@@ -30,7 +30,7 @@ const cols = [
         accessor: "dpg",
     },
     {
-        Header: commonStrings.frags,
+        Header: Capital(commonStrings.frags),
         accessor: "frags",
     },
     {
