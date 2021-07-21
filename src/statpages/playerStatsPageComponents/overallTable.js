@@ -1,7 +1,5 @@
 import React from "react";
 import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
-import { Collapse } from "@material-ui/core";
-
 import { MoEStars, Pagination } from "Components";
 import {
     ClassFilter,
@@ -24,112 +22,8 @@ import {
     TierCell,
 } from "Components/tableComponents";
 import styled from "styled-components";
-import Tooltip from "react-tooltip-lite";
-import awardsData from "Data/awardsinfo.json";
 import cellStyle from "Functions/cellStyle";
 import { Capital, commonStrings } from "Data/localizations";
-
-const AwardContainer = styled.div`
-    padding: 0.5rem;
-`;
-
-const AwardBreakdown = styled.div`
-    display: grid;
-    padding: 0.5rem 0rem;
-    grid-template-columns: 55px 55px 55px 55px 55px 55px 55px 55px 55px 55px;
-`;
-
-const Awards = ({ awards }) => {
-    const NumberBox = (val) => {
-        // TODO?: replace this with https://material-ui.com/components/badges/#dot-badge
-        let width;
-        if (val < 10) width = "15px";
-        else if (val < 100) width = "20px";
-        else if (val < 1000) width = "25px";
-        else width = "30px";
-        return (
-            <div
-                style={{
-                    width: width,
-                    height: "16px",
-                    backgroundColor: "rgb(199, 38, 81)",
-                    color: "white",
-                    position: "absolute",
-                    bottom: "5px",
-                    left: "30px",
-                    fontSize: "0.6rem",
-                    border: "1px solid black",
-                    borderRadius: "5px",
-                    textAlign: "center",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    userSelect: "none",
-                }}
-            >
-                {val}
-            </div>
-        );
-    };
-
-    const RenderTooltip = (award) => (
-        <div
-            style={{
-                position: "absolute",
-                left: "-250px",
-                top: "40px",
-                backgroundColor: "rgb(40, 40, 40)",
-                padding: "0.5rem",
-                borderRadius: "5px",
-            }}
-        >
-            <div
-                style={{
-                    lineHeight: "1.5rem",
-                    color: "rgb(255, 255, 255)",
-                    fontSize: "0.9rem",
-                }}
-            >
-                {awardsData[award].name}
-            </div>
-            <div
-                style={{
-                    width: "200px",
-                    color: "rgb(200, 200, 200)",
-                    fontSize: "0.7rem",
-                }}
-            >
-                {awardsData[award].desc}
-            </div>
-        </div>
-    );
-
-    const RenderAwards = (awards, type) =>
-        Object.entries(awards).map(([awardName, count], i) => {
-            return count > 0 ? (
-                <Tooltip key={i} arrow={false} direction="right" content={RenderTooltip(awardName)}>
-                    {NumberBox(count)}
-                    <img
-                        style={{ width: "50px" }}
-                        src={require(`Assets/awards/${type}/${awardName}.png`)}
-                        alt={awardName}
-                    />
-                </Tooltip>
-            ) : null;
-        });
-
-    const types = { battleHeroes: "Battle Heroes", main: "Honorary Ranks", epic: "Epic Medals" };
-    return (
-        <AwardContainer>
-            {Object.entries(types).map(([key, label]) => (
-                <React.Fragment key={key}>
-                    {label}
-                    <AwardBreakdown>{RenderAwards(awards[key], key)}</AwardBreakdown>
-                </React.Fragment>
-            ))}
-        </AwardContainer>
-    );
-};
 
 const Table = styled.table`
     border-spacing: 0;
@@ -141,7 +35,8 @@ const Tr = styled.tr`
     white-space: nowrap;
     color: rgb(220, 220, 220);
     background-color: rgba(40, 40, 70, 0.5);
-    :nth-child(4n + 1) {
+    cursor: pointer;
+    :nth-child(2n + 1) {
         background-color: rgba(50, 50, 80, 0.5);
     }
     :hover {
@@ -170,16 +65,7 @@ const TableContainer = styled.div`
     backdrop-filter: blur(7px);
 `;
 
-const SubTr = styled.tr`
-    color: rgb(220, 220, 220);
-    background-color: rgba(40, 40, 70, 0.25);
-`;
-
-const SubTd = styled.td`
-    padding: 0;
-`;
-
-function OverallTable({ data }) {
+function OverallTable({ data, setSelectedTank, setModalOpen }) {
     const columns = React.useMemo(
         () => [
             {
@@ -240,13 +126,23 @@ function OverallTable({ data }) {
             { Header: Capital(commonStrings.frags), accessor: "kpg", disableFilters: true },
             { Header: commonStrings.dmgRatio, accessor: "dmgratio", disableFilters: true },
             { Header: commonStrings.kd, accessor: "kd", disableFilters: true },
-            { Header: tableHeaders.survival, accessor: "survival", disableFilters: true },
+            { 
+                Cell: ({ value }) => `${value}%`,
+                Header: tableHeaders.survival, 
+                accessor: "survival", 
+                disableFilters: true 
+            },
             { Header: "XP", accessor: "xp", disableFilters: true },
-            { Header: "Hit%", accessor: "hitratio", disableFilters: true },
+            { 
+                Cell: ({ value }) => `${value}%`,
+                Header: "Hit%", 
+                accessor: "hitratio", 
+                disableFilters: true 
+            },
             { Header: "Armor", accessor: "armoreff", disableFilters: true },
             { Header: tableHeaders.spots, accessor: "spots", disableFilters: true },
             {
-                Cell: ({ value }) => <MoEStars marks={value} />,
+                Cell: ({ value }) => <MoEStars marks={value} size={"small"}/>,
                 Header: "MOE",
                 accessor: "moe",
                 Filter: MoEFilter,
@@ -255,33 +151,32 @@ function OverallTable({ data }) {
             {
                 Cell: ({ value }) => (
                     <img src={require(`Assets/masteryIcons/${value}.png`)} style={{ maxHeight: "23px" }} alt={value} />
-                    ),
-                    Header: "Mast", // TODO: iconize this
-                    accessor: "mastery",
-                    Filter: MasteryFilter,
-                    filter: arrayFilterFn,
-                },
-                {
-                    Header: "",
-                    accessor: "isPrem",
-                    Filter: PremFilter,
-                    filter: arrayFilterFn,
-                    hidden: true,
-                },
-            ],
-            []
-        );
-        
+                ),
+                Header: "Mast", // TODO: iconize this
+                accessor: "mastery",
+                Filter: MasteryFilter,
+                filter: arrayFilterFn,
+            },
+            {
+                Header: "",
+                accessor: "isPrem",
+                Filter: PremFilter,
+                filter: arrayFilterFn,
+                hidden: true,
+            },
+        ],
+        []
+    );
+
     const filterOrder = [3, 2, 1, 16, 17, 18];
     columns.forEach((column) => column.sortDescFirst = true)
-            
+
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
         prepareRow,
         state,
-        visibleColumns,
         page,
         canPreviousPage,
         canNextPage,
@@ -305,7 +200,7 @@ function OverallTable({ data }) {
                     {
                         id: "battles",
                         desc: true,
-                        
+
                     },
                 ],
             },
@@ -368,32 +263,26 @@ function OverallTable({ data }) {
                         {page.map((row, i) => {
                             prepareRow(row);
                             return (
-                                <React.Fragment key={i}>
-                                    <Tr {...row.getToggleRowExpandedProps({})}>
-                                        {row.cells.map((cell) =>
-                                            cell.column.hidden ? null : (
-                                                <Td
-                                                    {...cell.getCellProps({
-                                                        style: cellStyle(
-                                                            cell.column.isSorted,
-                                                            cell.column.id,
-                                                            cell.value
-                                                        ),
-                                                    })}
-                                                >
-                                                    {cell.render("Cell")}
-                                                </Td>
-                                            )
-                                        )}
-                                    </Tr>
-                                    <SubTr style={{ height: row.isExpanded || "0px" }}>
-                                        <SubTd colSpan={visibleColumns.length}>
-                                            <Collapse in={row.isExpanded}>
-                                                <Awards {...row.original} />
-                                            </Collapse>
-                                        </SubTd>
-                                    </SubTr>
-                                </React.Fragment>
+                                <Tr {...row.getRowProps()} onClick={() => {
+                                    setSelectedTank(row.original);
+                                    setModalOpen(true);
+                                }} >
+                                    {row.cells.map((cell) =>
+                                        cell.column.hidden ? null : (
+                                            <Td
+                                                {...cell.getCellProps({
+                                                    style: cellStyle(
+                                                        cell.column.isSorted,
+                                                        cell.column.id,
+                                                        cell.value
+                                                    ),
+                                                })}
+                                            >
+                                                {cell.render("Cell")}
+                                            </Td>
+                                        )
+                                    )}
+                                </Tr>
                             );
                         })}
                     </tbody>

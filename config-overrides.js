@@ -4,6 +4,7 @@ module.exports = {
     webpack: function (config, env) {
         config.resolve = {
             alias: {
+                Src: path.resolve(__dirname, "src/"),
                 Ads: path.resolve(__dirname, "src/ads/"),
                 Assets: path.resolve(__dirname, "src/assets/"),
                 Components: path.resolve(__dirname, "src/components/"),

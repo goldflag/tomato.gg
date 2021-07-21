@@ -9,7 +9,7 @@ import MediaQuery from "react-responsive";
 // LOCAL
 import { Loader, FullPageTableWrapper } from "Components";
 import { ServerContext } from "Context";
-import RecentLeaderboard from "./tankPageComponents/recentLeaderboard";
+import TankRecentsLeaderboard from "./tankPageComponents/tankRecentsLeaderboard";
 import { ServerPagination } from "Components";
 import { useURLState } from "Functions/hooks";
 import { FilterButtonGroup, FilterButton } from "Components/tableFilters";
@@ -99,7 +99,7 @@ const filters = {
     winrate: Capital(commonStrings.wr),
 };
 
-export default function TankPage(props) {
+export default function TankPage() {
     useEffect(() => {
         ReactGA.initialize(trackingId);
         ReactGA.pageview("/tank-page");
@@ -172,7 +172,7 @@ export default function TankPage(props) {
                         ))}
                     </FilterButtonGroup>
                 </TableLabel>
-                <RecentLeaderboard data={data.leaderboard} type={type} setType={setType} highlightUserID={userID} />
+                <TankRecentsLeaderboard data={data.leaderboard} type={type} highlightUserID={userID} />
                 <ServerPagination
                     page={actualPage}
                     numPages={numPages}

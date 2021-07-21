@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { StyledTable, TableContainer, tableHeaders } from "Components/tableComponents";
 import setColor from "Functions/cellStyle";
 import { Capital, commonStrings } from "Data/localizations";
-export default function RecentsLeaderboard({ data, type, highlightUserID }) {
+export default function TankRecentsLeaderboard({ data, type, highlightUserID, numRows }) {
     function headerStyle(header) {
         if (header.id === type) {
             return {
@@ -81,7 +81,7 @@ export default function RecentsLeaderboard({ data, type, highlightUserID }) {
             data,
             initialState: {
                 pageIndex: 0,
-                pageSize: 100,
+                pageSize: numRows ?? 100,
             },
         },
         usePagination

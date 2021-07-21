@@ -12,6 +12,7 @@ import GraphCalculator from "Functions/GraphCalculator";
 import MainTabs from "./playerStatsPageComponents/mainTabs";
 import { Loader } from "Components";
 import worrydetective from "Assets/staticfrogs/worrydetective.png";
+import { sleep } from "Src/utils";
 
 const trackingId = process.env.REACT_APP_GA;
 const backend = process.env.REACT_APP_BACKEND;
@@ -40,8 +41,6 @@ const { formatString, ...strings } = LocalizedStrings({
     zh: { notFound: "查無玩家 {0}", correct: "確認為正確的使用者及地區。" },
 });
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
 class StatsPage extends Component {
     constructor(props) {
         super(props);
@@ -66,6 +65,7 @@ class StatsPage extends Component {
             hofmainData: null,
             hofData: null,
             server: null,
+            id: null,
             stage: 0,
         };
     }
@@ -77,7 +77,7 @@ class StatsPage extends Component {
         if (id !== "FAIL") {
             this.searchStats(server, id).then((res) => {
                 const stage = this.state.loadedStats ? 3 : res ? 0 : 1;
-                this.setState({ loadedOther: true, loadedStats: this.state.loadedStats || !res, stage: stage });
+                this.setState({ id: id, loadedOther: true, loadedStats: this.state.loadedStats || !res, stage: stage });
             });
             this.searchRealTime(server, id).then(() => {
                 this.setState({ loadedStats: true, stage: 2 });
@@ -101,7 +101,7 @@ class StatsPage extends Component {
             if (validID) {
                 this.searchStats(server, id).then((res) => {
                     const stage = this.state.loadedStats ? 3 : res ? 0 : 1;
-                    this.setState({ loadedOther: true, loadedStats: this.state.loadedStats || !res, stage: stage });
+                    this.setState({ id: id, loadedOther: true, loadedStats: this.state.loadedStats || !res, stage: stage });
                 });
                 this.searchRealTime(server, id).then(() => {
                     this.setState({ loadedStats: true, stage: 2 });
