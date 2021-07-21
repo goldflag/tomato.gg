@@ -4,6 +4,7 @@ import awardsData from "Data/awardsinfo.json";
 import Tooltip from "react-tooltip-lite";
 
 const AwardContainer = styled.div`
+    margin-top: 1rem;
     font-family: Roboto Mono;
     font-size: 0.8rem;
 `;

@@ -49,3 +49,34 @@ export const CustomTab = withStyles((theme) => ({
     },
     selected: {},
 }))((props) => <Tab disableRipple {...props} />);
+
+export const CustomTabsV2 = withStyles({
+    root: {
+        elevation: 10,
+        borderBottom: "1px solid rgb(200, 200, 200)",
+    },
+    indicator: {
+        display: "flex",
+        justifyContent: "center",
+        backgroundColor: "rgb(200, 200, 200)",
+    },
+})(Tabs);
+
+export const CustomTabV2 = withStyles((t) => ({
+    root: {
+        textTransform: "none",
+        fontWeight: 600,
+        fontSize: "0.9rem",
+        marginRight: t.spacing(4),
+        fontFamily: "Segoe UI, Futura",
+        color: "rgb(240, 240, 240)",
+        "&:hover": {
+            color: "rgb(142, 147, 245)",
+            opacity: 1,
+        },
+        "&$selected": {
+            color: "rgb(191, 185, 250)",
+        },
+    },
+    selected: {},
+}))((props) => <Tab disableRipple {...props} />);

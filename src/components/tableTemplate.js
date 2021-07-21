@@ -1,13 +1,13 @@
 import React from "react";
 import { useTable, usePagination, useSortBy, useFilters, useExpanded } from "react-table";
-import { StyledTable, TableContainer, tableHeaders } from "Components/tableComponents";
+import { StyledTable, TableContainer } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
 import { Pagination } from "Components";
 
 export const TableTemplate = ({ data, cols, initialSortCol, numRows = 10, pageSizeOptions = [10, 20] }) => {
   const columns = React.useMemo(() => {
       return cols;
-  }, []);
+  }, [cols]);
 
   columns.forEach((column) => column.sortDescFirst = true);
 
@@ -110,5 +110,4 @@ export const TableTemplate = ({ data, cols, initialSortCol, numRows = 10, pageSi
           />
       </>
   );
-
 }

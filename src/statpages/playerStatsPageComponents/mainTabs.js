@@ -1,13 +1,11 @@
 // NPM
 import React, { useState } from "react";
-import { withStyles } from "@material-ui/core/styles";
-import { Tab, Tabs } from "@material-ui/core";
 import LocalizedStrings from "Functions/localizedStrings";
 import styled from "styled-components";
 import MediaQuery from "react-responsive";
 
 // LOCAL
-import { TabPanel } from "../../components/customTabs";
+import { TabPanel, CustomTabsV2, CustomTabV2 } from "Components/customTabs";
 import TopStats from "./topStats";
 import TopTable from "./topTable";
 import StatsByPeriod from "./appbars/StatsByPeriod";
@@ -23,37 +21,6 @@ import { worryrun } from "Assets/loaders";
 import { worryexcited } from "Assets/staticfrogs";
 import Ad from "Ads/ads";
 import { useWindowSize } from "Functions/hooks";
-
-const CustomTabs = withStyles({
-    root: {
-        elevation: 10,
-        borderBottom: "1px solid rgb(200, 200, 200)",
-    },
-    indicator: {
-        display: "flex",
-        justifyContent: "center",
-        backgroundColor: "rgb(200, 200, 200)",
-    },
-})(Tabs);
-
-const CustomTab = withStyles((t) => ({
-    root: {
-        textTransform: "none",
-        fontWeight: 600,
-        fontSize: "0.9rem",
-        marginRight: t.spacing(4),
-        fontFamily: "Segoe UI, Futura",
-        color: "rgb(240, 240, 240)",
-        "&:hover": {
-            color: "rgb(142, 147, 245)",
-            opacity: 1,
-        },
-        "&$selected": {
-            color: "rgb(191, 185, 250)",
-        },
-    },
-    selected: {},
-}))((props) => <Tab disableRipple {...props} />);
 
 const strings = LocalizedStrings({
     en: {
@@ -360,7 +327,7 @@ export default function MainTabs(props) {
                     lastPlayedTime={props.lastPlayedTime}
                     server={props.server}
                 />
-                <CustomTabs
+                <CustomTabsV2
                     value={page}
                     indicatorColor="primary"
                     styles={{ backgroundColor: "rgb(76, 90, 166)" }}
@@ -371,9 +338,9 @@ export default function MainTabs(props) {
                 >
                     {tabs.map(({ label, icon, value }, i) =>
                         // prettier-ignore
-                        <CustomTab label={<div>{label} {icon}</div>} value={value} key={i} />
+                        <CustomTabV2 label={<div>{label} {icon}</div>} value={value} key={i} />
                     )}
-                </CustomTabs>
+                </CustomTabsV2>
                 {tabs.map(({ body, value }, i) => (
                     <TabPanel value={page} index={value} key={i}>
                         {body.map((Section, i) => (

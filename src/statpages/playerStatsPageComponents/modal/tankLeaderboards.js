@@ -70,22 +70,7 @@ const cols = [
 const states = ["dpg", "wn8", "frags", "winrate"];
 const radiuses = ["20px 0 0 20px", "0", "0", "0 20px 20px 0"];
 
-export default function TankLeaderboards({ id, server }) {
-
-  const [data, setData] = useState();
-  const [type, setType] = useState("dpg");
-
-  useEffect(() => {
-    fetch(`${backend}/api/tankpage/${id}/${server}/${type}/0`)
-      .then((res) => res.json())
-      .then((data) => {
-        data.leaderboard.forEach((player) => {
-          player.url = `/stats/${serverConv[server]}/${player.username}=${player.player_id}`;
-        });
-        setData(data);
-      });
-  }, [server, type, id]);
-
+export default function TankLeaderboards({ data, type, setType }) {
   return (
     <>
       {data ?
@@ -97,7 +82,7 @@ export default function TankLeaderboards({ id, server }) {
               </SelectButton>
             ))}
           </SelectButtonContainer>
-          <TableTemplate data={data.leaderboard} initialSortCol={type} cols={cols} type={type} numRows={10} />
+          <TableTemplate data={data.leaderboard} initialSortCol={type} cols={cols} numRows={10} />
         </> : null}
     </>
   );

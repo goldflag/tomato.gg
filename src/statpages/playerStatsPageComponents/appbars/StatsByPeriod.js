@@ -3,7 +3,6 @@ import styled from "styled-components";
 import React, { useState, useEffect } from "react";
 
 // LOCAL
-import { commonStrings } from "Data/localizations";
 import LocalizedStrings from "Functions/localizedStrings";
 import { CustomTabs, CustomTab } from "Components/customTabs";
 import Linegraph from "../charts/StatsByPeriodLine";
@@ -43,7 +42,7 @@ export default function StatsByPeriod({ sessions: { sesweek, sesmonth } }) {
         const sesmonthProcessed = processData(sesmonth).slice(-12);
         const avgBattles = sesweekProcessed.reduce((acc, { battles }) => Number(acc) + Number(battles), 0) / sesweekProcessed.length;
         setData({ sesweekProcessed, sesmonthProcessed, avgBattles });
-    }, []);
+    }, [sesweek, sesmonth]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

@@ -36,12 +36,12 @@ const cols = [
     {
         Header: commonStrings.kd,
         accessor: "kd",
-        Cell: ({ value }) => value ? value : "Inf",
+        Cell: ({ value }) => value ? value : "-",
     },
     {
         Header: commonStrings.dmgRatio,
         accessor: "dmgratio",
-        Cell: ({ value }) => value ? value : "Inf",
+        Cell: ({ value }) => value ? value : "-",
     },
     {
         Header: tableHeaders.spots,
