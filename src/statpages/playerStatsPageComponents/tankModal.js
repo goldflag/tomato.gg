@@ -17,13 +17,14 @@ import TankRecentStats from "./modal/tankRecentStats";
 const backend = process.env.REACT_APP_BACKEND;
 
 const Modal = styled.div`
+  opacity: ${({ modalOpen }) => (modalOpen ? 1 : 0)};
+  visibility: ${({ modalOpen }) => (modalOpen ? null : 'hidden')};
   position: fixed;
   top: 5rem;
   bottom: 1rem;
   right: 12.8rem;
-  transition-duration: 1s;
-  width: ${({ modalOpen }) => (modalOpen ? 730 : 0)}px;
-  overflow: ${({ modalOpen }) => (modalOpen ? "auto" : "hidden")};
+  transition-duration: 0.6s;
+  width: 730px;
   background: rgba(40, 40, 50, 0.8);
   backdrop-filter: blur(5px);
   box-shadow: 0px 0px 10px rgb(10, 10, 10);
@@ -241,23 +242,21 @@ function TankSessionsTabbar({ sessionStats: { day, week, month } }) {
 export default function TankModal({ props, selectedTank, modalOpen, setModalOpen }) {
   const [sessionStats, setSessionStats] = useState();
   const [recentStats, setRecentStats] = useState();
-
   const [leaderboardStats, setLeaderboardStats] = useState();
   const [leaderBoardType, setLeaderBoardType] = useState("dpg");
-
   const [page, setPage] = useState("main");
 
   console.log(selectedTank);
 
   const fetchStats = useCallback(async () => {
-    Promise.all([
-      fetch(`${backend}/api/playertanksessions/${props.server}/${props.id}/${selectedTank.id}`),
-      fetch(`${backend}/api/recenttank/${props.server}/${selectedTank.id}/60`),
-      fetch(`${backend}/api/playertankrecents/${props.server}/${props.id}/${selectedTank.id}`),
-    ])
-      .then(([sessionData, serverData, playerData]) =>
-        Promise.all([sessionData.json(), serverData.json(), playerData.json()])
-      )
+    Promise.all(
+      [
+        `${backend}/api/playertanksessions/${props.server}/${props.id}/${selectedTank.id}`,
+        `${backend}/api/recenttank/${props.server}/${selectedTank.id}/60`,
+        `${backend}/api/playertankrecents/${props.server}/${props.id}/${selectedTank.id}`,
+      ].map((url) => fetch(url))
+    )
+      .then((arr) => Promise.all(arr.map((res) => res.json())))
       .then(([sessionData, serverData, playerData]) => {
         serverData["period"] = "Server";
         setRecentStats([serverData, ...playerData.reverse()]);

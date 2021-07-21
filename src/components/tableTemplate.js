@@ -4,7 +4,7 @@ import { StyledTable, TableContainer } from "Components/tableComponents";
 import cellStyle from "Functions/cellStyle";
 import { Pagination } from "Components";
 
-export const TableTemplate = ({ data, cols, initialSortCol, numRows = 10, pageSizeOptions = [10, 20] }) => {
+export const TableTemplate = ({ data, cols, initialSortCol, numRows = 10, pageSizeOptions = [10, 20], pointer = false }) => {
   const columns = React.useMemo(() => {
       return cols;
   }, [cols]);
@@ -50,7 +50,7 @@ export const TableTemplate = ({ data, cols, initialSortCol, numRows = 10, pageSi
   return (
       <>
           <TableContainer style={{overflow: "None"}}>
-              <StyledTable pointer={true} {...getTableProps()}>
+              <StyledTable pointer={pointer} {...getTableProps()}>
                   <thead>
                       {headerGroups.map((headerGroup) => (
                           <tr {...headerGroup.getHeaderGroupProps()}>
