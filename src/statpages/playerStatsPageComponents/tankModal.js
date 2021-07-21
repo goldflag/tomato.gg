@@ -89,6 +89,7 @@ const Card = styled.div`
   padding: 0.8rem 0rem;
   background-color: ${({ color }) => color ?? "rgba(100, 100, 150, 0.5)"};
   border-radius: 5px;
+  box-shadow: 0px 0px 5px rgb(10, 10, 10);
   .label {
     font-size: 0.7rem;
   }
@@ -121,6 +122,7 @@ const MoEMasteryCardDiv = styled.div`
   border: 1px double rgb(180, 180, 180);
   background-color: rgb(70, 70, 100, 0.3);
   border-radius: 20px;
+  box-shadow: 0px 0px 10px rgb(10, 10, 10);
 `;
 
 function MoEMasteryCard({ moe, mastery, nation }) {
@@ -239,52 +241,49 @@ function TankSessionsTabbar({ sessionStats: { day, week, month } }) {
   );
 }
 
-export default function TankModal({ props, selectedTank, modalOpen, setModalOpen }) {
+export default function TankModal({ props, selectedTankData, modalOpen, setModalOpen }) {
   const [sessionStats, setSessionStats] = useState();
   const [recentStats, setRecentStats] = useState();
   const [leaderboardStats, setLeaderboardStats] = useState();
   const [leaderBoardType, setLeaderBoardType] = useState("dpg");
   const [page, setPage] = useState("main");
 
-  console.log(selectedTank);
-
   const fetchStats = useCallback(async () => {
     Promise.all(
       [
-        `${backend}/api/playertanksessions/${props.server}/${props.id}/${selectedTank.id}`,
-        `${backend}/api/recenttank/${props.server}/${selectedTank.id}/60`,
-        `${backend}/api/playertankrecents/${props.server}/${props.id}/${selectedTank.id}`,
+        `${backend}/api/playertanksessions/${props.server}/${props.id}/${selectedTankData.id}`,
+        `${backend}/api/recenttank/${props.server}/${selectedTankData.id}/60`,
+        `${backend}/api/playertankrecents/${props.server}/${props.id}/${selectedTankData.id}`,
       ].map((url) => fetch(url))
     )
       .then((arr) => Promise.all(arr.map((res) => res.json())))
       .then(([sessionData, serverData, playerData]) => {
-        serverData["period"] = "Server";
+        serverData["period"] = "60D Server";
         setRecentStats([serverData, ...playerData.reverse()]);
-        console.log([serverData, ...playerData.reverse()]);
         setSessionStats(sessionData);
       });
-  }, [props, selectedTank]);
+  }, [props, selectedTankData]);
 
   useEffect(() => {
-    if (selectedTank) fetchStats();
-  }, [selectedTank, fetchStats]);
+    if (selectedTankData) fetchStats();
+  }, [selectedTankData, fetchStats]);
 
   useEffect(() => {
     async function fetchLeaderboards() {
       const leaderboardData = await fetch(
-        `${backend}/api/tankpage/${selectedTank.id}/${props.server}/${leaderBoardType}/0`
+        `${backend}/api/tankpage/${selectedTankData.id}/${props.server}/${leaderBoardType}/0`
       ).then((d) => d.json());
       leaderboardData.leaderboard.forEach((player) => {
         player.url = `/stats/${serverConv[props.server]}/${player.username}=${player.player_id}`;
       });
       setLeaderboardStats(leaderboardData);
     }
-    if (selectedTank) fetchLeaderboards();
-  }, [props, selectedTank, leaderBoardType]);
+    if (selectedTankData) fetchLeaderboards();
+  }, [props, selectedTankData, leaderBoardType]);
 
   const statsSection = (
     <>
-      {selectedTank ? (
+      {selectedTankData ? (
         <>
           <SectionHeader>Recent Stats</SectionHeader>
           <TankRecentStats data={recentStats} />
@@ -303,10 +302,10 @@ export default function TankModal({ props, selectedTank, modalOpen, setModalOpen
 
   const awardsSection = (
     <>
-      {selectedTank ? (
+      {selectedTankData ? (
         <>
           <SectionHeader>Awards</SectionHeader>
-          <Awards awards={selectedTank.awards} />
+          <Awards awards={selectedTankData.awards} />
         </>
       ) : null}
     </>
@@ -314,7 +313,7 @@ export default function TankModal({ props, selectedTank, modalOpen, setModalOpen
 
   const leaderboardsSection = (
     <>
-      {selectedTank ? (
+      {selectedTankData ? (
         <>
           <SectionHeader>{serverConv[props.server]} Top Players | 60 Days | Min 25 Battles </SectionHeader>
           <TankLeaderboards setType={setLeaderBoardType} type={leaderBoardType} data={leaderboardStats} />
@@ -367,22 +366,22 @@ export default function TankModal({ props, selectedTank, modalOpen, setModalOpen
 
   return (
     <Modal modalOpen={modalOpen}>
-      {selectedTank ? (
+      {selectedTankData ? (
         <Scrollbar>
           <ModalInner>
             <TankInfoGrid>
-              <TankInfo isPrem={selectedTank.isPrem}>
+              <TankInfo isPrem={selectedTankData.isPrem}>
                 <div className="tier">T I E R</div>
-                <div className="tierRoman">{tierConv[selectedTank.tier]}</div>
-                <div className="tankName">{selectedTank.name}</div>
+                <div className="tierRoman">{tierConv[selectedTankData.tier]}</div>
+                <div className="tankName">{selectedTankData.name}</div>
                 <div className="tankClass">
-                  {nationAdjConv.formatString(nationAdjConv[selectedTank.nation], classDescConv[selectedTank.class])}
+                  {nationAdjConv.formatString(nationAdjConv[selectedTankData.nation], classDescConv[selectedTankData.class])}
                 </div>
               </TankInfo>
-              <img style={{ width: "220px" }} src={selectedTank.bigImage} alt={selectedTank.name} />
-              <MoEMasteryCard moe={selectedTank.moe} mastery={selectedTank.mastery} nation={selectedTank.nation} />
+              <img style={{ width: "220px" }} src={selectedTankData.bigImage} alt={selectedTankData.name} />
+              <MoEMasteryCard moe={selectedTankData.moe} mastery={selectedTankData.mastery} nation={selectedTankData.nation} />
             </TankInfoGrid>
-            <TankOverallStats data={selectedTank} />
+            <TankOverallStats data={selectedTankData} />
             {ModalTabs}
           </ModalInner>
           <Close onClick={() => setModalOpen(false)} size={40} icon={ic_close} />

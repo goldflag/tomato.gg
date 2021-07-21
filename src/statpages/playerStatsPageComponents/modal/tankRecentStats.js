@@ -8,6 +8,7 @@ const cols = [
   {
     Header: "Period",
     accessor: "period",
+    sortable: false
   },
   {
     Header: Capital(commonStrings.battles),
