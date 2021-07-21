@@ -1,5 +1,6 @@
 // NPM
 import React from "react";
+import { Banner } from "Components";
 import { useTable, usePagination, useSortBy, useFilters, useExpanded, useGlobalFilter } from "react-table";
 
 // LOCAL
@@ -154,6 +155,13 @@ function PeriodBreakdown({ data, setSelectedTank, setModalOpen }) {
   return (
     <>
       <FiltersContainer>
+        <Banner
+          style={{ marginBottom: "1rem" }}
+          color={"linear-gradient(90deg, rgba(72,152,47,1) 0%, rgba(37,199,168,1) 53%, rgba(0,255,245,1) 100%)"}
+        >
+          NEW FEATURE: CLICK ON ROW TO SEE DETAILED TANK STATS!
+        </Banner>
+
         <div style={{ marginBottom: "-10px" }}>
           <GlobalFilter
             preGlobalFilteredRows={preGlobalFilteredRows}

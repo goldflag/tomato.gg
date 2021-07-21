@@ -9,3 +9,5 @@ export * from "./tableComponents";
 export * from "./fullPageTableWrapper";
 export * from "./infoPage";
 export * from "./tableTemplate";
+export * from "./banner";
+
