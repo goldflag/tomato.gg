@@ -1,5 +1,5 @@
 // NPM
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 // Local
@@ -7,9 +7,6 @@ import { TableTemplate } from "Components";
 import { tableHeaders } from "Components/tableComponents";
 import { Capital, commonStrings } from "Data/localizations";
 import { SelectButton, SelectButtonContainer } from "Components/buttons";
-import { serverConv } from "Data/conversions";
-
-const backend = process.env.REACT_APP_BACKEND;
 
 const cols = [
   {
@@ -54,11 +51,6 @@ const cols = [
     accessor: "kd",
     disableFilters: true,
   },
-  // {
-  //     Header: tableHeaders.spots,
-  //     accessor: "spots",
-  //     disableFilters: true,
-  // },
   {
     Header: tableHeaders.survival,
     accessor: "survived",

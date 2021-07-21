@@ -6,8 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import "CSS/tankstats.css";
 import "CSS/innerpage.css";
 import PercentileGraph from "./tankStatsPageComponents/percentileGraph";
-import CurveExamples from "./statsReferenceComponents/curveExamples";
-import InDepthExamples from "./statsReferenceComponents/inDepthExamples";
+// import CurveExamples from "./statsReferenceComponents/curveExamples";
 // import DPGPercentiles from "Data/DPGPercentiles.json";
 // import WN8Percentiles from "Data/WN8Percentiles.json";
 
@@ -78,7 +77,7 @@ export default function StatsReference(props) {
                                 <br />
                                 Here are some example tank curves that display various attributes:
                                 <div style={{ margin: "1rem 0 1rem 0" }}>
-                                    <CurveExamples />
+                                    {/* <CurveExamples /> */}
                                     <h2
                                         style={{
                                             fontSize: "1.4rem",
@@ -87,7 +86,6 @@ export default function StatsReference(props) {
                                     >
                                         In-depth Examples
                                     </h2>
-                                    <InDepthExamples />
                                 </div>
                                 <h2
                                     style={{

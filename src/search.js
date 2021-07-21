@@ -1,5 +1,5 @@
 // NPM
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
@@ -16,9 +16,6 @@ import { ServerContext, SearchHistoryContext, SearchmodeContext } from "Context"
 import { serverConv } from "Data/conversions";
 import Ad from "Ads/ads";
 import Colors from "Styling/colors";
-import { Loader } from "Components";
-import TankTable from "./searchpage/tanktable";
-import PlayerTable from "./searchpage/playertable";
 import LocalizedStrings from "Functions/localizedStrings";
 
 // ASSETS
@@ -27,7 +24,6 @@ import Tanksgg from "Assets/other sites/tanks.gg.png";
 import Aslain from "Assets/other sites/aslain.png";
 
 const APIKey = process.env.REACT_APP_API_KEY;
-const backend = process.env.REACT_APP_BACKEND;
 
 const Page = styled.div`
     margin: 0 1rem;
@@ -89,13 +85,6 @@ const GetBot = styled(Button)`
     :hover {
         border: 2px solid ${Colors.purple} !important;
     }
-`;
-
-const Minitables = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
 `;
 
 const OutboundLinks = styled.div`
@@ -293,39 +282,9 @@ export default withRouter(function Search(props) {
 
     const { addToHistory } = useContext(SearchHistoryContext);
     const [name, setName] = useState("");
-    
-    const [value, setValue] = useState(0);
-    const handleChange = (_, newValue) => setValue(newValue);
 
-    const [tankdata, setTankdata] = useState("");
-    const [playerdata, setPlayerdata] = useState("");
 
     const El = useRef(null);
-
-    function fetchStuff() {
-        const urls = [`${backend}/api/recenttanks/${server}/7`, `${backend}/api/leaderboard/${server}/wn8/7/8/0`];
-        Promise.all(urls.map((url) => fetch(url)))
-            .then((resps) => Promise.all(resps.map((r) => r.json())))
-            .then(([tank, player]) => {
-                setTankdata(tank);
-                player.body.forEach((player) => {
-                    player.url = `/stats/${serverConv[server]}/${player.username}=${player.player_id}`;
-                });
-                setPlayerdata(player.body);
-            });
-    }
-
-    useEffect(() => {
-        fetchStuff();
-        // setTimeout(() => {
-        //     try {
-        //         window.reloadAdSlots();
-        //     }
-        //     catch {
-        //         console.log("no ads");
-        //     }
-        // }, 0);
-    }, [server]);
 
     const searchId = async (e) => {
         e.preventDefault();
@@ -357,15 +316,6 @@ export default withRouter(function Search(props) {
         }
     };
 
-    let tankTable = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />;
-    if (tankdata) {
-        tankTable = <TankTable data={tankdata} />;
-    }
-    let playerTable = <Loader color={"rgba(40, 40, 70, 0.5)"} bottom={50} top={20} />;
-    if (playerdata) {
-        playerTable = <PlayerTable data={playerdata} />;
-    }
-
     const bottomContent = (
         <BottomIndicator 
             onClick={() => {
@@ -380,43 +330,9 @@ export default withRouter(function Search(props) {
     );
 
     const bottom = (
-        <>
-            {/* <Minitables>
-                <div style={{ margin: "1rem" }}>
-                    <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
-                        <CustomTab label={`1 WEEK TANK STATS`} />
-                    </CustomTabs>
-                    <TabPanel value={value} index={0}>
-                        <div
-                            style={{
-                                color: "rgb(220, 220, 220)",
-                                width: "600px",
-                            }}
-                        >
-                            {tankTable}
-                        </div>
-                    </TabPanel>
-                </div>
-                <div style={{ margin: "1rem" }}>
-                    <CustomTabs value={value} onChange={handleChange} aria-label="7 day tank stats">
-                        <CustomTab label={`1 WEEK PLAYER STATS`} />
-                    </CustomTabs>
-                    <TabPanel value={value} index={0}>
-                        <div
-                            style={{
-                                color: "rgb(220, 220, 220)",
-                                width: "600px",
-                            }}
-                        >
-                            {playerTable}
-                        </div>
-                    </TabPanel>
-                </div>
-            </Minitables> */}
             <Text>
                 <Accordion/>
             </Text>
-        </>
     );
 
     const mainContent = (
