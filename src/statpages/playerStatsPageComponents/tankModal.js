@@ -28,6 +28,13 @@ const Modal = styled.div`
   background: rgba(40, 40, 50, 0.8);
   backdrop-filter: blur(5px);
   box-shadow: 0px 0px 10px rgb(10, 10, 10);
+  @media screen and (max-width: 1000px) {
+    width: 100vw;
+    right: 10px;
+    top: 4.1rem;
+    left: 10px;
+    bottom: 10px;
+  }
 `;
 
 const ModalInner = styled.div`

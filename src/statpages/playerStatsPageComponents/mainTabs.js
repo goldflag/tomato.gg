@@ -393,15 +393,13 @@ export default function MainTabs(props) {
             ))}
           </TabPanel>
         ))}
-        <MediaQuery minWidth={1000}>
-          <TankModal
-            props={props}
-            setSelectedTank={setSelectedTank}
-            selectedTankData={selectedTankData}
-            modalOpen={modalOpen}
-            setModalOpen={setModalOpen}
-          />
-        </MediaQuery>
+        <TankModal
+          props={props}
+          setSelectedTank={setSelectedTank}
+          selectedTankData={selectedTankData}
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+        />
       </div>
       {windowSize.width > 1000 ? (
         <div style={{ padding: "0 0 0 1rem" }}>
